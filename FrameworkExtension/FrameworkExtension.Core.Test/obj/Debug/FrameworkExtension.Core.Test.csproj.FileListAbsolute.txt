@@ -7,3 +7,5 @@ D:\Code\fun\FEEF\FrameworkExtension\FrameworkExtension.Core.Test\bin\Debug\Frame
 D:\Code\fun\FEEF\FrameworkExtension\FrameworkExtension.Core.Test\bin\Debug\EntityFramework.xml
 D:\Code\fun\FEEF\FrameworkExtension\FrameworkExtension.Core.Test\obj\Debug\FrameworkExtension.Core.Test.dll
 D:\Code\fun\FEEF\FrameworkExtension\FrameworkExtension.Core.Test\obj\Debug\FrameworkExtension.Core.Test.pdb
+D:\Code\fun\FEEF\FrameworkExtension\FrameworkExtension.Core.Test\bin\Debug\MSTest.AssertionHelpers.dll
+D:\Code\fun\FEEF\FrameworkExtension\FrameworkExtension.Core.Test\bin\Debug\MSTest.AssertionHelpers.pdb

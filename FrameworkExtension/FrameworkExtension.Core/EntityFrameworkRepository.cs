@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace FrameworkExtension.Core
 {
@@ -30,6 +31,20 @@ namespace FrameworkExtension.Core
             return new EntityFrameworkRepository(Activator.CreateInstance<T>());
         }
 
+<<<<<<< HEAD
         public IDbContext Context { get; private set; }
     }
+=======
+        public void Find<TType>(IQuery<TType> query)
+        {
+            Context.AsQueryable<TType>();
+        }
+
+        public IDbContext Context { get; set; }
+    }
+
+    public interface IQuery<T>
+    {
+    }
+>>>>>>> master
 }

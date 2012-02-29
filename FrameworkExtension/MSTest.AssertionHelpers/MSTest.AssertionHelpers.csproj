@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExceptionAssert.cs" />
+    <Compile Include="IsNotEqualHelpers.cs" />
+    <Compile Include="IsNotNullHelpers.cs" />
     <Compile Include="IsOfTypeHelpers.cs" />
     <Compile Include="IsSameHelpers.cs" />
     <Compile Include="ShouldBeHelpers.cs" />

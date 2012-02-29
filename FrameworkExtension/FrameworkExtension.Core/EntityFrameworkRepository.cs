@@ -27,6 +27,7 @@ namespace FrameworkExtension.Core
                         constructorInfo.GetParameters()[0].ParameterType == typeof(string))
                         return new EntityFrameworkRepository((IDbContext)constructorInfo.Invoke(new[] { connectionString }));
                 }
+                throw new InvalidOperationException("You attempted to pass a connection string to a context that doesn't have a constructor that only accepts the connection string");
             }
             return new EntityFrameworkRepository(Activator.CreateInstance<T>());
         }

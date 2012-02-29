@@ -50,6 +50,24 @@ namespace FrameworkExtension.Core.Test
             //Assert
             repository.Context.IsByReferenceSame(context);
         }
+
+        [TestMethod]
+        public void When_Given_A_Connection_String_With_A_Class_That_Doesnt_Have_A_Constructor_It_Throws()
+        {
+            //Arrange
+	        
+            //Act
+            ExceptionAssert.Throws<InvalidOperationException>(() => EntityFrameworkRepository.Create<EFFailureContext>("Test"));
+            //Assert
+        }
+    }
+
+    public class EFFailureContext : IDbContext
+    {
+        public IQueryable<T> AsQueryable<T>()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class Foo

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using FrameworkExtension.Core.Interfaces;
 
 namespace FrameworkExtension.Core
 {
@@ -33,13 +35,29 @@ namespace FrameworkExtension.Core
         }
 
         public IDbContext Context { get; private set; }
-        public void Find<TType>(IQuery<TType> query)
+        IEnumerable<T> IRepository.Find<T>(IQueryObject<T> query)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T Get<T>(IQueryObject<T> query)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T Get<T>(IScalarObject<T> query) where T : struct
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Execute(ICommandObject command)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Find<TType>(IQueryObject<TType> query) where TType : class
         {
             Context.AsQueryable<TType>();
         }
-    }
-
-    public interface IQuery<T>
-    {
     }
 }

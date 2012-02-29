@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExceptionAssert.cs" />
+    <Compile Include="IsEqualHelper.cs" />
     <Compile Include="IsNotEqualHelpers.cs" />
     <Compile Include="IsNotNullHelpers.cs" />
     <Compile Include="IsOfTypeHelpers.cs" />

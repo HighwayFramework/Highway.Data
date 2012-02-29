@@ -1,4 +1,3 @@
-﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using FrameworkExtension.Core.Interfaces;
@@ -9,10 +8,10 @@ using Rhino.Mocks;
 namespace FrameworkExtension.Core.Test
 {
     [TestClass]
-    public class Given_A_Query_Object
+    public class Given_A_Scalar_Object
     {
         [TestMethod]
-        public void When_Passing_To_A_Repository_Query_Object_Then_It_Executes_Against_Context()
+        public void When_Passing_To_A_Repository_Scalar_Object_Then_It_Executes_Against_Context()
         {
             //Arrange
             var context = MockRepository.GenerateStrictMock<IDbContext>();
@@ -28,39 +27,21 @@ namespace FrameworkExtension.Core.Test
         }
 
         [TestMethod]
-        public void When_Executed_Returns_An_IEnumerable_Of_Items()
+        public void When_Executed_Returns_A_Single_Value()
         {
             //Arrange
             var context = MockRepository.GenerateStrictMock<IDbContext>();
             context.Expect(x => x.AsQueryable<Foo>()).Return(new List<Foo>().AsQueryable()).Repeat.Once();
-            var query = new TestQuery();
+            var query = new ScalarTestQuery();
 
 
             //Act
-            IEnumerable<Foo> items = query.Execute(context);
+            int result = query.Execute(context);
 
             //Assert
             context.VerifyAllExpectations();
-            items.IsNotNull();
+            result.IsEqual(0);
 
         }
-
-        //[TestMethod]
-        //public void When_Paging_Should_Affect_The_Base_Query_Before_It_Is_Executed()
-        //{
-        //    //Arrange
-        //    var context = MockRepository.GenerateStrictMock<IDbContext>();
-        //    context.Expect(x => x.AsQueryable<Foo>()).Return(new List<Foo>().AsQueryable()).Repeat.Once();
-        //    var query = new TestQuery();
-
-        //    //Act
-        //    var initialContextQuery = query.ContextQuery;
-        //    query.Skip(5).Take(1);
-        //    var secondContextQuery = query.ContextQuery;
-
-
-        //    //Assert
-        //    secondContextQuery.IsNotEqual(initialContextQuery);
-        //}
     }
 }

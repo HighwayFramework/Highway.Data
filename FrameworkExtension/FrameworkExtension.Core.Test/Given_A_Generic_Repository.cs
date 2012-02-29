@@ -18,7 +18,7 @@ namespace FrameworkExtension.Core.Test
             //Arrange 
 
             //act
-            var repository = new EntityFrameworkRepository<EFTestContext>();
+            var repository = EntityFrameworkRepository.Create<EFTestContext>();
 
             //Assert
             repository.Context.IsOfType<EFTestContext>();
@@ -31,7 +31,7 @@ namespace FrameworkExtension.Core.Test
             //Arrange
 	        
             //Act
-            var repository = new EntityFrameworkRepository<EFTestContext>("Test");
+            var repository = EntityFrameworkRepository.Create<EFTestContext>("Test");
 
             //Assert
             ((EFTestContext) repository.Context).ConnectionString.ShouldBe("Test");
@@ -45,7 +45,7 @@ namespace FrameworkExtension.Core.Test
             var context = new EFTestContext();
 
             //Act
-            var repository = new EntityFrameworkRepository<EFTestContext>(context);
+            var repository = new EntityFrameworkRepository(context);
 
             //Assert
             repository.Context.IsByReferenceSame(context);
@@ -57,7 +57,7 @@ namespace FrameworkExtension.Core.Test
             //Arrange
             var context = MockRepository.GenerateStrictMock<EFTestContext>();
             context.Expect(x => x.AsQueryable<Foo>()).Return(new List<Foo>().AsQueryable()).Repeat.Once();
-            var repository = new EntityFrameworkRepository<EFTestContext>(context);
+            var repository = new EntityFrameworkRepository(context);
 
             //Act
             repository.Find(new TestQuery());
@@ -88,9 +88,9 @@ namespace FrameworkExtension.Core.Test
             ConnectionString = connectionString;
         }
 
-        public virtual string ConnectionString { get; set; }
+        public string ConnectionString { get; set; }
 
-        public virtual IQueryable<T> AsQueryable<T>()
+        public IQueryable<T> AsQueryable<T>()
         {
             return null;
         }

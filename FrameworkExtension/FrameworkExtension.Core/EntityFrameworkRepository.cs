@@ -2,25 +2,19 @@
 
 namespace FrameworkExtension.Core
 {
-    public class EntityFrameworkRepository<T> : IRepository where T : IDbContext
+    public class EntityFrameworkRepository : IRepository
     {
-        public EntityFrameworkRepository()
-            : this(string.Empty)
-        {
-        }
-
-
-        public EntityFrameworkRepository(string connectionString)
-        {
-            Context = CreateContext(connectionString);
-        }
-
-        public EntityFrameworkRepository(T context)
+        public EntityFrameworkRepository(IDbContext context)
         {
             Context = context;
         }
 
-        private IDbContext CreateContext(string connectionString)
+        public static IRepository Create<T>() where T : IDbContext
+        {
+            return Create<T>(string.Empty);
+        }
+
+        public static IRepository Create<T>(string connectionString) where T : IDbContext
         {
             if (!String.IsNullOrWhiteSpace(connectionString))
             {
@@ -30,12 +24,12 @@ namespace FrameworkExtension.Core
                     //Not Needed Yet
                     if (constructorInfo.GetParameters().Length == 1 &&
                         constructorInfo.GetParameters()[0].ParameterType == typeof(string))
-                        return (IDbContext)constructorInfo.Invoke(new[] { connectionString });
+                        return new EntityFrameworkRepository((IDbContext)constructorInfo.Invoke(new[] { connectionString }));
                 }
             }
-            return Activator.CreateInstance<T>();
+            return new EntityFrameworkRepository(Activator.CreateInstance<T>());
         }
 
-        public IDbContext Context { get; set; }
+        public IDbContext Context { get; private set; }
     }
 }

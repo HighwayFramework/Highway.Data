@@ -50,22 +50,6 @@ namespace FrameworkExtension.Core.Test
             //Assert
             repository.Context.IsByReferenceSame(context);
         }
-
-        [TestMethod]
-        public void When_Given_A_Query_Object_Then_It_Executes_Against_Context()
-        {
-            //Arrange
-            var context = MockRepository.GenerateStrictMock<IDbContext>();
-            context.Expect(x => x.AsQueryable<Foo>()).Return(new List<Foo>().AsQueryable()).Repeat.Once();
-            var repository = new EntityFrameworkRepository(context);
-
-            //Act
-            repository.Find(new TestQuery());
-
-            //Assert
-            context.VerifyAllExpectations();
-
-        }
     }
 
     public class Foo

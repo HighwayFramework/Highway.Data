@@ -43,5 +43,23 @@ namespace FrameworkExtension.Core.Test
             items.IsNotNull();
 
         }
+
+        [TestMethod]
+        public void When_Paging_Should_Affect_The_Base_Query_Before_It_Is_Executed()
+        {
+            //Arrange
+            var context = MockRepository.GenerateStrictMock<IDbContext>();
+            context.Expect(x => x.AsQueryable<Foo>()).Return(new List<Foo>().AsQueryable()).Repeat.Once();
+            var query = new TestQuery();
+
+            //Act
+            var initialContextQuery = query.ContextQuery;
+            query.Skip(5).Take(1);
+            var secondContextQuery = query.ContextQuery;
+
+
+            //Assert
+            secondContextQuery.IsNotEqual(initialContextQuery);
+        }
     }
 }

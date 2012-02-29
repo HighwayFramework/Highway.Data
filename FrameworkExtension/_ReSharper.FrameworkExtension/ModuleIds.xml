@@ -1,5 +1,5 @@
 <Modules>
   <Module PersistentId="B0CA9DAB-C5D4-4AC6-97E7-725B18191B2D" ModuleId="FrameworkExtension.Core" />
-  <Module PersistentId="D2739E46-6E28-442E-94CA-E7283D86E490" ModuleId="FrameworkExtension.Core.Test" />
   <Module PersistentId="726A3CE4-CB5B-4E30-8F97-FE9705FF4F3C" ModuleId="FrameworkExtension.Core.Test_1" />
+  <Module PersistentId="82CC3D28-F1F9-4DA3-A388-1EA3091EA3DF" ModuleId="MSTest.AssertionHelpers" />
 </Modules>

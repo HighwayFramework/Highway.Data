@@ -1,0 +1,5 @@
+D:\Code\fun\FEEF\FrameworkExtension\MSTest.AssertionHelpers\bin\Debug\MSTest.AssertionHelpers.dll
+D:\Code\fun\FEEF\FrameworkExtension\MSTest.AssertionHelpers\bin\Debug\MSTest.AssertionHelpers.pdb
+D:\Code\fun\FEEF\FrameworkExtension\MSTest.AssertionHelpers\obj\Debug\ResolveAssemblyReference.cache
+D:\Code\fun\FEEF\FrameworkExtension\MSTest.AssertionHelpers\obj\Debug\MSTest.AssertionHelpers.dll
+D:\Code\fun\FEEF\FrameworkExtension\MSTest.AssertionHelpers\obj\Debug\MSTest.AssertionHelpers.pdb

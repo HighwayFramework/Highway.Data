@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSTest.AssertionHelpers", "MSTest.AssertionHelpers\MSTest.AssertionHelpers.csproj", "{82CC3D28-F1F9-4DA3-A388-1EA3091EA3DF}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = FrameworkExtension.vsmdi
@@ -29,6 +31,10 @@ Global
 		{726A3CE4-CB5B-4E30-8F97-FE9705FF4F3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{726A3CE4-CB5B-4E30-8F97-FE9705FF4F3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{726A3CE4-CB5B-4E30-8F97-FE9705FF4F3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82CC3D28-F1F9-4DA3-A388-1EA3091EA3DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82CC3D28-F1F9-4DA3-A388-1EA3091EA3DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82CC3D28-F1F9-4DA3-A388-1EA3091EA3DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82CC3D28-F1F9-4DA3-A388-1EA3091EA3DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

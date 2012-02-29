@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
+using MSTest.AssertionHelpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FrameworkExtension.Core.Test
@@ -19,16 +20,49 @@ namespace FrameworkExtension.Core.Test
             var repository = new EntityFrameworkRepository<EFTestContext>();
 
             //Assert
-            Assert.IsInstanceOfType(repository.Context, typeof(EFTestContext));
+            repository.Context.IsOfType<EFTestContext>();
 
+        }
+
+        [TestMethod]
+        public void When_Created_With_Connection_String_The_Context_Receives_That_String()
+        {
+            //Arrange
+	        
+            //Act
+            var repository = new EntityFrameworkRepository<EFTestContext>("Test");
+
+            //Assert
+            ((EFTestContext) repository.Context).ConnectionString.ShouldBe("Test");
+
+        }
+
+        [TestMethod]
+        public void When_Given_A_Contructor_It_Should_Support_Dependency_Injection()
+        {
+            //Arrange
+            var context = new EFTestContext();
+
+            //Act
+            var repository = new EntityFrameworkRepository<EFTestContext>(context);
+
+            //Assert
+            repository.Context.IsByReferenceSame(context);
         }
     }
 
     public class EFTestContext : DbContext, IDbContext
     {
-        public EFTestContext(string connectionString) : base(connectionString)
+        public EFTestContext()
         {
             
         }
+
+        public EFTestContext(string connectionString) : base(connectionString)
+        {
+            ConnectionString = connectionString;
+        }
+
+        public string ConnectionString { get; set; }
     }
 }

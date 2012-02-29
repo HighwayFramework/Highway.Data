@@ -55,7 +55,7 @@ namespace FrameworkExtension.Core.Test
         public void When_Given_A_Query_Object_Then_It_Executes_Against_Context()
         {
             //Arrange
-            var context = MockRepository.GenerateStrictMock<IDbContext>();
+            var context = MockRepository.GenerateStrictMock<EFTestContext>();
             context.Expect(x => x.AsQueryable<Foo>()).Return(new List<Foo>().AsQueryable()).Repeat.Once();
             var repository = new EntityFrameworkRepository<EFTestContext>(context);
 
@@ -66,6 +66,14 @@ namespace FrameworkExtension.Core.Test
             context.VerifyAllExpectations();
 
         }
+    }
+
+    public class Foo
+    {
+    }
+
+    public class TestQuery : IQuery<Foo>
+    {
     }
 
     public class EFTestContext : DbContext, IDbContext
@@ -80,6 +88,11 @@ namespace FrameworkExtension.Core.Test
             ConnectionString = connectionString;
         }
 
-        public string ConnectionString { get; set; }
+        public virtual string ConnectionString { get; set; }
+
+        public virtual IQueryable<T> AsQueryable<T>()
+        {
+            return null;
+        }
     }
 }

@@ -1,0 +1,9 @@
+D:\Code\fun\FEEF\FrameworkExtension\FrameworkExtension.Core.Test\obj\Debug\ResolveAssemblyReference.cache
+D:\Code\fun\FEEF\FrameworkExtension\FrameworkExtension.Core.Test\bin\Debug\FrameworkExtension.Core.Test.dll
+D:\Code\fun\FEEF\FrameworkExtension\FrameworkExtension.Core.Test\bin\Debug\FrameworkExtension.Core.Test.pdb
+D:\Code\fun\FEEF\FrameworkExtension\FrameworkExtension.Core.Test\bin\Debug\EntityFramework.dll
+D:\Code\fun\FEEF\FrameworkExtension\FrameworkExtension.Core.Test\bin\Debug\FrameworkExtension.Core.dll
+D:\Code\fun\FEEF\FrameworkExtension\FrameworkExtension.Core.Test\bin\Debug\FrameworkExtension.Core.pdb
+D:\Code\fun\FEEF\FrameworkExtension\FrameworkExtension.Core.Test\bin\Debug\EntityFramework.xml
+D:\Code\fun\FEEF\FrameworkExtension\FrameworkExtension.Core.Test\obj\Debug\FrameworkExtension.Core.Test.dll
+D:\Code\fun\FEEF\FrameworkExtension\FrameworkExtension.Core.Test\obj\Debug\FrameworkExtension.Core.Test.pdb

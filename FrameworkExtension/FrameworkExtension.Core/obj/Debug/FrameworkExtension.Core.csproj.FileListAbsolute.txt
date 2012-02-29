@@ -1,0 +1,8 @@
+D:\Code\fun\FEEF\FrameworkExtension\FrameworkExtension.Core\bin\Debug\FrameworkExtension.Core.dll.config
+D:\Code\fun\FEEF\FrameworkExtension\FrameworkExtension.Core\bin\Debug\FrameworkExtension.Core.dll
+D:\Code\fun\FEEF\FrameworkExtension\FrameworkExtension.Core\bin\Debug\FrameworkExtension.Core.pdb
+D:\Code\fun\FEEF\FrameworkExtension\FrameworkExtension.Core\bin\Debug\EntityFramework.dll
+D:\Code\fun\FEEF\FrameworkExtension\FrameworkExtension.Core\bin\Debug\EntityFramework.xml
+D:\Code\fun\FEEF\FrameworkExtension\FrameworkExtension.Core\obj\Debug\ResolveAssemblyReference.cache
+D:\Code\fun\FEEF\FrameworkExtension\FrameworkExtension.Core\obj\Debug\FrameworkExtension.Core.dll
+D:\Code\fun\FEEF\FrameworkExtension\FrameworkExtension.Core\obj\Debug\FrameworkExtension.Core.pdb

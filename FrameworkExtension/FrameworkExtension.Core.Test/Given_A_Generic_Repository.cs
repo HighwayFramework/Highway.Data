@@ -51,7 +51,7 @@ namespace FrameworkExtension.Core.Test
             var repository = new EntityFrameworkRepository(context);
 
             //Assert
-            repository.Context.IsByReferenceSame(context);
+            repository.Context.IsSameByReference(context);
         }
 
         [TestMethod]

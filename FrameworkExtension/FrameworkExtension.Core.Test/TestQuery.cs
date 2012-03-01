@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using FrameworkExtension.Core.Interfaces;
+using FrameworkExtension.Core.QueryObjects;
 
 namespace FrameworkExtension.Core.Test
 {
-    public class TestQuery : IQueryObject<Foo>
+    public class TestQuery : QueryObject<Foo>
     {
-        public IEnumerable<Foo> Execute(IDbContext context)
+        public TestQuery()
         {
-            return context.AsQueryable<Foo>();
+            ContextQuery = c => c.AsQueryable<Foo>();
         }
     }
 }

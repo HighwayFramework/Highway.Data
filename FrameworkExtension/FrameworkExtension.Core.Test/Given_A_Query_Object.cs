@@ -5,6 +5,7 @@ using FrameworkExtension.Core.Interfaces;
 using MSTest.AssertionHelpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
+using FrameworkExtension.Core.QueryObjects;
 
 namespace FrameworkExtension.Core.Test
 {
@@ -45,22 +46,28 @@ namespace FrameworkExtension.Core.Test
 
         }
 
-        //[TestMethod]
-        //public void When_Paging_Should_Affect_The_Base_Query_Before_It_Is_Executed()
-        //{
-        //    //Arrange
-        //    var context = MockRepository.GenerateStrictMock<IDbContext>();
-        //    context.Expect(x => x.AsQueryable<Foo>()).Return(new List<Foo>().AsQueryable()).Repeat.Once();
-        //    var query = new TestQuery();
+        [TestMethod]
+        public void When_Paging_Should_Affect_The_Base_Query_Before_It_Is_Executed()
+        {
+            //Arrange
+            var targetFoo = new Foo();
+            var context = MockRepository.GenerateStrictMock<IDbContext>();
+            context.Expect(x => x.AsQueryable<Foo>()).Return(new List<Foo>()
+                {
+                    new Foo(),
+                    new Foo(),
+                    new Foo(),
+                    new Foo(),
+                    targetFoo
+                }.AsQueryable()).Repeat.Once();
+            var query = new TestQuery();
 
-        //    //Act
-        //    var initialContextQuery = query.ContextQuery;
-        //    query.Skip(5).Take(1);
-        //    var secondContextQuery = query.ContextQuery;
+            //Act
+            var retVal = query.Skip(4).Take(1).Execute(context);
 
 
-        //    //Assert
-        //    secondContextQuery.IsNotEqual(initialContextQuery);
-        //}
+            //Assert
+            retVal.First().IsSameByReference(targetFoo);
+        }
     }
 }

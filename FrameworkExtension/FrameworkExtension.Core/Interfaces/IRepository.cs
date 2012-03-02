@@ -5,7 +5,7 @@ namespace FrameworkExtension.Core
 {
     public interface IRepository
     {
-        IDbContext Context { get; }
+        IDataContext Context { get; }
         IEnumerable<T> Find<T>(IQueryObject<T> query);
         T Get<T>(IQueryObject<T> query);
         T Get<T>(IScalarObject<T> query) where T : struct;

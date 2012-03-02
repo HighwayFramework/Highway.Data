@@ -9,15 +9,15 @@ namespace FrameworkExtension.Core.QueryObjects
 {
     public class ScalarObject<T> : IScalarObject<T> where T : struct
     {
-        public Func<IDbContext, T> ContextQuery { get; set; }
+        public Func<IDataContext, T> ContextQuery { get; set; }
 
-        protected void CheckContextAndQuery(IDbContext context)
+        protected void CheckContextAndQuery(IDataContext context)
         {
             if (context == null) throw new ArgumentNullException("context");
             if (this.ContextQuery == null) throw new InvalidOperationException("Null Query cannot be executed.");
         }
         
-        public virtual T Execute(IDbContext context)
+        public virtual T Execute(IDataContext context)
         {
                 CheckContextAndQuery(context);
                 return this.ContextQuery(context);

@@ -4,16 +4,16 @@ namespace FrameworkExtension.Core.Interfaces
 {
     public interface ICommandObject
     {
-        void Execute(IDbContext context);
+        void Execute(IDataContext context);
     }
 
     public interface IScalarObject<out T> where T : struct
     {
-        T Execute(IDbContext context);
+        T Execute(IDataContext context);
     }
 
     public interface IQueryObject<out T>
     {
-        IEnumerable<T> Execute(IDbContext context);
+        IEnumerable<T> Execute(IDataContext context);
     }
 }

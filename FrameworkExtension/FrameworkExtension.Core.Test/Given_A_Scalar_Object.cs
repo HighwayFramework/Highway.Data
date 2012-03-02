@@ -14,7 +14,7 @@ namespace FrameworkExtension.Core.Test
         public void When_Passing_To_A_Repository_Scalar_Object_Then_It_Executes_Against_Context()
         {
             //Arrange
-            var context = MockRepository.GenerateStrictMock<IDbContext>();
+            var context = MockRepository.GenerateStrictMock<IDataContext>();
             context.Expect(x => x.AsQueryable<Foo>()).Return(new List<Foo>().AsQueryable()).Repeat.Once();
             var repository = new EntityFrameworkRepository(context);
 
@@ -30,7 +30,7 @@ namespace FrameworkExtension.Core.Test
         public void When_Executed_Returns_A_Single_Value()
         {
             //Arrange
-            var context = MockRepository.GenerateStrictMock<IDbContext>();
+            var context = MockRepository.GenerateStrictMock<IDataContext>();
             context.Expect(x => x.AsQueryable<Foo>()).Return(new List<Foo>().AsQueryable()).Repeat.Once();
             var query = new ScalarTestQuery();
 

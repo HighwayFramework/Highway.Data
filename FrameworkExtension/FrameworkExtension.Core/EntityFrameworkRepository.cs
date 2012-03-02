@@ -7,17 +7,17 @@ namespace FrameworkExtension.Core
 {
     public class EntityFrameworkRepository : IRepository
     {
-        public EntityFrameworkRepository(IDbContext context)
+        public EntityFrameworkRepository(IDataContext context)
         {
             Context = context;
         }
 
-        public static IRepository Create<T>() where T : IDbContext
+        public static IRepository Create<T>() where T : IDataContext
         {
             return Create<T>(string.Empty);
         }
 
-        public static IRepository Create<T>(string connectionString) where T : IDbContext
+        public static IRepository Create<T>(string connectionString) where T : IDataContext
         {
             if (!String.IsNullOrWhiteSpace(connectionString))
             {
@@ -27,14 +27,14 @@ namespace FrameworkExtension.Core
                     //Not Needed Yet
                     if (constructorInfo.GetParameters().Length == 1 &&
                         constructorInfo.GetParameters()[0].ParameterType == typeof(string))
-                        return new EntityFrameworkRepository((IDbContext)constructorInfo.Invoke(new[] { connectionString }));
+                        return new EntityFrameworkRepository((IDataContext)constructorInfo.Invoke(new[] { connectionString }));
                 }
                 throw new InvalidOperationException("You attempted to pass a connection string to a context that doesn't have a constructor that only accepts the connection string");
             }
             return new EntityFrameworkRepository(Activator.CreateInstance<T>());
         }
 
-        public IDbContext Context { get; private set; }
+        public IDataContext Context { get; private set; }
         IEnumerable<T> IRepository.Find<T>(IQueryObject<T> query)
         {
             throw new NotImplementedException();

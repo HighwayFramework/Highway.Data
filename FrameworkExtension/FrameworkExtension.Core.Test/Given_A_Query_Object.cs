@@ -16,7 +16,7 @@ namespace FrameworkExtension.Core.Test
         public void When_Passing_To_A_Repository_Query_Object_Then_It_Executes_Against_Context()
         {
             //Arrange
-            var context = MockRepository.GenerateStrictMock<IDbContext>();
+            var context = MockRepository.GenerateStrictMock<IDataContext>();
             context.Expect(x => x.AsQueryable<Foo>()).Return(new List<Foo>().AsQueryable()).Repeat.Once();
             var repository = new EntityFrameworkRepository(context);
 
@@ -32,7 +32,7 @@ namespace FrameworkExtension.Core.Test
         public void When_Executed_Returns_An_IEnumerable_Of_Items()
         {
             //Arrange
-            var context = MockRepository.GenerateStrictMock<IDbContext>();
+            var context = MockRepository.GenerateStrictMock<IDataContext>();
             context.Expect(x => x.AsQueryable<Foo>()).Return(new List<Foo>().AsQueryable()).Repeat.Once();
             var query = new TestQuery();
 
@@ -51,7 +51,7 @@ namespace FrameworkExtension.Core.Test
         {
             //Arrange
             var targetFoo = new Foo();
-            var context = MockRepository.GenerateStrictMock<IDbContext>();
+            var context = MockRepository.GenerateStrictMock<IDataContext>();
             context.Expect(x => x.AsQueryable<Foo>()).Return(new List<Foo>()
                 {
                     new Foo(),

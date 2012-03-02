@@ -55,8 +55,8 @@ namespace FrameworkExtension.Core.QueryObjects
         }
 
 
-        protected Func<IDbContext, IQueryable<T>> ContextQuery { get; set; }
-        protected IDbContext Context { get; set; }
+        protected Func<IDataContext, IQueryable<T>> ContextQuery { get; set; }
+        protected IDataContext Context { get; set; }
 
         protected void CheckContextAndQuery()
         {
@@ -78,7 +78,7 @@ namespace FrameworkExtension.Core.QueryObjects
 
         #region IQueryObject<T> Members
 
-        public virtual IEnumerable<T> Execute(IDbContext context)
+        public virtual IEnumerable<T> Execute(IDataContext context)
         {
             Context = context;
             CheckContextAndQuery();

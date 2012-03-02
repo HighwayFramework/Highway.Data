@@ -65,7 +65,7 @@ namespace FrameworkExtension.Core.Test
         }
     }
 
-    public class EFFailureContext : IDbContext
+    public class EFFailureContext : IDataContext
     {
         public IQueryable<T> AsQueryable<T>()
         {
@@ -137,7 +137,7 @@ namespace FrameworkExtension.Core.Test
             throw new NotImplementedException();
         }
 
-        IQueryable<T> IDbContext.AsQueryable<T>()
+        IQueryable<T> IDataContext.AsQueryable<T>()
         {
             throw new NotImplementedException();
         }
@@ -147,7 +147,7 @@ namespace FrameworkExtension.Core.Test
     {
     }
 
-    public class EFTestContext : DbContext, IDbContext
+    public class EFTestContext : DbContext, IDataContext
     {
         public EFTestContext()
         {
@@ -226,7 +226,7 @@ namespace FrameworkExtension.Core.Test
             throw new NotImplementedException();
         }
 
-        IQueryable<T> IDbContext.AsQueryable<T>()
+        IQueryable<T> IDataContext.AsQueryable<T>()
         {
             throw new NotImplementedException();
         }

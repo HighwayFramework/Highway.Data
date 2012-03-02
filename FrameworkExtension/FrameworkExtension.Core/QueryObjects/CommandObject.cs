@@ -5,15 +5,15 @@ namespace FrameworkExtension.Core.QueryObjects
 {
     public class CommandObject : ICommandObject
     {
-        public Action<IDbContext> ContextQuery { get; set; }
+        public Action<IDataContext> ContextQuery { get; set; }
 
-        protected void CheckContextAndQuery(IDbContext context)
+        protected void CheckContextAndQuery(IDataContext context)
         {
             if (context == null) throw new ArgumentNullException("context");
             if (this.ContextQuery == null) throw new InvalidOperationException("Null Query cannot be executed.");
         }
 
-        public virtual void Execute(IDbContext context)
+        public virtual void Execute(IDataContext context)
         {
             CheckContextAndQuery(context);
             this.ContextQuery(context);

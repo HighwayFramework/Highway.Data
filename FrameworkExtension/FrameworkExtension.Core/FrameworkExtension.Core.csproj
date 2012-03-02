@@ -52,6 +52,7 @@
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryObjects\CommandObject.cs" />
+    <Compile Include="Interfaces\IExtendableQuery.cs" />
     <Compile Include="QueryObjects\QueryObjectBase.cs" />
     <Compile Include="QueryObjects\QueryObject.cs" />
     <Compile Include="QueryObjects\ScalarObject.cs" />

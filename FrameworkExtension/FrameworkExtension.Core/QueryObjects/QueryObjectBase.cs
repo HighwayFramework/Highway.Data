@@ -29,11 +29,6 @@ namespace FrameworkExtension.Core.QueryObjects
         }
     }
 
-    public interface IExtendableQuery
-    {
-        void AddMethodExpression(string methodName, Type[] generics, Expression[] parameters);
-    }
-
     public abstract class QueryObjectBase<T> : IQueryObject<T>, IExtendableQuery
     {
 
@@ -50,7 +45,7 @@ namespace FrameworkExtension.Core.QueryObjects
 
 
         List<Tuple<MethodInfo, Expression[]>> _expressionList = new List<Tuple<MethodInfo, Expression[]>>();
-        private void ZZAddMethodExpression(string methodName, Type[] generics, Expression[] parameters)
+        private void AddMethodExpression(string methodName, Type[] generics, Expression[] parameters)
         {
             MethodInfo orderMethodInfo = QueryableMethods
                 .Where(m => m.Name == methodName && m.GetParameters().Length == parameters.Length + 1).First();
@@ -114,7 +109,7 @@ namespace FrameworkExtension.Core.QueryObjects
                 .Where(m => m.Name == methodName && m.GetParameters().Length == parameters.Length + 1).First();
 
             orderMethodInfo = orderMethodInfo.MakeGenericMethod(generics);
-            Expression.
+            
             _expressionList.Add(new Tuple<MethodInfo, Expression[]>(orderMethodInfo, parameters));
         }
     }

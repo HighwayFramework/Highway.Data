@@ -13,6 +13,7 @@ namespace FrameworkExtension.Core
              {
                  action(item);
              }
+             return items;
          }
     }
 }

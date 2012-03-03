@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using FrameworkExtension.Core.Interfaces;
+using FrameworkExtension.Core.Test.TestDomain;
 using MSTest.AssertionHelpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
 
-namespace FrameworkExtension.Core.Test
+namespace FrameworkExtension.Core.Test.EntityFramework.UnitTests
 {
     [TestClass]
     public class Given_A_Scalar_Object

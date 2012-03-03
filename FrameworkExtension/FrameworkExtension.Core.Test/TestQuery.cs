@@ -1,6 +1,6 @@
-using System.Collections.Generic;
-using FrameworkExtension.Core.Interfaces;
 using FrameworkExtension.Core.QueryObjects;
+using FrameworkExtension.Core.Test.EntityFramework.UnitTests;
+using FrameworkExtension.Core.Test.TestDomain;
 
 namespace FrameworkExtension.Core.Test
 {

@@ -36,7 +36,7 @@ namespace FrameworkExtension.Core.Contexts
 
         public T Update<T>(T item) where T : class
         {
-            var entry = GetChangeTrackingEntry(item)
+            var entry = GetChangeTrackingEntry(item);
             if (entry == null)
             {
                 throw new InvalidOperationException(
@@ -63,7 +63,7 @@ namespace FrameworkExtension.Core.Contexts
             return item;
         }
 
-        private static DbEntityEntry<T> GetChangeTrackingEntry<T>(T item) where T : class
+        private DbEntityEntry<T> GetChangeTrackingEntry<T>(T item) where T : class
         {
             var entry = base.Entry(item);
             return entry;
@@ -93,17 +93,17 @@ namespace FrameworkExtension.Core.Contexts
 
         public IEnumerable<T> ExecuteSqlQuery<T>(string sql, params DbParameter[] dbParams)
         {
-            throw new System.NotImplementedException();
+            return base.Database.SqlQuery<T>(sql, dbParams);
         }
 
         public int ExecuteSqlCommand(string sql, params DbParameter[] dbParams)
         {
-            throw new System.NotImplementedException();
+            return base.Database.ExecuteSqlCommand(sql, dbParams);
         }
 
         public int ExecuteFunction(string procedureName, params ObjectParameter[] dbParams)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

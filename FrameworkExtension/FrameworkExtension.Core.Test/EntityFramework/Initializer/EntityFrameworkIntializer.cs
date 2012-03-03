@@ -5,27 +5,31 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FrameworkExtension.Core.Test.EntityFramework.Initializer
 {
-    public class EntityFrameworkIntializer : IDatabaseInitializer<EFTestContext>
+    public class EntityFrameworkIntializer : DropCreateDatabaseAlways<EFTestContext>
     {
-        public void InitializeDatabase(EFTestContext context)
-        {
-            if (context.Database.Exists())
-            {
-                context.Database.ExecuteSqlCommand("alter database FEEFTest set offline with rollback immediate");
-                context.Database.ExecuteSqlCommand("alter database FEEFTest set online");
-                context.Database.ExecuteSqlCommand("drop database FEEFTest");
-            }
-            context.Database.Create();
-            Seed(context);
-        }
-
-        protected void Seed(EFTestContext context)
+        protected override void Seed(EFTestContext context)
         {
             for (int i = 0; i < 5;i++ )
             {
                 context.Add(new Foo());
             }
             context.SaveChanges();
+        }
+    }
+
+    public class ForceDeleteInitializer : IDatabaseInitializer<EFTestContext>
+    {
+        private readonly IDatabaseInitializer<EFTestContext> _initializer;
+
+        public ForceDeleteInitializer(IDatabaseInitializer<EFTestContext> innerInitializer)
+        {
+            _initializer = innerInitializer;
+        }
+
+        public void InitializeDatabase(EFTestContext context)
+        {
+            if(context.Database.Exists()) context.Database.ExecuteSqlCommand("ALTER DATABASE FEEFTest SET SINGLE_USER WITH ROLLBACK IMMEDIATE");
+            _initializer.InitializeDatabase(context);
         }
     }
 }

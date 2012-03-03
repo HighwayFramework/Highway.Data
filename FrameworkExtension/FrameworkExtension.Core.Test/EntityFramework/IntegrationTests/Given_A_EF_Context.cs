@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using FrameworkExtension.Core.Contexts;
 using FrameworkExtension.Core.Test.EntityFramework.Initializer;
@@ -15,7 +16,7 @@ namespace FrameworkExtension.Core.Test.EntityFramework.IntegrationTests
     {
         private EFTestContext context;
 
-        [TestMethod]
+        [TestMethod, TestCategory(TestCategories.Database)]
         public void When_AsQueryable_Called_A_Set_Is_Pulled_From_The_Database()
         {
             //Arrange
@@ -30,20 +31,43 @@ namespace FrameworkExtension.Core.Test.EntityFramework.IntegrationTests
         [TestInitialize]
         private void Setup()
         {
-            Database.SetInitializer(new EntityFrameworkIntializer());
+            Database.SetInitializer(new ForceDeleteInitializer(new EntityFrameworkIntializer()));
             context = new EFTestContext(Settings.Default.Connection);
         }
 
-        [TestMethod]
-        public void When_Add_Is_Called_The_Object_Is_Commited_To_The_Database()
+        [TestMethod, TestCategory(TestCategories.Database)]
+        public void When_Add_Is_Called_The_Object_Is_Added_To_The_ChangeTracker_In_An_Added_State()
         {
             //Arrange
 	        
             //Act
-            context.Add(new Foo());
+            var item = new Foo();
+            context.Add(item);
 
             //Assert
-            context.AsQueryable<Foo>().Count().IsEqual(0);
+            context.ChangeTracker.DetectChanges();
+            var entry = context.Entry(item);
+            entry.State.IsEqual(EntityState.Added);
         }
+
+        [TestMethod, TestCategory(TestCategories.Database)]
+        public void When_Remove_Is_Called_The_Object_Is_Added_To_The_ChangeTracker_In_An_Deleted_State()
+        {
+            //Arrange
+	
+            //Act
+            var item = context.AsQueryable<Foo>().First();
+            context.Remove(item);
+
+            //Assert
+            context.ChangeTracker.DetectChanges();
+            var entry = context.Entry(item);
+            entry.State.IsEqual(EntityState.Deleted);
+        }
+    }
+
+    public static class TestCategories
+    {
+        public const string Database = "Database";
     }
 }

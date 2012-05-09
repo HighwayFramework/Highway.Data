@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using FrameworkExtension.Core.Interfaces;
+using FrameworkExtension.Core.Repositories;
 using FrameworkExtension.Core.Test.TestDomain;
+using FrameworkExtension.Core.Test.TestQueries;
 using MSTest.AssertionHelpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
@@ -33,7 +35,7 @@ namespace FrameworkExtension.Core.Test.EntityFramework.UnitTests
             //Arrange
             var context = MockRepository.GenerateStrictMock<IDataContext>();
             context.Expect(x => x.AsQueryable<Foo>()).Return(new List<Foo>().AsQueryable()).Repeat.Once();
-            var query = new ScalarTestQuery();
+            var query = new ScalarIntTestQuery();
 
 
             //Act

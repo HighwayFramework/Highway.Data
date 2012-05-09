@@ -6,9 +6,9 @@ namespace FrameworkExtension.Core
     public interface IRepository
     {
         IDataContext Context { get; }
-        IEnumerable<T> Find<T>(IQueryObject<T> query);
-        T Get<T>(IQueryObject<T> query);
-        T Get<T>(IScalarObject<T> query) where T : struct;
+        IEnumerable<T> Find<T>(IQuery<T> query) where T : class;
+        T Get<T>(IQuery<T> query) where T : class;
+        T Get<T>(IScalarObject<T> query);
         void Execute(ICommandObject command);
     }
 }

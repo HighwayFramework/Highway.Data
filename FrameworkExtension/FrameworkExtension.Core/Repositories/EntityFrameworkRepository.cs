@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FrameworkExtension.Core.Interfaces;
 
-namespace FrameworkExtension.Core
+namespace FrameworkExtension.Core.Repositories
 {
     public class EntityFrameworkRepository : IRepository
     {
@@ -35,29 +35,25 @@ namespace FrameworkExtension.Core
         }
 
         public IDataContext Context { get; private set; }
-        IEnumerable<T> IRepository.Find<T>(IQueryObject<T> query)
+        
+        public T Get<T>(IQuery<T> query) where T : class
         {
-            throw new NotImplementedException();
+            return query.Execute(Context).FirstOrDefault();
         }
 
-        public T Get<T>(IQueryObject<T> query)
+        public T Get<T>(IScalarObject<T> query)
         {
-            throw new NotImplementedException();
-        }
-
-        public T Get<T>(IScalarObject<T> query) where T : struct
-        {
-            throw new NotImplementedException();
+            return query.Execute(Context);
         }
 
         public void Execute(ICommandObject command)
         {
-            throw new NotImplementedException();
+            command.Execute(Context);
         }
 
-        public void Find<TType>(IQueryObject<TType> query) where TType : class
+        public IEnumerable<T> Find<T>(IQuery<T> query) where T : class
         {
-            Context.AsQueryable<TType>();
+            return query.Execute(Context);
         }
     }
 }

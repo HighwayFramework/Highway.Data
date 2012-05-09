@@ -29,7 +29,7 @@ namespace FrameworkExtension.Core.Test.EntityFramework.IntegrationTests
         }
 
         [TestInitialize]
-        private void Setup()
+        public void Setup()
         {
             Database.SetInitializer(new ForceDeleteInitializer(new EntityFrameworkIntializer()));
             context = new EFTestContext(Settings.Default.Connection);
@@ -51,7 +51,7 @@ namespace FrameworkExtension.Core.Test.EntityFramework.IntegrationTests
         }
 
         [TestMethod, TestCategory(TestCategories.Database)]
-        public void When_Remove_Is_Called_The_Object_Is_Added_To_The_ChangeTracker_In_An_Deleted_State()
+        public void When_Remove_Is_Called_The_Object_Is_Added_To_The_ChangeTracker_In_A_Deleted_State()
         {
             //Arrange
 	
@@ -63,6 +63,21 @@ namespace FrameworkExtension.Core.Test.EntityFramework.IntegrationTests
             context.ChangeTracker.DetectChanges();
             var entry = context.Entry(item);
             entry.State.IsEqual(EntityState.Deleted);
+        }
+
+        [TestMethod, TestCategory(TestCategories.Database)]
+        public void When_Detach_Is_Called_The_Object_Is_Added_To_The_ChangeTracker_In_A_Detached_State()
+        {
+            //Arrange
+	
+            //Act
+            var item = context.AsQueryable<Foo>().First();
+            context.Detach(item);
+
+            //Assert
+            context.ChangeTracker.DetectChanges();
+            var entry = context.Entry(item);
+            entry.State.IsEqual(EntityState.Detached);
         }
     }
 

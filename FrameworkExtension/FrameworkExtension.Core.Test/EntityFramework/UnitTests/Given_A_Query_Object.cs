@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using FrameworkExtension.Core.Interfaces;
+using FrameworkExtension.Core.Repositories;
 using FrameworkExtension.Core.Test.TestDomain;
+using FrameworkExtension.Core.Test.TestQueries;
 using MSTest.AssertionHelpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;

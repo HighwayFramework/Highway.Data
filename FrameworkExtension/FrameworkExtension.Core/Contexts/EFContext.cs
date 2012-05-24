@@ -7,15 +7,24 @@ using System.Data.Entity.Infrastructure;
 using System.Data.Objects;
 using System.Linq;
 using FrameworkExtension.Core.Interfaces;
+using FrameworkExtension.Core.Services;
 
 namespace FrameworkExtension.Core.Contexts
 {
     public class EFContext : DbContext, IDataContext
     {
-        public EFContext(string connectionString) : base(connectionString)
+        private readonly IUserNameService _userNameService;
+
+        public EFContext(string connectionString) : this(connectionString, new DefaultUserNameService())
         {
             
         }
+
+        public EFContext(string connectionString, IUserNameService userNameService) : base(connectionString)
+        {
+            _userNameService = userNameService;
+        }
+
 
         public IQueryable<T> AsQueryable<T>() where T : class
         {
@@ -88,7 +97,36 @@ namespace FrameworkExtension.Core.Contexts
 
         public int Commit()
         {
-            return base.SaveChanges();
+            base.ChangeTracker.DetectChanges();
+            var userName = _userNameService.GetCurrentUserName();
+#if DEBUG
+            var addedEntities = this.ChangeTracker.Entries().Where(x=>x.State == EntityState.Added).Where(e => e.Entity is IAuditableEntity).ToList();
+            var modifiedEntities = this.ChangeTracker.Entries().Where(x => x.State == EntityState.Modified).Where(e => e.Entity is IAuditableEntity).ToList();
+            var deletedEntities = this.ChangeTracker.Entries().Where(x => x.State == EntityState.Deleted).Where(e => e.Entity is IAuditableEntity).ToList();
+#endif
+
+            this.ChangeTracker.Entries().Where(x => x.State == EntityState.Added)
+                .Where(e => e.Entity is IAuditableEntity)
+                .ToList()
+                .ForEach(e =>
+                {
+                    var entity = e.Entity as IAuditableEntity;
+                    entity.CreatedDate = entity.ModifiedDate = DateTime.Now;
+                    entity.CreatedBy = entity.ModifiedBy = userName;
+                });
+
+            this.ChangeTracker.Entries().Where(x => x.State == EntityState.Modified)
+                .Where(e => e.Entity is IAuditableEntity)
+                .ToList()
+                .ForEach(e =>
+                {
+                    var entity = e.Entity as IAuditableEntity;
+                    entity.ModifiedDate = DateTime.Now;
+                    entity.ModifiedBy = userName;
+                });
+            this.ChangeTracker.DetectChanges();
+            var result = base.SaveChanges();
+            return result;
         }
 
         public IEnumerable<T> ExecuteSqlQuery<T>(string sql, params DbParameter[] dbParams)

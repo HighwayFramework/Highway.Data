@@ -46,7 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\DefaultUserNameService.cs" />
     <Compile Include="Contexts\EFContext.cs" />
+    <Compile Include="Interfaces\IAuditableEntity.cs" />
+    <Compile Include="Interfaces\IUserNameService.cs" />
     <Compile Include="QueryObjects\QueryExtensions.cs" />
     <Compile Include="Repositories\EntityFrameworkRepository.cs" />
     <Compile Include="EnumerableExtensions.cs" />

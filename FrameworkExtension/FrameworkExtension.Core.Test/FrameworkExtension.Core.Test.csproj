@@ -58,7 +58,8 @@
     <Compile Include="EntityFramework\IntegrationTests\Given_A_EF_Context.cs" />
     <Compile Include="EntityFramework\Mapping\FooMap.cs" />
     <Compile Include="EntityFramework\UnitTests\EFFailureContext.cs" />
-    <Compile Include="EntityFramework\UnitTests\EFTestContext.cs" />
+    <Compile Include="EntityFramework\UnitTests\EntityFrameworkTestContext.cs" />
+    <Compile Include="EntityFramework\UnitTests\Given_An_Event_Extendable_Context.cs" />
     <Compile Include="TestQueries\ScalarFooTestQuery.cs" />
     <Compile Include="TestDomain\Foo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

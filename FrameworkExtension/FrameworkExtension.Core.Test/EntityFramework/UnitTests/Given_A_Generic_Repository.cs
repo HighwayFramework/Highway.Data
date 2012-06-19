@@ -20,10 +20,10 @@ namespace FrameworkExtension.Core.Test.EntityFramework.UnitTests
             //Arrange 
 
             //act
-            var repository = EntityFrameworkRepository.Create<EFTestContext>();
+            var repository = EntityFrameworkRepository.Create<EntityFrameworkTestContext>();
 
             //Assert
-            repository.Context.IsOfType<EFTestContext>();
+            repository.Context.IsOfType<EntityFrameworkTestContext>();
 
         }
 
@@ -33,10 +33,10 @@ namespace FrameworkExtension.Core.Test.EntityFramework.UnitTests
             //Arrange
 	        
             //Act
-            var repository = EntityFrameworkRepository.Create<EFTestContext>("Test");
+            var repository = EntityFrameworkRepository.Create<EntityFrameworkTestContext>("Test");
 
             //Assert
-            ((EFTestContext) repository.Context).ConnectionString.ShouldBe("Test");
+            ((EntityFrameworkTestContext) repository.Context).ConnectionString.ShouldBe("Test");
 
         }
 
@@ -44,7 +44,7 @@ namespace FrameworkExtension.Core.Test.EntityFramework.UnitTests
         public void When_Given_A_Contructor_It_Should_Support_Dependency_Injection()
         {
             //Arrange
-            var context = new EFTestContext();
+            var context = new EntityFrameworkTestContext();
 
             //Act
             var repository = new EntityFrameworkRepository(context);
@@ -59,8 +59,10 @@ namespace FrameworkExtension.Core.Test.EntityFramework.UnitTests
             //Arrange
 	        
             //Act
-            ExceptionAssert.Throws<InvalidOperationException>(() => EntityFrameworkRepository.Create<EFFailureContext>("Test"));
+            Action action = () => EntityFrameworkRepository.Create<EFFailureContext>("Test");
+            
             //Assert
+            ExceptionAssert.Throws<InvalidOperationException>(action);
         }
 
         [TestMethod]

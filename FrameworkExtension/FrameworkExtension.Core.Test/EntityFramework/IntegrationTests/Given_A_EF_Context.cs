@@ -14,7 +14,7 @@ namespace FrameworkExtension.Core.Test.EntityFramework.IntegrationTests
     [TestClass]
     public class Given_A_EF_Context
     {
-        private EFTestContext context;
+        private EntityFrameworkTestContext context;
 
         [TestMethod, TestCategory(TestCategories.Database)]
         public void When_AsQueryable_Called_A_Set_Is_Pulled_From_The_Database()
@@ -32,7 +32,7 @@ namespace FrameworkExtension.Core.Test.EntityFramework.IntegrationTests
         public void Setup()
         {
             Database.SetInitializer(new ForceDeleteInitializer(new EntityFrameworkIntializer()));
-            context = new EFTestContext(Settings.Default.Connection);
+            context = new EntityFrameworkTestContext(Settings.Default.Connection);
         }
 
         [TestMethod, TestCategory(TestCategories.Database)]

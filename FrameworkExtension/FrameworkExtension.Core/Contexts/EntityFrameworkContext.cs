@@ -11,16 +11,15 @@ using FrameworkExtension.Core.Services;
 
 namespace FrameworkExtension.Core.Contexts
 {
-    public class EFContext : DbContext, IDataContext
+    public class EntityFrameworkContext : DbContext, IDataContext
     {
         private readonly IUserNameService _userNameService;
 
-        public EFContext(string connectionString) : this(connectionString, new DefaultUserNameService())
+        public EntityFrameworkContext(string connectionString) : this(connectionString, new DefaultUserNameService())
         {
-            
         }
 
-        public EFContext(string connectionString, IUserNameService userNameService) : base(connectionString)
+        public EntityFrameworkContext(string connectionString, IUserNameService userNameService) : base(connectionString)
         {
             _userNameService = userNameService;
         }
@@ -141,7 +140,7 @@ namespace FrameworkExtension.Core.Contexts
 
         public int ExecuteFunction(string procedureName, params ObjectParameter[] dbParams)
         {
-            throw new NotImplementedException();
+            return base.Database.SqlQuery<int>(procedureName, dbParams).FirstOrDefault();
         }
     }
 }

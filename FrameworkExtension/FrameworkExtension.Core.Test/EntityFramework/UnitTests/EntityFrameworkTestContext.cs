@@ -11,14 +11,14 @@ using FrameworkExtension.Core.Test.Properties;
 
 namespace FrameworkExtension.Core.Test.EntityFramework.UnitTests
 {
-    public class EFTestContext : EFContext, IDataContext
+    public class EntityFrameworkTestContext : EntityFrameworkContext, IDataContext
     {
-        public EFTestContext() : base(Settings.Default.Connection)
+        public EntityFrameworkTestContext() : base(Settings.Default.Connection)
         {
             
         }
         
-        public EFTestContext(string connectionString) : base(connectionString)
+        public EntityFrameworkTestContext(string connectionString) : base(connectionString)
         {
             ConnectionString = connectionString;
         }

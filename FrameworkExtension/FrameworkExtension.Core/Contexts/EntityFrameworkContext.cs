@@ -13,25 +13,8 @@ namespace FrameworkExtension.Core.Contexts
 {
     public class EntityFrameworkContext : DbContext, IDataContext
     {
-        private readonly IUserNameService _userNameService;
-
-        public EntityFrameworkContext(string connectionString) : this(connectionString, new DefaultUserNameService())
-        {
-        }
-
-        public EntityFrameworkContext(string connectionString, IUserNameService userNameService) : base(connectionString)
-        {
-            _userNameService = userNameService;
-        }
-
-        public EntityFrameworkContext(string connectionString, IEventManager eventManager) : base(connectionString)
-        {
-            this.EventManager = eventManager;
-        }
-
-        public IEventManager EventManager { get; private set; }
-
-
+        public EntityFrameworkContext(string connectionString) : base(connectionString) { }
+        
         public IQueryable<T> AsQueryable<T>() where T : class
         {
             return this.Set<T>();
@@ -104,33 +87,6 @@ namespace FrameworkExtension.Core.Contexts
         public int Commit()
         {
             base.ChangeTracker.DetectChanges();
-            var userName = _userNameService.GetCurrentUserName();
-#if DEBUG
-            var addedEntities = this.ChangeTracker.Entries().Where(x=>x.State == EntityState.Added).Where(e => e.Entity is IAuditableEntity).ToList();
-            var modifiedEntities = this.ChangeTracker.Entries().Where(x => x.State == EntityState.Modified).Where(e => e.Entity is IAuditableEntity).ToList();
-            var deletedEntities = this.ChangeTracker.Entries().Where(x => x.State == EntityState.Deleted).Where(e => e.Entity is IAuditableEntity).ToList();
-#endif
-
-            this.ChangeTracker.Entries().Where(x => x.State == EntityState.Added)
-                .Where(e => e.Entity is IAuditableEntity)
-                .ToList()
-                .ForEach(e =>
-                {
-                    var entity = e.Entity as IAuditableEntity;
-                    entity.CreatedDate = entity.ModifiedDate = DateTime.Now;
-                    entity.CreatedBy = entity.ModifiedBy = userName;
-                });
-
-            this.ChangeTracker.Entries().Where(x => x.State == EntityState.Modified)
-                .Where(e => e.Entity is IAuditableEntity)
-                .ToList()
-                .ForEach(e =>
-                {
-                    var entity = e.Entity as IAuditableEntity;
-                    entity.ModifiedDate = DateTime.Now;
-                    entity.ModifiedBy = userName;
-                });
-            this.ChangeTracker.DetectChanges();
             var result = base.SaveChanges();
             return result;
         }

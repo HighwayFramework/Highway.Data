@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Logging">
+      <HintPath>..\packages\Common.Logging.2.1.1\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
@@ -52,8 +55,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EventArgs\PostSaveEventArgs.cs" />
-    <Compile Include="EventArgs\PreSaveEventArgs.cs" />
+    <Compile Include="Interceptors\Events\PostSaveEventArgs.cs" />
+    <Compile Include="Interceptors\Events\PreSaveEventArgs.cs" />
+    <Compile Include="EventManagement\EventManager.cs" />
+    <Compile Include="Interceptors\EntityFrameworkAuditableInterceptor.cs" />
+    <Compile Include="Interceptors\InterceptorResult.cs" />
     <Compile Include="Interfaces\IEventManager.cs" />
     <Compile Include="Interfaces\IInterceptor.cs" />
     <Compile Include="Services\DefaultUserNameService.cs" />

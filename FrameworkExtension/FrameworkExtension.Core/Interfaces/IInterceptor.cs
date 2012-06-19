@@ -1,9 +1,10 @@
 using System;
+using FrameworkExtension.Core.Interceptors;
 
 namespace FrameworkExtension.Core.Interfaces
 {
-    public interface IInterceptor<T> where T : System.EventArgs
+    public interface IInterceptor<in T> where T : System.EventArgs
     {
-        bool Execute(IDataContext context, T eventArgs);
+        InterceptorResult Execute(IRepository context, T eventArgs);
     }
 }

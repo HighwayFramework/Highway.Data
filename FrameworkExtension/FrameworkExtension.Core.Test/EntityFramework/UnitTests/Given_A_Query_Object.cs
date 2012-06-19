@@ -20,7 +20,7 @@ namespace FrameworkExtension.Core.Test.EntityFramework.UnitTests
             //Arrange
             var context = MockRepository.GenerateStrictMock<IDataContext>();
             context.Expect(x => x.AsQueryable<Foo>()).Return(new List<Foo>().AsQueryable()).Repeat.Once();
-            var repository = new EntityFrameworkRepository(context);
+            var repository = new EntityFrameworkRepository(context, null);
 
             //Act
             repository.Find(new TestQuery());

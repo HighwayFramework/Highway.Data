@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using FrameworkExtension.Core.Interfaces;
 
-namespace FrameworkExtension.Core
+namespace FrameworkExtension.Core.Interfaces
 {
     public interface IRepository
     {
         IDataContext Context { get; }
+        IEventManager EventManager { get; }
         IEnumerable<T> Find<T>(IQuery<T> query) where T : class;
         T Get<T>(IQuery<T> query) where T : class;
         T Get<T>(IScalarObject<T> query);

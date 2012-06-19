@@ -62,6 +62,7 @@
     <Compile Include="Interceptors\InterceptorResult.cs" />
     <Compile Include="Interfaces\IEventManager.cs" />
     <Compile Include="Interfaces\IInterceptor.cs" />
+    <Compile Include="Interfaces\IObservableDataContext.cs" />
     <Compile Include="Services\DefaultUserNameService.cs" />
     <Compile Include="Contexts\EntityFrameworkContext.cs" />
     <Compile Include="Interfaces\IAuditableEntity.cs" />

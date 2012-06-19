@@ -5,6 +5,7 @@ using System.Linq;
 using System.Data.Objects;
 using System.Linq.Expressions;
 using System.Data;
+using FrameworkExtension.Core.Interceptors.Events;
 
 namespace FrameworkExtension.Core.Interfaces
 {

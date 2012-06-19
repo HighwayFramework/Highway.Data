@@ -2,6 +2,13 @@
 using FrameworkExtension.Core.Test.TestDomain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
+using Microsoft.Practices.ServiceLocation;
+using Castle.Windsor;
+using CommonServiceLocator.WindsorAdapter;
+using Castle.MicroKernel.Registration;
+using System.Net;
+using FrameworkExtension.Core.Interfaces;
+using FrameworkExtension.Core.EventArgs;
 
 namespace FrameworkExtension.Core.Test.EntityFramework.UnitTests
 {
@@ -12,19 +19,24 @@ namespace FrameworkExtension.Core.Test.EntityFramework.UnitTests
         public void When_Commit_Is_Called_PreSave_and_post_save_interceptors_are_Called()
         {
             //arrange
-            var context = new EntityFrameworkContext("Test", mockEventManager);
+            var container = new WindsorContainer();
+            ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(container));
+            var mockEventManager = MockRepository.GenerateMock<IEventManager>();
+            container.Register(Component.For<IEventManager>().Instance(mockEventManager),
+                               Component.For<EntityFrameworkContext>());
+            var context = container.Resolve<EntityFrameworkContext>(new { connectionString = "Test" });
 
             //Act
-            IPreSaveInterceptor mockPreSave = MockRepository.GenerateStrictMock<IPreSaveInterceptor>();
-            mockPreSave.Expect(x => x.Execute(context)).Returns(true);
+            IInterceptor<PreSaveEventArgs> mockPreSave = MockRepository.GenerateStrictMock<IInterceptor<PreSaveEventArgs>>();
+            mockPreSave.Expect(x => x.Execute(context, new PreSaveEventArgs())).Return(true);
             context.EventManager.Register(mockPreSave);
-            
-            IPostSaveInterceptor mockPostSave = MockRepository.GenerateStrictMock<IPostSaveInterceptor>();
-            mockPostSave.Expect(x => x.Execute(context)).Returns(true);
+
+            IInterceptor<PostSaveEventArgs> mockPostSave = MockRepository.GenerateStrictMock<IInterceptor<PostSaveEventArgs>>();
+            mockPostSave.Expect(x => x.Execute(context, new PostSaveEventArgs())).Return(true);
             context.EventManager.Register(mockPostSave);
             context.Add(new Foo());
             context.Commit();
-            
+
             //Assert
             mockPostSave.VerifyAllExpectations();
             mockPreSave.VerifyAllExpectations();

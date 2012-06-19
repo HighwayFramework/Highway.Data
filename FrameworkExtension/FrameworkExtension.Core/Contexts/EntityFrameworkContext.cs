@@ -24,6 +24,13 @@ namespace FrameworkExtension.Core.Contexts
             _userNameService = userNameService;
         }
 
+        public EntityFrameworkContext(string connectionString, IEventManager eventManager) : base(connectionString)
+        {
+            this.EventManager = eventManager;
+        }
+
+        public IEventManager EventManager { get; private set; }
+
 
         public IQueryable<T> AsQueryable<T>() where T : class
         {

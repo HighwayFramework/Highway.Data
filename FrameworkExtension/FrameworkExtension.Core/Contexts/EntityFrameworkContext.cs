@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Objects;
 using System.Linq;
+using FrameworkExtension.Core.EventManagement;
 using FrameworkExtension.Core.Interceptors.Events;
 using FrameworkExtension.Core.Interfaces;
 using FrameworkExtension.Core.Services;
@@ -14,6 +15,7 @@ namespace FrameworkExtension.Core.Contexts
 {
     public class EntityFrameworkContext : DbContext, IObservableDataContext
     {
+        
         public EntityFrameworkContext(string connectionString) : base(connectionString) { }
         
         public IQueryable<T> AsQueryable<T>() where T : class
@@ -117,6 +119,17 @@ namespace FrameworkExtension.Core.Contexts
         public int ExecuteFunction(string procedureName, params ObjectParameter[] dbParams)
         {
             return base.Database.SqlQuery<int>(procedureName, dbParams).FirstOrDefault();
+        }
+
+        private IEventManager _eventManager;
+        public IEventManager EventManager
+        {
+            get { return _eventManager; }
+            set 
+            { 
+                _eventManager = value;
+                _eventManager.Context = this;
+            }
         }
 
         public event EventHandler<PreSaveEventArgs> PreSave;

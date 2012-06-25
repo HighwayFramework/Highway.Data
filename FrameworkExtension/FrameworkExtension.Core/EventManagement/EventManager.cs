@@ -8,6 +8,10 @@ namespace FrameworkExtension.Core.EventManagement
 {
     public class EventManager : IEventManager
     {
+        public EventManager()
+        {
+            
+        }
         private IObservableDataContext _context;
         private readonly List<IInterceptor<PreSaveEventArgs>> _preSaveInterceptors = new List<IInterceptor<PreSaveEventArgs>>();
         private readonly List<IInterceptor<PostSaveEventArgs>> _postSaveInterceptors = new List<IInterceptor<PostSaveEventArgs>>();
@@ -28,7 +32,7 @@ namespace FrameworkExtension.Core.EventManagement
             }
         }
 
-        internal IObservableDataContext Context
+        public IObservableDataContext Context
         {
             get
             {
@@ -36,7 +40,7 @@ namespace FrameworkExtension.Core.EventManagement
             }
             set
             {
-                if (Object.ReferenceEquals(_context, value))
+                if (ReferenceEquals(_context, value))
                     return;
                 _context = value;
                 _context.PreSave += OnPreSave;

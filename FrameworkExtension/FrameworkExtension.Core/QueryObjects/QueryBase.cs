@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Transactions;
+using FrameworkExtension.Core.Interceptors.Events;
 using FrameworkExtension.Core.Interfaces;
 using System.Linq.Expressions;
 using System.Collections.ObjectModel;
@@ -10,7 +11,7 @@ using System.Reflection;
 
 namespace FrameworkExtension.Core.QueryObjects
 {
-    public abstract class QueryBase : IExtendableQuery
+    public abstract class QueryBase : IExtendableQuery, IObservableQuery
     {
         static ReadOnlyCollection<MethodInfo> QueryableMethods;
         static QueryBase()
@@ -44,5 +45,7 @@ namespace FrameworkExtension.Core.QueryObjects
             if (query == null) throw new InvalidOperationException("Null Query cannot be executed.");
         }
 
+        public event EventHandler<PreQueryEventArgs> PreQuery;
+        public event EventHandler<PostQueryEventArgs> PostQuery;
     }
 }

@@ -21,7 +21,7 @@ namespace FrameworkExtension.Core.Test.EntityFramework.UnitTests
             var context = new EntityFrameworkTestContext();
 
             //Act
-            var repository = new EntityFrameworkRepository(context, null);
+            var repository = new EntityFrameworkRepository(context);
 
             //Assert
             repository.Context.IsSameByReference(context);
@@ -37,7 +37,7 @@ namespace FrameworkExtension.Core.Test.EntityFramework.UnitTests
                     {
                         new Foo() {Id = 1, Name = "Test"}
                     }.AsQueryable());
-            var target = new EntityFrameworkRepository(context, null);
+            var target = new EntityFrameworkRepository(context);
             
             //Act
             var result = target.Find(new TestQuery());
@@ -60,7 +60,7 @@ namespace FrameworkExtension.Core.Test.EntityFramework.UnitTests
                     {
                         new Foo() {Id = 1, Name = "Test"}
                     }.AsQueryable());
-            var target = new EntityFrameworkRepository(context, null);
+            var target = new EntityFrameworkRepository(context);
 
             //Act
             var result = target.Get(new ScalarIntTestQuery());
@@ -80,7 +80,7 @@ namespace FrameworkExtension.Core.Test.EntityFramework.UnitTests
                     {
                         new Foo() {Id = 1, Name = "Test"}
                     }.AsQueryable());
-            var target = new EntityFrameworkRepository(context, null);
+            var target = new EntityFrameworkRepository(context);
 
             //Act
             var result = target.Get(new ScalarIntTestQuery());
@@ -101,7 +101,7 @@ namespace FrameworkExtension.Core.Test.EntityFramework.UnitTests
                     {
                         foo
                     }.AsQueryable());
-            var target = new EntityFrameworkRepository(context, null);
+            var target = new EntityFrameworkRepository(context);
 
             //Act
             var result = target.Get(new TestQuery());
@@ -121,7 +121,7 @@ namespace FrameworkExtension.Core.Test.EntityFramework.UnitTests
                     {
                         new Foo() {Id = 1, Name = "Test"}
                     }.AsQueryable());
-            var target = new EntityFrameworkRepository(context, null);
+            var target = new EntityFrameworkRepository(context);
 
             //Act
             var testCommand = new TestCommand();

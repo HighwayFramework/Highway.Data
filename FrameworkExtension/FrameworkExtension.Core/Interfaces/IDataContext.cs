@@ -24,5 +24,6 @@ namespace FrameworkExtension.Core.Interfaces
         IEnumerable<T> ExecuteSqlQuery<T>(string sql, params DbParameter[] dbParams);
         int ExecuteSqlCommand(string sql, params DbParameter[] dbParams);
         int ExecuteFunction(string procedureName, params ObjectParameter[] dbParams);
+        IEventManager EventManager { get; set; }
     }
 }

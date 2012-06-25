@@ -8,15 +8,9 @@ namespace FrameworkExtension.Core.Repositories
 {
     public class EntityFrameworkRepository : IRepository
     {
-        public EntityFrameworkRepository(IDataContext context, IEventManager eventManager)
+        public EntityFrameworkRepository(IDataContext context)
         {
             Context = context;
-            this.EventManager = eventManager;
-            var observableDataContext = context as IObservableDataContext;
-            if(observableDataContext != null)
-            {
-                ((EventManager) this.EventManager).Context = observableDataContext;
-            }
         }
 
         public IDataContext Context { get; private set; }

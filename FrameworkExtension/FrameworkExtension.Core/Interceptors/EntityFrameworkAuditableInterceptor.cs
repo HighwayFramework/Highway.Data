@@ -11,17 +11,15 @@ namespace FrameworkExtension.Core.Interceptors
     {
         private IUserNameService _userNameService;
 
-        public EntityFrameworkAuditableInterceptor(IUserNameService userNameService)
+        public EntityFrameworkAuditableInterceptor(IUserNameService userNameService, int priority = 0)
         {
             _userNameService = userNameService;
         }
 
-        public InterceptorResult Execute(IRepository context, PreSaveEventArgs eventArgs)
+        public InterceptorResult Execute(IDataContext context, PreSaveEventArgs eventArgs)
         {
             var efContext = context as DbContext;
-            if (efContext == null)
-                throw new InvalidOperationException(
-                    "Entity Framework Interceptors must be used with Entity Framework Contexts");
+            if (efContext == null) throw new InvalidOperationException("Entity Framework Interceptors must be used with Entity Framework Contexts");
             
             var userName = _userNameService.GetCurrentUserName();
 #if DEBUG
@@ -36,8 +34,11 @@ namespace FrameworkExtension.Core.Interceptors
                 .ForEach(e =>
                 {
                     var entity = e.Entity as IAuditableEntity;
-                    entity.CreatedDate = entity.ModifiedDate = DateTime.Now;
-                    entity.CreatedBy = entity.ModifiedBy = userName;
+                    if (entity != null)
+                    {
+                        entity.CreatedDate = entity.ModifiedDate = DateTime.Now;
+                        entity.CreatedBy = entity.ModifiedBy = userName;
+                    }
                 });
 
             efContext.ChangeTracker.Entries().Where(x => x.State == EntityState.Modified)
@@ -46,11 +47,16 @@ namespace FrameworkExtension.Core.Interceptors
                 .ForEach(e =>
                 {
                     var entity = e.Entity as IAuditableEntity;
-                    entity.ModifiedDate = DateTime.Now;
-                    entity.ModifiedBy = userName;
+                    if (entity != null)
+                    {
+                        entity.ModifiedDate = DateTime.Now;
+                        entity.ModifiedBy = userName;
+                    }
                 });
             efContext.ChangeTracker.DetectChanges();
             return new InterceptorResult();
         }
+
+        public int Priority { get; set; }
     }
 }

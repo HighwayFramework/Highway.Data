@@ -6,12 +6,13 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Objects;
 using System.Linq;
+using FrameworkExtension.Core.Interceptors.Events;
 using FrameworkExtension.Core.Interfaces;
 using FrameworkExtension.Core.Services;
 
 namespace FrameworkExtension.Core.Contexts
 {
-    public class EntityFrameworkContext : DbContext, IDataContext
+    public class EntityFrameworkContext : DbContext, IObservableDataContext
     {
         public EntityFrameworkContext(string connectionString) : base(connectionString) { }
         
@@ -87,8 +88,20 @@ namespace FrameworkExtension.Core.Contexts
         public int Commit()
         {
             base.ChangeTracker.DetectChanges();
+            InvokePreSave();
             var result = base.SaveChanges();
+            InvokePostSave();
             return result;
+        }
+
+        private void InvokePostSave()
+        {
+            if (PostSave != null) PostSave(this, new PostSaveEventArgs());
+        }
+
+        private void InvokePreSave()
+        {
+            if (PreSave != null) PreSave(this, new PreSaveEventArgs(){});
         }
 
         public IEnumerable<T> ExecuteSqlQuery<T>(string sql, params DbParameter[] dbParams)
@@ -105,5 +118,8 @@ namespace FrameworkExtension.Core.Contexts
         {
             return base.Database.SqlQuery<int>(procedureName, dbParams).FirstOrDefault();
         }
+
+        public event EventHandler<PreSaveEventArgs> PreSave;
+        public event EventHandler<PostSaveEventArgs> PostSave;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FrameworkExtension.Core.Interfaces;
 using FrameworkExtension.Core.Interceptors.Events;
 
@@ -7,9 +8,9 @@ namespace FrameworkExtension.Core.EventManagement
 {
     public class EventManager : IEventManager
     {
-        private IObservableDataContext _Context;
-        private readonly List<IInterceptor<PreSaveEventArgs>> _PreSaveInterceptors = new List<IInterceptor<PreSaveEventArgs>>();
-        private readonly List<IInterceptor<PostSaveEventArgs>> _PostSaveInterceptors = new List<IInterceptor<PostSaveEventArgs>>();
+        private IObservableDataContext _context;
+        private readonly List<IInterceptor<PreSaveEventArgs>> _preSaveInterceptors = new List<IInterceptor<PreSaveEventArgs>>();
+        private readonly List<IInterceptor<PostSaveEventArgs>> _postSaveInterceptors = new List<IInterceptor<PostSaveEventArgs>>();
 
         public void Register<T>(IInterceptor<T> interceptor) where T : EventArgs
         {
@@ -17,10 +18,10 @@ namespace FrameworkExtension.Core.EventManagement
             switch (key.Name)
             {
                 case "PreSaveEventArgs":
-                    _PreSaveInterceptors.Add(interceptor as IInterceptor<PreSaveEventArgs>);
+                    _preSaveInterceptors.Add(interceptor as IInterceptor<PreSaveEventArgs>);
                     break;
                 case "PostSaveEventArgs":
-                    _PostSaveInterceptors.Add(interceptor as IInterceptor<PostSaveEventArgs>);
+                    _postSaveInterceptors.Add(interceptor as IInterceptor<PostSaveEventArgs>);
                     break;
                 default:
                     throw new ArgumentException("Only PreSaveEventArgs and PostSaveEventArgs");
@@ -31,24 +32,32 @@ namespace FrameworkExtension.Core.EventManagement
         {
             get
             {
-                return _Context;
+                return _context;
             }
             set
             {
-                if (Object.ReferenceEquals(_Context, value))
+                if (Object.ReferenceEquals(_context, value))
                     return;
-                _Context = value;
-                _Context.PreSave += OnPreSave;
-                _Context.PostSave += OnPostSave;
+                _context = value;
+                _context.PreSave += OnPreSave;
+                _context.PostSave += OnPostSave;
             }
         }
         private void OnPreSave(object sender, PreSaveEventArgs e)
         {
-            throw new NotImplementedException();
+            foreach (var preSaveInterceptor in _preSaveInterceptors.OrderBy(x=>x.Priority))
+            {
+                var result = preSaveInterceptor.Execute(Context,e);
+                if (result.ContinueExecution == false) break;
+            }
         }
         private void OnPostSave(object sender, PostSaveEventArgs e)
         {
-            throw new NotImplementedException();
+            foreach (var postSaveInterceptor in _postSaveInterceptors.OrderBy(x => x.Priority))
+            {
+                var result = postSaveInterceptor.Execute(Context, e);
+                if (result.ContinueExecution == false) break;
+            }
         }
     }
 }

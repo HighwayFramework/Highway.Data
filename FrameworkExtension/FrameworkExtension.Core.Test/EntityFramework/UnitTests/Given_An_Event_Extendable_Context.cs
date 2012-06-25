@@ -28,23 +28,25 @@ namespace FrameworkExtension.Core.Test.EntityFramework.UnitTests
             var manager = new EventManager();
             container.Register(Component.For<IEventManager>().Instance(manager),
                                Component.For<IRepository>().ImplementedBy<EntityFrameworkRepository>());
-            IDataContext mockContext = MockRepository.GenerateMock<IDataContext>();
-            var repository = container.Resolve<IRepository>(new { context =  mockContext });
+            IDataContext dataContext = new EntityFrameworkTestContext();
+            var repository = container.Resolve<IRepository>(new { context =  dataContext });
 
             //Act
             IInterceptor<PreSaveEventArgs> mockPreSave = MockRepository.GenerateMock<IInterceptor<PreSaveEventArgs>>();
-            mockPreSave.Expect(x => x.Execute(repository, new PreSaveEventArgs())).Return(InterceptorResult.Succeeded());
+            mockPreSave.Expect(x => x.Execute(Arg<IDataContext>.Is.Same(dataContext), Arg<PreSaveEventArgs>.Is.Anything)).Return(InterceptorResult.Succeeded());
+            mockPreSave.Expect(x => x.Priority).Return(1);
             repository.EventManager.Register(mockPreSave);
 
             IInterceptor<PostSaveEventArgs> mockPostSave = MockRepository.GenerateMock<IInterceptor<PostSaveEventArgs>>();
-            mockPostSave.Expect(x => x.Execute(repository, new PostSaveEventArgs())).Return(InterceptorResult.Succeeded());
+            mockPostSave.Expect(x => x.Execute(Arg<IDataContext>.Is.Same(dataContext), Arg<PostSaveEventArgs>.Is.Anything)).Return(InterceptorResult.Succeeded());
+            mockPostSave.Expect(x => x.Priority).Return(1);
             repository.EventManager.Register(mockPostSave);
             repository.Context.Add(new Foo());
             repository.Context.Commit();
 
             //Assert
-            mockPostSave.VerifyAllExpectations();
             mockPreSave.VerifyAllExpectations();
+            mockPostSave.VerifyAllExpectations();
         }
 
     }

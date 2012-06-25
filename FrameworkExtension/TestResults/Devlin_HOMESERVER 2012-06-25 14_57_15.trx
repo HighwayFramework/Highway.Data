@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="4b0bbba5-7cdb-4c8d-9c18-f9af44a7fe68" name="Devlin@HOMESERVER 2012-06-25 14:57:15" runUser="HomeServer\Devlin" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Local" id="6062ef42-e538-4b74-b653-f93f6850fe53">
+    <Description>These are default test settings for a local test run.</Description>
+    <Deployment enabled="false" runDeploymentRoot="Devlin_HOMESERVER 2012-06-25 14_57_15">
+      <DeploymentItem filename="E:\Code\Fun\FEEF\FrameworkExtensions\FrameworkExtension\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll" />
+      <DeploymentItem filename="E:\Code\Fun\FEEF\FrameworkExtensions\FrameworkExtension\FrameworkExtension.Core\bin\Debug\FrameworkExtension.Core.dll" />
+      <DeploymentItem filename="E:\Code\Fun\FEEF\FrameworkExtensions\FrameworkExtension\packages\Castle.Windsor.3.0.0.4001\lib\net40\Castle.Windsor.dll" />
+      <DeploymentItem filename="E:\Code\Fun\FEEF\FrameworkExtensions\FrameworkExtension\MSTest.AssertionHelpers\bin\Debug\MSTest.AssertionHelpers.dll" />
+      <DeploymentItem filename="E:\Code\Fun\FEEF\FrameworkExtensions\FrameworkExtension\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll" />
+      <DeploymentItem filename="E:\Code\Fun\FEEF\FrameworkExtensions\FrameworkExtension\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll" />
+      <DeploymentItem filename="E:\Code\Fun\FEEF\FrameworkExtensions\FrameworkExtension\packages\CommonServiceLocator.WindsorAdapter.1.0\lib\NET35\CommonServiceLocator.WindsorAdapter.dll" />
+      <DeploymentItem filename="E:\Code\Fun\FEEF\FrameworkExtensions\FrameworkExtension\packages\Castle.Core.3.0.0.4001\lib\net40-client\Castle.Core.dll" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2012-06-25T14:57:15.9739282-05:00" queuing="2012-06-25T14:57:16.8159763-05:00" start="2012-06-25T14:57:16.8219767-05:00" finish="2012-06-25T14:57:17.7350289-05:00" />
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="When_Commit_Is_Called_PreSave_and_post_save_interceptors_are_Called" storage="e:\code\fun\feef\frameworkextensions\frameworkextension\frameworkextension.core.test\bin\debug\frameworkextension.core.test.dll" id="60836c9c-c82c-082f-3cae-9046336b87eb">
+      <Execution id="2dbd6df5-c805-49e0-99da-99900442ced8" />
+      <TestMethod codeBase="E:/Code/Fun/FEEF/FrameworkExtensions/FrameworkExtension/FrameworkExtension.Core.Test/bin/Debug/FrameworkExtension.Core.Test.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="FrameworkExtension.Core.Test.EntityFramework.UnitTests.Given_An_Event_Extendable_Context, FrameworkExtension.Core.Test, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="When_Commit_Is_Called_PreSave_and_post_save_interceptors_are_Called" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="60836c9c-c82c-082f-3cae-9046336b87eb" executionId="2dbd6df5-c805-49e0-99da-99900442ced8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="2dbd6df5-c805-49e0-99da-99900442ced8" testId="60836c9c-c82c-082f-3cae-9046336b87eb" testName="When_Commit_Is_Called_PreSave_and_post_save_interceptors_are_Called" computerName="HOMESERVER" duration="00:00:00.4775081" startTime="2012-06-25T14:57:16.8249768-05:00" endTime="2012-06-25T14:57:17.7210281-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2dbd6df5-c805-49e0-99da-99900442ced8">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method FrameworkExtension.Core.Test.EntityFramework.UnitTests.Given_An_Event_Extendable_Context.When_Commit_Is_Called_PreSave_and_post_save_interceptors_are_Called threw exception: 
+Rhino.Mocks.Exceptions.ExpectationViolationException: IInterceptor`1.Execute(Castle.Proxies.IDataContextProxybf754766288d45e6b5843b519666d218, FrameworkExtension.Core.Interceptors.Events.PostSaveEventArgs); Expected #1, Actual #0.</Message>
+          <StackTrace>    at Rhino.Mocks.Impl.ReplayMockState.Verify()
+   at Rhino.Mocks.MockRepository.Verify(Object obj)
+   at Rhino.Mocks.RhinoMocksExtensions.VerifyAllExpectations(Object mockObject)
+   at FrameworkExtension.Core.Test.EntityFramework.UnitTests.Given_An_Event_Extendable_Context.When_Commit_Is_Called_PreSave_and_post_save_interceptors_are_Called() in E:\Code\Fun\FEEF\FrameworkExtensions\FrameworkExtension\FrameworkExtension.Core.Test\EntityFramework\UnitTests\Given_An_Event_Extendable_Context.cs:line 46
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

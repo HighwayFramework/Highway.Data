@@ -11,7 +11,7 @@ using FrameworkExtension.Core.Test.Properties;
 
 namespace FrameworkExtension.Core.Test.EntityFramework.UnitTests
 {
-    public class EntityFrameworkTestContext : EntityFrameworkContext, IDataContext
+    public class EntityFrameworkTestContext : EntityFrameworkContext
     {
         public EntityFrameworkTestContext() : base(Settings.Default.Connection)
         {

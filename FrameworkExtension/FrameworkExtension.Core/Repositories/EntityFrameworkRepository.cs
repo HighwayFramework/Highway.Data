@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FrameworkExtension.Core.EventManagement;
 using FrameworkExtension.Core.Interfaces;
 
 namespace FrameworkExtension.Core.Repositories
@@ -11,6 +12,11 @@ namespace FrameworkExtension.Core.Repositories
         {
             Context = context;
             this.EventManager = eventManager;
+            var observableDataContext = context as IObservableDataContext;
+            if(observableDataContext != null)
+            {
+                ((EventManager) this.EventManager).Context = observableDataContext;
+            }
         }
 
         public IDataContext Context { get; private set; }

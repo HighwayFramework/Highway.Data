@@ -5,6 +5,7 @@ namespace FrameworkExtension.Core.Interfaces
 {
     public interface IInterceptor<in T> where T : System.EventArgs
     {
-        InterceptorResult Execute(IRepository context, T eventArgs);
+        InterceptorResult Execute(IDataContext context, T eventArgs);
+        int Priority { get; set; }
     }
 }

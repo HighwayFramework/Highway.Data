@@ -7,11 +7,11 @@ using FrameworkExtension.Core.Interfaces;
 
 namespace FrameworkExtension.Core.QueryObjects
 {
-    public class Scalar<T> : QueryBase, IScalarObject<T>
+    public class Scalar<T> : Query<T>, IScalarObject<T>
     {
         public Func<IDataContext, T> ContextQuery { get; set; }
 
-        public virtual T Execute(IDataContext context)
+        public new T Execute(IDataContext context)
         {
             Context = context;
             CheckContextAndQuery(ContextQuery);

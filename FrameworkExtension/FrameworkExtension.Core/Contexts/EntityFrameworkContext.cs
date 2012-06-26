@@ -9,15 +9,20 @@ using System.Linq;
 using FrameworkExtension.Core.EventManagement;
 using FrameworkExtension.Core.Interceptors.Events;
 using FrameworkExtension.Core.Interfaces;
+using FrameworkExtension.Core.Mappings;
 using FrameworkExtension.Core.Services;
 
 namespace FrameworkExtension.Core.Contexts
 {
     public class EntityFrameworkContext : DbContext, IObservableDataContext
     {
-        
-        public EntityFrameworkContext(string connectionString) : base(connectionString) { }
-        
+        private readonly MappingConfiguration _configuration;
+
+        public EntityFrameworkContext(string connectionString, MappingConfiguration configuration) : base(connectionString)
+        {
+            _configuration = configuration;
+        }
+
         public IQueryable<T> AsQueryable<T>() where T : class
         {
             return this.Set<T>();
@@ -134,5 +139,11 @@ namespace FrameworkExtension.Core.Contexts
 
         public event EventHandler<PreSaveEventArgs> PreSave;
         public event EventHandler<PostSaveEventArgs> PostSave;
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            _configuration.ConfigureModelBuilder(modelBuilder);
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

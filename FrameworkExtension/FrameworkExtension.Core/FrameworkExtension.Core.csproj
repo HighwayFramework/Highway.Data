@@ -63,6 +63,7 @@
     <Compile Include="Interfaces\IInterceptor.cs" />
     <Compile Include="Interfaces\IObservableDataContext.cs" />
     <Compile Include="Interfaces\IObservableQuery.cs" />
+    <Compile Include="Mappings\MappingConfiguration.cs" />
     <Compile Include="Services\DefaultUserNameService.cs" />
     <Compile Include="Contexts\EntityFrameworkContext.cs" />
     <Compile Include="Interfaces\IAuditableEntity.cs" />

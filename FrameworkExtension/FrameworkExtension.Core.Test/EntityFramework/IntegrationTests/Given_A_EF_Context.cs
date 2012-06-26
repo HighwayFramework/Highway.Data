@@ -1,12 +1,20 @@
 ﻿using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using Castle.MicroKernel.Registration;
+using Castle.Windsor;
+using CommonServiceLocator.WindsorAdapter;
 using FrameworkExtension.Core.Contexts;
+using FrameworkExtension.Core.EventManagement;
+using FrameworkExtension.Core.Interfaces;
+using FrameworkExtension.Core.Mappings;
 using FrameworkExtension.Core.Test.EntityFramework.Initializer;
+using FrameworkExtension.Core.Test.EntityFramework.Mapping;
 using FrameworkExtension.Core.Test.EntityFramework.UnitTests;
 using FrameworkExtension.Core.Test.Properties;
 using FrameworkExtension.Core.Test.TestDomain;
 using MSTest.AssertionHelpers;
+using Microsoft.Practices.ServiceLocation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FrameworkExtension.Core.Test.EntityFramework.IntegrationTests
@@ -15,6 +23,26 @@ namespace FrameworkExtension.Core.Test.EntityFramework.IntegrationTests
     public class Given_A_EF_Context
     {
         private EntityFrameworkTestContext context;
+        private static IWindsorContainer container;
+
+        [ClassInitialize]
+        public static void SetupClass(TestContext context)
+        {
+            container = new WindsorContainer();
+            ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(container));
+            container.Register(Component.For<IEventManager>().ImplementedBy<EventManager>().LifestyleTransient(),
+                               Component.For<EntityFrameworkTestContext>().ImplementedBy<EntityFrameworkTestContext>().DependsOn(new { connectionString = Settings.Default.Connection }).LifestyleTransient(),
+                               Component.For<MappingConfiguration>().ImplementedBy<TestMappingConfiguration>().LifestyleTransient());
+
+        }
+
+        [TestInitialize]
+        public void Setup()
+        {
+            Database.SetInitializer(new ForceDeleteInitializer(new EntityFrameworkIntializer()));
+            context = container.Resolve<EntityFrameworkTestContext>();
+        }
+
 
         [TestMethod, TestCategory(TestCategories.Database)]
         public void When_AsQueryable_Called_A_Set_Is_Pulled_From_The_Database()
@@ -26,13 +54,6 @@ namespace FrameworkExtension.Core.Test.EntityFramework.IntegrationTests
 
             //Assert
             items.Count().IsEqual(5);
-        }
-
-        [TestInitialize]
-        public void Setup()
-        {
-            Database.SetInitializer(new ForceDeleteInitializer(new EntityFrameworkIntializer()));
-            context = new EntityFrameworkTestContext(Settings.Default.Connection);
         }
 
         [TestMethod, TestCategory(TestCategories.Database)]

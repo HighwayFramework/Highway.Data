@@ -1,3 +1,4 @@
+using FrameworkExtension.Core.Interfaces;
 using FrameworkExtension.Core.QueryObjects;
 using FrameworkExtension.Core.Test.TestDomain;
 
@@ -9,5 +10,7 @@ namespace FrameworkExtension.Core.Test.TestQueries
         {
             ContextQuery = c => c.AsQueryable<Foo>();
         }
+
+        
     }
 }

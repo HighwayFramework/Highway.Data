@@ -7,7 +7,6 @@ namespace FrameworkExtension.Core.Interfaces
         IDataContext Context { get; }
         IEventManager EventManager { get; }
         IEnumerable<T> Find<T>(IQuery<T> query) where T : class;
-        T Get<T>(IQuery<T> query) where T : class;
         T Get<T>(IScalarObject<T> query);
         void Execute(ICommandObject command);
     }

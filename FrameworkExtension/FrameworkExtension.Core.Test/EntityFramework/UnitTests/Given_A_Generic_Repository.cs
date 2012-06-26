@@ -124,7 +124,7 @@ namespace FrameworkExtension.Core.Test.EntityFramework.UnitTests
             var target = new EntityFrameworkRepository(context);
 
             //Act
-            var result = target.Get(new TestQuery());
+            var result = target.Find(new TestQuery()).FirstOrDefault();
 
             //Assert
             context.VerifyAllExpectations();

@@ -1,0 +1,566 @@
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context}{\section{Framework\-Extension.\-Entity\-Framework.\-Tests.\-Unit\-Tests.\-Commit\-Events\-Mock\-Context Class Reference}
+\label{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context}\index{Framework\-Extension.\-Entity\-Framework.\-Tests.\-Unit\-Tests.\-Commit\-Events\-Mock\-Context@{Framework\-Extension.\-Entity\-Framework.\-Tests.\-Unit\-Tests.\-Commit\-Events\-Mock\-Context}}
+}
+Inheritance diagram for Framework\-Extension.\-Entity\-Framework.\-Tests.\-Unit\-Tests.\-Commit\-Events\-Mock\-Context\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_ad82d7b3128c3ebe211590cd135624215}{void {\bfseries Dispose} ()}\label{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_ad82d7b3128c3ebe211590cd135624215}
+
+\item 
+I\-Queryable$<$ T $>$ \hyperlink{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a1d47f5a08a631c9cb42df64ed2f607c8}{As\-Queryable$<$ T $>$} ()
+\begin{DoxyCompactList}\small\item\em This gives a mockable wrapper around the normal Set
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+method that allows for testablity \end{DoxyCompactList}\item 
+T \hyperlink{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_aa849c2f2553f381457c5003406c5d963}{Add$<$ T $>$} (T item)
+\begin{DoxyCompactList}\small\item\em Adds the provided instance of 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+to the data context \end{DoxyCompactList}\item 
+T \hyperlink{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a82ddc0eccd022f543467c4cc4e53db9b}{Remove$<$ T $>$} (T item)
+\begin{DoxyCompactList}\small\item\em Removes the provided instance of 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+from the data context \end{DoxyCompactList}\item 
+T \hyperlink{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a0aa0024cf61064e9051e8d722de73a0d}{Update$<$ T $>$} (T item)
+\begin{DoxyCompactList}\small\item\em Updates the provided instance of 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+in the data context \end{DoxyCompactList}\item 
+T \hyperlink{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a72aa5f2c99575ef7cce06d776fbb961d}{Attach$<$ T $>$} (T item)
+\begin{DoxyCompactList}\small\item\em Attaches the provided instance of 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+to the data context \end{DoxyCompactList}\item 
+T \hyperlink{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a423a62019fb58dfba4170ecd39e4ccfa}{Detach$<$ T $>$} (T item)
+\begin{DoxyCompactList}\small\item\em Detaches the provided instance of 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+from the data context \end{DoxyCompactList}\item 
+T \hyperlink{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a50db55322f05c529687fd244b57cdcb9}{Reload$<$ T $>$} (T item)
+\begin{DoxyCompactList}\small\item\em Reloads the provided instance of 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+from the database \end{DoxyCompactList}\item 
+void \hyperlink{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a0f247fc4a425272b9d8383cf4896c57c}{Reload$<$ T $>$} ()
+\begin{DoxyCompactList}\small\item\em Reloads all tracked objects of the type 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+\end{DoxyCompactList}\item 
+int \hyperlink{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_ace62a54842544297557b5ce7a089eb06}{Commit} ()
+\begin{DoxyCompactList}\small\item\em Commits all currently tracked entity changes \end{DoxyCompactList}\item 
+I\-Enumerable$<$ T $>$ \hyperlink{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a2fd113b93107d60e3ee6832f83741470}{Execute\-Sql\-Query$<$ T $>$} (string sql, params Db\-Parameter\mbox{[}$\,$\mbox{]} db\-Params)
+\begin{DoxyCompactList}\small\item\em Executes a S\-Q\-L command and tries to map the returned datasets into an I\-Enumerable
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+The results should have the same column names as the Entity Type has properties \end{DoxyCompactList}\item 
+int \hyperlink{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a32fbc6ee30ba43a4348efe2c01d8e20e}{Execute\-Sql\-Command} (string sql, params Db\-Parameter\mbox{[}$\,$\mbox{]} db\-Params)
+\begin{DoxyCompactList}\small\item\em Executes a S\-Q\-L command and returns the standard int return from the query \end{DoxyCompactList}\item 
+int \hyperlink{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a5fd5f0739acab5d130069397812906ab}{Execute\-Function} (string procedure\-Name, params Object\-Parameter\mbox{[}$\,$\mbox{]} db\-Params)
+\begin{DoxyCompactList}\small\item\em \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a8032ba032da585a733c0e712a0d20e7f}{\hyperlink{interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_event_manager}{I\-Event\-Manager} {\bfseries Event\-Manager}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}}\label{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a8032ba032da585a733c0e712a0d20e7f}
+
+\end{DoxyCompactItemize}
+\subsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_adc76bca5884d6f003bd23a3da86c4437}{Event\-Handler$<$ \hyperlink{class_framework_extension_1_1_core_1_1_interceptors_1_1_events_1_1_pre_save_event_args}{Pre\-Save\-Event\-Args} $>$ {\bfseries Pre\-Save}}\label{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_adc76bca5884d6f003bd23a3da86c4437}
+
+\item 
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a4db9f067aafe420bdf38f9de6077142d}{Event\-Handler$<$ \hyperlink{class_framework_extension_1_1_core_1_1_interceptors_1_1_events_1_1_post_save_event_args}{Post\-Save\-Event\-Args} $>$ {\bfseries Post\-Save}}\label{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a4db9f067aafe420bdf38f9de6077142d}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_aa849c2f2553f381457c5003406c5d963}{\index{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context@{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context}!Add$<$ T $>$@{Add$<$ T $>$}}
+\index{Add$<$ T $>$@{Add$<$ T $>$}!FrameworkExtension::EntityFramework::Tests::UnitTests::CommitEventsMockContext@{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context}}
+\subsubsection[{Add$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}T Framework\-Extension.\-Entity\-Framework.\-Tests.\-Unit\-Tests.\-Commit\-Events\-Mock\-Context.\-Add$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{T}]{item}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_aa849c2f2553f381457c5003406c5d963}
+
+
+Adds the provided instance of 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+to the data context 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity Type being added\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+you want to add\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+you added
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_data_context_a0c8685ab4b1c99f897eba29fba179896}{Framework\-Extension.\-Core.\-Interfaces.\-I\-Data\-Context}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em class}]\end{description}
+\end{Desc}
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a1d47f5a08a631c9cb42df64ed2f607c8}{\index{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context@{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context}!As\-Queryable$<$ T $>$@{As\-Queryable$<$ T $>$}}
+\index{As\-Queryable$<$ T $>$@{As\-Queryable$<$ T $>$}!FrameworkExtension::EntityFramework::Tests::UnitTests::CommitEventsMockContext@{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context}}
+\subsubsection[{As\-Queryable$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}I\-Queryable$<$T$>$ Framework\-Extension.\-Entity\-Framework.\-Tests.\-Unit\-Tests.\-Commit\-Events\-Mock\-Context.\-As\-Queryable$<$ T $>$ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a1d47f5a08a631c9cb42df64ed2f607c8}
+
+
+This gives a mockable wrapper around the normal Set
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+method that allows for testablity 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity being queried\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+I\-Queryable
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_data_context_a815dee1d6eb11910fc12250752b654b7}{Framework\-Extension.\-Core.\-Interfaces.\-I\-Data\-Context}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em class}]\end{description}
+\end{Desc}
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a72aa5f2c99575ef7cce06d776fbb961d}{\index{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context@{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context}!Attach$<$ T $>$@{Attach$<$ T $>$}}
+\index{Attach$<$ T $>$@{Attach$<$ T $>$}!FrameworkExtension::EntityFramework::Tests::UnitTests::CommitEventsMockContext@{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context}}
+\subsubsection[{Attach$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}T Framework\-Extension.\-Entity\-Framework.\-Tests.\-Unit\-Tests.\-Commit\-Events\-Mock\-Context.\-Attach$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{T}]{item}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a72aa5f2c99575ef7cce06d776fbb961d}
+
+
+Attaches the provided instance of 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+to the data context 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity Type being attached\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+you want to attach\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+you attached
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_data_context_afb8535c9b4c824dcc7787ee1c8f987e8}{Framework\-Extension.\-Core.\-Interfaces.\-I\-Data\-Context}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em class}]\end{description}
+\end{Desc}
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_ace62a54842544297557b5ce7a089eb06}{\index{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context@{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context}!Commit@{Commit}}
+\index{Commit@{Commit}!FrameworkExtension::EntityFramework::Tests::UnitTests::CommitEventsMockContext@{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context}}
+\subsubsection[{Commit}]{\setlength{\rightskip}{0pt plus 5cm}int Framework\-Extension.\-Entity\-Framework.\-Tests.\-Unit\-Tests.\-Commit\-Events\-Mock\-Context.\-Commit (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_ace62a54842544297557b5ce7a089eb06}
+
+
+Commits all currently tracked entity changes 
+
+\begin{DoxyReturn}{Returns}
+the number of rows affected
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_data_context_a50f3923131c6dbd2d5b057558327d9b2}{Framework\-Extension.\-Core.\-Interfaces.\-I\-Data\-Context}.
+
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a423a62019fb58dfba4170ecd39e4ccfa}{\index{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context@{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context}!Detach$<$ T $>$@{Detach$<$ T $>$}}
+\index{Detach$<$ T $>$@{Detach$<$ T $>$}!FrameworkExtension::EntityFramework::Tests::UnitTests::CommitEventsMockContext@{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context}}
+\subsubsection[{Detach$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}T Framework\-Extension.\-Entity\-Framework.\-Tests.\-Unit\-Tests.\-Commit\-Events\-Mock\-Context.\-Detach$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{T}]{item}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a423a62019fb58dfba4170ecd39e4ccfa}
+
+
+Detaches the provided instance of 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+from the data context 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity Type being detached\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+you want to detach\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+you detached
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_data_context_a26dc0d9a711b046a891f4796774a868f}{Framework\-Extension.\-Core.\-Interfaces.\-I\-Data\-Context}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em class}]\end{description}
+\end{Desc}
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a5fd5f0739acab5d130069397812906ab}{\index{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context@{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context}!Execute\-Function@{Execute\-Function}}
+\index{Execute\-Function@{Execute\-Function}!FrameworkExtension::EntityFramework::Tests::UnitTests::CommitEventsMockContext@{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context}}
+\subsubsection[{Execute\-Function}]{\setlength{\rightskip}{0pt plus 5cm}int Framework\-Extension.\-Entity\-Framework.\-Tests.\-Unit\-Tests.\-Commit\-Events\-Mock\-Context.\-Execute\-Function (
+\begin{DoxyParamCaption}
+\item[{string}]{procedure\-Name, }
+\item[{params Object\-Parameter\mbox{[}$\,$\mbox{]}}]{db\-Params}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a5fd5f0739acab5d130069397812906ab}
+
+
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em procedure\-Name} & \\
+\hline
+{\em db\-Params} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_data_context_a4fd23b695358dfafb3a2547fc78ce0ef}{Framework\-Extension.\-Core.\-Interfaces.\-I\-Data\-Context}.
+
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a32fbc6ee30ba43a4348efe2c01d8e20e}{\index{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context@{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context}!Execute\-Sql\-Command@{Execute\-Sql\-Command}}
+\index{Execute\-Sql\-Command@{Execute\-Sql\-Command}!FrameworkExtension::EntityFramework::Tests::UnitTests::CommitEventsMockContext@{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context}}
+\subsubsection[{Execute\-Sql\-Command}]{\setlength{\rightskip}{0pt plus 5cm}int Framework\-Extension.\-Entity\-Framework.\-Tests.\-Unit\-Tests.\-Commit\-Events\-Mock\-Context.\-Execute\-Sql\-Command (
+\begin{DoxyParamCaption}
+\item[{string}]{sql, }
+\item[{params Db\-Parameter\mbox{[}$\,$\mbox{]}}]{db\-Params}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a32fbc6ee30ba43a4348efe2c01d8e20e}
+
+
+Executes a S\-Q\-L command and returns the standard int return from the query 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sql} & The Sql Statement\\
+\hline
+{\em db\-Params} & A List of Database Parameters for the Query\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The rows affected
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_data_context_a1deee0a581593b6ae859816fb9f243e2}{Framework\-Extension.\-Core.\-Interfaces.\-I\-Data\-Context}.
+
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a2fd113b93107d60e3ee6832f83741470}{\index{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context@{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context}!Execute\-Sql\-Query$<$ T $>$@{Execute\-Sql\-Query$<$ T $>$}}
+\index{Execute\-Sql\-Query$<$ T $>$@{Execute\-Sql\-Query$<$ T $>$}!FrameworkExtension::EntityFramework::Tests::UnitTests::CommitEventsMockContext@{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context}}
+\subsubsection[{Execute\-Sql\-Query$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}I\-Enumerable$<$T$>$ Framework\-Extension.\-Entity\-Framework.\-Tests.\-Unit\-Tests.\-Commit\-Events\-Mock\-Context.\-Execute\-Sql\-Query$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{string}]{sql, }
+\item[{params Db\-Parameter\mbox{[}$\,$\mbox{]}}]{db\-Params}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a2fd113b93107d60e3ee6832f83741470}
+
+
+Executes a S\-Q\-L command and tries to map the returned datasets into an I\-Enumerable
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+The results should have the same column names as the Entity Type has properties 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity Type that the return should be mapped to\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em sql} & The Sql Statement\\
+\hline
+{\em db\-Params} & A List of Database Parameters for the Query\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An I\-Enumerable
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+from the query return
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_data_context_ab2932a3d1a47a5efe2e26083724ed5a0}{Framework\-Extension.\-Core.\-Interfaces.\-I\-Data\-Context}.
+
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a50db55322f05c529687fd244b57cdcb9}{\index{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context@{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context}!Reload$<$ T $>$@{Reload$<$ T $>$}}
+\index{Reload$<$ T $>$@{Reload$<$ T $>$}!FrameworkExtension::EntityFramework::Tests::UnitTests::CommitEventsMockContext@{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context}}
+\subsubsection[{Reload$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}T Framework\-Extension.\-Entity\-Framework.\-Tests.\-Unit\-Tests.\-Commit\-Events\-Mock\-Context.\-Reload$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{T}]{item}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a50db55322f05c529687fd244b57cdcb9}
+
+
+Reloads the provided instance of 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+from the database 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity Type being reloaded\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+you want to reload\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+you reloaded
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_data_context_a0440afc85c29fbe35b62685a08fb2313}{Framework\-Extension.\-Core.\-Interfaces.\-I\-Data\-Context}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em class}]\end{description}
+\end{Desc}
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a0f247fc4a425272b9d8383cf4896c57c}{\index{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context@{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context}!Reload$<$ T $>$@{Reload$<$ T $>$}}
+\index{Reload$<$ T $>$@{Reload$<$ T $>$}!FrameworkExtension::EntityFramework::Tests::UnitTests::CommitEventsMockContext@{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context}}
+\subsubsection[{Reload$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}void Framework\-Extension.\-Entity\-Framework.\-Tests.\-Unit\-Tests.\-Commit\-Events\-Mock\-Context.\-Reload$<$ T $>$ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a0f247fc4a425272b9d8383cf4896c57c}
+
+
+Reloads all tracked objects of the type 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of objects to reload\\
+\hline
+\end{DoxyTemplParams}
+
+
+Implements \hyperlink{interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_data_context_a0085fcdb37363f377d7ae84522e53a5b}{Framework\-Extension.\-Core.\-Interfaces.\-I\-Data\-Context}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em class}]\end{description}
+\end{Desc}
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a82ddc0eccd022f543467c4cc4e53db9b}{\index{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context@{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context}!Remove$<$ T $>$@{Remove$<$ T $>$}}
+\index{Remove$<$ T $>$@{Remove$<$ T $>$}!FrameworkExtension::EntityFramework::Tests::UnitTests::CommitEventsMockContext@{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context}}
+\subsubsection[{Remove$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}T Framework\-Extension.\-Entity\-Framework.\-Tests.\-Unit\-Tests.\-Commit\-Events\-Mock\-Context.\-Remove$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{T}]{item}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a82ddc0eccd022f543467c4cc4e53db9b}
+
+
+Removes the provided instance of 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+from the data context 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity Type being removed\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+you want to remove\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+you removed
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_data_context_a713205a05d584b6d47325434e6723564}{Framework\-Extension.\-Core.\-Interfaces.\-I\-Data\-Context}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em class}]\end{description}
+\end{Desc}
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a0aa0024cf61064e9051e8d722de73a0d}{\index{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context@{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context}!Update$<$ T $>$@{Update$<$ T $>$}}
+\index{Update$<$ T $>$@{Update$<$ T $>$}!FrameworkExtension::EntityFramework::Tests::UnitTests::CommitEventsMockContext@{Framework\-Extension\-::\-Entity\-Framework\-::\-Tests\-::\-Unit\-Tests\-::\-Commit\-Events\-Mock\-Context}}
+\subsubsection[{Update$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}T Framework\-Extension.\-Entity\-Framework.\-Tests.\-Unit\-Tests.\-Commit\-Events\-Mock\-Context.\-Update$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{T}]{item}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context_a0aa0024cf61064e9051e8d722de73a0d}
+
+
+Updates the provided instance of 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+in the data context 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity Type being updated\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+you want to update\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+you updated
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_data_context_a1297c0d6e59ec05855d8e25a72f49fdd}{Framework\-Extension.\-Core.\-Interfaces.\-I\-Data\-Context}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em class}]\end{description}
+\end{Desc}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Framework\-Extension.\-Entity\-Framework.\-Tests/\-Unit\-Tests/Given\-\_\-\-An\-\_\-\-Event\-\_\-\-Extendable\-\_\-\-Context.\-cs\end{DoxyCompactItemize}

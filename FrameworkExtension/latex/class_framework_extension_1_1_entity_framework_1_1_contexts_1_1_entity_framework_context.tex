@@ -1,0 +1,593 @@
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context}{\section{Framework\-Extension.\-Entity\-Framework.\-Contexts.\-Entity\-Framework\-Context Class Reference}
+\label{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context}\index{Framework\-Extension.\-Entity\-Framework.\-Contexts.\-Entity\-Framework\-Context@{Framework\-Extension.\-Entity\-Framework.\-Contexts.\-Entity\-Framework\-Context}}
+}
+Inheritance diagram for Framework\-Extension.\-Entity\-Framework.\-Contexts.\-Entity\-Framework\-Context\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a37fb0de705ec1e6ca5f7cbe39c5e47ae}{Entity\-Framework\-Context} (string connection\-String, \hyperlink{interface_framework_extension_1_1_entity_framework_1_1_mappings_1_1_i_mapping_configuration}{I\-Mapping\-Configuration} configuration)
+\begin{DoxyCompactList}\small\item\em Constructs a context \end{DoxyCompactList}\item 
+I\-Queryable$<$ T $>$ \hyperlink{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a56d3f290277a320f9fb8a3045c4d530c}{As\-Queryable$<$ T $>$} ()
+\begin{DoxyCompactList}\small\item\em This gives a mockable wrapper around the normal Set
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+method that allows for testablity \end{DoxyCompactList}\item 
+T \hyperlink{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_ae3053c572db5a34802107c6734e8d758}{Add$<$ T $>$} (T item)
+\begin{DoxyCompactList}\small\item\em Adds the provided instance of 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+to the data context \end{DoxyCompactList}\item 
+T \hyperlink{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_ac56f15278782a2978a3d5f368156ef8d}{Remove$<$ T $>$} (T item)
+\begin{DoxyCompactList}\small\item\em Removes the provided instance of 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+from the data context \end{DoxyCompactList}\item 
+T \hyperlink{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a02b78487a49ea0d42aeee143bff5c0bc}{Update$<$ T $>$} (T item)
+\begin{DoxyCompactList}\small\item\em Updates the provided instance of 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+in the data context \end{DoxyCompactList}\item 
+T \hyperlink{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a44750d8bf54f6d8ba284d46544c221fb}{Attach$<$ T $>$} (T item)
+\begin{DoxyCompactList}\small\item\em Attaches the provided instance of 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+to the data context \end{DoxyCompactList}\item 
+T \hyperlink{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a057c2858fd25f18db69fc85b86eb2019}{Detach$<$ T $>$} (T item)
+\begin{DoxyCompactList}\small\item\em Detaches the provided instance of 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+from the data context \end{DoxyCompactList}\item 
+T \hyperlink{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_ac8c74190bfe433a8eae0658616bad089}{Reload$<$ T $>$} (T item)
+\begin{DoxyCompactList}\small\item\em Reloads the provided instance of 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+from the database \end{DoxyCompactList}\item 
+void \hyperlink{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a87a885ec11e09fce2f7f220e6c98f994}{Reload$<$ T $>$} ()
+\begin{DoxyCompactList}\small\item\em Reloads all tracked objects of the type 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+\end{DoxyCompactList}\item 
+int \hyperlink{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_ac7563d83d7010a5f8da3168cf43fe5be}{Commit} ()
+\begin{DoxyCompactList}\small\item\em Commits all currently tracked entity changes \end{DoxyCompactList}\item 
+I\-Enumerable$<$ T $>$ \hyperlink{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a307fa6de8b9356b1d0addf4e2fd35b17}{Execute\-Sql\-Query$<$ T $>$} (string sql, params Db\-Parameter\mbox{[}$\,$\mbox{]} db\-Params)
+\begin{DoxyCompactList}\small\item\em Executes a S\-Q\-L command and tries to map the returned datasets into an I\-Enumerable
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+The results should have the same column names as the Entity Type has properties \end{DoxyCompactList}\item 
+int \hyperlink{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a322a4ad4a30196edfd0f7aed48b9bf73}{Execute\-Sql\-Command} (string sql, params Db\-Parameter\mbox{[}$\,$\mbox{]} db\-Params)
+\begin{DoxyCompactList}\small\item\em Executes a S\-Q\-L command and returns the standard int return from the query \end{DoxyCompactList}\item 
+int \hyperlink{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a8348891845aee02967ca1d4c1c1ec786}{Execute\-Function} (string procedure\-Name, params Object\-Parameter\mbox{[}$\,$\mbox{]} db\-Params)
+\begin{DoxyCompactList}\small\item\em \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a227e8a3a9f7827eaa1623ca5c5aee7f5}{override void {\bfseries On\-Model\-Creating} (Db\-Model\-Builder model\-Builder)}\label{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a227e8a3a9f7827eaa1623ca5c5aee7f5}
+
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a7d57df088997b433082fd6a8640bbfd9}{\hyperlink{interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_event_manager}{I\-Event\-Manager} {\bfseries Event\-Manager}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}}\label{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a7d57df088997b433082fd6a8640bbfd9}
+
+\end{DoxyCompactItemize}
+\subsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a1053c137e7c1f17ae09c532771d02555}{Event\-Handler$<$ \hyperlink{class_framework_extension_1_1_core_1_1_interceptors_1_1_events_1_1_pre_save_event_args}{Pre\-Save\-Event\-Args} $>$ {\bfseries Pre\-Save}}\label{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a1053c137e7c1f17ae09c532771d02555}
+
+\item 
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a3315a34f2cee31f15e01e222f20b7c2c}{Event\-Handler$<$ \hyperlink{class_framework_extension_1_1_core_1_1_interceptors_1_1_events_1_1_post_save_event_args}{Post\-Save\-Event\-Args} $>$ {\bfseries Post\-Save}}\label{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a3315a34f2cee31f15e01e222f20b7c2c}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a37fb0de705ec1e6ca5f7cbe39c5e47ae}{\index{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context@{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context}!Entity\-Framework\-Context@{Entity\-Framework\-Context}}
+\index{Entity\-Framework\-Context@{Entity\-Framework\-Context}!FrameworkExtension::EntityFramework::Contexts::EntityFrameworkContext@{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context}}
+\subsubsection[{Entity\-Framework\-Context}]{\setlength{\rightskip}{0pt plus 5cm}Framework\-Extension.\-Entity\-Framework.\-Contexts.\-Entity\-Framework\-Context.\-Entity\-Framework\-Context (
+\begin{DoxyParamCaption}
+\item[{string}]{connection\-String, }
+\item[{{\bf I\-Mapping\-Configuration}}]{configuration}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a37fb0de705ec1e6ca5f7cbe39c5e47ae}
+
+
+Constructs a context 
+
+
+\begin{DoxyParams}{Parameters}
+{\em connection\-String} & The standard S\-Q\-L connection string for the Database\\
+\hline
+{\em configuration} & The Mapping Configuration that will determine how the tables and objects interact\\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_ae3053c572db5a34802107c6734e8d758}{\index{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context@{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context}!Add$<$ T $>$@{Add$<$ T $>$}}
+\index{Add$<$ T $>$@{Add$<$ T $>$}!FrameworkExtension::EntityFramework::Contexts::EntityFrameworkContext@{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context}}
+\subsubsection[{Add$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}T Framework\-Extension.\-Entity\-Framework.\-Contexts.\-Entity\-Framework\-Context.\-Add$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{T}]{item}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_ae3053c572db5a34802107c6734e8d758}
+
+
+Adds the provided instance of 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+to the data context 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity Type being added\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+you want to add\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+you added
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_data_context_a0c8685ab4b1c99f897eba29fba179896}{Framework\-Extension.\-Core.\-Interfaces.\-I\-Data\-Context}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em class}]\end{description}
+\end{Desc}
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a56d3f290277a320f9fb8a3045c4d530c}{\index{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context@{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context}!As\-Queryable$<$ T $>$@{As\-Queryable$<$ T $>$}}
+\index{As\-Queryable$<$ T $>$@{As\-Queryable$<$ T $>$}!FrameworkExtension::EntityFramework::Contexts::EntityFrameworkContext@{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context}}
+\subsubsection[{As\-Queryable$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}I\-Queryable$<$T$>$ Framework\-Extension.\-Entity\-Framework.\-Contexts.\-Entity\-Framework\-Context.\-As\-Queryable$<$ T $>$ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a56d3f290277a320f9fb8a3045c4d530c}
+
+
+This gives a mockable wrapper around the normal Set
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+method that allows for testablity 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity being queried\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+I\-Queryable
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_data_context_a815dee1d6eb11910fc12250752b654b7}{Framework\-Extension.\-Core.\-Interfaces.\-I\-Data\-Context}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em class}]\end{description}
+\end{Desc}
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a44750d8bf54f6d8ba284d46544c221fb}{\index{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context@{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context}!Attach$<$ T $>$@{Attach$<$ T $>$}}
+\index{Attach$<$ T $>$@{Attach$<$ T $>$}!FrameworkExtension::EntityFramework::Contexts::EntityFrameworkContext@{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context}}
+\subsubsection[{Attach$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}T Framework\-Extension.\-Entity\-Framework.\-Contexts.\-Entity\-Framework\-Context.\-Attach$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{T}]{item}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a44750d8bf54f6d8ba284d46544c221fb}
+
+
+Attaches the provided instance of 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+to the data context 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity Type being attached\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+you want to attach\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+you attached
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_data_context_afb8535c9b4c824dcc7787ee1c8f987e8}{Framework\-Extension.\-Core.\-Interfaces.\-I\-Data\-Context}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em class}]\end{description}
+\end{Desc}
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_ac7563d83d7010a5f8da3168cf43fe5be}{\index{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context@{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context}!Commit@{Commit}}
+\index{Commit@{Commit}!FrameworkExtension::EntityFramework::Contexts::EntityFrameworkContext@{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context}}
+\subsubsection[{Commit}]{\setlength{\rightskip}{0pt plus 5cm}int Framework\-Extension.\-Entity\-Framework.\-Contexts.\-Entity\-Framework\-Context.\-Commit (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_ac7563d83d7010a5f8da3168cf43fe5be}
+
+
+Commits all currently tracked entity changes 
+
+\begin{DoxyReturn}{Returns}
+the number of rows affected
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_data_context_a50f3923131c6dbd2d5b057558327d9b2}{Framework\-Extension.\-Core.\-Interfaces.\-I\-Data\-Context}.
+
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a057c2858fd25f18db69fc85b86eb2019}{\index{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context@{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context}!Detach$<$ T $>$@{Detach$<$ T $>$}}
+\index{Detach$<$ T $>$@{Detach$<$ T $>$}!FrameworkExtension::EntityFramework::Contexts::EntityFrameworkContext@{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context}}
+\subsubsection[{Detach$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}T Framework\-Extension.\-Entity\-Framework.\-Contexts.\-Entity\-Framework\-Context.\-Detach$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{T}]{item}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a057c2858fd25f18db69fc85b86eb2019}
+
+
+Detaches the provided instance of 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+from the data context 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity Type being detached\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+you want to detach\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+you detached
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_data_context_a26dc0d9a711b046a891f4796774a868f}{Framework\-Extension.\-Core.\-Interfaces.\-I\-Data\-Context}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em class}]\end{description}
+\end{Desc}
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a8348891845aee02967ca1d4c1c1ec786}{\index{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context@{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context}!Execute\-Function@{Execute\-Function}}
+\index{Execute\-Function@{Execute\-Function}!FrameworkExtension::EntityFramework::Contexts::EntityFrameworkContext@{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context}}
+\subsubsection[{Execute\-Function}]{\setlength{\rightskip}{0pt plus 5cm}int Framework\-Extension.\-Entity\-Framework.\-Contexts.\-Entity\-Framework\-Context.\-Execute\-Function (
+\begin{DoxyParamCaption}
+\item[{string}]{procedure\-Name, }
+\item[{params Object\-Parameter\mbox{[}$\,$\mbox{]}}]{db\-Params}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a8348891845aee02967ca1d4c1c1ec786}
+
+
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em procedure\-Name} & \\
+\hline
+{\em db\-Params} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_data_context_a4fd23b695358dfafb3a2547fc78ce0ef}{Framework\-Extension.\-Core.\-Interfaces.\-I\-Data\-Context}.
+
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a322a4ad4a30196edfd0f7aed48b9bf73}{\index{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context@{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context}!Execute\-Sql\-Command@{Execute\-Sql\-Command}}
+\index{Execute\-Sql\-Command@{Execute\-Sql\-Command}!FrameworkExtension::EntityFramework::Contexts::EntityFrameworkContext@{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context}}
+\subsubsection[{Execute\-Sql\-Command}]{\setlength{\rightskip}{0pt plus 5cm}int Framework\-Extension.\-Entity\-Framework.\-Contexts.\-Entity\-Framework\-Context.\-Execute\-Sql\-Command (
+\begin{DoxyParamCaption}
+\item[{string}]{sql, }
+\item[{params Db\-Parameter\mbox{[}$\,$\mbox{]}}]{db\-Params}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a322a4ad4a30196edfd0f7aed48b9bf73}
+
+
+Executes a S\-Q\-L command and returns the standard int return from the query 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sql} & The Sql Statement\\
+\hline
+{\em db\-Params} & A List of Database Parameters for the Query\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The rows affected
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_data_context_a1deee0a581593b6ae859816fb9f243e2}{Framework\-Extension.\-Core.\-Interfaces.\-I\-Data\-Context}.
+
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a307fa6de8b9356b1d0addf4e2fd35b17}{\index{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context@{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context}!Execute\-Sql\-Query$<$ T $>$@{Execute\-Sql\-Query$<$ T $>$}}
+\index{Execute\-Sql\-Query$<$ T $>$@{Execute\-Sql\-Query$<$ T $>$}!FrameworkExtension::EntityFramework::Contexts::EntityFrameworkContext@{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context}}
+\subsubsection[{Execute\-Sql\-Query$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}I\-Enumerable$<$T$>$ Framework\-Extension.\-Entity\-Framework.\-Contexts.\-Entity\-Framework\-Context.\-Execute\-Sql\-Query$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{string}]{sql, }
+\item[{params Db\-Parameter\mbox{[}$\,$\mbox{]}}]{db\-Params}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a307fa6de8b9356b1d0addf4e2fd35b17}
+
+
+Executes a S\-Q\-L command and tries to map the returned datasets into an I\-Enumerable
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+The results should have the same column names as the Entity Type has properties 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity Type that the return should be mapped to\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em sql} & The Sql Statement\\
+\hline
+{\em db\-Params} & A List of Database Parameters for the Query\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An I\-Enumerable
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+from the query return
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_data_context_ab2932a3d1a47a5efe2e26083724ed5a0}{Framework\-Extension.\-Core.\-Interfaces.\-I\-Data\-Context}.
+
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_ac8c74190bfe433a8eae0658616bad089}{\index{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context@{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context}!Reload$<$ T $>$@{Reload$<$ T $>$}}
+\index{Reload$<$ T $>$@{Reload$<$ T $>$}!FrameworkExtension::EntityFramework::Contexts::EntityFrameworkContext@{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context}}
+\subsubsection[{Reload$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}T Framework\-Extension.\-Entity\-Framework.\-Contexts.\-Entity\-Framework\-Context.\-Reload$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{T}]{item}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_ac8c74190bfe433a8eae0658616bad089}
+
+
+Reloads the provided instance of 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+from the database 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity Type being reloaded\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+you want to reload\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+you reloaded
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_data_context_a0440afc85c29fbe35b62685a08fb2313}{Framework\-Extension.\-Core.\-Interfaces.\-I\-Data\-Context}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em class}]\end{description}
+\end{Desc}
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a87a885ec11e09fce2f7f220e6c98f994}{\index{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context@{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context}!Reload$<$ T $>$@{Reload$<$ T $>$}}
+\index{Reload$<$ T $>$@{Reload$<$ T $>$}!FrameworkExtension::EntityFramework::Contexts::EntityFrameworkContext@{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context}}
+\subsubsection[{Reload$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}void Framework\-Extension.\-Entity\-Framework.\-Contexts.\-Entity\-Framework\-Context.\-Reload$<$ T $>$ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a87a885ec11e09fce2f7f220e6c98f994}
+
+
+Reloads all tracked objects of the type 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of objects to reload\\
+\hline
+\end{DoxyTemplParams}
+
+
+Implements \hyperlink{interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_data_context_a0085fcdb37363f377d7ae84522e53a5b}{Framework\-Extension.\-Core.\-Interfaces.\-I\-Data\-Context}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em class}]\end{description}
+\end{Desc}
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_ac56f15278782a2978a3d5f368156ef8d}{\index{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context@{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context}!Remove$<$ T $>$@{Remove$<$ T $>$}}
+\index{Remove$<$ T $>$@{Remove$<$ T $>$}!FrameworkExtension::EntityFramework::Contexts::EntityFrameworkContext@{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context}}
+\subsubsection[{Remove$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}T Framework\-Extension.\-Entity\-Framework.\-Contexts.\-Entity\-Framework\-Context.\-Remove$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{T}]{item}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_ac56f15278782a2978a3d5f368156ef8d}
+
+
+Removes the provided instance of 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+from the data context 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity Type being removed\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+you want to remove\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+you removed
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_data_context_a713205a05d584b6d47325434e6723564}{Framework\-Extension.\-Core.\-Interfaces.\-I\-Data\-Context}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em class}]\end{description}
+\end{Desc}
+\hypertarget{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a02b78487a49ea0d42aeee143bff5c0bc}{\index{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context@{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context}!Update$<$ T $>$@{Update$<$ T $>$}}
+\index{Update$<$ T $>$@{Update$<$ T $>$}!FrameworkExtension::EntityFramework::Contexts::EntityFrameworkContext@{Framework\-Extension\-::\-Entity\-Framework\-::\-Contexts\-::\-Entity\-Framework\-Context}}
+\subsubsection[{Update$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}T Framework\-Extension.\-Entity\-Framework.\-Contexts.\-Entity\-Framework\-Context.\-Update$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{T}]{item}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context_a02b78487a49ea0d42aeee143bff5c0bc}
+
+
+Updates the provided instance of 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+in the data context 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity Type being updated\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+you want to update\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+you updated
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_data_context_a1297c0d6e59ec05855d8e25a72f49fdd}{Framework\-Extension.\-Core.\-Interfaces.\-I\-Data\-Context}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em class}]\end{description}
+\end{Desc}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Framework\-Extension.\-Entity\-Framework/\-Contexts/Entity\-Framework\-Context.\-cs\end{DoxyCompactItemize}

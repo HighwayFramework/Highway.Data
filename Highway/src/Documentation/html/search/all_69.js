@@ -8,6 +8,7 @@ var searchData=
   ['iinterceptor_2dg',['IInterceptor-g',['../interface_highway_1_1_data_1_1_interfaces_1_1_i_interceptor-g.html',1,'Highway::Data::Interfaces']]],
   ['iinterceptor_2dg_3c_20presaveeventargs_20_3e',['IInterceptor-g&lt; PreSaveEventArgs &gt;',['../interface_highway_1_1_data_1_1_interfaces_1_1_i_interceptor-g.html',1,'Highway::Data::Interfaces']]],
   ['imappingconfiguration',['IMappingConfiguration',['../interface_highway_1_1_data_1_1_entity_framework_1_1_mappings_1_1_i_mapping_configuration.html',1,'Highway::Data::EntityFramework::Mappings']]],
+  ['install',['Install',['../class_highway_1_1_data_1_1_entity_framework_1_1_castle_1_1_castle_bootstrap.html#ac7161bb3c873e78b28b4085225c5a776',1,'Highway::Data::EntityFramework::Castle::CastleBootstrap']]],
   ['interceptorresult',['InterceptorResult',['../struct_highway_1_1_data_1_1_interceptors_1_1_interceptor_result.html',1,'Highway::Data::Interceptors']]],
   ['iobservabledatacontext',['IObservableDataContext',['../interface_highway_1_1_data_1_1_interfaces_1_1_i_observable_data_context.html',1,'Highway::Data::Interfaces']]],
   ['iobservablequery',['IObservableQuery',['../interface_highway_1_1_data_1_1_interfaces_1_1_i_observable_query.html',1,'Highway::Data::Interfaces']]],

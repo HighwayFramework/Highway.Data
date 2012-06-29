@@ -1,0 +1,99 @@
+\hypertarget{class_highway_1_1_data_1_1_query_objects_1_1_query_base}{\section{Highway.\-Data.\-Query\-Objects.\-Query\-Base Class Reference}
+\label{class_highway_1_1_data_1_1_query_objects_1_1_query_base}\index{Highway.\-Data.\-Query\-Objects.\-Query\-Base@{Highway.\-Data.\-Query\-Objects.\-Query\-Base}}
+}
+Inheritance diagram for Highway.\-Data.\-Query\-Objects.\-Query\-Base\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.089552cm]{class_highway_1_1_data_1_1_query_objects_1_1_query_base}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_highway_1_1_data_1_1_query_objects_1_1_query_base_ace7c9da4af343caab20f5fdd38b47557}{Add\-Method\-Expression} (string method\-Name, Type\mbox{[}$\,$\mbox{]} generics, Expression\mbox{[}$\,$\mbox{]} parameters)
+\begin{DoxyCompactList}\small\item\em Adds a method to the expression in the query object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_highway_1_1_data_1_1_query_objects_1_1_query_base_a2abee86dc5bd2bfa2463c343e7574dfb}{void {\bfseries Check\-Context\-And\-Query} (object query)}\label{class_highway_1_1_data_1_1_query_objects_1_1_query_base_a2abee86dc5bd2bfa2463c343e7574dfb}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_highway_1_1_data_1_1_query_objects_1_1_query_base_a27dce07609e00f8553b79790cc8a9d1d}{List$<$ Tuple$<$ Method\-Info, \\*
+Expression\mbox{[}$\,$\mbox{]}$>$ $>$ {\bfseries \-\_\-expression\-List} = new List$<$Tuple$<$Method\-Info, Expression\mbox{[}$\,$\mbox{]}$>$$>$()}\label{class_highway_1_1_data_1_1_query_objects_1_1_query_base_a27dce07609e00f8553b79790cc8a9d1d}
+
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_highway_1_1_data_1_1_query_objects_1_1_query_base_aa8ca309734c39e9e78853e2a76c041f1}{\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context}{I\-Data\-Context} {\bfseries Context}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}}\label{class_highway_1_1_data_1_1_query_objects_1_1_query_base_aa8ca309734c39e9e78853e2a76c041f1}
+
+\end{DoxyCompactItemize}
+\subsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+Event\-Handler$<$ \hyperlink{class_highway_1_1_data_1_1_interceptors_1_1_events_1_1_pre_query_event_args}{Pre\-Query\-Event\-Args} $>$ \hyperlink{class_highway_1_1_data_1_1_query_objects_1_1_query_base_a0f4a7c6fcd8e32c461633855ed00f824}{Pre\-Query}
+\begin{DoxyCompactList}\small\item\em The event fired just before the query goes to the database \end{DoxyCompactList}\item 
+Event\-Handler$<$ \hyperlink{class_highway_1_1_data_1_1_interceptors_1_1_events_1_1_post_query_event_args}{Post\-Query\-Event\-Args} $>$ \hyperlink{class_highway_1_1_data_1_1_query_objects_1_1_query_base_a75da4f1ac849eac015645365f982a9ff}{Post\-Query}
+\begin{DoxyCompactList}\small\item\em The event fire just after the data is translated into objects but before the data is returned. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_highway_1_1_data_1_1_query_objects_1_1_query_base_ace7c9da4af343caab20f5fdd38b47557}{\index{Highway\-::\-Data\-::\-Query\-Objects\-::\-Query\-Base@{Highway\-::\-Data\-::\-Query\-Objects\-::\-Query\-Base}!Add\-Method\-Expression@{Add\-Method\-Expression}}
+\index{Add\-Method\-Expression@{Add\-Method\-Expression}!Highway::Data::QueryObjects::QueryBase@{Highway\-::\-Data\-::\-Query\-Objects\-::\-Query\-Base}}
+\subsubsection[{Add\-Method\-Expression}]{\setlength{\rightskip}{0pt plus 5cm}void Highway.\-Data.\-Query\-Objects.\-Query\-Base.\-Add\-Method\-Expression (
+\begin{DoxyParamCaption}
+\item[{string}]{method\-Name, }
+\item[{Type\mbox{[}$\,$\mbox{]}}]{generics, }
+\item[{Expression\mbox{[}$\,$\mbox{]}}]{parameters}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_highway_1_1_data_1_1_query_objects_1_1_query_base_ace7c9da4af343caab20f5fdd38b47557}
+
+
+Adds a method to the expression in the query object 
+
+
+\begin{DoxyParams}{Parameters}
+{\em method\-Name} & The name of the method to be added i.\-e. Group\-By\\
+\hline
+{\em generics} & Any type parameters needed by the method to be added\\
+\hline
+{\em parameters} & Any object parameters needed by the method to be added\\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_extendable_query_abf9d0846c2d2ca8542b2f685f6845998}{Highway.\-Data.\-Interfaces.\-I\-Extendable\-Query}.
+
+
+
+\subsection{Event Documentation}
+\hypertarget{class_highway_1_1_data_1_1_query_objects_1_1_query_base_a75da4f1ac849eac015645365f982a9ff}{\index{Highway\-::\-Data\-::\-Query\-Objects\-::\-Query\-Base@{Highway\-::\-Data\-::\-Query\-Objects\-::\-Query\-Base}!Post\-Query@{Post\-Query}}
+\index{Post\-Query@{Post\-Query}!Highway::Data::QueryObjects::QueryBase@{Highway\-::\-Data\-::\-Query\-Objects\-::\-Query\-Base}}
+\subsubsection[{Post\-Query}]{\setlength{\rightskip}{0pt plus 5cm}Event\-Handler$<${\bf Post\-Query\-Event\-Args}$>$ Highway.\-Data.\-Query\-Objects.\-Query\-Base.\-Post\-Query}}\label{class_highway_1_1_data_1_1_query_objects_1_1_query_base_a75da4f1ac849eac015645365f982a9ff}
+
+
+The event fire just after the data is translated into objects but before the data is returned. 
+
+
+
+Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_observable_query_ac8cff5ce936c3611f965796ba9707c49}{Highway.\-Data.\-Interfaces.\-I\-Observable\-Query}.
+
+\hypertarget{class_highway_1_1_data_1_1_query_objects_1_1_query_base_a0f4a7c6fcd8e32c461633855ed00f824}{\index{Highway\-::\-Data\-::\-Query\-Objects\-::\-Query\-Base@{Highway\-::\-Data\-::\-Query\-Objects\-::\-Query\-Base}!Pre\-Query@{Pre\-Query}}
+\index{Pre\-Query@{Pre\-Query}!Highway::Data::QueryObjects::QueryBase@{Highway\-::\-Data\-::\-Query\-Objects\-::\-Query\-Base}}
+\subsubsection[{Pre\-Query}]{\setlength{\rightskip}{0pt plus 5cm}Event\-Handler$<${\bf Pre\-Query\-Event\-Args}$>$ Highway.\-Data.\-Query\-Objects.\-Query\-Base.\-Pre\-Query}}\label{class_highway_1_1_data_1_1_query_objects_1_1_query_base_a0f4a7c6fcd8e32c461633855ed00f824}
+
+
+The event fired just before the query goes to the database 
+
+
+
+Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_observable_query_a1687e8dccf74ef87f98fe8ef6f1c99c3}{Highway.\-Data.\-Interfaces.\-I\-Observable\-Query}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Highway.\-Data/\-Query\-Objects/Query\-Base.\-cs\end{DoxyCompactItemize}

@@ -87,6 +87,14 @@
     <Compile Include="UnitTests\Given_A_Scalar_Object.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Highway.Data.EntityFramework\Highway.Data.EntityFramework.csproj">
+      <Project>{726C5578-4D46-46FB-A58D-352E447E672A}</Project>
+      <Name>Highway.Data.EntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Highway.Data\Highway.Data.csproj">
+      <Project>{B0CA9DAB-C5D4-4AC6-97E7-725B18191B2D}</Project>
+      <Name>Highway.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Highway.Data.Test\Highway.Data.Test.csproj">
       <Project>{726A3CE4-CB5B-4E30-8F97-FE9705FF4F3C}</Project>
       <Name>Highway.Data.Test</Name>

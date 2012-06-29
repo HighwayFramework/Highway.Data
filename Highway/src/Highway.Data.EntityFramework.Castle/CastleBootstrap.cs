@@ -5,6 +5,10 @@ using System.Text;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using Highway.Data.EntityFramework.Contexts;
+using Highway.Data.EntityFramework.Repositories;
+using Highway.Data.EventManagement;
+using Highway.Data.Interfaces;
 
 namespace Highway.Data.EntityFramework.Castle
 {
@@ -19,7 +23,9 @@ namespace Highway.Data.EntityFramework.Castle
         /// <param name="container">The container.</param><param name="store">The configuration store.</param>
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            
+            container.Register(
+                Component.For<IEventManager>().ImplementedBy<EventManager>()
+                );
         }
     }
 }

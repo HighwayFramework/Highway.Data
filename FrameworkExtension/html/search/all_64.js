@@ -1,5 +1,0 @@
-var searchData=
-[
-  ['defaultusernameservice',['DefaultUserNameService',['../class_framework_extension_1_1_core_1_1_services_1_1_default_user_name_service.html',1,'FrameworkExtension::Core::Services']]],
-  ['detach_3c_20t_20_3e',['Detach&lt; T &gt;',['../interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_data_context.html#a26dc0d9a711b046a891f4796774a868f',1,'FrameworkExtension.Core.Interfaces.IDataContext.Detach&lt; T &gt;()'],['../class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#a057c2858fd25f18db69fc85b86eb2019',1,'FrameworkExtension.EntityFramework.Contexts.EntityFrameworkContext.Detach&lt; T &gt;()'],['../class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_e_f_failure_context.html#aa33403a155b2131363fa93932d4c89f8',1,'FrameworkExtension.EntityFramework.Tests.UnitTests.EFFailureContext.Detach&lt; T &gt;()'],['../class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context.html#a423a62019fb58dfba4170ecd39e4ccfa',1,'FrameworkExtension.EntityFramework.Tests.UnitTests.CommitEventsMockContext.Detach&lt; T &gt;()']]]
-];

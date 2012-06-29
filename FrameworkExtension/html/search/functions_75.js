@@ -1,4 +1,0 @@
-var searchData=
-[
-  ['update_3c_20t_20_3e',['Update&lt; T &gt;',['../interface_framework_extension_1_1_core_1_1_interfaces_1_1_i_data_context.html#a1297c0d6e59ec05855d8e25a72f49fdd',1,'FrameworkExtension.Core.Interfaces.IDataContext.Update&lt; T &gt;()'],['../class_framework_extension_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#a02b78487a49ea0d42aeee143bff5c0bc',1,'FrameworkExtension.EntityFramework.Contexts.EntityFrameworkContext.Update&lt; T &gt;()'],['../class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_e_f_failure_context.html#a784fd14d08113d264b8bf40d57a54b34',1,'FrameworkExtension.EntityFramework.Tests.UnitTests.EFFailureContext.Update&lt; T &gt;()'],['../class_framework_extension_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context.html#a0aa0024cf61064e9051e8d722de73a0d',1,'FrameworkExtension.EntityFramework.Tests.UnitTests.CommitEventsMockContext.Update&lt; T &gt;()']]]
-];

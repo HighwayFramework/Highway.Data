@@ -13,14 +13,14 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <title>Highway.data by HighwayFramework</title>
+    <title>Highway.Data part of The Highway Framework</title>
   </head>
 
   <body>
     <header>
       <div class="inner">
-        <h1>Highway.data</h1>
-        <h2>Highway.Data</h2>
+        <h1>Highway.Data</h1>
+        <h2>The fastest and smoothest way to great architecture</h2>
         <a href="https://github.com/HighwayFramework/Highway.Data" class="button"><small>View project on</small>GitHub</a>
       </div>
     </header>
@@ -28,32 +28,48 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          <h3>Welcome to GitHub Pages.</h3>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<h3>Getting Started</h3>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+<p>The easiest way to get started is to simply wire up Highway.Data to your existing IoC container.  For these examples we will use the Castle.Windsor syntax:</p>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<pre class="highlight">
+container.Register(
+	Component.For&lt;IRepository&gt;()
+		.ImplementedBy&lt;EntityFrameworkRepository&gt;(),
+	Component.For&lt;IDataContext&gt;()
+		.ImplementedBy&lt;EntityFrameworkContext&gt;()
+		.DependsOn(new { connectionString = "Connection String" }),
+	Component.For&lt;IEventHandler&gt;()
+		.ImplementedBy&lt;EventHandler&gt;(),
+	Component.For&lt;IMappingConfiguration&gt;()
+		.ImplementedBy&lt;YourMappingClass&gt;(),
+);
+</pre>
 
-<h3>Designer Templates</h3>
+<h3>Creating Your Mappings</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>With Highway we do not try to reinvent the wheel, so every ORM implementation will have a slightly different mapping structure that uses the syntax from that ORM.  This is because Highway is not meant to replace your ORM, but rather provide tested pattern implementations.  For EntityFramework, we need to create a class which implements IMappingConfiguration, as we mentioned above in our registrations.  This interface will be injected into the context for you, and gives you access to Entity Framework's DbModelBuilder.</p>
 
-<h3>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<pre class="highlight">
+public class YourMappings : IMappingConfiguration
+{
+    public void ConfigureModelBuilder(DbModelBuilder modelBuilder)
+    {
+        modelBuilder
+            .Entity&lt;Person&gt;()
+            .ToTable("People");
+    }
+}
+</pre>
 
 <h3>Authors and Contributors</h3>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p>This framework was created and is maintained by Tim Rayburn (<a href="https://github.com/trayburn" class="user-mention">@trayburn</a>) and Devlin Liles (<a href="https://github.com/devlinliles" class="user-mention">@devlinliles</a>)</p>
 
-<h3>Support or Contact</h3>
+<h3>Support</h3>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<p>Feel free to open issues on GitHub if you encounter any issues.  If you need a commercial support license, then feel free to contact us at highway@timrayburn.net and we provide you pricing for these options.</p>
         </section>
 
         <aside id="sidebar">
@@ -64,6 +80,10 @@ $ git checkout gh-pages
           <a href="https://github.com/HighwayFramework/Highway.Data/tarball/master" class="button">
             <small>Download</small>
             .tar.gz file
+          </a>
+          <a href="docs/index.html" class="button">
+            <small>Documentation</small>
+            API Docs
           </a>
 
           <p class="repo-owner"><a href="https://github.com/HighwayFramework/Highway.Data"></a> is maintained by <a href="https://github.com/HighwayFramework">HighwayFramework</a>.</p>

@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FrameworkExtension.EntityFramework.Tests")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Highway.Data.EntityFramework.Tests")]
+[assembly: AssemblyDescription("The fastest and smoothest way to great architecture")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FrameworkExtension.EntityFramework.Tests")]
-[assembly: AssemblyCopyright("Copyright ©  2012")]
+[assembly: AssemblyCompany("Devlin Liles and Tim Rayburn")]
+[assembly: AssemblyProduct("Highway.Data")]
+[assembly: AssemblyCopyright("Copyright © Devlin Liles 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

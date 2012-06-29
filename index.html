@@ -1,98 +1,44 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+---
+layout: default
+---
+### Getting Started
 
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+The easiest way to get started is to simply wire up Highway.Data to your existing IoC container.  For these examples we will use the Castle.Windsor syntax:
 
-    <title>Highway.Data part of The Highway Framework</title>
-  </head>
-
-  <body>
-    <header>
-      <div class="inner">
-        <h1>Highway.Data</h1>
-        <h2>The fastest and smoothest way to great architecture</h2>
-        <a href="https://github.com/HighwayFramework/Highway.Data" class="button"><small>View project on</small>GitHub</a>
-      </div>
-    </header>
-
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-
-<h3>Getting Started</h3>
-
-<p>The easiest way to get started is to simply wire up Highway.Data to your existing IoC container.  For these examples we will use the Castle.Windsor syntax:</p>
-
-<pre class="highlight">
+{% highlight csharp %}
 container.Register(
-	Component.For&lt;IRepository&gt;()
-		.ImplementedBy&lt;EntityFrameworkRepository&gt;(),
-	Component.For&lt;IDataContext&gt;()
-		.ImplementedBy&lt;EntityFrameworkContext&gt;()
+	Component.For<IRepository>()
+		.ImplementedBy<EntityFrameworkRepository>(),
+	Component.For<IDataContext>()
+		.ImplementedBy<EntityFrameworkContext>()
 		.DependsOn(new { connectionString = "Connection String" }),
-	Component.For&lt;IEventHandler&gt;()
-		.ImplementedBy&lt;EventHandler&gt;(),
-	Component.For&lt;IMappingConfiguration&gt;()
-		.ImplementedBy&lt;YourMappingClass&gt;(),
+	Component.For<IEventHandler>()
+		.ImplementedBy<EventHandler>(),
+	Component.For<IMappingConfiguration>()
+		.ImplementedBy<YourMappingClass>(),
 );
-</pre>
+{% endhighlight %}
 
-<h3>Creating Your Mappings</h3>
+### Creating Your Mappings
 
-<p>With Highway we do not try to reinvent the wheel, so every ORM implementation will have a slightly different mapping structure that uses the syntax from that ORM.  This is because Highway is not meant to replace your ORM, but rather provide tested pattern implementations.  For EntityFramework, we need to create a class which implements IMappingConfiguration, as we mentioned above in our registrations.  This interface will be injected into the context for you, and gives you access to Entity Framework's DbModelBuilder.</p>
+With Highway we do not try to reinvent the wheel, so every ORM implementation will have a slightly different mapping structure that uses the syntax from that ORM.  This is because Highway is not meant to replace your ORM, but rather provide tested pattern implementations.  For EntityFramework, we need to create a class which implements IMappingConfiguration, as we mentioned above in our registrations.  This interface will be injected into the context for you, and gives you access to Entity Framework's DbModelBuilder.
 
-<pre class="highlight">
+{% highlight csharp %}
 public class YourMappings : IMappingConfiguration
 {
     public void ConfigureModelBuilder(DbModelBuilder modelBuilder)
     {
         modelBuilder
-            .Entity&lt;Person&gt;()
+            .Entity<Person>()
             .ToTable("People");
     }
 }
-</pre>
+{% endhighlight %}
 
-<h3>Authors and Contributors</h3>
+### Authors and Contributors
 
-<p>This framework was created and is maintained by Tim Rayburn (<a href="https://github.com/trayburn" class="user-mention">@trayburn</a>) and Devlin Liles (<a href="https://github.com/devlinliles" class="user-mention">@devlinliles</a>)</p>
+This framework was created and is maintained by Tim Rayburn (@trayburn) and Devlin Liles (@devlinliles)
 
-<h3>Support</h3>
+### Support
 
-<p>Feel free to open issues on GitHub if you encounter any issues.  If you need a commercial support license, then feel free to contact us at highway@timrayburn.net and we provide you pricing for these options.</p>
-        </section>
-
-        <aside id="sidebar">
-          <a href="https://github.com/HighwayFramework/Highway.Data/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/HighwayFramework/Highway.Data/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
-          <a href="docs/index.html" class="button">
-            <small>Documentation</small>
-            API Docs
-          </a>
-
-          <p class="repo-owner"><a href="https://github.com/HighwayFramework/Highway.Data"></a> is maintained by <a href="https://github.com/HighwayFramework">HighwayFramework</a>.</p>
-
-          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
-    </div>
-
-  
-  </body>
-</html>
+Feel free to open issues on GitHub if you encounter any issues.  If you need a commercial support license, then feel free to contact us at highway@timrayburn.net and we provide you pricing for these options.

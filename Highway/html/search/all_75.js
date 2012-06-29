@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['update_3c_20t_20_3e',['Update&lt; T &gt;',['../interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#a54acc7026404f8426c0e1efe6accaf26',1,'Highway.Data.Interfaces.IDataContext.Update&lt; T &gt;()'],['../class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#a3746422e9f70039d208c6dd6be02327e',1,'Highway.Data.EntityFramework.Contexts.EntityFrameworkContext.Update&lt; T &gt;()'],['../class_highway_1_1_data_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_e_f_failure_context.html#a2a82171e665c27272dd5814deb80aa89',1,'Highway.Data.EntityFramework.Tests.UnitTests.EFFailureContext.Update&lt; T &gt;()'],['../class_highway_1_1_data_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context.html#aa642060835ad2e1a58acb568c2a7c879',1,'Highway.Data.EntityFramework.Tests.UnitTests.CommitEventsMockContext.Update&lt; T &gt;()']]]
+];

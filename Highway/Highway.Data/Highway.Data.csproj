@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B0CA9DAB-C5D4-4AC6-97E7-725B18191B2D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Highway.Data</RootNamespace>
+    <AssemblyName>Highway.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Highway.Data.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Bootstrapper">
+      <HintPath>..\packages\Bootstrapper.2.0.3.1\lib\Bootstrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Bootstrapper.ServiceLocator">
+      <HintPath>..\packages\Bootstrapper.ServiceLocator.2.0.0.0\lib\Bootstrapper.ServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging">
+      <HintPath>..\packages\Common.Logging.2.1.1\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Interceptors\Events\PostQueryEventArgs.cs" />
+    <Compile Include="Interceptors\Events\PostSaveEventArgs.cs" />
+    <Compile Include="Interceptors\Events\PreQueryEventArgs.cs" />
+    <Compile Include="Interceptors\Events\PreSaveEventArgs.cs" />
+    <Compile Include="EventManagement\EventManager.cs" />
+    <Compile Include="Interceptors\InterceptorResult.cs" />
+    <Compile Include="Interfaces\ICommandObject.cs" />
+    <Compile Include="Interfaces\IEventManager.cs" />
+    <Compile Include="Interfaces\IInterceptor.cs" />
+    <Compile Include="Interfaces\IObservableDataContext.cs" />
+    <Compile Include="Interfaces\IObservableQuery.cs" />
+    <Compile Include="Interfaces\IQueryBase.cs" />
+    <Compile Include="Interfaces\IScalarObject.cs" />
+    <Compile Include="Services\DefaultUserNameService.cs" />
+    <Compile Include="Interfaces\IAuditableEntity.cs" />
+    <Compile Include="Interfaces\IUserNameService.cs" />
+    <Compile Include="QueryObjects\QueryExtensions.cs" />
+    <Compile Include="EnumerableExtensions.cs" />
+    <Compile Include="Interfaces\IDataContext.cs" />
+    <Compile Include="Interfaces\IQuery.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryObjects\Command.cs" />
+    <Compile Include="Interfaces\IExtendableQuery.cs" />
+    <Compile Include="QueryObjects\QueryBase.cs" />
+    <Compile Include="QueryObjects\Query.cs" />
+    <Compile Include="QueryObjects\Scalar.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

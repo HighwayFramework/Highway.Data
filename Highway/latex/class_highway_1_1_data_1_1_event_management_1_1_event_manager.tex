@@ -1,0 +1,106 @@
+\hypertarget{class_highway_1_1_data_1_1_event_management_1_1_event_manager}{\section{Highway.\-Data.\-Event\-Management.\-Event\-Manager Class Reference}
+\label{class_highway_1_1_data_1_1_event_management_1_1_event_manager}\index{Highway.\-Data.\-Event\-Management.\-Event\-Manager@{Highway.\-Data.\-Event\-Management.\-Event\-Manager}}
+}
+
+
+The base implementation of the Event manager for registration of \hyperlink{namespace_highway_1_1_data_1_1_interceptors}{Interceptors}, and execution of them in an ordered fashion  
+
+
+Inheritance diagram for Highway.\-Data.\-Event\-Management.\-Event\-Manager\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_highway_1_1_data_1_1_event_management_1_1_event_manager}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_highway_1_1_data_1_1_event_management_1_1_event_manager_a2ff87220e8e54bedff9594688e52163c}{Event\-Manager} ()
+\begin{DoxyCompactList}\small\item\em Creats an \hyperlink{class_highway_1_1_data_1_1_event_management_1_1_event_manager}{Event\-Manager} \end{DoxyCompactList}\item 
+void \hyperlink{class_highway_1_1_data_1_1_event_management_1_1_event_manager_afef19b17ec8fa17764a1cd24f5569f34}{Register$<$ T $>$} (\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_interceptor-g}{I\-Interceptor}$<$ T $>$ interceptor)
+\begin{DoxyCompactList}\small\item\em Allows for the Registration of I\-Interceptor
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+objects that will hook to events in priority order \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_observable_data_context}{I\-Observable\-Data\-Context} \hyperlink{class_highway_1_1_data_1_1_event_management_1_1_event_manager_ac5a9cddf17fcb4c3b298b3d50431de2f}{Context}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em A reference to context that allows for usaged and event wiring \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The base implementation of the Event manager for registration of \hyperlink{namespace_highway_1_1_data_1_1_interceptors}{Interceptors}, and execution of them in an ordered fashion 
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_highway_1_1_data_1_1_event_management_1_1_event_manager_a2ff87220e8e54bedff9594688e52163c}{\index{Highway\-::\-Data\-::\-Event\-Management\-::\-Event\-Manager@{Highway\-::\-Data\-::\-Event\-Management\-::\-Event\-Manager}!Event\-Manager@{Event\-Manager}}
+\index{Event\-Manager@{Event\-Manager}!Highway::Data::EventManagement::EventManager@{Highway\-::\-Data\-::\-Event\-Management\-::\-Event\-Manager}}
+\subsubsection[{Event\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}Highway.\-Data.\-Event\-Management.\-Event\-Manager.\-Event\-Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_highway_1_1_data_1_1_event_management_1_1_event_manager_a2ff87220e8e54bedff9594688e52163c}
+
+
+Creats an \hyperlink{class_highway_1_1_data_1_1_event_management_1_1_event_manager}{Event\-Manager} 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_highway_1_1_data_1_1_event_management_1_1_event_manager_afef19b17ec8fa17764a1cd24f5569f34}{\index{Highway\-::\-Data\-::\-Event\-Management\-::\-Event\-Manager@{Highway\-::\-Data\-::\-Event\-Management\-::\-Event\-Manager}!Register$<$ T $>$@{Register$<$ T $>$}}
+\index{Register$<$ T $>$@{Register$<$ T $>$}!Highway::Data::EventManagement::EventManager@{Highway\-::\-Data\-::\-Event\-Management\-::\-Event\-Manager}}
+\subsubsection[{Register$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}void Highway.\-Data.\-Event\-Management.\-Event\-Manager.\-Register$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{{\bf I\-Interceptor}$<$ T $>$}]{interceptor}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_highway_1_1_data_1_1_event_management_1_1_event_manager_afef19b17ec8fa17764a1cd24f5569f34}
+
+
+Allows for the Registration of I\-Interceptor
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+objects that will hook to events in priority order 
+
+
+\begin{DoxyParams}{Parameters}
+{\em interceptor} & The interceptor to be registered to an event\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Event Args that the interceptor accepts\\
+\hline
+\end{DoxyTemplParams}
+
+
+Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_event_manager_a5573595e903c9d9831145aaca1b24fa7}{Highway.\-Data.\-Interfaces.\-I\-Event\-Manager}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em Event\-Args}]\end{description}
+\end{Desc}
+
+
+\subsection{Property Documentation}
+\hypertarget{class_highway_1_1_data_1_1_event_management_1_1_event_manager_ac5a9cddf17fcb4c3b298b3d50431de2f}{\index{Highway\-::\-Data\-::\-Event\-Management\-::\-Event\-Manager@{Highway\-::\-Data\-::\-Event\-Management\-::\-Event\-Manager}!Context@{Context}}
+\index{Context@{Context}!Highway::Data::EventManagement::EventManager@{Highway\-::\-Data\-::\-Event\-Management\-::\-Event\-Manager}}
+\subsubsection[{Context}]{\setlength{\rightskip}{0pt plus 5cm}{\bf I\-Observable\-Data\-Context} Highway.\-Data.\-Event\-Management.\-Event\-Manager.\-Context\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}}\label{class_highway_1_1_data_1_1_event_management_1_1_event_manager_ac5a9cddf17fcb4c3b298b3d50431de2f}
+
+
+A reference to context that allows for usaged and event wiring 
+
+
+
+Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_event_manager_aae163759719833dca07513b02efbafa8}{Highway.\-Data.\-Interfaces.\-I\-Event\-Manager}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Highway.\-Data/\-Event\-Management/Event\-Manager.\-cs\end{DoxyCompactItemize}

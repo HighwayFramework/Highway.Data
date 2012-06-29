@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['detach_3c_20t_20_3e',['Detach&lt; T &gt;',['../interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#a88434616ba2c8b719d31e76554babfc0',1,'Highway.Data.Interfaces.IDataContext.Detach&lt; T &gt;()'],['../class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#aa0ccdc09ac449783a450a6098946a289',1,'Highway.Data.EntityFramework.Contexts.EntityFrameworkContext.Detach&lt; T &gt;()'],['../class_highway_1_1_data_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_e_f_failure_context.html#a3b383183286a91ada493aa4725c5adb7',1,'Highway.Data.EntityFramework.Tests.UnitTests.EFFailureContext.Detach&lt; T &gt;()'],['../class_highway_1_1_data_1_1_entity_framework_1_1_tests_1_1_unit_tests_1_1_commit_events_mock_context.html#ae6c871e777ac52adb028b0a8bcc58ccd',1,'Highway.Data.EntityFramework.Tests.UnitTests.CommitEventsMockContext.Detach&lt; T &gt;()']]]
+];

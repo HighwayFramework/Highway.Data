@@ -13,3 +13,4 @@ _ReSharper*
 lib/golden_cap.zip
 *.orig
 *.cache
+packages

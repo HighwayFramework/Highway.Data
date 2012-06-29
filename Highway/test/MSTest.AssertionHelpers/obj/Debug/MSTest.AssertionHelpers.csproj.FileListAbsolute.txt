@@ -1,0 +1,5 @@
+E:\Code\Fun\Highway\Highway\test\MSTest.AssertionHelpers\bin\Debug\MSTest.AssertionHelpers.dll
+E:\Code\Fun\Highway\Highway\test\MSTest.AssertionHelpers\bin\Debug\MSTest.AssertionHelpers.pdb
+E:\Code\Fun\Highway\Highway\test\MSTest.AssertionHelpers\obj\Debug\ResolveAssemblyReference.cache
+E:\Code\Fun\Highway\Highway\test\MSTest.AssertionHelpers\obj\Debug\MSTest.AssertionHelpers.dll
+E:\Code\Fun\Highway\Highway\test\MSTest.AssertionHelpers\obj\Debug\MSTest.AssertionHelpers.pdb

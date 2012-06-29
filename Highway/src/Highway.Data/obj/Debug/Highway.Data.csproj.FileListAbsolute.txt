@@ -1,0 +1,11 @@
+E:\Code\Fun\Highway\Highway\src\Highway.Data\bin\Debug\Highway.Data.dll.config
+E:\Code\Fun\Highway\Highway\src\Highway.Data\bin\Debug\Highway.Data.dll
+E:\Code\Fun\Highway\Highway\src\Highway.Data\bin\Debug\Highway.Data.pdb
+E:\Code\Fun\Highway\Highway\src\Highway.Data\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+E:\Code\Fun\Highway\Highway\src\Highway.Data\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+E:\Code\Fun\Highway\Highway\src\Highway.Data\obj\Debug\ResolveAssemblyReference.cache
+E:\Code\Fun\Highway\Highway\src\Highway.Data\obj\Debug\Highway.Data.dll
+E:\Code\Fun\Highway\Highway\src\Highway.Data\obj\Debug\Highway.Data.pdb
+E:\Code\Fun\Highway\Highway\src\Highway.Data\bin\Debug\Common.Logging.dll
+E:\Code\Fun\Highway\Highway\src\Highway.Data\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+E:\Code\Fun\Highway\Highway\src\Highway.Data\bin\Debug\Highway.Data.xml

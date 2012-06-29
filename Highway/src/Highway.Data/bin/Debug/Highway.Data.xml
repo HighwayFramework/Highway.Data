@@ -1,0 +1,437 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Highway.Data</name>
+    </assembly>
+    <members>
+        <member name="T:Highway.Data.Interfaces.IQuery`1">
+            <summary>
+            An Interface for Queries that return collections
+            </summary>
+            <typeparam name="T">The Type being requested</typeparam>
+        </member>
+        <member name="T:Highway.Data.Interfaces.IQueryBase">
+            <summary>
+            The base interface that surfaces SQL output of the Query statement
+            </summary>
+        </member>
+        <member name="M:Highway.Data.Interfaces.IQueryBase.OutputSQLStatement(Highway.Data.Interfaces.IDataContext)">
+            <summary>
+            This executes the expression against the passed in context to generate the SQL statement, but doesn't execute the IQueryable<typeparam name="T"></typeparam> against the data context
+            </summary>
+            <param name="context">The data context that the query is evaluated and the SQL is generated against</param>
+            <returns>The SQL Statement from the Query</returns>
+        </member>
+        <member name="M:Highway.Data.Interfaces.IQuery`1.Execute(Highway.Data.Interfaces.IDataContext)">
+            <summary>
+            This executes the expression in ContextQuery on the context that is passed in, resulting in a IQueryable<typeparam name="T"></typeparam> that is returned as an IEnumerable<typeparam name="T"></typeparam>
+            </summary>
+            <param name="context">the data context that the query should be executed against</param>
+            <returns>The collection of <typeparamref name="T"/> that the query materialized if any</returns>
+        </member>
+        <member name="T:Highway.Data.Interceptors.InterceptorResult">
+            <summary>
+            Results from any interceptor operation that gives a flag to tell the event manager to proceed to the next priority in line or not.
+            </summary>
+        </member>
+        <member name="M:Highway.Data.Interceptors.InterceptorResult.Succeeded">
+            <summary>
+            Creates a successful result that continues execution
+            </summary>
+            <returns>An Interceptor Result</returns>
+        </member>
+        <member name="M:Highway.Data.Interceptors.InterceptorResult.Failed(System.String,System.Boolean)">
+            <summary>
+            Creates a failure result that gives the event manager a message to log, and specifies to proceed to the next priority in line or not. The Default is False
+            </summary>
+            <param name="message">Error message from the interceptor</param>
+            <param name="continueToExecute">Does execution of the interceptors continue ( Default is False )</param>
+            <returns>An Interceptor Result</returns>
+        </member>
+        <member name="P:Highway.Data.Interceptors.InterceptorResult.ContinueExecution">
+            <summary>
+            A boolean flag for the event manager to decide if it will continue to process or error
+            </summary>
+        </member>
+        <member name="P:Highway.Data.Interceptors.InterceptorResult.Message">
+            <summary>
+            Error message populated in the case of failure
+            </summary>
+        </member>
+        <member name="T:Highway.Data.Interfaces.IObservableDataContext">
+            <summary>
+            The interface used to surface events from a context that supports interceptors
+            </summary>
+        </member>
+        <member name="T:Highway.Data.Interfaces.IDataContext">
+            <summary>
+            The standard interface used to interact with an ORM specific implementation
+            </summary>
+        </member>
+        <member name="M:Highway.Data.Interfaces.IDataContext.AsQueryable``1">
+            <summary>
+            This gives a mockable wrapper around the normal Set<typeparam name="T"></typeparam> method that allows for testablity
+            </summary>
+            <typeparam name="T">The Entity being queried</typeparam>
+            <returns>IQueryable<typeparam name="T"></typeparam></returns>
+        </member>
+        <member name="M:Highway.Data.Interfaces.IDataContext.Add``1(``0)">
+            <summary>
+            Adds the provided instance of <typeparam name="T"></typeparam> to the data context
+            </summary>
+            <typeparam name="T">The Entity Type being added</typeparam>
+            <param name="item">The <typeparam name="T"></typeparam> you want to add</param>
+            <returns>The <typeparam name="T"></typeparam> you added</returns>
+        </member>
+        <member name="M:Highway.Data.Interfaces.IDataContext.Remove``1(``0)">
+            <summary>
+            Removes the provided instance of <typeparam name="T"></typeparam> from the data context
+            </summary>
+            <typeparam name="T">The Entity Type being removed</typeparam>
+            <param name="item">The <typeparam name="T"></typeparam> you want to remove</param>
+            <returns>The <typeparam name="T"></typeparam> you removed</returns>
+        </member>
+        <member name="M:Highway.Data.Interfaces.IDataContext.Update``1(``0)">
+            <summary>
+            Updates the provided instance of <typeparam name="T"></typeparam> in the data context
+            </summary>
+            <typeparam name="T">The Entity Type being updated</typeparam>
+            <param name="item">The <typeparam name="T"></typeparam> you want to update</param>
+            <returns>The <typeparam name="T"></typeparam> you updated</returns>
+        </member>
+        <member name="M:Highway.Data.Interfaces.IDataContext.Attach``1(``0)">
+            <summary>
+            Attaches the provided instance of <typeparam name="T"></typeparam> to the data context
+            </summary>
+            <typeparam name="T">The Entity Type being attached</typeparam>
+            <param name="item">The <typeparam name="T"></typeparam> you want to attach</param>
+            <returns>The <typeparam name="T"></typeparam> you attached</returns>
+        </member>
+        <member name="M:Highway.Data.Interfaces.IDataContext.Detach``1(``0)">
+            <summary>
+            Detaches the provided instance of <typeparam name="T"></typeparam> from the data context
+            </summary>
+            <typeparam name="T">The Entity Type being detached</typeparam>
+            <param name="item">The <typeparam name="T"></typeparam> you want to detach</param>
+            <returns>The <typeparam name="T"></typeparam> you detached</returns>
+        </member>
+        <member name="M:Highway.Data.Interfaces.IDataContext.Reload``1(``0)">
+            <summary>
+            Reloads the provided instance of <typeparam name="T"></typeparam> from the database
+            </summary>
+            <typeparam name="T">The Entity Type being reloaded</typeparam>
+            <param name="item">The <typeparam name="T"></typeparam> you want to reload</param>
+            <returns>The <typeparam name="T"></typeparam> you reloaded</returns>
+        </member>
+        <member name="M:Highway.Data.Interfaces.IDataContext.Reload``1">
+            <summary>
+            Reloads all tracked objects of the type <typeparam name="T"></typeparam>
+            </summary>
+            <typeparam name="T">The type of objects to reload</typeparam>
+        </member>
+        <member name="M:Highway.Data.Interfaces.IDataContext.Commit">
+            <summary>
+            Commits all currently tracked entity changes
+            </summary>
+            <returns>the number of rows affected</returns>
+        </member>
+        <member name="M:Highway.Data.Interfaces.IDataContext.ExecuteSqlQuery``1(System.String,System.Data.Common.DbParameter[])">
+            <summary>
+            Executes a SQL command and tries to map the returned datasets into an IEnumerable<typeparam name="T"></typeparam>
+            The results should have the same column names as the Entity Type has properties
+            </summary>
+            <typeparam name="T">The Entity Type that the return should be mapped to</typeparam>
+            <param name="sql">The Sql Statement</param>
+            <param name="dbParams">A List of Database Parameters for the Query</param>
+            <returns>An IEnumerable<typeparam name="T"></typeparam> from the query return</returns>
+        </member>
+        <member name="M:Highway.Data.Interfaces.IDataContext.ExecuteSqlCommand(System.String,System.Data.Common.DbParameter[])">
+            <summary>
+            Executes a SQL command and returns the standard int return from the query
+            </summary>
+            <param name="sql">The Sql Statement</param>
+            <param name="dbParams">A List of Database Parameters for the Query</param>
+            <returns>The rows affected</returns>
+        </member>
+        <member name="M:Highway.Data.Interfaces.IDataContext.ExecuteFunction(System.String,System.Data.Objects.ObjectParameter[])">
+            <summary>
+            
+            </summary>
+            <param name="procedureName"></param>
+            <param name="dbParams"></param>
+            <returns></returns>
+        </member>
+        <member name="E:Highway.Data.Interfaces.IObservableDataContext.PreSave">
+            <summary>
+            The event fired just before the commit of the ORM
+            </summary>
+        </member>
+        <member name="E:Highway.Data.Interfaces.IObservableDataContext.PostSave">
+            <summary>
+            The event fired just after the commit of the ORM
+            </summary>
+        </member>
+        <member name="T:Highway.Data.Interfaces.IExtendableQuery">
+            <summary>
+            This interface is used to allow for extension of prebuilt queries
+            </summary>
+        </member>
+        <member name="M:Highway.Data.Interfaces.IExtendableQuery.AddMethodExpression(System.String,System.Type[],System.Linq.Expressions.Expression[])">
+            <summary>
+            Adds a method to the expression in the query object
+            </summary>
+            <param name="methodName">The name of the method to be added i.e. GroupBy</param>
+            <param name="generics">Any type parameters needed by the method to be added</param>
+            <param name="parameters">Any object parameters needed by the method to be added</param>
+        </member>
+        <member name="T:Highway.Data.Interfaces.IObservableQuery">
+            <summary>
+            The interface used to surface events for queries that support interceptors
+            </summary>
+        </member>
+        <member name="E:Highway.Data.Interfaces.IObservableQuery.PreQuery">
+            <summary>
+            The event fired just before the query goes to the database
+            </summary>
+        </member>
+        <member name="E:Highway.Data.Interfaces.IObservableQuery.PostQuery">
+            <summary>
+            The event fire just after the data is translated into objects but before the data is returned.
+            </summary>
+        </member>
+        <member name="M:Highway.Data.QueryObjects.Query`1.ExtendQuery">
+            <summary>
+            This method allows for the extension of Ordering and Grouping on the prebuild Query
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Highway.Data.QueryObjects.Query`1.Execute(Highway.Data.Interfaces.IDataContext)">
+            <summary>
+            This executes the expression in ContextQuery on the context that is passed in, resulting in a IQueryable<typeparam name="T"></typeparam> that is returned as an IEnumerable<typeparam name="T"></typeparam>
+            </summary>
+            <param name="context">the data context that the query should be executed against</param>
+            <returns>IEnumerable<typeparam name="T"></typeparam></returns>
+        </member>
+        <member name="M:Highway.Data.QueryObjects.Query`1.OutputSQLStatement(Highway.Data.Interfaces.IDataContext)">
+            <summary>
+            This executes the expression against the passed in context to generate the SQL statement, but doesn't execute the IQueryable<typeparam name="T"></typeparam> against the data context
+            </summary>
+            <param name="context">The data context that the query is evaluated and the SQL is generated against</param>
+            <returns></returns>
+        </member>
+        <member name="P:Highway.Data.QueryObjects.Query`1.ContextQuery">
+            <summary>
+            This holds the expression that will be used to create the IQueryable<typeparam name="T"></typeparam> when executed on the context
+            </summary>
+        </member>
+        <member name="T:Highway.Data.Interfaces.ICommandObject">
+            <summary>
+            An Interface for Command Queries that return no value, or the return is ignored
+            </summary>
+        </member>
+        <member name="M:Highway.Data.Interfaces.ICommandObject.Execute(Highway.Data.Interfaces.IDataContext)">
+            <summary>
+            Executes the expression against the passed in context and ignores the returned value if any
+            </summary>
+            <param name="context">The data context that the command is executed against</param>
+        </member>
+        <member name="T:Highway.Data.Interceptors.Events.PostQueryEventArgs">
+            <summary>
+            The Event Arguments for a post query execution Interceptor to use
+            </summary>
+        </member>
+        <member name="T:Highway.Data.Interfaces.IRepository">
+            <summary>
+            The interface used to interact with the ORM Specific Implementations
+            </summary>
+        </member>
+        <member name="M:Highway.Data.Interfaces.IRepository.Find``1(Highway.Data.Interfaces.IQuery{``0})">
+            <summary>
+            
+            </summary>
+            <param name="query"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Highway.Data.Interfaces.IRepository.Get``1(Highway.Data.Interfaces.IScalarObject{``0})">
+            <summary>
+            
+            </summary>
+            <param name="query"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Highway.Data.Interfaces.IRepository.Execute(Highway.Data.Interfaces.ICommandObject)">
+            <summary>
+            
+            </summary>
+            <param name="command"></param>
+        </member>
+        <member name="P:Highway.Data.Interfaces.IRepository.Context">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highway.Data.Interfaces.IRepository.EventManager">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Highway.Data.Services.DefaultUserNameService">
+            <summary>
+            Stub implementation of the User Name service to supply example names for Auditable interceptor.
+            </summary>
+        </member>
+        <member name="T:Highway.Data.Interfaces.IUserNameService">
+            <summary>
+            This gives a standard interface for the user name service,
+            Which is leveraged by the PreSave interceptors to supply user names for audit tagging on entities.
+            </summary>
+        </member>
+        <member name="M:Highway.Data.Interfaces.IUserNameService.GetCurrentUserName">
+            <summary>
+            Basic Method for returning the current user name
+            </summary>
+            <returns>The current user's name or login</returns>
+        </member>
+        <member name="T:Highway.Data.Interceptors.Events.PostSaveEventArgs">
+            <summary>
+            The Event Arguments for a Post-Save Interceptor to use
+            </summary>
+        </member>
+        <member name="T:Highway.Data.QueryObjects.Command">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Highway.Data.Interfaces.IScalarObject`1">
+            <summary>
+            An Interface for Scalar Queries that return a single value or object
+            </summary>
+            <typeparam name="T">The Type that is being returned</typeparam>
+        </member>
+        <member name="M:Highway.Data.Interfaces.IScalarObject`1.Execute(Highway.Data.Interfaces.IDataContext)">
+            <summary>
+            Executes the expression against the passed in context
+            </summary>
+            <param name="context">The data context that the scalar query is executed against</param>
+            <returns>The instance of <typeparamref name="T"/> that the query materialized if any</returns>
+        </member>
+        <member name="T:Highway.Data.Interceptors.Events.PreSaveEventArgs">
+            <summary>
+            The Event Arguments for a Pre-Save Interceptor to use
+            </summary>
+        </member>
+        <member name="T:Highway.Data.QueryObjects.QueryExtensions">
+            <summary>
+            A collection of extension methods for extending reusable IQuery objects
+            </summary>
+        </member>
+        <member name="M:Highway.Data.QueryObjects.QueryExtensions.Take``1(Highway.Data.Interfaces.IQuery{``0},System.Int32)">
+            <summary>
+            Takes the specified number of records
+            </summary>
+            <param name="extend"></param>
+            <param name="count"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Highway.Data.QueryObjects.QueryExtensions.Skip``1(Highway.Data.Interfaces.IQuery{``0},System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="extend"></param>
+            <param name="count"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:Highway.Data.Interfaces.IEventManager">
+            <summary>
+            The interface used to interact with the Event manager implementation for registration of Interceptors
+            </summary>
+        </member>
+        <member name="M:Highway.Data.Interfaces.IEventManager.Register``1(Highway.Data.Interfaces.IInterceptor{``0})">
+            <summary>
+            Allows for the Registration of IInterceptor<typeparam name="T"></typeparam> objects that will hook to events in priority order
+            </summary>
+            <param name="interceptor">The interceptor to be registered to an event</param>
+            <typeparam name="T">The Event Args that the interceptor accepts</typeparam>
+        </member>
+        <member name="P:Highway.Data.Interfaces.IEventManager.Context">
+            <summary>
+            A reference to context that allows for usaged and event wiring
+            </summary>
+        </member>
+        <member name="T:Highway.Data.Interceptors.Events.PreQueryEventArgs">
+            <summary>
+            The Event Arguments for a Pre-Query execution Interceptor to use
+            </summary>
+        </member>
+        <member name="T:Highway.Data.EventManagement.EventManager">
+            <summary>
+            The base implementation of the Event manager for registration of Interceptors, and execution of them in an ordered fashion
+            </summary>
+        </member>
+        <member name="M:Highway.Data.EventManagement.EventManager.#ctor">
+            <summary>
+            Creats an EventManager
+            </summary>
+        </member>
+        <member name="M:Highway.Data.EventManagement.EventManager.Register``1(Highway.Data.Interfaces.IInterceptor{``0})">
+            <summary>
+            Allows for the Registration of IInterceptor<typeparam name="T"></typeparam> objects that will hook to events in priority order
+            </summary>
+            <param name="interceptor">The interceptor to be registered to an event</param>
+            <typeparam name="T">The Event Args that the interceptor accepts</typeparam>
+        </member>
+        <member name="P:Highway.Data.EventManagement.EventManager.Context">
+            <summary>
+            A reference to context that allows for usaged and event wiring
+            </summary>
+        </member>
+        <member name="T:Highway.Data.Interfaces.IAuditableEntity">
+            <summary>
+            The interface to implement when using with the default Auditable Interceptor to specify an Auditable Entity
+            </summary>
+        </member>
+        <member name="P:Highway.Data.Interfaces.IAuditableEntity.CreatedDate">
+            <summary>
+            The date this entity was created
+            </summary>
+        </member>
+        <member name="P:Highway.Data.Interfaces.IAuditableEntity.CreatedBy">
+            <summary>
+            Who created this entity
+            </summary>
+        </member>
+        <member name="P:Highway.Data.Interfaces.IAuditableEntity.ModifiedDate">
+            <summary>
+            The date this entity was last modified
+            </summary>
+        </member>
+        <member name="P:Highway.Data.Interfaces.IAuditableEntity.ModifiedBy">
+            <summary>
+            Who last modified this entity
+            </summary>
+        </member>
+        <member name="T:Highway.Data.Interfaces.IInterceptor`1">
+            <summary>
+            The standard interface for intercept
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Highway.Data.Interfaces.IInterceptor`1.Execute(Highway.Data.Interfaces.IDataContext,`0)">
+            <summary>
+            Executes the interceptor handle an event based on the event arguments
+            </summary>
+            <param name="context">The data context that raised the event</param>
+            <param name="eventArgs">The event arguments that were passed from the context</param>
+            <returns>An Interceptor Result</returns>
+        </member>
+        <member name="P:Highway.Data.Interfaces.IInterceptor`1.Priority">
+            <summary>
+             The priority order that this interceptor has for ordered execution by the event manager
+            </summary>
+        </member>
+    </members>
+</doc>

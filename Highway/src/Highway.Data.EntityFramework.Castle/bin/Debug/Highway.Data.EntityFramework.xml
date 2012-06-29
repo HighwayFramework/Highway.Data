@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Highway.Data.EntityFramework</name>
+    </assembly>
+    <members>
+        <member name="M:Highway.Data.EntityFramework.Contexts.EntityFrameworkContext.#ctor(System.String,Highway.Data.EntityFramework.Mappings.IMappingConfiguration)">
+            <summary>
+            Constructs a context
+            </summary>
+            <param name="connectionString">The standard SQL connection string for the Database</param>
+            <param name="configuration">The Mapping Configuration that will determine how the tables and objects interact</param>
+        </member>
+        <member name="M:Highway.Data.EntityFramework.Contexts.EntityFrameworkContext.AsQueryable``1">
+            <summary>
+            This gives a mockable wrapper around the normal Set<typeparam name="T"></typeparam> method that allows for testablity
+            </summary>
+            <typeparam name="T">The Entity being queried</typeparam>
+            <returns>IQueryable<typeparam name="T"></typeparam></returns>
+        </member>
+        <member name="M:Highway.Data.EntityFramework.Contexts.EntityFrameworkContext.Add``1(``0)">
+            <summary>
+            Adds the provided instance of <typeparam name="T"></typeparam> to the data context
+            </summary>
+            <typeparam name="T">The Entity Type being added</typeparam>
+            <param name="item">The <typeparam name="T"></typeparam> you want to add</param>
+            <returns>The <typeparam name="T"></typeparam> you added</returns>
+        </member>
+        <member name="M:Highway.Data.EntityFramework.Contexts.EntityFrameworkContext.Remove``1(``0)">
+            <summary>
+            Removes the provided instance of <typeparam name="T"></typeparam> from the data context
+            </summary>
+            <typeparam name="T">The Entity Type being removed</typeparam>
+            <param name="item">The <typeparam name="T"></typeparam> you want to remove</param>
+            <returns>The <typeparam name="T"></typeparam> you removed</returns>
+        </member>
+        <member name="M:Highway.Data.EntityFramework.Contexts.EntityFrameworkContext.Update``1(``0)">
+            <summary>
+            Updates the provided instance of <typeparam name="T"></typeparam> in the data context
+            </summary>
+            <typeparam name="T">The Entity Type being updated</typeparam>
+            <param name="item">The <typeparam name="T"></typeparam> you want to update</param>
+            <returns>The <typeparam name="T"></typeparam> you updated</returns>
+        </member>
+        <member name="M:Highway.Data.EntityFramework.Contexts.EntityFrameworkContext.Attach``1(``0)">
+            <summary>
+            Attaches the provided instance of <typeparam name="T"></typeparam> to the data context
+            </summary>
+            <typeparam name="T">The Entity Type being attached</typeparam>
+            <param name="item">The <typeparam name="T"></typeparam> you want to attach</param>
+            <returns>The <typeparam name="T"></typeparam> you attached</returns>
+        </member>
+        <member name="M:Highway.Data.EntityFramework.Contexts.EntityFrameworkContext.Detach``1(``0)">
+            <summary>
+            Detaches the provided instance of <typeparam name="T"></typeparam> from the data context
+            </summary>
+            <typeparam name="T">The Entity Type being detached</typeparam>
+            <param name="item">The <typeparam name="T"></typeparam> you want to detach</param>
+            <returns>The <typeparam name="T"></typeparam> you detached</returns>
+        </member>
+        <member name="M:Highway.Data.EntityFramework.Contexts.EntityFrameworkContext.Reload``1(``0)">
+            <summary>
+            Reloads the provided instance of <typeparam name="T"></typeparam> from the database
+            </summary>
+            <typeparam name="T">The Entity Type being reloaded</typeparam>
+            <param name="item">The <typeparam name="T"></typeparam> you want to reload</param>
+            <returns>The <typeparam name="T"></typeparam> you reloaded</returns>
+        </member>
+        <member name="M:Highway.Data.EntityFramework.Contexts.EntityFrameworkContext.Reload``1">
+            <summary>
+            Reloads all tracked objects of the type <typeparam name="T"></typeparam>
+            </summary>
+            <typeparam name="T">The type of objects to reload</typeparam>
+        </member>
+        <member name="M:Highway.Data.EntityFramework.Contexts.EntityFrameworkContext.Commit">
+            <summary>
+            Commits all currently tracked entity changes
+            </summary>
+            <returns>the number of rows affected</returns>
+        </member>
+        <member name="M:Highway.Data.EntityFramework.Contexts.EntityFrameworkContext.ExecuteSqlQuery``1(System.String,System.Data.Common.DbParameter[])">
+            <summary>
+            Executes a SQL command and tries to map the returned datasets into an IEnumerable<typeparam name="T"></typeparam>
+            The results should have the same column names as the Entity Type has properties
+            </summary>
+            <typeparam name="T">The Entity Type that the return should be mapped to</typeparam>
+            <param name="sql">The Sql Statement</param>
+            <param name="dbParams">A List of Database Parameters for the Query</param>
+            <returns>An IEnumerable<typeparam name="T"></typeparam> from the query return</returns>
+        </member>
+        <member name="M:Highway.Data.EntityFramework.Contexts.EntityFrameworkContext.ExecuteSqlCommand(System.String,System.Data.Common.DbParameter[])">
+            <summary>
+            Executes a SQL command and returns the standard int return from the query
+            </summary>
+            <param name="sql">The Sql Statement</param>
+            <param name="dbParams">A List of Database Parameters for the Query</param>
+            <returns>The rows affected</returns>
+        </member>
+        <member name="M:Highway.Data.EntityFramework.Contexts.EntityFrameworkContext.ExecuteFunction(System.String,System.Data.Objects.ObjectParameter[])">
+            <summary>
+            
+            </summary>
+            <param name="procedureName"></param>
+            <param name="dbParams"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Highway.Data.EntityFramework.Mappings.IMappingConfiguration">
+            <summary>
+            Implement this interface to pass the mappings in via constructor injection on the context.
+            </summary>
+        </member>
+        <member name="M:Highway.Data.EntityFramework.Mappings.IMappingConfiguration.ConfigureModelBuilder(System.Data.Entity.DbModelBuilder)">
+            <summary>
+            This method takes the modelBuilder from Entity Framework and wires in the mappings provided
+            </summary>
+            <param name="modelBuilder">The Database model builder used by Entity Framework to generate the model.</param>
+        </member>
+        <member name="T:Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository">
+            <summary>
+            A Entity Framework Specific repository implementation that uses Specification pattern to execute Queries in a controlled fashion.
+            </summary>
+        </member>
+        <member name="M:Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository.#ctor(Highway.Data.Interfaces.IDataContext)">
+            <summary>
+            Creates a Repository that uses the context provided
+            </summary>
+            <param name="context">The data context that this repository uses</param>
+        </member>
+        <member name="M:Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository.Get``1(Highway.Data.Interfaces.IScalarObject{``0})">
+            <summary>
+            Executes a prebuilt IScalarObject<typeparam name="T"></typeparam> and returns a single instance of <typeparam name="T"></typeparam>
+            </summary>
+            <typeparam name="T">The Entity being queried</typeparam>
+            <param name="query">The prebuilt Query Object</param>
+            <returns>The instance of <typeparam name="T"></typeparam> returned from the query</returns>
+        </member>
+        <member name="M:Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository.Execute(Highway.Data.Interfaces.ICommandObject)">
+            <summary>
+            Executes a prebuilt ICommandObject
+            </summary>
+            <param name="command">The prebuilt command object</param>
+        </member>
+        <member name="M:Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository.Find``1(Highway.Data.Interfaces.IQuery{``0})">
+            <summary>
+            Executes a prebuilt IQuery<typeparam name="T"></typeparam> and returns an IEnumerable<typeparam name="T"></typeparam>
+            </summary>
+            <typeparam name="T">The Entity being queried</typeparam>
+            <param name="query">The prebuilt Query Object</param>
+            <returns>The IEnumerable<typeparam name="T"></typeparam> returned from the query</returns>
+        </member>
+        <member name="P:Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository.Context">
+            <summary>
+            Reference to the Context the repository is using
+            </summary>
+        </member>
+        <member name="P:Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository.EventManager">
+            <summary>
+            Reference to the EventManager the repository is using
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -10,7 +10,7 @@ using Highway.Data.EntityFramework.Tests.Mapping;
 using Highway.Data.EntityFramework.Tests.UnitTests;
 using Highway.Data.EventManagement;
 using Highway.Data.Interfaces;
-using Highway.Data.Test.TestDomain;
+using Highway.Data.Tests.TestDomain;
 using MSTest.AssertionHelpers;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

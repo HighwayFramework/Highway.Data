@@ -103,9 +103,9 @@
       <Project>{B0CA9DAB-C5D4-4AC6-97E7-725B18191B2D}</Project>
       <Name>Highway.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Highway.Data.Test\Highway.Data.Test.csproj">
+    <ProjectReference Include="..\Highway.Data.Tests\Highway.Data.Tests.csproj">
       <Project>{726A3CE4-CB5B-4E30-8F97-FE9705FF4F3C}</Project>
-      <Name>Highway.Data.Test</Name>
+      <Name>Highway.Data.Tests</Name>
     </ProjectReference>
     <ProjectReference Include="..\MSTest.AssertionHelpers\MSTest.AssertionHelpers.csproj">
       <Project>{82CC3D28-F1F9-4DA3-A388-1EA3091EA3DF}</Project>

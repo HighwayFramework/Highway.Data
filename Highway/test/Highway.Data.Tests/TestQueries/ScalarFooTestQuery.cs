@@ -1,8 +1,8 @@
 using System.Linq;
 using Highway.Data.QueryObjects;
-using Highway.Data.Test.TestDomain;
+using Highway.Data.Tests.TestDomain;
 
-namespace Highway.Data.Test.TestQueries
+namespace Highway.Data.Tests.TestQueries
 {
     public class ScalarFooTestQuery : Scalar<Foo>
     {

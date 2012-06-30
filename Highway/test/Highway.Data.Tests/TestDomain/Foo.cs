@@ -1,6 +1,6 @@
 using System;
 
-namespace Highway.Data.Test.TestDomain
+namespace Highway.Data.Tests.TestDomain
 {
     public class Foo
     {

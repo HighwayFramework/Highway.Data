@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\SolutionInfo.cs">
+      <Link>SolutionInfo.cs</Link>
+    </Compile>
     <Compile Include="ExceptionAssert.cs" />
     <Compile Include="IsEqualHelper.cs" />
     <Compile Include="IsNotEqualHelpers.cs" />

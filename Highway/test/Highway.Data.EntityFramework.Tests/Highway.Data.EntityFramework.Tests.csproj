@@ -72,6 +72,9 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\SolutionInfo.cs">
+      <Link>SolutionInfo.cs</Link>
+    </Compile>
     <Compile Include="Initializer\EntityFrameworkIntializer.cs" />
     <Compile Include="IntegrationTests\Given_A_EF_Context.cs" />
     <Compile Include="Mapping\FooMap.cs" />

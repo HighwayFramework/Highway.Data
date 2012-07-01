@@ -6,9 +6,11 @@ require 'fileutils'
 CONFIG        = 'Debug'
 RAKE_DIR      = File.expand_path(File.dirname(__FILE__))
 SOLUTION_DIR  = RAKE_DIR + "/Highway"
+TEMPLATE_DIR  = RAKE_DIR + "/Templates"
 TEST_DIR      = SOLUTION_DIR + "/test/"
 SRC_DIR       = SOLUTION_DIR + "/src/"
 SOLUTION_FILE = 'Highway.sln'
+TEMPLATE_FILE = 'Templates.MVC.sln'
 MSTEST        = ENV['VS100COMNTOOLS'] + "..\\IDE\\mstest.exe"
 NUGET         = SOLUTION_DIR + "/.nuget/nuget.exe"
 
@@ -18,7 +20,10 @@ TEST_DLLS     = Dir.glob('*Tests').collect{|dll| File.join(dll, 'bin', CONFIG, d
 Dir.chdir('../..')
 # --------------------------------------------------------------------------------------------
 
-task :default                     => ['build:msbuild']
+task :default                     => ['build:msbuild', 'build:templates']
+task :test                        => ['build:mstest' ]
+task :package                     => ['package:packall']
+task :push                        => ['package:pushall']
 
 namespace :build do
 
@@ -35,7 +40,14 @@ namespace :build do
 	    mstest.assemblies TEST_DLLS
 	end
 	
-	task :templates => [ :clean_templates_build, :create_templates_build ] do
+	msbuild :template_build, [:targets] do |msb, args|
+    args.with_defaults(:targets => :Build)
+    msb.properties :configuration => CONFIG
+    msb.targets args[:targets]
+    msb.solution = "#{TEMPLATE_DIR}/#{TEMPLATE_FILE}"
+  end
+	
+	task :templates => [ :template_build, :clean_templates_build, :create_templates_build ] do
 		appstart_files = Dir.glob('Templates/Templates.MVC/App_Start/*.cs')
 		basetypes_files = Dir.glob('Templates/Templates.MVC/BaseTypes/*.cs')
 		models_files = Dir.glob('Templates/Templates.MVC/Models/*.cs')
@@ -71,7 +83,6 @@ namespace :build do
 		
 		cp 'Templates/Templates.Mvc/log4net.config', 'Templates/build/content/'
 		cp 'Templates/Templates.Mvc/Highway.Mvc.Castle.nuspec', 'Templates/build/'
-		sh 'Highway/.nuget/nuget.exe pack Templates/build/Highway.Mvc.Castle.nuspec -o nuget'
 	end
 	
 	task :clean_templates_build do
@@ -96,6 +107,7 @@ namespace :package do
 		sh 'Highway/.nuget/nuget.exe pack Highway/src/Highway.Data/Highway.Data.csproj -o pack'
 		sh 'Highway/.nuget/nuget.exe pack Highway/src/Highway.Data.EntityFramework/Highway.Data.EntityFramework.csproj -o pack'
 		sh 'Highway/.nuget/nuget.exe pack Highway/src/Highway.Data.EntityFramework.Castle/Highway.Data.EntityFramework.Castle.csproj -o pack'		
+		sh 'Highway/.nuget/nuget.exe pack Templates/build/Highway.Mvc.Castle.nuspec -o pack'
 	end
 		
 	task :packall => [ :clean ] do

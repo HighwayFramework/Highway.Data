@@ -1,8 +1,9 @@
 # Highway.Data
+## The fastest and smoothest way to great architecture 
 
 This project focuses on bringing our recommendations for data access, specifically the Repository and Specification patterns.  For this intial release we've focused on delivering these for Entity Framework, but in the future you can look foward implementations for NHibernate and other data access structures.  If we're going to work with Entity Framework in a code first fashion, we will need some POCOs.  Our guidance with Highway.Data is not to use the Mapping attributes, which instantly make your POCOs aware of your database, but rather to use a mapping class.  We provide an interface you can implement to configure your Entity Framework mappings, it is called IMappingConfiguration.  So let's say we're working with the following POCO:
 
-{% codeblock lang:csharp %}
+```csharp
     public class Person
     {
         public int Id { get; set; }
@@ -10,11 +11,11 @@ This project focuses on bringing our recommendations for data access, specifical
         public string FirstName { get; set; }
         public string LastName { get; set; }
     }
-{% endcodeblock %}
+```
 
 We can create a very simply mapping class to store that in the database in the People table:
 
-{% codeblock lang:csharp %}
+```csharp
 public class MyMappings : IMappingConfiguration
 {
     public void ConfigureModelBuilder(DbModelBuilder modelBuilder)
@@ -24,11 +25,11 @@ public class MyMappings : IMappingConfiguration
             .ToTable("People");
     }
 }
-{% endcodeblock %}
+```
 
 Now all that is left is to register with our container, and we're off and running.  For this demo, we'll show how to do that with Castle.Windsor:
 
-{% codeblock lang:csharp %}
+```csharp
 var container = new WindsorContainer();
 container.Register(
     Component.For<IMappingConfiguration>()
@@ -41,7 +42,7 @@ container.Register(
     Component.For<IEventManager>()
         .ImplementedBy<EventManager>()
     );
-{% endcodeblock %}
+```
 
 We now have a completely wired up Highway.Data implementation, and can resolved IRepository into any of our classes which need to access data.  But that's only the first half of Highway.Data.
 
@@ -49,7 +50,7 @@ We now have a completely wired up Highway.Data implementation, and can resolved 
 
 In addition to a repository pattern implementation, we also provide an implementation of Specification pattern in Highway.Data.  We use the pattern to ensure our queries are all testable, without access to a database, and also to be able to quickly enumerate, and if necessary generate SQL for, all the queries are project uses.  There are few things that will make a DBA smile more than to learn that a project using an ORM can quickly produce for him or her a list of all queries used by that application.  That said, let me show you how you create a simple query against the LastName property of our Person.
 
-{% codeblock lang:csharp %}
+```csharp
 public class LastNameQuery : Query<Person>
 {
     public LastNameQuery(string lastName)
@@ -58,11 +59,11 @@ public class LastNameQuery : Query<Person>
             .Where(x => x.LastName == lastName);
     }
 }
-{% endcodeblock %}
+```
 
 As you can see, we create a class to represent our query, and provide the query implementation to the ContextQuery property.  Once we've created this query, using it is as simple as:
 
-{% codeblock lang:csharp %}
+```csharp
 public class DataConsumingClass
 {
     private IRepository repo;
@@ -78,7 +79,7 @@ public class DataConsumingClass
         // Work with the people returned however you want.
     }
 }
-{% endcodeblock %}
+```
 
 Obviously, this could be any class in your application, we depend on an IRepository, and hand the Find method our query, and our query it's parameter.  And that's it!
 

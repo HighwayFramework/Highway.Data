@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Templates.BaseTypes;
 using Highway.Data.Interfaces;
 using Templates.Models;
+using System.Net;
 
 namespace Templates.Controllers
 {
@@ -22,6 +23,11 @@ namespace Templates.Controllers
         {
             Logger.Debug("Home Controller, checking in sir.");
             return View(repo.Context.AsQueryable<DeleteMe>().ToList());
+        }
+
+        public ActionResult BlowUp()
+        {
+            throw new NotImplementedException("Proper Exception Logged");
         }
 
     }

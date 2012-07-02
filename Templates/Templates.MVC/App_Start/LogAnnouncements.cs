@@ -14,7 +14,10 @@ namespace Templates.App_Start
         private static ILogger logger = NullLogger.Instance;
         public static void PostStartup()
         {
+#pragma warning disable 618
             logger = IoC.Container.Resolve<ILogger>();
+#pragma warning restore 618
+
             logger.Info("Application Startup Completed");
         }
 

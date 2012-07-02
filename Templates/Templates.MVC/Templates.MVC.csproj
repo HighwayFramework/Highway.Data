@@ -98,16 +98,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\ControllerFactoryWireup.cs" />
+    <Compile Include="App_Start\FilterProvidersWireup.cs" />
     <Compile Include="App_Start\IoC.cs" />
     <Compile Include="App_Start\LogAnnouncements.cs" />
     <Compile Include="App_Start\SetDatabaseInitializer.cs" />
     <Compile Include="BaseTypes\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Filters\ExceptionLoggingFilter.cs" />
+    <Compile Include="Filters\IoCFilterProvider.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Installers\ControllerInstaller.cs" />
     <Compile Include="Installers\HighwayDataInstaller.cs" />
+    <Compile Include="Installers\FilterInstaller.cs" />
     <Compile Include="Installers\LoggingInstaller.cs" />
     <Compile Include="Installers\WindsorControllerFactory.cs" />
     <Compile Include="Models\DatabaseInitializer.cs" />

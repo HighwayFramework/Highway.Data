@@ -11,7 +11,10 @@ namespace Templates.App_Start
     {
         public static void PostStartup()
         {
-            ControllerBuilder.Current.SetControllerFactory(IoC.Container.Resolve<IControllerFactory>());
+#pragma warning disable 618
+            IControllerFactory factory = IoC.Container.Resolve<IControllerFactory>();
+#pragma warning restore 618
+            ControllerBuilder.Current.SetControllerFactory(factory);
         }
     }
 }

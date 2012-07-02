@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Highway.Mvc.Castle</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <authors>Tim Rayburn and Devlin Liles</authors>
     <owners>TRayburn</owners>
     <licenseUrl>https://github.com/HighwayFramework/Highway.Data/blob/master/README.markdown</licenseUrl>

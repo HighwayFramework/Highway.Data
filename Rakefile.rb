@@ -52,6 +52,7 @@ namespace :build do
 		basetypes_files = Dir.glob('Templates/Templates.MVC/BaseTypes/*.cs')
 		models_files = Dir.glob('Templates/Templates.MVC/Models/*.cs')
 		installers_files = Dir.glob('Templates/Templates.MVC/Installers/*.cs')
+		filters_files = Dir.glob('Templates/Templates.MVC/Filters/*.cs')
 		
 		appstart_files.each do |file|
 			out_filename = 'Templates/build/content/App_Start/' +  File.basename(file) + '.pp'
@@ -81,6 +82,13 @@ namespace :build do
 			end
 		end
 		
+		filters_files.each do |file|
+			out_filename = 'Templates/build/content/Filters/' +  File.basename(file) + '.pp'
+			File.open(out_filename,'w+') do |output_file|
+				output_file.puts File.read(file).gsub(/Templates\./,'$rootnamespace$.')
+			end
+		end
+		
 		cp 'Templates/Templates.Mvc/log4net.config', 'Templates/build/content/'
 		cp 'Templates/Templates.Mvc/Highway.Mvc.Castle.nuspec', 'Templates/build/'
 	end
@@ -98,6 +106,7 @@ namespace :build do
 		Dir.mkdir('Templates/build/content/BaseTypes')
 		Dir.mkdir('Templates/build/content/Models')
 		Dir.mkdir('Templates/build/content/Installers')
+		Dir.mkdir('Templates/build/content/Filters')
 	end
 end
 

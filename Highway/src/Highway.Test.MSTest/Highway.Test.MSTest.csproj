@@ -8,8 +8,8 @@
     <ProjectGuid>{82CC3D28-F1F9-4DA3-A388-1EA3091EA3DF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MSTest.AssertionHelpers</RootNamespace>
-    <AssemblyName>MSTest.AssertionHelpers</AssemblyName>
+    <RootNamespace>Highway.Test.MSTest</RootNamespace>
+    <AssemblyName>Highway.Test.MSTest</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

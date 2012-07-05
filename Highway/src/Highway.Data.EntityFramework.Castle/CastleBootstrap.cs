@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Castle.MicroKernel.Registration;
+using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Highway.Data.EntityFramework.Contexts;
@@ -23,6 +24,7 @@ namespace Highway.Data.EntityFramework.Castle
         /// <param name="container">The container.</param><param name="store">The configuration store.</param>
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
+            container.Kernel.Resolver.AddSubResolver(new ArrayResolver(container.Kernel));
             container.Register(
                 Component.For<IEventManager>().ImplementedBy<EventManager>()
                 );

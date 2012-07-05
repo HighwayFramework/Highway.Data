@@ -15,16 +15,16 @@ namespace Highway.Data.EntityFramework.Contexts
 {
     public class EntityFrameworkContext : DbContext, IObservableDataContext
     {
-        private readonly IMappingConfiguration _configuration;
+        private readonly IMappingConfiguration[] _configurations;
 
         /// <summary>
         /// Constructs a context
         /// </summary>
         /// <param name="connectionString">The standard SQL connection string for the Database</param>
-        /// <param name="configuration">The Mapping Configuration that will determine how the tables and objects interact</param>
-        public EntityFrameworkContext(string connectionString, IMappingConfiguration configuration) : base(connectionString)
+        /// <param name="configurations">The Mapping Configuration that will determine how the tables and objects interact</param>
+        public EntityFrameworkContext(string connectionString, IMappingConfiguration[] configurations) : base(connectionString)
         {
-            _configuration = configuration;
+            _configurations = configurations;
         }
 
         /// <summary>
@@ -215,7 +215,10 @@ namespace Highway.Data.EntityFramework.Contexts
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            _configuration.ConfigureModelBuilder(modelBuilder);
+            foreach (var mappingConfiguration in _configurations)
+            {
+                mappingConfiguration.ConfigureModelBuilder(modelBuilder);  
+            }
             base.OnModelCreating(modelBuilder);
         }
     }

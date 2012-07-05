@@ -72,6 +72,9 @@
     <Compile Include="..\..\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="TestDomain\Bar.cs" />
+    <Compile Include="TestDomain\Baz.cs" />
+    <Compile Include="TestDomain\Qux.cs" />
     <Compile Include="TestQueries\ScalarFooTestQuery.cs" />
     <Compile Include="TestDomain\Foo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

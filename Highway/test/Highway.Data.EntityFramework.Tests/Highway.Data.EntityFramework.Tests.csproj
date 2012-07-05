@@ -77,7 +77,10 @@
     </Compile>
     <Compile Include="Initializer\EntityFrameworkIntializer.cs" />
     <Compile Include="IntegrationTests\Given_A_EF_Context.cs" />
+    <Compile Include="Mapping\BarMap.cs" />
+    <Compile Include="Mapping\BazMap.cs" />
     <Compile Include="Mapping\FooMap.cs" />
+    <Compile Include="Mapping\QuxMap.cs" />
     <Compile Include="Mapping\TestMappingConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -87,6 +90,7 @@
     </Compile>
     <Compile Include="UnitTests\EFFailureContext.cs" />
     <Compile Include="UnitTests\EntityFrameworkTestContext.cs" />
+    <Compile Include="UnitTests\Given_A_Generic_Repository_Factory.cs" />
     <Compile Include="UnitTests\Given_An_Event_Extendable_Context.cs" />
     <Compile Include="UnitTests\Given_A_Collection_Of_T.cs" />
     <Compile Include="UnitTests\Given_A_Context_Without_Mappings.cs" />

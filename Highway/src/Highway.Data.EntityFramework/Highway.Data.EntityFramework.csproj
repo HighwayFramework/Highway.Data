@@ -58,6 +58,7 @@
       <Link>SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="Contexts\EntityFrameworkContext.cs" />
+    <Compile Include="Factory\RepositoryFactory.cs" />
     <Compile Include="Interceptors\EntityFrameworkAuditableInterceptor.cs" />
     <Compile Include="Mappings\IMappingConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

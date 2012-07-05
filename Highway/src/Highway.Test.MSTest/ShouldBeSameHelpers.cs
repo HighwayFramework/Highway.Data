@@ -1,10 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace MSTest.AssertionHelpers
+namespace Highway.Test.MSTest
 {
-    public static class IsSameHelpers
+    public static class ShouldBeSameHelpers
     {
-         public static void IsSameByReference<T>(this T actual, T expected) where T : class
+        public static void ShouldBeSame<T>(this T actual, T expected) where T : class
          {
              Assert.AreSame(expected,actual, "Actual and Expected are in different memory locations");
          }

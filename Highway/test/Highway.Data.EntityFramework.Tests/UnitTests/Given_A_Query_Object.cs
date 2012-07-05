@@ -10,7 +10,7 @@ using Highway.Data.EventManagement;
 using Highway.Data.Interfaces;
 using Highway.Data.Test.TestDomain;
 using Highway.Data.Test.TestQueries;
-using MSTest.AssertionHelpers;
+using Highway.Test.MSTest;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Highway.Data.EntityFramework.Tests.Properties;
@@ -65,7 +65,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
 
             //Assert
             context.VerifyAllExpectations();
-            items.IsNotNull();
+            items.ShouldNotBeNull();
 
         }
 
@@ -90,7 +90,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
 
 
             //Assert
-            retVal.First().IsSameByReference(targetFoo);
+            retVal.First().ShouldBeSame(targetFoo);
         }
 
         [TestMethod]
@@ -105,8 +105,8 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             var sqlOutput = target.OutputSQLStatement(context);
 
             //assert
-            sqlOutput.IsNotNull();
-            sqlOutput.IsTrue(x => x.ToLowerInvariant().Contains("from"));
+            sqlOutput.ShouldNotBeNull();
+            sqlOutput.ShouldContain("from");
 
         }
     }

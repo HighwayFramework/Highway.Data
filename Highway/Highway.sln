@@ -22,14 +22,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data", "src\Highway
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.EntityFramework", "src\Highway.Data.EntityFramework\Highway.Data.EntityFramework.csproj", "{726C5578-4D46-46FB-A58D-352E447E672A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSTest.AssertionHelpers", "test\MSTest.AssertionHelpers\MSTest.AssertionHelpers.csproj", "{82CC3D28-F1F9-4DA3-A388-1EA3091EA3DF}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4D77A758-5608-4034-9E89-9F77B840B876}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Test.MSTest", "src\Highway.Test.MSTest\Highway.Test.MSTest.csproj", "{82CC3D28-F1F9-4DA3-A388-1EA3091EA3DF}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution

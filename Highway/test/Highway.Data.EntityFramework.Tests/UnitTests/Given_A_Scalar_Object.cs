@@ -10,7 +10,7 @@ using Highway.Data.EventManagement;
 using Highway.Data.Interfaces;
 using Highway.Data.Test.TestDomain;
 using Highway.Data.Test.TestQueries;
-using MSTest.AssertionHelpers;
+using Highway.Test.MSTest;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Highway.Data.EntityFramework.Tests.Properties;
@@ -63,7 +63,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
 
             //Assert
             context.VerifyAllExpectations();
-            result.IsEqual(0);
+            result.ShouldBe(0);
 
         }
 

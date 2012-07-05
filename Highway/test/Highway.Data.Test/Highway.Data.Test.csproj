@@ -48,7 +48,7 @@
       <HintPath>..\..\packages\CommonServiceLocator.WindsorAdapter.1.0\lib\NET35\CommonServiceLocator.WindsorAdapter.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
+      <HintPath>..\..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -96,6 +96,10 @@
     <ProjectReference Include="..\..\src\Highway.Data\Highway.Data.csproj">
       <Project>{B0CA9DAB-C5D4-4AC6-97E7-725B18191B2D}</Project>
       <Name>Highway.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Highway.Test.MSTest\Highway.Test.MSTest.csproj">
+      <Project>{82CC3D28-F1F9-4DA3-A388-1EA3091EA3DF}</Project>
+      <Name>Highway.Test.MSTest</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

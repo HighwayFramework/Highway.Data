@@ -10,7 +10,7 @@ using Highway.Data.EventManagement;
 using Highway.Data.Interfaces;
 using Highway.Data.Test.TestDomain;
 using Highway.Data.Test.TestQueries;
-using MSTest.AssertionHelpers;
+using Highway.Test.MSTest;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Highway.Data.EntityFramework.Tests.Properties;
@@ -43,7 +43,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             var repository = new EntityFrameworkRepository(context);
                         
             //Assert
-            repository.Context.IsSameByReference(context);
+            repository.Context.ShouldBeSame(context);
         }
 
         [TestMethod]
@@ -64,9 +64,9 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             //Assert
             context.VerifyAllExpectations();
             var foo = result.First();
-            foo.IsNotNull();
-            foo.Id.IsEqual(1);
-            foo.Name.IsEqual("Test");
+            foo.ShouldNotBeNull();
+            foo.Id.ShouldBe(1);
+            foo.Name.ShouldBe("Test");
         }
 
         [TestMethod]
@@ -86,7 +86,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
 
             //Assert
             context.VerifyAllExpectations();
-            result.IsEqual(1);
+            result.ShouldBe(1);
         }
 
         [TestMethod]
@@ -106,7 +106,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
 
             //Assert
             context.VerifyAllExpectations();
-            result.IsEqual(1);
+            result.ShouldBe(1);
         }
 
         [TestMethod]
@@ -127,7 +127,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
 
             //Assert
             context.VerifyAllExpectations();
-            result.IsEqual(foo);
+            result.ShouldBe(foo);
         }
 
         [TestMethod]
@@ -148,7 +148,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
 
             //Assert
             context.VerifyAllExpectations();
-            testCommand.Called.IsTrue();
+            testCommand.Called.ShouldBeTrue();
         }
     }
 }

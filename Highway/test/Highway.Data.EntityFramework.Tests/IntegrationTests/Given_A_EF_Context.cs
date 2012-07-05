@@ -11,7 +11,7 @@ using Highway.Data.EntityFramework.Tests.UnitTests;
 using Highway.Data.EventManagement;
 using Highway.Data.Interfaces;
 using Highway.Data.Test.TestDomain;
-using MSTest.AssertionHelpers;
+using Highway.Test.MSTest;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Highway.Data.EntityFramework.Tests.Properties;
@@ -52,7 +52,7 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
             var items = context.AsQueryable<Foo>();
 
             //Assert
-            items.Count().IsEqual(5);
+            items.Count().ShouldBe(5);
         }
 
         [TestMethod, TestCategory(TestCategories.Database)]
@@ -67,7 +67,7 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
             //Assert
             context.ChangeTracker.DetectChanges();
             var entry = context.Entry(item);
-            entry.State.IsEqual(EntityState.Added);
+            entry.State.ShouldBe(EntityState.Added);
         }
 
         [TestMethod, TestCategory(TestCategories.Database)]
@@ -82,7 +82,7 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
             //Assert
             context.ChangeTracker.DetectChanges();
             var entry = context.Entry(item);
-            entry.State.IsEqual(EntityState.Deleted);
+            entry.State.ShouldBe(EntityState.Deleted);
         }
 
         [TestMethod, TestCategory(TestCategories.Database)]
@@ -97,7 +97,7 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
             //Assert
             context.ChangeTracker.DetectChanges();
             var entry = context.Entry(item);
-            entry.State.IsEqual(EntityState.Detached);
+            entry.State.ShouldBe(EntityState.Detached);
         }
     }
 

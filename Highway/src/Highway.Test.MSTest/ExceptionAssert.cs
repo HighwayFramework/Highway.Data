@@ -1,11 +1,16 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace MSTest.AssertionHelpers
+namespace Highway.Test.MSTest
 {
-    public class ExceptionAssert
+    public static class ExceptionAssert
     {
-         public static void Throws<T>(Action action)
+         /// <summary>
+         /// This method gives us a wrapper to catch an exception
+         /// </summary>
+         /// <typeparam name="T">The Type of Exception that should be thrown</typeparam>
+         /// <param name="action">The execution that should throw the exception</param>
+         public static void ShouldThrowException<T>(this Action action)
          {
              try
              {

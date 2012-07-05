@@ -10,6 +10,10 @@ using Highway.Data.Interfaces;
 
 namespace Highway.Data.QueryObjects
 {
+    /// <summary>
+    /// The base implementation for Queries that return collections
+    /// </summary>
+    /// <typeparam name="T">The Type being requested</typeparam>
     public class Query<T> : QueryBase, IQuery<T>
     {
         /// <summary>

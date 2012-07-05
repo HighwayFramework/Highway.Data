@@ -45,14 +45,14 @@
       <Link>SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="ExceptionAssert.cs" />
-    <Compile Include="IsEqualHelper.cs" />
-    <Compile Include="IsNotEqualHelpers.cs" />
-    <Compile Include="IsNotNullHelpers.cs" />
-    <Compile Include="IsOfTypeHelpers.cs" />
-    <Compile Include="IsSameHelpers.cs" />
-    <Compile Include="IsTrueHelpers.cs" />
     <Compile Include="ShouldBeHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShouldBeNotEqualHelpers.cs" />
+    <Compile Include="ShouldBeNotNullHelpers.cs" />
+    <Compile Include="ShouldBeOfTypeHelpers.cs" />
+    <Compile Include="ShouldBeSameHelpers.cs" />
+    <Compile Include="ShouldBeTrueHelpers.cs" />
+    <Compile Include="StringHelpers.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

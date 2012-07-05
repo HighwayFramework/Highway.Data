@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Data.Entity.ModelConfiguration;
-using Highway.Data.Test.TestDomain;
+using Highway.Data.Tests.TestDomain;
 
 namespace Highway.Data.EntityFramework.Tests.Mapping
 {

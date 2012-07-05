@@ -14,3 +14,5 @@ lib/golden_cap.zip
 *.orig
 *.cache
 packages
+TestResults
+Logs

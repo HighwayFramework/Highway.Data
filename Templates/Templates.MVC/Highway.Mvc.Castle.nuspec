@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Highway.Mvc.Castle</id>
+    <version>1.0.1</version>
+    <authors>Tim Rayburn and Devlin Liles</authors>
+    <owners>TRayburn</owners>
+    <licenseUrl>https://github.com/HighwayFramework/Highway.Data/blob/master/README.markdown</licenseUrl>
+    <projectUrl>http://github.com/HighwayFramework/Highway.Data</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Quickstart package for Highway Framework in an MVC project.</description>
+    <copyright>Copyright 2012 Devlin Liles</copyright>
+    <tags>Highway MVC Repository Specification architecture</tags>
+    <dependencies>
+      <dependency id="WebActivator" />
+      <dependency id="Castle.Windsor-log4net" />
+      <dependency id="Highway.Data.EntityFramework" />
+    </dependencies>
+  </metadata>
+</package>

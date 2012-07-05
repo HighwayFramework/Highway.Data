@@ -140,14 +140,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>Context
 : <a class="el" href="class_highway_1_1_data_1_1_event_management_1_1_event_manager.html#ac5a9cddf17fcb4c3b298b3d50431de2f">Highway.Data.EventManagement.EventManager</a>
 , <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_event_manager.html#aae163759719833dca07513b02efbafa8">Highway.Data.Interfaces.IEventManager</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository.html#a39447e7deb1284fc5e5d9ea7c2c78c63">Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository</a>
 , <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository.html#aadf2e3d1d5b118f2fe6e2b1fc1ae8e77">Highway.Data.Interfaces.IRepository</a>
+, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository.html#a39447e7deb1284fc5e5d9ea7c2c78c63">Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository</a>
 </li>
 <li>ContextQuery
-: <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_query-g.html#a68ecc8e5735dee1db60782614427cbbf">Highway.Data.QueryObjects.Query&lt; T &gt;</a>
+: <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_command.html#a83c9845e7df1f9ff350d05182c23e373">Highway.Data.QueryObjects.Command</a>
+, <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_query-g.html#a68ecc8e5735dee1db60782614427cbbf">Highway.Data.QueryObjects.Query&lt; T &gt;</a>
 </li>
 <li>ContinueExecution
 : <a class="el" href="struct_highway_1_1_data_1_1_interceptors_1_1_interceptor_result.html#a6c07e279d13920c2216d8f2902a4c3a0">Highway.Data.Interceptors.InterceptorResult</a>
+</li>
+<li>Create&lt; TOne &gt;()
+: <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_factory.html#a343d7436f44181174c5a213ae59f4588">Highway.Data.Interfaces.IRepositoryFactory</a>
+, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_factory_1_1_repository_factory.html#adc2a8362d9f6eba603dc296f80a464d2">Highway.Data.EntityFramework.Factory.RepositoryFactory</a>
+</li>
+<li>Create&lt; TOne, TTwo &gt;()
+: <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_factory.html#af84ae4a3ffcb355f70c9ab332b27fa75">Highway.Data.Interfaces.IRepositoryFactory</a>
+, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_factory_1_1_repository_factory.html#a77fab4a79881f8cdee299599b72b15ce">Highway.Data.EntityFramework.Factory.RepositoryFactory</a>
+</li>
+<li>Create&lt; TOne, TTwo, TThree &gt;()
+: <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_factory_1_1_repository_factory.html#a1de27f1264d65c2927bdc6dc02329a27">Highway.Data.EntityFramework.Factory.RepositoryFactory</a>
+, <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_factory.html#a52f84ef3732b1f34558d928e02f0f7c4">Highway.Data.Interfaces.IRepositoryFactory</a>
+</li>
+<li>Create&lt; TOne, TTwo, TThree, TFour &gt;()
+: <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_factory.html#a41cfb8f0c6ee57071f92df68c7f5a7b9">Highway.Data.Interfaces.IRepositoryFactory</a>
+, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_factory_1_1_repository_factory.html#a7299e0d5fdaf1ceceaf7fbac1d010816">Highway.Data.EntityFramework.Factory.RepositoryFactory</a>
 </li>
 <li>CreatedBy
 : <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_auditable_entity.html#a0d61b38cdb0d857f95a648d74d47dc4e">Highway.Data.Interfaces.IAuditableEntity</a>
@@ -168,7 +185,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <h3><a class="anchor" id="index_e"></a>- e -</h3><ul>
 <li>EntityFrameworkContext()
-: <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#af9731a0bf0b89baabddd5d1ea3d78912">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>
+: <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#a45502d0390821379b888a6b9e712e8b5">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>
 </li>
 <li>EntityFrameworkRepository()
 : <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository.html#a9f5b6355d4a5054c37bcd19a6a444aca">Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository</a>
@@ -289,12 +306,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>Reload&lt; T &gt;()
 : <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#a8b5557c0e54d1447d2f8a8e68bf4e1f0">Highway.Data.Interfaces.IDataContext</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#afb94c4b4111081a2b1100591f5298db1">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>
+, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#a5a2499b1327d56166ff950578d62d615">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>
 , <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#ac56bd7fbcb297fd6d0deb0edafe057df">Highway.Data.Interfaces.IDataContext</a>
 </li>
 <li>Remove&lt; T &gt;()
 : <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#a36b80fcc6db41fd1036bbc4ea466294b">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>
 , <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#a07a2c7548509a6db53dd3da67ff5125d">Highway.Data.Interfaces.IDataContext</a>
+</li>
+<li>RepositoryFactory()
+: <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_factory_1_1_repository_factory.html#a11fcf7b715d125e390df596a4fcaf9a6">Highway.Data.EntityFramework.Factory.RepositoryFactory</a>
 </li>
 </ul>
 
@@ -315,7 +335,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 28 2012 23:42:19 for Highway Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jul 5 2012 15:25:02 for Highway Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.1
 </small></address>

@@ -2,7 +2,7 @@ var searchData=
 [
   ['entityframeworkauditableinterceptor',['EntityFrameworkAuditableInterceptor',['../class_highway_1_1_data_1_1_entity_framework_1_1_interceptors_1_1_entity_framework_auditable_interceptor.html',1,'Highway::Data::EntityFramework::Interceptors']]],
   ['entityframeworkcontext',['EntityFrameworkContext',['../class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html',1,'Highway::Data::EntityFramework::Contexts']]],
-  ['entityframeworkcontext',['EntityFrameworkContext',['../class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#af9731a0bf0b89baabddd5d1ea3d78912',1,'Highway::Data::EntityFramework::Contexts::EntityFrameworkContext']]],
+  ['entityframeworkcontext',['EntityFrameworkContext',['../class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#a45502d0390821379b888a6b9e712e8b5',1,'Highway::Data::EntityFramework::Contexts::EntityFrameworkContext']]],
   ['entityframeworkrepository',['EntityFrameworkRepository',['../class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository.html',1,'Highway::Data::EntityFramework::Repositories']]],
   ['entityframeworkrepository',['EntityFrameworkRepository',['../class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository.html#a9f5b6355d4a5054c37bcd19a6a444aca',1,'Highway::Data::EntityFramework::Repositories::EntityFrameworkRepository']]],
   ['eventmanager',['EventManager',['../class_highway_1_1_data_1_1_event_management_1_1_event_manager.html',1,'Highway::Data::EventManagement']]],

@@ -71,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Events</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Events</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -113,39 +113,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9f5b6355d4a5054c37bcd19a6a444aca"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository.html#a9f5b6355d4a5054c37bcd19a6a444aca">EntityFrameworkRepository</a> (<a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html">IDataContext</a> context)</td></tr>
 <tr class="memdesc:a9f5b6355d4a5054c37bcd19a6a444aca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a Repository that uses the context provided  <a href="#a9f5b6355d4a5054c37bcd19a6a444aca"></a><br/></td></tr>
 <tr class="memitem:a96b10f64c2c73cdc8c19ceed3f97004d"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository.html#a96b10f64c2c73cdc8c19ceed3f97004d">Get&lt; T &gt;</a> (<a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_scalar_object-g.html">IScalarObject</a>&lt; T &gt; query)</td></tr>
-<tr class="memdesc:a96b10f64c2c73cdc8c19ceed3f97004d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a prebuilt IScalarObject</p>
-<dl class="tparams"><dt>Template Parameters:</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<p>and returns a single instance of </p>
-<dl class="tparams"><dt>Template Parameters:</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
- <a href="#a96b10f64c2c73cdc8c19ceed3f97004d"></a><br/></td></tr>
+<tr class="memdesc:a96b10f64c2c73cdc8c19ceed3f97004d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a prebuilt IScalarObject{T} and returns a single instance of <em>T</em>   <a href="#a96b10f64c2c73cdc8c19ceed3f97004d"></a><br/></td></tr>
 <tr class="memitem:a2cf1765e57f0e5527e2c36888eaf38f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository.html#a2cf1765e57f0e5527e2c36888eaf38f9">Execute</a> (<a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_command_object.html">ICommandObject</a> command)</td></tr>
 <tr class="memdesc:a2cf1765e57f0e5527e2c36888eaf38f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a prebuilt ICommandObject  <a href="#a2cf1765e57f0e5527e2c36888eaf38f9"></a><br/></td></tr>
 <tr class="memitem:af361e5a4bc1f44f9165cc450add06ece"><td class="memItemLeft" align="right" valign="top">IEnumerable&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository.html#af361e5a4bc1f44f9165cc450add06ece">Find&lt; T &gt;</a> (<a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_query-g.html">IQuery</a>&lt; T &gt; query)</td></tr>
-<tr class="memdesc:af361e5a4bc1f44f9165cc450add06ece"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a prebuilt IQuery</p>
-<dl class="tparams"><dt>Template Parameters:</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<p>and returns an IEnumerable</p>
-<dl class="tparams"><dt>Template Parameters:</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
- <a href="#af361e5a4bc1f44f9165cc450add06ece"></a><br/></td></tr>
+<tr class="memdesc:af361e5a4bc1f44f9165cc450add06ece"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a prebuilt IQuery{T} and returns an IEnumerable{T}  <a href="#af361e5a4bc1f44f9165cc450add06ece"></a><br/></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="properties"></a>
 Properties</h2></td></tr>
@@ -247,21 +219,7 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Executes a prebuilt IQuery</p>
-<dl class="tparams"><dt>Template Parameters:</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<p>and returns an IEnumerable</p>
-<dl class="tparams"><dt>Template Parameters:</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-</p>
+<p>Executes a prebuilt IQuery{T} and returns an IEnumerable{T} </p>
 <dl class="tparams"><dt>Template Parameters:</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>The Entity being queried</td></tr>
@@ -274,13 +232,7 @@ Properties</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns:</dt><dd>The IEnumerable<dl class="tparams"><dt>Template Parameters:</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-returned from the query</dd></dl>
+<dl class="section return"><dt>Returns:</dt><dd>The IEnumerable{T} returned from the query</dd></dl>
 
 <p>Implements <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository.html#a18bd55ae31839881dc43cb0ba958086b">Highway.Data.Interfaces.IRepository</a>.</p>
 <div class="typeconstraint">
@@ -315,21 +267,7 @@ returned from the query</dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>Executes a prebuilt IScalarObject</p>
-<dl class="tparams"><dt>Template Parameters:</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<p>and returns a single instance of </p>
-<dl class="tparams"><dt>Template Parameters:</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-</p>
+<p>Executes a prebuilt IScalarObject{T} and returns a single instance of <em>T</em>  </p>
 <dl class="tparams"><dt>Template Parameters:</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>The Entity being queried</td></tr>
@@ -342,13 +280,7 @@ returned from the query</dd></dl>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns:</dt><dd>The instance of <dl class="tparams"><dt>Template Parameters:</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-returned from the query</dd></dl>
+<dl class="section return"><dt>Returns:</dt><dd>The instance of <em>T</em>  returned from the query</dd></dl>
 
 <p>Implements <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository.html#af4256e7e2f82fd545161eeedd323712b">Highway.Data.Interfaces.IRepository</a>.</p>
 
@@ -409,7 +341,7 @@ returned from the query</dd></dl>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 28 2012 23:42:19 for Highway Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jul 6 2012 10:53:23 for Highway Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.1
 </small></address>

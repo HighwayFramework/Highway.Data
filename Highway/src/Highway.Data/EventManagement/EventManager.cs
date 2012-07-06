@@ -23,7 +23,7 @@ namespace Highway.Data.EventManagement
         private readonly List<IInterceptor<PostSaveEventArgs>> _postSaveInterceptors = new List<IInterceptor<PostSaveEventArgs>>();
 
         /// <summary>
-        /// Allows for the Registration of IInterceptor<typeparam name="T"></typeparam> objects that will hook to events in priority order
+        /// Allows for the Registration of <see cref="IInterceptor{T}"/> objects that will hook to events in priority order
         /// </summary>
         /// <param name="interceptor">The interceptor to be registered to an event</param>
         /// <typeparam name="T">The Event Args that the interceptor accepts</typeparam>

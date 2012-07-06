@@ -28,17 +28,17 @@ namespace Highway.Data.EntityFramework.Repositories
         public IEventManager EventManager { get; private set; }
 
         /// <summary>
-        /// Executes a prebuilt IScalarObject<typeparam name="T"></typeparam> and returns a single instance of <typeparam name="T"></typeparam>
+        /// Executes a prebuilt <see cref="IScalarObject{T}"/> and returns a single instance of <typeparamref name="T"/>
         /// </summary>
         /// <typeparam name="T">The Entity being queried</typeparam>
         /// <param name="query">The prebuilt Query Object</param>
-        /// <returns>The instance of <typeparam name="T"></typeparam> returned from the query</returns>
+        /// <returns>The instance of <typeparamref name="T"/> returned from the query</returns>
         public T Get<T>(IScalarObject<T> query)
         {
             return query.Execute(Context);
         }
         /// <summary>
-        /// Executes a prebuilt ICommandObject
+        /// Executes a prebuilt <see cref="ICommandObject"/>
         /// </summary>
         /// <param name="command">The prebuilt command object</param>
         public void Execute(ICommandObject command)
@@ -46,11 +46,11 @@ namespace Highway.Data.EntityFramework.Repositories
             command.Execute(Context);
         }
         /// <summary>
-        /// Executes a prebuilt IQuery<typeparam name="T"></typeparam> and returns an IEnumerable<typeparam name="T"></typeparam>
+        /// Executes a prebuilt <see cref="IQuery{T}"/> and returns an <see cref="IEnumerable{T}"/>
         /// </summary>
         /// <typeparam name="T">The Entity being queried</typeparam>
         /// <param name="query">The prebuilt Query Object</param>
-        /// <returns>The IEnumerable<typeparam name="T"></typeparam> returned from the query</returns>
+        /// <returns>The <see cref="IEnumerable{T}"/> returned from the query</returns>
         public IEnumerable<T> Find<T>(IQuery<T> query) where T : class
         {
             return query.Execute(Context);

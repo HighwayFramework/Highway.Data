@@ -70,6 +70,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="functions.html"><span>All</span></a></li>
       <li><a href="functions_func.html"><span>Functions</span></a></li>
+      <li><a href="functions_vars.html"><span>Variables</span></a></li>
       <li class="current"><a href="functions_prop.html"><span>Properties</span></a></li>
       <li><a href="functions_evnt.html"><span>Events</span></a></li>
     </ul>
@@ -80,7 +81,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Events</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Events</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -94,12 +95,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>Context
 : <a class="el" href="class_highway_1_1_data_1_1_event_management_1_1_event_manager.html#ac5a9cddf17fcb4c3b298b3d50431de2f">Highway.Data.EventManagement.EventManager</a>
 , <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_event_manager.html#aae163759719833dca07513b02efbafa8">Highway.Data.Interfaces.IEventManager</a>
+, <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_query_base.html#aa8ca309734c39e9e78853e2a76c041f1">Highway.Data.QueryObjects.QueryBase</a>
 , <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository.html#a39447e7deb1284fc5e5d9ea7c2c78c63">Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository</a>
 , <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository.html#aadf2e3d1d5b118f2fe6e2b1fc1ae8e77">Highway.Data.Interfaces.IRepository</a>
 </li>
 <li>ContextQuery
-: <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_command.html#a83c9845e7df1f9ff350d05182c23e373">Highway.Data.QueryObjects.Command</a>
-, <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_query-g.html#a68ecc8e5735dee1db60782614427cbbf">Highway.Data.QueryObjects.Query&lt; T &gt;</a>
+: <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_query-g.html#a68ecc8e5735dee1db60782614427cbbf">Highway.Data.QueryObjects.Query&lt; T &gt;</a>
+, <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_scalar-g.html#acb183b773f6c4bb8c9a989c1144095db">Highway.Data.QueryObjects.Scalar&lt; T &gt;</a>
+, <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_command.html#a83c9845e7df1f9ff350d05182c23e373">Highway.Data.QueryObjects.Command</a>
 </li>
 <li>ContinueExecution
 : <a class="el" href="struct_highway_1_1_data_1_1_interceptors_1_1_interceptor_result.html#a6c07e279d13920c2216d8f2902a4c3a0">Highway.Data.Interceptors.InterceptorResult</a>
@@ -111,8 +114,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_auditable_entity.html#a24e61a7fc1bd175a00cb7dd54e44d193">Highway.Data.Interfaces.IAuditableEntity</a>
 </li>
 <li>EventManager
-: <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository.html#a2f76cda20f7e51ce44c11a077194c747">Highway.Data.Interfaces.IRepository</a>
+: <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#a66d20c659a7c50d08705534ad750e1f8">Highway.Data.Interfaces.IDataContext</a>
 , <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository.html#abb629b7ba44c32a78951f64554f52e06">Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository</a>
+, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#a2342a28fa33d6cae0ce58c5f74438e9a">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>
+, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#aefd1b923c2414387cddd0a579608039d">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>
+, <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository.html#a2f76cda20f7e51ce44c11a077194c747">Highway.Data.Interfaces.IRepository</a>
 </li>
 <li>Message
 : <a class="el" href="struct_highway_1_1_data_1_1_interceptors_1_1_interceptor_result.html#a7b315c3700250dd60167d7313241eeff">Highway.Data.Interceptors.InterceptorResult</a>
@@ -131,7 +137,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 5 2012 15:25:02 for Highway Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jul 6 2012 10:53:24 for Highway Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.1
 </small></address>

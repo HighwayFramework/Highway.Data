@@ -29,7 +29,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             container = new WindsorContainer();
             ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(container));
             container.Register(Component.For<IEventManager>().ImplementedBy<EventManager>().LifestyleTransient(),
-                               Component.For<IDataContext>().ImplementedBy<EntityFrameworkTestContext>().DependsOn(new { connectionString = Settings.Default.Connection }).LifestyleTransient(),
+                               Component.For<IDataContext>().ImplementedBy<EntityFrameworkTestContext>().DependsOn(new { connectionString = Settings.Default.Connection, configurations = new []{new TestMappingConfiguration()} }).LifestyleTransient(),
                                Component.For<IMappingConfiguration>().ImplementedBy<TestMappingConfiguration>().LifestyleTransient());
 
         }

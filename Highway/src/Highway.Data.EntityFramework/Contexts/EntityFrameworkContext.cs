@@ -13,6 +13,9 @@ using Highway.Data;
 
 namespace Highway.Data.EntityFramework.Contexts
 {
+    /// <summary>
+    /// A base implementation of the Code First Data Context for Entity Framework
+    /// </summary>
     public class EntityFrameworkContext : DbContext, IObservableDataContext
     {
         private readonly IMappingConfiguration[] _configurations;
@@ -28,21 +31,21 @@ namespace Highway.Data.EntityFramework.Contexts
         }
 
         /// <summary>
-        /// This gives a mockable wrapper around the normal Set<typeparam name="T"></typeparam> method that allows for testablity
+        /// This gives a mockable wrapper around the normal <see cref="DbSet{T}"/> method that allows for testablity
         /// </summary>
         /// <typeparam name="T">The Entity being queried</typeparam>
-        /// <returns>IQueryable<typeparam name="T"></typeparam></returns>
+        /// <returns><see cref="IQueryable{T}"/></returns>
         public IQueryable<T> AsQueryable<T>() where T : class
         {
             return this.Set<T>();
         }
 
         /// <summary>
-        /// Adds the provided instance of <typeparam name="T"></typeparam> to the data context
+        /// Adds the provided instance of <typeparamref name="T"/> to the data context
         /// </summary>
         /// <typeparam name="T">The Entity Type being added</typeparam>
-        /// <param name="item">The <typeparam name="T"></typeparam> you want to add</param>
-        /// <returns>The <typeparam name="T"></typeparam> you added</returns>
+        /// <param name="item">The <typeparamref name="T"/> you want to add</param>
+        /// <returns>The <typeparamref name="T"/> you added</returns>
         public T Add<T>(T item) where T : class
         {
             this.Set<T>().Add(item);
@@ -50,11 +53,11 @@ namespace Highway.Data.EntityFramework.Contexts
         }
 
         /// <summary>
-        /// Removes the provided instance of <typeparam name="T"></typeparam> from the data context
+        /// Removes the provided instance of <typeparamref name="T"/> from the data context
         /// </summary>
         /// <typeparam name="T">The Entity Type being removed</typeparam>
-        /// <param name="item">The <typeparam name="T"></typeparam> you want to remove</param>
-        /// <returns>The <typeparam name="T"></typeparam> you removed</returns>
+        /// <param name="item">The <typeparamref name="T"/> you want to remove</param>
+        /// <returns>The <typeparamref name="T"/> you removed</returns>
         public T Remove<T>(T item) where T : class
         {
             this.Set<T>().Remove(item);
@@ -62,11 +65,11 @@ namespace Highway.Data.EntityFramework.Contexts
         }
 
         /// <summary>
-        /// Updates the provided instance of <typeparam name="T"></typeparam> in the data context
+        /// Updates the provided instance of <typeparamref name="T"/> in the data context
         /// </summary>
         /// <typeparam name="T">The Entity Type being updated</typeparam>
-        /// <param name="item">The <typeparam name="T"></typeparam> you want to update</param>
-        /// <returns>The <typeparam name="T"></typeparam> you updated</returns>
+        /// <param name="item">The <typeparamref name="T"/> you want to update</param>
+        /// <returns>The <typeparamref name="T"/> you updated</returns>
         public T Update<T>(T item) where T : class
         {
             var entry = GetChangeTrackingEntry(item);
@@ -80,11 +83,11 @@ namespace Highway.Data.EntityFramework.Contexts
         }
 
         /// <summary>
-        /// Attaches the provided instance of <typeparam name="T"></typeparam> to the data context
+        /// Attaches the provided instance of <typeparamref name="T"/> to the data context
         /// </summary>
         /// <typeparam name="T">The Entity Type being attached</typeparam>
-        /// <param name="item">The <typeparam name="T"></typeparam> you want to attach</param>
-        /// <returns>The <typeparam name="T"></typeparam> you attached</returns>
+        /// <param name="item">The <typeparamref name="T"/> you want to attach</param>
+        /// <returns>The <typeparamref name="T"/> you attached</returns>
         public T Attach<T>(T item) where T : class
         {
             this.Set<T>().Attach(item);
@@ -92,11 +95,11 @@ namespace Highway.Data.EntityFramework.Contexts
         }
 
         /// <summary>
-        /// Detaches the provided instance of <typeparam name="T"></typeparam> from the data context
+        /// Detaches the provided instance of <typeparamref name="T"/> from the data context
         /// </summary>
         /// <typeparam name="T">The Entity Type being detached</typeparam>
-        /// <param name="item">The <typeparam name="T"></typeparam> you want to detach</param>
-        /// <returns>The <typeparam name="T"></typeparam> you detached</returns>
+        /// <param name="item">The <typeparamref name="T"/> you want to detach</param>
+        /// <returns>The <typeparamref name="T"/> you detached</returns>
         public T Detach<T>(T item) where T : class
         {
             var entry = GetChangeTrackingEntry(item);
@@ -115,11 +118,11 @@ namespace Highway.Data.EntityFramework.Contexts
         }
 
         /// <summary>
-        /// Reloads the provided instance of <typeparam name="T"></typeparam> from the database
+        /// Reloads the provided instance of <typeparamref name="T"/> from the database
         /// </summary>
         /// <typeparam name="T">The Entity Type being reloaded</typeparam>
-        /// <param name="item">The <typeparam name="T"></typeparam> you want to reload</param>
-        /// <returns>The <typeparam name="T"></typeparam> you reloaded</returns>
+        /// <param name="item">The <typeparamref name="T"/> you want to reload</param>
+        /// <returns>The <typeparamref name="T"/> you reloaded</returns>
         public T Reload<T>(T item) where T : class
         {
             var entry = GetChangeTrackingEntry(item);
@@ -132,7 +135,7 @@ namespace Highway.Data.EntityFramework.Contexts
         }
 
         /// <summary>
-        /// Reloads all tracked objects of the type <typeparam name="T"></typeparam>
+        /// Reloads all tracked objects of the type <typeparamref name="T"/>
         /// </summary>
         /// <typeparam name="T">The type of objects to reload</typeparam>
         public void Reload<T>() where T : class
@@ -165,13 +168,13 @@ namespace Highway.Data.EntityFramework.Contexts
         }
 
         /// <summary>
-        /// Executes a SQL command and tries to map the returned datasets into an IEnumerable<typeparam name="T"></typeparam>
+        /// Executes a SQL command and tries to map the returned datasets into an <see cref="IEnumerable{T}"/>
         /// The results should have the same column names as the Entity Type has properties
         /// </summary>
         /// <typeparam name="T">The Entity Type that the return should be mapped to</typeparam>
         /// <param name="sql">The Sql Statement</param>
         /// <param name="dbParams">A List of Database Parameters for the Query</param>
-        /// <returns>An IEnumerable<typeparam name="T"></typeparam> from the query return</returns>
+        /// <returns>An <see cref="IEnumerable{T}"/> from the query return</returns>
         public IEnumerable<T> ExecuteSqlQuery<T>(string sql, params DbParameter[] dbParams)
         {
             return base.Database.SqlQuery<T>(sql, dbParams);
@@ -200,6 +203,9 @@ namespace Highway.Data.EntityFramework.Contexts
         }
 
         private IEventManager _eventManager;
+        /// <summary>
+        /// The reference to EventManager that allows for ordered event handling and registration
+        /// </summary>
         public IEventManager EventManager
         {
             get { return _eventManager; }
@@ -210,9 +216,31 @@ namespace Highway.Data.EntityFramework.Contexts
             }
         }
 
+        /// <summary>
+        /// The event fired just before the commit of the ORM
+        /// </summary>
         public event EventHandler<PreSaveEventArgs> PreSave;
+
+        /// <summary>
+        /// The event fired just after the commit of the ORM
+        /// </summary>
         public event EventHandler<PostSaveEventArgs> PostSave;
 
+        /// <summary>
+        /// This method is called when the model for a derived context has been initialized, but
+        ///                 before the model has been locked down and used to initialize the context.  The default
+        ///                 implementation of this method takes the <see cref="Highway.Data.EntityFramework.Mappings.IMappingConfiguration"/> array passed in on construction and applies them. 
+        /// If no configuration mappings were passed it it does nothing.
+        /// </summary>
+        /// <remarks>
+        /// Typically, this method is called only once when the first instance of a derived context
+        ///                 is created.  The model for that context is then cached and is for all further instances of
+        ///                 the context in the app domain.  This caching can be disabled by setting the ModelCaching
+        ///                 property on the given ModelBuidler, but note that this can seriously degrade performance.
+        ///                 More control over caching is provided through use of the DbModelBuilder and DbContextFactory
+        ///                 classes directly.
+        /// </remarks>
+        /// <param name="modelBuilder">The builder that defines the model for the context being created.</param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             foreach (var mappingConfiguration in _configurations)

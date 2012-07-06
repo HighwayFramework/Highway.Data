@@ -16,18 +16,18 @@ Inheritance diagram for Highway.\-Data.\-Interfaces.\-I\-Repository\-:\begin{fig
 \begin{DoxyCompactItemize}
 \item 
 I\-Enumerable$<$ T $>$ \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_a18bd55ae31839881dc43cb0ba958086b}{Find$<$ T $>$} (\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_query-g}{I\-Query}$<$ T $>$ query)
-\begin{DoxyCompactList}\small\item\em \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Executes a prebuilt I\-Query\{\-T\} and returns an I\-Enumerable\{\-T\} \end{DoxyCompactList}\item 
 T \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_af4256e7e2f82fd545161eeedd323712b}{Get$<$ T $>$} (\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_scalar_object-g}{I\-Scalar\-Object}$<$ T $>$ query)
-\begin{DoxyCompactList}\small\item\em \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Executes a prebuilt I\-Scalar\-Object\{\-T\} and returns a single instance of {\itshape T}  \end{DoxyCompactList}\item 
 void \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_a2f2f0b12b547d9d5eeaf18d013b7c008}{Execute} (\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_command_object}{I\-Command\-Object} command)
-\begin{DoxyCompactList}\small\item\em \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Executes a prebuilt \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_command_object}{I\-Command\-Object} \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Properties}
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context}{I\-Data\-Context} \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_aadf2e3d1d5b118f2fe6e2b1fc1ae8e77}{Context}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
-\begin{DoxyCompactList}\small\item\em \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Reference to the Context the repository is using \end{DoxyCompactList}\item 
 \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_event_manager}{I\-Event\-Manager} \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_a2f76cda20f7e51ce44c11a077194c747}{Event\-Manager}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
-\begin{DoxyCompactList}\small\item\em \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Reference to the Event\-Manager the repository is using \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -45,11 +45,11 @@ The interface used to interact with the O\-R\-M Specific Implementations
 )}}\label{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_a2f2f0b12b547d9d5eeaf18d013b7c008}
 
 
-
+Executes a prebuilt \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_command_object}{I\-Command\-Object} 
 
 
 \begin{DoxyParams}{Parameters}
-{\em command} & \\
+{\em command} & The prebuilt command object\\
 \hline
 \end{DoxyParams}
 
@@ -65,20 +65,20 @@ Implemented in \hyperlink{class_highway_1_1_data_1_1_entity_framework_1_1_reposi
 )}}\label{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_a18bd55ae31839881dc43cb0ba958086b}
 
 
+Executes a prebuilt I\-Query\{\-T\} and returns an I\-Enumerable\{\-T\} 
 
-
-
-\begin{DoxyParams}{Parameters}
-{\em query} & \\
-\hline
-\end{DoxyParams}
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em T} & \\
+{\em T} & The Entity being queried\\
 \hline
 \end{DoxyTemplParams}
-\begin{DoxyReturn}{Returns}
 
+\begin{DoxyParams}{Parameters}
+{\em query} & The prebuilt Query Object\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The I\-Enumerable\{\-T\} returned from the query
 \end{DoxyReturn}
 
 
@@ -97,20 +97,20 @@ Implemented in \hyperlink{class_highway_1_1_data_1_1_entity_framework_1_1_reposi
 )}}\label{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_af4256e7e2f82fd545161eeedd323712b}
 
 
+Executes a prebuilt I\-Scalar\-Object\{\-T\} and returns a single instance of {\itshape T}  
 
-
-
-\begin{DoxyParams}{Parameters}
-{\em query} & \\
-\hline
-\end{DoxyParams}
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em T} & \\
+{\em T} & The Entity being queried\\
 \hline
 \end{DoxyTemplParams}
-\begin{DoxyReturn}{Returns}
 
+\begin{DoxyParams}{Parameters}
+{\em query} & The prebuilt Query Object\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The instance of {\itshape T}  returned from the query
 \end{DoxyReturn}
 
 
@@ -124,7 +124,7 @@ Implemented in \hyperlink{class_highway_1_1_data_1_1_entity_framework_1_1_reposi
 \subsubsection[{Context}]{\setlength{\rightskip}{0pt plus 5cm}{\bf I\-Data\-Context} Highway.\-Data.\-Interfaces.\-I\-Repository.\-Context\hspace{0.3cm}{\ttfamily [get]}}}\label{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_aadf2e3d1d5b118f2fe6e2b1fc1ae8e77}
 
 
-
+Reference to the Context the repository is using 
 
 
 
@@ -135,7 +135,7 @@ Implemented in \hyperlink{class_highway_1_1_data_1_1_entity_framework_1_1_reposi
 \subsubsection[{Event\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}{\bf I\-Event\-Manager} Highway.\-Data.\-Interfaces.\-I\-Repository.\-Event\-Manager\hspace{0.3cm}{\ttfamily [get]}}}\label{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_a2f76cda20f7e51ce44c11a077194c747}
 
 
-
+Reference to the Event\-Manager the repository is using 
 
 
 

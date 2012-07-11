@@ -11,7 +11,7 @@ namespace Highway.Data.EntityFramework.Interceptors
     /// <summary>
     /// An interceptor that operates pre-save to add audit information to the records being committed that implement the <see cref="Highway.Data.Interfaces.IAuditableEntity"/> interface
     /// </summary>
-    public class EntityFrameworkAuditableInterceptor : IInterceptor<PreSaveEventArgs>
+    public class AuditableInterceptor : IInterceptor<PreSaveEventArgs>
     {
         private IUserNameService _userNameService;
 
@@ -20,7 +20,7 @@ namespace Highway.Data.EntityFramework.Interceptors
         /// </summary>
         /// <param name="userNameService">Application Service that provides current user name</param>
         /// <param name="priority">The order in the priority stack that the interceptor should operate on</param>
-        public EntityFrameworkAuditableInterceptor(IUserNameService userNameService, int priority = 0)
+        public AuditableInterceptor(IUserNameService userNameService, int priority = 0)
         {
             _userNameService = userNameService;
         }

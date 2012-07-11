@@ -3,12 +3,12 @@ using System.Data.Entity;
 using System.Linq;
 using Highway.Data.EntityFramework.Contexts;
 using Highway.Data.EntityFramework.Mappings;
+using Highway.Data.NHibernate.Tests.Properties;
 using Highway.Data.Tests.TestDomain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Highway.Data.EntityFramework.Tests.Properties;
 using Rhino.Mocks;
 
-namespace Highway.Data.EntityFramework.Tests.UnitTests
+namespace Highway.Data.NHibernate.Tests.UnitTests
 {
     [TestClass]
     public class Given_A_Context_Without_Mappings
@@ -22,7 +22,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             mapping.Expect(x => x.ConfigureModelBuilder(Arg<DbModelBuilder>.Is.Anything));
 
             //Act
-            var target = new EntityFrameworkContext(Settings.Default.Connection, mappings);
+            var target = new Context(Settings.Default.Connection, mappings);
             try
             {
                 target.Set<Foo>().ToList();

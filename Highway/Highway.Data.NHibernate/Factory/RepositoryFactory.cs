@@ -1,28 +1,25 @@
 ﻿using System;
-using Highway.Data.EntityFramework.Contexts;
-using Highway.Data.EntityFramework.Mappings;
-using Highway.Data.EntityFramework.Repositories;
 using Highway.Data.Interfaces;
+using Highway.Data.NHibernate.Contexts;
+using Highway.Data.NHibernate.Repositories;
+using NHibernate;
 
-namespace Highway.Data.EntityFramework.Factory
+namespace Highway.Data.NHibernate.Factory
 {
     /// <summary>
-    /// The Entity Framework Specific Repository Implementation
+    /// The nHibernate Specific Repository Implementation
     /// </summary>
     public class RepositoryFactory : IRepositoryFactory
     {
-        private readonly string _connectionString;
-        private readonly Func<Type, IMappingConfiguration> _mappingsDelegate;
+        private readonly ISessionFactory _sessionFactory;
 
         /// <summary>
         /// Creates a repository factory with a connection string to the database being talked to
         /// </summary>
         /// <param name="connectionString">The SQL Connection string for the context</param>
-        /// <param name="mappingsDelegate"></param>
-        public RepositoryFactory(string connectionString, Func<Type,IMappingConfiguration> mappingsDelegate)
+        public RepositoryFactory(ISessionFactory sessionFactory )
         {
-            _connectionString = connectionString;
-            _mappingsDelegate = mappingsDelegate;
+            _sessionFactory = sessionFactory;
         }
 
         /// <summary>
@@ -96,14 +93,9 @@ namespace Highway.Data.EntityFramework.Factory
             return CreateRepository(mappings);
         }
 
-        private Repository CreateRepository(IMappingConfiguration[] mappings)
+        private Repository CreateRepository()
         {
-            return new Repository(new Context(_connectionString, mappings));
-        }
-
-        private IMappingConfiguration GetMapping(Type type)
-        {
-            return _mappingsDelegate(type);
+            return new Repository(new Context(_sessionFactory.GetCurrentSession()));
         }
     }
 }

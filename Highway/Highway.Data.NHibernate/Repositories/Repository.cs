@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
 using Highway.Data.Interfaces;
 
-namespace Highway.Data.EntityFramework.Repositories
+namespace Highway.Data.NHibernate.Repositories
 {
     /// <summary>
     /// A Entity Framework Specific repository implementation that uses Specification pattern to execute Queries in a controlled fashion.
     /// </summary>
-    public class EntityFrameworkRepository : IRepository
+    public class Repository : IRepository
     {
         /// <summary>
         /// Creates a Repository that uses the context provided
         /// </summary>
         /// <param name="context">The data context that this repository uses</param>
-        public EntityFrameworkRepository(IDataContext context)
+        public Repository(IDataContext context)
         {
             Context = context;
         }

@@ -5,18 +5,18 @@ using Castle.Windsor;
 using CommonServiceLocator.WindsorAdapter;
 using Highway.Data.EntityFramework.Mappings;
 using Highway.Data.EntityFramework.Repositories;
-using Highway.Data.EntityFramework.Tests.Mapping;
 using Highway.Data.EventManagement;
 using Highway.Data.Interfaces;
+using Highway.Data.NHibernate.Tests.Mapping;
+using Highway.Data.NHibernate.Tests.Properties;
 using Highway.Data.Tests.TestDomain;
 using Highway.Data.Tests.TestQueries;
 using Highway.Test.MSTest;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Highway.Data.EntityFramework.Tests.Properties;
 using Rhino.Mocks;
 
-namespace Highway.Data.EntityFramework.Tests.UnitTests
+namespace Highway.Data.NHibernate.Tests.UnitTests
 {
     [TestClass]
     public class Given_A_Generic_Repository
@@ -24,12 +24,12 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
         private static IWindsorContainer container;
 
         [ClassInitialize]
-        public static void SetupClass(TestContext context)
+        public static void SetupClass(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext context)
         {
             container = new WindsorContainer();
             ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(container));
             container.Register(Component.For<IEventManager>().ImplementedBy<EventManager>().LifestyleTransient(),
-                               Component.For<IDataContext>().ImplementedBy<EntityFrameworkTestContext>().DependsOn(new { connectionString = Settings.Default.Connection, configurations = new []{new TestMappingConfiguration()} }).LifestyleTransient(),
+                               Component.For<IDataContext>().ImplementedBy<TestContext>().DependsOn(new { connectionString = Settings.Default.Connection, configurations = new []{new TestMappingConfiguration()} }).LifestyleTransient(),
                                Component.For<IMappingConfiguration>().ImplementedBy<TestMappingConfiguration>().LifestyleTransient());
 
         }
@@ -40,7 +40,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             var context = container.Resolve<IDataContext>();
 
             //Act
-            var repository = new EntityFrameworkRepository(context);
+            var repository = new Repository(context);
                         
             //Assert
             repository.Context.ShouldBeSame(context);
@@ -56,7 +56,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
                     {
                         new Foo() {Id = 1, Name = "Test"}
                     }.AsQueryable());
-            var target = new EntityFrameworkRepository(context);
+            var target = new Repository(context);
             
             //Act
             var result = target.Find(new FindFoo());
@@ -79,7 +79,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
                     {
                         new Foo() {Id = 1, Name = "Test"}
                     }.AsQueryable());
-            var target = new EntityFrameworkRepository(context);
+            var target = new Repository(context);
 
             //Act
             var result = target.Get(new ScalarIntTestQuery());
@@ -99,7 +99,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
                     {
                         new Foo() {Id = 1, Name = "Test"}
                     }.AsQueryable());
-            var target = new EntityFrameworkRepository(context);
+            var target = new Repository(context);
 
             //Act
             var result = target.Get(new ScalarIntTestQuery());
@@ -120,7 +120,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
                     {
                         foo
                     }.AsQueryable());
-            var target = new EntityFrameworkRepository(context);
+            var target = new Repository(context);
 
             //Act
             var result = target.Find(new FindFoo()).FirstOrDefault();
@@ -140,7 +140,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
                     {
                         new Foo() {Id = 1, Name = "Test"}
                     }.AsQueryable());
-            var target = new EntityFrameworkRepository(context);
+            var target = new Repository(context);
 
             //Act
             var testCommand = new TestCommand();

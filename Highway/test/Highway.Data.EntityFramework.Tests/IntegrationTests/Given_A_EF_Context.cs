@@ -5,32 +5,33 @@ using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using CommonServiceLocator.WindsorAdapter;
 using Highway.Data.EntityFramework.Mappings;
-using Highway.Data.EntityFramework.Tests.Initializer;
-using Highway.Data.EntityFramework.Tests.Mapping;
-using Highway.Data.EntityFramework.Tests.UnitTests;
 using Highway.Data.EventManagement;
 using Highway.Data.Interfaces;
+using Highway.Data.NHibernate.Tests.Initializer;
+using Highway.Data.NHibernate.Tests.Mapping;
+using Highway.Data.NHibernate.Tests.Properties;
+using Highway.Data.NHibernate.Tests.UnitTests;
 using Highway.Data.Tests.TestDomain;
 using Highway.Test.MSTest;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Highway.Data.EntityFramework.Tests.Properties;
+using TestContext = Highway.Data.NHibernate.Tests.UnitTests.TestContext;
 
-namespace Highway.Data.EntityFramework.Tests.IntegrationTests
+namespace Highway.Data.NHibernate.Tests.IntegrationTests
 {
     [TestClass]
     public class Given_A_EF_Context
     {
-        private EntityFrameworkTestContext context;
+        private TestContext context;
         private static IWindsorContainer container;
 
         [ClassInitialize]
-        public static void SetupClass(TestContext context)
+        public static void SetupClass(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext context)
         {
             container = new WindsorContainer();
             ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(container));
             container.Register(Component.For<IEventManager>().ImplementedBy<EventManager>().LifestyleTransient(),
-                               Component.For<EntityFrameworkTestContext>().ImplementedBy<EntityFrameworkTestContext>().DependsOn(new { connectionString = Settings.Default.Connection }).LifestyleTransient(),
+                               Component.For<TestContext>().ImplementedBy<TestContext>().DependsOn(new { connectionString = Settings.Default.Connection }).LifestyleTransient(),
                                Component.For<IMappingConfiguration>().ImplementedBy<TestMappingConfiguration>().LifestyleTransient());
 
         }
@@ -39,7 +40,7 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
         public void Setup()
         {
             Database.SetInitializer(new ForceDeleteInitializer(new EntityFrameworkIntializer()));
-            context = container.Resolve<EntityFrameworkTestContext>();
+            context = container.Resolve<TestContext>();
         }
 
 

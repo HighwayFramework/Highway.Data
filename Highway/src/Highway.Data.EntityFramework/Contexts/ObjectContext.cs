@@ -2,42 +2,59 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
+using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Linq;
-using Highway.Data.EntityFramework.Mappings;
 using Highway.Data.Interceptors.Events;
 using Highway.Data.Interfaces;
-using Highway.Data;
 
 namespace Highway.Data.EntityFramework.Contexts
 {
     /// <summary>
-    /// A base implementation of the Code First Data Context for Entity Framework
+    /// The default implementation of a Object context for the database first approach to Entity Framework
     /// </summary>
-    public class EntityFrameworkContext : DbContext, IObservableDataContext
+    public class ObjectContext : System.Data.Objects.ObjectContext, IObservableDataContext
     {
-        private readonly IMappingConfiguration[] _configurations;
-
         /// <summary>
-        /// Constructs a context
-        /// </summary>
-        /// <param name="connectionString">The standard SQL connection string for the Database</param>
-        /// <param name="configurations">The Mapping Configuration that will determine how the tables and objects interact</param>
-        public EntityFrameworkContext(string connectionString, IMappingConfiguration[] configurations) : base(connectionString)
+        /// Creates a database or model first context        /// </summary>
+        /// <param name="connection"></param>
+        public ObjectContext(EntityConnection connection) : base(connection)
         {
-            _configurations = configurations;
         }
 
         /// <summary>
-        /// This gives a mockable wrapper around the normal <see cref="DbSet{T}"/> method that allows for testablity
+        /// Creates a database or model first context
+        /// </summary>
+        /// <param name="connectionString"></param>
+        public ObjectContext(string connectionString) : base(connectionString)
+        {
+        }
+        /// <summary>
+        /// Creates a database or model first context
+        /// </summary>
+        /// <param name="connectionString"></param>
+        /// <param name="defaultContainerName"></param>
+        protected ObjectContext(string connectionString, string defaultContainerName) : base(connectionString, defaultContainerName)
+        {
+        }
+
+        /// <summary>
+        /// Creates a database or model first context
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="defaultContainerName"></param>
+        protected ObjectContext(EntityConnection connection, string defaultContainerName) : base(connection, defaultContainerName)
+        {
+        }
+
+        /// <summary>
+        /// This gives a mockable wrapper around the normal Set<typeparamref name="T"/> method that allows for testablity
         /// </summary>
         /// <typeparam name="T">The Entity being queried</typeparam>
         /// <returns><see cref="IQueryable{T}"/></returns>
         public IQueryable<T> AsQueryable<T>() where T : class
         {
-            return this.Set<T>();
+            return this.CreateObjectSet<T>();
         }
 
         /// <summary>
@@ -48,7 +65,7 @@ namespace Highway.Data.EntityFramework.Contexts
         /// <returns>The <typeparamref name="T"/> you added</returns>
         public T Add<T>(T item) where T : class
         {
-            this.Set<T>().Add(item);
+            this.CreateObjectSet<T>().AddObject(item);
             return item;
         }
 
@@ -60,7 +77,7 @@ namespace Highway.Data.EntityFramework.Contexts
         /// <returns>The <typeparamref name="T"/> you removed</returns>
         public T Remove<T>(T item) where T : class
         {
-            this.Set<T>().Remove(item);
+            this.DeleteObject(item);
             return item;
         }
 
@@ -72,13 +89,17 @@ namespace Highway.Data.EntityFramework.Contexts
         /// <returns>The <typeparamref name="T"/> you updated</returns>
         public T Update<T>(T item) where T : class
         {
-            var entry = GetChangeTrackingEntry(item);
-            if (entry == null)
+            var entry = this.ObjectStateManager.GetObjectStateEntry(item);
+            if (entry != null)
             {
-                throw new InvalidOperationException(
-                    "Cannot Update an object that is not attacched to the current Entity Framework data context");
+                entry.ApplyCurrentValues(item);
             }
-            entry.State = EntityState.Modified;
+            else
+            {
+                this.Attach(item);
+                entry = this.ObjectStateManager.GetObjectStateEntry(item);
+                entry.SetModified();
+            }
             return item;
         }
 
@@ -90,7 +111,7 @@ namespace Highway.Data.EntityFramework.Contexts
         /// <returns>The <typeparamref name="T"/> you attached</returns>
         public T Attach<T>(T item) where T : class
         {
-            this.Set<T>().Attach(item);
+            this.CreateObjectSet<T>().Attach(item);
             return item;
         }
 
@@ -102,19 +123,8 @@ namespace Highway.Data.EntityFramework.Contexts
         /// <returns>The <typeparamref name="T"/> you detached</returns>
         public T Detach<T>(T item) where T : class
         {
-            var entry = GetChangeTrackingEntry(item);
-            if (entry == null)
-            {
-                throw new InvalidOperationException("Cannot detach an object that is not attached to the current context.");
-            }
-            entry.State = EntityState.Detached;
+            this.CreateObjectSet<T>().Detach(item);
             return item;
-        }
-
-        private DbEntityEntry<T> GetChangeTrackingEntry<T>(T item) where T : class
-        {
-            var entry = base.Entry(item);
-            return entry;
         }
 
         /// <summary>
@@ -125,12 +135,11 @@ namespace Highway.Data.EntityFramework.Contexts
         /// <returns>The <typeparamref name="T"/> you reloaded</returns>
         public T Reload<T>(T item) where T : class
         {
-            var entry = GetChangeTrackingEntry(item);
-            if(entry == null)
+            var entry = this.ObjectStateManager.GetObjectStateEntry(item);
+            if (entry != null)
             {
-                throw new InvalidOperationException("You cannot reload an objecct that is not in the current Entity Framework datya context");
+                this.Refresh(RefreshMode.StoreWins, item);
             }
-            entry.Reload();
             return item;
         }
 
@@ -140,17 +149,22 @@ namespace Highway.Data.EntityFramework.Contexts
         /// <typeparam name="T">The type of objects to reload</typeparam>
         public void Reload<T>() where T : class
         {
-            var entries = base.ChangeTracker.Entries<T>();
-            entries.Each(x => x.Reload());
+            var entities = this.ObjectStateManager
+                .GetObjectStateEntries(EntityState.Modified | EntityState.Unchanged)
+                .Select(x => x.Entity);
+            if (entities.Any())
+            {
+                this.Refresh(RefreshMode.StoreWins, entities);
+            }
         }
-        
+
         /// <summary>
         /// Commits all currently tracked entity changes
         /// </summary>
         /// <returns>the number of rows affected</returns>
         public int Commit()
         {
-            base.ChangeTracker.DetectChanges();
+            base.DetectChanges();
             InvokePreSave();
             var result = base.SaveChanges();
             InvokePostSave();
@@ -164,7 +178,7 @@ namespace Highway.Data.EntityFramework.Contexts
 
         private void InvokePreSave()
         {
-            if (PreSave != null) PreSave(this, new PreSaveEventArgs(){});
+            if (PreSave != null) PreSave(this, new PreSaveEventArgs());
         }
 
         /// <summary>
@@ -177,7 +191,8 @@ namespace Highway.Data.EntityFramework.Contexts
         /// <returns>An <see cref="IEnumerable{T}"/> from the query return</returns>
         public IEnumerable<T> ExecuteSqlQuery<T>(string sql, params DbParameter[] dbParams)
         {
-            return base.Database.SqlQuery<T>(sql, dbParams);
+            var objectParameters = dbParams.Select(x => new ObjectParameter(x.ParameterName, x.Value)).ToArray();
+            return this.CreateQuery<T>(sql, objectParameters);
         }
 
         /// <summary>
@@ -188,18 +203,7 @@ namespace Highway.Data.EntityFramework.Contexts
         /// <returns>The rows affected</returns>
         public int ExecuteSqlCommand(string sql, params DbParameter[] dbParams)
         {
-            return base.Database.ExecuteSqlCommand(sql, dbParams);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="procedureName"></param>
-        /// <param name="dbParams"></param>
-        /// <returns></returns>
-        public int ExecuteFunction(string procedureName, params ObjectParameter[] dbParams)
-        {
-            return base.Database.SqlQuery<int>(procedureName, dbParams).FirstOrDefault();
+            return this.ExecuteSqlQuery<int>(sql, dbParams).FirstOrDefault();
         }
 
         private IEventManager _eventManager;
@@ -209,8 +213,8 @@ namespace Highway.Data.EntityFramework.Contexts
         public IEventManager EventManager
         {
             get { return _eventManager; }
-            set 
-            { 
+            set
+            {
                 _eventManager = value;
                 _eventManager.Context = this;
             }
@@ -225,29 +229,5 @@ namespace Highway.Data.EntityFramework.Contexts
         /// The event fired just after the commit of the ORM
         /// </summary>
         public event EventHandler<PostSaveEventArgs> PostSave;
-
-        /// <summary>
-        /// This method is called when the model for a derived context has been initialized, but
-        ///                 before the model has been locked down and used to initialize the context.  The default
-        ///                 implementation of this method takes the <see cref="Highway.Data.EntityFramework.Mappings.IMappingConfiguration"/> array passed in on construction and applies them. 
-        /// If no configuration mappings were passed it it does nothing.
-        /// </summary>
-        /// <remarks>
-        /// Typically, this method is called only once when the first instance of a derived context
-        ///                 is created.  The model for that context is then cached and is for all further instances of
-        ///                 the context in the app domain.  This caching can be disabled by setting the ModelCaching
-        ///                 property on the given ModelBuidler, but note that this can seriously degrade performance.
-        ///                 More control over caching is provided through use of the DbModelBuilder and DbContextFactory
-        ///                 classes directly.
-        /// </remarks>
-        /// <param name="modelBuilder">The builder that defines the model for the context being created.</param>
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            foreach (var mappingConfiguration in _configurations)
-            {
-                mappingConfiguration.ConfigureModelBuilder(modelBuilder);  
-            }
-            base.OnModelCreating(modelBuilder);
-        }
     }
 }

@@ -8,35 +8,35 @@ namespace Highway.Data.Interfaces
     public interface IRepository
     {
         /// <summary>
-        /// 
+        /// Reference to the Context the repository is using
         /// </summary>
         IDataContext Context { get; }
 
         /// <summary>
-        /// 
+        /// Reference to the EventManager the repository is using
         /// </summary>
         IEventManager EventManager { get; }
 
         /// <summary>
-        /// 
+        /// Executes a prebuilt <see cref="IQuery{T}"/> and returns an <see cref="IEnumerable{T}"/>
         /// </summary>
-        /// <param name="query"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+        /// <typeparam name="T">The Entity being queried</typeparam>
+        /// <param name="query">The prebuilt Query Object</param>
+        /// <returns>The <see cref="IEnumerable{T}"/> returned from the query</returns>
         IEnumerable<T> Find<T>(IQuery<T> query) where T : class;
 
         /// <summary>
-        /// 
+        /// Executes a prebuilt <see cref="IScalarObject{T}"/> and returns a single instance of <typeparamref name="T"/>
         /// </summary>
-        /// <param name="query"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+        /// <typeparam name="T">The Entity being queried</typeparam>
+        /// <param name="query">The prebuilt Query Object</param>
+        /// <returns>The instance of <typeparamref name="T"/> returned from the query</returns>
         T Get<T>(IScalarObject<T> query);
 
         /// <summary>
-        /// 
+        /// Executes a prebuilt <see cref="ICommandObject"/>
         /// </summary>
-        /// <param name="command"></param>
+        /// <param name="command">The prebuilt command object</param>
         void Execute(ICommandObject command);
     }
 }

@@ -1,6 +1,11 @@
 \hypertarget{class_highway_1_1_data_1_1_query_objects_1_1_query_base}{\section{Highway.\-Data.\-Query\-Objects.\-Query\-Base Class Reference}
 \label{class_highway_1_1_data_1_1_query_objects_1_1_query_base}\index{Highway.\-Data.\-Query\-Objects.\-Query\-Base@{Highway.\-Data.\-Query\-Objects.\-Query\-Base}}
 }
+
+
+The base query that allows for appending expressions, query extensions, and eventing  
+
+
 Inheritance diagram for Highway.\-Data.\-Query\-Objects.\-Query\-Base\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -15,22 +20,19 @@ void \hyperlink{class_highway_1_1_data_1_1_query_objects_1_1_query_base_ace7c9da
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{class_highway_1_1_data_1_1_query_objects_1_1_query_base_a2abee86dc5bd2bfa2463c343e7574dfb}{void {\bfseries Check\-Context\-And\-Query} (object query)}\label{class_highway_1_1_data_1_1_query_objects_1_1_query_base_a2abee86dc5bd2bfa2463c343e7574dfb}
-
-\end{DoxyCompactItemize}
+void \hyperlink{class_highway_1_1_data_1_1_query_objects_1_1_query_base_a2abee86dc5bd2bfa2463c343e7574dfb}{Check\-Context\-And\-Query} (object query)
+\begin{DoxyCompactList}\small\item\em Checks the context and the \hyperlink{class_highway_1_1_data_1_1_query_objects_1_1_query-g}{Query} for null \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{class_highway_1_1_data_1_1_query_objects_1_1_query_base_a27dce07609e00f8553b79790cc8a9d1d}{List$<$ Tuple$<$ Method\-Info, \\*
-Expression\mbox{[}$\,$\mbox{]}$>$ $>$ {\bfseries \-\_\-expression\-List} = new List$<$Tuple$<$Method\-Info, Expression\mbox{[}$\,$\mbox{]}$>$$>$()}\label{class_highway_1_1_data_1_1_query_objects_1_1_query_base_a27dce07609e00f8553b79790cc8a9d1d}
-
-\end{DoxyCompactItemize}
+List$<$ Tuple$<$ Method\-Info, \\*
+Expression\mbox{[}$\,$\mbox{]}$>$ $>$ \hyperlink{class_highway_1_1_data_1_1_query_objects_1_1_query_base_a22b740c6d5ff1bfc7d5fd96f26c751b8}{Expression\-List} = new List$<$Tuple$<$Method\-Info, Expression\mbox{[}$\,$\mbox{]}$>$$>$()
+\begin{DoxyCompactList}\small\item\em Holds the expressions to be appended \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Properties}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{class_highway_1_1_data_1_1_query_objects_1_1_query_base_aa8ca309734c39e9e78853e2a76c041f1}{\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context}{I\-Data\-Context} {\bfseries Context}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}}\label{class_highway_1_1_data_1_1_query_objects_1_1_query_base_aa8ca309734c39e9e78853e2a76c041f1}
-
-\end{DoxyCompactItemize}
+\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context}{I\-Data\-Context} \hyperlink{class_highway_1_1_data_1_1_query_objects_1_1_query_base_aa8ca309734c39e9e78853e2a76c041f1}{Context}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The reference to the I\-Data\-Context that gives data connection \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Events}
 \begin{DoxyCompactItemize}
 \item 
@@ -38,6 +40,11 @@ Event\-Handler$<$ \hyperlink{class_highway_1_1_data_1_1_interceptors_1_1_events_
 \begin{DoxyCompactList}\small\item\em The event fired just before the query goes to the database \end{DoxyCompactList}\item 
 Event\-Handler$<$ \hyperlink{class_highway_1_1_data_1_1_interceptors_1_1_events_1_1_post_query_event_args}{Post\-Query\-Event\-Args} $>$ \hyperlink{class_highway_1_1_data_1_1_query_objects_1_1_query_base_a75da4f1ac849eac015645365f982a9ff}{Post\-Query}
 \begin{DoxyCompactList}\small\item\em The event fire just after the data is translated into objects but before the data is returned. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The base query that allows for appending expressions, query extensions, and eventing 
+
 
 
 \subsection{Member Function Documentation}
@@ -66,6 +73,42 @@ Adds a method to the expression in the query object
 
 
 Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_extendable_query_abf9d0846c2d2ca8542b2f685f6845998}{Highway.\-Data.\-Interfaces.\-I\-Extendable\-Query}.
+
+\hypertarget{class_highway_1_1_data_1_1_query_objects_1_1_query_base_a2abee86dc5bd2bfa2463c343e7574dfb}{\index{Highway\-::\-Data\-::\-Query\-Objects\-::\-Query\-Base@{Highway\-::\-Data\-::\-Query\-Objects\-::\-Query\-Base}!Check\-Context\-And\-Query@{Check\-Context\-And\-Query}}
+\index{Check\-Context\-And\-Query@{Check\-Context\-And\-Query}!Highway::Data::QueryObjects::QueryBase@{Highway\-::\-Data\-::\-Query\-Objects\-::\-Query\-Base}}
+\subsubsection[{Check\-Context\-And\-Query}]{\setlength{\rightskip}{0pt plus 5cm}void Highway.\-Data.\-Query\-Objects.\-Query\-Base.\-Check\-Context\-And\-Query (
+\begin{DoxyParamCaption}
+\item[{object}]{query}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}}\label{class_highway_1_1_data_1_1_query_objects_1_1_query_base_a2abee86dc5bd2bfa2463c343e7574dfb}
+
+
+Checks the context and the \hyperlink{class_highway_1_1_data_1_1_query_objects_1_1_query-g}{Query} for null 
+
+
+\begin{DoxyParams}{Parameters}
+{\em query} & The query to be executed\\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_highway_1_1_data_1_1_query_objects_1_1_query_base_a22b740c6d5ff1bfc7d5fd96f26c751b8}{\index{Highway\-::\-Data\-::\-Query\-Objects\-::\-Query\-Base@{Highway\-::\-Data\-::\-Query\-Objects\-::\-Query\-Base}!Expression\-List@{Expression\-List}}
+\index{Expression\-List@{Expression\-List}!Highway::Data::QueryObjects::QueryBase@{Highway\-::\-Data\-::\-Query\-Objects\-::\-Query\-Base}}
+\subsubsection[{Expression\-List}]{\setlength{\rightskip}{0pt plus 5cm}List$<$Tuple$<$Method\-Info, Expression\mbox{[}$\,$\mbox{]}$>$ $>$ Highway.\-Data.\-Query\-Objects.\-Query\-Base.\-Expression\-List = new List$<$Tuple$<$Method\-Info, Expression\mbox{[}$\,$\mbox{]}$>$$>$()\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_highway_1_1_data_1_1_query_objects_1_1_query_base_a22b740c6d5ff1bfc7d5fd96f26c751b8}
+
+
+Holds the expressions to be appended 
+
+
+
+\subsection{Property Documentation}
+\hypertarget{class_highway_1_1_data_1_1_query_objects_1_1_query_base_aa8ca309734c39e9e78853e2a76c041f1}{\index{Highway\-::\-Data\-::\-Query\-Objects\-::\-Query\-Base@{Highway\-::\-Data\-::\-Query\-Objects\-::\-Query\-Base}!Context@{Context}}
+\index{Context@{Context}!Highway::Data::QueryObjects::QueryBase@{Highway\-::\-Data\-::\-Query\-Objects\-::\-Query\-Base}}
+\subsubsection[{Context}]{\setlength{\rightskip}{0pt plus 5cm}{\bf I\-Data\-Context} Highway.\-Data.\-Query\-Objects.\-Query\-Base.\-Context\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}, {\ttfamily [protected]}}}\label{class_highway_1_1_data_1_1_query_objects_1_1_query_base_aa8ca309734c39e9e78853e2a76c041f1}
+
+
+The reference to the I\-Data\-Context that gives data connection 
 
 
 

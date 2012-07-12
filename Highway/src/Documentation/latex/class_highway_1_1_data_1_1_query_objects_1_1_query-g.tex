@@ -1,6 +1,11 @@
 \hypertarget{class_highway_1_1_data_1_1_query_objects_1_1_query-g}{\section{Highway.\-Data.\-Query\-Objects.\-Query$<$ T $>$ Class Template Reference}
 \label{class_highway_1_1_data_1_1_query_objects_1_1_query-g}\index{Highway.\-Data.\-Query\-Objects.\-Query$<$ T $>$@{Highway.\-Data.\-Query\-Objects.\-Query$<$ T $>$}}
 }
+
+
+The base implementation for Queries that return collections  
+
+
 Inheritance diagram for Highway.\-Data.\-Query\-Objects.\-Query$<$ T $>$\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -11,47 +16,55 @@ Inheritance diagram for Highway.\-Data.\-Query\-Objects.\-Query$<$ T $>$\-:\begi
 \begin{DoxyCompactItemize}
 \item 
 virtual I\-Enumerable$<$ T $>$ \hyperlink{class_highway_1_1_data_1_1_query_objects_1_1_query-g_a68dd6db173a8ea84d10d72ccc27f74f4}{Execute} (\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context}{I\-Data\-Context} context)
-\begin{DoxyCompactList}\small\item\em This executes the expression in Context\-Query on the context that is passed in, resulting in a I\-Queryable
-\begin{DoxyTemplParams}{Template Parameters}
-{\em T} & \\
-\hline
-\end{DoxyTemplParams}
-that is returned as an I\-Enumerable
-\begin{DoxyTemplParams}{Template Parameters}
-{\em T} & \\
-\hline
-\end{DoxyTemplParams}
-\end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em This executes the expression in Context\-Query on the context that is passed in, resulting in a I\-Queryable\{\-T\} that is returned as an I\-Enumerable\{\-T\} \end{DoxyCompactList}\item 
 string \hyperlink{class_highway_1_1_data_1_1_query_objects_1_1_query-g_a73d9b26cc05e595ea45e5ba03e0812ba}{Output\-S\-Q\-L\-Statement} (\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context}{I\-Data\-Context} context)
-\begin{DoxyCompactList}\small\item\em This executes the expression against the passed in context to generate the S\-Q\-L statement, but doesn't execute the I\-Queryable
-\begin{DoxyTemplParams}{Template Parameters}
-{\em T} & \\
-\hline
-\end{DoxyTemplParams}
-against the data context \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em This executes the expression against the passed in context to generate the S\-Q\-L statement, but doesn't execute the I\-Queryable{\itshape T}  against the data context \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 virtual I\-Queryable$<$ T $>$ \hyperlink{class_highway_1_1_data_1_1_query_objects_1_1_query-g_a4c84387155c4c9eb66ffadec6169fb5c}{Extend\-Query} ()
 \begin{DoxyCompactList}\small\item\em This method allows for the extension of Ordering and Grouping on the prebuild \hyperlink{class_highway_1_1_data_1_1_query_objects_1_1_query-g}{Query} \end{DoxyCompactList}\item 
-\hypertarget{class_highway_1_1_data_1_1_query_objects_1_1_query-g_ad83e665a02845faedd4fbe821f16f48f}{I\-Queryable$<$ T $>$ {\bfseries Append\-Expressions} (I\-Queryable$<$ T $>$ query)}\label{class_highway_1_1_data_1_1_query_objects_1_1_query-g_ad83e665a02845faedd4fbe821f16f48f}
-
-\end{DoxyCompactItemize}
+I\-Queryable$<$ T $>$ \hyperlink{class_highway_1_1_data_1_1_query_objects_1_1_query-g_ad83e665a02845faedd4fbe821f16f48f}{Append\-Expressions} (I\-Queryable$<$ T $>$ query)
+\begin{DoxyCompactList}\small\item\em Gives the ability to apend an I\-Queryable onto the current query \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Properties}
 \begin{DoxyCompactItemize}
 \item 
 Func$<$ \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context}{I\-Data\-Context}, I\-Queryable\\*
 $<$ T $>$ $>$ \hyperlink{class_highway_1_1_data_1_1_query_objects_1_1_query-g_a68ecc8e5735dee1db60782614427cbbf}{Context\-Query}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
-\begin{DoxyCompactList}\small\item\em This holds the expression that will be used to create the I\-Queryable
-\begin{DoxyTemplParams}{Template Parameters}
-{\em T} & \\
-\hline
-\end{DoxyTemplParams}
-when executed on the context \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em This holds the expression that will be used to create the I\-Queryable\{\-T\} when executed on the context \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
 
+\subsection{Detailed Description}
+The base implementation for Queries that return collections 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Type being requested\\
+\hline
+\end{DoxyTemplParams}
+
+
 \subsection{Member Function Documentation}
+\hypertarget{class_highway_1_1_data_1_1_query_objects_1_1_query-g_ad83e665a02845faedd4fbe821f16f48f}{\index{Highway\-::\-Data\-::\-Query\-Objects\-::\-Query-\/g@{Highway\-::\-Data\-::\-Query\-Objects\-::\-Query-\/g}!Append\-Expressions@{Append\-Expressions}}
+\index{Append\-Expressions@{Append\-Expressions}!Highway::Data::QueryObjects::Query-g@{Highway\-::\-Data\-::\-Query\-Objects\-::\-Query-\/g}}
+\subsubsection[{Append\-Expressions}]{\setlength{\rightskip}{0pt plus 5cm}template$<$T $>$ I\-Queryable$<$T$>$ {\bf Highway.\-Data.\-Query\-Objects.\-Query}$<$ T $>$.Append\-Expressions (
+\begin{DoxyParamCaption}
+\item[{I\-Queryable$<$ T $>$}]{query}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}}\label{class_highway_1_1_data_1_1_query_objects_1_1_query-g_ad83e665a02845faedd4fbe821f16f48f}
+
+
+Gives the ability to apend an I\-Queryable onto the current query 
+
+
+\begin{DoxyParams}{Parameters}
+{\em query} & The query containing the expressions to append\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The combined query
+\end{DoxyReturn}
 \hypertarget{class_highway_1_1_data_1_1_query_objects_1_1_query-g_a68dd6db173a8ea84d10d72ccc27f74f4}{\index{Highway\-::\-Data\-::\-Query\-Objects\-::\-Query-\/g@{Highway\-::\-Data\-::\-Query\-Objects\-::\-Query-\/g}!Execute@{Execute}}
 \index{Execute@{Execute}!Highway::Data::QueryObjects::Query-g@{Highway\-::\-Data\-::\-Query\-Objects\-::\-Query-\/g}}
 \subsubsection[{Execute}]{\setlength{\rightskip}{0pt plus 5cm}template$<$T $>$ virtual I\-Enumerable$<$T$>$ {\bf Highway.\-Data.\-Query\-Objects.\-Query}$<$ T $>$.Execute (
@@ -61,17 +74,7 @@ when executed on the context \end{DoxyCompactList}\end{DoxyCompactItemize}
 )\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{class_highway_1_1_data_1_1_query_objects_1_1_query-g_a68dd6db173a8ea84d10d72ccc27f74f4}
 
 
-This executes the expression in Context\-Query on the context that is passed in, resulting in a I\-Queryable
-\begin{DoxyTemplParams}{Template Parameters}
-{\em T} & \\
-\hline
-\end{DoxyTemplParams}
-that is returned as an I\-Enumerable
-\begin{DoxyTemplParams}{Template Parameters}
-{\em T} & \\
-\hline
-\end{DoxyTemplParams}
-
+This executes the expression in Context\-Query on the context that is passed in, resulting in a I\-Queryable\{\-T\} that is returned as an I\-Enumerable\{\-T\} 
 
 
 \begin{DoxyParams}{Parameters}
@@ -79,12 +82,7 @@ that is returned as an I\-Enumerable
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-I\-Enumerable
-\begin{DoxyTemplParams}{Template Parameters}
-{\em T} & \\
-\hline
-\end{DoxyTemplParams}
-
+I\-Enumerable\{\-T\}
 \end{DoxyReturn}
 
 
@@ -102,7 +100,7 @@ Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_query-g_af
 This method allows for the extension of Ordering and Grouping on the prebuild \hyperlink{class_highway_1_1_data_1_1_query_objects_1_1_query-g}{Query} 
 
 \begin{DoxyReturn}{Returns}
-
+an I\-Queryable\{\-T\}
 \end{DoxyReturn}
 \hypertarget{class_highway_1_1_data_1_1_query_objects_1_1_query-g_a73d9b26cc05e595ea45e5ba03e0812ba}{\index{Highway\-::\-Data\-::\-Query\-Objects\-::\-Query-\/g@{Highway\-::\-Data\-::\-Query\-Objects\-::\-Query-\/g}!Output\-S\-Q\-L\-Statement@{Output\-S\-Q\-L\-Statement}}
 \index{Output\-S\-Q\-L\-Statement@{Output\-S\-Q\-L\-Statement}!Highway::Data::QueryObjects::Query-g@{Highway\-::\-Data\-::\-Query\-Objects\-::\-Query-\/g}}
@@ -113,12 +111,7 @@ This method allows for the extension of Ordering and Grouping on the prebuild \h
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_highway_1_1_data_1_1_query_objects_1_1_query-g_a73d9b26cc05e595ea45e5ba03e0812ba}
 
 
-This executes the expression against the passed in context to generate the S\-Q\-L statement, but doesn't execute the I\-Queryable
-\begin{DoxyTemplParams}{Template Parameters}
-{\em T} & \\
-\hline
-\end{DoxyTemplParams}
-against the data context 
+This executes the expression against the passed in context to generate the S\-Q\-L statement, but doesn't execute the I\-Queryable{\itshape T}  against the data context 
 
 
 \begin{DoxyParams}{Parameters}
@@ -140,12 +133,7 @@ Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_query_base
 \subsubsection[{Context\-Query}]{\setlength{\rightskip}{0pt plus 5cm}template$<$T $>$ Func$<${\bf I\-Data\-Context}, I\-Queryable$<$T$>$ $>$ {\bf Highway.\-Data.\-Query\-Objects.\-Query}$<$ T $>$.Context\-Query\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}, {\ttfamily [protected]}}}\label{class_highway_1_1_data_1_1_query_objects_1_1_query-g_a68ecc8e5735dee1db60782614427cbbf}
 
 
-This holds the expression that will be used to create the I\-Queryable
-\begin{DoxyTemplParams}{Template Parameters}
-{\em T} & \\
-\hline
-\end{DoxyTemplParams}
-when executed on the context 
+This holds the expression that will be used to create the I\-Queryable\{\-T\} when executed on the context 
 
 
 

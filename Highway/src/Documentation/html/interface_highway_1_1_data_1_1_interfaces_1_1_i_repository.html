@@ -71,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Events</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Events</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -111,18 +111,18 @@ Inheritance diagram for Highway.Data.Interfaces.IRepository:</div>
 <tr class="heading"><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a18bd55ae31839881dc43cb0ba958086b"><td class="memItemLeft" align="right" valign="top">IEnumerable&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository.html#a18bd55ae31839881dc43cb0ba958086b">Find&lt; T &gt;</a> (<a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_query-g.html">IQuery</a>&lt; T &gt; query)</td></tr>
-<tr class="memdesc:a18bd55ae31839881dc43cb0ba958086b"><td class="mdescLeft">&#160;</td><td class="mdescRight"> <a href="#a18bd55ae31839881dc43cb0ba958086b"></a><br/></td></tr>
+<tr class="memdesc:a18bd55ae31839881dc43cb0ba958086b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a prebuilt IQuery{T} and returns an IEnumerable{T}  <a href="#a18bd55ae31839881dc43cb0ba958086b"></a><br/></td></tr>
 <tr class="memitem:af4256e7e2f82fd545161eeedd323712b"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository.html#af4256e7e2f82fd545161eeedd323712b">Get&lt; T &gt;</a> (<a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_scalar_object-g.html">IScalarObject</a>&lt; T &gt; query)</td></tr>
-<tr class="memdesc:af4256e7e2f82fd545161eeedd323712b"><td class="mdescLeft">&#160;</td><td class="mdescRight"> <a href="#af4256e7e2f82fd545161eeedd323712b"></a><br/></td></tr>
+<tr class="memdesc:af4256e7e2f82fd545161eeedd323712b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a prebuilt IScalarObject{T} and returns a single instance of <em>T</em>   <a href="#af4256e7e2f82fd545161eeedd323712b"></a><br/></td></tr>
 <tr class="memitem:a2f2f0b12b547d9d5eeaf18d013b7c008"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository.html#a2f2f0b12b547d9d5eeaf18d013b7c008">Execute</a> (<a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_command_object.html">ICommandObject</a> command)</td></tr>
-<tr class="memdesc:a2f2f0b12b547d9d5eeaf18d013b7c008"><td class="mdescLeft">&#160;</td><td class="mdescRight"> <a href="#a2f2f0b12b547d9d5eeaf18d013b7c008"></a><br/></td></tr>
+<tr class="memdesc:a2f2f0b12b547d9d5eeaf18d013b7c008"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a prebuilt <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_command_object.html" title="An Interface for Command Queries that return no value, or the return is ignored ">ICommandObject</a>  <a href="#a2f2f0b12b547d9d5eeaf18d013b7c008"></a><br/></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:aadf2e3d1d5b118f2fe6e2b1fc1ae8e77"><td class="memItemLeft" align="right" valign="top"><a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html">IDataContext</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository.html#aadf2e3d1d5b118f2fe6e2b1fc1ae8e77">Context</a><code> [get]</code></td></tr>
-<tr class="memdesc:aadf2e3d1d5b118f2fe6e2b1fc1ae8e77"><td class="mdescLeft">&#160;</td><td class="mdescRight"> <a href="#aadf2e3d1d5b118f2fe6e2b1fc1ae8e77"></a><br/></td></tr>
+<tr class="memdesc:aadf2e3d1d5b118f2fe6e2b1fc1ae8e77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference to the Context the repository is using  <a href="#aadf2e3d1d5b118f2fe6e2b1fc1ae8e77"></a><br/></td></tr>
 <tr class="memitem:a2f76cda20f7e51ce44c11a077194c747"><td class="memItemLeft" align="right" valign="top"><a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_event_manager.html">IEventManager</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository.html#a2f76cda20f7e51ce44c11a077194c747">EventManager</a><code> [get]</code></td></tr>
-<tr class="memdesc:a2f76cda20f7e51ce44c11a077194c747"><td class="mdescLeft">&#160;</td><td class="mdescRight"> <a href="#a2f76cda20f7e51ce44c11a077194c747"></a><br/></td></tr>
+<tr class="memdesc:a2f76cda20f7e51ce44c11a077194c747"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference to the EventManager the repository is using  <a href="#a2f76cda20f7e51ce44c11a077194c747"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>The interface used to interact with the ORM Specific Implementations </p>
@@ -141,10 +141,10 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p></p>
+<p>Executes a prebuilt <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_command_object.html" title="An Interface for Command Queries that return no value, or the return is ignored ">ICommandObject</a> </p>
 <dl class="params"><dt>Parameters:</dt><dd>
   <table class="params">
-    <tr><td class="paramname">command</td><td></td></tr>
+    <tr><td class="paramname">command</td><td>The prebuilt command object</td></tr>
   </table>
   </dd>
 </dl>
@@ -167,20 +167,20 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p></p>
-<dl class="params"><dt>Parameters:</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">query</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Executes a prebuilt IQuery{T} and returns an IEnumerable{T} </p>
 <dl class="tparams"><dt>Template Parameters:</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td></td></tr>
+    <tr><td class="paramname">T</td><td>The Entity being queried</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns:</dt><dd></dd></dl>
+<dl class="params"><dt>Parameters:</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">query</td><td>The prebuilt Query Object</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns:</dt><dd>The IEnumerable{T} returned from the query</dd></dl>
 
 <p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository.html#af361e5a4bc1f44f9165cc450add06ece">Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository</a>.</p>
 <div class="typeconstraint">
@@ -207,20 +207,20 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p></p>
-<dl class="params"><dt>Parameters:</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">query</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Executes a prebuilt IScalarObject{T} and returns a single instance of <em>T</em>  </p>
 <dl class="tparams"><dt>Template Parameters:</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td></td></tr>
+    <tr><td class="paramname">T</td><td>The Entity being queried</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns:</dt><dd></dd></dl>
+<dl class="params"><dt>Parameters:</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">query</td><td>The prebuilt Query Object</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns:</dt><dd>The instance of <em>T</em>  returned from the query</dd></dl>
 
 <p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository.html#a96b10f64c2c73cdc8c19ceed3f97004d">Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository</a>.</p>
 
@@ -245,7 +245,7 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p></p>
+<p>Reference to the Context the repository is using </p>
 
 <p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository.html#a39447e7deb1284fc5e5d9ea7c2c78c63">Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository</a>.</p>
 
@@ -269,7 +269,7 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p></p>
+<p>Reference to the EventManager the repository is using </p>
 
 <p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository.html#abb629b7ba44c32a78951f64554f52e06">Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository</a>.</p>
 
@@ -281,7 +281,7 @@ Properties</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 28 2012 23:42:19 for Highway Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jul 6 2012 10:53:23 for Highway Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.1
 </small></address>

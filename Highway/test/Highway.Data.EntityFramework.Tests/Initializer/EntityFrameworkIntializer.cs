@@ -1,12 +1,12 @@
 ﻿using System.Data.Entity;
-using Highway.Data.EntityFramework.Tests.UnitTests;
+using Highway.Data.NHibernate.Tests.UnitTests;
 using Highway.Data.Tests.TestDomain;
 
-namespace Highway.Data.EntityFramework.Tests.Initializer
+namespace Highway.Data.NHibernate.Tests.Initializer
 {
-    public class EntityFrameworkIntializer : DropCreateDatabaseAlways<EntityFrameworkTestContext>
+    public class EntityFrameworkIntializer : DropCreateDatabaseAlways<TestContext>
     {
-        protected override void Seed(EntityFrameworkTestContext context)
+        protected override void Seed(TestContext context)
         {
             for (int i = 0; i < 5;i++ )
             {
@@ -16,16 +16,16 @@ namespace Highway.Data.EntityFramework.Tests.Initializer
         }
     }
 
-    public class ForceDeleteInitializer : IDatabaseInitializer<EntityFrameworkTestContext>
+    public class ForceDeleteInitializer : IDatabaseInitializer<TestContext>
     {
-        private readonly IDatabaseInitializer<EntityFrameworkTestContext> _initializer;
+        private readonly IDatabaseInitializer<TestContext> _initializer;
 
-        public ForceDeleteInitializer(IDatabaseInitializer<EntityFrameworkTestContext> innerInitializer)
+        public ForceDeleteInitializer(IDatabaseInitializer<TestContext> innerInitializer)
         {
             _initializer = innerInitializer;
         }
 
-        public void InitializeDatabase(EntityFrameworkTestContext context)
+        public void InitializeDatabase(TestContext context)
         {
             if(context.Database.Exists()) context.Database.ExecuteSqlCommand("ALTER DATABASE FEEFTest SET SINGLE_USER WITH ROLLBACK IMMEDIATE");
             _initializer.InitializeDatabase(context);

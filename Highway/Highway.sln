@@ -1,11 +1,9 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B91E975D-C195-49BC-86D5-550F8DE379BD}"
 	ProjectSection(SolutionItems) = preProject
 		Highway.vsmdi = Highway.vsmdi
 		Local.testsettings = Local.testsettings
-		SolutionInfo.cs = SolutionInfo.cs
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
@@ -21,8 +19,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data", "src\Highway
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.EntityFramework", "src\Highway.Data.EntityFramework\Highway.Data.EntityFramework.csproj", "{726C5578-4D46-46FB-A58D-352E447E672A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSTest.AssertionHelpers", "test\MSTest.AssertionHelpers\MSTest.AssertionHelpers.csproj", "{82CC3D28-F1F9-4DA3-A388-1EA3091EA3DF}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4D77A758-5608-4034-9E89-9F77B840B876}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
@@ -31,6 +27,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4D77A7
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.Tests", "test\Highway.Data.Tests\Highway.Data.Tests.csproj", "{726A3CE4-CB5B-4E30-8F97-FE9705FF4F3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Test.MSTest", "src\Highway.Test.MSTest\Highway.Test.MSTest.csproj", "{82CC3D28-F1F9-4DA3-A388-1EA3091EA3DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.NHibernate", "Highway.Data.NHibernate\Highway.Data.NHibernate.csproj", "{AF718501-DCF9-42F0-B658-FDDA68238FAC}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -57,14 +57,18 @@ Global
 		{726C5578-4D46-46FB-A58D-352E447E672A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{726C5578-4D46-46FB-A58D-352E447E672A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{726C5578-4D46-46FB-A58D-352E447E672A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{82CC3D28-F1F9-4DA3-A388-1EA3091EA3DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{82CC3D28-F1F9-4DA3-A388-1EA3091EA3DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{82CC3D28-F1F9-4DA3-A388-1EA3091EA3DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{82CC3D28-F1F9-4DA3-A388-1EA3091EA3DF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{726A3CE4-CB5B-4E30-8F97-FE9705FF4F3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{726A3CE4-CB5B-4E30-8F97-FE9705FF4F3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{726A3CE4-CB5B-4E30-8F97-FE9705FF4F3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{726A3CE4-CB5B-4E30-8F97-FE9705FF4F3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82CC3D28-F1F9-4DA3-A388-1EA3091EA3DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82CC3D28-F1F9-4DA3-A388-1EA3091EA3DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82CC3D28-F1F9-4DA3-A388-1EA3091EA3DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82CC3D28-F1F9-4DA3-A388-1EA3091EA3DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF718501-DCF9-42F0-B658-FDDA68238FAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF718501-DCF9-42F0-B658-FDDA68238FAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF718501-DCF9-42F0-B658-FDDA68238FAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF718501-DCF9-42F0-B658-FDDA68238FAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

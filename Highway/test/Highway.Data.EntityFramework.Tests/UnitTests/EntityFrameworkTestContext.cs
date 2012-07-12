@@ -1,11 +1,11 @@
 using Highway.Data.EntityFramework.Contexts;
 using Highway.Data.EntityFramework.Mappings;
 
-namespace Highway.Data.EntityFramework.Tests.UnitTests
+namespace Highway.Data.NHibernate.Tests.UnitTests
 {
-    public class EntityFrameworkTestContext : EntityFrameworkContext
+    public class TestContext : Context
     {
-        public EntityFrameworkTestContext(string connectionString, IMappingConfiguration configuration) : base(connectionString, configuration)
+        public TestContext(string connectionString, IMappingConfiguration[] configurations) : base(connectionString, configurations)
         {
         }
 

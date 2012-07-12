@@ -16,6 +16,7 @@ var searchData=
   ['iquery_2dg_3c_20t_20_3e',['IQuery-g&lt; T &gt;',['../interface_highway_1_1_data_1_1_interfaces_1_1_i_query-g.html',1,'Highway::Data::Interfaces']]],
   ['iquerybase',['IQueryBase',['../interface_highway_1_1_data_1_1_interfaces_1_1_i_query_base.html',1,'Highway::Data::Interfaces']]],
   ['irepository',['IRepository',['../interface_highway_1_1_data_1_1_interfaces_1_1_i_repository.html',1,'Highway::Data::Interfaces']]],
+  ['irepositoryfactory',['IRepositoryFactory',['../interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_factory.html',1,'Highway::Data::Interfaces']]],
   ['iscalarobject_2dg',['IScalarObject-g',['../interface_highway_1_1_data_1_1_interfaces_1_1_i_scalar_object-g.html',1,'Highway::Data::Interfaces']]],
   ['iscalarobject_2dg_3c_20t_20_3e',['IScalarObject-g&lt; T &gt;',['../interface_highway_1_1_data_1_1_interfaces_1_1_i_scalar_object-g.html',1,'Highway::Data::Interfaces']]],
   ['iusernameservice',['IUserNameService',['../interface_highway_1_1_data_1_1_interfaces_1_1_i_user_name_service.html',1,'Highway::Data::Interfaces']]]

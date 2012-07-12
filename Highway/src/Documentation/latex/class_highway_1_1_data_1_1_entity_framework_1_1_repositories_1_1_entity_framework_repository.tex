@@ -18,31 +18,11 @@ Inheritance diagram for Highway.\-Data.\-Entity\-Framework.\-Repositories.\-Enti
 \hyperlink{class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository_a9f5b6355d4a5054c37bcd19a6a444aca}{Entity\-Framework\-Repository} (\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context}{I\-Data\-Context} context)
 \begin{DoxyCompactList}\small\item\em Creates a Repository that uses the context provided \end{DoxyCompactList}\item 
 T \hyperlink{class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository_a96b10f64c2c73cdc8c19ceed3f97004d}{Get$<$ T $>$} (\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_scalar_object-g}{I\-Scalar\-Object}$<$ T $>$ query)
-\begin{DoxyCompactList}\small\item\em Executes a prebuilt I\-Scalar\-Object
-\begin{DoxyTemplParams}{Template Parameters}
-{\em T} & \\
-\hline
-\end{DoxyTemplParams}
-and returns a single instance of 
-\begin{DoxyTemplParams}{Template Parameters}
-{\em T} & \\
-\hline
-\end{DoxyTemplParams}
-\end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Executes a prebuilt I\-Scalar\-Object\{\-T\} and returns a single instance of {\itshape T}  \end{DoxyCompactList}\item 
 void \hyperlink{class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository_a2cf1765e57f0e5527e2c36888eaf38f9}{Execute} (\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_command_object}{I\-Command\-Object} command)
 \begin{DoxyCompactList}\small\item\em Executes a prebuilt I\-Command\-Object \end{DoxyCompactList}\item 
 I\-Enumerable$<$ T $>$ \hyperlink{class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository_af361e5a4bc1f44f9165cc450add06ece}{Find$<$ T $>$} (\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_query-g}{I\-Query}$<$ T $>$ query)
-\begin{DoxyCompactList}\small\item\em Executes a prebuilt I\-Query
-\begin{DoxyTemplParams}{Template Parameters}
-{\em T} & \\
-\hline
-\end{DoxyTemplParams}
-and returns an I\-Enumerable
-\begin{DoxyTemplParams}{Template Parameters}
-{\em T} & \\
-\hline
-\end{DoxyTemplParams}
-\end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Executes a prebuilt I\-Query\{\-T\} and returns an I\-Enumerable\{\-T\} \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Properties}
 \begin{DoxyCompactItemize}
 \item 
@@ -106,17 +86,7 @@ Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository_af361e5a4bc1f44f9165cc450add06ece}
 
 
-Executes a prebuilt I\-Query
-\begin{DoxyTemplParams}{Template Parameters}
-{\em T} & \\
-\hline
-\end{DoxyTemplParams}
-and returns an I\-Enumerable
-\begin{DoxyTemplParams}{Template Parameters}
-{\em T} & \\
-\hline
-\end{DoxyTemplParams}
-
+Executes a prebuilt I\-Query\{\-T\} and returns an I\-Enumerable\{\-T\} 
 
 
 \begin{DoxyTemplParams}{Template Parameters}
@@ -129,12 +99,7 @@ and returns an I\-Enumerable
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-The I\-Enumerable
-\begin{DoxyTemplParams}{Template Parameters}
-{\em T} & \\
-\hline
-\end{DoxyTemplParams}
-returned from the query
+The I\-Enumerable\{\-T\} returned from the query
 \end{DoxyReturn}
 
 
@@ -153,17 +118,7 @@ Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository_a96b10f64c2c73cdc8c19ceed3f97004d}
 
 
-Executes a prebuilt I\-Scalar\-Object
-\begin{DoxyTemplParams}{Template Parameters}
-{\em T} & \\
-\hline
-\end{DoxyTemplParams}
-and returns a single instance of 
-\begin{DoxyTemplParams}{Template Parameters}
-{\em T} & \\
-\hline
-\end{DoxyTemplParams}
-
+Executes a prebuilt I\-Scalar\-Object\{\-T\} and returns a single instance of {\itshape T}  
 
 
 \begin{DoxyTemplParams}{Template Parameters}
@@ -176,12 +131,7 @@ and returns a single instance of
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-The instance of 
-\begin{DoxyTemplParams}{Template Parameters}
-{\em T} & \\
-\hline
-\end{DoxyTemplParams}
-returned from the query
+The instance of {\itshape T}  returned from the query
 \end{DoxyReturn}
 
 

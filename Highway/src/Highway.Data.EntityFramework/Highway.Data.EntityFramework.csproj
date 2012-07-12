@@ -57,11 +57,13 @@
     <Compile Include="..\..\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="Contexts\EntityFrameworkContext.cs" />
-    <Compile Include="Interceptors\EntityFrameworkAuditableInterceptor.cs" />
+    <Compile Include="Contexts\Context.cs" />
+    <Compile Include="Contexts\ObjectContext.cs" />
+    <Compile Include="Factory\RepositoryFactory.cs" />
+    <Compile Include="Interceptors\AuditableInterceptor.cs" />
     <Compile Include="Mappings\IMappingConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\EntityFrameworkRepository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

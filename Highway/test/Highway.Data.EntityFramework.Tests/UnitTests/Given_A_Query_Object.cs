@@ -7,8 +7,8 @@ using Highway.Data.EntityFramework.Mappings;
 using Highway.Data.EntityFramework.Repositories;
 using Highway.Data.EventManagement;
 using Highway.Data.Interfaces;
-using Highway.Data.NHibernate.Tests.Mapping;
-using Highway.Data.NHibernate.Tests.Properties;
+using Highway.Data.EntityFramework.Tests.Mapping;
+using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.Tests.TestDomain;
 using Highway.Data.Tests.TestQueries;
 using Highway.Test.MSTest;
@@ -17,7 +17,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
 using Highway.Data.QueryObjects;
 
-namespace Highway.Data.NHibernate.Tests.UnitTests
+namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
     [TestClass]
     public class Given_A_Query_Object 

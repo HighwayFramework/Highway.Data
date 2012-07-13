@@ -7,17 +7,17 @@ using CommonServiceLocator.WindsorAdapter;
 using Highway.Data.EntityFramework.Mappings;
 using Highway.Data.EventManagement;
 using Highway.Data.Interfaces;
-using Highway.Data.NHibernate.Tests.Initializer;
-using Highway.Data.NHibernate.Tests.Mapping;
-using Highway.Data.NHibernate.Tests.Properties;
-using Highway.Data.NHibernate.Tests.UnitTests;
+using Highway.Data.EntityFramework.Tests.Initializer;
+using Highway.Data.EntityFramework.Tests.Mapping;
+using Highway.Data.EntityFramework.Tests.Properties;
+using Highway.Data.EntityFramework.Tests.UnitTests;
 using Highway.Data.Tests.TestDomain;
 using Highway.Test.MSTest;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TestContext = Highway.Data.NHibernate.Tests.UnitTests.TestContext;
+using TestContext = Highway.Data.EntityFramework.Tests.UnitTests.TestContext;
 
-namespace Highway.Data.NHibernate.Tests.IntegrationTests
+namespace Highway.Data.EntityFramework.Tests.IntegrationTests
 {
     [TestClass]
     public class Given_A_EF_Context

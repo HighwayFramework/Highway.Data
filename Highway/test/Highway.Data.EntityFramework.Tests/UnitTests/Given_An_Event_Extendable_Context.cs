@@ -14,7 +14,7 @@ using Castle.Windsor;
 using CommonServiceLocator.WindsorAdapter;
 using Castle.MicroKernel.Registration;
 
-namespace Highway.Data.NHibernate.Tests.UnitTests
+namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
     [TestClass]
     public class Given_An_Event_Extendable_Context

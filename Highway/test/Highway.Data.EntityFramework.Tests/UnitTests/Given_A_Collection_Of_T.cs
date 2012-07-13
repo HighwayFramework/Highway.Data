@@ -3,7 +3,7 @@ using System.Linq;
 using Highway.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Highway.Data.NHibernate.Tests.UnitTests
+namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
     [TestClass]
     public class Given_A_Collection_Of_T

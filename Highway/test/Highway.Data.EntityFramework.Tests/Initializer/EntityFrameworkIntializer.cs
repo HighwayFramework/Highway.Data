@@ -1,8 +1,8 @@
 ﻿using System.Data.Entity;
-using Highway.Data.NHibernate.Tests.UnitTests;
+using Highway.Data.EntityFramework.Tests.UnitTests;
 using Highway.Data.Tests.TestDomain;
 
-namespace Highway.Data.NHibernate.Tests.Initializer
+namespace Highway.Data.EntityFramework.Tests.Initializer
 {
     public class EntityFrameworkIntializer : DropCreateDatabaseAlways<TestContext>
     {

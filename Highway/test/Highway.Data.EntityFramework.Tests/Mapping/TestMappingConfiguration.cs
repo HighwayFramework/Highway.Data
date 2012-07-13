@@ -1,7 +1,7 @@
 using System.Data.Entity;
 using Highway.Data.EntityFramework.Mappings;
 
-namespace Highway.Data.NHibernate.Tests.Mapping
+namespace Highway.Data.EntityFramework.Tests.Mapping
 {
     public class TestMappingConfiguration : IMappingConfiguration
     {

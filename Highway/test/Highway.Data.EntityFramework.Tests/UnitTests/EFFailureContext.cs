@@ -5,7 +5,7 @@ using System.Data.Objects;
 using System.Linq;
 using Highway.Data.Interfaces;
 
-namespace Highway.Data.NHibernate.Tests.UnitTests
+namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
     public class EFFailureContext : IDataContext
     {

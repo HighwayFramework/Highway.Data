@@ -3,12 +3,12 @@ using System.Data.Entity;
 using System.Linq;
 using Highway.Data.EntityFramework.Contexts;
 using Highway.Data.EntityFramework.Mappings;
-using Highway.Data.NHibernate.Tests.Properties;
+using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.Tests.TestDomain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
 
-namespace Highway.Data.NHibernate.Tests.UnitTests
+namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
     [TestClass]
     public class Given_A_Context_Without_Mappings

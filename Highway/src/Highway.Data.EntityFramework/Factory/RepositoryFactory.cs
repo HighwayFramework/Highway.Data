@@ -3,6 +3,7 @@ using Highway.Data.EntityFramework.Contexts;
 using Highway.Data.EntityFramework.Mappings;
 using Highway.Data.EntityFramework.Repositories;
 using Highway.Data.Interfaces;
+using Microsoft.Practices.ServiceLocation;
 
 namespace Highway.Data.EntityFramework.Factory
 {
@@ -103,6 +104,7 @@ namespace Highway.Data.EntityFramework.Factory
 
         private IMappingConfiguration GetMapping(Type type)
         {
+            Console.WriteLine("^^");
             return _mappingsDelegate(type);
         }
     }

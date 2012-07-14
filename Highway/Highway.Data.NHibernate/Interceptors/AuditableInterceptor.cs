@@ -30,6 +30,7 @@ namespace Highway.Data.NHibernate.Interceptors
         /// <returns>An Interceptor Result</returns>
         public InterceptorResult Execute(IDataContext context, PreSaveEventArgs eventArgs)
         {
+            return default(InterceptorResult);
 //            var efContext = context as DbContext;
 //            if (efContext == null) throw new InvalidOperationException("Entity Framework Interceptors must be used with Entity Framework Contexts");
             

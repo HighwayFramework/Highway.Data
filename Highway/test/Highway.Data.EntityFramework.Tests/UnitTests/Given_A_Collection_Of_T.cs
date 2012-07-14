@@ -2,11 +2,12 @@
 using System.Linq;
 using Highway.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Highway.Data.Tests;
 
-namespace Highway.Data.NHibernate.Tests.UnitTests
+namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
     [TestClass]
-    public class Given_A_Collection_Of_T
+    public class Given_A_Collection_Of_T : BaseTest<object>
     {
         [TestMethod]
         public void When_Each_Is_Called_Action_Gets_invoked_for_every_item()

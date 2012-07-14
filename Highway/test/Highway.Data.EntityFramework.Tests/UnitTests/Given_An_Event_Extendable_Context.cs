@@ -13,34 +13,36 @@ using Microsoft.Practices.ServiceLocation;
 using Castle.Windsor;
 using CommonServiceLocator.WindsorAdapter;
 using Castle.MicroKernel.Registration;
+using Highway.Data.Tests;
 
-namespace Highway.Data.NHibernate.Tests.UnitTests
+namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
     [TestClass]
-    public class Given_An_Event_Extendable_Context
+    public class Given_An_Event_Extendable_Context : ContainerTest<CommitEventsMockContext>
     {
+        public override void RegisterComponents(IWindsorContainer container)
+        {
+            container.Register(
+                Component.For<IEventManager>()
+                    .ImplementedBy<EventManager>());
+            base.RegisterComponents(container);
+        }
         [TestMethod]
         public void When_Commit_Is_Called_PreSave_and_post_save_interceptors_are_Called()
         {
             //arrange
-            var container = new WindsorContainer();
-            ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(container));
-            var manager = new EventManager();
-            container.Register(Component.For<IEventManager>().Instance(manager),
-                               Component.For<IDataContext>().ImplementedBy<CommitEventsMockContext>());
-            var context = container.Resolve<IDataContext>();
-
-            //Act
             IInterceptor<PreSaveEventArgs> mockPreSave = MockRepository.GenerateMock<IInterceptor<PreSaveEventArgs>>();
-            mockPreSave.Expect(x => x.Execute(Arg<IDataContext>.Is.Same(context), Arg<PreSaveEventArgs>.Is.Anything)).Return(InterceptorResult.Succeeded());
+            mockPreSave.Expect(x => x.Execute(Arg<IDataContext>.Is.Same(target), Arg<PreSaveEventArgs>.Is.Anything)).Return(InterceptorResult.Succeeded());
             mockPreSave.Expect(x => x.Priority).Return(1);
-            context.EventManager.Register(mockPreSave);
+            target.EventManager.Register(mockPreSave);
 
             IInterceptor<PostSaveEventArgs> mockPostSave = MockRepository.GenerateMock<IInterceptor<PostSaveEventArgs>>();
-            mockPostSave.Expect(x => x.Execute(Arg<IDataContext>.Is.Same(context), Arg<PostSaveEventArgs>.Is.Anything)).Return(InterceptorResult.Succeeded());
+            mockPostSave.Expect(x => x.Execute(Arg<IDataContext>.Is.Same(target), Arg<PostSaveEventArgs>.Is.Anything)).Return(InterceptorResult.Succeeded());
             mockPostSave.Expect(x => x.Priority).Return(1);
-            context.EventManager.Register(mockPostSave);
-            context.Commit();
+            target.EventManager.Register(mockPostSave);
+
+            //Act
+            target.Commit();
 
             //Assert
             mockPreSave.VerifyAllExpectations();
@@ -53,7 +55,6 @@ namespace Highway.Data.NHibernate.Tests.UnitTests
     {
         public void Dispose()
         {
-            throw new System.NotImplementedException();
         }
 
         public IQueryable<T> AsQueryable<T>() where T : class

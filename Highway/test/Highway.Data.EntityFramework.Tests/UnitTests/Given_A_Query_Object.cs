@@ -7,8 +7,8 @@ using Highway.Data.EntityFramework.Mappings;
 using Highway.Data.EntityFramework.Repositories;
 using Highway.Data.EventManagement;
 using Highway.Data.Interfaces;
-using Highway.Data.NHibernate.Tests.Mapping;
-using Highway.Data.NHibernate.Tests.Properties;
+using Highway.Data.EntityFramework.Tests.Mapping;
+using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.Tests.TestDomain;
 using Highway.Data.Tests.TestQueries;
 using Highway.Test.MSTest;
@@ -16,38 +16,48 @@ using Microsoft.Practices.ServiceLocation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
 using Highway.Data.QueryObjects;
+using Highway.Data.EntityFramework.Tests.UnitTests;
+using Highway.Data.Tests;
 
-namespace Highway.Data.NHibernate.Tests.UnitTests
+namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
     [TestClass]
-    public class Given_A_Query_Object 
+    public class Given_A_Query_Object : AutoMockingTest<FindFoo>
     {
-        internal static IWindsorContainer container;
+        private IDataContext mockContext;
 
-        [ClassInitialize]
-        public static void SetupClass(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext context)
+        public override void RegisterComponents(IWindsorContainer container)
         {
-            container = new WindsorContainer();
-            ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(container));
-            container.Register(Component.For<IEventManager>().ImplementedBy<EventManager>().LifestyleTransient(),
-                               Component.For<IDataContext>().ImplementedBy<TestContext>().DependsOn(new { connectionString = Settings.Default.Connection }).LifestyleTransient(),
-                               Component.For<IMappingConfiguration>().ImplementedBy<TestMappingConfiguration>().LifestyleTransient());
+            container.Register(
+                Component.For<IEventManager>()
+                    .ImplementedBy<EventManager>(),
+                Component.For<IRepository>()
+                    .ImplementedBy<Repository>(),
+                Component.For<IMappingConfiguration>()
+                    .ImplementedBy<FooMappingConfiguration>());
+            base.RegisterComponents(container);
+        }
 
+        public override void BeforeEachTest()
+        {
+            base.BeforeEachTest();
+            mockContext = Container.Resolve<IDataContext>();
         }
 
         [TestMethod]
         public void When_Passing_To_A_Repository_Query_Object_Then_It_Executes_Against_Context()
         {
             //Arrange
-            var context = MockRepository.GenerateStrictMock<IDataContext>();
-            context.Expect(x => x.AsQueryable<Foo>()).Return(new List<Foo>().AsQueryable()).Repeat.Once();
-            var repository = new Repository(context);
+            mockContext.Expect(x => x.AsQueryable<Foo>())
+                .Return(new List<Foo>().AsQueryable())
+                .Repeat.Once();
+            var repo = Container.Resolve<IRepository>();
 
             //Act
-            repository.Find(new FindFoo());
+            repo.Find(new FindFoo());
 
             //Assert
-            context.VerifyAllExpectations();
+            mockContext.VerifyAllExpectations();
 
         }
 
@@ -55,16 +65,15 @@ namespace Highway.Data.NHibernate.Tests.UnitTests
         public void When_Executed_Returns_An_IEnumerable_Of_Items()
         {
             //Arrange
-            var context = MockRepository.GenerateStrictMock<IDataContext>();
-            context.Expect(x => x.AsQueryable<Foo>()).Return(new List<Foo>().AsQueryable()).Repeat.Once();
-            var query = new FindFoo();
-
+            mockContext.Expect(x => x.AsQueryable<Foo>())
+                .Return(new List<Foo>().AsQueryable())
+                .Repeat.Once();
 
             //Act
-            IEnumerable<Foo> items = query.Execute(context);
+            IEnumerable<Foo> items = target.Execute(mockContext);
 
             //Assert
-            context.VerifyAllExpectations();
+            mockContext.VerifyAllExpectations();
             items.ShouldNotBeNull();
 
         }
@@ -74,8 +83,7 @@ namespace Highway.Data.NHibernate.Tests.UnitTests
         {
             //Arrange
             var targetFoo = new Foo();
-            var context = MockRepository.GenerateStrictMock<IDataContext>();
-            context.Expect(x => x.AsQueryable<Foo>()).Return(new List<Foo>()
+            mockContext.Expect(x => x.AsQueryable<Foo>()).Return(new List<Foo>()
                 {
                     new Foo(),
                     new Foo(),
@@ -83,10 +91,9 @@ namespace Highway.Data.NHibernate.Tests.UnitTests
                     new Foo(),
                     targetFoo
                 }.AsQueryable()).Repeat.Once();
-            var query = new FindFoo();
 
             //Act
-            var retVal = query.Skip(4).Take(1).Execute(context);
+            var retVal = target.Skip(4).Take(1).Execute(mockContext);
 
 
             //Assert
@@ -99,7 +106,7 @@ namespace Highway.Data.NHibernate.Tests.UnitTests
             //arrange
             var target = new FindFoo();
 
-            var context = container.Resolve<IDataContext>();
+            var context = new TestDataContext(Settings.Default.Connection, new IMappingConfiguration[] { new FooMappingConfiguration() });
 
             //act
             var sqlOutput = target.OutputSQLStatement(context);

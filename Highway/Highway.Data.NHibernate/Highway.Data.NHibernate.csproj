@@ -61,7 +61,6 @@
     </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="Contexts\Context.cs" />
-    <Compile Include="Factory\RepositoryFactory.cs" />
     <Compile Include="Factory\SessionFactory.cs" />
     <Compile Include="Interceptors\AuditableInterceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -32,7 +32,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Test.MSTest", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.EntityFramework.StructureMap", "src\Highway.Data.EntityFramework.StructureMap\Highway.Data.EntityFramework.StructureMap.csproj", "{402396DA-AFB2-4E7E-92B1-6C863BBCCF64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.EntityFramework.StructureMap.Example", "Highway.Data.EntityFramework.StructureMap.Example\Highway.Data.EntityFramework.StructureMap.Example.csproj", "{F2EE810E-EDD6-4625-B90A-BA86D964C535}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.EntityFramework.StructureMap.Example", "src\Highway.Data.EntityFramework.StructureMap.Example\Highway.Data.EntityFramework.StructureMap.Example.csproj", "{F2EE810E-EDD6-4625-B90A-BA86D964C535}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution

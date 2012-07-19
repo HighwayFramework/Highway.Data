@@ -11,7 +11,7 @@ namespace Highway.Data.EntityFramework.Tests.Mapping
             this.ToTable("Foos");
             this.HasKey(x => x.Id);
             this.Property(x => x.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            this.Property(x => x.Name).IsOptional();
+            this.Property(x => x.Name).IsOptional().HasMaxLength(12);
         }
     }
 }

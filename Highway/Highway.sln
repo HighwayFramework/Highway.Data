@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.Tests", "test\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Test.MSTest", "src\Highway.Test.MSTest\Highway.Test.MSTest.csproj", "{82CC3D28-F1F9-4DA3-A388-1EA3091EA3DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.EntityFramework.Unity", "src\Highway.Data.EntityFramework.Unity\Highway.Data.EntityFramework.Unity.csproj", "{DC695D07-9D0A-422B-B102-30A40656683F}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Highway.vsmdi
@@ -63,6 +65,10 @@ Global
 		{82CC3D28-F1F9-4DA3-A388-1EA3091EA3DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82CC3D28-F1F9-4DA3-A388-1EA3091EA3DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82CC3D28-F1F9-4DA3-A388-1EA3091EA3DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC695D07-9D0A-422B-B102-30A40656683F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC695D07-9D0A-422B-B102-30A40656683F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC695D07-9D0A-422B-B102-30A40656683F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC695D07-9D0A-422B-B102-30A40656683F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,5 +76,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{2E42F150-A360-4315-B140-0497F701E451} = {B91E975D-C195-49BC-86D5-550F8DE379BD}
 		{E43B93A9-4EB6-4031-820C-50001889C760} = {2E42F150-A360-4315-B140-0497F701E451}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35
 	EndGlobalSection
 EndGlobal

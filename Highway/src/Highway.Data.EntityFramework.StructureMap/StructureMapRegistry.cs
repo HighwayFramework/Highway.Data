@@ -14,7 +14,7 @@ namespace Highway.Data.EntityFramework.StructureMap
     {
         public StructureMapRegistry()
         {
-            ForRequestedType<IEventManager>().TheDefaultIsConcreteType<EventManager>();
+            For<IEventManager>().Use<EventManager>();
         }
     }
 }

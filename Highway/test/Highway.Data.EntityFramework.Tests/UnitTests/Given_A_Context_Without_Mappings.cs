@@ -3,13 +3,14 @@ using System.Data.Entity;
 using System.Linq;
 using Highway.Data.EntityFramework.Contexts;
 using Highway.Data.EntityFramework.Mappings;
-using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.Tests.TestDomain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
+using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.Tests;
 using Castle.MicroKernel.Registration;
 using Highway.Data.EntityFramework.Tests.Initializer;
+using Highway.Data.EntityFramework.Tests.Mapping;
 
 namespace Highway.Data.EntityFramework.Tests.UnitTests
 {

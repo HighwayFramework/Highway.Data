@@ -95,7 +95,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="UnitTests\EFFailureContext.cs" />
-    <Compile Include="UnitTests\TestContext.cs" />
+    <Compile Include="UnitTests\TestDataContext.cs" />
     <Compile Include="UnitTests\Given_An_Event_Extendable_Context.cs" />
     <Compile Include="UnitTests\Given_A_Collection_Of_T.cs" />
     <Compile Include="UnitTests\Given_A_Context_Without_Mappings.cs" />

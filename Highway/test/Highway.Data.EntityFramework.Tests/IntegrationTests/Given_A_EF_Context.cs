@@ -15,16 +15,15 @@ using Highway.Test.MSTest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Component = Castle.MicroKernel.Registration.Component;
 using Highway.Data.EntityFramework.Tests.Properties;
-using TestContext = Highway.Data.EntityFramework.Tests.UnitTests.TestContext;
 
 namespace Highway.Data.EntityFramework.Tests.IntegrationTests
 {
     [TestClass]
-    public class Given_A_EF_Context : ContainerTest<TestContext>
+    public class Given_A_EF_Context : ContainerTest<TestDataContext>
     {
-        public override TestContext ResolveTarget()
+        public override TestDataContext ResolveTarget()
         {
-            return Container.Resolve<TestContext>(new { connectionString = Settings.Default.Connection });
+            return Container.Resolve<TestDataContext>(new { connectionString = Settings.Default.Connection });
         }
         public override void RegisterComponents(IWindsorContainer container)
         {

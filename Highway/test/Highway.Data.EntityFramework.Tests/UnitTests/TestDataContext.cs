@@ -3,9 +3,9 @@ using Highway.Data.EntityFramework.Mappings;
 
 namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
-    public class TestContext : Context
+    public class TestDataContext : Context
     {
-        public TestContext(string connectionString, IMappingConfiguration[] configurations) : base(connectionString, configurations)
+        public TestDataContext(string connectionString, IMappingConfiguration[] configurations) : base(connectionString, configurations)
         {
         }
 

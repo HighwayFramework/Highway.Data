@@ -2,7 +2,6 @@
 using System.Linq;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using CommonServiceLocator.WindsorAdapter;
 using Highway.Data.EntityFramework.Mappings;
 using Highway.Data.EntityFramework.Repositories;
 using Highway.Data.EventManagement;
@@ -12,32 +11,36 @@ using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.Tests.TestDomain;
 using Highway.Data.Tests.TestQueries;
 using Highway.Test.MSTest;
-using Microsoft.Practices.ServiceLocation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
+using Highway.Data.Tests;
 
 namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
     [TestClass]
-    public class Given_A_Generic_Repository
+    public class Given_A_Generic_Repository : ContainerTest<Repository>
     {
-        private static IWindsorContainer container;
-
-        [ClassInitialize]
-        public static void SetupClass(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext context)
+        public override void RegisterComponents(IWindsorContainer container)
         {
-            container = new WindsorContainer();
-            ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(container));
-            container.Register(Component.For<IEventManager>().ImplementedBy<EventManager>().LifestyleTransient(),
-                               Component.For<IDataContext>().ImplementedBy<TestContext>().DependsOn(new { connectionString = Settings.Default.Connection, configurations = new []{new TestMappingConfiguration()} }).LifestyleTransient(),
-                               Component.For<IMappingConfiguration>().ImplementedBy<TestMappingConfiguration>().LifestyleTransient());
-
+            container.Register(
+                    Component.For<IEventManager>()
+                        .ImplementedBy<EventManager>(),
+                    Component.For<IDataContext>().ImplementedBy<TestContext>()
+                        .DependsOn(new
+                        {
+                            connectionString = Settings.Default.Connection,
+                            configurations = new[] { new FooMappingConfiguration() }
+                        }),
+                    Component.For<IMappingConfiguration>()
+                        .ImplementedBy<FooMappingConfiguration>());
+            base.RegisterComponents(container);
         }
+
         [TestMethod]
         public void When_Given_A_Contructor_It_Should_Support_Dependency_Injection()
         {
             //Arrange
-            var context = container.Resolve<IDataContext>();
+            var context = Container.Resolve<IDataContext>();
 
             //Act
             var repository = new Repository(context);
@@ -56,7 +59,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
                     {
                         new Foo() {Id = 1, Name = "Test"}
                     }.AsQueryable());
-            var target = new Repository(context);
+            target = new Repository(context);
             
             //Act
             var result = target.Find(new FindFoo());
@@ -79,7 +82,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
                     {
                         new Foo() {Id = 1, Name = "Test"}
                     }.AsQueryable());
-            var target = new Repository(context);
+            target = new Repository(context);
 
             //Act
             var result = target.Get(new ScalarIntTestQuery());
@@ -99,7 +102,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
                     {
                         new Foo() {Id = 1, Name = "Test"}
                     }.AsQueryable());
-            var target = new Repository(context);
+            target = new Repository(context);
 
             //Act
             var result = target.Get(new ScalarIntTestQuery());
@@ -120,7 +123,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
                     {
                         foo
                     }.AsQueryable());
-            var target = new Repository(context);
+            target = new Repository(context);
 
             //Act
             var result = target.Find(new FindFoo()).FirstOrDefault();
@@ -140,7 +143,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
                     {
                         new Foo() {Id = 1, Name = "Test"}
                     }.AsQueryable());
-            var target = new Repository(context);
+            target = new Repository(context);
 
             //Act
             var testCommand = new TestCommand();

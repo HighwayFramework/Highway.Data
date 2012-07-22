@@ -55,7 +55,6 @@
     <Compile Include="..\..\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="Interfaces\IRepositoryFactory.cs" />
     <Compile Include="Interceptors\Events\PostQueryEventArgs.cs" />
     <Compile Include="Interceptors\Events\PostSaveEventArgs.cs" />
     <Compile Include="Interceptors\Events\PreQueryEventArgs.cs" />

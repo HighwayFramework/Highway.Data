@@ -9,6 +9,7 @@ using System.Linq;
 using Highway.Data.EntityFramework.Mappings;
 using Highway.Data.Interceptors.Events;
 using Highway.Data.Interfaces;
+using System.Diagnostics;
 
 namespace Highway.Data.EntityFramework.Contexts
 {
@@ -24,7 +25,8 @@ namespace Highway.Data.EntityFramework.Contexts
         /// </summary>
         /// <param name="connectionString">The standard SQL connection string for the Database</param>
         /// <param name="configurations">The Mapping Configuration that will determine how the tables and objects interact</param>
-        public Context(string connectionString, IMappingConfiguration[] configurations) : base(connectionString)
+        public Context(string connectionString, IMappingConfiguration[] configurations)
+            : base(connectionString)
         {
             _configurations = configurations;
         }
@@ -125,7 +127,7 @@ namespace Highway.Data.EntityFramework.Contexts
         public T Reload<T>(T item) where T : class
         {
             var entry = GetChangeTrackingEntry(item);
-            if(entry == null)
+            if (entry == null)
             {
                 throw new InvalidOperationException("You cannot reload an objecct that is not in the current Entity Framework datya context");
             }
@@ -142,7 +144,7 @@ namespace Highway.Data.EntityFramework.Contexts
             var entries = base.ChangeTracker.Entries<T>();
             entries.Each(x => x.Reload());
         }
-        
+
         /// <summary>
         /// Commits all currently tracked entity changes
         /// </summary>
@@ -163,7 +165,7 @@ namespace Highway.Data.EntityFramework.Contexts
 
         private void InvokePreSave()
         {
-            if (PreSave != null) PreSave(this, new PreSaveEventArgs(){});
+            if (PreSave != null) PreSave(this, new PreSaveEventArgs() { });
         }
 
         /// <summary>
@@ -208,8 +210,8 @@ namespace Highway.Data.EntityFramework.Contexts
         public IEventManager EventManager
         {
             get { return _eventManager; }
-            set 
-            { 
+            set
+            {
                 _eventManager = value;
                 _eventManager.Context = this;
             }
@@ -242,9 +244,11 @@ namespace Highway.Data.EntityFramework.Contexts
         /// <param name="modelBuilder">The builder that defines the model for the context being created.</param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            Console.WriteLine("\tOnModelCreating");
             foreach (var mappingConfiguration in _configurations)
             {
-                mappingConfiguration.ConfigureModelBuilder(modelBuilder);  
+                Console.WriteLine("\t\tMapping : " + mappingConfiguration.GetType().Name);
+                mappingConfiguration.ConfigureModelBuilder(modelBuilder);
             }
             base.OnModelCreating(modelBuilder);
         }

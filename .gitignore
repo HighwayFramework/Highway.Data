@@ -15,4 +15,5 @@ lib/golden_cap.zip
 *.cache
 packages
 TestResults
-Logs
+
+*.ncrunchsolution

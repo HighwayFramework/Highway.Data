@@ -7,22 +7,36 @@ using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.Tests.TestDomain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
+using Highway.Data.Tests;
+using Castle.MicroKernel.Registration;
+using Highway.Data.EntityFramework.Tests.Initializer;
 
 namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
     [TestClass]
-    public class Given_A_Context_Without_Mappings
+    public class Given_A_Context_Without_Mappings : ContainerTest<Context>
     {
+        private IMappingConfiguration mockMapping;
+        public override void RegisterComponents(Castle.Windsor.IWindsorContainer container)
+        {
+            mockMapping = MockRepository.GenerateMock<IMappingConfiguration>();
+            container.Register(Component.For<IMappingConfiguration>().Instance(mockMapping));
+            base.RegisterComponents(container);
+        }
+
+        public override Context ResolveTarget()
+        {
+            Database.SetInitializer(new ForceDeleteInitializer(new EntityFrameworkIntializer()));
+            return Container.Resolve<Context>(new { connectionString = Settings.Default.Connection });
+        }
+
         [TestMethod]
         public void Mappings_Can_Be_Injected_instead_of_explicitly_coded_in_the_context()
         {
             //Arrange
-            var mapping = MockRepository.GenerateMock<IMappingConfiguration>();
-            var mappings = new IMappingConfiguration[]{mapping};
-            mapping.Expect(x => x.ConfigureModelBuilder(Arg<DbModelBuilder>.Is.Anything));
+            mockMapping.Expect(x => x.ConfigureModelBuilder(Arg<DbModelBuilder>.Is.Anything));
 
             //Act
-            var target = new Context(Settings.Default.Connection, mappings);
             try
             {
                 target.Set<Foo>().ToList();
@@ -34,8 +48,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             
 
             //Assert
-            mapping.VerifyAllExpectations();
+            mockMapping.VerifyAllExpectations();
         }
-
     }
 }

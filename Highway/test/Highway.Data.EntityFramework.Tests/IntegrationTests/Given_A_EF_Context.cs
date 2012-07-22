@@ -1,48 +1,45 @@
-﻿using System.Data;
+﻿using System.ComponentModel;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using CommonServiceLocator.WindsorAdapter;
 using Highway.Data.EntityFramework.Mappings;
 using Highway.Data.EventManagement;
 using Highway.Data.Interfaces;
 using Highway.Data.EntityFramework.Tests.Initializer;
 using Highway.Data.EntityFramework.Tests.Mapping;
-using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.EntityFramework.Tests.UnitTests;
+using Highway.Data.Tests;
 using Highway.Data.Tests.TestDomain;
 using Highway.Test.MSTest;
-using Microsoft.Practices.ServiceLocation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Component = Castle.MicroKernel.Registration.Component;
+using Highway.Data.EntityFramework.Tests.Properties;
 using TestContext = Highway.Data.EntityFramework.Tests.UnitTests.TestContext;
 
 namespace Highway.Data.EntityFramework.Tests.IntegrationTests
 {
     [TestClass]
-    public class Given_A_EF_Context
+    public class Given_A_EF_Context : ContainerTest<TestContext>
     {
-        private TestContext context;
-        private static IWindsorContainer container;
-
-        [ClassInitialize]
-        public static void SetupClass(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext context)
+        public override TestContext ResolveTarget()
         {
-            container = new WindsorContainer();
-            ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(container));
-            container.Register(Component.For<IEventManager>().ImplementedBy<EventManager>().LifestyleTransient(),
-                               Component.For<TestContext>().ImplementedBy<TestContext>().DependsOn(new { connectionString = Settings.Default.Connection }).LifestyleTransient(),
-                               Component.For<IMappingConfiguration>().ImplementedBy<TestMappingConfiguration>().LifestyleTransient());
+            return Container.Resolve<TestContext>(new { connectionString = Settings.Default.Connection });
+        }
+        public override void RegisterComponents(IWindsorContainer container)
+        {
+            container.Register(Component.For<IEventManager>().ImplementedBy<EventManager>(),
+                               Component.For<IMappingConfiguration>().ImplementedBy<FooMappingConfiguration>());
 
+            base.RegisterComponents(container);
         }
 
-        [TestInitialize]
-        public void Setup()
+        public override void BeforeEachTest()
         {
+            base.BeforeEachTest();
             Database.SetInitializer(new ForceDeleteInitializer(new EntityFrameworkIntializer()));
-            context = container.Resolve<TestContext>();
+            target.AsQueryable<Foo>().ToList();
         }
-
 
         [TestMethod, TestCategory(TestCategories.Database)]
         public void When_AsQueryable_Called_A_Set_Is_Pulled_From_The_Database()
@@ -50,7 +47,7 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
             //Arrange
 
             //Act
-            var items = context.AsQueryable<Foo>();
+            var items = target.AsQueryable<Foo>();
 
             //Assert
             items.Count().ShouldBe(5);
@@ -60,14 +57,14 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
         public void When_Add_Is_Called_The_Object_Is_Added_To_The_ChangeTracker_In_An_Added_State()
         {
             //Arrange
-	        
-            //Act
             var item = new Foo();
-            context.Add(item);
+
+            //Act
+            target.Add(item);
 
             //Assert
-            context.ChangeTracker.DetectChanges();
-            var entry = context.Entry(item);
+            target.ChangeTracker.DetectChanges();
+            var entry = target.Entry(item);
             entry.State.ShouldBe(EntityState.Added);
         }
 
@@ -77,12 +74,12 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
             //Arrange
 	
             //Act
-            var item = context.AsQueryable<Foo>().First();
-            context.Remove(item);
+            var item = target.AsQueryable<Foo>().First();
+            target.Remove(item);
 
             //Assert
-            context.ChangeTracker.DetectChanges();
-            var entry = context.Entry(item);
+            target.ChangeTracker.DetectChanges();
+            var entry = target.Entry(item);
             entry.State.ShouldBe(EntityState.Deleted);
         }
 
@@ -92,18 +89,14 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
             //Arrange
 	
             //Act
-            var item = context.AsQueryable<Foo>().First();
-            context.Detach(item);
+            var item = target.AsQueryable<Foo>().First();
+            target.Detach(item);
 
             //Assert
-            context.ChangeTracker.DetectChanges();
-            var entry = context.Entry(item);
+            target.ChangeTracker.DetectChanges();
+            var entry = target.Entry(item);
             entry.State.ShouldBe(EntityState.Detached);
+            target.Dispose();
         }
-    }
-
-    public static class TestCategories
-    {
-        public const string Database = "Database";
     }
 }

@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.Entity.ModelConfiguration;
 using Highway.Data.Tests.TestDomain;
 
+
 namespace Highway.Data.EntityFramework.Tests.Mapping
 {
     public class QuxMap : EntityTypeConfiguration<Qux>

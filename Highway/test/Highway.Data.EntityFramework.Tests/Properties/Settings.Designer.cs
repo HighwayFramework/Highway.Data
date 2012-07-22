@@ -34,3 +34,4 @@ namespace Highway.Data.EntityFramework.Tests.Properties {
         }
     }
 }
+

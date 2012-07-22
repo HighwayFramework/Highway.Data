@@ -72,6 +72,10 @@
     <Compile Include="..\..\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="AutoMockingLazyComponentLoader.cs" />
+    <Compile Include="AutoMockingTest.cs" />
+    <Compile Include="BaseTest.cs" />
+    <Compile Include="ContainerTest.cs" />
     <Compile Include="TestDomain\Bar.cs" />
     <Compile Include="TestDomain\Baz.cs" />
     <Compile Include="TestDomain\Qux.cs" />

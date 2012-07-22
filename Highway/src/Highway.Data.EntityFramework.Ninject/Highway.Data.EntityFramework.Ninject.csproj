@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\SolutionInfo.cs">
+      <Link>SolutionInfo.cs</Link>
+    </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -51,7 +54,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\Highway.Data\Highway.Data.csproj">
+    <ProjectReference Include="..\Highway.Data\Highway.Data.csproj">
       <Project>{b0ca9dab-c5d4-4ac6-97e7-725b18191b2d}</Project>
       <Name>Highway.Data</Name>
     </ProjectReference>

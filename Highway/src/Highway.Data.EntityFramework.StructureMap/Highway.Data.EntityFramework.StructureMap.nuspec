@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<package >
-  <metadata>
+<package>
+<metadata>
     <id>$id$</id>
     <version>$version$</version>
     <title>$title$</title>
@@ -15,7 +15,7 @@
     <tags>Architecture  ORM  Repository  Specification  Productivity</tags>
     <dependencies>
       <dependency id="Highway.Data.EntityFramework" />
-	  <dependency id="Castle.Windsor"/>
+	  <dependency id="StructureMap" />
     </dependencies>
   </metadata>
 </package>

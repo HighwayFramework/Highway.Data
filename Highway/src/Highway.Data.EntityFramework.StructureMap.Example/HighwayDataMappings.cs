@@ -1,10 +1,4 @@
-﻿using Highway.Data.EntityFramework.Mappings;
-using Highway.Data.EntityFramework.StructureMap.Example.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Highway.Data.EntityFramework.StructureMap.Example.Domain;
 
 namespace Highway.Data.EntityFramework.StructureMap.Example
 {

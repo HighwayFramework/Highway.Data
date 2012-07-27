@@ -2,9 +2,7 @@
 using System.Linq;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using CommonServiceLocator.WindsorAdapter;
-using Highway.Data.EntityFramework.Mappings;
-using Highway.Data.EntityFramework.Repositories;
+using Highway.Data.Repositories;
 using Highway.Data.EventManagement;
 using Highway.Data.Interfaces;
 using Highway.Data.EntityFramework.Tests.Mapping;
@@ -12,10 +10,8 @@ using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.Tests.TestDomain;
 using Highway.Data.Tests.TestQueries;
 using Highway.Test.MSTest;
-using Microsoft.Practices.ServiceLocation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
-using Highway.Data.EntityFramework.Tests.UnitTests;
 using Highway.Data.Tests;
 
 namespace Highway.Data.EntityFramework.Tests.UnitTests

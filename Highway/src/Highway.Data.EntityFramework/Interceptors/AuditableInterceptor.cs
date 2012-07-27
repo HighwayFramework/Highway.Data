@@ -6,7 +6,7 @@ using Highway.Data.Interceptors;
 using Highway.Data.Interceptors.Events;
 using Highway.Data.Interfaces;
 
-namespace Highway.Data.EntityFramework.Interceptors
+namespace Highway.Data.Interceptors
 {
     /// <summary>
     /// An interceptor that operates pre-save to add audit information to the records being committed that implement the <see cref="Highway.Data.Interfaces.IAuditableEntity"/> interface

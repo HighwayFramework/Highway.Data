@@ -1,9 +1,7 @@
-﻿using System.ComponentModel;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using Castle.Windsor;
-using Highway.Data.EntityFramework.Mappings;
 using Highway.Data.EventManagement;
 using Highway.Data.Interfaces;
 using Highway.Data.EntityFramework.Tests.Initializer;

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Highway.Data.Interfaces;
 
-namespace Highway.Data.EntityFramework.Repositories
+namespace Highway.Data.Repositories
 {
     /// <summary>
     /// A Entity Framework Specific repository implementation that uses Specification pattern to execute Queries in a controlled fashion.

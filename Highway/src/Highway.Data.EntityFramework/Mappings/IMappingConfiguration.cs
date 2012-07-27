@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 
-namespace Highway.Data.EntityFramework.Mappings
+namespace Highway.Data
 {
     /// <summary>
     /// Implement this interface to pass the mappings in via constructor injection on the context.

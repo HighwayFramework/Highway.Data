@@ -1,13 +1,7 @@
-﻿using Highway.Data.EntityFramework.Contexts;
-using Highway.Data.EntityFramework.Mappings;
-using Highway.Data.EntityFramework.Repositories;
+﻿using Highway.Data.Repositories;
 using Highway.Data.Interfaces;
 using StructureMap;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Highway.Data.EntityFramework.StructureMap.Example
 {
@@ -27,7 +21,7 @@ namespace Highway.Data.EntityFramework.StructureMap.Example
                 x.For<IRepository>().Use<Repository>();
                 x.For<IDataContext>().Use<Context>()
                     .Ctor<string>("connectionString").Is(SqlExpressConnectionString)
-                    .Ctor<IMappingConfiguration[]>("configurations").Is(new[] { new HighwayDataMappings() });
+                    .Ctor<IMappingConfiguration[]>("mapping").Is(new[] { new HighwayDataMappings() });
 
             }));
 

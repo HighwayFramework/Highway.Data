@@ -9,7 +9,7 @@ using Castle.Windsor;
 using Highway.Data.EventManagement;
 using Highway.Data.Interfaces;
 
-namespace Highway.Data.NHibernate.Castle
+namespace Highway.Data.EntityFramework.Castle
 {
     /// <summary>
     /// Castle specific bootstrap for installing types needed for usage to the current container

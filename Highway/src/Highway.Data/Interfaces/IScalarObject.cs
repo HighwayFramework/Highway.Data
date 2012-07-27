@@ -4,7 +4,7 @@ namespace Highway.Data.Interfaces
     /// An Interface for Scalar Queries that return a single value or object
     /// </summary>
     /// <typeparam name="T">The Type that is being returned</typeparam>
-    public interface IScalarObject<out T>
+    public interface IScalarObject<out T> 
     {
         /// <summary>
         /// Executes the expression against the passed in context

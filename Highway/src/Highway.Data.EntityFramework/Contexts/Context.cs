@@ -6,31 +6,35 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Objects;
 using System.Linq;
-using Highway.Data.EntityFramework.Mappings;
+using Common.Logging;
+using Common.Logging.Simple;
 using Highway.Data.Interceptors.Events;
 using Highway.Data.Interfaces;
-using System.Diagnostics;
 
-namespace Highway.Data.EntityFramework.Contexts
+namespace Highway.Data
 {
     /// <summary>
     /// A base implementation of the Code First Data Context for Entity Framework
     /// </summary>
     public class Context : DbContext, IObservableDataContext
     {
-        private readonly IMappingConfiguration[] _configurations;
+        private readonly IMappingConfiguration _mapping;
+        private readonly ILog _log;
 
         /// <summary>
         /// Constructs a context
         /// </summary>
         /// <param name="connectionString">The standard SQL connection string for the Database</param>
-        /// <param name="configurations">The Mapping Configuration that will determine how the tables and objects interact</param>
-        public Context(string connectionString, IMappingConfiguration[] configurations)
-            : base(connectionString)
-        {
-            _configurations = configurations;
+        /// <param name="mapping">The Mapping Configuration that will determine how the tables and objects interact</param>
+        /// <param name="contextConfiguration">The context specific configuration that will change context level behavior ( Optional )</param>
+        /// <param name="log">The logger being supplied for this context ( Optional )</param>
+        public Context(string connectionString, IMappingConfiguration mapping, IContextConfiguration contextConfiguration = null, ILog log = null) : base(connectionString)
+        {   
+            _mapping = mapping;
+            _log = log ?? new NoOpLogger();
+            if(contextConfiguration != null) contextConfiguration.ConfugureContext(this);
         }
-
+        
         /// <summary>
         /// This gives a mockable wrapper around the normal <see cref="DbSet{T}"/> method that allows for testablity
         /// </summary>
@@ -49,7 +53,9 @@ namespace Highway.Data.EntityFramework.Contexts
         /// <returns>The <typeparamref name="T"/> you added</returns>
         public T Add<T>(T item) where T : class
         {
+            _log.DebugFormat("Adding Object {0}",item);
             this.Set<T>().Add(item);
+            _log.DebugFormat("Added Object {0}", item);
             return item;
         }
 
@@ -61,7 +67,9 @@ namespace Highway.Data.EntityFramework.Contexts
         /// <returns>The <typeparamref name="T"/> you removed</returns>
         public T Remove<T>(T item) where T : class
         {
+            _log.DebugFormat("Removing Object {0}", item);
             this.Set<T>().Remove(item);
+            _log.DebugFormat("Removed Object {0}", item);
             return item;
         }
 
@@ -73,13 +81,16 @@ namespace Highway.Data.EntityFramework.Contexts
         /// <returns>The <typeparamref name="T"/> you updated</returns>
         public T Update<T>(T item) where T : class
         {
+            _log.DebugFormat("Retrieving State Entry For Object {0}", item);
             var entry = GetChangeTrackingEntry(item);
+            _log.DebugFormat("Updating Object {0}", item);
             if (entry == null)
             {
                 throw new InvalidOperationException(
                     "Cannot Update an object that is not attacched to the current Entity Framework data context");
             }
             entry.State = EntityState.Modified;
+            _log.DebugFormat("Updated Object {0}", item);
             return item;
         }
 
@@ -91,7 +102,9 @@ namespace Highway.Data.EntityFramework.Contexts
         /// <returns>The <typeparamref name="T"/> you attached</returns>
         public T Attach<T>(T item) where T : class
         {
+            _log.DebugFormat("Attaching Object {0}", item);
             this.Set<T>().Attach(item);
+            _log.DebugFormat("Attaching Object {0}", item);
             return item;
         }
 
@@ -103,12 +116,15 @@ namespace Highway.Data.EntityFramework.Contexts
         /// <returns>The <typeparamref name="T"/> you detached</returns>
         public T Detach<T>(T item) where T : class
         {
+            _log.DebugFormat("Retrieving State Entry For Object {0}", item);
             var entry = GetChangeTrackingEntry(item);
+            _log.DebugFormat("Detaching Object {0}", item);
             if (entry == null)
             {
                 throw new InvalidOperationException("Cannot detach an object that is not attached to the current context.");
             }
             entry.State = EntityState.Detached;
+            _log.DebugFormat("Detached Object {0}", item);
             return item;
         }
 
@@ -126,12 +142,15 @@ namespace Highway.Data.EntityFramework.Contexts
         /// <returns>The <typeparamref name="T"/> you reloaded</returns>
         public T Reload<T>(T item) where T : class
         {
+            _log.DebugFormat("Retrieving State Entry For Object {0}", item);
             var entry = GetChangeTrackingEntry(item);
+            _log.DebugFormat("Reloading Object {0}", item);
             if (entry == null)
             {
                 throw new InvalidOperationException("You cannot reload an objecct that is not in the current Entity Framework datya context");
             }
             entry.Reload();
+            _log.DebugFormat("Reloaded Object {0}", item);
             return item;
         }
 
@@ -151,10 +170,12 @@ namespace Highway.Data.EntityFramework.Contexts
         /// <returns>the number of rows affected</returns>
         public int Commit()
         {
+            _log.Debug("\tCommit");
             base.ChangeTracker.DetectChanges();
             InvokePreSave();
             var result = base.SaveChanges();
             InvokePostSave();
+            _log.DebugFormat("\tCommited {0} Changes",result);
             return result;
         }
 
@@ -178,6 +199,8 @@ namespace Highway.Data.EntityFramework.Contexts
         /// <returns>An <see cref="IEnumerable{T}"/> from the query return</returns>
         public IEnumerable<T> ExecuteSqlQuery<T>(string sql, params DbParameter[] dbParams)
         {
+            var parameters = dbParams.Select(x => string.Format("{0} : {1} : {2}\t", x.ParameterName, x.Value, x.DbType)).ToArray();
+            _log.TraceFormat("Executing SQL {0}, with parameters {1}", sql, string.Join(",", parameters));
             return base.Database.SqlQuery<T>(sql, dbParams);
         }
 
@@ -189,6 +212,8 @@ namespace Highway.Data.EntityFramework.Contexts
         /// <returns>The rows affected</returns>
         public int ExecuteSqlCommand(string sql, params DbParameter[] dbParams)
         {
+            var parameters = dbParams.Select(x => string.Format("{0} : {1} : {2}\t", x.ParameterName, x.Value, x.DbType)).ToArray();
+            _log.TraceFormat("Executing SQL {0}, with parameters {1}", sql, string.Join(",", parameters));
             return base.Database.ExecuteSqlCommand(sql, dbParams);
         }
 
@@ -200,6 +225,8 @@ namespace Highway.Data.EntityFramework.Contexts
         /// <returns></returns>
         public int ExecuteFunction(string procedureName, params ObjectParameter[] dbParams)
         {
+            var parameters = dbParams.Select(x => string.Format("{0} : {1} : {2}\t", x.Name, x.Value, x.ParameterType)).ToArray();
+            _log.DebugFormat("Executing Procedure {0}, with parameters {1}",procedureName, string.Join(",", parameters));
             return base.Database.SqlQuery<int>(procedureName, dbParams).FirstOrDefault();
         }
 
@@ -244,11 +271,11 @@ namespace Highway.Data.EntityFramework.Contexts
         /// <param name="modelBuilder">The builder that defines the model for the context being created.</param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            Console.WriteLine("\tOnModelCreating");
-            foreach (var mappingConfiguration in _configurations)
+            _log.Debug("\tOnModelCreating");
+            if(_mapping != null)
             {
-                Console.WriteLine("\t\tMapping : " + mappingConfiguration.GetType().Name);
-                mappingConfiguration.ConfigureModelBuilder(modelBuilder);
+                _log.DebugFormat("\t\tMapping : {0}", _mapping.GetType().Name);
+                _mapping.ConfigureModelBuilder(modelBuilder);
             }
             base.OnModelCreating(modelBuilder);
         }

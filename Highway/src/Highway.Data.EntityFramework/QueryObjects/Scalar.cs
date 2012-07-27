@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Text;
-using System.Transactions;
 using Highway.Data.Interfaces;
 
 namespace Highway.Data.QueryObjects
@@ -29,5 +29,7 @@ namespace Highway.Data.QueryObjects
             CheckContextAndQuery(ContextQuery);
             return this.ContextQuery(context);
         }
+
+
     }    
 }

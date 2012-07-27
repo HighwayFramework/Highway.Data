@@ -8,7 +8,7 @@ using System.Linq;
 using Highway.Data.Interceptors.Events;
 using Highway.Data.Interfaces;
 
-namespace Highway.Data.EntityFramework.Contexts
+namespace Highway.Data
 {
     /// <summary>
     /// The default implementation of a Object context for the database first approach to Entity Framework

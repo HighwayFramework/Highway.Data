@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
-using Highway.Data.EntityFramework.Contexts;
-using Highway.Data.EntityFramework.Mappings;
 using Highway.Data.Tests.TestDomain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
@@ -10,18 +8,17 @@ using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.Tests;
 using Castle.MicroKernel.Registration;
 using Highway.Data.EntityFramework.Tests.Initializer;
-using Highway.Data.EntityFramework.Tests.Mapping;
 
 namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
     [TestClass]
     public class Given_A_Context_Without_Mappings : ContainerTest<Context>
     {
-        private IMappingConfiguration mockMapping;
+        private IMappingConfiguration _mockMapping;
         public override void RegisterComponents(Castle.Windsor.IWindsorContainer container)
         {
-            mockMapping = MockRepository.GenerateMock<IMappingConfiguration>();
-            container.Register(Component.For<IMappingConfiguration>().Instance(mockMapping));
+            _mockMapping = MockRepository.GenerateMock<IMappingConfiguration>();
+            container.Register(Component.For<IMappingConfiguration>().Instance(_mockMapping));
             base.RegisterComponents(container);
         }
 
@@ -35,7 +32,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
         public void Mappings_Can_Be_Injected_instead_of_explicitly_coded_in_the_context()
         {
             //Arrange
-            mockMapping.Expect(x => x.ConfigureModelBuilder(Arg<DbModelBuilder>.Is.Anything));
+            _mockMapping.Expect(x => x.ConfigureModelBuilder(Arg<DbModelBuilder>.Is.Anything));
 
             //Act
             try
@@ -49,7 +46,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             
 
             //Assert
-            mockMapping.VerifyAllExpectations();
+            _mockMapping.VerifyAllExpectations();
         }
     }
 }

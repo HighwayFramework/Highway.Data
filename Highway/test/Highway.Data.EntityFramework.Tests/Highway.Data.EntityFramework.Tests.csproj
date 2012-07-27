@@ -25,6 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -75,9 +76,12 @@
     <Compile Include="..\..\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="Async\Given_An_Async_enabled_Repository.cs" />
+    <Compile Include="Contexts\Given_A_Context_Without_Configuration.cs" />
     <Compile Include="Initializer\EntityFrameworkIntializer.cs" />
     <Compile Include="Initializer\ForceDeleteInitializer.cs" />
     <Compile Include="IntegrationTests\Given_A_EF_Context.cs" />
+    <Compile Include="Logging\Given_A_Context.cs" />
     <Compile Include="Mapping\BarMappingConfiguration.cs" />
     <Compile Include="Mapping\BaseMappingConfiguration.cs" />
     <Compile Include="Mapping\BazMappingConfiguration.cs" />
@@ -94,14 +98,18 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="TestQueries\FindFoo.cs" />
+    <Compile Include="TestQueries\ScalarFooTestQuery.cs" />
+    <Compile Include="TestQueries\ScalarIntTestQuery.cs" />
+    <Compile Include="TestQueries\TestCommand.cs" />
     <Compile Include="UnitTests\EFFailureContext.cs" />
     <Compile Include="UnitTests\TestDataContext.cs" />
-    <Compile Include="UnitTests\Given_An_Event_Extendable_Context.cs" />
-    <Compile Include="UnitTests\Given_A_Collection_Of_T.cs" />
-    <Compile Include="UnitTests\Given_A_Context_Without_Mappings.cs" />
-    <Compile Include="UnitTests\Given_A_Generic_Repository.cs" />
-    <Compile Include="UnitTests\Given_A_Query_Object.cs" />
-    <Compile Include="UnitTests\Given_A_Scalar_Object.cs" />
+    <Compile Include="Contexts\Given_An_Event_Extendable_Context.cs" />
+    <Compile Include="Enumerable\Given_A_Collection_Of_T.cs" />
+    <Compile Include="Contexts\Given_A_Context_Without_Mappings.cs" />
+    <Compile Include="Repositories\Given_A_Generic_Repository.cs" />
+    <Compile Include="Queries\Given_A_Query_Object.cs" />
+    <Compile Include="Queries\Given_A_Scalar_Object.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Highway.Data.EntityFramework\Highway.Data.EntityFramework.csproj">

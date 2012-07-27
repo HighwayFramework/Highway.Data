@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Highway.Data.EntityFramework.Repositories;
+using Highway.Data.Repositories;
 using Highway.Data.Interfaces;
 using Highway.Data.Tests;
 using Highway.Data.Tests.TestDomain;

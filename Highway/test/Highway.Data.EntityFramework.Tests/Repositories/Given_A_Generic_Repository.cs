@@ -24,7 +24,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             container.Register(
                     Component.For<IEventManager>()
                         .ImplementedBy<EventManager>(),
-                    Component.For<IDataContext>().ImplementedBy<TestDataContext>()
+                    Component.For<IDataContext>().ImplementedBy<TestDataDataContext>()
                         .DependsOn(new
                         {
                             connectionString = Settings.Default.Connection,

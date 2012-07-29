@@ -17,11 +17,11 @@ using Highway.Data.EntityFramework.Tests.Properties;
 namespace Highway.Data.EntityFramework.Tests.IntegrationTests
 {
     [TestClass]
-    public class Given_A_EF_Context : ContainerTest<TestDataContext>
+    public class Given_A_EF_Context : ContainerTest<TestDataDataContext>
     {
-        public override TestDataContext ResolveTarget()
+        public override TestDataDataContext ResolveTarget()
         {
-            return Container.Resolve<TestDataContext>(new { connectionString = Settings.Default.Connection });
+            return Container.Resolve<TestDataDataContext>(new { connectionString = Settings.Default.Connection });
         }
         public override void RegisterComponents(IWindsorContainer container)
         {

@@ -19,7 +19,7 @@ namespace Highway.Data.EntityFramework.StructureMap.Example
 
                 x.For<IMappingConfiguration>().Use<HighwayDataMappings>();
                 x.For<IRepository>().Use<Repository>();
-                x.For<IDataContext>().Use<Context>()
+                x.For<IDataContext>().Use<DataContext>()
                     .Ctor<string>("connectionString").Is(SqlExpressConnectionString)
                     .Ctor<IMappingConfiguration[]>("mapping").Is(new[] { new HighwayDataMappings() });
 

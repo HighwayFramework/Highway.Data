@@ -13,12 +13,12 @@ namespace Highway.Data
     /// <summary>
     /// The default implementation of a Object context for the database first approach to Entity Framework
     /// </summary>
-    public class ObjectContext : System.Data.Objects.ObjectContext, IObservableDataContext
+    public class ObjectDataContext : System.Data.Objects.ObjectContext, IObservableDataContext
     {
         /// <summary>
         /// Creates a database or model first context        /// </summary>
         /// <param name="connection"></param>
-        public ObjectContext(EntityConnection connection) : base(connection)
+        public ObjectDataContext(EntityConnection connection) : base(connection)
         {
         }
 
@@ -26,7 +26,7 @@ namespace Highway.Data
         /// Creates a database or model first context
         /// </summary>
         /// <param name="connectionString"></param>
-        public ObjectContext(string connectionString) : base(connectionString)
+        public ObjectDataContext(string connectionString) : base(connectionString)
         {
         }
         /// <summary>
@@ -34,7 +34,7 @@ namespace Highway.Data
         /// </summary>
         /// <param name="connectionString"></param>
         /// <param name="defaultContainerName"></param>
-        protected ObjectContext(string connectionString, string defaultContainerName) : base(connectionString, defaultContainerName)
+        protected ObjectDataContext(string connectionString, string defaultContainerName) : base(connectionString, defaultContainerName)
         {
         }
 
@@ -43,7 +43,7 @@ namespace Highway.Data
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="defaultContainerName"></param>
-        protected ObjectContext(EntityConnection connection, string defaultContainerName) : base(connection, defaultContainerName)
+        protected ObjectDataContext(EntityConnection connection, string defaultContainerName) : base(connection, defaultContainerName)
         {
         }
 

@@ -3,19 +3,19 @@ using Highway.Data.EntityFramework.Tests.UnitTests;
 
 namespace Highway.Data.EntityFramework.Tests.Initializer
 {
-    public class ForceDeleteInitializer : IDatabaseInitializer<TestDataContext>
+    public class ForceDeleteInitializer : IDatabaseInitializer<TestDataDataContext>
     {
-        private readonly IDatabaseInitializer<TestDataContext> _initializer;
+        private readonly IDatabaseInitializer<TestDataDataContext> _initializer;
 
-        public ForceDeleteInitializer(IDatabaseInitializer<TestDataContext> innerInitializer)
+        public ForceDeleteInitializer(IDatabaseInitializer<TestDataDataContext> innerInitializer)
         {
             _initializer = innerInitializer;
         }
 
-        public void InitializeDatabase(TestDataContext dataContext)
+        public void InitializeDatabase(TestDataDataContext dataDataContext)
         {
-            if (dataContext.Database.Exists()) dataContext.Database.ExecuteSqlCommand("ALTER DATABASE FEEFTest SET SINGLE_USER WITH ROLLBACK IMMEDIATE");
-            _initializer.InitializeDatabase(dataContext);
+            if (dataDataContext.Database.Exists()) dataDataContext.Database.ExecuteSqlCommand("ALTER DATABASE FEEFTest SET SINGLE_USER WITH ROLLBACK IMMEDIATE");
+            _initializer.InitializeDatabase(dataDataContext);
         }
     }
 }

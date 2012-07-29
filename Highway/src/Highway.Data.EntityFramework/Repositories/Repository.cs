@@ -18,7 +18,7 @@ namespace Highway.Data.Repositories
         }
 
         /// <summary>
-        /// Reference to the Context the repository is using
+        /// Reference to the DataContext the repository is using
         /// </summary>
         public IDataContext Context { get; private set; }
         

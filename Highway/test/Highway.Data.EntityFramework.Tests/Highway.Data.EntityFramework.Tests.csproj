@@ -11,11 +11,13 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Highway.Data.EntityFramework.Tests</RootNamespace>
     <AssemblyName>Highway.Data.EntityFramework.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion)\</OutputPath>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <DefineConstants></DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,6 +36,12 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFrameworkVersion)' == 'v4.5'">
+    <DefineConstants>$(DefineConstants);DOTNET_45</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFrameworkVersion)' == 'v4.0'">
+    <DefineConstants>$(DefineConstants);DOTNET_40</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core">
@@ -103,7 +111,7 @@
     <Compile Include="TestQueries\ScalarIntTestQuery.cs" />
     <Compile Include="TestQueries\TestCommand.cs" />
     <Compile Include="UnitTests\EFFailureContext.cs" />
-    <Compile Include="UnitTests\TestDataContext.cs" />
+    <Compile Include="UnitTests\TestDataDataContext.cs" />
     <Compile Include="Contexts\Given_An_Event_Extendable_Context.cs" />
     <Compile Include="Enumerable\Given_A_Collection_Of_T.cs" />
     <Compile Include="Contexts\Given_A_Context_Without_Mappings.cs" />
@@ -139,6 +147,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <Target Name="AfterBuild">
+    <MSBuild Condition=" '$(TargetFrameworkVersion)' != 'v4.0'" Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v4.0" RunEachTargetSeparately="true" />
+  </Target>
+
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

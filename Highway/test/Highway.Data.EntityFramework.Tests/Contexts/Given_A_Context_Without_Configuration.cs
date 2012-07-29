@@ -16,7 +16,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             mockConfig.Expect(x => x.ConfugureContext(Arg<DbContext>.Is.Anything)).Repeat.Once();
             
             //Act
-            var target = new Context("Test", new FooMappingConfiguration(), mockConfig);
+            var target = new DataContext("Test", new FooMappingConfiguration(), mockConfig);
 
             //Assert
             mockConfig.VerifyAllExpectations();

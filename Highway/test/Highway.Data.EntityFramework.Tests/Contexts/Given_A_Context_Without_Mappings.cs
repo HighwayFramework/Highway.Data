@@ -12,7 +12,7 @@ using Highway.Data.EntityFramework.Tests.Initializer;
 namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
     [TestClass]
-    public class Given_A_Context_Without_Mappings : ContainerTest<Context>
+    public class Given_A_Context_Without_Mappings : ContainerTest<DataContext>
     {
         private IMappingConfiguration _mockMapping;
         public override void RegisterComponents(Castle.Windsor.IWindsorContainer container)
@@ -22,10 +22,10 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             base.RegisterComponents(container);
         }
 
-        public override Context ResolveTarget()
+        public override DataContext ResolveTarget()
         {
             Database.SetInitializer(new ForceDeleteInitializer(new EntityFrameworkIntializer()));
-            return Container.Resolve<Context>(new { connectionString = Settings.Default.Connection });
+            return Container.Resolve<DataContext>(new { connectionString = Settings.Default.Connection });
         }
 
         [TestMethod]

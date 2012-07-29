@@ -51,7 +51,7 @@ namespace Highway.Data.QueryObjects
         /// <param name="query">The query to be executed</param>
         protected void CheckContextAndQuery(object query)
         {
-            if (Context == null) throw new InvalidOperationException("Context cannot be null.");
+            if (Context == null) throw new InvalidOperationException("DataContext cannot be null.");
             if (query == null) throw new InvalidOperationException("Null Query cannot be executed.");
         }
 

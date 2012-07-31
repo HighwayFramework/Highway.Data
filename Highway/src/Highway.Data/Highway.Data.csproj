@@ -36,9 +36,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFrameworkVersion)' == 'v4.5'">
     <DefineConstants>$(DefineConstants);DOTNET_45</DefineConstants>
+    <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFrameworkVersion)' == 'v4.0'">
     <DefineConstants>$(DefineConstants);DOTNET_40</DefineConstants>
+    <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion)\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Logging">

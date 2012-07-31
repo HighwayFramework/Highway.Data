@@ -9,6 +9,10 @@ namespace Highway.Data.Repositories
     /// </summary>
     public class AsyncRepository : IAsyncRepository
     {
+        /// <summary>
+        /// Creates an Async Repository that uses Async and Await
+        /// </summary>
+        /// <param name="context">The data context being leveraged</param>
         public AsyncRepository(IDataContext context)
         {
             Context = context;
@@ -16,7 +20,7 @@ namespace Highway.Data.Repositories
 
         public IDataContext Context { get; private set; }
         public IEventManager EventManager { get; private set; }
-        public Task<IEnumerable<T>> Find<T>(IQuery<T> query) where T : class
+        public async Task<IEnumerable<T>> Find<T>(IQuery<T> query) where T : class
         {
             var task = new Task<IEnumerable<T>>(() =>
                 {
@@ -25,10 +29,10 @@ namespace Highway.Data.Repositories
                         return query.Execute(Context);
                     }
                 });
-            return task;
+            return await task;
         }
 
-        public Task<T> Get<T>(IScalarObject<T> query)
+        public async Task<T> Get<T>(IScalarObject<T> query)
         {
             var task = new Task<T>(() =>
             {
@@ -37,10 +41,10 @@ namespace Highway.Data.Repositories
                     return query.Execute(Context);
                 }
             });
-            return task;
+            return await task;
         }
 
-        public Task Execute(ICommandObject command)
+        public async Task Execute(ICommandObject command)
         {
             var task = new Task(() =>
             {
@@ -49,7 +53,7 @@ namespace Highway.Data.Repositories
                     command.Execute(Context);
                 }
             });
-            return task;
+            await task;
         }
     }
 }

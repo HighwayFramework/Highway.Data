@@ -2,7 +2,7 @@
 using System.Linq;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using Highway.Data.Repositories;
+
 using Highway.Data.EventManagement;
 using Highway.Data.Interfaces;
 using Highway.Data.EntityFramework.Tests.Mapping;
@@ -24,7 +24,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             container.Register(
                     Component.For<IEventManager>()
                         .ImplementedBy<EventManager>(),
-                    Component.For<IDataContext>().ImplementedBy<TestDataDataContext>()
+                    Component.For<IDataContext>().ImplementedBy<TestDataContext>()
                         .DependsOn(new
                         {
                             connectionString = Settings.Default.Connection,

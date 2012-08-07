@@ -27,17 +27,17 @@ namespace Highway.Data.Interfaces
         Task<IEnumerable<T>> Find<T>(IQuery<T> query) where T : class;
 
         /// <summary>
-        /// Executes a prebuilt <see cref="IScalarObject{T}"/> and returns a single instance of <typeparamref name="T"/>
+        /// Executes a prebuilt <see cref="IScalar{T}"/> and returns a single instance of <typeparamref name="T"/>
         /// </summary>
         /// <typeparam name="T">The Entity being queried</typeparam>
         /// <param name="query">The prebuilt Query Object</param>
         /// <returns>The instance of <typeparamref name="T"/> returned from the query</returns>
-        Task<T> Get<T>(IScalarObject<T> query);
+        Task<T> Get<T>(IScalar<T> query);
 
         /// <summary>
-        /// Executes a prebuilt <see cref="ICommandObject"/>
+        /// Executes a prebuilt <see cref="ICommand"/>
         /// </summary>
         /// <param name="command">The prebuilt command object</param>
-        Task Execute(ICommandObject command);
+        Task Execute(ICommand command);
     }
 }

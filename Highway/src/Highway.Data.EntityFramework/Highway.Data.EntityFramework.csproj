@@ -15,7 +15,8 @@
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <DefineConstants></DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -26,7 +27,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\Highway.Data.EntityFramework.xml</DocumentationFile>
-    <DefineConstants></DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -36,7 +38,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DefineConstants></DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFrameworkVersion)' == 'v4.5'">
@@ -73,10 +76,12 @@
     </Compile>
     <Compile Include="Contexts\DataContext.cs" />
     <Compile Include="Contexts\ObjectDataContext.cs" />
+    <Compile Include="Database\DropCreateInitializer.cs" />
     <Compile Include="Interceptors\AuditableInterceptor.cs" />
     <Compile Include="Mappings\IContextConfiguration.cs" />
     <Compile Include="Mappings\IMappingConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryObjects\AsyncQuery.cs" />
     <Compile Include="QueryObjects\Command.cs" />
     <Compile Include="QueryObjects\Query.cs" />
     <Compile Include="QueryObjects\QueryBase.cs" />

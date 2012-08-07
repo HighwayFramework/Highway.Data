@@ -71,22 +71,25 @@
     <Compile Include="EventManagement\EventManager.cs" />
     <Compile Include="Interceptors\InterceptorResult.cs" />
     <Compile Condition="'$(TargetFrameworkVersion)' == 'v4.5'" Include="Interfaces\IAsyncRepository.cs" />
-    <Compile Include="Interfaces\ICommandObject.cs" />
+    <Compile Include="Interfaces\Queries\IAsyncCommand.cs" />
+    <Compile Include="Interfaces\Queries\IAsyncQuery.cs" />
+    <Compile Include="Interfaces\Queries\IAsyncScalar.cs" />
+    <Compile Include="Interfaces\Queries\ICommand.cs" />
     <Compile Include="Interfaces\IEventManager.cs" />
     <Compile Include="Interfaces\IInterceptor.cs" />
     <Compile Include="Interfaces\IObservableDataContext.cs" />
-    <Compile Include="Interfaces\IObservableQuery.cs" />
-    <Compile Include="Interfaces\IQueryBase.cs" />
-    <Compile Include="Interfaces\IScalarObject.cs" />
+    <Compile Include="Interfaces\Queries\IObservableQuery.cs" />
+    <Compile Include="Interfaces\Queries\IQueryBase.cs" />
+    <Compile Include="Interfaces\Queries\IScalar.cs" />
     <Compile Include="Services\DefaultUserNameService.cs" />
     <Compile Include="Interfaces\IAuditableEntity.cs" />
     <Compile Include="Interfaces\IUserNameService.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="Interfaces\IDataContext.cs" />
-    <Compile Include="Interfaces\IQuery.cs" />
+    <Compile Include="Interfaces\Queries\IQuery.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Interfaces\IExtendableQuery.cs" />
+    <Compile Include="Interfaces\Queries\IExtendableQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

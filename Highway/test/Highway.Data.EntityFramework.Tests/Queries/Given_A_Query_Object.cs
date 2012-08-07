@@ -4,7 +4,7 @@ using Castle.MicroKernel.Registration;
 ﻿using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 ﻿using Castle.Windsor;
 using CommonServiceLocator.WindsorAdapter;
-using Highway.Data.Repositories;
+
 using Highway.Data.EventManagement;
 using Highway.Data.Interfaces;
 using Highway.Data.EntityFramework.Tests.Mapping;
@@ -31,7 +31,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(container));
             container.Kernel.Resolver.AddSubResolver(new ArrayResolver(container.Kernel));
             container.Register(Component.For<IEventManager>().ImplementedBy<EventManager>().LifestyleTransient(),
-                               Component.For<IDataContext>().ImplementedBy<TestDataDataContext>().DependsOn(new { connectionString = Settings.Default.Connection }).LifestyleTransient(),
+                               Component.For<IDataContext>().ImplementedBy<TestDataContext>().DependsOn(new { connectionString = Settings.Default.Connection }).LifestyleTransient(),
                                Component.For<IMappingConfiguration>().ImplementedBy<FooMappingConfiguration>().LifestyleTransient());
 
         }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Highway.Data.Interfaces;
 
-namespace Highway.Data.Repositories
+namespace Highway.Data
 {
     /// <summary>
     /// A Entity Framework Specific repository implementation that uses Specification pattern to execute Queries in a controlled fashion.
@@ -28,20 +28,20 @@ namespace Highway.Data.Repositories
         public IEventManager EventManager { get; private set; }
 
         /// <summary>
-        /// Executes a prebuilt <see cref="IScalarObject{T}"/> and returns a single instance of <typeparamref name="T"/>
+        /// Executes a prebuilt <see cref="IScalar{T}"/> and returns a single instance of <typeparamref name="T"/>
         /// </summary>
         /// <typeparam name="T">The Entity being queried</typeparam>
         /// <param name="query">The prebuilt Query Object</param>
         /// <returns>The instance of <typeparamref name="T"/> returned from the query</returns>
-        public T Get<T>(IScalarObject<T> query)
+        public T Get<T>(IScalar<T> query)
         {
             return query.Execute(Context);
         }
         /// <summary>
-        /// Executes a prebuilt <see cref="ICommandObject"/>
+        /// Executes a prebuilt <see cref="ICommand"/>
         /// </summary>
         /// <param name="command">The prebuilt command object</param>
-        public void Execute(ICommandObject command)
+        public void Execute(ICommand command)
         {
             command.Execute(Context);
         }

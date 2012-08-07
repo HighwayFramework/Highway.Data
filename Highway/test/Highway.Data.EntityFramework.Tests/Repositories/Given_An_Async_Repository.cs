@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Highway.Data.Interfaces;
-using Highway.Data.Repositories;
+
 using Highway.Data.Tests.TestDomain;
 using Highway.Data.Tests.TestQueries;
 using Highway.Test.MSTest;
@@ -24,6 +24,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
 
             //Act
             var result = repo.Find(new FindFoo());
+            mockContext.AssertWasNotCalled(x => x.AsQueryable<Foo>());
             var testReuslt = result.Result;
             
             //Assert

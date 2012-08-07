@@ -24,7 +24,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
 
         public override DataContext ResolveTarget()
         {
-            Database.SetInitializer(new ForceDeleteInitializer(new EntityFrameworkIntializer()));
+            Database.SetInitializer(new EntityFrameworkIntializer());
             return Container.Resolve<DataContext>(new { connectionString = Settings.Default.Connection });
         }
 

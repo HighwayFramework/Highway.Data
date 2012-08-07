@@ -6,15 +6,19 @@ using Highway.Data.Tests.TestDomain;
 
 namespace Highway.Data.EntityFramework.Tests.Initializer
 {
-    public class EntityFrameworkIntializer : DropCreateDatabaseAlways<TestDataDataContext>
+    public class EntityFrameworkIntializer : DropCreateInitializer<TestDataContext>
     {
-        protected override void Seed(TestDataDataContext dataDataContext)
+        public EntityFrameworkIntializer() : base(SeedDatabase)
         {
-            for (int i = 0; i < 5;i++ )
+            
+        }
+
+        private static void SeedDatabase(TestDataContext context)
+        {
+            for (int i = 0; i < 5; i++)
             {
-                dataDataContext.Add(new Foo());
+                context.Add(new Foo());
             }
-            dataDataContext.SaveChanges();
         }
     }
 }

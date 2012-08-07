@@ -2,6 +2,8 @@
 using System.Data.Entity;
 using System.Linq;
 using Castle.Windsor;
+using Common.Logging;
+using Common.Logging.Simple;
 using Highway.Data.EventManagement;
 using Highway.Data.Interfaces;
 using Highway.Data.EntityFramework.Tests.Initializer;
@@ -17,16 +19,18 @@ using Highway.Data.EntityFramework.Tests.Properties;
 namespace Highway.Data.EntityFramework.Tests.IntegrationTests
 {
     [TestClass]
-    public class Given_A_EF_Context : ContainerTest<TestDataDataContext>
+    public class Given_A_EF_Context : ContainerTest<TestDataContext>
     {
-        public override TestDataDataContext ResolveTarget()
+        public override TestDataContext ResolveTarget()
         {
-            return Container.Resolve<TestDataDataContext>(new { connectionString = Settings.Default.Connection });
+            return Container.Resolve<TestDataContext>(new { connectionString = Settings.Default.Connection });
         }
         public override void RegisterComponents(IWindsorContainer container)
         {
             container.Register(Component.For<IEventManager>().ImplementedBy<EventManager>(),
-                               Component.For<IMappingConfiguration>().ImplementedBy<FooMappingConfiguration>());
+                               Component.For<IMappingConfiguration>().ImplementedBy<FooMappingConfiguration>(),
+                               Component.For<ILog>().ImplementedBy<NoOpLogger>(),
+                               Component.For<IContextConfiguration>().ImplementedBy(null));
 
             base.RegisterComponents(container);
         }
@@ -34,7 +38,7 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
         public override void BeforeEachTest()
         {
             base.BeforeEachTest();
-            Database.SetInitializer(new ForceDeleteInitializer(new EntityFrameworkIntializer()));
+            Database.SetInitializer(new EntityFrameworkIntializer());
             target.AsQueryable<Foo>().ToList();
         }
 

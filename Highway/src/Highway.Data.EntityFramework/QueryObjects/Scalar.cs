@@ -11,7 +11,7 @@ namespace Highway.Data.QueryObjects
     /// Base implementation of a query that returns a single value or object
     /// </summary>
     /// <typeparam name="T">The type of object or value being returned</typeparam>
-    public class Scalar<T> : QueryBase, IScalarObject<T>
+    public class Scalar<T> : QueryBase, IScalar<T>
     {
         /// <summary>
         /// The query to be executed later

@@ -6,6 +6,7 @@ using System.Text;
 using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Highway.Data.Interfaces;
 
 namespace Highway.Data.QueryObjects
@@ -46,8 +47,8 @@ namespace Highway.Data.QueryObjects
         /// <returns><see cref="IEnumerable{T}"/></returns>
         public virtual IEnumerable<T> Execute(IDataContext context)
         {
-            var query = PrepareQuery(context);
-            return query;
+            var task = PrepareQuery(context);
+            return task;
         }
 
         /// <summary>

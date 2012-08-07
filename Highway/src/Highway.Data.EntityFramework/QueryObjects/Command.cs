@@ -6,7 +6,7 @@ namespace Highway.Data.QueryObjects
     /// <summary>
     /// 
     /// </summary>
-    public class Command : QueryBase, ICommandObject
+    public class Command : QueryBase, ICommand
     {
         /// <summary>
         /// The Command that will be executed at some point in the future

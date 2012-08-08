@@ -2,7 +2,8 @@
 using System.Linq;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-
+using Common.Logging;
+using Common.Logging.Simple;
 using Highway.Data.EventManagement;
 using Highway.Data.Interfaces;
 using Highway.Data.EntityFramework.Tests.Mapping;
@@ -28,10 +29,11 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
                         .DependsOn(new
                         {
                             connectionString = Settings.Default.Connection,
-                            configurations = new[] { new FooMappingConfiguration() }
+                            configurations = new[] { new FooMappingConfiguration() },
                         }),
                     Component.For<IMappingConfiguration>()
-                        .ImplementedBy<FooMappingConfiguration>());
+                        .ImplementedBy<FooMappingConfiguration>(),
+                    Component.For<ILog>().ImplementedBy<NoOpLogger>());
             base.RegisterComponents(container);
         }
 

@@ -144,21 +144,6 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Reloads all tracked objects of the type <typeparamref name="T"/>
-        /// </summary>
-        /// <typeparam name="T">The type of objects to reload</typeparam>
-        public void Reload<T>() where T : class
-        {
-            var entities = this.ObjectStateManager
-                .GetObjectStateEntries(EntityState.Modified | EntityState.Unchanged)
-                .Select(x => x.Entity);
-            if (entities.Any())
-            {
-                this.Refresh(RefreshMode.StoreWins, entities);
-            }
-        }
-
-        /// <summary>
         /// Commits all currently tracked entity changes
         /// </summary>
         /// <returns>the number of rows affected</returns>

@@ -3,6 +3,8 @@ using System.Linq;
 using Castle.MicroKernel.Registration;
 ﻿using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 ﻿using Castle.Windsor;
+using Common.Logging;
+using Common.Logging.Simple;
 using CommonServiceLocator.WindsorAdapter;
 
 using Highway.Data.EventManagement;
@@ -32,7 +34,8 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             container.Kernel.Resolver.AddSubResolver(new ArrayResolver(container.Kernel));
             container.Register(Component.For<IEventManager>().ImplementedBy<EventManager>().LifestyleTransient(),
                                Component.For<IDataContext>().ImplementedBy<TestDataContext>().DependsOn(new { connectionString = Settings.Default.Connection }).LifestyleTransient(),
-                               Component.For<IMappingConfiguration>().ImplementedBy<FooMappingConfiguration>().LifestyleTransient());
+                               Component.For<IMappingConfiguration>().ImplementedBy<FooMappingConfiguration>().LifestyleTransient(),
+                               Component.For<ILog>().ImplementedBy<NoOpLogger>());
 
         }
 

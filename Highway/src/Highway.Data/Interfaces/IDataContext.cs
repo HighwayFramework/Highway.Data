@@ -70,12 +70,6 @@ namespace Highway.Data.Interfaces
         T Reload<T>(T item) where T : class;
 
         /// <summary>
-        /// Reloads all tracked objects of the type <typeparamref name="T"/>
-        /// </summary>
-        /// <typeparam name="T">The type of objects to reload</typeparam>
-        void Reload<T>() where T : class;
-
-        /// <summary>
         /// Commits all currently tracked entity changes
         /// </summary>
         /// <returns>the number of rows affected</returns>

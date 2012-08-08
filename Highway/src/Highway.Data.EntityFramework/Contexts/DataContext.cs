@@ -42,7 +42,10 @@ namespace Highway.Data
         /// <returns><see cref="IQueryable{T}"/></returns>
         public IQueryable<T> AsQueryable<T>() where T : class
         {
-            return this.Set<T>();
+            _log.DebugFormat("Querying Object {0}", typeof(T).Name);
+            var result = this.Set<T>();
+            _log.DebugFormat("Queried Object {0}", typeof(T).Name);
+            return result;
         }
 
         /// <summary>
@@ -86,8 +89,7 @@ namespace Highway.Data
             _log.DebugFormat("Updating Object {0}", item);
             if (entry == null)
             {
-                throw new InvalidOperationException(
-                    "Cannot Update an object that is not attacched to the current Entity Framework data context");
+                throw new InvalidOperationException("Cannot Update an object that is not attacched to the current Entity Framework data context");
             }
             entry.State = EntityState.Modified;
             _log.TraceFormat("Updated Object {0}", item);
@@ -152,16 +154,6 @@ namespace Highway.Data
             entry.Reload();
             _log.TraceFormat("Reloaded Object {0}", item);
             return item;
-        }
-
-        /// <summary>
-        /// Reloads all tracked objects of the type <typeparamref name="T"/>
-        /// </summary>
-        /// <typeparam name="T">The type of objects to reload</typeparam>
-        public void Reload<T>() where T : class
-        {
-            var entries = base.ChangeTracker.Entries<T>();
-            entries.Each(x => x.Reload());
         }
 
         /// <summary>

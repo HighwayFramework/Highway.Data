@@ -77,6 +77,7 @@
     <Compile Include="Contexts\DataContext.cs" />
     <Compile Include="Contexts\ObjectDataContext.cs" />
     <Compile Include="Database\DropCreateInitializer.cs" />
+    <Compile Include="Helpers\PerformanceTestHelper.cs" />
     <Compile Include="Interceptors\AuditableInterceptor.cs" />
     <Compile Include="Mappings\IContextConfiguration.cs" />
     <Compile Include="Mappings\IMappingConfiguration.cs" />

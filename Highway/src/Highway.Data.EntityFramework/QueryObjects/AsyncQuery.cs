@@ -4,9 +4,6 @@ using Highway.Data.Interfaces;
 
 namespace Highway.Data.QueryObjects
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class AsyncQuery<T> : IAsyncQuery<T>
     {
         private readonly IQuery<T> _query;
@@ -21,11 +18,6 @@ namespace Highway.Data.QueryObjects
         }
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns></returns>
         public Task<IEnumerable<T>> Execute(IDataContext context)
         {
 
@@ -43,30 +35,6 @@ namespace Highway.Data.QueryObjects
         public string OutputSQLStatement(IDataContext context)
         {
             return _query.OutputSQLStatement(context);
-        }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class AsyncScalar<T> : IAsyncScalar<T>
-    {
-        private readonly IScalar<T> _query;
-
-        public AsyncScalar(IScalar<T> query)
-        {
-            _query = query;
-        }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        public Task<T> Execute(IDataContext context)
-        {
-            return new Task<T>(() => _query.Execute(context));
         }
     }
 }

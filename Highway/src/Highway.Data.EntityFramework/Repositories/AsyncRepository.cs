@@ -44,28 +44,20 @@ namespace Highway.Data
             return task;
         }
 
-        public async Task<T> Get<T>(IScalar<T> query)
+        public Task<T> Get<T>(IScalar<T> query)
         {
-            var task = new Task<T>(() =>
-            {
-                lock (Context)
-                {
-                    return query.Execute(Context);
-                }
-            });
-            return await task;
+            var asyncQuery = new AsyncScalar<T>(query);
+            var task = asyncQuery.Execute(Context);
+            task.Start();
+            return task;
         }
 
-        public async Task Execute(ICommand command)
+        public Task Execute(ICommand command)
         {
-            var task = new Task(() =>
-            {
-                lock (Context)
-                {
-                    command.Execute(Context);
-                }
-            });
-            await task;
+            var asyncQuery = new AsyncCommand(command);
+            var task = asyncQuery.Execute(Context);
+            task.Start();
+            return task;            
         }
     }
 }

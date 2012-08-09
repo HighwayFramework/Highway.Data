@@ -3,15 +3,34 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Common.Logging;
+using Common.Logging.Simple;
 using Highway.Data.Interfaces;
 
-namespace Highway.Data.EntityFramework.Helpers
+namespace Highway.Data.EntityFramework
 {
     /// <summary>
-    /// Wrapper class for the extension method that outputs a performance trace of a given query
+    ///Extensions for testing and tracing performance of queries and context compilation
     /// </summary>
-    public static class PerformanceTestHelper
+    public static class PerformanceTracingExtensions
     {
+        private static ConsoleOutLogger defaultLogger = new ConsoleOutLogger("Performance", LogLevel.All, false, false, false, string.Empty);
+
+        /// <summary>
+        /// Runs the given query against the context and tracks execution time with a default console out logger
+        /// </summary>
+        /// <param name="query">The query to be executed</param>
+        /// <param name="context">the context to run the test against</param>
+        /// <param name="firstTimeRun">Boolean flag to determine if the context compilation time will be ran outside of the query time for traing purpose </param>
+        /// <param name="maxAllowableMilliseconds">the maximum number of milliseconds the execution should take</param>
+        /// <typeparam name="T">The type being queried</typeparam>
+        /// <returns>a tuple of boolean ( executed under allowed max ) and IEnumberable{T} for the results of the query</returns>
+        /// <exception cref="InvalidOperationException">If the query execution does not meet the expected time, it will throw this error</exception>
+        public static IEnumerable<T> RunPerformanceTest<T>(this IQuery<T> query, IDataContext context, bool firstTimeRun = false, int maxAllowableMilliseconds = 250)
+            where T : class
+        {
+            return query.RunPerformanceTest(context, defaultLogger,firstTimeRun,maxAllowableMilliseconds);
+        }
+
         /// <summary>
         /// Runs the given query against the context and tracks execution time
         /// </summary>
@@ -40,6 +59,20 @@ namespace Highway.Data.EntityFramework.Helpers
                         "Query {0} in {1} ms but expected to complete in under {2} ms",
                         query.GetType().Name, sw.ElapsedMilliseconds, maxAllowableMilliseconds));
             return results;
+        }
+
+        /// <summary>
+        /// Compiles the Context to execution of a query and tracks the time spent
+        /// </summary>
+        /// <param name="context">the context to run the test against</param>
+        /// <param name="query">The query to be executed</param>
+        /// <param name="log">The log to output the information to</param>
+        /// <param name="maxAllowableMilliseconds">the maximum number of milliseconds the execution should take</param>
+        /// <typeparam name="T">The type being queried</typeparam>
+        /// <exception cref="InvalidOperationException">If the compilation does not meet the expected time, it will throw this error</exception>
+        public static void RunStartUpPerformanceTest<T>(this IDataContext context, IQuery<T> query, int maxAllowableMilliseconds = 2500)
+        {
+            context.RunStartUpPerformanceTest(query,defaultLogger,maxAllowableMilliseconds);
         }
 
         /// <summary>

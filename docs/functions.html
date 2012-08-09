@@ -113,8 +113,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <h3><a class="anchor" id="index_a"></a>- a -</h3><ul>
 <li>Add&lt; T &gt;()
 : <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#aa40a195c7208c198ab56f4ddf3e33d27">Highway.Data.Interfaces.IDataContext</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#a8d50357ea11414364e9155ef79048b21">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#a412a71e5dac9537827249d18a99484f9">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>
+, <a class="el" href="class_highway_1_1_data_1_1_data_context.html#aa25d7d4463901329f19e303c925ec3d6">Highway.Data.DataContext</a>
+, <a class="el" href="class_highway_1_1_data_1_1_object_data_context.html#af6ca49358858c69c09fe1f2dc400b769">Highway.Data.ObjectDataContext</a>
 </li>
 <li>AddMethodExpression()
 : <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_extendable_query.html#abf9d0846c2d2ca8542b2f685f6845998">Highway.Data.Interfaces.IExtendableQuery</a>
@@ -124,14 +124,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_query-g.html#ad83e665a02845faedd4fbe821f16f48f">Highway.Data.QueryObjects.Query&lt; T &gt;</a>
 </li>
 <li>AsQueryable&lt; T &gt;()
-: <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#a011a1a590b8a8687e70e09f78e371825">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#a4af775d2ca582477cfc53daa5903fab5">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>
+: <a class="el" href="class_highway_1_1_data_1_1_data_context.html#a3d30713ba0399753b504537e7037f679">Highway.Data.DataContext</a>
+, <a class="el" href="class_highway_1_1_data_1_1_object_data_context.html#afaeb4a099112573423d449aca1430531">Highway.Data.ObjectDataContext</a>
 , <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#a2361aaf5d4e2635081a51c2244c841e8">Highway.Data.Interfaces.IDataContext</a>
 </li>
+<li>AsyncQuery()
+: <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_async_query-g.html#a8ededa42a1fa185fb1d639d6dcc285e6">Highway.Data.QueryObjects.AsyncQuery&lt; T &gt;</a>
+</li>
+<li>AsyncRepository()
+: <a class="el" href="class_highway_1_1_data_1_1_async_repository.html#aeaa2c3c79488f1d5741249e6ec1ac783">Highway.Data.AsyncRepository</a>
+</li>
 <li>Attach&lt; T &gt;()
-: <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#ae844d05f0756ca3bb5cb4b43fba41944">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>
-, <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#a404ee46e3152c5a80a7ad7a999a5f302">Highway.Data.Interfaces.IDataContext</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#ae482a535469bb401c655d1581a4f34a6">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>
+: <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#a404ee46e3152c5a80a7ad7a999a5f302">Highway.Data.Interfaces.IDataContext</a>
+, <a class="el" href="class_highway_1_1_data_1_1_data_context.html#a5fdc0f2a2966b7b39086410020d002ae">Highway.Data.DataContext</a>
+, <a class="el" href="class_highway_1_1_data_1_1_object_data_context.html#a632c683e76a677a54c93ad46c04f0a2c">Highway.Data.ObjectDataContext</a>
+</li>
+<li>AuditableInterceptor()
+: <a class="el" href="class_highway_1_1_data_1_1_interceptors_1_1_auditable_interceptor.html#ae12de3cb75bc62d39bd2b8aeff796844">Highway.Data.Interceptors.AuditableInterceptor</a>
 </li>
 </ul>
 
@@ -142,42 +151,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>Commit()
 : <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#a11952cf19e2562bcd82edd9c239c1aac">Highway.Data.Interfaces.IDataContext</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#ae1f0be0b4cd8e0b81cccb4dbb2e60734">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#a9a423f1dabec6bc46f393965c815237d">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>
+, <a class="el" href="class_highway_1_1_data_1_1_object_data_context.html#af757c0a88ca932751e70fd569ae8f137">Highway.Data.ObjectDataContext</a>
+, <a class="el" href="class_highway_1_1_data_1_1_data_context.html#a9ce97e92d86b82aa7f31a5d59f98e817">Highway.Data.DataContext</a>
 </li>
 <li>ConfigureModelBuilder()
-: <a class="el" href="interface_highway_1_1_data_1_1_entity_framework_1_1_mappings_1_1_i_mapping_configuration.html#a84ae8af129375228ed45a1538cceb06e">Highway.Data.EntityFramework.Mappings.IMappingConfiguration</a>
+: <a class="el" href="interface_highway_1_1_data_1_1_i_mapping_configuration.html#abf9f940f87d0d312627dacb1e347ebdc">Highway.Data.IMappingConfiguration</a>
+</li>
+<li>ConfugureContext()
+: <a class="el" href="interface_highway_1_1_data_1_1_i_context_configuration.html#acbaf09064f8205b9a85e6584e36e04b5">Highway.Data.IContextConfiguration</a>
 </li>
 <li>Context
-: <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository.html#aadf2e3d1d5b118f2fe6e2b1fc1ae8e77">Highway.Data.Interfaces.IRepository</a>
-, <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_query_base.html#aa8ca309734c39e9e78853e2a76c041f1">Highway.Data.QueryObjects.QueryBase</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository.html#a39447e7deb1284fc5e5d9ea7c2c78c63">Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository</a>
-, <a class="el" href="class_highway_1_1_data_1_1_event_management_1_1_event_manager.html#ac5a9cddf17fcb4c3b298b3d50431de2f">Highway.Data.EventManagement.EventManager</a>
+: <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_async_repository.html#a03e1d3bb759c50309a4be719eca25a0f">Highway.Data.Interfaces.IAsyncRepository</a>
 , <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_event_manager.html#aae163759719833dca07513b02efbafa8">Highway.Data.Interfaces.IEventManager</a>
+, <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository.html#aadf2e3d1d5b118f2fe6e2b1fc1ae8e77">Highway.Data.Interfaces.IRepository</a>
+, <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_query_base.html#aa8ca309734c39e9e78853e2a76c041f1">Highway.Data.QueryObjects.QueryBase</a>
+, <a class="el" href="class_highway_1_1_data_1_1_async_repository.html#abfd6073ad2ad20eebaf97568c7ed8d7e">Highway.Data.AsyncRepository</a>
+, <a class="el" href="class_highway_1_1_data_1_1_repository.html#a56e71ca922bdbd73db6986b3609e5ed7">Highway.Data.Repository</a>
+, <a class="el" href="class_highway_1_1_data_1_1_event_management_1_1_event_manager.html#ac5a9cddf17fcb4c3b298b3d50431de2f">Highway.Data.EventManagement.EventManager</a>
 </li>
 <li>ContextQuery
 : <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_command.html#a83c9845e7df1f9ff350d05182c23e373">Highway.Data.QueryObjects.Command</a>
-, <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_query-g.html#a68ecc8e5735dee1db60782614427cbbf">Highway.Data.QueryObjects.Query&lt; T &gt;</a>
 , <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_scalar-g.html#acb183b773f6c4bb8c9a989c1144095db">Highway.Data.QueryObjects.Scalar&lt; T &gt;</a>
+, <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_query-g.html#a68ecc8e5735dee1db60782614427cbbf">Highway.Data.QueryObjects.Query&lt; T &gt;</a>
 </li>
 <li>ContinueExecution
 : <a class="el" href="struct_highway_1_1_data_1_1_interceptors_1_1_interceptor_result.html#a6c07e279d13920c2216d8f2902a4c3a0">Highway.Data.Interceptors.InterceptorResult</a>
-</li>
-<li>Create&lt; TOne &gt;()
-: <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_factory.html#a343d7436f44181174c5a213ae59f4588">Highway.Data.Interfaces.IRepositoryFactory</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_factory_1_1_repository_factory.html#adc2a8362d9f6eba603dc296f80a464d2">Highway.Data.EntityFramework.Factory.RepositoryFactory</a>
-</li>
-<li>Create&lt; TOne, TTwo &gt;()
-: <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_factory.html#af84ae4a3ffcb355f70c9ab332b27fa75">Highway.Data.Interfaces.IRepositoryFactory</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_factory_1_1_repository_factory.html#a77fab4a79881f8cdee299599b72b15ce">Highway.Data.EntityFramework.Factory.RepositoryFactory</a>
-</li>
-<li>Create&lt; TOne, TTwo, TThree &gt;()
-: <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_factory.html#a52f84ef3732b1f34558d928e02f0f7c4">Highway.Data.Interfaces.IRepositoryFactory</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_factory_1_1_repository_factory.html#a1de27f1264d65c2927bdc6dc02329a27">Highway.Data.EntityFramework.Factory.RepositoryFactory</a>
-</li>
-<li>Create&lt; TOne, TTwo, TThree, TFour &gt;()
-: <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_factory.html#a41cfb8f0c6ee57071f92df68c7f5a7b9">Highway.Data.Interfaces.IRepositoryFactory</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_factory_1_1_repository_factory.html#a7299e0d5fdaf1ceceaf7fbac1d010816">Highway.Data.EntityFramework.Factory.RepositoryFactory</a>
 </li>
 <li>CreatedBy
 : <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_auditable_entity.html#a0d61b38cdb0d857f95a648d74d47dc4e">Highway.Data.Interfaces.IAuditableEntity</a>
@@ -189,60 +187,64 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <h3><a class="anchor" id="index_d"></a>- d -</h3><ul>
+<li>DataContext()
+: <a class="el" href="class_highway_1_1_data_1_1_data_context.html#a53dda69cf93cec7079609b39ba8b6c40">Highway.Data.DataContext</a>
+</li>
 <li>Detach&lt; T &gt;()
 : <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#a88434616ba2c8b719d31e76554babfc0">Highway.Data.Interfaces.IDataContext</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#a18c4b788c7bcc1baa12d07731edb2295">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#aa0ccdc09ac449783a450a6098946a289">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>
+, <a class="el" href="class_highway_1_1_data_1_1_object_data_context.html#a35b4f068d2b1fe3aa87fe23127c82ea9">Highway.Data.ObjectDataContext</a>
+, <a class="el" href="class_highway_1_1_data_1_1_data_context.html#a59a714f1f0c316e54c6bda401155b947">Highway.Data.DataContext</a>
+</li>
+<li>DropCreateInitializer()
+: <a class="el" href="class_highway_1_1_data_1_1_drop_create_initializer-g.html#a9782d33ac411f497fb0813e7d7bc2f77">Highway.Data.DropCreateInitializer&lt; T &gt;</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_e"></a>- e -</h3><ul>
-<li>EntityFrameworkAuditableInterceptor()
-: <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_interceptors_1_1_entity_framework_auditable_interceptor.html#af82e7af9db91d333a1faf197398405f3">Highway.Data.EntityFramework.Interceptors.EntityFrameworkAuditableInterceptor</a>
-</li>
-<li>EntityFrameworkContext()
-: <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#a45502d0390821379b888a6b9e712e8b5">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>
-</li>
-<li>EntityFrameworkObjectContext()
-: <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#a2f7eeefa09f448cdfa55eb6757ec9223">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>
-</li>
-<li>EntityFrameworkRepository()
-: <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository.html#a9f5b6355d4a5054c37bcd19a6a444aca">Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository</a>
-</li>
 <li>EventManager
-: <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#a66d20c659a7c50d08705534ad750e1f8">Highway.Data.Interfaces.IDataContext</a>
-, <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository.html#a2f76cda20f7e51ce44c11a077194c747">Highway.Data.Interfaces.IRepository</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#aefd1b923c2414387cddd0a579608039d">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#a2342a28fa33d6cae0ce58c5f74438e9a">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository.html#abb629b7ba44c32a78951f64554f52e06">Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository</a>
+: <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_async_repository.html#ad3c1510134e22665788e2f8eccd954f0">Highway.Data.Interfaces.IAsyncRepository</a>
+, <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#a66d20c659a7c50d08705534ad750e1f8">Highway.Data.Interfaces.IDataContext</a>
+, <a class="el" href="class_highway_1_1_data_1_1_data_context.html#aebad01f13573f0ec22ab8a388c3093fd">Highway.Data.DataContext</a>
 , <a class="el" href="class_highway_1_1_data_1_1_event_management_1_1_event_manager.html#a2ff87220e8e54bedff9594688e52163c">Highway.Data.EventManagement.EventManager</a>
+, <a class="el" href="class_highway_1_1_data_1_1_object_data_context.html#a1be407a6d9a2d147511ca72d6a09ff49">Highway.Data.ObjectDataContext</a>
+, <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository.html#a2f76cda20f7e51ce44c11a077194c747">Highway.Data.Interfaces.IRepository</a>
+, <a class="el" href="class_highway_1_1_data_1_1_async_repository.html#ab41ad1eec675e831aba15b677d27717e">Highway.Data.AsyncRepository</a>
+, <a class="el" href="class_highway_1_1_data_1_1_repository.html#ac1ac32fc8d217cfb1d47bb1cc68088c6">Highway.Data.Repository</a>
 </li>
 <li>Execute()
 : <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_query-g.html#af0d1ad34be86383555892f3dfeb4b2dc">Highway.Data.Interfaces.IQuery&lt; out T &gt;</a>
-, <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository.html#a2f2f0b12b547d9d5eeaf18d013b7c008">Highway.Data.Interfaces.IRepository</a>
-, <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_scalar_object-g.html#afe687ef242a0e465c47e7feb104b0ce5">Highway.Data.Interfaces.IScalarObject&lt; out T &gt;</a>
-, <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_command.html#a7154a6a32966d8f54a31860d8c829820">Highway.Data.QueryObjects.Command</a>
+, <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_scalar-g.html#a3a27ca86e587dbd0c1c199ae1cf54174">Highway.Data.Interfaces.IScalar&lt; out T &gt;</a>
+, <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_async_repository.html#a5f396f5c1aa1b9e3eced829bf736a4ab">Highway.Data.Interfaces.IAsyncRepository</a>
+, <a class="el" href="class_highway_1_1_data_1_1_repository.html#aa09c537b268e6e96085803087f9f7212">Highway.Data.Repository</a>
+, <a class="el" href="class_highway_1_1_data_1_1_interceptors_1_1_auditable_interceptor.html#acc6803b69df915b7df03bc3f0981ba40">Highway.Data.Interceptors.AuditableInterceptor</a>
+, <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_async_command.html#a03a37fc95c41d551c4bfc75ae4eb841b">Highway.Data.QueryObjects.AsyncCommand</a>
 , <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_query-g.html#a68dd6db173a8ea84d10d72ccc27f74f4">Highway.Data.QueryObjects.Query&lt; T &gt;</a>
-, <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_scalar-g.html#aff12d516dd21701d1f48c9fb370c5683">Highway.Data.QueryObjects.Scalar&lt; T &gt;</a>
+, <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_command.html#a7154a6a32966d8f54a31860d8c829820">Highway.Data.QueryObjects.Command</a>
 , <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_interceptor-g.html#a9a3fc7ae745282c3a584683a2c6060e2">Highway.Data.Interfaces.IInterceptor&lt; in T &gt;</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_interceptors_1_1_entity_framework_auditable_interceptor.html#afb272779790d7da3d2006d94236b450e">Highway.Data.EntityFramework.Interceptors.EntityFrameworkAuditableInterceptor</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository.html#a2cf1765e57f0e5527e2c36888eaf38f9">Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository</a>
-, <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_command_object.html#a25d2d3b6e3bea3380b5a5f6df7a9b2d1">Highway.Data.Interfaces.ICommandObject</a>
+, <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_async_query-g.html#a1f616c1d4c33dbeefdcfc435fff96931">Highway.Data.QueryObjects.AsyncQuery&lt; T &gt;</a>
+, <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_async_scalar-g.html#af09b943ca549dc089066510ea9fa91a4">Highway.Data.QueryObjects.AsyncScalar&lt; T &gt;</a>
+, <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository.html#a91324642f3ca885ac8b4b5deb7bd3e8f">Highway.Data.Interfaces.IRepository</a>
+, <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_async_command.html#a626e4ab4e98afc89f6541347e0b35006">Highway.Data.Interfaces.IAsyncCommand</a>
+, <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_scalar-g.html#aff12d516dd21701d1f48c9fb370c5683">Highway.Data.QueryObjects.Scalar&lt; T &gt;</a>
+, <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_command.html#a4c4bebaba6455031b1fc9a18a2150378">Highway.Data.Interfaces.ICommand</a>
+, <a class="el" href="class_highway_1_1_data_1_1_async_repository.html#afa774a72108c37212f0862fa61a5cec3">Highway.Data.AsyncRepository</a>
+, <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_async_query-g.html#a32fdccff7dacbdc222b3b4a0c2678870">Highway.Data.Interfaces.IAsyncQuery&lt; T &gt;</a>
+, <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_async_scalar-g.html#a602c6cc9b11d9ae91c309df77fa91c09">Highway.Data.Interfaces.IAsyncScalar&lt; T &gt;</a>
 </li>
 <li>ExecuteFunction()
-: <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#aba2419c2ed299ff633303a50584d059d">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>
-, <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#a27f9736cd139560b0b5debe9a7bc795a">Highway.Data.Interfaces.IDataContext</a>
+: <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#a27f9736cd139560b0b5debe9a7bc795a">Highway.Data.Interfaces.IDataContext</a>
+, <a class="el" href="class_highway_1_1_data_1_1_data_context.html#a2efb49e3b623dbfbcdd3e8bd258e3d87">Highway.Data.DataContext</a>
 </li>
 <li>ExecuteSqlCommand()
-: <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#a5b6f659e95b783a131f380bbce6c68dd">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#aec1f83731440a4f42b83458101020819">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>
-, <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#ad8d3d00bdfca146ea8197e050a215be3">Highway.Data.Interfaces.IDataContext</a>
+: <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#ad8d3d00bdfca146ea8197e050a215be3">Highway.Data.Interfaces.IDataContext</a>
+, <a class="el" href="class_highway_1_1_data_1_1_data_context.html#a53be0d1815f1e1f7edfc4132295827ca">Highway.Data.DataContext</a>
+, <a class="el" href="class_highway_1_1_data_1_1_object_data_context.html#aecb019a79c5201a4d041b3ae38158361">Highway.Data.ObjectDataContext</a>
 </li>
 <li>ExecuteSqlQuery&lt; T &gt;()
-: <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#a2b385a19abb43ebe167ba4f517af51f2">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#a0a1fde31dabdc1a0e2cdef5dbfdefa2f">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>
-, <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#a975fee919078b8770313b4b8582554e5">Highway.Data.Interfaces.IDataContext</a>
+: <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#a975fee919078b8770313b4b8582554e5">Highway.Data.Interfaces.IDataContext</a>
+, <a class="el" href="class_highway_1_1_data_1_1_data_context.html#a39afcba0bd8847a3077883a832fc360e">Highway.Data.DataContext</a>
+, <a class="el" href="class_highway_1_1_data_1_1_object_data_context.html#aa93f35fdeb68aa4e0e6f7ed21ab8178a">Highway.Data.ObjectDataContext</a>
 </li>
 <li>ExpressionList
 : <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_query_base.html#a22b740c6d5ff1bfc7d5fd96f26c751b8">Highway.Data.QueryObjects.QueryBase</a>
@@ -258,20 +260,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="struct_highway_1_1_data_1_1_interceptors_1_1_interceptor_result.html#a54a35f1060e308ef40ecc189f7d9543a">Highway.Data.Interceptors.InterceptorResult</a>
 </li>
 <li>Find&lt; T &gt;()
-: <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository.html#af361e5a4bc1f44f9165cc450add06ece">Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository</a>
+: <a class="el" href="class_highway_1_1_data_1_1_repository.html#ab19e6b78b2aa9394f45194f4c8761ff1">Highway.Data.Repository</a>
+, <a class="el" href="class_highway_1_1_data_1_1_async_repository.html#ad0ad809e167fb82b047270031b6bc47c">Highway.Data.AsyncRepository</a>
 , <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository.html#a18bd55ae31839881dc43cb0ba958086b">Highway.Data.Interfaces.IRepository</a>
+, <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_async_repository.html#adf81905d686e44b115548921a7d6d72d">Highway.Data.Interfaces.IAsyncRepository</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_g"></a>- g -</h3><ul>
 <li>Get&lt; T &gt;()
-: <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository.html#af4256e7e2f82fd545161eeedd323712b">Highway.Data.Interfaces.IRepository</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository.html#a96b10f64c2c73cdc8c19ceed3f97004d">Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository</a>
+: <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_async_repository.html#a7eed1d89c1104a467bfdc12cb0de3133">Highway.Data.Interfaces.IAsyncRepository</a>
+, <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository.html#ab64290450d370e1c29e31ea92d3ff18d">Highway.Data.Interfaces.IRepository</a>
+, <a class="el" href="class_highway_1_1_data_1_1_repository.html#a45937217fa900c48979c8eec90b8db1b">Highway.Data.Repository</a>
+, <a class="el" href="class_highway_1_1_data_1_1_async_repository.html#a0c032814b93798874cd36b30ecf821dc">Highway.Data.AsyncRepository</a>
 </li>
 <li>GetCurrentUserName()
-: <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_user_name_service.html#acf786ae5696f47b78ec3a77870059c43">Highway.Data.Interfaces.IUserNameService</a>
-, <a class="el" href="class_highway_1_1_data_1_1_services_1_1_default_user_name_service.html#a58828bf30490a5dc67049d2dc77da0c3">Highway.Data.Services.DefaultUserNameService</a>
+: <a class="el" href="class_highway_1_1_data_1_1_services_1_1_default_user_name_service.html#a58828bf30490a5dc67049d2dc77da0c3">Highway.Data.Services.DefaultUserNameService</a>
+, <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_user_name_service.html#acf786ae5696f47b78ec3a77870059c43">Highway.Data.Interfaces.IUserNameService</a>
 </li>
 </ul>
 
@@ -297,12 +303,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <h3><a class="anchor" id="index_o"></a>- o -</h3><ul>
+<li>ObjectDataContext()
+: <a class="el" href="class_highway_1_1_data_1_1_object_data_context.html#a64924428561bbc395c401d453406f59d">Highway.Data.ObjectDataContext</a>
+</li>
 <li>OnModelCreating()
-: <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#aaf3b39746258acf1cc5e14467c5e795d">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>
+: <a class="el" href="class_highway_1_1_data_1_1_data_context.html#a54336e47c20e2eb8b4e93e00ffa79a2a">Highway.Data.DataContext</a>
 </li>
 <li>OutputSQLStatement()
 : <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_query-g.html#a73d9b26cc05e595ea45e5ba03e0812ba">Highway.Data.QueryObjects.Query&lt; T &gt;</a>
 , <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_query_base.html#a151df3073faaf51d98207e2794f62817">Highway.Data.Interfaces.IQueryBase</a>
+, <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_async_query-g.html#a9bd874775719c724859e294bfb6ea4cc">Highway.Data.QueryObjects.AsyncQuery&lt; T &gt;</a>
 </li>
 </ul>
 
@@ -313,8 +323,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_highway_1_1_data_1_1_query_objects_1_1_query_base.html#a75da4f1ac849eac015645365f982a9ff">Highway.Data.QueryObjects.QueryBase</a>
 </li>
 <li>PostSave
-: <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#a2297153144a3e1240cb4526eb963b889">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#ad5a527da395401a50839ae936576b9d9">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>
+: <a class="el" href="class_highway_1_1_data_1_1_data_context.html#a5363d61dfcaa37657d39a7439b4d6281">Highway.Data.DataContext</a>
+, <a class="el" href="class_highway_1_1_data_1_1_object_data_context.html#ab361ad5a8c621b099944e255b8593046">Highway.Data.ObjectDataContext</a>
 , <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_observable_data_context.html#a1978b914f7b94a37a6e86f3314326ca9">Highway.Data.Interfaces.IObservableDataContext</a>
 </li>
 <li>PreQuery
@@ -323,11 +333,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>PreSave
 : <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_observable_data_context.html#add85ecbc05ebf7174003841bdbd72dfe">Highway.Data.Interfaces.IObservableDataContext</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#a0c33a6b51babf17fcc2d61e396dd8bf9">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#a4e307f212412dfd562cd70640d67709b">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>
+, <a class="el" href="class_highway_1_1_data_1_1_object_data_context.html#a58b23aa4f60cbcee50ccf12ebcf20d82">Highway.Data.ObjectDataContext</a>
+, <a class="el" href="class_highway_1_1_data_1_1_data_context.html#a92833ad619f66fb7245638ff88dedf94">Highway.Data.DataContext</a>
 </li>
 <li>Priority
-: <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_interceptors_1_1_entity_framework_auditable_interceptor.html#a49eb8fc89f9eb1b4103f29d4f4c45d6b">Highway.Data.EntityFramework.Interceptors.EntityFrameworkAuditableInterceptor</a>
+: <a class="el" href="class_highway_1_1_data_1_1_interceptors_1_1_auditable_interceptor.html#a58ec8c5deb639bea285d6d288a4838c3">Highway.Data.Interceptors.AuditableInterceptor</a>
 , <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_interceptor-g.html#a7d04e39fcc9ecb1139044cbdda2df23a">Highway.Data.Interfaces.IInterceptor&lt; in T &gt;</a>
 </li>
 </ul>
@@ -339,20 +349,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_event_manager.html#a5573595e903c9d9831145aaca1b24fa7">Highway.Data.Interfaces.IEventManager</a>
 </li>
 <li>Reload&lt; T &gt;()
-: <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#a8b5557c0e54d1447d2f8a8e68bf4e1f0">Highway.Data.Interfaces.IDataContext</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#ac65e67686fd1fecb7932266bff554279">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#a5a2499b1327d56166ff950578d62d615">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>
+: <a class="el" href="class_highway_1_1_data_1_1_data_context.html#a356e8fd459774943527943f1cfeb4f46">Highway.Data.DataContext</a>
+, <a class="el" href="class_highway_1_1_data_1_1_object_data_context.html#a8012b2235781cd84e3b5a4c8f90f0627">Highway.Data.ObjectDataContext</a>
 , <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#ac56bd7fbcb297fd6d0deb0edafe057df">Highway.Data.Interfaces.IDataContext</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#a5bb2a15fe3102f47871a5532d3a8c095">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#afb94c4b4111081a2b1100591f5298db1">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>
 </li>
 <li>Remove&lt; T &gt;()
-: <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#a36b80fcc6db41fd1036bbc4ea466294b">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#af83b71e1b88c1b31d302f834602731c6">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>
+: <a class="el" href="class_highway_1_1_data_1_1_data_context.html#a17ff1673fd0d79f6637e32748f38c9b5">Highway.Data.DataContext</a>
+, <a class="el" href="class_highway_1_1_data_1_1_object_data_context.html#abd11d26a547a30aa8e9ec792cbe92bf6">Highway.Data.ObjectDataContext</a>
 , <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#a07a2c7548509a6db53dd3da67ff5125d">Highway.Data.Interfaces.IDataContext</a>
 </li>
-<li>RepositoryFactory()
-: <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_factory_1_1_repository_factory.html#a11fcf7b715d125e390df596a4fcaf9a6">Highway.Data.EntityFramework.Factory.RepositoryFactory</a>
+<li>Repository()
+: <a class="el" href="class_highway_1_1_data_1_1_repository.html#a389f626c975fba670445d97b9ae780c2">Highway.Data.Repository</a>
 </li>
 </ul>
 
@@ -367,14 +374,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <h3><a class="anchor" id="index_u"></a>- u -</h3><ul>
 <li>Update&lt; T &gt;()
 : <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#a54acc7026404f8426c0e1efe6accaf26">Highway.Data.Interfaces.IDataContext</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#afd7de00d4bfcaabfd92b71b34a7cfe33">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>
-, <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#a3746422e9f70039d208c6dd6be02327e">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>
+, <a class="el" href="class_highway_1_1_data_1_1_object_data_context.html#a40757f523d8afc84fd5ac7a9573e9f9f">Highway.Data.ObjectDataContext</a>
+, <a class="el" href="class_highway_1_1_data_1_1_data_context.html#a90f58f01c6c3d9043cea8b911dccd913">Highway.Data.DataContext</a>
 </li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jul 6 2012 10:53:24 for Highway Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Aug 8 2012 20:11:22 for Highway Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.1
 </small></address>

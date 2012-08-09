@@ -101,9 +101,9 @@ Inheritance diagram for Highway.Data.Interfaces.IObservableDataContext:</div>
  <div class="center">
   <img src="interface_highway_1_1_data_1_1_interfaces_1_1_i_observable_data_context.png" usemap="#Highway.Data.Interfaces.IObservableDataContext_map" alt=""/>
   <map id="Highway.Data.Interfaces.IObservableDataContext_map" name="Highway.Data.Interfaces.IObservableDataContext_map">
-<area href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html" title="The standard interface used to interact with an ORM specific implementation " alt="Highway.Data.Interfaces.IDataContext" shape="rect" coords="214,0,632,24"/>
-<area href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html" title="A base implementation of the Code First Data Context for Entity Framework " alt="Highway.Data.EntityFramework.Contexts.EntityFrameworkContext" shape="rect" coords="0,112,418,136"/>
-<area href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html" title="The default implementation of a Object context for the database first approach to Entity Framework ..." alt="Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext" shape="rect" coords="428,112,846,136"/>
+<area href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html" title="The standard interface used to interact with an ORM specific implementation " alt="Highway.Data.Interfaces.IDataContext" shape="rect" coords="151,0,443,24"/>
+<area href="class_highway_1_1_data_1_1_data_context.html" title="A base implementation of the Code First Data DataContext for Entity Framework " alt="Highway.Data.DataContext" shape="rect" coords="0,112,292,136"/>
+<area href="class_highway_1_1_data_1_1_object_data_context.html" title="The default implementation of a Object context for the database first approach to Entity Framework ..." alt="Highway.Data.ObjectDataContext" shape="rect" coords="302,112,594,136"/>
 </map>
  </div></div>
 
@@ -133,8 +133,6 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:a88434616ba2c8b719d31e76554babfc0 inherit pub_methods_interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detaches the provided instance of <em>T</em>  from the data context  <a href="#a88434616ba2c8b719d31e76554babfc0"></a><br/></td></tr>
 <tr class="memitem:ac56bd7fbcb297fd6d0deb0edafe057df inherit pub_methods_interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#ac56bd7fbcb297fd6d0deb0edafe057df">Reload&lt; T &gt;</a> (T item)</td></tr>
 <tr class="memdesc:ac56bd7fbcb297fd6d0deb0edafe057df inherit pub_methods_interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reloads the provided instance of <em>T</em>  from the database  <a href="#ac56bd7fbcb297fd6d0deb0edafe057df"></a><br/></td></tr>
-<tr class="memitem:a8b5557c0e54d1447d2f8a8e68bf4e1f0 inherit pub_methods_interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#a8b5557c0e54d1447d2f8a8e68bf4e1f0">Reload&lt; T &gt;</a> ()</td></tr>
-<tr class="memdesc:a8b5557c0e54d1447d2f8a8e68bf4e1f0 inherit pub_methods_interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reloads all tracked objects of the type <em>T</em>   <a href="#a8b5557c0e54d1447d2f8a8e68bf4e1f0"></a><br/></td></tr>
 <tr class="memitem:a11952cf19e2562bcd82edd9c239c1aac inherit pub_methods_interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#a11952cf19e2562bcd82edd9c239c1aac">Commit</a> ()</td></tr>
 <tr class="memdesc:a11952cf19e2562bcd82edd9c239c1aac inherit pub_methods_interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context"><td class="mdescLeft">&#160;</td><td class="mdescRight">Commits all currently tracked entity changes  <a href="#a11952cf19e2562bcd82edd9c239c1aac"></a><br/></td></tr>
 <tr class="memitem:a975fee919078b8770313b4b8582554e5 inherit pub_methods_interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context"><td class="memItemLeft" align="right" valign="top">IEnumerable&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#a975fee919078b8770313b4b8582554e5">ExecuteSqlQuery&lt; T &gt;</a> (string sql, params DbParameter[] dbParams)</td></tr>
@@ -162,7 +160,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>The event fired just after the commit of the ORM </p>
 
-<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#ad5a527da395401a50839ae936576b9d9">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>, and <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#a2297153144a3e1240cb4526eb963b889">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>.</p>
+<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_data_context.html#a5363d61dfcaa37657d39a7439b4d6281">Highway.Data.DataContext</a>, and <a class="el" href="class_highway_1_1_data_1_1_object_data_context.html#ab361ad5a8c621b099944e255b8593046">Highway.Data.ObjectDataContext</a>.</p>
 
 </div>
 </div>
@@ -178,7 +176,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>The event fired just before the commit of the ORM </p>
 
-<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#a0c33a6b51babf17fcc2d61e396dd8bf9">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>, and <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#a4e307f212412dfd562cd70640d67709b">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>.</p>
+<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_data_context.html#a92833ad619f66fb7245638ff88dedf94">Highway.Data.DataContext</a>, and <a class="el" href="class_highway_1_1_data_1_1_object_data_context.html#a58b23aa4f60cbcee50ccf12ebcf20d82">Highway.Data.ObjectDataContext</a>.</p>
 
 </div>
 </div>
@@ -188,7 +186,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jul 6 2012 10:53:23 for Highway Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Aug 8 2012 20:11:21 for Highway Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.1
 </small></address>

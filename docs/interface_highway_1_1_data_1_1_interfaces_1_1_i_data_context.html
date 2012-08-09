@@ -102,9 +102,9 @@ Inheritance diagram for Highway.Data.Interfaces.IDataContext:</div>
  <div class="center">
   <img src="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.png" usemap="#Highway.Data.Interfaces.IDataContext_map" alt=""/>
   <map id="Highway.Data.Interfaces.IDataContext_map" name="Highway.Data.Interfaces.IDataContext_map">
-<area href="interface_highway_1_1_data_1_1_interfaces_1_1_i_observable_data_context.html" title="The interface used to surface events from a context that supports interceptors " alt="Highway.Data.Interfaces.IObservableDataContext" shape="rect" coords="214,56,632,80"/>
-<area href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html" title="A base implementation of the Code First Data Context for Entity Framework " alt="Highway.Data.EntityFramework.Contexts.EntityFrameworkContext" shape="rect" coords="0,112,418,136"/>
-<area href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html" title="The default implementation of a Object context for the database first approach to Entity Framework ..." alt="Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext" shape="rect" coords="428,112,846,136"/>
+<area href="interface_highway_1_1_data_1_1_interfaces_1_1_i_observable_data_context.html" title="The interface used to surface events from a context that supports interceptors " alt="Highway.Data.Interfaces.IObservableDataContext" shape="rect" coords="151,56,443,80"/>
+<area href="class_highway_1_1_data_1_1_data_context.html" title="A base implementation of the Code First Data DataContext for Entity Framework " alt="Highway.Data.DataContext" shape="rect" coords="0,112,292,136"/>
+<area href="class_highway_1_1_data_1_1_object_data_context.html" title="The default implementation of a Object context for the database first approach to Entity Framework ..." alt="Highway.Data.ObjectDataContext" shape="rect" coords="302,112,594,136"/>
 </map>
  </div></div>
 
@@ -126,8 +126,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a88434616ba2c8b719d31e76554babfc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detaches the provided instance of <em>T</em>  from the data context  <a href="#a88434616ba2c8b719d31e76554babfc0"></a><br/></td></tr>
 <tr class="memitem:ac56bd7fbcb297fd6d0deb0edafe057df"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#ac56bd7fbcb297fd6d0deb0edafe057df">Reload&lt; T &gt;</a> (T item)</td></tr>
 <tr class="memdesc:ac56bd7fbcb297fd6d0deb0edafe057df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reloads the provided instance of <em>T</em>  from the database  <a href="#ac56bd7fbcb297fd6d0deb0edafe057df"></a><br/></td></tr>
-<tr class="memitem:a8b5557c0e54d1447d2f8a8e68bf4e1f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#a8b5557c0e54d1447d2f8a8e68bf4e1f0">Reload&lt; T &gt;</a> ()</td></tr>
-<tr class="memdesc:a8b5557c0e54d1447d2f8a8e68bf4e1f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reloads all tracked objects of the type <em>T</em>   <a href="#a8b5557c0e54d1447d2f8a8e68bf4e1f0"></a><br/></td></tr>
 <tr class="memitem:a11952cf19e2562bcd82edd9c239c1aac"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#a11952cf19e2562bcd82edd9c239c1aac">Commit</a> ()</td></tr>
 <tr class="memdesc:a11952cf19e2562bcd82edd9c239c1aac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Commits all currently tracked entity changes  <a href="#a11952cf19e2562bcd82edd9c239c1aac"></a><br/></td></tr>
 <tr class="memitem:a975fee919078b8770313b4b8582554e5"><td class="memItemLeft" align="right" valign="top">IEnumerable&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#a975fee919078b8770313b4b8582554e5">ExecuteSqlQuery&lt; T &gt;</a> (string sql, params DbParameter[] dbParams)</td></tr>
@@ -174,7 +172,7 @@ Properties</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>The <em>T</em>  you added</dd></dl>
 
-<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#a412a71e5dac9537827249d18a99484f9">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>, and <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#a8d50357ea11414364e9155ef79048b21">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>.</p>
+<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_object_data_context.html#af6ca49358858c69c09fe1f2dc400b769">Highway.Data.ObjectDataContext</a>, and <a class="el" href="class_highway_1_1_data_1_1_data_context.html#aa25d7d4463901329f19e303c925ec3d6">Highway.Data.DataContext</a>.</p>
 <div class="typeconstraint">
 <dl><dt><b>Type Constraints</b><dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
@@ -207,7 +205,7 @@ Properties</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>IQueryable{T}</dd></dl>
 
-<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#a011a1a590b8a8687e70e09f78e371825">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>, and <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#a4af775d2ca582477cfc53daa5903fab5">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>.</p>
+<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_object_data_context.html#afaeb4a099112573423d449aca1430531">Highway.Data.ObjectDataContext</a>, and <a class="el" href="class_highway_1_1_data_1_1_data_context.html#a3d30713ba0399753b504537e7037f679">Highway.Data.DataContext</a>.</p>
 <div class="typeconstraint">
 <dl><dt><b>Type Constraints</b><dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
@@ -247,7 +245,7 @@ Properties</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>The <em>T</em>  you attached</dd></dl>
 
-<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#ae844d05f0756ca3bb5cb4b43fba41944">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>, and <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#ae482a535469bb401c655d1581a4f34a6">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>.</p>
+<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_object_data_context.html#a632c683e76a677a54c93ad46c04f0a2c">Highway.Data.ObjectDataContext</a>, and <a class="el" href="class_highway_1_1_data_1_1_data_context.html#a5fdc0f2a2966b7b39086410020d002ae">Highway.Data.DataContext</a>.</p>
 <div class="typeconstraint">
 <dl><dt><b>Type Constraints</b><dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
@@ -274,7 +272,7 @@ Properties</h2></td></tr>
 <p>Commits all currently tracked entity changes </p>
 <dl class="section return"><dt>Returns:</dt><dd>the number of rows affected</dd></dl>
 
-<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#ae1f0be0b4cd8e0b81cccb4dbb2e60734">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>, and <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#a9a423f1dabec6bc46f393965c815237d">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>.</p>
+<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_data_context.html#a9ce97e92d86b82aa7f31a5d59f98e817">Highway.Data.DataContext</a>, and <a class="el" href="class_highway_1_1_data_1_1_object_data_context.html#af757c0a88ca932751e70fd569ae8f137">Highway.Data.ObjectDataContext</a>.</p>
 
 </div>
 </div>
@@ -307,7 +305,7 @@ Properties</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>The <em>T</em>  you detached</dd></dl>
 
-<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#a18c4b788c7bcc1baa12d07731edb2295">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>, and <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#aa0ccdc09ac449783a450a6098946a289">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>.</p>
+<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_object_data_context.html#a35b4f068d2b1fe3aa87fe23127c82ea9">Highway.Data.ObjectDataContext</a>, and <a class="el" href="class_highway_1_1_data_1_1_data_context.html#a59a714f1f0c316e54c6bda401155b947">Highway.Data.DataContext</a>.</p>
 <div class="typeconstraint">
 <dl><dt><b>Type Constraints</b><dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
@@ -352,7 +350,7 @@ Properties</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd></dd></dl>
 
-<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#aba2419c2ed299ff633303a50584d059d">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>.</p>
+<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_data_context.html#a2efb49e3b623dbfbcdd3e8bd258e3d87">Highway.Data.DataContext</a>.</p>
 
 </div>
 </div>
@@ -390,7 +388,7 @@ Properties</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>The rows affected</dd></dl>
 
-<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#a5b6f659e95b783a131f380bbce6c68dd">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>, and <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#aec1f83731440a4f42b83458101020819">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>.</p>
+<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_data_context.html#a53be0d1815f1e1f7edfc4132295827ca">Highway.Data.DataContext</a>, and <a class="el" href="class_highway_1_1_data_1_1_object_data_context.html#aecb019a79c5201a4d041b3ae38158361">Highway.Data.ObjectDataContext</a>.</p>
 
 </div>
 </div>
@@ -434,7 +432,7 @@ Properties</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>An IEnumerable{T} from the query return</dd></dl>
 
-<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#a2b385a19abb43ebe167ba4f517af51f2">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>, and <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#a0a1fde31dabdc1a0e2cdef5dbfdefa2f">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>.</p>
+<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_data_context.html#a39afcba0bd8847a3077883a832fc360e">Highway.Data.DataContext</a>, and <a class="el" href="class_highway_1_1_data_1_1_object_data_context.html#aa93f35fdeb68aa4e0e6f7ed21ab8178a">Highway.Data.ObjectDataContext</a>.</p>
 
 </div>
 </div>
@@ -467,39 +465,7 @@ Properties</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>The <em>T</em>  you reloaded</dd></dl>
 
-<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#a5bb2a15fe3102f47871a5532d3a8c095">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>, and <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#a5a2499b1327d56166ff950578d62d615">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>.</p>
-<div class="typeconstraint">
-<dl><dt><b>Type Constraints</b><dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td valign="top"><em>T</em></td><td>&#160;:</td><td valign="top"><em>class</em></td><td>&#160;</td></tr>
-</table>
-</dl>
-</div>
-
-</div>
-</div>
-<a class="anchor" id="a8b5557c0e54d1447d2f8a8e68bf4e1f0"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Highway.Data.Interfaces.IDataContext.Reload&lt; T &gt; </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Reloads all tracked objects of the type <em>T</em>  </p>
-<dl class="tparams"><dt>Template Parameters:</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>The type of objects to reload</td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#ac65e67686fd1fecb7932266bff554279">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>, and <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#afb94c4b4111081a2b1100591f5298db1">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>.</p>
+<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_data_context.html#a356e8fd459774943527943f1cfeb4f46">Highway.Data.DataContext</a>, and <a class="el" href="class_highway_1_1_data_1_1_object_data_context.html#a8012b2235781cd84e3b5a4c8f90f0627">Highway.Data.ObjectDataContext</a>.</p>
 <div class="typeconstraint">
 <dl><dt><b>Type Constraints</b><dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
@@ -539,7 +505,7 @@ Properties</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>The <em>T</em>  you removed</dd></dl>
 
-<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#af83b71e1b88c1b31d302f834602731c6">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>, and <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#a36b80fcc6db41fd1036bbc4ea466294b">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>.</p>
+<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_object_data_context.html#abd11d26a547a30aa8e9ec792cbe92bf6">Highway.Data.ObjectDataContext</a>, and <a class="el" href="class_highway_1_1_data_1_1_data_context.html#a17ff1673fd0d79f6637e32748f38c9b5">Highway.Data.DataContext</a>.</p>
 <div class="typeconstraint">
 <dl><dt><b>Type Constraints</b><dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
@@ -579,7 +545,7 @@ Properties</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>The <em>T</em>  you updated</dd></dl>
 
-<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#afd7de00d4bfcaabfd92b71b34a7cfe33">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>, and <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#a3746422e9f70039d208c6dd6be02327e">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>.</p>
+<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_object_data_context.html#a40757f523d8afc84fd5ac7a9573e9f9f">Highway.Data.ObjectDataContext</a>, and <a class="el" href="class_highway_1_1_data_1_1_data_context.html#a90f58f01c6c3d9043cea8b911dccd913">Highway.Data.DataContext</a>.</p>
 <div class="typeconstraint">
 <dl><dt><b>Type Constraints</b><dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
@@ -611,7 +577,7 @@ Properties</h2></td></tr>
 
 <p>The reference to EventManager that allows for ordered event handling and registration </p>
 
-<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_object_context.html#a2342a28fa33d6cae0ce58c5f74438e9a">Highway.Data.EntityFramework.Contexts.EntityFrameworkObjectContext</a>, and <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_contexts_1_1_entity_framework_context.html#aefd1b923c2414387cddd0a579608039d">Highway.Data.EntityFramework.Contexts.EntityFrameworkContext</a>.</p>
+<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_data_context.html#aebad01f13573f0ec22ab8a388c3093fd">Highway.Data.DataContext</a>, and <a class="el" href="class_highway_1_1_data_1_1_object_data_context.html#a1be407a6d9a2d147511ca72d6a09ff49">Highway.Data.ObjectDataContext</a>.</p>
 
 </div>
 </div>
@@ -621,7 +587,7 @@ Properties</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jul 6 2012 10:53:23 for Highway Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Aug 8 2012 20:11:21 for Highway Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.1
 </small></address>

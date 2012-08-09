@@ -13,6 +13,7 @@ namespace Highway.Data
     /// <summary>
     /// The default implementation of a Object context for the database first approach to Entity Framework
     /// </summary>
+    [Obsolete("This is prototype code to try and support the database first approach. It is not guaranteed that this will be supported or further developed going forward as we currently see it as a sub-optimal approach.",false)]
     public class ObjectDataContext : System.Data.Objects.ObjectContext, IObservableDataContext
     {
         /// <summary>

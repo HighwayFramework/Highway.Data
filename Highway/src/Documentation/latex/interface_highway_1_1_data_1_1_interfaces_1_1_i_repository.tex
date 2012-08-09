@@ -17,10 +17,10 @@ Inheritance diagram for Highway.\-Data.\-Interfaces.\-I\-Repository\-:\begin{fig
 \item 
 I\-Enumerable$<$ T $>$ \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_a18bd55ae31839881dc43cb0ba958086b}{Find$<$ T $>$} (\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_query-g}{I\-Query}$<$ T $>$ query)
 \begin{DoxyCompactList}\small\item\em Executes a prebuilt I\-Query\{\-T\} and returns an I\-Enumerable\{\-T\} \end{DoxyCompactList}\item 
-T \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_af4256e7e2f82fd545161eeedd323712b}{Get$<$ T $>$} (\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_scalar_object-g}{I\-Scalar\-Object}$<$ T $>$ query)
-\begin{DoxyCompactList}\small\item\em Executes a prebuilt I\-Scalar\-Object\{\-T\} and returns a single instance of {\itshape T}  \end{DoxyCompactList}\item 
-void \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_a2f2f0b12b547d9d5eeaf18d013b7c008}{Execute} (\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_command_object}{I\-Command\-Object} command)
-\begin{DoxyCompactList}\small\item\em Executes a prebuilt \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_command_object}{I\-Command\-Object} \end{DoxyCompactList}\end{DoxyCompactItemize}
+T \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_ab64290450d370e1c29e31ea92d3ff18d}{Get$<$ T $>$} (\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_scalar-g}{I\-Scalar}$<$ T $>$ query)
+\begin{DoxyCompactList}\small\item\em Executes a prebuilt I\-Scalar\{\-T\} and returns a single instance of {\itshape T}  \end{DoxyCompactList}\item 
+void \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_a91324642f3ca885ac8b4b5deb7bd3e8f}{Execute} (\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_command}{I\-Command} command)
+\begin{DoxyCompactList}\small\item\em Executes a prebuilt \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_command}{I\-Command} \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Properties}
 \begin{DoxyCompactItemize}
 \item 
@@ -36,16 +36,16 @@ The interface used to interact with the O\-R\-M Specific Implementations
 
 
 \subsection{Member Function Documentation}
-\hypertarget{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_a2f2f0b12b547d9d5eeaf18d013b7c008}{\index{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Repository@{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Repository}!Execute@{Execute}}
+\hypertarget{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_a91324642f3ca885ac8b4b5deb7bd3e8f}{\index{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Repository@{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Repository}!Execute@{Execute}}
 \index{Execute@{Execute}!Highway::Data::Interfaces::IRepository@{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Repository}}
 \subsubsection[{Execute}]{\setlength{\rightskip}{0pt plus 5cm}void Highway.\-Data.\-Interfaces.\-I\-Repository.\-Execute (
 \begin{DoxyParamCaption}
-\item[{{\bf I\-Command\-Object}}]{command}
+\item[{{\bf I\-Command}}]{command}
 \end{DoxyParamCaption}
-)}}\label{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_a2f2f0b12b547d9d5eeaf18d013b7c008}
+)}}\label{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_a91324642f3ca885ac8b4b5deb7bd3e8f}
 
 
-Executes a prebuilt \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_command_object}{I\-Command\-Object} 
+Executes a prebuilt \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_command}{I\-Command} 
 
 
 \begin{DoxyParams}{Parameters}
@@ -54,7 +54,7 @@ Executes a prebuilt \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_c
 \end{DoxyParams}
 
 
-Implemented in \hyperlink{class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository_a2cf1765e57f0e5527e2c36888eaf38f9}{Highway.\-Data.\-Entity\-Framework.\-Repositories.\-Entity\-Framework\-Repository}.
+Implemented in \hyperlink{class_highway_1_1_data_1_1_repository_aa09c537b268e6e96085803087f9f7212}{Highway.\-Data.\-Repository}.
 
 \hypertarget{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_a18bd55ae31839881dc43cb0ba958086b}{\index{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Repository@{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Repository}!Find$<$ T $>$@{Find$<$ T $>$}}
 \index{Find$<$ T $>$@{Find$<$ T $>$}!Highway::Data::Interfaces::IRepository@{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Repository}}
@@ -82,22 +82,22 @@ The I\-Enumerable\{\-T\} returned from the query
 \end{DoxyReturn}
 
 
-Implemented in \hyperlink{class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository_af361e5a4bc1f44f9165cc450add06ece}{Highway.\-Data.\-Entity\-Framework.\-Repositories.\-Entity\-Framework\-Repository}.
+Implemented in \hyperlink{class_highway_1_1_data_1_1_repository_ab19e6b78b2aa9394f45194f4c8761ff1}{Highway.\-Data.\-Repository}.
 
 \begin{Desc}
 \item[Type Constraints]\begin{description}
 \item[{\em T} : {\em class}]\end{description}
 \end{Desc}
-\hypertarget{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_af4256e7e2f82fd545161eeedd323712b}{\index{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Repository@{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Repository}!Get$<$ T $>$@{Get$<$ T $>$}}
+\hypertarget{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_ab64290450d370e1c29e31ea92d3ff18d}{\index{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Repository@{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Repository}!Get$<$ T $>$@{Get$<$ T $>$}}
 \index{Get$<$ T $>$@{Get$<$ T $>$}!Highway::Data::Interfaces::IRepository@{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Repository}}
 \subsubsection[{Get$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}T Highway.\-Data.\-Interfaces.\-I\-Repository.\-Get$<$ T $>$ (
 \begin{DoxyParamCaption}
-\item[{{\bf I\-Scalar\-Object}$<$ T $>$}]{query}
+\item[{{\bf I\-Scalar}$<$ T $>$}]{query}
 \end{DoxyParamCaption}
-)}}\label{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_af4256e7e2f82fd545161eeedd323712b}
+)}}\label{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_ab64290450d370e1c29e31ea92d3ff18d}
 
 
-Executes a prebuilt I\-Scalar\-Object\{\-T\} and returns a single instance of {\itshape T}  
+Executes a prebuilt I\-Scalar\{\-T\} and returns a single instance of {\itshape T}  
 
 
 \begin{DoxyTemplParams}{Template Parameters}
@@ -114,7 +114,7 @@ The instance of {\itshape T}  returned from the query
 \end{DoxyReturn}
 
 
-Implemented in \hyperlink{class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository_a96b10f64c2c73cdc8c19ceed3f97004d}{Highway.\-Data.\-Entity\-Framework.\-Repositories.\-Entity\-Framework\-Repository}.
+Implemented in \hyperlink{class_highway_1_1_data_1_1_repository_a45937217fa900c48979c8eec90b8db1b}{Highway.\-Data.\-Repository}.
 
 
 
@@ -128,7 +128,7 @@ Reference to the Context the repository is using
 
 
 
-Implemented in \hyperlink{class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository_a39447e7deb1284fc5e5d9ea7c2c78c63}{Highway.\-Data.\-Entity\-Framework.\-Repositories.\-Entity\-Framework\-Repository}.
+Implemented in \hyperlink{class_highway_1_1_data_1_1_repository_a56e71ca922bdbd73db6986b3609e5ed7}{Highway.\-Data.\-Repository}.
 
 \hypertarget{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_a2f76cda20f7e51ce44c11a077194c747}{\index{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Repository@{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Repository}!Event\-Manager@{Event\-Manager}}
 \index{Event\-Manager@{Event\-Manager}!Highway::Data::Interfaces::IRepository@{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Repository}}
@@ -139,7 +139,7 @@ Reference to the Event\-Manager the repository is using
 
 
 
-Implemented in \hyperlink{class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository_abb629b7ba44c32a78951f64554f52e06}{Highway.\-Data.\-Entity\-Framework.\-Repositories.\-Entity\-Framework\-Repository}.
+Implemented in \hyperlink{class_highway_1_1_data_1_1_repository_ac1ac32fc8d217cfb1d47bb1cc68088c6}{Highway.\-Data.\-Repository}.
 
 
 

@@ -1,20 +1,22 @@
 var searchData=
 [
   ['castle',['Castle',['../namespace_highway_1_1_data_1_1_entity_framework_1_1_castle.html',1,'Highway::Data::EntityFramework']]],
-  ['contexts',['Contexts',['../namespace_highway_1_1_data_1_1_entity_framework_1_1_contexts.html',1,'Highway::Data::EntityFramework']]],
   ['data',['Data',['../namespace_highway_1_1_data.html',1,'Highway']]],
+  ['domain',['Domain',['../namespace_highway_1_1_data_1_1_entity_framework_1_1_structure_map_1_1_example_1_1_domain.html',1,'Highway::Data::EntityFramework::StructureMap::Example']]],
   ['entityframework',['EntityFramework',['../namespace_highway_1_1_data_1_1_entity_framework.html',1,'Highway::Data']]],
   ['eventmanagement',['EventManagement',['../namespace_highway_1_1_data_1_1_event_management.html',1,'Highway::Data']]],
   ['events',['Events',['../namespace_highway_1_1_data_1_1_interceptors_1_1_events.html',1,'Highway::Data::Interceptors']]],
-  ['factory',['Factory',['../namespace_highway_1_1_data_1_1_entity_framework_1_1_factory.html',1,'Highway::Data::EntityFramework']]],
+  ['example',['Example',['../namespace_highway_1_1_data_1_1_entity_framework_1_1_structure_map_1_1_example.html',1,'Highway::Data::EntityFramework::StructureMap']]],
   ['highway',['Highway',['../namespace_highway.html',1,'']]],
+  ['highwaydatamappings',['HighwayDataMappings',['../class_highway_1_1_data_1_1_entity_framework_1_1_structure_map_1_1_example_1_1_highway_data_mappings.html',1,'Highway::Data::EntityFramework::StructureMap::Example']]],
   ['interceptors',['Interceptors',['../namespace_highway_1_1_data_1_1_interceptors.html',1,'Highway::Data']]],
-  ['interceptors',['Interceptors',['../namespace_highway_1_1_data_1_1_entity_framework_1_1_interceptors.html',1,'Highway::Data::EntityFramework']]],
   ['interfaces',['Interfaces',['../namespace_highway_1_1_data_1_1_interfaces.html',1,'Highway::Data']]],
-  ['mappings',['Mappings',['../namespace_highway_1_1_data_1_1_entity_framework_1_1_mappings.html',1,'Highway::Data::EntityFramework']]],
   ['mstest',['MSTest',['../namespace_highway_1_1_test_1_1_m_s_test.html',1,'Highway::Test']]],
+  ['ninject',['Ninject',['../namespace_highway_1_1_data_1_1_entity_framework_1_1_ninject.html',1,'Highway::Data::EntityFramework']]],
+  ['queries',['Queries',['../namespace_highway_1_1_data_1_1_entity_framework_1_1_structure_map_1_1_example_1_1_queries.html',1,'Highway::Data::EntityFramework::StructureMap::Example']]],
   ['queryobjects',['QueryObjects',['../namespace_highway_1_1_data_1_1_query_objects.html',1,'Highway::Data']]],
-  ['repositories',['Repositories',['../namespace_highway_1_1_data_1_1_entity_framework_1_1_repositories.html',1,'Highway::Data::EntityFramework']]],
   ['services',['Services',['../namespace_highway_1_1_data_1_1_services.html',1,'Highway::Data']]],
-  ['test',['Test',['../namespace_highway_1_1_test.html',1,'Highway']]]
+  ['structuremap',['StructureMap',['../namespace_highway_1_1_data_1_1_entity_framework_1_1_structure_map.html',1,'Highway::Data::EntityFramework']]],
+  ['test',['Test',['../namespace_highway_1_1_test.html',1,'Highway']]],
+  ['unity',['Unity',['../namespace_highway_1_1_data_1_1_entity_framework_1_1_unity.html',1,'Highway::Data::EntityFramework']]]
 ];

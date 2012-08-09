@@ -102,7 +102,7 @@ Inheritance diagram for Highway.Data.Interfaces.IRepository:</div>
  <div class="center">
   <img src="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository.png" usemap="#Highway.Data.Interfaces.IRepository_map" alt=""/>
   <map id="Highway.Data.Interfaces.IRepository_map" name="Highway.Data.Interfaces.IRepository_map">
-<area href="class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository.html" title="A Entity Framework Specific repository implementation that uses Specification pattern to execute Quer..." alt="Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository" shape="rect" coords="0,56,420,80"/>
+<area href="class_highway_1_1_data_1_1_repository.html" title="A Entity Framework Specific repository implementation that uses Specification pattern to execute Quer..." alt="Highway.Data.Repository" shape="rect" coords="0,56,218,80"/>
 </map>
  </div></div>
 
@@ -112,10 +112,10 @@ Inheritance diagram for Highway.Data.Interfaces.IRepository:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a18bd55ae31839881dc43cb0ba958086b"><td class="memItemLeft" align="right" valign="top">IEnumerable&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository.html#a18bd55ae31839881dc43cb0ba958086b">Find&lt; T &gt;</a> (<a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_query-g.html">IQuery</a>&lt; T &gt; query)</td></tr>
 <tr class="memdesc:a18bd55ae31839881dc43cb0ba958086b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a prebuilt IQuery{T} and returns an IEnumerable{T}  <a href="#a18bd55ae31839881dc43cb0ba958086b"></a><br/></td></tr>
-<tr class="memitem:af4256e7e2f82fd545161eeedd323712b"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository.html#af4256e7e2f82fd545161eeedd323712b">Get&lt; T &gt;</a> (<a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_scalar_object-g.html">IScalarObject</a>&lt; T &gt; query)</td></tr>
-<tr class="memdesc:af4256e7e2f82fd545161eeedd323712b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a prebuilt IScalarObject{T} and returns a single instance of <em>T</em>   <a href="#af4256e7e2f82fd545161eeedd323712b"></a><br/></td></tr>
-<tr class="memitem:a2f2f0b12b547d9d5eeaf18d013b7c008"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository.html#a2f2f0b12b547d9d5eeaf18d013b7c008">Execute</a> (<a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_command_object.html">ICommandObject</a> command)</td></tr>
-<tr class="memdesc:a2f2f0b12b547d9d5eeaf18d013b7c008"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a prebuilt <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_command_object.html" title="An Interface for Command Queries that return no value, or the return is ignored ">ICommandObject</a>  <a href="#a2f2f0b12b547d9d5eeaf18d013b7c008"></a><br/></td></tr>
+<tr class="memitem:ab64290450d370e1c29e31ea92d3ff18d"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository.html#ab64290450d370e1c29e31ea92d3ff18d">Get&lt; T &gt;</a> (<a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_scalar-g.html">IScalar</a>&lt; T &gt; query)</td></tr>
+<tr class="memdesc:ab64290450d370e1c29e31ea92d3ff18d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a prebuilt IScalar{T} and returns a single instance of <em>T</em>   <a href="#ab64290450d370e1c29e31ea92d3ff18d"></a><br/></td></tr>
+<tr class="memitem:a91324642f3ca885ac8b4b5deb7bd3e8f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_repository.html#a91324642f3ca885ac8b4b5deb7bd3e8f">Execute</a> (<a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_command.html">ICommand</a> command)</td></tr>
+<tr class="memdesc:a91324642f3ca885ac8b4b5deb7bd3e8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a prebuilt <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_command.html" title="An Interface for Command Queries that return no value, or the return is ignored ">ICommand</a>  <a href="#a91324642f3ca885ac8b4b5deb7bd3e8f"></a><br/></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="properties"></a>
 Properties</h2></td></tr>
@@ -127,21 +127,21 @@ Properties</h2></td></tr>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>The interface used to interact with the ORM Specific Implementations </p>
 </div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a2f2f0b12b547d9d5eeaf18d013b7c008"></a>
+<a class="anchor" id="a91324642f3ca885ac8b4b5deb7bd3e8f"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void Highway.Data.Interfaces.IRepository.Execute </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_command_object.html">ICommandObject</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_command.html">ICommand</a>&#160;</td>
           <td class="paramname"><em>command</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Executes a prebuilt <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_command_object.html" title="An Interface for Command Queries that return no value, or the return is ignored ">ICommandObject</a> </p>
+<p>Executes a prebuilt <a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_command.html" title="An Interface for Command Queries that return no value, or the return is ignored ">ICommand</a> </p>
 <dl class="params"><dt>Parameters:</dt><dd>
   <table class="params">
     <tr><td class="paramname">command</td><td>The prebuilt command object</td></tr>
@@ -149,7 +149,7 @@ Properties</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository.html#a2cf1765e57f0e5527e2c36888eaf38f9">Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository</a>.</p>
+<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_repository.html#aa09c537b268e6e96085803087f9f7212">Highway.Data.Repository</a>.</p>
 
 </div>
 </div>
@@ -182,7 +182,7 @@ Properties</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>The IEnumerable{T} returned from the query</dd></dl>
 
-<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository.html#af361e5a4bc1f44f9165cc450add06ece">Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository</a>.</p>
+<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_repository.html#ab19e6b78b2aa9394f45194f4c8761ff1">Highway.Data.Repository</a>.</p>
 <div class="typeconstraint">
 <dl><dt><b>Type Constraints</b><dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
@@ -193,21 +193,21 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="af4256e7e2f82fd545161eeedd323712b"></a>
+<a class="anchor" id="ab64290450d370e1c29e31ea92d3ff18d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">T Highway.Data.Interfaces.IRepository.Get&lt; T &gt; </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_scalar_object-g.html">IScalarObject</a>&lt; T &gt;&#160;</td>
+          <td class="paramtype"><a class="el" href="interface_highway_1_1_data_1_1_interfaces_1_1_i_scalar-g.html">IScalar</a>&lt; T &gt;&#160;</td>
           <td class="paramname"><em>query</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Executes a prebuilt IScalarObject{T} and returns a single instance of <em>T</em>  </p>
+<p>Executes a prebuilt IScalar{T} and returns a single instance of <em>T</em>  </p>
 <dl class="tparams"><dt>Template Parameters:</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>The Entity being queried</td></tr>
@@ -222,7 +222,7 @@ Properties</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns:</dt><dd>The instance of <em>T</em>  returned from the query</dd></dl>
 
-<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository.html#a96b10f64c2c73cdc8c19ceed3f97004d">Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository</a>.</p>
+<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_repository.html#a45937217fa900c48979c8eec90b8db1b">Highway.Data.Repository</a>.</p>
 
 </div>
 </div>
@@ -247,7 +247,7 @@ Properties</h2></td></tr>
 
 <p>Reference to the Context the repository is using </p>
 
-<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository.html#a39447e7deb1284fc5e5d9ea7c2c78c63">Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository</a>.</p>
+<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_repository.html#a56e71ca922bdbd73db6986b3609e5ed7">Highway.Data.Repository</a>.</p>
 
 </div>
 </div>
@@ -271,7 +271,7 @@ Properties</h2></td></tr>
 
 <p>Reference to the EventManager the repository is using </p>
 
-<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_entity_framework_1_1_repositories_1_1_entity_framework_repository.html#abb629b7ba44c32a78951f64554f52e06">Highway.Data.EntityFramework.Repositories.EntityFrameworkRepository</a>.</p>
+<p>Implemented in <a class="el" href="class_highway_1_1_data_1_1_repository.html#ac1ac32fc8d217cfb1d47bb1cc68088c6">Highway.Data.Repository</a>.</p>
 
 </div>
 </div>
@@ -281,7 +281,7 @@ Properties</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jul 6 2012 10:53:23 for Highway Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Aug 8 2012 20:11:21 for Highway Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.1
 </small></address>

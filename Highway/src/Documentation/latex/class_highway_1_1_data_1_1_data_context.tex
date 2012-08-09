@@ -1,0 +1,476 @@
+\hypertarget{class_highway_1_1_data_1_1_data_context}{\section{Highway.\-Data.\-Data\-Context Class Reference}
+\label{class_highway_1_1_data_1_1_data_context}\index{Highway.\-Data.\-Data\-Context@{Highway.\-Data.\-Data\-Context}}
+}
+
+
+A base implementation of the Code First \hyperlink{namespace_highway_1_1_data}{Data} \hyperlink{class_highway_1_1_data_1_1_data_context}{Data\-Context} for Entity Framework  
+
+
+Inheritance diagram for Highway.\-Data.\-Data\-Context\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_highway_1_1_data_1_1_data_context}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_highway_1_1_data_1_1_data_context_a53dda69cf93cec7079609b39ba8b6c40}{Data\-Context} (string connection\-String, \hyperlink{interface_highway_1_1_data_1_1_i_mapping_configuration}{I\-Mapping\-Configuration} mapping, \hyperlink{interface_highway_1_1_data_1_1_i_context_configuration}{I\-Context\-Configuration} context\-Configuration=null, I\-Log log=null)
+\begin{DoxyCompactList}\small\item\em Constructs a context \end{DoxyCompactList}\item 
+I\-Queryable$<$ T $>$ \hyperlink{class_highway_1_1_data_1_1_data_context_a3d30713ba0399753b504537e7037f679}{As\-Queryable$<$ T $>$} ()
+\begin{DoxyCompactList}\small\item\em This gives a mockable wrapper around the normal Db\-Set\{\-T\} method that allows for testablity \end{DoxyCompactList}\item 
+T \hyperlink{class_highway_1_1_data_1_1_data_context_aa25d7d4463901329f19e303c925ec3d6}{Add$<$ T $>$} (T item)
+\begin{DoxyCompactList}\small\item\em Adds the provided instance of {\itshape T}  to the data context \end{DoxyCompactList}\item 
+T \hyperlink{class_highway_1_1_data_1_1_data_context_a17ff1673fd0d79f6637e32748f38c9b5}{Remove$<$ T $>$} (T item)
+\begin{DoxyCompactList}\small\item\em Removes the provided instance of {\itshape T}  from the data context \end{DoxyCompactList}\item 
+T \hyperlink{class_highway_1_1_data_1_1_data_context_a90f58f01c6c3d9043cea8b911dccd913}{Update$<$ T $>$} (T item)
+\begin{DoxyCompactList}\small\item\em Updates the provided instance of {\itshape T}  in the data context \end{DoxyCompactList}\item 
+T \hyperlink{class_highway_1_1_data_1_1_data_context_a5fdc0f2a2966b7b39086410020d002ae}{Attach$<$ T $>$} (T item)
+\begin{DoxyCompactList}\small\item\em Attaches the provided instance of {\itshape T}  to the data context \end{DoxyCompactList}\item 
+T \hyperlink{class_highway_1_1_data_1_1_data_context_a59a714f1f0c316e54c6bda401155b947}{Detach$<$ T $>$} (T item)
+\begin{DoxyCompactList}\small\item\em Detaches the provided instance of {\itshape T}  from the data context \end{DoxyCompactList}\item 
+T \hyperlink{class_highway_1_1_data_1_1_data_context_a356e8fd459774943527943f1cfeb4f46}{Reload$<$ T $>$} (T item)
+\begin{DoxyCompactList}\small\item\em Reloads the provided instance of {\itshape T}  from the database \end{DoxyCompactList}\item 
+int \hyperlink{class_highway_1_1_data_1_1_data_context_a9ce97e92d86b82aa7f31a5d59f98e817}{Commit} ()
+\begin{DoxyCompactList}\small\item\em Commits all currently tracked entity changes \end{DoxyCompactList}\item 
+I\-Enumerable$<$ T $>$ \hyperlink{class_highway_1_1_data_1_1_data_context_a39afcba0bd8847a3077883a832fc360e}{Execute\-Sql\-Query$<$ T $>$} (string sql, params Db\-Parameter\mbox{[}$\,$\mbox{]} db\-Params)
+\begin{DoxyCompactList}\small\item\em Executes a S\-Q\-L command and tries to map the returned datasets into an I\-Enumerable\{\-T\} The results should have the same column names as the Entity Type has properties \end{DoxyCompactList}\item 
+int \hyperlink{class_highway_1_1_data_1_1_data_context_a53be0d1815f1e1f7edfc4132295827ca}{Execute\-Sql\-Command} (string sql, params Db\-Parameter\mbox{[}$\,$\mbox{]} db\-Params)
+\begin{DoxyCompactList}\small\item\em Executes a S\-Q\-L command and returns the standard int return from the query \end{DoxyCompactList}\item 
+int \hyperlink{class_highway_1_1_data_1_1_data_context_a2efb49e3b623dbfbcdd3e8bd258e3d87}{Execute\-Function} (string procedure\-Name, params Object\-Parameter\mbox{[}$\,$\mbox{]} db\-Params)
+\begin{DoxyCompactList}\small\item\em \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+override void \hyperlink{class_highway_1_1_data_1_1_data_context_a54336e47c20e2eb8b4e93e00ffa79a2a}{On\-Model\-Creating} (Db\-Model\-Builder model\-Builder)
+\begin{DoxyCompactList}\small\item\em This method is called when the model for a derived context has been initialized, but before the model has been locked down and used to initialize the context. The default implementation of this method takes the \hyperlink{interface_highway_1_1_data_1_1_i_mapping_configuration}{I\-Mapping\-Configuration} array passed in on construction and applies them. If no configuration mappings were passed it it does nothing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_event_manager}{I\-Event\-Manager} \hyperlink{class_highway_1_1_data_1_1_data_context_aebad01f13573f0ec22ab8a388c3093fd}{Event\-Manager}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The reference to Event\-Manager that allows for ordered event handling and registration \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+Event\-Handler$<$ \hyperlink{class_highway_1_1_data_1_1_interceptors_1_1_events_1_1_pre_save_event_args}{Pre\-Save\-Event\-Args} $>$ \hyperlink{class_highway_1_1_data_1_1_data_context_a92833ad619f66fb7245638ff88dedf94}{Pre\-Save}
+\begin{DoxyCompactList}\small\item\em The event fired just before the commit of the O\-R\-M \end{DoxyCompactList}\item 
+Event\-Handler$<$ \hyperlink{class_highway_1_1_data_1_1_interceptors_1_1_events_1_1_post_save_event_args}{Post\-Save\-Event\-Args} $>$ \hyperlink{class_highway_1_1_data_1_1_data_context_a5363d61dfcaa37657d39a7439b4d6281}{Post\-Save}
+\begin{DoxyCompactList}\small\item\em The event fired just after the commit of the O\-R\-M \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A base implementation of the Code First \hyperlink{namespace_highway_1_1_data}{Data} \hyperlink{class_highway_1_1_data_1_1_data_context}{Data\-Context} for Entity Framework 
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_highway_1_1_data_1_1_data_context_a53dda69cf93cec7079609b39ba8b6c40}{\index{Highway\-::\-Data\-::\-Data\-Context@{Highway\-::\-Data\-::\-Data\-Context}!Data\-Context@{Data\-Context}}
+\index{Data\-Context@{Data\-Context}!Highway::Data::DataContext@{Highway\-::\-Data\-::\-Data\-Context}}
+\subsubsection[{Data\-Context}]{\setlength{\rightskip}{0pt plus 5cm}Highway.\-Data.\-Data\-Context.\-Data\-Context (
+\begin{DoxyParamCaption}
+\item[{string}]{connection\-String, }
+\item[{{\bf I\-Mapping\-Configuration}}]{mapping, }
+\item[{{\bf I\-Context\-Configuration}}]{context\-Configuration = {\ttfamily null}, }
+\item[{I\-Log}]{log = {\ttfamily null}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_highway_1_1_data_1_1_data_context_a53dda69cf93cec7079609b39ba8b6c40}
+
+
+Constructs a context 
+
+
+\begin{DoxyParams}{Parameters}
+{\em connection\-String} & The standard S\-Q\-L connection string for the Database\\
+\hline
+{\em mapping} & The Mapping Configuration that will determine how the tables and objects interact\\
+\hline
+{\em context\-Configuration} & The context specific configuration that will change context level behavior ( Optional )\\
+\hline
+{\em log} & The logger being supplied for this context ( Optional )\\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_highway_1_1_data_1_1_data_context_aa25d7d4463901329f19e303c925ec3d6}{\index{Highway\-::\-Data\-::\-Data\-Context@{Highway\-::\-Data\-::\-Data\-Context}!Add$<$ T $>$@{Add$<$ T $>$}}
+\index{Add$<$ T $>$@{Add$<$ T $>$}!Highway::Data::DataContext@{Highway\-::\-Data\-::\-Data\-Context}}
+\subsubsection[{Add$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}T Highway.\-Data.\-Data\-Context.\-Add$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{T}]{item}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_highway_1_1_data_1_1_data_context_aa25d7d4463901329f19e303c925ec3d6}
+
+
+Adds the provided instance of {\itshape T}  to the data context 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity Type being added\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The {\itshape T}  you want to add\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The {\itshape T}  you added
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context_aa40a195c7208c198ab56f4ddf3e33d27}{Highway.\-Data.\-Interfaces.\-I\-Data\-Context}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em class}]\end{description}
+\end{Desc}
+\hypertarget{class_highway_1_1_data_1_1_data_context_a3d30713ba0399753b504537e7037f679}{\index{Highway\-::\-Data\-::\-Data\-Context@{Highway\-::\-Data\-::\-Data\-Context}!As\-Queryable$<$ T $>$@{As\-Queryable$<$ T $>$}}
+\index{As\-Queryable$<$ T $>$@{As\-Queryable$<$ T $>$}!Highway::Data::DataContext@{Highway\-::\-Data\-::\-Data\-Context}}
+\subsubsection[{As\-Queryable$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}I\-Queryable$<$T$>$ Highway.\-Data.\-Data\-Context.\-As\-Queryable$<$ T $>$ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_highway_1_1_data_1_1_data_context_a3d30713ba0399753b504537e7037f679}
+
+
+This gives a mockable wrapper around the normal Db\-Set\{\-T\} method that allows for testablity 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity being queried\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+I\-Queryable\{\-T\}
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context_a2361aaf5d4e2635081a51c2244c841e8}{Highway.\-Data.\-Interfaces.\-I\-Data\-Context}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em class}]\end{description}
+\end{Desc}
+\hypertarget{class_highway_1_1_data_1_1_data_context_a5fdc0f2a2966b7b39086410020d002ae}{\index{Highway\-::\-Data\-::\-Data\-Context@{Highway\-::\-Data\-::\-Data\-Context}!Attach$<$ T $>$@{Attach$<$ T $>$}}
+\index{Attach$<$ T $>$@{Attach$<$ T $>$}!Highway::Data::DataContext@{Highway\-::\-Data\-::\-Data\-Context}}
+\subsubsection[{Attach$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}T Highway.\-Data.\-Data\-Context.\-Attach$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{T}]{item}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_highway_1_1_data_1_1_data_context_a5fdc0f2a2966b7b39086410020d002ae}
+
+
+Attaches the provided instance of {\itshape T}  to the data context 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity Type being attached\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The {\itshape T}  you want to attach\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The {\itshape T}  you attached
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context_a404ee46e3152c5a80a7ad7a999a5f302}{Highway.\-Data.\-Interfaces.\-I\-Data\-Context}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em class}]\end{description}
+\end{Desc}
+\hypertarget{class_highway_1_1_data_1_1_data_context_a9ce97e92d86b82aa7f31a5d59f98e817}{\index{Highway\-::\-Data\-::\-Data\-Context@{Highway\-::\-Data\-::\-Data\-Context}!Commit@{Commit}}
+\index{Commit@{Commit}!Highway::Data::DataContext@{Highway\-::\-Data\-::\-Data\-Context}}
+\subsubsection[{Commit}]{\setlength{\rightskip}{0pt plus 5cm}int Highway.\-Data.\-Data\-Context.\-Commit (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_highway_1_1_data_1_1_data_context_a9ce97e92d86b82aa7f31a5d59f98e817}
+
+
+Commits all currently tracked entity changes 
+
+\begin{DoxyReturn}{Returns}
+the number of rows affected
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context_a11952cf19e2562bcd82edd9c239c1aac}{Highway.\-Data.\-Interfaces.\-I\-Data\-Context}.
+
+\hypertarget{class_highway_1_1_data_1_1_data_context_a59a714f1f0c316e54c6bda401155b947}{\index{Highway\-::\-Data\-::\-Data\-Context@{Highway\-::\-Data\-::\-Data\-Context}!Detach$<$ T $>$@{Detach$<$ T $>$}}
+\index{Detach$<$ T $>$@{Detach$<$ T $>$}!Highway::Data::DataContext@{Highway\-::\-Data\-::\-Data\-Context}}
+\subsubsection[{Detach$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}T Highway.\-Data.\-Data\-Context.\-Detach$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{T}]{item}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_highway_1_1_data_1_1_data_context_a59a714f1f0c316e54c6bda401155b947}
+
+
+Detaches the provided instance of {\itshape T}  from the data context 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity Type being detached\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The {\itshape T}  you want to detach\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The {\itshape T}  you detached
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context_a88434616ba2c8b719d31e76554babfc0}{Highway.\-Data.\-Interfaces.\-I\-Data\-Context}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em class}]\end{description}
+\end{Desc}
+\hypertarget{class_highway_1_1_data_1_1_data_context_a2efb49e3b623dbfbcdd3e8bd258e3d87}{\index{Highway\-::\-Data\-::\-Data\-Context@{Highway\-::\-Data\-::\-Data\-Context}!Execute\-Function@{Execute\-Function}}
+\index{Execute\-Function@{Execute\-Function}!Highway::Data::DataContext@{Highway\-::\-Data\-::\-Data\-Context}}
+\subsubsection[{Execute\-Function}]{\setlength{\rightskip}{0pt plus 5cm}int Highway.\-Data.\-Data\-Context.\-Execute\-Function (
+\begin{DoxyParamCaption}
+\item[{string}]{procedure\-Name, }
+\item[{params Object\-Parameter\mbox{[}$\,$\mbox{]}}]{db\-Params}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_highway_1_1_data_1_1_data_context_a2efb49e3b623dbfbcdd3e8bd258e3d87}
+
+
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em procedure\-Name} & \\
+\hline
+{\em db\-Params} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context_a27f9736cd139560b0b5debe9a7bc795a}{Highway.\-Data.\-Interfaces.\-I\-Data\-Context}.
+
+\hypertarget{class_highway_1_1_data_1_1_data_context_a53be0d1815f1e1f7edfc4132295827ca}{\index{Highway\-::\-Data\-::\-Data\-Context@{Highway\-::\-Data\-::\-Data\-Context}!Execute\-Sql\-Command@{Execute\-Sql\-Command}}
+\index{Execute\-Sql\-Command@{Execute\-Sql\-Command}!Highway::Data::DataContext@{Highway\-::\-Data\-::\-Data\-Context}}
+\subsubsection[{Execute\-Sql\-Command}]{\setlength{\rightskip}{0pt plus 5cm}int Highway.\-Data.\-Data\-Context.\-Execute\-Sql\-Command (
+\begin{DoxyParamCaption}
+\item[{string}]{sql, }
+\item[{params Db\-Parameter\mbox{[}$\,$\mbox{]}}]{db\-Params}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_highway_1_1_data_1_1_data_context_a53be0d1815f1e1f7edfc4132295827ca}
+
+
+Executes a S\-Q\-L command and returns the standard int return from the query 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sql} & The Sql Statement\\
+\hline
+{\em db\-Params} & A List of Database Parameters for the Query\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The rows affected
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context_ad8d3d00bdfca146ea8197e050a215be3}{Highway.\-Data.\-Interfaces.\-I\-Data\-Context}.
+
+\hypertarget{class_highway_1_1_data_1_1_data_context_a39afcba0bd8847a3077883a832fc360e}{\index{Highway\-::\-Data\-::\-Data\-Context@{Highway\-::\-Data\-::\-Data\-Context}!Execute\-Sql\-Query$<$ T $>$@{Execute\-Sql\-Query$<$ T $>$}}
+\index{Execute\-Sql\-Query$<$ T $>$@{Execute\-Sql\-Query$<$ T $>$}!Highway::Data::DataContext@{Highway\-::\-Data\-::\-Data\-Context}}
+\subsubsection[{Execute\-Sql\-Query$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}I\-Enumerable$<$T$>$ Highway.\-Data.\-Data\-Context.\-Execute\-Sql\-Query$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{string}]{sql, }
+\item[{params Db\-Parameter\mbox{[}$\,$\mbox{]}}]{db\-Params}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_highway_1_1_data_1_1_data_context_a39afcba0bd8847a3077883a832fc360e}
+
+
+Executes a S\-Q\-L command and tries to map the returned datasets into an I\-Enumerable\{\-T\} The results should have the same column names as the Entity Type has properties 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity Type that the return should be mapped to\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em sql} & The Sql Statement\\
+\hline
+{\em db\-Params} & A List of Database Parameters for the Query\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An I\-Enumerable\{\-T\} from the query return
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context_a975fee919078b8770313b4b8582554e5}{Highway.\-Data.\-Interfaces.\-I\-Data\-Context}.
+
+\hypertarget{class_highway_1_1_data_1_1_data_context_a54336e47c20e2eb8b4e93e00ffa79a2a}{\index{Highway\-::\-Data\-::\-Data\-Context@{Highway\-::\-Data\-::\-Data\-Context}!On\-Model\-Creating@{On\-Model\-Creating}}
+\index{On\-Model\-Creating@{On\-Model\-Creating}!Highway::Data::DataContext@{Highway\-::\-Data\-::\-Data\-Context}}
+\subsubsection[{On\-Model\-Creating}]{\setlength{\rightskip}{0pt plus 5cm}override void Highway.\-Data.\-Data\-Context.\-On\-Model\-Creating (
+\begin{DoxyParamCaption}
+\item[{Db\-Model\-Builder}]{model\-Builder}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}}\label{class_highway_1_1_data_1_1_data_context_a54336e47c20e2eb8b4e93e00ffa79a2a}
+
+
+This method is called when the model for a derived context has been initialized, but before the model has been locked down and used to initialize the context. The default implementation of this method takes the \hyperlink{interface_highway_1_1_data_1_1_i_mapping_configuration}{I\-Mapping\-Configuration} array passed in on construction and applies them. If no configuration mappings were passed it it does nothing. 
+
+Typically, this method is called only once when the first instance of a derived context is created. The model for that context is then cached and is for all further instances of the context in the app domain. This caching can be disabled by setting the Model\-Caching property on the given Model\-Buidler, but note that this can seriously degrade performance. More control over caching is provided through use of the Db\-Model\-Builder and Db\-Context\-Factory classes directly. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model\-Builder} & The builder that defines the model for the context being created.\\
+\hline
+\end{DoxyParams}
+\hypertarget{class_highway_1_1_data_1_1_data_context_a356e8fd459774943527943f1cfeb4f46}{\index{Highway\-::\-Data\-::\-Data\-Context@{Highway\-::\-Data\-::\-Data\-Context}!Reload$<$ T $>$@{Reload$<$ T $>$}}
+\index{Reload$<$ T $>$@{Reload$<$ T $>$}!Highway::Data::DataContext@{Highway\-::\-Data\-::\-Data\-Context}}
+\subsubsection[{Reload$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}T Highway.\-Data.\-Data\-Context.\-Reload$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{T}]{item}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_highway_1_1_data_1_1_data_context_a356e8fd459774943527943f1cfeb4f46}
+
+
+Reloads the provided instance of {\itshape T}  from the database 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity Type being reloaded\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The {\itshape T}  you want to reload\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The {\itshape T}  you reloaded
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context_ac56bd7fbcb297fd6d0deb0edafe057df}{Highway.\-Data.\-Interfaces.\-I\-Data\-Context}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em class}]\end{description}
+\end{Desc}
+\hypertarget{class_highway_1_1_data_1_1_data_context_a17ff1673fd0d79f6637e32748f38c9b5}{\index{Highway\-::\-Data\-::\-Data\-Context@{Highway\-::\-Data\-::\-Data\-Context}!Remove$<$ T $>$@{Remove$<$ T $>$}}
+\index{Remove$<$ T $>$@{Remove$<$ T $>$}!Highway::Data::DataContext@{Highway\-::\-Data\-::\-Data\-Context}}
+\subsubsection[{Remove$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}T Highway.\-Data.\-Data\-Context.\-Remove$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{T}]{item}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_highway_1_1_data_1_1_data_context_a17ff1673fd0d79f6637e32748f38c9b5}
+
+
+Removes the provided instance of {\itshape T}  from the data context 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity Type being removed\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The {\itshape T}  you want to remove\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The {\itshape T}  you removed
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context_a07a2c7548509a6db53dd3da67ff5125d}{Highway.\-Data.\-Interfaces.\-I\-Data\-Context}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em class}]\end{description}
+\end{Desc}
+\hypertarget{class_highway_1_1_data_1_1_data_context_a90f58f01c6c3d9043cea8b911dccd913}{\index{Highway\-::\-Data\-::\-Data\-Context@{Highway\-::\-Data\-::\-Data\-Context}!Update$<$ T $>$@{Update$<$ T $>$}}
+\index{Update$<$ T $>$@{Update$<$ T $>$}!Highway::Data::DataContext@{Highway\-::\-Data\-::\-Data\-Context}}
+\subsubsection[{Update$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}T Highway.\-Data.\-Data\-Context.\-Update$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{T}]{item}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_highway_1_1_data_1_1_data_context_a90f58f01c6c3d9043cea8b911dccd913}
+
+
+Updates the provided instance of {\itshape T}  in the data context 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity Type being updated\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The {\itshape T}  you want to update\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The {\itshape T}  you updated
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context_a54acc7026404f8426c0e1efe6accaf26}{Highway.\-Data.\-Interfaces.\-I\-Data\-Context}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em class}]\end{description}
+\end{Desc}
+
+
+\subsection{Property Documentation}
+\hypertarget{class_highway_1_1_data_1_1_data_context_aebad01f13573f0ec22ab8a388c3093fd}{\index{Highway\-::\-Data\-::\-Data\-Context@{Highway\-::\-Data\-::\-Data\-Context}!Event\-Manager@{Event\-Manager}}
+\index{Event\-Manager@{Event\-Manager}!Highway::Data::DataContext@{Highway\-::\-Data\-::\-Data\-Context}}
+\subsubsection[{Event\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}{\bf I\-Event\-Manager} Highway.\-Data.\-Data\-Context.\-Event\-Manager\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}}\label{class_highway_1_1_data_1_1_data_context_aebad01f13573f0ec22ab8a388c3093fd}
+
+
+The reference to Event\-Manager that allows for ordered event handling and registration 
+
+
+
+Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context_a66d20c659a7c50d08705534ad750e1f8}{Highway.\-Data.\-Interfaces.\-I\-Data\-Context}.
+
+
+
+\subsection{Event Documentation}
+\hypertarget{class_highway_1_1_data_1_1_data_context_a5363d61dfcaa37657d39a7439b4d6281}{\index{Highway\-::\-Data\-::\-Data\-Context@{Highway\-::\-Data\-::\-Data\-Context}!Post\-Save@{Post\-Save}}
+\index{Post\-Save@{Post\-Save}!Highway::Data::DataContext@{Highway\-::\-Data\-::\-Data\-Context}}
+\subsubsection[{Post\-Save}]{\setlength{\rightskip}{0pt plus 5cm}Event\-Handler$<${\bf Post\-Save\-Event\-Args}$>$ Highway.\-Data.\-Data\-Context.\-Post\-Save}}\label{class_highway_1_1_data_1_1_data_context_a5363d61dfcaa37657d39a7439b4d6281}
+
+
+The event fired just after the commit of the O\-R\-M 
+
+
+
+Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_observable_data_context_a1978b914f7b94a37a6e86f3314326ca9}{Highway.\-Data.\-Interfaces.\-I\-Observable\-Data\-Context}.
+
+\hypertarget{class_highway_1_1_data_1_1_data_context_a92833ad619f66fb7245638ff88dedf94}{\index{Highway\-::\-Data\-::\-Data\-Context@{Highway\-::\-Data\-::\-Data\-Context}!Pre\-Save@{Pre\-Save}}
+\index{Pre\-Save@{Pre\-Save}!Highway::Data::DataContext@{Highway\-::\-Data\-::\-Data\-Context}}
+\subsubsection[{Pre\-Save}]{\setlength{\rightskip}{0pt plus 5cm}Event\-Handler$<${\bf Pre\-Save\-Event\-Args}$>$ Highway.\-Data.\-Data\-Context.\-Pre\-Save}}\label{class_highway_1_1_data_1_1_data_context_a92833ad619f66fb7245638ff88dedf94}
+
+
+The event fired just before the commit of the O\-R\-M 
+
+
+
+Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_observable_data_context_add85ecbc05ebf7174003841bdbd72dfe}{Highway.\-Data.\-Interfaces.\-I\-Observable\-Data\-Context}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Highway.\-Data.\-Entity\-Framework/\-Contexts/Data\-Context.\-cs\end{DoxyCompactItemize}

@@ -1,0 +1,97 @@
+\hypertarget{class_highway_1_1_data_1_1_interceptors_1_1_auditable_interceptor}{\section{Highway.\-Data.\-Interceptors.\-Auditable\-Interceptor Class Reference}
+\label{class_highway_1_1_data_1_1_interceptors_1_1_auditable_interceptor}\index{Highway.\-Data.\-Interceptors.\-Auditable\-Interceptor@{Highway.\-Data.\-Interceptors.\-Auditable\-Interceptor}}
+}
+
+
+An interceptor that operates pre-\/save to add audit information to the records being committed that implement the \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_auditable_entity}{Highway.\-Data.\-Interfaces.\-I\-Auditable\-Entity} interface  
+
+
+Inheritance diagram for Highway.\-Data.\-Interceptors.\-Auditable\-Interceptor\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_highway_1_1_data_1_1_interceptors_1_1_auditable_interceptor}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_highway_1_1_data_1_1_interceptors_1_1_auditable_interceptor_ae12de3cb75bc62d39bd2b8aeff796844}{Auditable\-Interceptor} (\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_user_name_service}{I\-User\-Name\-Service} user\-Name\-Service, int priority=0)
+\begin{DoxyCompactList}\small\item\em Creates a interceptor for audit data attachment \end{DoxyCompactList}\item 
+\hyperlink{struct_highway_1_1_data_1_1_interceptors_1_1_interceptor_result}{Interceptor\-Result} \hyperlink{class_highway_1_1_data_1_1_interceptors_1_1_auditable_interceptor_acc6803b69df915b7df03bc3f0981ba40}{Execute} (\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context}{I\-Data\-Context} context, \hyperlink{class_highway_1_1_data_1_1_interceptors_1_1_events_1_1_pre_save_event_args}{Pre\-Save\-Event\-Args} event\-Args)
+\begin{DoxyCompactList}\small\item\em Executes the interceptor handle an event based on the event arguments \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_highway_1_1_data_1_1_interceptors_1_1_auditable_interceptor_a58ec8c5deb639bea285d6d288a4838c3}{Priority}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The priority order that this interceptor has for ordered execution by the event manager \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+An interceptor that operates pre-\/save to add audit information to the records being committed that implement the \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_auditable_entity}{Highway.\-Data.\-Interfaces.\-I\-Auditable\-Entity} interface 
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_highway_1_1_data_1_1_interceptors_1_1_auditable_interceptor_ae12de3cb75bc62d39bd2b8aeff796844}{\index{Highway\-::\-Data\-::\-Interceptors\-::\-Auditable\-Interceptor@{Highway\-::\-Data\-::\-Interceptors\-::\-Auditable\-Interceptor}!Auditable\-Interceptor@{Auditable\-Interceptor}}
+\index{Auditable\-Interceptor@{Auditable\-Interceptor}!Highway::Data::Interceptors::AuditableInterceptor@{Highway\-::\-Data\-::\-Interceptors\-::\-Auditable\-Interceptor}}
+\subsubsection[{Auditable\-Interceptor}]{\setlength{\rightskip}{0pt plus 5cm}Highway.\-Data.\-Interceptors.\-Auditable\-Interceptor.\-Auditable\-Interceptor (
+\begin{DoxyParamCaption}
+\item[{{\bf I\-User\-Name\-Service}}]{user\-Name\-Service, }
+\item[{int}]{priority = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_highway_1_1_data_1_1_interceptors_1_1_auditable_interceptor_ae12de3cb75bc62d39bd2b8aeff796844}
+
+
+Creates a interceptor for audit data attachment 
+
+
+\begin{DoxyParams}{Parameters}
+{\em user\-Name\-Service} & Application Service that provides current user name\\
+\hline
+{\em priority} & The order in the priority stack that the interceptor should operate on\\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_highway_1_1_data_1_1_interceptors_1_1_auditable_interceptor_acc6803b69df915b7df03bc3f0981ba40}{\index{Highway\-::\-Data\-::\-Interceptors\-::\-Auditable\-Interceptor@{Highway\-::\-Data\-::\-Interceptors\-::\-Auditable\-Interceptor}!Execute@{Execute}}
+\index{Execute@{Execute}!Highway::Data::Interceptors::AuditableInterceptor@{Highway\-::\-Data\-::\-Interceptors\-::\-Auditable\-Interceptor}}
+\subsubsection[{Execute}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Interceptor\-Result} Highway.\-Data.\-Interceptors.\-Auditable\-Interceptor.\-Execute (
+\begin{DoxyParamCaption}
+\item[{{\bf I\-Data\-Context}}]{context, }
+\item[{{\bf Pre\-Save\-Event\-Args}}]{event\-Args}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_highway_1_1_data_1_1_interceptors_1_1_auditable_interceptor_acc6803b69df915b7df03bc3f0981ba40}
+
+
+Executes the interceptor handle an event based on the event arguments 
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & The data context that raised the event\\
+\hline
+{\em event\-Args} & The event arguments that were passed from the context\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An Interceptor Result
+\end{DoxyReturn}
+
+
+\subsection{Property Documentation}
+\hypertarget{class_highway_1_1_data_1_1_interceptors_1_1_auditable_interceptor_a58ec8c5deb639bea285d6d288a4838c3}{\index{Highway\-::\-Data\-::\-Interceptors\-::\-Auditable\-Interceptor@{Highway\-::\-Data\-::\-Interceptors\-::\-Auditable\-Interceptor}!Priority@{Priority}}
+\index{Priority@{Priority}!Highway::Data::Interceptors::AuditableInterceptor@{Highway\-::\-Data\-::\-Interceptors\-::\-Auditable\-Interceptor}}
+\subsubsection[{Priority}]{\setlength{\rightskip}{0pt plus 5cm}int Highway.\-Data.\-Interceptors.\-Auditable\-Interceptor.\-Priority\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}}\label{class_highway_1_1_data_1_1_interceptors_1_1_auditable_interceptor_a58ec8c5deb639bea285d6d288a4838c3}
+
+
+The priority order that this interceptor has for ordered execution by the event manager 
+
+
+
+Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_interceptor-g_a7d04e39fcc9ecb1139044cbdda2df23a}{Highway.\-Data.\-Interfaces.\-I\-Interceptor$<$ in T $>$}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Highway.\-Data.\-Entity\-Framework/\-Interceptors/Auditable\-Interceptor.\-cs\end{DoxyCompactItemize}

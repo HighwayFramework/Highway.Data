@@ -1,0 +1,169 @@
+\hypertarget{class_highway_1_1_data_1_1_repository}{\section{Highway.\-Data.\-Repository Class Reference}
+\label{class_highway_1_1_data_1_1_repository}\index{Highway.\-Data.\-Repository@{Highway.\-Data.\-Repository}}
+}
+
+
+A Entity Framework Specific repository implementation that uses Specification pattern to execute Queries in a controlled fashion.  
+
+
+Inheritance diagram for Highway.\-Data.\-Repository\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_highway_1_1_data_1_1_repository}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_highway_1_1_data_1_1_repository_a389f626c975fba670445d97b9ae780c2}{Repository} (\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context}{I\-Data\-Context} context)
+\begin{DoxyCompactList}\small\item\em Creates a \hyperlink{class_highway_1_1_data_1_1_repository}{Repository} that uses the context provided \end{DoxyCompactList}\item 
+T \hyperlink{class_highway_1_1_data_1_1_repository_a45937217fa900c48979c8eec90b8db1b}{Get$<$ T $>$} (\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_scalar-g}{I\-Scalar}$<$ T $>$ query)
+\begin{DoxyCompactList}\small\item\em Executes a prebuilt I\-Scalar\{\-T\} and returns a single instance of {\itshape T}  \end{DoxyCompactList}\item 
+void \hyperlink{class_highway_1_1_data_1_1_repository_aa09c537b268e6e96085803087f9f7212}{Execute} (\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_command}{I\-Command} command)
+\begin{DoxyCompactList}\small\item\em Executes a prebuilt I\-Command \end{DoxyCompactList}\item 
+I\-Enumerable$<$ T $>$ \hyperlink{class_highway_1_1_data_1_1_repository_ab19e6b78b2aa9394f45194f4c8761ff1}{Find$<$ T $>$} (\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_query-g}{I\-Query}$<$ T $>$ query)
+\begin{DoxyCompactList}\small\item\em Executes a prebuilt I\-Query\{\-T\} and returns an I\-Enumerable\{\-T\} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context}{I\-Data\-Context} \hyperlink{class_highway_1_1_data_1_1_repository_a56e71ca922bdbd73db6986b3609e5ed7}{Context}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Reference to the \hyperlink{class_highway_1_1_data_1_1_data_context}{Data\-Context} the repository is using \end{DoxyCompactList}\item 
+\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_event_manager}{I\-Event\-Manager} \hyperlink{class_highway_1_1_data_1_1_repository_ac1ac32fc8d217cfb1d47bb1cc68088c6}{Event\-Manager}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Reference to the Event\-Manager the repository is using \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A Entity Framework Specific repository implementation that uses Specification pattern to execute Queries in a controlled fashion. 
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_highway_1_1_data_1_1_repository_a389f626c975fba670445d97b9ae780c2}{\index{Highway\-::\-Data\-::\-Repository@{Highway\-::\-Data\-::\-Repository}!Repository@{Repository}}
+\index{Repository@{Repository}!Highway::Data::Repository@{Highway\-::\-Data\-::\-Repository}}
+\subsubsection[{Repository}]{\setlength{\rightskip}{0pt plus 5cm}Highway.\-Data.\-Repository.\-Repository (
+\begin{DoxyParamCaption}
+\item[{{\bf I\-Data\-Context}}]{context}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_highway_1_1_data_1_1_repository_a389f626c975fba670445d97b9ae780c2}
+
+
+Creates a \hyperlink{class_highway_1_1_data_1_1_repository}{Repository} that uses the context provided 
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & The data context that this repository uses\\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_highway_1_1_data_1_1_repository_aa09c537b268e6e96085803087f9f7212}{\index{Highway\-::\-Data\-::\-Repository@{Highway\-::\-Data\-::\-Repository}!Execute@{Execute}}
+\index{Execute@{Execute}!Highway::Data::Repository@{Highway\-::\-Data\-::\-Repository}}
+\subsubsection[{Execute}]{\setlength{\rightskip}{0pt plus 5cm}void Highway.\-Data.\-Repository.\-Execute (
+\begin{DoxyParamCaption}
+\item[{{\bf I\-Command}}]{command}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_highway_1_1_data_1_1_repository_aa09c537b268e6e96085803087f9f7212}
+
+
+Executes a prebuilt I\-Command 
+
+
+\begin{DoxyParams}{Parameters}
+{\em command} & The prebuilt command object\\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_a91324642f3ca885ac8b4b5deb7bd3e8f}{Highway.\-Data.\-Interfaces.\-I\-Repository}.
+
+\hypertarget{class_highway_1_1_data_1_1_repository_ab19e6b78b2aa9394f45194f4c8761ff1}{\index{Highway\-::\-Data\-::\-Repository@{Highway\-::\-Data\-::\-Repository}!Find$<$ T $>$@{Find$<$ T $>$}}
+\index{Find$<$ T $>$@{Find$<$ T $>$}!Highway::Data::Repository@{Highway\-::\-Data\-::\-Repository}}
+\subsubsection[{Find$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}I\-Enumerable$<$T$>$ Highway.\-Data.\-Repository.\-Find$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{{\bf I\-Query}$<$ T $>$}]{query}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_highway_1_1_data_1_1_repository_ab19e6b78b2aa9394f45194f4c8761ff1}
+
+
+Executes a prebuilt I\-Query\{\-T\} and returns an I\-Enumerable\{\-T\} 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity being queried\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em query} & The prebuilt Query Object\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The I\-Enumerable\{\-T\} returned from the query
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_a18bd55ae31839881dc43cb0ba958086b}{Highway.\-Data.\-Interfaces.\-I\-Repository}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em class}]\end{description}
+\end{Desc}
+\hypertarget{class_highway_1_1_data_1_1_repository_a45937217fa900c48979c8eec90b8db1b}{\index{Highway\-::\-Data\-::\-Repository@{Highway\-::\-Data\-::\-Repository}!Get$<$ T $>$@{Get$<$ T $>$}}
+\index{Get$<$ T $>$@{Get$<$ T $>$}!Highway::Data::Repository@{Highway\-::\-Data\-::\-Repository}}
+\subsubsection[{Get$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}T Highway.\-Data.\-Repository.\-Get$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{{\bf I\-Scalar}$<$ T $>$}]{query}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_highway_1_1_data_1_1_repository_a45937217fa900c48979c8eec90b8db1b}
+
+
+Executes a prebuilt I\-Scalar\{\-T\} and returns a single instance of {\itshape T}  
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity being queried\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em query} & The prebuilt Query Object\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The instance of {\itshape T}  returned from the query
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_ab64290450d370e1c29e31ea92d3ff18d}{Highway.\-Data.\-Interfaces.\-I\-Repository}.
+
+
+
+\subsection{Property Documentation}
+\hypertarget{class_highway_1_1_data_1_1_repository_a56e71ca922bdbd73db6986b3609e5ed7}{\index{Highway\-::\-Data\-::\-Repository@{Highway\-::\-Data\-::\-Repository}!Context@{Context}}
+\index{Context@{Context}!Highway::Data::Repository@{Highway\-::\-Data\-::\-Repository}}
+\subsubsection[{Context}]{\setlength{\rightskip}{0pt plus 5cm}{\bf I\-Data\-Context} Highway.\-Data.\-Repository.\-Context\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}}\label{class_highway_1_1_data_1_1_repository_a56e71ca922bdbd73db6986b3609e5ed7}
+
+
+Reference to the \hyperlink{class_highway_1_1_data_1_1_data_context}{Data\-Context} the repository is using 
+
+
+
+Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_aadf2e3d1d5b118f2fe6e2b1fc1ae8e77}{Highway.\-Data.\-Interfaces.\-I\-Repository}.
+
+\hypertarget{class_highway_1_1_data_1_1_repository_ac1ac32fc8d217cfb1d47bb1cc68088c6}{\index{Highway\-::\-Data\-::\-Repository@{Highway\-::\-Data\-::\-Repository}!Event\-Manager@{Event\-Manager}}
+\index{Event\-Manager@{Event\-Manager}!Highway::Data::Repository@{Highway\-::\-Data\-::\-Repository}}
+\subsubsection[{Event\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}{\bf I\-Event\-Manager} Highway.\-Data.\-Repository.\-Event\-Manager\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}}\label{class_highway_1_1_data_1_1_repository_ac1ac32fc8d217cfb1d47bb1cc68088c6}
+
+
+Reference to the Event\-Manager the repository is using 
+
+
+
+Implements \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_repository_a2f76cda20f7e51ce44c11a077194c747}{Highway.\-Data.\-Interfaces.\-I\-Repository}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Highway.\-Data.\-Entity\-Framework/\-Repositories/Repository.\-cs\end{DoxyCompactItemize}

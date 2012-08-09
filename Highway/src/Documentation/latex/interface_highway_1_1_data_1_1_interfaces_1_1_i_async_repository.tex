@@ -1,0 +1,148 @@
+\hypertarget{interface_highway_1_1_data_1_1_interfaces_1_1_i_async_repository}{\section{Highway.\-Data.\-Interfaces.\-I\-Async\-Repository Interface Reference}
+\label{interface_highway_1_1_data_1_1_interfaces_1_1_i_async_repository}\index{Highway.\-Data.\-Interfaces.\-I\-Async\-Repository@{Highway.\-Data.\-Interfaces.\-I\-Async\-Repository}}
+}
+
+
+The interface used to interact with the O\-R\-M Specific Implementations  
+
+
+Inheritance diagram for Highway.\-Data.\-Interfaces.\-I\-Async\-Repository\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interface_highway_1_1_data_1_1_interfaces_1_1_i_async_repository}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Task$<$ I\-Enumerable$<$ T $>$ $>$ \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_async_repository_adf81905d686e44b115548921a7d6d72d}{Find$<$ T $>$} (\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_query-g}{I\-Query}$<$ T $>$ query)
+\begin{DoxyCompactList}\small\item\em Executes a prebuilt I\-Query\{\-T\} and returns an I\-Enumerable\{\-T\} \end{DoxyCompactList}\item 
+Task$<$ T $>$ \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_async_repository_a7eed1d89c1104a467bfdc12cb0de3133}{Get$<$ T $>$} (\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_scalar-g}{I\-Scalar}$<$ T $>$ query)
+\begin{DoxyCompactList}\small\item\em Executes a prebuilt I\-Scalar\{\-T\} and returns a single instance of {\itshape T}  \end{DoxyCompactList}\item 
+Task \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_async_repository_a5f396f5c1aa1b9e3eced829bf736a4ab}{Execute} (\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_command}{I\-Command} command)
+\begin{DoxyCompactList}\small\item\em Executes a prebuilt \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_command}{I\-Command} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context}{I\-Data\-Context} \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_async_repository_a03e1d3bb759c50309a4be719eca25a0f}{Context}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Reference to the Context the repository is using \end{DoxyCompactList}\item 
+\hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_event_manager}{I\-Event\-Manager} \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_async_repository_ad3c1510134e22665788e2f8eccd954f0}{Event\-Manager}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Reference to the Event\-Manager the repository is using \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The interface used to interact with the O\-R\-M Specific Implementations 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{interface_highway_1_1_data_1_1_interfaces_1_1_i_async_repository_a5f396f5c1aa1b9e3eced829bf736a4ab}{\index{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Async\-Repository@{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Async\-Repository}!Execute@{Execute}}
+\index{Execute@{Execute}!Highway::Data::Interfaces::IAsyncRepository@{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Async\-Repository}}
+\subsubsection[{Execute}]{\setlength{\rightskip}{0pt plus 5cm}Task Highway.\-Data.\-Interfaces.\-I\-Async\-Repository.\-Execute (
+\begin{DoxyParamCaption}
+\item[{{\bf I\-Command}}]{command}
+\end{DoxyParamCaption}
+)}}\label{interface_highway_1_1_data_1_1_interfaces_1_1_i_async_repository_a5f396f5c1aa1b9e3eced829bf736a4ab}
+
+
+Executes a prebuilt \hyperlink{interface_highway_1_1_data_1_1_interfaces_1_1_i_command}{I\-Command} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em command} & The prebuilt command object\\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{class_highway_1_1_data_1_1_async_repository_afa774a72108c37212f0862fa61a5cec3}{Highway.\-Data.\-Async\-Repository}.
+
+\hypertarget{interface_highway_1_1_data_1_1_interfaces_1_1_i_async_repository_adf81905d686e44b115548921a7d6d72d}{\index{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Async\-Repository@{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Async\-Repository}!Find$<$ T $>$@{Find$<$ T $>$}}
+\index{Find$<$ T $>$@{Find$<$ T $>$}!Highway::Data::Interfaces::IAsyncRepository@{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Async\-Repository}}
+\subsubsection[{Find$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}Task$<$I\-Enumerable$<$T$>$ $>$ Highway.\-Data.\-Interfaces.\-I\-Async\-Repository.\-Find$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{{\bf I\-Query}$<$ T $>$}]{query}
+\end{DoxyParamCaption}
+)}}\label{interface_highway_1_1_data_1_1_interfaces_1_1_i_async_repository_adf81905d686e44b115548921a7d6d72d}
+
+
+Executes a prebuilt I\-Query\{\-T\} and returns an I\-Enumerable\{\-T\} 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity being queried\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em query} & The prebuilt Query Object\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The I\-Enumerable\{\-T\} returned from the query
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_highway_1_1_data_1_1_async_repository_ad0ad809e167fb82b047270031b6bc47c}{Highway.\-Data.\-Async\-Repository}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em class}]\end{description}
+\end{Desc}
+\hypertarget{interface_highway_1_1_data_1_1_interfaces_1_1_i_async_repository_a7eed1d89c1104a467bfdc12cb0de3133}{\index{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Async\-Repository@{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Async\-Repository}!Get$<$ T $>$@{Get$<$ T $>$}}
+\index{Get$<$ T $>$@{Get$<$ T $>$}!Highway::Data::Interfaces::IAsyncRepository@{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Async\-Repository}}
+\subsubsection[{Get$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}Task$<$T$>$ Highway.\-Data.\-Interfaces.\-I\-Async\-Repository.\-Get$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{{\bf I\-Scalar}$<$ T $>$}]{query}
+\end{DoxyParamCaption}
+)}}\label{interface_highway_1_1_data_1_1_interfaces_1_1_i_async_repository_a7eed1d89c1104a467bfdc12cb0de3133}
+
+
+Executes a prebuilt I\-Scalar\{\-T\} and returns a single instance of {\itshape T}  
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Entity being queried\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em query} & The prebuilt Query Object\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The instance of {\itshape T}  returned from the query
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_highway_1_1_data_1_1_async_repository_a0c032814b93798874cd36b30ecf821dc}{Highway.\-Data.\-Async\-Repository}.
+
+
+
+\subsection{Property Documentation}
+\hypertarget{interface_highway_1_1_data_1_1_interfaces_1_1_i_async_repository_a03e1d3bb759c50309a4be719eca25a0f}{\index{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Async\-Repository@{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Async\-Repository}!Context@{Context}}
+\index{Context@{Context}!Highway::Data::Interfaces::IAsyncRepository@{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Async\-Repository}}
+\subsubsection[{Context}]{\setlength{\rightskip}{0pt plus 5cm}{\bf I\-Data\-Context} Highway.\-Data.\-Interfaces.\-I\-Async\-Repository.\-Context\hspace{0.3cm}{\ttfamily [get]}}}\label{interface_highway_1_1_data_1_1_interfaces_1_1_i_async_repository_a03e1d3bb759c50309a4be719eca25a0f}
+
+
+Reference to the Context the repository is using 
+
+
+
+Implemented in \hyperlink{class_highway_1_1_data_1_1_async_repository_abfd6073ad2ad20eebaf97568c7ed8d7e}{Highway.\-Data.\-Async\-Repository}.
+
+\hypertarget{interface_highway_1_1_data_1_1_interfaces_1_1_i_async_repository_ad3c1510134e22665788e2f8eccd954f0}{\index{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Async\-Repository@{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Async\-Repository}!Event\-Manager@{Event\-Manager}}
+\index{Event\-Manager@{Event\-Manager}!Highway::Data::Interfaces::IAsyncRepository@{Highway\-::\-Data\-::\-Interfaces\-::\-I\-Async\-Repository}}
+\subsubsection[{Event\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}{\bf I\-Event\-Manager} Highway.\-Data.\-Interfaces.\-I\-Async\-Repository.\-Event\-Manager\hspace{0.3cm}{\ttfamily [get]}}}\label{interface_highway_1_1_data_1_1_interfaces_1_1_i_async_repository_ad3c1510134e22665788e2f8eccd954f0}
+
+
+Reference to the Event\-Manager the repository is using 
+
+
+
+Implemented in \hyperlink{class_highway_1_1_data_1_1_async_repository_ab41ad1eec675e831aba15b677d27717e}{Highway.\-Data.\-Async\-Repository}.
+
+
+
+The documentation for this interface was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Highway.\-Data/\-Interfaces/I\-Async\-Repository.\-cs\end{DoxyCompactItemize}

@@ -11,6 +11,6 @@ namespace Highway.Data
         /// This method allows the configuration of context specific properties to be injected
         /// </summary>
         /// <param name="context">the context that is being configured</param>
-        void ConfugureContext(DbContext context);
+        void ConfigureContext(DbContext context);
     }
 }

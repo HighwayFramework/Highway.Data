@@ -26,13 +26,50 @@ namespace Highway.Data
         /// </summary>
         /// <param name="connectionString">The standard SQL connection string for the Database</param>
         /// <param name="mapping">The Mapping Configuration that will determine how the tables and objects interact</param>
-        /// <param name="contextConfiguration">The context specific configuration that will change context level behavior ( Optional )</param>
+        public DataContext(string connectionString, IMappingConfiguration mapping)
+            : this(connectionString, mapping, null, new NoOpLogger())
+        {
+
+        }
+
+        /// <summary>
+        /// Constructs a context
+        /// </summary>
+        /// <param name="connectionString">The standard SQL connection string for the Database</param>
+        /// <param name="mapping">The Mapping Configuration that will determine how the tables and objects interact</param>
         /// <param name="log">The logger being supplied for this context ( Optional )</param>
-        public DataContext(string connectionString, IMappingConfiguration mapping, IContextConfiguration contextConfiguration = null, ILog log = null) : base(connectionString)
-        {   
+        public DataContext(string connectionString, IMappingConfiguration mapping, ILog log)
+            : this(connectionString, mapping, null,log)
+        {
+
+        }
+
+        /// <summary>
+        /// Constructs a context
+        /// </summary>
+        /// <param name="connectionString">The standard SQL connection string for the Database</param>
+        /// <param name="mapping">The Mapping Configuration that will determine how the tables and objects interact</param>
+        /// <param name="contextConfiguration">The context specific configuration that will change context level behavior ( Optional )</param>
+        public DataContext(string connectionString, IMappingConfiguration mapping, IContextConfiguration contextConfiguration) : this(connectionString,mapping,contextConfiguration,new NoOpLogger())
+        {
+            
+        }
+
+        
+
+        /// <summary>
+        /// Constructs a context
+        /// </summary>
+        /// <param name="connectionString">The standard SQL connection string for the Database</param>
+        /// <param name="mapping">The Mapping Configuration that will determine how the tables and objects interact</param>
+        /// <param name="contextConfiguration">The context specific configuration that will change context level behavior</param>
+        /// <param name="log">The logger being supplied for this context ( Optional )</param>
+        public DataContext(string connectionString, IMappingConfiguration mapping, IContextConfiguration contextConfiguration, ILog log)
+            : base(connectionString)
+        {
             _mapping = mapping;
-            _log = log ?? new NoOpLogger();
-            if(contextConfiguration != null) contextConfiguration.ConfugureContext(this);
+            _log = log;
+            if (contextConfiguration != null) contextConfiguration.ConfigureContext(this);
         }
         
         /// <summary>

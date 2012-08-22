@@ -38,6 +38,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.EntityFramewor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.EntityFramework.Ninject", "src\Highway.Data.EntityFramework.Ninject\Highway.Data.EntityFramework.Ninject.csproj", "{B335E5E2-5FA4-45AC-B91B-80FA503987AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.EntityFramework.Ninject.Example", "src\Highway.Data.EntityFramework.Ninject.Example\Highway.Data.EntityFramework.Ninject.Example.csproj", "{A2675066-5136-4486-832D-4D3118AE48D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.EntityFramework.Castle.Example", "src\Highway.Data.EntityFramework.Castle.Example\Highway.Data.EntityFramework.Castle.Example.csproj", "{FC946232-C52C-4F10-9049-B24A0B7A796D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.EntityFramework.Unity.Example", "src\Highway.Data.EntityFramework.Unity.Example\Highway.Data.EntityFramework.Unity.Example.csproj", "{EF32FEFB-C837-448A-839D-16AE6CC80747}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Highway.vsmdi
@@ -87,6 +93,18 @@ Global
 		{B335E5E2-5FA4-45AC-B91B-80FA503987AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B335E5E2-5FA4-45AC-B91B-80FA503987AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B335E5E2-5FA4-45AC-B91B-80FA503987AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2675066-5136-4486-832D-4D3118AE48D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2675066-5136-4486-832D-4D3118AE48D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2675066-5136-4486-832D-4D3118AE48D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2675066-5136-4486-832D-4D3118AE48D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC946232-C52C-4F10-9049-B24A0B7A796D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC946232-C52C-4F10-9049-B24A0B7A796D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC946232-C52C-4F10-9049-B24A0B7A796D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC946232-C52C-4F10-9049-B24A0B7A796D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF32FEFB-C837-448A-839D-16AE6CC80747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF32FEFB-C837-448A-839D-16AE6CC80747}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF32FEFB-C837-448A-839D-16AE6CC80747}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF32FEFB-C837-448A-839D-16AE6CC80747}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,6 +114,6 @@ Global
 		{E43B93A9-4EB6-4031-820C-50001889C760} = {2E42F150-A360-4315-B140-0497F701E451}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35;packages\Unity.2.1.505.2\lib\NET35
 	EndGlobalSection
 EndGlobal

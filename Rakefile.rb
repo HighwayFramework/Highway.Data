@@ -11,7 +11,7 @@ TEST_DIR      = SOLUTION_DIR + "/test/"
 SRC_DIR       = SOLUTION_DIR + "/src/"
 SOLUTION_FILE = 'Highway.sln'
 TEMPLATE_FILE = 'Templates.MVC.sln'
-MSTEST        = ENV['VS100COMNTOOLS'] + "..\\IDE\\mstest.exe"
+MSTEST        = ENV['VS110COMNTOOLS'] + "..\\IDE\\mstest.exe"
 NUGET         = SOLUTION_DIR + "/.nuget/nuget.exe"
 
 # --- Retrieve a list of all Test DLLS -------------------------------------------------------

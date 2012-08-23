@@ -1,5 +1,7 @@
 ﻿using Highway.Data.Interfaces;
 using System;
+using Castle.MicroKernel.Registration;
+using Castle.MicroKernel;
 
 namespace Highway.Data.EntityFramework.Castle.Example
 {
@@ -8,17 +10,16 @@ namespace Highway.Data.EntityFramework.Castle.Example
         static void Main(string[] args)
         {
             const string SqlExpressConnectionString = @"Data Source=(local)\SQLExpress;Initial Catalog=HighwayDemo;Integrated Security=True";
-
-            container.Register(Component.For<IRepository>().ImplementedBy<EntityFrameworkRepository>(),
-                Component.For<IDataContext>().ImplementedBy<EntityFrameworkContext>().DependsOn(new { connectionString = SqlExpressConnectionString }),
-	            Component.For<IEventHandler>().ImplementedBy<EventHandler>(),
-                Component.For<IMappingConfiguration>().ImplementedBy<YourMappingClass>());
+            var container = new DefaultKernel();
+            container.Register(Component.For<IRepository>().ImplementedBy<Repository>(),
+                Component.For<IDataContext>().ImplementedBy<DataContext>().DependsOn(new { connectionString = SqlExpressConnectionString }),
+                Component.For<IMappingConfiguration>().ImplementedBy<HighwayDataMappings>());
 
             // Use for Demos
             // DropCreateDatabaseIfModelChanges, Migrations not supported yet.  (IDatabaseInitializers)
             //Database.SetInitializer(new DropCreateDatabaseAlways<EntityFrameworkContext>());
 
-            var application = ObjectFactory.GetInstance<DemoApplication>();
+            var application = container.Resolve<DemoApplication>();
             application.Run();
 
             Console.Read();

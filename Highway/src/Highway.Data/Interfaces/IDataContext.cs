@@ -94,14 +94,6 @@ namespace Highway.Data.Interfaces
         int ExecuteSqlCommand(string sql, params DbParameter[] dbParams);
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="procedureName"></param>
-        /// <param name="dbParams"></param>
-        /// <returns></returns>
-        int ExecuteFunction(string procedureName, params ObjectParameter[] dbParams);
-
-        /// <summary>
         /// The reference to EventManager that allows for ordered event handling and registration
         /// </summary>
         IEventManager EventManager { get; set; }

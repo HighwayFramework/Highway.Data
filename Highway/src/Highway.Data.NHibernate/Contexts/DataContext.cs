@@ -15,7 +15,7 @@ namespace Highway.Data
     /// <summary>
     /// A base implementation of the Code First Data DataContext for Entity Framework
     /// </summary>
-    public class DataContext : ISession, IObservableDataContext
+    public class DataContext : IObservableDataContext, IDisposable
     {
         private readonly IMappingConfiguration _mapping;
         private readonly ILog _log;
@@ -29,7 +29,7 @@ namespace Highway.Data
         {
             _session = session;
         }
-                
+
         /// <summary>
         /// This gives a mockable wrapper around the normal <see cref="DbSet{T}"/> method that allows for testablity
         /// </summary>
@@ -51,7 +51,7 @@ namespace Highway.Data
         /// <returns>The <typeparamref name="T"/> you added</returns>
         public T Add<T>(T item) where T : class
         {
-            _log.DebugFormat("Adding Object {0}",item);
+            _log.DebugFormat("Adding Object {0}", item);
             _session.Save(item);
             _log.TraceFormat("Added Object {0}", item);
             return item;
@@ -108,7 +108,7 @@ namespace Highway.Data
         public T Detach<T>(T item) where T : class
         {
             _log.DebugFormat("Detaching Object {0}", item);
-            _session.Evict(item);            
+            _session.Evict(item);
             _log.TraceFormat("Detached Object {0}", item);
             return item;
         }
@@ -162,9 +162,7 @@ namespace Highway.Data
         /// <returns>An <see cref="IEnumerable{T}"/> from the query return</returns>
         public IEnumerable<T> ExecuteSqlQuery<T>(string sql, params DbParameter[] dbParams)
         {
-            var parameters = dbParams.Select(x => string.Format("{0} : {1} : {2}\t", x.ParameterName, x.Value, x.DbType)).ToArray();
-            _log.TraceFormat("Executing SQL {0}, with parameters {1}", sql, string.Join(",", parameters));
-            return base.Database.SqlQuery<T>(sql, dbParams);
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -175,22 +173,7 @@ namespace Highway.Data
         /// <returns>The rows affected</returns>
         public int ExecuteSqlCommand(string sql, params DbParameter[] dbParams)
         {
-            var parameters = dbParams.Select(x => string.Format("{0} : {1} : {2}\t", x.ParameterName, x.Value, x.DbType)).ToArray();
-            _log.TraceFormat("Executing SQL {0}, with parameters {1}", sql, string.Join(",", parameters));
-            return base.Database.ExecuteSqlCommand(sql, dbParams);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="procedureName"></param>
-        /// <param name="dbParams"></param>
-        /// <returns></returns>
-        public int ExecuteFunction(string procedureName, params ObjectParameter[] dbParams)
-        {
-            var parameters = dbParams.Select(x => string.Format("{0} : {1} : {2}\t", x.Name, x.Value, x.ParameterType)).ToArray();
-            _log.TraceFormat("Executing Procedure {0}, with parameters {1}", procedureName, string.Join(",", parameters));
-            return base.Database.SqlQuery<int>(procedureName, dbParams).FirstOrDefault();
+            throw new NotImplementedException();
         }
 
         private IEventManager _eventManager;
@@ -218,30 +201,12 @@ namespace Highway.Data
         /// </summary>
         public event EventHandler<PostSaveEventArgs> PostSave;
 
-        /// <summary>
-        /// This method is called when the model for a derived context has been initialized, but
-        ///                 before the model has been locked down and used to initialize the context.  The default
-        ///                 implementation of this method takes the <see cref="IMappingConfiguration"/> array passed in on construction and applies them. 
-        /// If no configuration mappings were passed it it does nothing.
-        /// </summary>
-        /// <remarks>
-        /// Typically, this method is called only once when the first instance of a derived context
-        ///                 is created.  The model for that context is then cached and is for all further instances of
-        ///                 the context in the app domain.  This caching can be disabled by setting the ModelCaching
-        ///                 property on the given ModelBuidler, but note that this can seriously degrade performance.
-        ///                 More control over caching is provided through use of the DbModelBuilder and DbContextFactory
-        ///                 classes directly.
-        /// </remarks>
-        /// <param name="modelBuilder">The builder that defines the model for the context being created.</param>
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        public void Dispose()
         {
-            _log.Debug("\tOnModelCreating");
-            if(_mapping != null)
+            if (_session.Connection.State != ConnectionState.Closed)
             {
-                _log.TraceFormat("\t\tMapping : {0}", _mapping.GetType().Name);
-                _mapping.ConfigureModelBuilder(modelBuilder);
+                _session.Connection.Close();
             }
-            base.OnModelCreating(modelBuilder);
         }
     }
 }

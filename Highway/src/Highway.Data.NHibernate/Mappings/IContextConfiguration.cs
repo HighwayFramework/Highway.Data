@@ -1,4 +1,3 @@
-using System.Data.Entity;
 using NHibernate;
 
 namespace Highway.Data

@@ -1,6 +1,7 @@
 ﻿
 using Highway.Data.Interfaces;
 using System;
+using Microsoft.Practices.Unity;
 
 namespace Highway.Data.EntityFramework.Unity.Example
 {
@@ -10,25 +11,18 @@ namespace Highway.Data.EntityFramework.Unity.Example
         {
             const string SqlExpressConnectionString = @"Data Source=(local)\SQLExpress;Initial Catalog=HighwayDemo;Integrated Security=True";
 
-            ObjectFactory.Initialize(x => x.Scan(scan =>
-            {
-                scan.TheCallingAssembly();
-                scan.WithDefaultConventions();
-                scan.AssembliesFromApplicationBaseDirectory();
+            var unityContainer = new UnityContainer();
+            unityContainer.BuildHighway();
+            unityContainer.RegisterType<IMappingConfiguration, HighwayDataMappings>();
+            unityContainer.RegisterType<IRepository, Repository>();
+            unityContainer.RegisterType<IDataContext, DataContext>(new InjectionConstructor(SqlExpressConnectionString,new HighwayDataMappings()));
 
-                x.For<IMappingConfiguration>().Use<HighwayDataMappings>();
-                x.For<IRepository>().Use<Repository>();
-                x.For<IDataContext>().Use<DataContext>()
-                    .Ctor<string>("connectionString").Is(SqlExpressConnectionString)
-                    .Ctor<IMappingConfiguration[]>("mapping").Is(new[] { new HighwayDataMappings() });
-
-            }));
 
             // Use for Demos
             // DropCreateDatabaseIfModelChanges, Migrations not supported yet.  (IDatabaseInitializers)
             //Database.SetInitializer(new DropCreateDatabaseAlways<EntityFrameworkContext>());
 
-            var application = ObjectFactory.GetInstance<DemoApplication>();
+            var application = unityContainer.Resolve<DemoApplication>();
             application.Run();
 
             Console.Read();

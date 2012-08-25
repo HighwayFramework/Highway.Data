@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using Highway.Data.EntityFramework.Mappings;
 using System.Data.Entity;
+using System.Linq;
+using Highway.Data;
 
 namespace Templates.Models
 {

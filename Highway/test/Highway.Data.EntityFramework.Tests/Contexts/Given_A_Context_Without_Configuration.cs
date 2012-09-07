@@ -2,6 +2,7 @@
 using Highway.Data.EntityFramework.Tests.Mapping;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
+using Highway.Data.Tests.TestDomain;
 
 namespace Highway.Data.EntityFramework.Tests.UnitTests
 {

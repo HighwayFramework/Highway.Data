@@ -89,6 +89,7 @@
       <Link>SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="Async\Given_An_Async_enabled_Repository.cs" />
+    <Compile Include="Contexts\Given_An_AggregateContextFactory.cs" />
     <Compile Include="Contexts\Given_A_Context_Without_Configuration.cs" />
     <Compile Include="Initializer\EntityFrameworkIntializer.cs" />
     <Compile Include="IntegrationTests\Given_A_EF_Context.cs" />

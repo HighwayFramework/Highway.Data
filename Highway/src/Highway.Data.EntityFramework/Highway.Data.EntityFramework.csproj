@@ -75,6 +75,7 @@
     <Compile Include="..\..\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="Builders\DynamicAggregateContextBuilder.cs" />
     <Compile Include="Configuration\AggregateConfiguration.cs" />
     <Compile Include="Configuration\IAggregateConfiguration.cs" />
     <Compile Include="Contexts\AggregateDataContext.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Database\DropCreateInitializer.cs" />
     <Compile Include="Extensions\LoggingTraceExtensions.cs" />
     <Compile Include="Extensions\PerformanceTracingExtensions.cs" />
+    <Compile Include="Factory\AggregateConfigurationFactory.cs" />
     <Compile Include="Factory\AggregateContextFactory.cs" />
     <Compile Include="Interceptors\AuditableInterceptor.cs" />
     <Compile Include="Mappings\IAggregateMappingConfiguration.cs" />

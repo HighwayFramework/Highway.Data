@@ -9,14 +9,10 @@ namespace Highway.Data
 {
     public interface IAggregateConfiguration
     {
+        IEnumerable<Type> TypesConfigured { get; set; }
         string ConnectionString { get; set; }
         IMappingConfiguration[] Mappings { get; set; }
         ILog Logger { get; set; }
         IContextConfiguration ContextConfiguration { get; set; }
     }
-    public interface IAggregateConfiguration<T1> : IAggregateConfiguration { }
-    public interface IAggregateConfiguration<T1,T2> : IAggregateConfiguration { }
-    public interface IAggregateConfiguration<T1,T2,T3> : IAggregateConfiguration { }
-    public interface IAggregateConfiguration<T1,T2,T3,T4> : IAggregateConfiguration { }
-
 }

@@ -16,13 +16,17 @@ namespace Highway.Data
     /// <summary>
     /// Context that is bounded to an Aggregate Root(s) for query separation
     /// </summary>
-    class AggregateDataContext : DbContext, IObservableDataContext
+    public class AggregateDataContext : DbContext, IObservableDataContext
     {
         private readonly IMappingConfiguration[] _mappings;
         private readonly ILog _log;
         private IEventManager _eventManager;
         private IEnumerable<Type> _typesConfigured = new List<Type>();
 
+        /// <summary>
+        /// Constructs the base AggregateRootContext - This should not be used
+        /// </summary>
+        /// <param name="configuration"></param>
         public AggregateDataContext(IAggregateConfiguration configuration) : base(configuration.ConnectionString)   
         {
             _typesConfigured = configuration.TypesConfigured;

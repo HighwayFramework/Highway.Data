@@ -14,7 +14,7 @@ namespace Highway.Data
             ConnectionString = connectionString;
             Mappings = mappings;
             Logger = logger ?? new NoOpLogger();
-            ContextConfiguration = contextConfiguration;
+            ContextConfiguration = contextConfiguration ?? new DefaultContextConfiguration();
             TypesConfigured = typesConfigured;
         }
 

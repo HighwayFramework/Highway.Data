@@ -77,6 +77,7 @@
     </Compile>
     <Compile Include="Builders\DynamicAggregateContextBuilder.cs" />
     <Compile Include="Configuration\AggregateConfiguration.cs" />
+    <Compile Include="Configuration\DefaultContextConfiguration.cs" />
     <Compile Include="Configuration\IAggregateConfiguration.cs" />
     <Compile Include="Contexts\AggregateDataContext.cs" />
     <Compile Include="Contexts\DataContext.cs" />

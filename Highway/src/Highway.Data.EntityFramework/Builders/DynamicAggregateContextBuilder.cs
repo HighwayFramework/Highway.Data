@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.CodeDom;
 using System.Reflection;
 using System.CodeDom.Compiler;
+using Highway.Data.Interfaces;
 
 namespace Highway.Data.EntityFramework.Builder
 {
@@ -30,12 +32,23 @@ namespace Highway.Data.EntityFramework.Builder
         private static Type ConstructNewContextType()
         {
             var codeDomProvider = new Microsoft.CSharp.CSharpCodeProvider();
+            
             Guid typeGuid = Guid.NewGuid();
             string typeGuidString = typeGuid.ToString().Replace("{",string.Empty).Replace("}",string.Empty).Replace("-",string.Empty);
             var classDeclaration = classString.Replace("{className}", typeGuidString);
-            CompilerParameters newCompilerParameters = new CompilerParameters();
+            var name = string.Format("Highway.Data.AggregateContext{0}", typeGuidString);
+            CompilerParameters newCompilerParameters = new CompilerParameters(referenceAssemblies)
+                {
+                    GenerateInMemory = true,
+                    MainClass = name
+                };
             var output = codeDomProvider.CompileAssemblyFromSource(newCompilerParameters, classDeclaration);
-            var type = output.CompiledAssembly.GetType(string.Format("{0}AggregateContext",typeGuidString));
+            
+            foreach (var outputString in output.Output)
+            {
+                Console.WriteLine(outputString);
+            }
+            var type = output.CompiledAssembly.GetType(name);
             return type;
         }
 
@@ -54,9 +67,9 @@ using System.Text;
 
 namespace Highway.Data
 {
-    internal class {className}AggregateContext : AggregateDataContext
+    public class AggregateContext{className} : AggregateDataContext
     {
-        public {className}AggregateContext(IAggregateConfiguration configuration)
+        public AggregateContext{className}(IAggregateConfiguration configuration)
             : base(configuration)
         {
 
@@ -64,6 +77,14 @@ namespace Highway.Data
     }
 }
 ";
+        private static string[] referenceAssemblies = new string[]
+            {
+                "System.dll",
+                "System.Linq.dll",
+                "EntityFramework.dll",
+                "Highway.Data.dll",
+                "Highway.Data.EntityFramework.dll"
 
+            };
     }
 }

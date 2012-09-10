@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
 using Castle.Windsor;
 using Common.Logging;
 using Highway.Data.EntityFramework.Tests.Mapping;
@@ -22,7 +25,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
         {
             // Arrange
             var container = new WindsorContainer();
-            var configuration = new AggregateConfiguration("Test",new IMappingConfiguration[]{new FooMappingConfiguration(),new BarMappingConfiguration()}, new NoOpLogger(), null,new[]{typeof(Foo),typeof(Bar)} );
+            var configuration = new AggregateConfiguration("Test",new IMappingConfiguration[]{new FooMappingConfiguration(),new BarMappingConfiguration()}, null,null ,new[]{typeof(Foo),typeof(Bar)} );
             container.Register(
                 Component.For<IAggregateConfiguration>().Instance(configuration)
                 .Named(string.Format("{0},{1}",typeof (Foo).FullName,typeof (Bar).FullName)));
@@ -41,6 +44,10 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             // Assert
             // peek under the covers and ensure that each add went
             // to the right DbContext.
+            var objectContext = ((IObjectContextAdapter) context).ObjectContext;
+            Assert.IsTrue(objectContext.ObjectStateManager.GetObjectStateEntries(EntityState.Added).Count() == 2);
+            Assert.IsTrue(objectContext.ObjectStateManager.GetObjectStateEntries(EntityState.Added).First().EntitySet.Name == "Foos");
+            Assert.IsTrue(objectContext.ObjectStateManager.GetObjectStateEntries(EntityState.Added).Last().EntitySet.Name == "Bars");
         }
     }
 }

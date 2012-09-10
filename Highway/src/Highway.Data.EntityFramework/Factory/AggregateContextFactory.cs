@@ -9,7 +9,10 @@ using Highway.Data.EntityFramework.Builder;
 
 namespace Highway.Data
 {
-    public class AggregateContextFactory
+    /// <summary>
+    /// Factory for creating aggregate root based bounded contexts
+    /// </summary>
+    public abstract class AggregateContextFactory
     {
         private static IDataContext CreatContextFromConfiguration(IAggregateConfiguration configuration)
         {
@@ -22,7 +25,7 @@ namespace Highway.Data
         /// </summary>
         /// <typeparam name="T1">The Type to configure the context for</typeparam>
         /// <returns><seealso cref="IDataContext"/>The IDataContext for usage</returns>
-        public IDataContext Create<T1>()
+        public static IDataContext Create<T1>()
             where T1 : class
         {
             var configuration = AggregateConfigurationFactory.GetConfigurationFor<T1>();
@@ -35,7 +38,7 @@ namespace Highway.Data
         /// <typeparam name="T1">The Type to configure the context for</typeparam>
         /// <typeparam name="T2">The Type to configure the context for</typeparam>
         /// <returns><seealso cref="IDataContext"/>The IDataContext for usage</returns>
-        public IDataContext Create<T1, T2>() 
+        public static IDataContext Create<T1, T2>() 
             where T1 : class 
             where T2 : class
         {
@@ -51,7 +54,7 @@ namespace Highway.Data
         /// <typeparam name="T2">The Type to configure the context for</typeparam>
         /// <typeparam name="T3">The Type to configure the context for</typeparam>
         /// <returns><seealso cref="IDataContext"/>The IDataContext for usage</returns>
-        public IDataContext Create<T1, T2, T3>()
+        public static IDataContext Create<T1, T2, T3>()
             where T1 : class
             where T2 : class
             where T3 : class
@@ -68,7 +71,7 @@ namespace Highway.Data
         /// <typeparam name="T3">The Type to configure the context for</typeparam>
         /// <typeparam name="T4">The Type to configure the context for</typeparam>
         /// <returns><seealso cref="IDataContext"/>The IDataContext for usage</returns>
-        public IDataContext Create<T1, T2, T3, T4>()
+        public static IDataContext Create<T1, T2, T3, T4>()
             where T1 : class
             where T2 : class
             where T3 : class

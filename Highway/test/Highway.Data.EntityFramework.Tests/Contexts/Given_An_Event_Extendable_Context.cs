@@ -18,7 +18,7 @@ using Highway.Data.Tests;
 namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
     [TestClass]
-    public class Given_An_Event_Extendable_Context : ContainerTest<CommitEventsMockContext>
+    public class GivenAnEventExtendableContext : ContainerTest<CommitEventsMockContext>
     {
         public override void RegisterComponents(IWindsorContainer container)
         {
@@ -28,7 +28,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             base.RegisterComponents(container);
         }
         [TestMethod]
-        public void When_Commit_Is_Called_PreSave_and_post_save_interceptors_are_Called()
+        public void WhenCommitIsCalledPreSaveAndPostSaveInterceptorsAreCalled()
         {
             //arrange
             IInterceptor<PreSaveEventArgs> mockPreSave = MockRepository.GenerateMock<IInterceptor<PreSaveEventArgs>>();

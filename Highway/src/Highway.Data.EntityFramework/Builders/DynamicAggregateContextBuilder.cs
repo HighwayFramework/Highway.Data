@@ -31,7 +31,8 @@ namespace Highway.Data.EntityFramework.Builder
         {
             var codeDomProvider = new Microsoft.CSharp.CSharpCodeProvider();
             Guid typeGuid = Guid.NewGuid();
-            var classDeclaration = string.Format(classString, typeGuid);
+            string typeGuidString = typeGuid.ToString().Replace("{",string.Empty).Replace("}",string.Empty).Replace("-",string.Empty);
+            var classDeclaration = classString.Replace("{className}", typeGuidString);
             CompilerParameters newCompilerParameters = new CompilerParameters();
             var output = codeDomProvider.CompileAssemblyFromSource(newCompilerParameters, classDeclaration);
             var type = output.CompiledAssembly.GetType(string.Format("{0}AggregateContext",typeGuid));
@@ -53,9 +54,9 @@ using System.Text;
 
 namespace Highway.Data
 {
-    internal class {0}AggregateContext : AggregateDataContext
+    internal class {className}AggregateContext : AggregateDataContext
     {
-        public {0}AggregateContext(IAggregateConfiguration configuration)
+        public {className}AggregateContext(IAggregateConfiguration configuration)
             : base(configuration)
         {
 

@@ -1,5 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Highway.Data.Tests.TestDomain;
+using Highway.Data.EntityFramework;
+using Highway.Data.Interfaces;
 
 namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
@@ -10,7 +12,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
         {
             // Arrange
             var factory = new AggregateContextFactory();
-            var context = factory.Create<Foo, Bar>();
+            IDataContext context = factory.Create<Foo, Bar>();
             var foo = new Foo();
             var bar = new Bar();
 

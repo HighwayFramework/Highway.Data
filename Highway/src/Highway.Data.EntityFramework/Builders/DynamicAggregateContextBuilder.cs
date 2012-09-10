@@ -35,7 +35,7 @@ namespace Highway.Data.EntityFramework.Builder
             var classDeclaration = classString.Replace("{className}", typeGuidString);
             CompilerParameters newCompilerParameters = new CompilerParameters();
             var output = codeDomProvider.CompileAssemblyFromSource(newCompilerParameters, classDeclaration);
-            var type = output.CompiledAssembly.GetType(string.Format("{0}AggregateContext",typeGuid));
+            var type = output.CompiledAssembly.GetType(string.Format("{0}AggregateContext",typeGuidString));
             return type;
         }
 

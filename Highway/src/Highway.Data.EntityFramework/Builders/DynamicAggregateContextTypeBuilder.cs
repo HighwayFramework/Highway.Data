@@ -51,7 +51,7 @@ namespace Highway.Data
 
         private static string BuildKey(IAggregateConfiguration configuration)
         {
-            return string.Join(",", configuration.TypesConfigured.Select(x => x.FullName));
+            return AggregateConfigurationKeyFactory.GenerateKey(configuration.TypesConfigured.ToArray());
         }
 
         /// <summary>

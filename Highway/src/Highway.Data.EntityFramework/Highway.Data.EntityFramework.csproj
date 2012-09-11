@@ -86,6 +86,7 @@
     <Compile Include="Extensions\LoggingTraceExtensions.cs" />
     <Compile Include="Extensions\PerformanceTracingExtensions.cs" />
     <Compile Include="Factory\AggregateConfigurationFactory.cs" />
+    <Compile Include="Factory\AggregateConfigurationKeyFactory.cs" />
     <Compile Include="Factory\AggregateContextFactory.cs" />
     <Compile Include="Interceptors\AuditableInterceptor.cs" />
     <Compile Include="Mappings\IContextConfiguration.cs" />

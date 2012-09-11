@@ -15,7 +15,7 @@
     <tags>Architecture  ORM  Repository  Specification  Productivity</tags>
     <dependencies>
       <dependency id="Highway.Data.EntityFramework" />
-	  <dependency if="Ninject" />
+	  <dependency id="Ninject" />
     </dependencies>
   </metadata>
 </package>

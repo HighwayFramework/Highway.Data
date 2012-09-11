@@ -31,7 +31,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
                                                            new[] {typeof (Foo), typeof (Bar)});
             container.Register(
                 Component.For<IAggregateConfiguration>().Instance(configuration)
-                    .Named(string.Format("{0},{1}", typeof (Foo).FullName, typeof (Bar).FullName)));
+                    .Named(AggregateConfigurationKeyFactory.GenerateKey<Foo,Bar>()));
             string typeName = string.Format("{0},{1}", typeof (Foo).FullName, typeof (Bar).FullName);
             var windsorServiceLocator = new WindsorServiceLocator(container);
             ServiceLocator.SetLocatorProvider(() => windsorServiceLocator);
@@ -74,11 +74,9 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
                                                                      {new FooMappingConfiguration()}, null, null,
                                                                  new[] {typeof (Foo)});
 
-            string typeName = string.Format("{0},{1}", typeof (Foo).FullName, typeof (Bar).FullName);
-            string secondTypeName = typeof (Foo).FullName;
             container.Register(
-                Component.For<IAggregateConfiguration>().Instance(configuration).Named(typeName),
-                Component.For<IAggregateConfiguration>().Instance(secondConfiguration).Named(secondTypeName));
+                Component.For<IAggregateConfiguration>().Instance(configuration).Named(AggregateConfigurationKeyFactory.GenerateKey<Foo,Bar>()),
+                Component.For<IAggregateConfiguration>().Instance(secondConfiguration).Named(AggregateConfigurationKeyFactory.GenerateKey<Foo>()));
 
             var windsorServiceLocator = new WindsorServiceLocator(container);
             ServiceLocator.SetLocatorProvider(() => windsorServiceLocator);

@@ -13,7 +13,6 @@ namespace Highway.Data.EntityFramework.Tests.Async
             //Act
 
             //Assert
-
         }
     }
 }

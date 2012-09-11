@@ -1,21 +1,22 @@
-﻿
+﻿using System;
 using Highway.Data.Interfaces;
-using System;
 using Microsoft.Practices.Unity;
 
 namespace Highway.Data.EntityFramework.Unity.Example
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            const string SqlExpressConnectionString = @"Data Source=(local)\SQLExpress;Initial Catalog=HighwayDemo;Integrated Security=True";
+            const string SqlExpressConnectionString =
+                @"Data Source=(local)\SQLExpress;Initial Catalog=HighwayDemo;Integrated Security=True";
 
             var unityContainer = new UnityContainer();
             unityContainer.BuildHighway();
             unityContainer.RegisterType<IMappingConfiguration, HighwayDataMappings>();
             unityContainer.RegisterType<IRepository, Repository>();
-            unityContainer.RegisterType<IDataContext, DataContext>(new InjectionConstructor(SqlExpressConnectionString,new HighwayDataMappings()));
+            unityContainer.RegisterType<IDataContext, DataContext>(new InjectionConstructor(SqlExpressConnectionString,
+                                                                                            new HighwayDataMappings()));
 
 
             // Use for Demos

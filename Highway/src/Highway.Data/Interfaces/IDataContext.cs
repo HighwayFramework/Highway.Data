@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
-using System.Data.Objects;
-using System.Linq.Expressions;
-using System.Data;
-using Highway.Data.Interceptors.Events;
 
 namespace Highway.Data.Interfaces
 {
@@ -15,12 +11,17 @@ namespace Highway.Data.Interfaces
     public interface IDataContext : IDisposable
     {
         /// <summary>
+        /// The reference to EventManager that allows for ordered event handling and registration
+        /// </summary>
+        IEventManager EventManager { get; set; }
+
+        /// <summary>
         /// This gives a mockable wrapper around normal Set method that allows for testablity
         /// </summary>
         /// <typeparam name="T">The Entity being queried</typeparam>
         /// <returns><see cref="IQueryable{T}"/></returns>
         IQueryable<T> AsQueryable<T>() where T : class;
-        
+
         /// <summary>
         /// Adds the provided instance of <typeparamref name="T"/> to the data context
         /// </summary>
@@ -92,11 +93,5 @@ namespace Highway.Data.Interfaces
         /// <param name="dbParams">A List of Database Parameters for the Query</param>
         /// <returns>The rows affected</returns>
         int ExecuteSqlCommand(string sql, params DbParameter[] dbParams);
-
-        /// <summary>
-        /// The reference to EventManager that allows for ordered event handling and registration
-        /// </summary>
-        IEventManager EventManager { get; set; }
     }
-
 }

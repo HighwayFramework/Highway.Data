@@ -6,7 +6,6 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Objects;
 using System.Linq;
-using System.Text;
 using Common.Logging;
 using Highway.Data.Interceptors.Events;
 using Highway.Data.Interfaces;
@@ -18,16 +17,16 @@ namespace Highway.Data
     /// </summary>
     public class AggregateDataContext : DbContext, IObservableDataContext
     {
-        private readonly IMappingConfiguration[] _mappings;
         private readonly ILog _log;
+        private readonly IMappingConfiguration[] _mappings;
+        private readonly IEnumerable<Type> _typesConfigured = new List<Type>();
         private IEventManager _eventManager;
-        private IEnumerable<Type> _typesConfigured = new List<Type>();
 
         /// <summary>
         /// Constructs the base AggregateRootContext - This should not be used
         /// </summary>
         /// <param name="configuration"></param>
-        public AggregateDataContext(IAggregateConfiguration configuration) : base(configuration.ConnectionString)   
+        public AggregateDataContext(IAggregateConfiguration configuration) : base(configuration.ConnectionString)
         {
             _typesConfigured = configuration.TypesConfigured;
             _mappings = configuration.Mappings;
@@ -35,6 +34,7 @@ namespace Highway.Data
             configuration.ContextConfiguration.ConfigureContext(this);
         }
 
+        #region IObservableDataContext Members
 
         /// <summary>
         /// This gives a mock-able wrapper around the normal <see cref="DbSet{T}"/> method that allows for testablity
@@ -44,9 +44,9 @@ namespace Highway.Data
         public IQueryable<T> AsQueryable<T>() where T : class
         {
             CheckTypeAgainstAggregateRootsConfigured<T>();
-            _log.DebugFormat("Querying Object {0}", typeof(T).Name);
-            var result = this.Set<T>();
-            _log.DebugFormat("Queried Object {0}", typeof(T).Name);
+            _log.DebugFormat("Querying Object {0}", typeof (T).Name);
+            DbSet<T> result = Set<T>();
+            _log.DebugFormat("Queried Object {0}", typeof (T).Name);
             return result;
         }
 
@@ -60,7 +60,7 @@ namespace Highway.Data
         {
             CheckTypeAgainstAggregateRootsConfigured<T>();
             _log.DebugFormat("Adding Object {0}", item);
-            this.Set<T>().Add(item);
+            Set<T>().Add(item);
             _log.TraceFormat("Added Object {0}", item);
             return item;
         }
@@ -75,7 +75,7 @@ namespace Highway.Data
         {
             CheckTypeAgainstAggregateRootsConfigured<T>();
             _log.DebugFormat("Removing Object {0}", item);
-            this.Set<T>().Remove(item);
+            Set<T>().Remove(item);
             _log.TraceFormat("Removed Object {0}", item);
             return item;
         }
@@ -90,11 +90,12 @@ namespace Highway.Data
         {
             CheckTypeAgainstAggregateRootsConfigured<T>();
             _log.TraceFormat("Retrieving State Entry For Object {0}", item);
-            var entry = GetChangeTrackingEntry(item);
+            DbEntityEntry<T> entry = GetChangeTrackingEntry(item);
             _log.DebugFormat("Updating Object {0}", item);
             if (entry == null)
             {
-                throw new InvalidOperationException("Cannot Update an object that is not attacched to the current Entity Framework data context");
+                throw new InvalidOperationException(
+                    "Cannot Update an object that is not attacched to the current Entity Framework data context");
             }
             entry.State = EntityState.Modified;
             _log.TraceFormat("Updated Object {0}", item);
@@ -111,7 +112,7 @@ namespace Highway.Data
         {
             CheckTypeAgainstAggregateRootsConfigured<T>();
             _log.DebugFormat("Attaching Object {0}", item);
-            this.Set<T>().Attach(item);
+            Set<T>().Attach(item);
             _log.TraceFormat("Attached Object {0}", item);
             return item;
         }
@@ -126,21 +127,16 @@ namespace Highway.Data
         {
             CheckTypeAgainstAggregateRootsConfigured<T>();
             _log.TraceFormat("Retrieving State Entry For Object {0}", item);
-            var entry = GetChangeTrackingEntry(item);
+            DbEntityEntry<T> entry = GetChangeTrackingEntry(item);
             _log.DebugFormat("Detaching Object {0}", item);
             if (entry == null)
             {
-                throw new InvalidOperationException("Cannot detach an object that is not attached to the current context.");
+                throw new InvalidOperationException(
+                    "Cannot detach an object that is not attached to the current context.");
             }
             entry.State = EntityState.Detached;
             _log.TraceFormat("Detached Object {0}", item);
             return item;
-        }
-
-        private DbEntityEntry<T> GetChangeTrackingEntry<T>(T item) where T : class
-        {
-            var entry = base.Entry(item);
-            return entry;
         }
 
         /// <summary>
@@ -153,11 +149,12 @@ namespace Highway.Data
         {
             CheckTypeAgainstAggregateRootsConfigured<T>();
             _log.TraceFormat("Retrieving State Entry For Object {0}", item);
-            var entry = GetChangeTrackingEntry(item);
+            DbEntityEntry<T> entry = GetChangeTrackingEntry(item);
             _log.DebugFormat("Reloading Object {0}", item);
             if (entry == null)
             {
-                throw new InvalidOperationException("You cannot reload an objecct that is not in the current Entity Framework datya context");
+                throw new InvalidOperationException(
+                    "You cannot reload an objecct that is not in the current Entity Framework datya context");
             }
             entry.Reload();
             _log.TraceFormat("Reloaded Object {0}", item);
@@ -173,20 +170,10 @@ namespace Highway.Data
             _log.Trace("\tCommit");
             base.ChangeTracker.DetectChanges();
             InvokePreSave();
-            var result = base.SaveChanges();
+            int result = base.SaveChanges();
             InvokePostSave();
             _log.DebugFormat("\tCommitted {0} Changes", result);
             return result;
-        }
-
-        private void InvokePostSave()
-        {
-            if (PostSave != null) PostSave(this, new PostSaveEventArgs());
-        }
-
-        private void InvokePreSave()
-        {
-            if (PreSave != null) PreSave(this, new PreSaveEventArgs() { });
         }
 
         /// <summary>
@@ -199,7 +186,8 @@ namespace Highway.Data
         /// <returns>An <see cref="IEnumerable{T}"/> from the query return</returns>
         public IEnumerable<T> ExecuteSqlQuery<T>(string sql, params DbParameter[] dbParams)
         {
-            var parameters = dbParams.Select(x => string.Format("{0} : {1} : {2}\t", x.ParameterName, x.Value, x.DbType)).ToArray();
+            string[] parameters =
+                dbParams.Select(x => string.Format("{0} : {1} : {2}\t", x.ParameterName, x.Value, x.DbType)).ToArray();
             _log.TraceFormat("Executing SQL {0}, with parameters {1}", sql, string.Join(",", parameters));
             return base.Database.SqlQuery<T>(sql, dbParams);
         }
@@ -212,24 +200,12 @@ namespace Highway.Data
         /// <returns>The rows affected</returns>
         public int ExecuteSqlCommand(string sql, params DbParameter[] dbParams)
         {
-            var parameters = dbParams.Select(x => string.Format("{0} : {1} : {2}\t", x.ParameterName, x.Value, x.DbType)).ToArray();
+            string[] parameters =
+                dbParams.Select(x => string.Format("{0} : {1} : {2}\t", x.ParameterName, x.Value, x.DbType)).ToArray();
             _log.TraceFormat("Executing SQL {0}, with parameters {1}", sql, string.Join(",", parameters));
             return base.Database.ExecuteSqlCommand(sql, dbParams);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="procedureName"></param>
-        /// <param name="dbParams"></param>
-        /// <returns></returns>
-        public int ExecuteFunction(string procedureName, params ObjectParameter[] dbParams)
-        {
-            var parameters = dbParams.Select(x => string.Format("{0} : {1} : {2}\t", x.Name, x.Value, x.ParameterType)).ToArray();
-            _log.TraceFormat("Executing Procedure {0}, with parameters {1}", procedureName, string.Join(",", parameters));
-            return base.Database.SqlQuery<int>(procedureName, dbParams).FirstOrDefault();
-        }
-                                            
         /// <summary>
         /// The reference to EventManager that allows for ordered event handling and registration
         /// </summary>
@@ -253,6 +229,38 @@ namespace Highway.Data
         /// </summary>
         public event EventHandler<PostSaveEventArgs> PostSave;
 
+        #endregion
+
+        private DbEntityEntry<T> GetChangeTrackingEntry<T>(T item) where T : class
+        {
+            DbEntityEntry<T> entry = base.Entry(item);
+            return entry;
+        }
+
+        private void InvokePostSave()
+        {
+            if (PostSave != null) PostSave(this, new PostSaveEventArgs());
+        }
+
+        private void InvokePreSave()
+        {
+            if (PreSave != null) PreSave(this, new PreSaveEventArgs {});
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="procedureName"></param>
+        /// <param name="dbParams"></param>
+        /// <returns></returns>
+        public int ExecuteFunction(string procedureName, params ObjectParameter[] dbParams)
+        {
+            string[] parameters =
+                dbParams.Select(x => string.Format("{0} : {1} : {2}\t", x.Name, x.Value, x.ParameterType)).ToArray();
+            _log.TraceFormat("Executing Procedure {0}, with parameters {1}", procedureName, string.Join(",", parameters));
+            return base.Database.SqlQuery<int>(procedureName, dbParams).FirstOrDefault();
+        }
+
         /// <summary>
         /// This method is called when the model for a derived context has been initialized, but
         ///                 before the model has been locked down and used to initialize the context.  The default
@@ -271,7 +279,7 @@ namespace Highway.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             _log.Debug("\tOnModelCreating");
-            foreach (var mapping in _mappings)
+            foreach (IMappingConfiguration mapping in _mappings)
             {
                 if (mapping != null)
                 {
@@ -279,17 +287,15 @@ namespace Highway.Data
                     mapping.ConfigureModelBuilder(modelBuilder);
                 }
             }
-            
+
             base.OnModelCreating(modelBuilder);
         }
-        
+
         private void CheckTypeAgainstAggregateRootsConfigured<T>()
         {
-            if (_typesConfigured.Contains(typeof(T))) return;
-            throw new InvalidOperationException("Requested Type was not configured for this Aggregate Root bounded context, Please check the configuration and try again.");
-
+            if (_typesConfigured.Contains(typeof (T))) return;
+            throw new InvalidOperationException(
+                "Requested Type was not configured for this Aggregate Root bounded context, Please check the configuration and try again.");
         }
     }
-
-
 }

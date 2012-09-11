@@ -1,20 +1,21 @@
 ﻿using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
+using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Common.Logging;
 using Common.Logging.Simple;
-using Highway.Data.EventManagement;
-using Highway.Data.Interfaces;
 using Highway.Data.EntityFramework.Tests.Initializer;
 using Highway.Data.EntityFramework.Tests.Mapping;
+using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.EntityFramework.Tests.UnitTests;
+using Highway.Data.EventManagement;
+using Highway.Data.Interfaces;
 using Highway.Data.Tests;
 using Highway.Data.Tests.TestDomain;
 using Highway.Test.MSTest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Component = Castle.MicroKernel.Registration.Component;
-using Highway.Data.EntityFramework.Tests.Properties;
 
 namespace Highway.Data.EntityFramework.Tests.IntegrationTests
 {
@@ -23,8 +24,9 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
     {
         public override TestDataContext ResolveTarget()
         {
-            return Container.Resolve<TestDataContext>(new { connectionString = Settings.Default.Connection });
+            return Container.Resolve<TestDataContext>(new {connectionString = Settings.Default.Connection});
         }
+
         public override void RegisterComponents(IWindsorContainer container)
         {
             container.Register(Component.For<IEventManager>().ImplementedBy<EventManager>(),
@@ -48,7 +50,7 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
             //Arrange
 
             //Act
-            var items = target.AsQueryable<Foo>();
+            IQueryable<Foo> items = target.AsQueryable<Foo>();
 
             //Assert
             items.Count().ShouldBe(5);
@@ -65,7 +67,7 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
 
             //Assert
             target.ChangeTracker.DetectChanges();
-            var entry = target.Entry(item);
+            DbEntityEntry<Foo> entry = target.Entry(item);
             entry.State.ShouldBe(EntityState.Added);
         }
 
@@ -73,14 +75,14 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
         public void When_Remove_Is_Called_The_Object_Is_Added_To_The_ChangeTracker_In_A_Deleted_State()
         {
             //Arrange
-	
+
             //Act
-            var item = target.AsQueryable<Foo>().First();
+            Foo item = target.AsQueryable<Foo>().First();
             target.Remove(item);
 
             //Assert
             target.ChangeTracker.DetectChanges();
-            var entry = target.Entry(item);
+            DbEntityEntry<Foo> entry = target.Entry(item);
             entry.State.ShouldBe(EntityState.Deleted);
         }
 
@@ -88,14 +90,14 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
         public void When_Detach_Is_Called_The_Object_Is_Added_To_The_ChangeTracker_In_A_Detached_State()
         {
             //Arrange
-	
+
             //Act
-            var item = target.AsQueryable<Foo>().First();
+            Foo item = target.AsQueryable<Foo>().First();
             target.Detach(item);
 
             //Assert
             target.ChangeTracker.DetectChanges();
-            var entry = target.Entry(item);
+            DbEntityEntry<Foo> entry = target.Entry(item);
             entry.State.ShouldBe(EntityState.Detached);
             target.Dispose();
         }

@@ -11,14 +11,17 @@ namespace Highway.Data.Interfaces
         /// The date this entity was created
         /// </summary>
         DateTime CreatedDate { get; set; }
+
         /// <summary>
         /// Who created this entity
         /// </summary>
         string CreatedBy { get; set; }
+
         /// <summary>
         /// The date this entity was last modified
         /// </summary>
         DateTime ModifiedDate { get; set; }
+
         /// <summary>
         /// Who last modified this entity
         /// </summary>

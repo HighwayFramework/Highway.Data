@@ -2,17 +2,16 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.Entity.ModelConfiguration;
 using Highway.Data.Tests.TestDomain;
 
-
 namespace Highway.Data.EntityFramework.Tests.Mapping
 {
     public class QuxMap : EntityTypeConfiguration<Qux>
     {
         public QuxMap()
         {
-            this.ToTable("Quxs");
-            this.HasKey(x => x.Id);
-            this.Property(x => x.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            this.Property(x => x.Name).IsOptional();
+            ToTable("Quxs");
+            HasKey(x => x.Id);
+            Property(x => x.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            Property(x => x.Name).IsOptional();
         }
     }
 }

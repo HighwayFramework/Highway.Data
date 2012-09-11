@@ -7,17 +7,16 @@ namespace Highway.Data.Interfaces
     /// </summary>
     public interface IEventManager
     {
+        /// <summary>
+        /// A reference to context that allows for usaged and event wiring
+        /// </summary>
+        IObservableDataContext Context { get; set; }
 
         /// <summary>
         /// Allows for the Registration of IInterceptor<typeparamref name="T"/> objects that will hook to events in priority order
         /// </summary>
         /// <param name="interceptor">The interceptor to be registered to an event</param>
         /// <typeparam name="T">The Event Args that the interceptor accepts</typeparam>
-        void Register<T>(IInterceptor<T> interceptor) where T : System.EventArgs;
-        
-        /// <summary>
-        /// A reference to context that allows for usaged and event wiring
-        /// </summary>
-        IObservableDataContext Context { get; set; }
+        void Register<T>(IInterceptor<T> interceptor) where T : EventArgs;
     }
 }

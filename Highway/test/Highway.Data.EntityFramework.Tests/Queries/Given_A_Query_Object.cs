@@ -1,42 +1,42 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Castle.MicroKernel.Registration;
-﻿using Castle.MicroKernel.Resolvers.SpecializedResolvers;
-﻿using Castle.Windsor;
+using Castle.MicroKernel.Resolvers.SpecializedResolvers;
+using Castle.Windsor;
 using Common.Logging;
 using Common.Logging.Simple;
 using CommonServiceLocator.WindsorAdapter;
-
+using Highway.Data.EntityFramework.Tests.Mapping;
+using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.EventManagement;
 using Highway.Data.Interfaces;
-using Highway.Data.EntityFramework.Tests.Mapping;
+using Highway.Data.QueryObjects;
 using Highway.Data.Tests.TestDomain;
 using Highway.Data.Tests.TestQueries;
 using Highway.Test.MSTest;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
-using Highway.Data.QueryObjects;
-using Highway.Data.EntityFramework.Tests.Properties;
 
 namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
     [TestClass]
-    public class Given_A_Query_Object 
+    public class Given_A_Query_Object
     {
         internal static IWindsorContainer container;
 
         [ClassInitialize]
-        public static void SetupClass(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext context)
+        public static void SetupClass(TestContext context)
         {
             container = new WindsorContainer();
             ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(container));
             container.Kernel.Resolver.AddSubResolver(new ArrayResolver(container.Kernel));
             container.Register(Component.For<IEventManager>().ImplementedBy<EventManager>().LifestyleTransient(),
-                               Component.For<IDataContext>().ImplementedBy<TestDataContext>().DependsOn(new { connectionString = Settings.Default.Connection }).LifestyleTransient(),
-                               Component.For<IMappingConfiguration>().ImplementedBy<FooMappingConfiguration>().LifestyleTransient(),
+                               Component.For<IDataContext>().ImplementedBy<TestDataContext>().DependsOn(
+                                   new {connectionString = Settings.Default.Connection}).LifestyleTransient(),
+                               Component.For<IMappingConfiguration>().ImplementedBy<FooMappingConfiguration>().
+                                   LifestyleTransient(),
                                Component.For<ILog>().ImplementedBy<NoOpLogger>());
-
         }
 
         [TestMethod]
@@ -52,7 +52,6 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
 
             //Assert
             context.VerifyAllExpectations();
-
         }
 
         [TestMethod]
@@ -70,7 +69,6 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             //Assert
             context.VerifyAllExpectations();
             items.ShouldNotBeNull();
-
         }
 
         [TestMethod]
@@ -79,7 +77,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             //Arrange
             var targetFoo = new Foo();
             var context = MockRepository.GenerateStrictMock<IDataContext>();
-            context.Expect(x => x.AsQueryable<Foo>()).Return(new List<Foo>()
+            context.Expect(x => x.AsQueryable<Foo>()).Return(new List<Foo>
                 {
                     new Foo(),
                     new Foo(),
@@ -90,7 +88,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             var query = new FindFoo();
 
             //Act
-            var retVal = query.Skip(4).Take(1).Execute(context);
+            IEnumerable<Foo> retVal = query.Skip(4).Take(1).Execute(context);
 
 
             //Assert
@@ -106,12 +104,11 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             var context = container.Resolve<IDataContext>();
 
             //act
-            var sqlOutput = target.OutputSQLStatement(context);
+            string sqlOutput = target.OutputSQLStatement(context);
 
             //assert
             sqlOutput.ShouldNotBeNull();
             sqlOutput.ShouldContain("from");
-
         }
     }
 }

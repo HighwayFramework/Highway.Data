@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
 using Highway.Data.Interfaces;
 
 namespace Highway.Data.QueryObjects
@@ -18,6 +14,8 @@ namespace Highway.Data.QueryObjects
         /// </summary>
         protected Func<IDataContext, T> ContextQuery { get; set; }
 
+        #region IScalar<T> Members
+
         /// <summary>
         /// Executes the expression against the passed in context
         /// </summary>
@@ -27,9 +25,9 @@ namespace Highway.Data.QueryObjects
         {
             Context = context;
             CheckContextAndQuery(ContextQuery);
-            return this.ContextQuery(context);
+            return ContextQuery(context);
         }
 
-
-    }    
+        #endregion
+    }
 }

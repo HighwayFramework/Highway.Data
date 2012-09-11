@@ -2,7 +2,6 @@
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using Highway.Data.Interceptors;
 using Highway.Data.Interceptors.Events;
 using Highway.Data.Interfaces;
 
@@ -13,7 +12,7 @@ namespace Highway.Data.Interceptors
     /// </summary>
     public class AuditableInterceptor : IInterceptor<PreSaveEventArgs>
     {
-        private IUserNameService _userNameService;
+        private readonly IUserNameService _userNameService;
 
         /// <summary>
         /// Creates a interceptor for audit data attachment
@@ -25,6 +24,8 @@ namespace Highway.Data.Interceptors
             _userNameService = userNameService;
         }
 
+        #region IInterceptor<PreSaveEventArgs> Members
+
         /// <summary>
         /// Executes the interceptor handle an event based on the event arguments
         /// </summary>
@@ -34,9 +35,11 @@ namespace Highway.Data.Interceptors
         public InterceptorResult Execute(IDataContext context, PreSaveEventArgs eventArgs)
         {
             var efContext = context as DbContext;
-            if (efContext == null) throw new InvalidOperationException("Entity Framework Interceptors must be used with Entity Framework Contexts");
-            
-            var userName = _userNameService.GetCurrentUserName();
+            if (efContext == null)
+                throw new InvalidOperationException(
+                    "Entity Framework Interceptors must be used with Entity Framework Contexts");
+
+            string userName = _userNameService.GetCurrentUserName();
 #if DEBUG
             var addedEntities = efContext.ChangeTracker.Entries().Where(x => x.State == EntityState.Added).Where(e => e.Entity is IAuditableEntity).ToList();
             var modifiedEntities = efContext.ChangeTracker.Entries().Where(x => x.State == EntityState.Modified).Where(e => e.Entity is IAuditableEntity).ToList();
@@ -47,27 +50,27 @@ namespace Highway.Data.Interceptors
                 .Where(e => e.Entity is IAuditableEntity)
                 .ToList()
                 .ForEach(e =>
-                {
-                    var entity = e.Entity as IAuditableEntity;
-                    if (entity != null)
                     {
-                        entity.CreatedDate = entity.ModifiedDate = DateTime.Now;
-                        entity.CreatedBy = entity.ModifiedBy = userName;
-                    }
-                });
+                        var entity = e.Entity as IAuditableEntity;
+                        if (entity != null)
+                        {
+                            entity.CreatedDate = entity.ModifiedDate = DateTime.Now;
+                            entity.CreatedBy = entity.ModifiedBy = userName;
+                        }
+                    });
 
             efContext.ChangeTracker.Entries().Where(x => x.State == EntityState.Modified)
                 .Where(e => e.Entity is IAuditableEntity)
                 .ToList()
                 .ForEach(e =>
-                {
-                    var entity = e.Entity as IAuditableEntity;
-                    if (entity != null)
                     {
-                        entity.ModifiedDate = DateTime.Now;
-                        entity.ModifiedBy = userName;
-                    }
-                });
+                        var entity = e.Entity as IAuditableEntity;
+                        if (entity != null)
+                        {
+                            entity.ModifiedDate = DateTime.Now;
+                            entity.ModifiedBy = userName;
+                        }
+                    });
             efContext.ChangeTracker.DetectChanges();
             return new InterceptorResult();
         }
@@ -76,5 +79,7 @@ namespace Highway.Data.Interceptors
         ///  The priority order that this interceptor has for ordered execution by the event manager
         /// </summary>
         public int Priority { get; set; }
+
+        #endregion
     }
 }

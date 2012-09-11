@@ -12,6 +12,7 @@ namespace Highway.Data.QueryObjects
             _query = query;
         }
 
+        #region IAsyncScalar<T> Members
 
         public Task<T> Execute(IDataContext context)
         {
@@ -19,9 +20,11 @@ namespace Highway.Data.QueryObjects
                 {
                     lock (context)
                     {
-                        return _query.Execute(context);    
+                        return _query.Execute(context);
                     }
                 });
         }
+
+        #endregion
     }
 }

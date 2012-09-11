@@ -3,7 +3,7 @@ namespace Highway.Data.Interfaces
     /// <summary>
     /// An Interface for Command Queries that return no value, or the return is ignored
     /// </summary>
-    public interface ICommand 
+    public interface ICommand
     {
         /// <summary>
         /// Executes the expression against the passed in context and ignores the returned value if any

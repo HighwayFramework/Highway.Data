@@ -1,5 +1,3 @@
-using System;
-
 namespace Highway.Data.Tests.TestDomain
 {
     public class Foo

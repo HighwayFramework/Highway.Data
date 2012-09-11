@@ -5,15 +5,15 @@ namespace Highway.Data.Tests.TestQueries
 {
     public class TestCommand : Command
     {
-        public bool Called { get; set; }
-
         public TestCommand()
         {
             ContextQuery = db =>
-                               {
-                                   db.AsQueryable<Foo>();
-                                   Called = true;
-                               };
+                {
+                    db.AsQueryable<Foo>();
+                    Called = true;
+                };
         }
+
+        public bool Called { get; set; }
     }
 }

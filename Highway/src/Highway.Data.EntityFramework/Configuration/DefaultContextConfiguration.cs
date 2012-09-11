@@ -7,10 +7,14 @@ namespace Highway.Data
     /// </summary>
     public class DefaultContextConfiguration : IContextConfiguration
     {
+        #region IContextConfiguration Members
+
         public void ConfigureContext(DbContext context)
         {
             context.Configuration.LazyLoadingEnabled = false;
             context.Configuration.ProxyCreationEnabled = false;
         }
+
+        #endregion
     }
 }

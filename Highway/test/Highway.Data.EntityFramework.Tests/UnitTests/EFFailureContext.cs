@@ -9,17 +9,9 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
     public class EFFailureContext : IDataContext
     {
-        public IQueryable<T> AsQueryable<T>()
-        {
-            throw new NotImplementedException();
-        }
+        #region IDataContext Members
 
         public T Add<T>(T item) where T : class
-        {
-            throw new NotImplementedException();
-        }
-
-        public T Add<T>(T item, bool changeState) where T : class
         {
             throw new NotImplementedException();
         }
@@ -49,17 +41,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             throw new NotImplementedException();
         }
 
-        public void Reload<T>() where T : class
-        {
-            throw new NotImplementedException();
-        }
-
         public int Commit()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int ExecuteFunction(string procedureName, params ObjectParameter[] dbParams)
         {
             throw new NotImplementedException();
         }
@@ -86,6 +68,28 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
         }
 
         IQueryable<T> IDataContext.AsQueryable<T>()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        public IQueryable<T> AsQueryable<T>()
+        {
+            throw new NotImplementedException();
+        }
+
+        public T Add<T>(T item, bool changeState) where T : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Reload<T>() where T : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public int ExecuteFunction(string procedureName, params ObjectParameter[] dbParams)
         {
             throw new NotImplementedException();
         }

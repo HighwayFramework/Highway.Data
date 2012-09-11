@@ -19,20 +19,21 @@ namespace Highway.Data.EntityFramework.Tests.Performance
         public void Should_Throw_An_Error_When_Query_Is_To_Slow()
         {
             //Arrange
-            var consoleOutLogger = new ConsoleOutLogger("Performance",LogLevel.All, true,true,true,"");
-            var context = new TestDataContext(Settings.Default.Connection, new FooMappingConfiguration(),consoleOutLogger);
+            var consoleOutLogger = new ConsoleOutLogger("Performance", LogLevel.All, true, true, true, "");
+            var context = new TestDataContext(Settings.Default.Connection, new FooMappingConfiguration(),
+                                              consoleOutLogger);
 
             //Act
             IEnumerable<Foo> result = null;
             try
             {
-                result = new FindFoo().RunPerformanceTest(context, consoleOutLogger,maxAllowableMilliseconds:-1);
+                result = new FindFoo().RunPerformanceTest(context, consoleOutLogger, maxAllowableMilliseconds: -1);
             }
             catch (Exception e)
             {
                 Assert.IsTrue(e.Message.Contains("Query FindFoo"));
             }
-            
+
 
             //Assert
             Assert.IsNull(result);
@@ -44,19 +45,18 @@ namespace Highway.Data.EntityFramework.Tests.Performance
         {
             //Arrange
             var consoleOutLogger = new ConsoleOutLogger("Performance", LogLevel.All, true, true, true, "");
-            var context = new TestDataContext(Settings.Default.Connection, new FooMappingConfiguration(), consoleOutLogger);
-            var nullResult = context.AsQueryable<Foo>().ToList();
+            var context = new TestDataContext(Settings.Default.Connection, new FooMappingConfiguration(),
+                                              consoleOutLogger);
+            List<Foo> nullResult = context.AsQueryable<Foo>().ToList();
 
             //Act
             IEnumerable<Foo> result = null;
-           
-            result = new FindFoo().RunPerformanceTest(context, consoleOutLogger,false);
-           
+
+            result = new FindFoo().RunPerformanceTest(context, consoleOutLogger, false);
 
 
             //Assert
             Assert.IsNotNull(result);
-
         }
 
         [TestMethod]
@@ -64,14 +64,15 @@ namespace Highway.Data.EntityFramework.Tests.Performance
         {
             //Arrange
             var consoleOutLogger = new ConsoleOutLogger("Performance", LogLevel.All, true, true, true, "");
-            var context = new TestDataContext(Settings.Default.Connection, new FooMappingConfiguration(), consoleOutLogger);
+            var context = new TestDataContext(Settings.Default.Connection, new FooMappingConfiguration(),
+                                              consoleOutLogger);
 
             //Act
             IEnumerable<Foo> result = null;
             try
             {
                 var query = new FindFoo();
-                context.RunStartUpPerformanceTest(query,consoleOutLogger, maxAllowableMilliseconds: -1);
+                context.RunStartUpPerformanceTest(query, consoleOutLogger, maxAllowableMilliseconds: -1);
             }
             catch (Exception e)
             {
@@ -81,7 +82,6 @@ namespace Highway.Data.EntityFramework.Tests.Performance
 
             //Assert
             Assert.IsNull(result);
-
         }
     }
 }

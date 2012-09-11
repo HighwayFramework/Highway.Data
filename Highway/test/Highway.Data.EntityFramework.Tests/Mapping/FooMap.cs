@@ -8,10 +8,10 @@ namespace Highway.Data.EntityFramework.Tests.Mapping
     {
         public FooMap()
         {
-            this.ToTable("Foos");
-            this.HasKey(x => x.Id);
-            this.Property(x => x.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            this.Property(x => x.Name).IsOptional().HasMaxLength(12);
+            ToTable("Foos");
+            HasKey(x => x.Id);
+            Property(x => x.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            Property(x => x.Name).IsOptional().HasMaxLength(12);
         }
     }
 }

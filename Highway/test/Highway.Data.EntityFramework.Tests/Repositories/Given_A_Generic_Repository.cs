@@ -4,16 +4,16 @@ using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Common.Logging;
 using Common.Logging.Simple;
-using Highway.Data.EventManagement;
-using Highway.Data.Interfaces;
 using Highway.Data.EntityFramework.Tests.Mapping;
 using Highway.Data.EntityFramework.Tests.Properties;
+using Highway.Data.EventManagement;
+using Highway.Data.Interfaces;
+using Highway.Data.Tests;
 using Highway.Data.Tests.TestDomain;
 using Highway.Data.Tests.TestQueries;
 using Highway.Test.MSTest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
-using Highway.Data.Tests;
 
 namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
@@ -23,17 +23,17 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
         public override void RegisterComponents(IWindsorContainer container)
         {
             container.Register(
-                    Component.For<IEventManager>()
-                        .ImplementedBy<EventManager>(),
-                    Component.For<IDataContext>().ImplementedBy<TestDataContext>()
-                        .DependsOn(new
+                Component.For<IEventManager>()
+                    .ImplementedBy<EventManager>(),
+                Component.For<IDataContext>().ImplementedBy<TestDataContext>()
+                    .DependsOn(new
                         {
                             connectionString = Settings.Default.Connection,
-                            configurations = new[] { new FooMappingConfiguration() },
+                            configurations = new[] {new FooMappingConfiguration()},
                         }),
-                    Component.For<IMappingConfiguration>()
-                        .ImplementedBy<FooMappingConfiguration>(),
-                    Component.For<ILog>().ImplementedBy<NoOpLogger>());
+                Component.For<IMappingConfiguration>()
+                    .ImplementedBy<FooMappingConfiguration>(),
+                Component.For<ILog>().ImplementedBy<NoOpLogger>());
             base.RegisterComponents(container);
         }
 
@@ -45,7 +45,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
 
             //Act
             var repository = new Repository(context);
-                        
+
             //Assert
             repository.Context.ShouldBeSame(context);
         }
@@ -58,16 +58,16 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             context.Expect(x => x.AsQueryable<Foo>()).Return(
                 new List<Foo>
                     {
-                        new Foo() {Id = 1, Name = "Test"}
+                        new Foo {Id = 1, Name = "Test"}
                     }.AsQueryable());
             target = new Repository(context);
-            
+
             //Act
-            var result = target.Find(new FindFoo());
+            IEnumerable<Foo> result = target.Find(new FindFoo());
 
             //Assert
             context.VerifyAllExpectations();
-            var foo = result.First();
+            Foo foo = result.First();
             foo.ShouldNotBeNull();
             foo.Id.ShouldBe(1);
             foo.Name.ShouldBe("Test");
@@ -81,12 +81,12 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             context.Expect(x => x.AsQueryable<Foo>()).Return(
                 new List<Foo>
                     {
-                        new Foo() {Id = 1, Name = "Test"}
+                        new Foo {Id = 1, Name = "Test"}
                     }.AsQueryable());
             target = new Repository(context);
 
             //Act
-            var result = target.Get(new ScalarIntTestQuery());
+            int result = target.Get(new ScalarIntTestQuery());
 
             //Assert
             context.VerifyAllExpectations();
@@ -101,12 +101,12 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             context.Expect(x => x.AsQueryable<Foo>()).Return(
                 new List<Foo>
                     {
-                        new Foo() {Id = 1, Name = "Test"}
+                        new Foo {Id = 1, Name = "Test"}
                     }.AsQueryable());
             target = new Repository(context);
 
             //Act
-            var result = target.Get(new ScalarIntTestQuery());
+            int result = target.Get(new ScalarIntTestQuery());
 
             //Assert
             context.VerifyAllExpectations();
@@ -118,7 +118,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
         {
             //Arrange
             var context = MockRepository.GenerateStrictMock<IDataContext>();
-            var foo = new Foo() {Id = 1, Name = "Test"};
+            var foo = new Foo {Id = 1, Name = "Test"};
             context.Expect(x => x.AsQueryable<Foo>()).Return(
                 new List<Foo>
                     {
@@ -127,7 +127,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             target = new Repository(context);
 
             //Act
-            var result = target.Find(new FindFoo()).FirstOrDefault();
+            Foo result = target.Find(new FindFoo()).FirstOrDefault();
 
             //Assert
             context.VerifyAllExpectations();
@@ -142,7 +142,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             context.Expect(x => x.AsQueryable<Foo>()).Return(
                 new List<Foo>
                     {
-                        new Foo() {Id = 1, Name = "Test"}
+                        new Foo {Id = 1, Name = "Test"}
                     }.AsQueryable());
             target = new Repository(context);
 
@@ -156,4 +156,3 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
         }
     }
 }
-

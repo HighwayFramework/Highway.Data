@@ -1,5 +1,3 @@
-using System.Linq;
-
 namespace Highway.Data.EntityFramework.Tests
 {
     public static class TestCategories

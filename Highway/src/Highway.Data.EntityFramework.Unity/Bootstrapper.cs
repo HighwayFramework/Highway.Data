@@ -9,7 +9,6 @@ namespace Highway.Data.EntityFramework.Unity
         public static void BuildHighway(this IUnityContainer container)
         {
             container.RegisterType<IEventManager, EventManager>();
-
         }
     }
 }

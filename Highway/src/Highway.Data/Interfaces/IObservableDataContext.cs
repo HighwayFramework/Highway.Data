@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Highway.Data.Interceptors.Events;
 
 namespace Highway.Data.Interfaces
@@ -14,6 +12,7 @@ namespace Highway.Data.Interfaces
         /// The event fired just before the commit of the ORM
         /// </summary>
         event EventHandler<PreSaveEventArgs> PreSave;
+
         /// <summary>
         /// The event fired just after the commit of the ORM
         /// </summary>

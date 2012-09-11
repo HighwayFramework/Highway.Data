@@ -1,14 +1,15 @@
-﻿using Highway.Data.Interfaces;
-using System;
+﻿using System;
+using Highway.Data.Interfaces;
 using Ninject;
 
 namespace Highway.Data.EntityFramework.Ninject.Example
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            const string SqlExpressConnectionString = @"Data Source=(local)\SQLExpress;Initial Catalog=HighwayDemo;Integrated Security=True";
+            const string SqlExpressConnectionString =
+                @"Data Source=(local)\SQLExpress;Initial Catalog=HighwayDemo;Integrated Security=True";
 
             var kernel = new StandardKernel();
             kernel.BuildHighway();
@@ -18,7 +19,6 @@ namespace Highway.Data.EntityFramework.Ninject.Example
                 .WithConstructorArgument("connectionString", SqlExpressConnectionString)
                 .WithConstructorArgument("mapping", new HighwayDataMappings());
             kernel.Bind<DemoApplication>().To<DemoApplication>();
-
 
 
             // Use for Demos

@@ -1,19 +1,15 @@
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity.Infrastructure;
+using System.Data.Objects;
 using System.Linq;
-using Castle.Windsor;
-using Common.Logging;
-using Highway.Data.EntityFramework.Tests.Mapping;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Highway.Data.Tests.TestDomain;
-using Highway.Data.EntityFramework;
-using Highway.Data.Interfaces;
-using Microsoft.Practices.ServiceLocation;
-using CommonServiceLocator.WindsorAdapter;
 using Castle.MicroKernel.Registration;
-using Common.Logging.Simple;
+using Castle.Windsor;
+using CommonServiceLocator.WindsorAdapter;
+using Highway.Data.EntityFramework.Tests.Mapping;
+using Highway.Data.Interfaces;
+using Highway.Data.Tests.TestDomain;
+using Microsoft.Practices.ServiceLocation;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
@@ -26,11 +22,17 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
         {
             // Arrange
             var container = new WindsorContainer();
-            var configuration = new AggregateConfiguration("Test",new IMappingConfiguration[]{new FooMappingConfiguration(),new BarMappingConfiguration()}, null,null ,new[]{typeof(Foo),typeof(Bar)} );
+            var configuration = new AggregateConfiguration("Test",
+                                                           new IMappingConfiguration[]
+                                                               {
+                                                                   new FooMappingConfiguration(),
+                                                                   new BarMappingConfiguration()
+                                                               }, null, null,
+                                                           new[] {typeof (Foo), typeof (Bar)});
             container.Register(
                 Component.For<IAggregateConfiguration>().Instance(configuration)
-                .Named(string.Format("{0},{1}",typeof (Foo).FullName,typeof (Bar).FullName)));
-            var typeName = string.Format("{0},{1}",typeof(Foo).FullName,typeof(Bar).FullName);
+                    .Named(string.Format("{0},{1}", typeof (Foo).FullName, typeof (Bar).FullName)));
+            string typeName = string.Format("{0},{1}", typeof (Foo).FullName, typeof (Bar).FullName);
             var windsorServiceLocator = new WindsorServiceLocator(container);
             ServiceLocator.SetLocatorProvider(() => windsorServiceLocator);
 
@@ -45,10 +47,14 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             // Assert
             // peek under the covers and ensure that each add went
             // to the right DbContext.
-            var objectContext = ((IObjectContextAdapter) context).ObjectContext;
+            ObjectContext objectContext = ((IObjectContextAdapter) context).ObjectContext;
             Assert.IsTrue(objectContext.ObjectStateManager.GetObjectStateEntries(EntityState.Added).Count() == 2);
-            Assert.IsTrue(objectContext.ObjectStateManager.GetObjectStateEntries(EntityState.Added).First().EntitySet.Name == "Foos");
-            Assert.IsTrue(objectContext.ObjectStateManager.GetObjectStateEntries(EntityState.Added).Last().EntitySet.Name == "Bars");
+            Assert.IsTrue(
+                objectContext.ObjectStateManager.GetObjectStateEntries(EntityState.Added).First().EntitySet.Name ==
+                "Foos");
+            Assert.IsTrue(
+                objectContext.ObjectStateManager.GetObjectStateEntries(EntityState.Added).Last().EntitySet.Name ==
+                "Bars");
         }
 
         [TestMethod, TestCategory("Integration"), TestCategory("Database")]
@@ -56,15 +62,24 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
         {
             //Arrange
             var container = new WindsorContainer();
-            var configuration = new AggregateConfiguration("Test", new IMappingConfiguration[] { new FooMappingConfiguration(), new BarMappingConfiguration() }, null, null, new[] { typeof(Foo), typeof(Bar) });
-            var secondConfiguration = new AggregateConfiguration("Test", new IMappingConfiguration[] { new FooMappingConfiguration() }, null, null, new[] { typeof(Foo) });
+            var configuration = new AggregateConfiguration("Test",
+                                                           new IMappingConfiguration[]
+                                                               {
+                                                                   new FooMappingConfiguration(),
+                                                                   new BarMappingConfiguration()
+                                                               }, null, null,
+                                                           new[] {typeof (Foo), typeof (Bar)});
+            var secondConfiguration = new AggregateConfiguration("Test",
+                                                                 new IMappingConfiguration[]
+                                                                     {new FooMappingConfiguration()}, null, null,
+                                                                 new[] {typeof (Foo)});
 
-            var typeName = string.Format("{0},{1}", typeof(Foo).FullName, typeof(Bar).FullName);
-            var secondTypeName = typeof(Foo).FullName;
+            string typeName = string.Format("{0},{1}", typeof (Foo).FullName, typeof (Bar).FullName);
+            string secondTypeName = typeof (Foo).FullName;
             container.Register(
                 Component.For<IAggregateConfiguration>().Instance(configuration).Named(typeName),
                 Component.For<IAggregateConfiguration>().Instance(secondConfiguration).Named(secondTypeName));
-            
+
             var windsorServiceLocator = new WindsorServiceLocator(container);
             ServiceLocator.SetLocatorProvider(() => windsorServiceLocator);
 
@@ -82,16 +97,21 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             // Assert
             // peek under the covers and ensure that each add went
             // to the right DbContext.
-            Assert.AreNotSame(context.GetType().FullName, contextTwo.GetType().FullName);
-            var objectContext = ((IObjectContextAdapter)context).ObjectContext;
+            Assert.AreNotEqual(context.GetType().FullName, contextTwo.GetType().FullName);
+            ObjectContext objectContext = ((IObjectContextAdapter) context).ObjectContext;
             Assert.IsTrue(objectContext.ObjectStateManager.GetObjectStateEntries(EntityState.Added).Count() == 2);
-            Assert.IsTrue(objectContext.ObjectStateManager.GetObjectStateEntries(EntityState.Added).First().EntitySet.Name == "Foos");
-            Assert.IsTrue(objectContext.ObjectStateManager.GetObjectStateEntries(EntityState.Added).Last().EntitySet.Name == "Bars");
+            Assert.IsTrue(
+                objectContext.ObjectStateManager.GetObjectStateEntries(EntityState.Added).First().EntitySet.Name ==
+                "Foos");
+            Assert.IsTrue(
+                objectContext.ObjectStateManager.GetObjectStateEntries(EntityState.Added).Last().EntitySet.Name ==
+                "Bars");
 
-            var objectContextTwo = ((IObjectContextAdapter)contextTwo).ObjectContext;
+            ObjectContext objectContextTwo = ((IObjectContextAdapter) contextTwo).ObjectContext;
             Assert.IsTrue(objectContextTwo.ObjectStateManager.GetObjectStateEntries(EntityState.Added).Count() == 1);
-            Assert.IsTrue(objectContextTwo.ObjectStateManager.GetObjectStateEntries(EntityState.Added).Single().EntitySet.Name == "Foos");
-
+            Assert.IsTrue(
+                objectContextTwo.ObjectStateManager.GetObjectStateEntries(EntityState.Added).Single().EntitySet.Name ==
+                "Foos");
         }
     }
 }

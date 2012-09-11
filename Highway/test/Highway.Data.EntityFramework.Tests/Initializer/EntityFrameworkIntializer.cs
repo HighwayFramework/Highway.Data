@@ -1,8 +1,5 @@
-﻿using System.Data.Entity;
-using Highway.Data.EntityFramework.Tests.UnitTests;
+﻿using Highway.Data.EntityFramework.Tests.UnitTests;
 using Highway.Data.Tests.TestDomain;
-
-
 
 namespace Highway.Data.EntityFramework.Tests.Initializer
 {
@@ -10,7 +7,6 @@ namespace Highway.Data.EntityFramework.Tests.Initializer
     {
         public EntityFrameworkIntializer() : base(SeedDatabase)
         {
-            
         }
 
         private static void SeedDatabase(TestDataContext context)

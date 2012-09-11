@@ -1,4 +1,3 @@
-using System;
 using System.Linq.Expressions;
 using Highway.Data.Interfaces;
 
@@ -18,9 +17,9 @@ namespace Highway.Data.QueryObjects
         /// <returns></returns>
         public static IQuery<T> Take<T>(this IQuery<T> extend, int count)
         {
-            var generics = new Type[] { typeof(T) };
-            var parameters = new Expression[] { Expression.Constant(count) };
-            ((IExtendableQuery)extend).AddMethodExpression("Take", generics, parameters);
+            var generics = new[] {typeof (T)};
+            var parameters = new Expression[] {Expression.Constant(count)};
+            ((IExtendableQuery) extend).AddMethodExpression("Take", generics, parameters);
             return extend;
         }
 
@@ -33,9 +32,9 @@ namespace Highway.Data.QueryObjects
         /// <returns></returns>
         public static IQuery<T> Skip<T>(this IQuery<T> extend, int count)
         {
-            var generics = new Type[] { typeof(T) };
-            var parameters = new Expression[] { Expression.Constant(count) };
-            ((IExtendableQuery)extend).AddMethodExpression("Skip", generics, parameters);
+            var generics = new[] {typeof (T)};
+            var parameters = new Expression[] {Expression.Constant(count)};
+            ((IExtendableQuery) extend).AddMethodExpression("Skip", generics, parameters);
             return extend;
         }
     }

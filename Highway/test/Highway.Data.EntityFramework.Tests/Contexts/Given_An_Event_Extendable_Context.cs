@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Objects;
 using System.Linq;
+using Castle.MicroKernel.Registration;
+using Castle.Windsor;
 using Highway.Data.EventManagement;
 using Highway.Data.Interceptors;
 using Highway.Data.Interceptors.Events;
 using Highway.Data.Interfaces;
+using Highway.Data.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
-using Microsoft.Practices.ServiceLocation;
-using Castle.Windsor;
-using CommonServiceLocator.WindsorAdapter;
-using Castle.MicroKernel.Registration;
-using Highway.Data.Tests;
 
 namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
@@ -27,17 +25,20 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
                     .ImplementedBy<EventManager>());
             base.RegisterComponents(container);
         }
+
         [TestMethod]
         public void WhenCommitIsCalledPreSaveAndPostSaveInterceptorsAreCalled()
         {
             //arrange
-            IInterceptor<PreSaveEventArgs> mockPreSave = MockRepository.GenerateMock<IInterceptor<PreSaveEventArgs>>();
-            mockPreSave.Expect(x => x.Execute(Arg<IDataContext>.Is.Same(target), Arg<PreSaveEventArgs>.Is.Anything)).Return(InterceptorResult.Succeeded());
+            var mockPreSave = MockRepository.GenerateMock<IInterceptor<PreSaveEventArgs>>();
+            mockPreSave.Expect(x => x.Execute(Arg<IDataContext>.Is.Same(target), Arg<PreSaveEventArgs>.Is.Anything)).
+                Return(InterceptorResult.Succeeded());
             mockPreSave.Expect(x => x.Priority).Return(1);
             target.EventManager.Register(mockPreSave);
 
-            IInterceptor<PostSaveEventArgs> mockPostSave = MockRepository.GenerateMock<IInterceptor<PostSaveEventArgs>>();
-            mockPostSave.Expect(x => x.Execute(Arg<IDataContext>.Is.Same(target), Arg<PostSaveEventArgs>.Is.Anything)).Return(InterceptorResult.Succeeded());
+            var mockPostSave = MockRepository.GenerateMock<IInterceptor<PostSaveEventArgs>>();
+            mockPostSave.Expect(x => x.Execute(Arg<IDataContext>.Is.Same(target), Arg<PostSaveEventArgs>.Is.Anything)).
+                Return(InterceptorResult.Succeeded());
             mockPostSave.Expect(x => x.Priority).Return(1);
             target.EventManager.Register(mockPostSave);
 
@@ -48,58 +49,56 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             mockPreSave.VerifyAllExpectations();
             mockPostSave.VerifyAllExpectations();
         }
-
     }
 
     public class CommitEventsMockContext : IObservableDataContext
     {
+        private IEventManager _eventManager;
+
+        #region IObservableDataContext Members
+
         public void Dispose()
         {
         }
 
         public IQueryable<T> AsQueryable<T>() where T : class
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public T Add<T>(T item) where T : class
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public T Remove<T>(T item) where T : class
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public T Update<T>(T item) where T : class
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public T Attach<T>(T item) where T : class
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public T Detach<T>(T item) where T : class
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public T Reload<T>(T item) where T : class
         {
-            throw new System.NotImplementedException();
-        }
-
-        public void Reload<T>() where T : class
-        {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public int Commit()
         {
-            PreSave(this,new PreSaveEventArgs());
+            PreSave(this, new PreSaveEventArgs());
             //stuff
             PostSave(this, new PostSaveEventArgs());
             return 0;
@@ -107,20 +106,14 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
 
         public IEnumerable<T> ExecuteSqlQuery<T>(string sql, params DbParameter[] dbParams)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public int ExecuteSqlCommand(string sql, params DbParameter[] dbParams)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        public int ExecuteFunction(string procedureName, params ObjectParameter[] dbParams)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        private IEventManager _eventManager;
         public IEventManager EventManager
         {
             get { return _eventManager; }
@@ -130,7 +123,20 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
                 _eventManager.Context = this;
             }
         }
+
         public event EventHandler<PreSaveEventArgs> PreSave;
         public event EventHandler<PostSaveEventArgs> PostSave;
+
+        #endregion
+
+        public void Reload<T>() where T : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public int ExecuteFunction(string procedureName, params ObjectParameter[] dbParams)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

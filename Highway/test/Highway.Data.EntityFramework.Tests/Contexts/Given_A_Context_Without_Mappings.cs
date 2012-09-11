@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
+using Castle.MicroKernel.Registration;
+using Castle.Windsor;
+using Highway.Data.EntityFramework.Tests.Initializer;
+using Highway.Data.EntityFramework.Tests.Properties;
+using Highway.Data.Tests;
 using Highway.Data.Tests.TestDomain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
-using Highway.Data.EntityFramework.Tests.Properties;
-using Highway.Data.Tests;
-using Castle.MicroKernel.Registration;
-using Highway.Data.EntityFramework.Tests.Initializer;
 
 namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
@@ -15,7 +16,8 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
     public class Given_A_Context_Without_Mappings : ContainerTest<DataContext>
     {
         private IMappingConfiguration _mockMapping;
-        public override void RegisterComponents(Castle.Windsor.IWindsorContainer container)
+
+        public override void RegisterComponents(IWindsorContainer container)
         {
             _mockMapping = MockRepository.GenerateMock<IMappingConfiguration>();
             container.Register(Component.For<IMappingConfiguration>().Instance(_mockMapping));
@@ -25,7 +27,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
         public override DataContext ResolveTarget()
         {
             Database.SetInitializer(new EntityFrameworkIntializer());
-            return Container.Resolve<DataContext>(new { connectionString = Settings.Default.Connection });
+            return Container.Resolve<DataContext>(new {connectionString = Settings.Default.Connection});
         }
 
         [TestMethod]
@@ -43,7 +45,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             {
                 //Suppress the error from the context. This allows us to test the mappings peice without having to actually map.
             }
-            
+
 
             //Assert
             _mockMapping.VerifyAllExpectations();

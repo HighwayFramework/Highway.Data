@@ -8,7 +8,6 @@ namespace Highway.Data.EntityFramework.Tests.Mapping
         {
             modelBuilder.Configurations.Add(new QuxMap());
             base.ConfigureModelBuilder(modelBuilder);
-
         }
     }
 }

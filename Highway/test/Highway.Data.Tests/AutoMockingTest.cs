@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Castle.Windsor;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.Resolvers;
+using Castle.Windsor;
 
 namespace Highway.Data.Tests
 {

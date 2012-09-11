@@ -75,7 +75,7 @@
     <Compile Include="..\..\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="Builders\DynamicAggregateContextBuilder.cs" />
+    <Compile Include="Builders\DynamicAggregateContextTypeBuilder.cs" />
     <Compile Include="Configuration\AggregateConfiguration.cs" />
     <Compile Include="Configuration\DefaultContextConfiguration.cs" />
     <Compile Include="Configuration\IAggregateConfiguration.cs" />
@@ -88,7 +88,6 @@
     <Compile Include="Factory\AggregateConfigurationFactory.cs" />
     <Compile Include="Factory\AggregateContextFactory.cs" />
     <Compile Include="Interceptors\AuditableInterceptor.cs" />
-    <Compile Include="Mappings\IAggregateMappingConfiguration.cs" />
     <Compile Include="Mappings\IContextConfiguration.cs" />
     <Compile Include="Mappings\IMappingConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

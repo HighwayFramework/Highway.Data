@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Highway.Data.Interceptors;
 using Highway.Data.Interceptors.Events;
 using Highway.Data.Interfaces;
 
@@ -11,16 +12,15 @@ namespace Highway.Data.EventManagement
     /// </summary>
     public class EventManager : IEventManager
     {
-        /// <summary>
-        /// Creats an EventManager
-        /// </summary>
-        public EventManager()
-        {
-            
-        }
+        private readonly List<IInterceptor<PostSaveEventArgs>> _postSaveInterceptors =
+            new List<IInterceptor<PostSaveEventArgs>>();
+
+        private readonly List<IInterceptor<PreSaveEventArgs>> _preSaveInterceptors =
+            new List<IInterceptor<PreSaveEventArgs>>();
+
         private IObservableDataContext _context;
-        private readonly List<IInterceptor<PreSaveEventArgs>> _preSaveInterceptors = new List<IInterceptor<PreSaveEventArgs>>();
-        private readonly List<IInterceptor<PostSaveEventArgs>> _postSaveInterceptors = new List<IInterceptor<PostSaveEventArgs>>();
+
+        #region IEventManager Members
 
         /// <summary>
         /// Allows for the Registration of <see cref="IInterceptor{T}"/> objects that will hook to events in priority order
@@ -29,7 +29,7 @@ namespace Highway.Data.EventManagement
         /// <typeparam name="T">The Event Args that the interceptor accepts</typeparam>
         public void Register<T>(IInterceptor<T> interceptor) where T : EventArgs
         {
-            Type key = typeof(T);
+            Type key = typeof (T);
             switch (key.Name)
             {
                 case "PreSaveEventArgs":
@@ -48,10 +48,7 @@ namespace Highway.Data.EventManagement
         /// </summary>
         public IObservableDataContext Context
         {
-            get
-            {
-                return _context;
-            }
+            get { return _context; }
             set
             {
                 if (ReferenceEquals(_context, value))
@@ -62,11 +59,13 @@ namespace Highway.Data.EventManagement
             }
         }
 
+        #endregion
+
         private void OnPreSave(object sender, PreSaveEventArgs e)
         {
-            foreach (var preSaveInterceptor in _preSaveInterceptors.OrderBy(x=>x.Priority))
+            foreach (var preSaveInterceptor in _preSaveInterceptors.OrderBy(x => x.Priority))
             {
-                var result = preSaveInterceptor.Execute(Context,e);
+                InterceptorResult result = preSaveInterceptor.Execute(Context, e);
                 if (result.ContinueExecution == false) break;
             }
         }
@@ -75,7 +74,7 @@ namespace Highway.Data.EventManagement
         {
             foreach (var postSaveInterceptor in _postSaveInterceptors.OrderBy(x => x.Priority))
             {
-                var result = postSaveInterceptor.Execute(Context, e);
+                InterceptorResult result = postSaveInterceptor.Execute(Context, e);
                 if (result.ContinueExecution == false) break;
             }
         }

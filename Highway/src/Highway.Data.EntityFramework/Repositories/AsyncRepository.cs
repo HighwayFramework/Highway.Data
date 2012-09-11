@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Highway.Data.Interfaces;
 using Highway.Data.QueryObjects;
@@ -20,6 +19,8 @@ namespace Highway.Data
             Context = context;
         }
 
+        #region IAsyncRepository Members
+
         /// <summary>
         /// Reference to the Context the repository is using
         /// </summary>
@@ -39,7 +40,7 @@ namespace Highway.Data
         public Task<IEnumerable<T>> Find<T>(IQuery<T> query) where T : class
         {
             var asyncQuery = new AsyncQuery<T>(query);
-            var task = asyncQuery.Execute(Context);
+            Task<IEnumerable<T>> task = asyncQuery.Execute(Context);
             task.Start();
             return task;
         }
@@ -47,7 +48,7 @@ namespace Highway.Data
         public Task<T> Get<T>(IScalar<T> query)
         {
             var asyncQuery = new AsyncScalar<T>(query);
-            var task = asyncQuery.Execute(Context);
+            Task<T> task = asyncQuery.Execute(Context);
             task.Start();
             return task;
         }
@@ -55,9 +56,11 @@ namespace Highway.Data
         public Task Execute(ICommand command)
         {
             var asyncQuery = new AsyncCommand(command);
-            var task = asyncQuery.Execute(Context);
+            Task task = asyncQuery.Execute(Context);
             task.Start();
-            return task;            
+            return task;
         }
+
+        #endregion
     }
 }

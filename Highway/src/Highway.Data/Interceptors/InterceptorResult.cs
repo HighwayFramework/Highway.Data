@@ -6,15 +6,25 @@ namespace Highway.Data.Interceptors
     public struct InterceptorResult
     {
         /// <summary>
+        /// A boolean flag for the event manager to decide if it will continue to process or error
+        /// </summary>
+        public bool ContinueExecution { get; set; }
+
+        /// <summary>
+        /// Error message populated in the case of failure
+        /// </summary>
+        public string Message { get; set; }
+
+        /// <summary>
         /// Creates a successful result that continues execution
         /// </summary>
         /// <returns>An Interceptor Result</returns>
         public static InterceptorResult Succeeded()
         {
-            return new InterceptorResult()
-                       {
-                           ContinueExecution = true
-                       };
+            return new InterceptorResult
+                {
+                    ContinueExecution = true
+                };
         }
 
         /// <summary>
@@ -25,21 +35,11 @@ namespace Highway.Data.Interceptors
         /// <returns>An Interceptor Result</returns>
         public static InterceptorResult Failed(string message, bool continueToExecute = false)
         {
-            return new InterceptorResult()
-                       {
-                           ContinueExecution = continueToExecute,
-                           Message = message
-                       };
+            return new InterceptorResult
+                {
+                    ContinueExecution = continueToExecute,
+                    Message = message
+                };
         }
-
-        /// <summary>
-        /// A boolean flag for the event manager to decide if it will continue to process or error
-        /// </summary>
-        public bool ContinueExecution { get; set; }
-        
-        /// <summary>
-        /// Error message populated in the case of failure
-        /// </summary>
-        public string Message { get; set; }
     }
 }

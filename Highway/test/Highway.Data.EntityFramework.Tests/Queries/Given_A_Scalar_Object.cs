@@ -19,7 +19,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             //Arrange
             var context = MockRepository.GenerateStrictMock<IDataContext>();
             context.Expect(x => x.AsQueryable<Foo>())
-                .Return(new List<Foo>() { new Foo() }.AsQueryable())
+                .Return(new List<Foo> {new Foo()}.AsQueryable())
                 .Repeat.Once();
             var repository = new Repository(context);
 
@@ -28,7 +28,6 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
 
             //Assert
             context.VerifyAllExpectations();
-
         }
 
         [TestMethod]
@@ -48,7 +47,6 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             //Assert
             context.VerifyAllExpectations();
             result.ShouldBe(0);
-
         }
 
         //[TestMethod]
@@ -67,6 +65,5 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
         //    sqlOutput.IsTrue(x => x.ToLowerInvariant().Contains("from"));
 
         //}
-
     }
 }

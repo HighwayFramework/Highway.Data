@@ -12,6 +12,7 @@ namespace Highway.Data.QueryObjects
             _command = command;
         }
 
+        #region IAsyncCommand Members
 
         public Task Execute(IDataContext context)
         {
@@ -23,5 +24,7 @@ namespace Highway.Data.QueryObjects
                     }
                 });
         }
+
+        #endregion
     }
 }

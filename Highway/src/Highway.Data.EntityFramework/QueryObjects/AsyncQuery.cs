@@ -17,10 +17,10 @@ namespace Highway.Data.QueryObjects
             _query = query;
         }
 
+        #region IAsyncQuery<T> Members
 
         public Task<IEnumerable<T>> Execute(IDataContext context)
         {
-
             return new Task<IEnumerable<T>>(() =>
                 {
                     lock (context)
@@ -28,13 +28,13 @@ namespace Highway.Data.QueryObjects
                         return _query.Execute(context);
                     }
                 });
-
-
         }
 
         public string OutputSQLStatement(IDataContext context)
         {
             return _query.OutputSQLStatement(context);
         }
+
+        #endregion
     }
 }

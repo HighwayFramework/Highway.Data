@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Linq;
 using Common.Logging;
 using Common.Logging.Simple;
 using Highway.Data.Interfaces;
@@ -12,7 +10,8 @@ namespace Highway.Data.EntityFramework
     /// </summary>
     public static class LoggingTraceExtensions
     {
-        private static ILog defaultLogger = new ConsoleOutLogger("SqlTrace",LogLevel.All, true,false,true,string.Empty);
+        private static readonly ILog defaultLogger = new ConsoleOutLogger("SqlTrace", LogLevel.All, true, false, true,
+                                                                          string.Empty);
 
         /// <summary>
         /// Compiles the Context to execution of a query and tracks the time spent
@@ -24,7 +23,7 @@ namespace Highway.Data.EntityFramework
         public static void OutputSQL(this IDataContext context, ILog log, params IQueryBase[] queries)
         {
             log.TraceFormat("Beginning Sql Output");
-            foreach (var query in queries)
+            foreach (IQueryBase query in queries)
             {
                 log.Trace("************************************************");
                 log.TraceFormat("SQL Statement for {0}", query.GetType().Name);
@@ -43,7 +42,7 @@ namespace Highway.Data.EntityFramework
         /// <exception cref="InvalidOperationException">If the compilation does not meet the expected time, it will throw this error</exception>
         public static void OutputSQL(this IDataContext context, params IQueryBase[] queries)
         {
-            context.OutputSQL(defaultLogger,queries);
+            context.OutputSQL(defaultLogger, queries);
         }
     }
 }

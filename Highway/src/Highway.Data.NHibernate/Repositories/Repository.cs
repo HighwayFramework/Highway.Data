@@ -17,11 +17,13 @@ namespace Highway.Data
             Context = context;
         }
 
+        #region IRepository Members
+
         /// <summary>
         /// Reference to the DataContext the repository is using
         /// </summary>
         public IDataContext Context { get; private set; }
-        
+
         /// <summary>
         /// Reference to the EventManager the repository is using
         /// </summary>
@@ -37,6 +39,7 @@ namespace Highway.Data
         {
             return query.Execute(Context);
         }
+
         /// <summary>
         /// Executes a prebuilt <see cref="ICommand"/>
         /// </summary>
@@ -45,6 +48,7 @@ namespace Highway.Data
         {
             command.Execute(Context);
         }
+
         /// <summary>
         /// Executes a prebuilt <see cref="IQuery{T}"/> and returns an <see cref="IEnumerable{T}"/>
         /// </summary>
@@ -55,5 +59,7 @@ namespace Highway.Data
         {
             return query.Execute(Context);
         }
+
+        #endregion
     }
 }

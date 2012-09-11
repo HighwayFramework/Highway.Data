@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Highway.Data;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Highway.Data.Tests;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
@@ -27,6 +26,8 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             list.All(x => x.Called);
         }
 
+        #region Nested type: TestActionHolder
+
         private class TestActionHolder
         {
             public bool Called { get; set; }
@@ -36,5 +37,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
                 Called = true;
             }
         }
+
+        #endregion
     }
 }

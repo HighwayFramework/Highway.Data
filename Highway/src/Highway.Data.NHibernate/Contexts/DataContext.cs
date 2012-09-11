@@ -4,7 +4,6 @@ using System.Data;
 using System.Data.Common;
 using System.Linq;
 using Common.Logging;
-using Common.Logging.Simple;
 using Highway.Data.Interceptors.Events;
 using Highway.Data.Interfaces;
 using NHibernate;
@@ -17,8 +16,10 @@ namespace Highway.Data
     /// </summary>
     public class DataContext : IObservableDataContext, IDisposable
     {
-        private readonly IMappingConfiguration _mapping;
         private readonly ILog _log;
+        private readonly IMappingConfiguration _mapping;
+        private readonly ISession _session;
+        private IEventManager _eventManager;
 
         /// <summary>
         /// Constructs a context
@@ -30,6 +31,8 @@ namespace Highway.Data
             _session = session;
         }
 
+        #region IObservableDataContext Members
+
         /// <summary>
         /// This gives a mockable wrapper around the normal <see cref="DbSet{T}"/> method that allows for testablity
         /// </summary>
@@ -37,9 +40,9 @@ namespace Highway.Data
         /// <returns><see cref="IQueryable{T}"/></returns>
         public IQueryable<T> AsQueryable<T>() where T : class
         {
-            _log.DebugFormat("Querying Object {0}", typeof(T).Name);
-            var result = _session.Query<T>();
-            _log.DebugFormat("Queried Object {0}", typeof(T).Name);
+            _log.DebugFormat("Querying Object {0}", typeof (T).Name);
+            IQueryable<T> result = _session.Query<T>();
+            _log.DebugFormat("Queried Object {0}", typeof (T).Name);
             return result;
         }
 
@@ -142,16 +145,6 @@ namespace Highway.Data
             return 0;
         }
 
-        private void InvokePostSave()
-        {
-            if (PostSave != null) PostSave(this, new PostSaveEventArgs());
-        }
-
-        private void InvokePreSave()
-        {
-            if (PreSave != null) PreSave(this, new PreSaveEventArgs() { });
-        }
-
         /// <summary>
         /// Executes a SQL command and tries to map the returned datasets into an <see cref="IEnumerable{T}"/>
         /// The results should have the same column names as the Entity Type has properties
@@ -176,8 +169,6 @@ namespace Highway.Data
             throw new NotImplementedException();
         }
 
-        private IEventManager _eventManager;
-        private readonly ISession _session;
         /// <summary>
         /// The reference to EventManager that allows for ordered event handling and registration
         /// </summary>
@@ -207,6 +198,18 @@ namespace Highway.Data
             {
                 _session.Connection.Close();
             }
+        }
+
+        #endregion
+
+        private void InvokePostSave()
+        {
+            if (PostSave != null) PostSave(this, new PostSaveEventArgs());
+        }
+
+        private void InvokePreSave()
+        {
+            if (PreSave != null) PreSave(this, new PreSaveEventArgs {});
         }
     }
 }

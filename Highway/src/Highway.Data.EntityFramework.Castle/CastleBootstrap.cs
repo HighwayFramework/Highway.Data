@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Castle.MicroKernel.Registration;
+﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
@@ -16,6 +12,8 @@ namespace Highway.Data.EntityFramework.Castle
     /// </summary>
     public class CastleBootstrap : IWindsorInstaller
     {
+        #region IWindsorInstaller Members
+
         /// <summary>
         /// Performs the installation in the <see cref="T:Castle.Windsor.IWindsorContainer"/>.
         /// </summary>
@@ -27,5 +25,7 @@ namespace Highway.Data.EntityFramework.Castle
                 Component.For<IEventManager>().ImplementedBy<EventManager>()
                 );
         }
+
+        #endregion
     }
 }

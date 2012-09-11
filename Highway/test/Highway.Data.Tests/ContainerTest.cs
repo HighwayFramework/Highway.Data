@@ -1,16 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Castle.Windsor;
-using Castle.MicroKernel.Resolvers.SpecializedResolvers;
-using Castle.MicroKernel.Registration;
 using Castle.Facilities.TypedFactory;
+using Castle.MicroKernel.Registration;
+using Castle.MicroKernel.Resolvers.SpecializedResolvers;
+using Castle.Windsor;
 
 namespace Highway.Data.Tests
 {
     public class ContainerTest<T> : BaseTest<T> where T : class
     {
         public IWindsorContainer Container { get; set; }
+
         public virtual void RegisterComponents(IWindsorContainer container)
         {
             container.Register(Component.For<T>().ImplementedBy<T>());
@@ -34,7 +32,9 @@ namespace Highway.Data.Tests
         public override void AfterEachTest()
         {
             base.AfterEachTest();
-            using (Container) { }
+            using (Container)
+            {
+            }
         }
     }
 }

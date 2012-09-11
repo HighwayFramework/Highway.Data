@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data.Entity;
-using System.Data.SqlClient;
 
 namespace Highway.Data
 {
@@ -22,12 +21,17 @@ namespace Highway.Data
             _seedAction = seedAction;
         }
 
+        #region IDatabaseInitializer<T> Members
+
         public void InitializeDatabase(T context)
         {
             if (context.Database.Exists())
             {
-                context.Database.ExecuteSqlCommand(string.Format("use master; \r\n alter database {0} set single_user with rollback immediate;", context.Database.Connection.Database));
-                context.Database.ExecuteSqlCommand(string.Format("use master; \r\n Drop database {0};", context.Database.Connection.Database));
+                context.Database.ExecuteSqlCommand(
+                    string.Format("use master; \r\n alter database {0} set single_user with rollback immediate;",
+                                  context.Database.Connection.Database));
+                context.Database.ExecuteSqlCommand(string.Format("use master; \r\n Drop database {0};",
+                                                                 context.Database.Connection.Database));
             }
             context.Database.CreateIfNotExists();
             if (_seedAction != null)
@@ -36,5 +40,7 @@ namespace Highway.Data
                 context.SaveChanges();
             }
         }
+
+        #endregion
     }
 }

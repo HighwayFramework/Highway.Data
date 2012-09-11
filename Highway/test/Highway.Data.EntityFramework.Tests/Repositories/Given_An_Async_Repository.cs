@@ -1,12 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Highway.Data.Interfaces;
-
-using Highway.Data.Tests.TestDomain;
-using Highway.Data.Tests.TestQueries;
-using Highway.Test.MSTest;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Rhino.Mocks;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
@@ -26,10 +18,9 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             //var result = repo.Find(new FindFoo());
             //mockContext.AssertWasNotCalled(x => x.AsQueryable<Foo>());
             //var testReuslt = result.Result;
-            
+
             ////Assert
             //testReuslt.First().ShouldBe(expected);
-
         }
     }
 }

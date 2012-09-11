@@ -13,6 +13,8 @@ namespace Highway.Data.QueryObjects
         /// </summary>
         protected Action<IDataContext> ContextQuery { get; set; }
 
+        #region ICommand Members
+
         /// <summary>
         /// Executes the expression against the passed in context and ignores the returned value if any
         /// </summary>
@@ -21,8 +23,9 @@ namespace Highway.Data.QueryObjects
         {
             Context = context;
             CheckContextAndQuery(ContextQuery);
-            this.ContextQuery(context);
+            ContextQuery(context);
         }
 
+        #endregion
     }
 }

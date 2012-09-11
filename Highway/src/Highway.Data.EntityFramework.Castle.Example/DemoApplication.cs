@@ -1,11 +1,8 @@
-﻿using Highway.Data.EntityFramework.Castle.Example.Domain;
+﻿using System;
+using System.Linq;
+using Highway.Data.EntityFramework.Castle.Example.Domain;
 using Highway.Data.EntityFramework.Castle.Example.Queries;
 using Highway.Data.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Highway.Data.EntityFramework.Castle.Example
 {
@@ -22,7 +19,7 @@ namespace Highway.Data.EntityFramework.Castle.Example
         {
             //AddPerson();
 
-            var person = repo.Find(new LastNameQuery("Rayburn")).FirstOrDefault();
+            Person person = repo.Find(new LastNameQuery("Rayburn")).FirstOrDefault();
 
             Console.WriteLine("{0} thinks Highway.Data Rocks!!!", person.FullName);
         }
@@ -30,7 +27,7 @@ namespace Highway.Data.EntityFramework.Castle.Example
         private void AddPerson()
         {
             // Adding a person to the repository
-            repo.Context.Add(new Person { FirstName = "Tim", LastName = "Rayburn" });
+            repo.Context.Add(new Person {FirstName = "Tim", LastName = "Rayburn"});
             repo.Context.Commit();
         }
     }

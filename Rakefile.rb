@@ -125,13 +125,16 @@ namespace :package do
 		
 	task :packall => [ :clean ] do
 		Dir.mkdir('pack')
+		create_lib
 		create_packs	
 		Dir.glob('pack/*') { |file| FileUtils.move(file,'nuget/') }
+		clean_lib
 		Dir.rmdir('pack')
 	end
 	
 	task :pushall => [ :clean ] do
 		Dir.mkdir('pack')
+		create_lib
 		create_packs	
 		Dir.chdir('pack')
 		Dir.glob('*').each do |file| 
@@ -139,17 +142,61 @@ namespace :package do
 			FileUtils.move(file,'../nuget/')
 		end
 		Dir.chdir('..')
+		clean_lib
 		Dir.rmdir('pack')
+	end
+	
+	def clean_lib()
+		FileUtils.remove_dir 'Highway/src/Highway.Data/lib', force = true
+		FileUtils.remove_dir 'Highway/src/Highway.Data.EntityFramework/lib', force = true
+		FileUtils.remove_dir 'Highway/src/Highway.Data.EntityFramework.Castle/lib', force = true
+		FileUtils.remove_dir 'Highway/src/Highway.Data.EntityFramework.Ninject/lib', force = true
+		FileUtils.remove_dir 'Highway/src/Highway.Data.EntityFramework.StructureMap/lib', force = true
+		FileUtils.remove_dir 'Highway/src/Highway.Data.EntityFramework.Unity/lib', force = true
+		FileUtils.remove_dir 'Highway/src/Highway.Test.MSTest/lib', force = true
+	end
+		
+	def create_lib()
+		Dir.mkdir('Highway/src/Highway.Data/lib')
+		Dir.mkdir('Highway/src/Highway.Data/lib/net40')
+		Dir.mkdir('Highway/src/Highway.Data/lib/net45')
+		FileUtils.cp_r 'Highway/src/Highway.Data/bin/Debug/v4.0/.', 'Highway/src/Highway.Data/lib/net40/'
+		FileUtils.cp_r 'Highway/src/Highway.Data/bin/Debug/v4.5/.', 'Highway/src/Highway.Data/lib/net45/'
+		Dir.mkdir('Highway/src/Highway.Data.EntityFramework/lib')
+		Dir.mkdir('Highway/src/Highway.Data.EntityFramework/lib/net40')
+		Dir.mkdir('Highway/src/Highway.Data.EntityFramework/lib/net45')
+		FileUtils.cp_r 'Highway/src/Highway.Data.EntityFramework/bin/Debug/v4.0/.', 'Highway/src/Highway.Data.EntityFramework/lib/net40/'
+		FileUtils.cp_r 'Highway/src/Highway.Data.EntityFramework/bin/Debug/v4.5/.', 'Highway/src/Highway.Data.EntityFramework/lib/net45/'
+		Dir.mkdir('Highway/src/Highway.Data.EntityFramework.Castle/lib')
+		Dir.mkdir('Highway/src/Highway.Data.EntityFramework.Castle/lib/net40')
+		Dir.mkdir('Highway/src/Highway.Data.EntityFramework.Castle/lib/net45')
+		FileUtils.cp_r 'Highway/src/Highway.Data.EntityFramework.Castle/bin/Debug/v4.0/.', 'Highway/src/Highway.Data.EntityFramework.Castle/lib/net40/'
+		FileUtils.cp_r 'Highway/src/Highway.Data.EntityFramework.Castle/bin/Debug/v4.5/.', 'Highway/src/Highway.Data.EntityFramework.Castle/lib/net45/'
+		Dir.mkdir('Highway/src/Highway.Data.EntityFramework.Ninject/lib')
+		Dir.mkdir('Highway/src/Highway.Data.EntityFramework.Ninject/lib/net40')
+		Dir.mkdir('Highway/src/Highway.Data.EntityFramework.Ninject/lib/net45')
+		FileUtils.cp_r 'Highway/src/Highway.Data.EntityFramework.Ninject/bin/Debug/v4.0/.', 'Highway/src/Highway.Data.EntityFramework.Ninject/lib/net40/'
+		FileUtils.cp_r 'Highway/src/Highway.Data.EntityFramework.Ninject/bin/Debug/v4.5/.', 'Highway/src/Highway.Data.EntityFramework.Ninject/lib/net45/'
+		Dir.mkdir('Highway/src/Highway.Data.EntityFramework.StructureMap/lib')
+		Dir.mkdir('Highway/src/Highway.Data.EntityFramework.StructureMap/lib/net40')
+		Dir.mkdir('Highway/src/Highway.Data.EntityFramework.StructureMap/lib/net45')
+		FileUtils.cp_r 'Highway/src/Highway.Data.EntityFramework.StructureMap/bin/Debug/v4.0/.', 'Highway/src/Highway.Data.EntityFramework.StructureMap/lib/net40/'
+		FileUtils.cp_r 'Highway/src/Highway.Data.EntityFramework.StructureMap/bin/Debug/v4.5/.', 'Highway/src/Highway.Data.EntityFramework.StructureMap/lib/net45/'
+		Dir.mkdir('Highway/src/Highway.Data.EntityFramework.Unity/lib')
+		Dir.mkdir('Highway/src/Highway.Data.EntityFramework.Unity/lib/net40')
+		Dir.mkdir('Highway/src/Highway.Data.EntityFramework.Unity/lib/net45')
+		FileUtils.cp_r 'Highway/src/Highway.Data.EntityFramework.Unity/bin/Debug/v4.0/.', 'Highway/src/Highway.Data.EntityFramework.Unity/lib/net40/'
+		FileUtils.cp_r 'Highway/src/Highway.Data.EntityFramework.Unity/bin/Debug/v4.5/.', 'Highway/src/Highway.Data.EntityFramework.Unity/lib/net45/'
+		Dir.mkdir('Highway/src/Highway.Test.MSTest/lib')
+		Dir.mkdir('Highway/src/Highway.Test.MSTest/lib/net40')
+		Dir.mkdir('Highway/src/Highway.Test.MSTest/lib/net45')
+		FileUtils.cp_r 'Highway/src/Highway.Test.MSTest/bin/Debug/v4.0/.', 'Highway/src/Highway.Test.MSTest/lib/net40/'
+		FileUtils.cp_r 'Highway/src/Highway.Test.MSTest/bin/Debug/v4.5/.', 'Highway/src/Highway.Test.MSTest/lib/net45/'		
 	end
 	
 	task :clean do
 		if Dir.exists? 'pack' 
-			Dir.chdir('pack')
-			Dir.glob('*').each do |file| 
-				rm file
-			end
-			Dir.chdir('..')
-			Dir.rmdir('pack')
+			FileUtils.remove_dir 'pack', force = true
 		end
 	end
 end

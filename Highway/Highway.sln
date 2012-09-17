@@ -46,8 +46,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.EntityFramewor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.NHibernate", "src\Highway.Data.NHibernate\Highway.Data.NHibernate.csproj", "{18C47D64-A3D9-4A2C-AD52-94A3ACB493C6}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Highway.Data.Test.Database", "Highway.Data.Test.Database\Highway.Data.Test.Database.sqlproj", "{B41EBB1B-8F7B-4AA5-B628-14807771BC67}"
-EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Highway.vsmdi
@@ -113,12 +111,6 @@ Global
 		{18C47D64-A3D9-4A2C-AD52-94A3ACB493C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18C47D64-A3D9-4A2C-AD52-94A3ACB493C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18C47D64-A3D9-4A2C-AD52-94A3ACB493C6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B41EBB1B-8F7B-4AA5-B628-14807771BC67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B41EBB1B-8F7B-4AA5-B628-14807771BC67}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B41EBB1B-8F7B-4AA5-B628-14807771BC67}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{B41EBB1B-8F7B-4AA5-B628-14807771BC67}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B41EBB1B-8F7B-4AA5-B628-14807771BC67}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B41EBB1B-8F7B-4AA5-B628-14807771BC67}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

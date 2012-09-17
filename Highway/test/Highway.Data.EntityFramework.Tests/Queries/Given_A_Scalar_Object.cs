@@ -1,10 +1,20 @@
 using System.Collections.Generic;
 using System.Linq;
+using Castle.MicroKernel.Registration;
+using Castle.MicroKernel.Resolvers.SpecializedResolvers;
+using Castle.Windsor;
+using Common.Logging;
+using Common.Logging.Simple;
+using CommonServiceLocator.WindsorAdapter;
+using Highway.Data.EntityFramework.Tests.Mapping;
+using Highway.Data.EntityFramework.Tests.Properties;
+using Highway.Data.EventManagement;
 using Highway.Data.Interfaces;
 using Highway.Data.Tests;
 using Highway.Data.Tests.TestDomain;
 using Highway.Data.Tests.TestQueries;
 using Highway.Test.MSTest;
+using Microsoft.Practices.ServiceLocation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
 
@@ -13,6 +23,23 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
     [TestClass]
     public class Given_A_Scalar_Object : BaseTest<object>
     {
+        private static IWindsorContainer _container;
+
+        [ClassInitialize]
+        public static void SetupClass(TestContext context)
+        {
+            _container = new WindsorContainer();
+            ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(_container));
+            _container.Kernel.Resolver.AddSubResolver(new ArrayResolver(_container.Kernel));
+            _container.Register(Component.For<IEventManager>().ImplementedBy<EventManager>().LifestyleTransient(),
+                               Component.For<IDataContext>().ImplementedBy<TestDataContext>().DependsOn(
+                                   new { connectionString = Settings.Default.Connection }).LifestyleTransient(),
+                               Component.For<IMappingConfiguration>().ImplementedBy<FooMappingConfiguration>().
+                                   LifestyleTransient(),
+                               Component.For<ILog>().ImplementedBy<NoOpLogger>());
+        }
+
+
         [TestMethod]
         public void When_Passing_To_A_Repository_Scalar_Object_Then_It_Executes_Against_Context()
         {
@@ -48,22 +75,5 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             context.VerifyAllExpectations();
             result.ShouldBe(0);
         }
-
-        //[TestMethod]
-        //public void When_Calling_Output_Sql_with_Context_It_Outputs_SQL()
-        //{
-        //    //arrange
-        //    var target = new ScalarIntTestQuery();
-
-        //    var context = container.Resolve<IDataContext>();
-
-        //    //act
-        //    var sqlOutput = target.OutputSQLStatement(context);
-
-        //    //assert
-        //    sqlOutput.IsNotNull();
-        //    sqlOutput.IsTrue(x => x.ToLowerInvariant().Contains("from"));
-
-        //}
     }
 }

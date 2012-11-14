@@ -92,6 +92,7 @@
     <Compile Include="Factory\AggregateConfigurationKeyFactory.cs" />
     <Compile Include="Factory\AggregateContextFactory.cs" />
     <Compile Include="Interceptors\AuditableInterceptor.cs" />
+    <Compile Include="Interfaces\IEntityDataContext.cs" />
     <Compile Include="Mappings\IContextConfiguration.cs" />
     <Compile Include="Mappings\IMappingConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

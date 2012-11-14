@@ -8,6 +8,7 @@ using System.Data.Objects;
 using System.Linq;
 using Common.Logging;
 using Common.Logging.Simple;
+using Highway.Data.EntityFramework.Interfaces;
 using Highway.Data.Interceptors.Events;
 using Highway.Data.Interfaces;
 
@@ -16,7 +17,7 @@ namespace Highway.Data
     /// <summary>
     /// A base implementation of the Code First Data DataContext for Entity Framework
     /// </summary>
-    public class DataContext : DbContext, IObservableDataContext
+    public class DataContext : DbContext, IEntityDataContext
     {
         private readonly ILog _log;
         private readonly IMappingConfiguration _mapping;

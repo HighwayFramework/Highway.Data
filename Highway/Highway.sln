@@ -46,6 +46,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.EntityFramewor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.NHibernate", "src\Highway.Data.NHibernate\Highway.Data.NHibernate.csproj", "{18C47D64-A3D9-4A2C-AD52-94A3ACB493C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.RavenDB", "src\Highway.Data.RavenDB\Highway.Data.RavenDB.csproj", "{A677DDBC-6200-48EF-B7A1-70947C5E01DF}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Highway.vsmdi
@@ -111,6 +113,10 @@ Global
 		{18C47D64-A3D9-4A2C-AD52-94A3ACB493C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18C47D64-A3D9-4A2C-AD52-94A3ACB493C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18C47D64-A3D9-4A2C-AD52-94A3ACB493C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A677DDBC-6200-48EF-B7A1-70947C5E01DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A677DDBC-6200-48EF-B7A1-70947C5E01DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A677DDBC-6200-48EF-B7A1-70947C5E01DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A677DDBC-6200-48EF-B7A1-70947C5E01DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

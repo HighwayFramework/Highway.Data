@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Linq;
-using System.Linq.Expressions;
 using Common.Logging;
 using Common.Logging.Simple;
 using Highway.Data.Interceptors.Events;
 using Highway.Data.Interfaces;
 using Raven.Client;
-using Raven.Client.Document;
-using Raven.Client.Indexes;
-using Raven.Client.Linq;
 
 namespace Highway.Data
 {
@@ -25,6 +20,12 @@ namespace Highway.Data
 
         #region IObservableDataContext Members
 
+        public DataContext(IDocumentSession session, ILog log, IEventManager eventManager) : base(session)
+        {
+            _log = log;
+            _eventManager = eventManager;
+        }
+
         /// <summary>
         /// This gives a mockable wrapper around the normal <see cref="DbSet{T}"/> method that allows for testablity
         /// </summary>
@@ -33,7 +34,7 @@ namespace Highway.Data
         public IQueryable<T> AsQueryable<T>() where T : class
         {
             _log.DebugFormat("Querying Object {0}", typeof (T).Name);
-            IQueryable<T> result = null;
+            IQueryable<T> result = base.Query<T>();
             _log.DebugFormat("Queried Object {0}", typeof (T).Name);
             return result;
         }
@@ -47,7 +48,7 @@ namespace Highway.Data
         public T Add<T>(T item) where T : class
         {
             _log.DebugFormat("Adding Object {0}", item);
-            IQueryable<T> result = null;
+            base.Store(item);
             _log.TraceFormat("Added Object {0}", item);
             return item;
         }
@@ -61,7 +62,7 @@ namespace Highway.Data
         public T Remove<T>(T item) where T : class
         {
             _log.DebugFormat("Removing Object {0}", item);
-            IQueryable<T> result = null;
+            base.Delete(item);
             _log.TraceFormat("Removed Object {0}", item);
             return item;
         }
@@ -74,36 +75,9 @@ namespace Highway.Data
         /// <returns>The <typeparamref name="T"/> you updated</returns>
         public T Update<T>(T item) where T : class
         {
-            _log.TraceFormat("Retrieving State Entry For Object {0}", item);
             _log.DebugFormat("Updating Object {0}", item);
+            base.Store(item);
             _log.TraceFormat("Updated Object {0}", item);
-            return item;
-        }
-
-        /// <summary>
-        /// Attaches the provided instance of <typeparamref name="T"/> to the data context
-        /// </summary>
-        /// <typeparam name="T">The Entity Type being attached</typeparam>
-        /// <param name="item">The <typeparamref name="T"/> you want to attach</param>
-        /// <returns>The <typeparamref name="T"/> you attached</returns>
-        public T Attach<T>(T item) where T : class
-        {
-            _log.DebugFormat("Attaching Object {0}", item);
-            _log.TraceFormat("Attached Object {0}", item);
-            return item;
-        }
-
-        /// <summary>
-        /// Detaches the provided instance of <typeparamref name="T"/> from the data context
-        /// </summary>
-        /// <typeparam name="T">The Entity Type being detached</typeparam>
-        /// <param name="item">The <typeparamref name="T"/> you want to detach</param>
-        /// <returns>The <typeparamref name="T"/> you detached</returns>
-        public T Detach<T>(T item) where T : class
-        {
-            _log.TraceFormat("Retrieving State Entry For Object {0}", item);
-            _log.DebugFormat("Detaching Object {0}", item);
-            _log.TraceFormat("Detached Object {0}", item);
             return item;
         }
 
@@ -115,8 +89,9 @@ namespace Highway.Data
         /// <returns>The <typeparamref name="T"/> you reloaded</returns>
         public T Reload<T>(T item) where T : class
         {
-            _log.TraceFormat("Retrieving State Entry For Object {0}", item);
             _log.DebugFormat("Reloading Object {0}", item);
+            var id = base.Advanced.GetDocumentId(item);
+            item = base.Load<T>(id);
             _log.TraceFormat("Reloaded Object {0}", item);
             return item;
         }
@@ -129,6 +104,7 @@ namespace Highway.Data
         {
             _log.Trace("\tCommit");
             InvokePreSave();
+            base.SaveChanges();
             InvokePostSave();
             _log.DebugFormat("\tCommited Changes");
             return 0;
@@ -173,102 +149,5 @@ namespace Highway.Data
         {
             base.Dispose();
         }
-    }
-
-    public class DbContext<T> : IDocumentSession where T: IDocumentSession
-    {
-        private readonly IDocumentSession _session;
-
-        public DbContext(IDocumentSession session)
-        {
-            _session = session;
-        }
-
-        public void Dispose()
-        {
-            _session.Dispose();
-        }
-
-        public void Delete<T1>(T1 entity)
-        {
-            _session.Delete(entity);
-        }
-
-        public T1 Load<T1>(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public T1[] Load<T1>(params string[] ids)
-        {
-            throw new NotImplementedException();
-        }
-
-        public T1[] Load<T1>(IEnumerable<string> ids)
-        {
-            throw new NotImplementedException();
-        }
-
-        public T1 Load<T1>(ValueType id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IRavenQueryable<T1> Query<T1>(string indexName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IRavenQueryable<T1> Query<T1>()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IRavenQueryable<T1> Query<T1, TIndexCreator>() where TIndexCreator : AbstractIndexCreationTask, new()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ILoaderWithInclude<object> Include(string path)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ILoaderWithInclude<T1> Include<T1>(Expression<Func<T1, object>> path)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ILoaderWithInclude<T1> Include<T1, TInclude>(Expression<Func<T1, object>> path)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SaveChanges()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Store(object entity, Guid etag)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Store(object entity, Guid etag, string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Store(dynamic entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Store(dynamic entity, string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ISyncAdvancedSessionOperation Advanced { get; private set; }
     }
 }

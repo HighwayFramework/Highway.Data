@@ -20,18 +20,9 @@ namespace Highway.Data.EntityFramework
         /// <param name="log">The log to output the information to</param>
         /// <param name="queries">the list of queries to be output</param>
         /// <exception cref="InvalidOperationException">If the compilation does not meet the expected time, it will throw this error</exception>
-        public static void OutputSQL(this IDataContext context, ILog log, params IQueryBase[] queries)
+        public static void OutputQuery(this IDataContext context, ILog log, params IQueryBase[] queries)
         {
-            log.TraceFormat("Beginning Sql Output");
-            foreach (IQueryBase query in queries)
-            {
-                log.Trace("************************************************");
-                log.TraceFormat("SQL Statement for {0}", query.GetType().Name);
-                log.Trace("------------------------------------------------");
-                query.OutputSQLStatement(context);
-                log.Trace("************************************************");
-            }
-            log.Trace("SQL Output Completed");
+            
         }
 
         /// <summary>
@@ -40,9 +31,9 @@ namespace Highway.Data.EntityFramework
         /// <param name="context">the context to run the test against</param>
         /// <param name="queries">the list of queries to be output</param>
         /// <exception cref="InvalidOperationException">If the compilation does not meet the expected time, it will throw this error</exception>
-        public static void OutputSQL(this IDataContext context, params IQueryBase[] queries)
+        public static void OutputQuery(this IDataContext context, params IQueryBase[] queries)
         {
-            context.OutputSQL(defaultLogger, queries);
+            context.OutputQuery(defaultLogger, queries);
         }
     }
 }

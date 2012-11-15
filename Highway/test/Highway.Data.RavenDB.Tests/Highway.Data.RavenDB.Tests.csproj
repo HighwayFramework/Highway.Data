@@ -36,6 +36,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFrameworkVersion)' == 'v4.5'">
+    <DefineConstants>$(DefineConstants);DOTNET_45</DefineConstants>
+    <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion)\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFrameworkVersion)' == 'v4.0'">
+    <DefineConstants>$(DefineConstants);DOTNET_40</DefineConstants>
+    <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion)\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto">
       <HintPath>..\..\packages\RavenDB.Database.1.0.960\lib\net40\BouncyCastle.Crypto.dll</HintPath>
@@ -44,13 +52,13 @@
       <HintPath>..\..\packages\Castle.Core.3.1.0\lib\net35\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Windsor">
-      <HintPath>..\..\src\Highway.Data.EntityFramework.Castle\bin\Debug\v4.5\Castle.Windsor.dll</HintPath>
+      <HintPath>..\..\packages\Castle.Windsor.3.1.0\lib\net40\Castle.Windsor.dll</HintPath>
     </Reference>
     <Reference Include="Common.Logging">
-      <HintPath>..\Highway.Data.EntityFramework.Tests\bin\Debug\v4.5\Common.Logging.dll</HintPath>
+      <HintPath>..\..\packages\Common.Logging.2.1.1\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
     <Reference Include="CommonServiceLocator.WindsorAdapter">
-      <HintPath>..\Highway.Data.EntityFramework.Tests\bin\Debug\v4.5\CommonServiceLocator.WindsorAdapter.dll</HintPath>
+      <HintPath>..\..\packages\CommonServiceLocator.WindsorAdapter.1.0\lib\NET35\CommonServiceLocator.WindsorAdapter.dll</HintPath>
     </Reference>
     <Reference Include="Esent.Interop">
       <HintPath>..\..\packages\RavenDB.Database.1.0.960\lib\net40\Esent.Interop.dll</HintPath>
@@ -67,7 +75,9 @@
     <Reference Include="Lucene.Net.Contrib.SpellChecker">
       <HintPath>..\..\packages\RavenDB.Database.1.0.960\lib\net40\Lucene.Net.Contrib.SpellChecker.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\Highway.Data.EntityFramework.Tests\bin\Debug\v4.5\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.4.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>

@@ -11,7 +11,7 @@ using Raven.Client;
 namespace Highway.Data
 {
     /// <summary>
-    /// A base implementation of the Code First Data DataContext for Entity Framework
+    /// A base implementation of the RavenDB DataContext
     /// </summary>
     public class DataContext : DbContext<IDocumentSession> , IObservableDataContext
     {

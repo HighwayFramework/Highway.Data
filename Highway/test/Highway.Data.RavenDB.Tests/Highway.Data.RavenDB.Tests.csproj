@@ -124,9 +124,11 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Contexts\Given_An_Event_Extendable_Context.cs" />
+    <Compile Include="IntegrationTests\Given_A_RavenDB_Context.cs" />
     <Compile Include="Queries\Given_A_Query_Object.cs" />
     <Compile Include="Queries\Given_A_Scalar_Object.cs" />
     <Compile Include="Repositories\Given_A_Generic_Repository.cs" />
+    <Compile Include="TestCategories.cs" />
     <Compile Include="TestQueries\FindFoo.cs" />
     <Compile Include="TestQueries\ScalarFooTestQuery.cs" />
     <Compile Include="TestQueries\ScalarIntTestQuery.cs" />

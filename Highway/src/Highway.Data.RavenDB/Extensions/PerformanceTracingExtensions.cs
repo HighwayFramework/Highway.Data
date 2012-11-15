@@ -6,7 +6,7 @@ using Common.Logging;
 using Common.Logging.Simple;
 using Highway.Data.Interfaces;
 
-namespace Highway.Data.EntityFramework
+namespace Highway.Data.RavenDB
 {
     /// <summary>
     ///Extensions for testing and tracing performance of queries and context compilation

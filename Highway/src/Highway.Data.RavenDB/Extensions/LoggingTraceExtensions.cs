@@ -3,14 +3,14 @@ using Common.Logging;
 using Common.Logging.Simple;
 using Highway.Data.Interfaces;
 
-namespace Highway.Data.EntityFramework
+namespace Highway.Data.RavenDB
 {
     /// <summary>
     /// Extension for context to handle output of large numbers of queries
     /// </summary>
     public static class LoggingTraceExtensions
     {
-        private static readonly ILog defaultLogger = new ConsoleOutLogger("SqlTrace", LogLevel.All, true, false, true,
+        private static readonly ILog defaultLogger = new ConsoleOutLogger("LoggingTrace", LogLevel.All, true, false, true,
                                                                           string.Empty);
 
         /// <summary>

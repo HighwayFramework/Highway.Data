@@ -3,7 +3,7 @@ using Common.Logging;
 using Common.Logging.Simple;
 using Highway.Data.Interfaces;
 
-namespace Highway.Data.EntityFramework
+namespace Highway.Data.NHibernate
 {
     /// <summary>
     /// Extension for context to handle output of large numbers of queries
@@ -28,7 +28,7 @@ namespace Highway.Data.EntityFramework
                 log.Trace("************************************************");
                 log.TraceFormat("SQL Statement for {0}", query.GetType().Name);
                 log.Trace("------------------------------------------------");
-                query.OutputSQLStatement(context);
+                query.OutputQuery(context);
                 log.Trace("************************************************");
             }
             log.Trace("SQL Output Completed");

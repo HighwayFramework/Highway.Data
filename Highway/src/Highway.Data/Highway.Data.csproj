@@ -73,10 +73,6 @@
     <Compile Include="Interceptors\Events\PreSaveEventArgs.cs" />
     <Compile Include="EventManagement\EventManager.cs" />
     <Compile Include="Interceptors\InterceptorResult.cs" />
-    <Compile Condition="'$(TargetFrameworkVersion)' == 'v4.5'" Include="Interfaces\IAsyncRepository.cs" />
-    <Compile Include="Interfaces\Queries\IAsyncCommand.cs" />
-    <Compile Include="Interfaces\Queries\IAsyncQuery.cs" />
-    <Compile Include="Interfaces\Queries\IAsyncScalar.cs" />
     <Compile Include="Interfaces\Queries\ICommand.cs" />
     <Compile Include="Interfaces\IEventManager.cs" />
     <Compile Include="Interfaces\IInterceptor.cs" />
@@ -84,6 +80,7 @@
     <Compile Include="Interfaces\Queries\IObservableQuery.cs" />
     <Compile Include="Interfaces\Queries\IQueryBase.cs" />
     <Compile Include="Interfaces\Queries\IScalar.cs" />
+    <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Services\DefaultUserNameService.cs" />
     <Compile Include="Interfaces\IAuditableEntity.cs" />
     <Compile Include="Interfaces\IUserNameService.cs" />

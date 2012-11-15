@@ -28,7 +28,7 @@ namespace Highway.Data.EntityFramework
                 log.Trace("************************************************");
                 log.TraceFormat("SQL Statement for {0}", query.GetType().Name);
                 log.Trace("------------------------------------------------");
-                query.OutputSQLStatement(context);
+                query.OutputQuery(context);
                 log.Trace("************************************************");
             }
             log.Trace("SQL Output Completed");

@@ -8,19 +8,9 @@ using Raven.Client.Linq;
 
 namespace Highway.Data
 {
-    public class DbContext<T> : IDocumentSession where T: IDocumentSession
+    public partial class DataContext : IDocumentSession 
     {
         private readonly IDocumentSession _session;
-
-        public DbContext(IDocumentSession session)
-        {
-            _session = session;
-        }
-
-        public void Dispose()
-        {
-            _session.Dispose();
-        }
 
         public void Delete<T1>(T1 entity)
         {

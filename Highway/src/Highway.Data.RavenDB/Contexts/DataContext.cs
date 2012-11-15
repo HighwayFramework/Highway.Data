@@ -13,17 +13,18 @@ namespace Highway.Data
     /// <summary>
     /// A base implementation of the RavenDB DataContext
     /// </summary>
-    public class DataContext : DbContext<IDocumentSession> , IObservableDataContext
+    public partial class DataContext : IObservableDataContext
     {
         private readonly ILog _log;
         private IEventManager _eventManager;
 
         #region IObservableDataContext Members
 
-        public DataContext(IDocumentSession session, ILog log, IEventManager eventManager) : base(session)
+        public DataContext(IDocumentSession session, ILog log, IEventManager eventManager)
         {
             _log = log;
             _eventManager = eventManager;
+            _session = session;
         }
 
         /// <summary>
@@ -147,7 +148,7 @@ namespace Highway.Data
 
         public void Dispose()
         {
-            base.Dispose();
+            _session.Dispose();
         }
     }
 }

@@ -7,7 +7,6 @@ using Highway.Data.Interfaces;
 namespace Highway.Data.QueryObjects
 {
     /// <summary>
-    /// The base implementation for Queries that return collections
     /// </summary>
     /// <typeparam name="T">The Type being requested</typeparam>
     public class Query<T> : QueryBase, IQuery<T>
@@ -36,6 +35,16 @@ namespace Highway.Data.QueryObjects
         /// <param name="context">The data context that the query is evaluated and the SQL is generated against</param>
         /// <returns></returns>
         public string OutputSQLStatement(IDataContext context)
+        {
+            return OutputQuery(context);
+        }
+
+        /// <summary>
+        /// This executes the expression against the passed in context to generate the SQL statement, but doesn't execute the IQueryable<typeparamref name="T"/> against the data context
+        /// </summary>
+        /// <param name="context">The data context that the query is evaluated and the SQL is generated against</param>
+        /// <returns></returns>
+        public string OutputQuery(IDataContext context)
         {
             IQueryable<T> query = PrepareQuery(context);
             return query.ToString();

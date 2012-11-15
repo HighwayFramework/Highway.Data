@@ -34,7 +34,7 @@ namespace Highway.Data
         public IQueryable<T> AsQueryable<T>() where T : class
         {
             _log.DebugFormat("Querying Object {0}", typeof (T).Name);
-            IQueryable<T> result = base.Query<T>();
+            IQueryable<T> result = Query<T>();
             _log.DebugFormat("Queried Object {0}", typeof (T).Name);
             return result;
         }
@@ -48,7 +48,7 @@ namespace Highway.Data
         public T Add<T>(T item) where T : class
         {
             _log.DebugFormat("Adding Object {0}", item);
-            base.Store(item);
+            Store(item);
             _log.TraceFormat("Added Object {0}", item);
             return item;
         }
@@ -62,7 +62,7 @@ namespace Highway.Data
         public T Remove<T>(T item) where T : class
         {
             _log.DebugFormat("Removing Object {0}", item);
-            base.Delete(item);
+            Delete(item);
             _log.TraceFormat("Removed Object {0}", item);
             return item;
         }
@@ -76,7 +76,7 @@ namespace Highway.Data
         public T Update<T>(T item) where T : class
         {
             _log.DebugFormat("Updating Object {0}", item);
-            base.Store(item);
+            Store(item);
             _log.TraceFormat("Updated Object {0}", item);
             return item;
         }
@@ -90,8 +90,8 @@ namespace Highway.Data
         public T Reload<T>(T item) where T : class
         {
             _log.DebugFormat("Reloading Object {0}", item);
-            var id = base.Advanced.GetDocumentId(item);
-            item = base.Load<T>(id);
+            var id = Advanced.GetDocumentId(item);
+            item = Load<T>(id);
             _log.TraceFormat("Reloaded Object {0}", item);
             return item;
         }
@@ -104,7 +104,7 @@ namespace Highway.Data
         {
             _log.Trace("\tCommit");
             InvokePreSave();
-            base.SaveChanges();
+            SaveChanges();
             InvokePostSave();
             _log.DebugFormat("\tCommited Changes");
             return 0;

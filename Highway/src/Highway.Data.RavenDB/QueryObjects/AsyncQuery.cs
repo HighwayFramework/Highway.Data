@@ -32,7 +32,12 @@ namespace Highway.Data.QueryObjects
 
         public string OutputSQLStatement(IDataContext context)
         {
-            return _query.OutputSQLStatement(context);
+            return OutputQuery(context);
+        }
+
+        public string OutputQuery(IDataContext context)
+        {
+            return _query.OutputQuery(context);
         }
 
         #endregion

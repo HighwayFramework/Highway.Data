@@ -37,6 +37,11 @@ namespace Highway.Data.QueryObjects
         /// <returns></returns>
         public string OutputSQLStatement(IDataContext context)
         {
+            return OutputQuery(context);
+        }
+
+        public string OutputQuery(IDataContext context)
+        {
             IQueryable<T> query = PrepareQuery(context);
             return query.ToString();
         }

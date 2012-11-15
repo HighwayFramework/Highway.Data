@@ -1,18 +1,19 @@
 ﻿using System;
 using Highway.Data.Interfaces;
+using NHibernate;
 
 namespace Highway.Data.QueryObjects
 {
     /// <summary>
-    /// Base implementation of a query that returns a single value or object
+    /// Advanced query that returns a single value or object base on NHibernate
     /// </summary>
     /// <typeparam name="T">The type of object or value being returned</typeparam>
-    public class Scalar<T> : QueryBase, IScalar<T>
+    public class AdvancedScalar<T> : QueryBase, IScalar<T>
     {
         /// <summary>
         /// The query to be executed later
         /// </summary>
-        protected Func<IDataContext, T> ContextQuery { get; set; }
+        protected Func<ISession, T> ContextQuery { get; set; }
 
         #region IScalar<T> Members
 
@@ -25,7 +26,7 @@ namespace Highway.Data.QueryObjects
         {
             Context = context;
             CheckContextAndQuery(ContextQuery);
-            return ContextQuery(context);
+            return ContextQuery((ISession)context);
         }
 
         #endregion

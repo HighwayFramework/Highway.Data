@@ -96,11 +96,9 @@
     <Compile Include="Mappings\IContextConfiguration.cs" />
     <Compile Include="Mappings\IMappingConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryObjects\Command.cs" />
-    <Compile Include="QueryObjects\Query.cs" />
-    <Compile Include="QueryObjects\QueryBase.cs" />
-    <Compile Include="QueryObjects\QueryExtensions.cs" />
-    <Compile Include="QueryObjects\Scalar.cs" />
+    <Compile Include="QueryObjects\AdvancedCommand.cs" />
+    <Compile Include="QueryObjects\AdvancedQuery.cs" />
+    <Compile Include="QueryObjects\AdvancedScalar.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

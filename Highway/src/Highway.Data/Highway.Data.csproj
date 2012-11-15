@@ -80,6 +80,11 @@
     <Compile Include="Interfaces\Queries\IObservableQuery.cs" />
     <Compile Include="Interfaces\Queries\IQueryBase.cs" />
     <Compile Include="Interfaces\Queries\IScalar.cs" />
+    <Compile Include="QueryObjects\Command.cs" />
+    <Compile Include="QueryObjects\Query.cs" />
+    <Compile Include="QueryObjects\QueryBase.cs" />
+    <Compile Include="QueryObjects\QueryExtensions.cs" />
+    <Compile Include="QueryObjects\Scalar.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Services\DefaultUserNameService.cs" />
     <Compile Include="Interfaces\IAuditableEntity.cs" />

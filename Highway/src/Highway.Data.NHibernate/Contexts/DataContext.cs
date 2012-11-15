@@ -14,7 +14,7 @@ namespace Highway.Data
     /// <summary>
     /// A base implementation of the Code First Data DataContext for Entity Framework
     /// </summary>
-    public class DataContext : IObservableDataContext, IDisposable
+    public partial class DataContext : IObservableDataContext, IDisposable
     {
         private readonly ILog _log;
         private readonly IMappingConfiguration _mapping;

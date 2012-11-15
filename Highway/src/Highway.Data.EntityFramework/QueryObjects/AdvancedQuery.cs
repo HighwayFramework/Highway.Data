@@ -7,14 +7,14 @@ using Highway.Data.Interfaces;
 namespace Highway.Data.QueryObjects
 {
     /// <summary>
+    /// This query is tied to the implementation of EntityFramework
     /// </summary>
-    /// <typeparam name="T">The Type being requested</typeparam>
-    public class Query<T> : QueryBase, IQuery<T>
+    public class AdvancedQuery<T> : QueryBase, IQuery<T>
     {
         /// <summary>
         /// This holds the expression that will be used to create the <see cref="IQueryable{T}"/> when executed on the context
         /// </summary>
-        protected Func<IDataContext, IQueryable<T>> ContextQuery { get; set; }
+        protected Func<DataContext, IQueryable<T>> ContextQuery { get; set; }
 
         #region IQuery<T> Members
 
@@ -39,11 +39,6 @@ namespace Highway.Data.QueryObjects
             return OutputQuery(context);
         }
 
-        /// <summary>
-        /// This executes the expression against the passed in context to generate the SQL statement, but doesn't execute the IQueryable<typeparamref name="T"/> against the data context
-        /// </summary>
-        /// <param name="context">The data context that the query is evaluated and the SQL is generated against</param>
-        /// <returns></returns>
         public string OutputQuery(IDataContext context)
         {
             IQueryable<T> query = PrepareQuery(context);
@@ -60,7 +55,7 @@ namespace Highway.Data.QueryObjects
         {
             try
             {
-                return ContextQuery(Context);
+                return ContextQuery((DataContext)Context);
             }
             catch (Exception)
             {

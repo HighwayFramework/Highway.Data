@@ -1,17 +1,18 @@
 using System;
 using Highway.Data.Interfaces;
+using Raven.Client;
 
 namespace Highway.Data.QueryObjects
 {
     /// <summary>
-    /// 
+    /// An implementation that executes functions against the database tied to RavenDB
     /// </summary>
-    public class Command : QueryBase, ICommand
+    public class AdvancedCommand : QueryBase, ICommand
     {
         /// <summary>
         /// The Command that will be executed at some point in the future
         /// </summary>
-        protected Action<IDataContext> ContextQuery { get; set; }
+        protected Action<IDocumentSession> ContextQuery { get; set; }
 
         #region ICommand Members
 
@@ -23,7 +24,7 @@ namespace Highway.Data.QueryObjects
         {
             Context = context;
             CheckContextAndQuery(ContextQuery);
-            ContextQuery(context);
+            ContextQuery((IDocumentSession)context);
         }
 
         #endregion

@@ -4,7 +4,7 @@ using Highway.Data.Interfaces;
 namespace Highway.Data.QueryObjects
 {
     /// <summary>
-    /// 
+    /// An implementation that executes functions against the database independant of the data access layer
     /// </summary>
     public class Command : QueryBase, ICommand
     {

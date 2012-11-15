@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Highway.Data.Interfaces;
+using Raven.Client;
 
 namespace Highway.Data.QueryObjects
 {
     /// <summary>
-    /// The base implementation for Queries that return collections
+    /// This query is tied to the implementation of RavenDB
     /// </summary>
-    /// <typeparam name="T">The Type being requested</typeparam>
-    public class Query<T> : QueryBase, IQuery<T>
+    public class AdvancedQuery<T> : QueryBase, IQuery<T>
     {
         /// <summary>
         /// This holds the expression that will be used to create the <see cref="IQueryable{T}"/> when executed on the context
         /// </summary>
-        protected Func<IDataContext, IQueryable<T>> ContextQuery { get; set; }
+        protected Func<IDocumentSession, IQueryable<T>> ContextQuery { get; set; }
 
         #region IQuery<T> Members
 
@@ -56,7 +56,7 @@ namespace Highway.Data.QueryObjects
         {
             try
             {
-                return ContextQuery(Context);
+                return ContextQuery((IDocumentSession)Context);
             }
             catch (Exception)
             {

@@ -115,6 +115,8 @@ namespace :package do
 	def create_packs()
 		sh 'Highway/.nuget/nuget.exe pack Highway/src/Highway.Data/Highway.Data.csproj -o pack'
 		sh 'Highway/.nuget/nuget.exe pack Highway/src/Highway.Data.EntityFramework/Highway.Data.EntityFramework.csproj -o pack'
+		sh 'Highway/.nuget/nuget.exe pack Highway/src/Highway.Data.NHibernate/Highway.Data.NHibernate.csproj -o pack'
+		sh 'Highway/.nuget/nuget.exe pack Highway/src/Highway.Data.RavenDB/Highway.Data.RavenDB.csproj -o pack'
 		sh 'Highway/.nuget/nuget.exe pack Highway/src/Highway.Data.EntityFramework.Castle/Highway.Data.EntityFramework.Castle.csproj -o pack'		
 		sh 'Highway/.nuget/nuget.exe pack Highway/src/Highway.Data.EntityFramework.Ninject/Highway.Data.EntityFramework.Ninject.csproj -o pack'	
 		sh 'Highway/.nuget/nuget.exe pack Highway/src/Highway.Data.EntityFramework.StructureMap/Highway.Data.EntityFramework.StructureMap.csproj -o pack'	
@@ -149,6 +151,8 @@ namespace :package do
 	def clean_lib()
 		FileUtils.remove_dir 'Highway/src/Highway.Data/lib', force = true
 		FileUtils.remove_dir 'Highway/src/Highway.Data.EntityFramework/lib', force = true
+		FileUtils.remove_dir 'Highway/src/Highway.Data.NHibernate/lib', force = true
+		FileUtils.remove_dir 'Highway/src/Highway.Data.RavenDB/lib', force = true
 		FileUtils.remove_dir 'Highway/src/Highway.Data.EntityFramework.Castle/lib', force = true
 		FileUtils.remove_dir 'Highway/src/Highway.Data.EntityFramework.Ninject/lib', force = true
 		FileUtils.remove_dir 'Highway/src/Highway.Data.EntityFramework.StructureMap/lib', force = true

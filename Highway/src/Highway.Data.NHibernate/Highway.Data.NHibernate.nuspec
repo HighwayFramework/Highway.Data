@@ -13,5 +13,9 @@
     <releaseNotes>First Major Release</releaseNotes>
     <copyright>Devlin Liles Copyright 2012</copyright>
     <tags>Architecture  ORM  Repository  Specification  Productivity</tags>
+    <dependencies>
+      <dependency id="Highway.Data" />
+	  <dependency id="NHibernate" />
+    </dependencies>
   </metadata>
 </package>

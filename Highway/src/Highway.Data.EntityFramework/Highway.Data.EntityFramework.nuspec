@@ -15,6 +15,7 @@
     <tags>Architecture  ORM  Repository  Specification  Productivity</tags>
     <dependencies>
       <dependency id="Highway.Data" />
+	  <dependency id="EntityFramework" />
     </dependencies>
   </metadata>
 </package>

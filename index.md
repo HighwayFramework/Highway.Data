@@ -89,4 +89,4 @@ This framework was created and is maintained by Tim Rayburn (@trayburn) and Devl
 
 Feel free to open issues on GitHub if you encounter any issues.  If you need a commercial support license, then feel free to contact us at highway@timrayburn.net and we provide you pricing for these options.
 
-[ioc]: /ioc.html
+[ioc]: /Highway.Data/ioc.html

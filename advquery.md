@@ -321,4 +321,4 @@ layout: default
 
 #### [Go Back to Getting Started with IoC][ioc]
 
-[ioc]: /ioc.html
+[ioc]: /Highway.Data/ioc.html

@@ -153,5 +153,5 @@ layout: default
 #### [Go Back to Getting Started with Highway.Data.EntityFramework][index]
 #### [Continue with Highway.Data and Advanced Query Scanarios][advquery]
 
-[index]: /index.html
-[advquery]: /advquery.html
+[index]: /Highway.Data/index.html
+[advquery]: /Highway.Data/advquery.html

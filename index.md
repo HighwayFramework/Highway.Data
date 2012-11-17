@@ -78,6 +78,8 @@ layout: default
 <p>&#160;</p>  
 <p><font size="4">&#160;<strong>Hop on the Highway and see where it takes you</strong></font></p>
 
+#### [Continue learning about Highway and IoC][ioc]
+
 
 ### Authors and Contributors
 
@@ -86,3 +88,5 @@ This framework was created and is maintained by Tim Rayburn (@trayburn) and Devl
 ### Support
 
 Feel free to open issues on GitHub if you encounter any issues.  If you need a commercial support license, then feel free to contact us at highway@timrayburn.net and we provide you pricing for these options.
+
+[ioc]: /ioc.html

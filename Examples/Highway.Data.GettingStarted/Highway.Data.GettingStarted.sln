@@ -5,11 +5,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.GettingStarted
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.GettingStarted.IoC.UI", "Highway.Data.GettingStarted.IoC.UI\Highway.Data.GettingStarted.IoC.UI.csproj", "{0913025D-3ACA-41B4-AF17-B06DA5B8100B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.GettingStarted.IoC.UI.Tests", "Highway.Data.GettingStarted.IoC.UI.Tests\Highway.Data.GettingStarted.IoC.UI.Tests.csproj", "{D51A21F2-E7B1-4951-A1D1-655FDC505B4A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.GettingStarted.Domain", "Highway.Data.GettingStarted.Domain\Highway.Data.GettingStarted.Domain.csproj", "{A1D6C74C-B29D-4834-85E8-1FF54A066334}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.GettingStarted.DataAccess", "Highway.Data.GettingStarted.DataAccess\Highway.Data.GettingStarted.DataAccess.csproj", "{7BA89DF6-959D-4846-AF80-244D2EC02387}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{85EBBA46-D13F-42FC-B9DF-332CEE6FD4D7}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.GettingStarted.AdvancedQueries", "Highway.Data.GettingStarted.AdvancedQueries\Highway.Data.GettingStarted.AdvancedQueries.csproj", "{D83DD6A1-4C79-4146-9E2D-E8C1D353BD3C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +32,6 @@ Global
 		{0913025D-3ACA-41B4-AF17-B06DA5B8100B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0913025D-3ACA-41B4-AF17-B06DA5B8100B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0913025D-3ACA-41B4-AF17-B06DA5B8100B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D51A21F2-E7B1-4951-A1D1-655FDC505B4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D51A21F2-E7B1-4951-A1D1-655FDC505B4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D51A21F2-E7B1-4951-A1D1-655FDC505B4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D51A21F2-E7B1-4951-A1D1-655FDC505B4A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A1D6C74C-B29D-4834-85E8-1FF54A066334}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A1D6C74C-B29D-4834-85E8-1FF54A066334}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1D6C74C-B29D-4834-85E8-1FF54A066334}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -37,6 +40,10 @@ Global
 		{7BA89DF6-959D-4846-AF80-244D2EC02387}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BA89DF6-959D-4846-AF80-244D2EC02387}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BA89DF6-959D-4846-AF80-244D2EC02387}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D83DD6A1-4C79-4146-9E2D-E8C1D353BD3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D83DD6A1-4C79-4146-9E2D-E8C1D353BD3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D83DD6A1-4C79-4146-9E2D-E8C1D353BD3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D83DD6A1-4C79-4146-9E2D-E8C1D353BD3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -50,19 +50,5 @@ namespace Highway.Data.GettingStarted.IoC.UI.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
         }
-
-        [TestMethod]
-        public void DoSomething()
-        {
-            //arrange
-            var controller = new HomeController(null);
-
-            //act 
-            controller.IsActive();
-
-            //assert
-            Assert.IsTrue(controller.Active);
-
-        }
     }
 }

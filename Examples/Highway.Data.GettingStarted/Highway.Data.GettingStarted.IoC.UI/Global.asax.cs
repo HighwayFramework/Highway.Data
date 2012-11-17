@@ -37,16 +37,26 @@ namespace Highway.Data.GettingStarted.IoC.UI
 
         private void WireUpIoC()
         {
-            var bootstrap = new CastleBootstrap();
+            //This is the bootstrap for the castle Highway.Data implementation. 
+            //You IoC implementation will have a similar class, just change the namespace and
+            //let intellisense be your guide
+            var bootstrap = new Highway.Data.EntityFramework.Castle.CastleBootstrap();
+
             var container = new WindsorContainer();
             bootstrap.Install(container, null);
 
             //Wiring in our types
             container.Register(
-                Component.For<IDataContext>().ImplementedBy<DataContext>().DependsOn(Dependency.OnConfigValue("connectionString", Settings.Default.ConnectionString)),
+                //This is Highway.Data's Context
+                Component.For<IDataContext>().ImplementedBy<DataContext>()
+                .DependsOn(Dependency.OnConfigValue("connectionString", Settings.Default.ConnectionString)),
+                //This is Highway.Data's Repository
                 Component.For<IRepository>().ImplementedBy<Repository>(),
+                //This is Highway.Data's relational mappings Interface, but YOUR implementation
                 Component.For<IMappingConfiguration>().ImplementedBy<GettingStartedMappings>(),
+                //This is Common.Loggings log interface, feel free to supply anything that uses it *cough* log4net
                 Component.For<ILog>().ImplementedBy<NoOpLogger>(),
+                //This is Highway.Data's context configuration, by default use the default :-)
                 Component.For<IContextConfiguration>().ImplementedBy<DefaultContextConfiguration>());
             
 
@@ -65,7 +75,8 @@ namespace Highway.Data.GettingStarted.IoC.UI
         {
             _container = container;
 
-            var controllerTypes = Assembly.GetExecutingAssembly().GetTypes().Where(t => typeof (IController).IsAssignableFrom(t));
+            var controllerTypes = Assembly.GetExecutingAssembly()
+                .GetTypes().Where(t => typeof (IController).IsAssignableFrom(t));
             
             foreach (Type t in controllerTypes)
             {

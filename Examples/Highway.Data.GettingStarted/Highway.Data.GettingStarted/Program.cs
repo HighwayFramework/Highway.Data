@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Highway.Data.EntityFramework;
-using Highway.Data.GettingStarted.DataAccess.Mappings;
-using Highway.Data.GettingStarted.DataAccess.Queries;
-using Highway.Data.GettingStarted.Domain.Entities;
-using Highway.Data.QueryObjects;
 
 namespace Highway.Data.GettingStarted
 {

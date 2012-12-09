@@ -22,6 +22,7 @@ namespace Highway.Data
         private readonly ILog _log;
         private readonly IMappingConfiguration _mapping;
         private IEventManager _eventManager;
+        private bool _databaseFirst;
 
         /// <summary>
         /// Constructs a context
@@ -72,6 +73,27 @@ namespace Highway.Data
             _log = log;
             if (contextConfiguration != null) contextConfiguration.ConfigureContext(this);
         }
+
+        /// <summary>
+        /// Database first way to construct the data context for Highway.Data.EntityFramework
+        /// </summary>
+        /// <param name="databaseFirstConnectionString">The metadata embedded connection string from database first Entity Framework</param>
+        public DataContext(string databaseFirstConnectionString) : this(databaseFirstConnectionString,new NoOpLogger())
+        {
+           
+        }
+
+        /// <summary>
+        /// Database first way to construct the data context for Highway.Data.EntityFramework
+        /// </summary>
+        /// <param name="databaseFirstConnectionString">The metadata embedded connection string from database first Entity Framework</param>
+        /// <param name="log">The logger for the database first context</param>
+        public DataContext(string databaseFirstConnectionString, ILog log)
+        {
+            _databaseFirst = true;
+            _log = log;
+        }
+
 
         #region IObservableDataContext Members
 
@@ -310,6 +332,7 @@ namespace Highway.Data
         /// <param name="modelBuilder">The builder that defines the model for the context being created.</param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            if (_databaseFirst) throw new UnintentionalCodeFirstException();
             _log.Debug("\tOnModelCreating");
             if (_mapping != null)
             {

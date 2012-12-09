@@ -82,6 +82,8 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +96,7 @@
       <Link>SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="Async\Given_An_Async_enabled_Repository.cs" />
+    <Compile Include="Contexts\Given_A_Context_Based_On_Database_First.cs" />
     <Compile Include="Contexts\Given_A_Context_Without_Configuration.cs" />
     <Compile Include="Initializer\EntityFrameworkIntializer.cs" />
     <Compile Include="IntegrationTests\Given_A_EF_Context.cs" />
@@ -115,6 +118,27 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="TestContexts\C__MigrationHistory.cs">
+      <DependentUpon>ExampleContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TestContexts\ExampleContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExampleContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TestContexts\ExampleContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExampleContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TestContexts\ExampleContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExampleContext.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="TestContexts\Member.cs">
+      <DependentUpon>ExampleContext.tt</DependentUpon>
     </Compile>
     <Compile Include="TestQueries\FindFoo.cs" />
     <Compile Include="TestQueries\ScalarFooTestQuery.cs" />
@@ -154,6 +178,24 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="TestContexts\ExampleContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ExampleContext.Context.cs</LastGenOutput>
+    </None>
+    <EntityDeploy Include="TestContexts\ExampleContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ExampleContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="TestContexts\ExampleContext.edmx.diagram">
+      <DependentUpon>ExampleContext.edmx</DependentUpon>
+    </None>
+    <None Include="TestContexts\ExampleContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ExampleContext.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

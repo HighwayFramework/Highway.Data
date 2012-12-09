@@ -88,7 +88,7 @@ namespace Highway.Data
         /// </summary>
         /// <param name="databaseFirstConnectionString">The metadata embedded connection string from database first Entity Framework</param>
         /// <param name="log">The logger for the database first context</param>
-        public DataContext(string databaseFirstConnectionString, ILog log)
+        public DataContext(string databaseFirstConnectionString, ILog log) : base(databaseFirstConnectionString)
         {
             _databaseFirst = true;
             _log = log;

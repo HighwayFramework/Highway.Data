@@ -20,20 +20,4 @@ namespace Highway.Data.EntityFramework.Tests.Initializer
             }
         }
     }
-
-    public class HighwayTestInitializer<T> : IDatabaseInitializer<T> where T : DbContext
-    {
-        private readonly Action<T> _seedAction;
-
-        public HighwayTestInitializer(Action<T> seedAction)
-        {
-            _seedAction = seedAction;
-        }
-
-        public void InitializeDatabase(T context)
-        {
-            _seedAction(context);
-            context.SaveChanges();
-        }
-    }
 }

@@ -13,7 +13,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
         public void Should_Not_Call_Code_First_Bindings()
         {
             //Arrange
-            Database.SetInitializer(new HighwayTestInitializer<DataContext>(c =>
+            Database.SetInitializer(new DropCreateInitializer<DataContext>(c =>
                 {
                     for (int i = 0; i < 5; i++)
                     {

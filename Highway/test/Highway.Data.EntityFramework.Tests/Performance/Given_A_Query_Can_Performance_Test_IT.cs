@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Common.Logging;
 using Common.Logging.Simple;
@@ -19,6 +20,7 @@ namespace Highway.Data.EntityFramework.Tests.Performance
         public void Should_Throw_An_Error_When_Query_Is_To_Slow()
         {
             //Arrange
+            Database.SetInitializer(new DropCreateDatabaseAlways<TestDataContext>());
             var consoleOutLogger = new ConsoleOutLogger("Performance", LogLevel.All, true, true, true, "");
             var context = new TestDataContext(Settings.Default.Connection, new FooMappingConfiguration(),
                                               consoleOutLogger);
@@ -44,6 +46,7 @@ namespace Highway.Data.EntityFramework.Tests.Performance
         public void Should_Execute_Query_With_Performance_Info()
         {
             //Arrange
+            Database.SetInitializer(new DropCreateDatabaseAlways<TestDataContext>());
             var consoleOutLogger = new ConsoleOutLogger("Performance", LogLevel.All, true, true, true, "");
             var context = new TestDataContext(Settings.Default.Connection, new FooMappingConfiguration(),
                                               consoleOutLogger);
@@ -63,6 +66,7 @@ namespace Highway.Data.EntityFramework.Tests.Performance
         public void Should_Run_Compilation_Test_For_Context()
         {
             //Arrange
+            Database.SetInitializer(new DropCreateDatabaseAlways<TestDataContext>());
             var consoleOutLogger = new ConsoleOutLogger("Performance", LogLevel.All, true, true, true, "");
             var context = new TestDataContext(Settings.Default.Connection, new FooMappingConfiguration(),
                                               consoleOutLogger);

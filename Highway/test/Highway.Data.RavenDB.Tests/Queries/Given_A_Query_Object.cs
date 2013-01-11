@@ -18,7 +18,7 @@ using Raven.Client;
 using Raven.Client.Embedded;
 using Rhino.Mocks;
 
-namespace Highway.Data.EntityFramework.Tests.UnitTests
+namespace Highway.Data.RavenDB.Tests.Queries
 {
     [TestClass]
     public class Given_A_Query_Object
@@ -97,22 +97,6 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
 
             //Assert
             retVal.First().ShouldBeSame(targetFoo);
-        }
-
-        [TestMethod]
-        public void When_Calling_Output_Sql_with_Context_It_Outputs_SQL()
-        {
-            //arrange
-            var target = new FindFoo();
-
-            var context = container.Resolve<IDataContext>();
-
-            //act
-            string sqlOutput = target.OutputSQLStatement(context);
-
-            //assert
-            sqlOutput.ShouldNotBeNull();
-            sqlOutput.ShouldContain("from");
         }
     }
 }

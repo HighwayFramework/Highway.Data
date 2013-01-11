@@ -68,12 +68,16 @@ namespace Highway.Data.RavenDB.Tests.IntegrationTests
             //Arrange
 
             //Act
-            target.Add(new Foo());
+            var item = new Foo();
+            target.Add(item);
             target.SaveChanges();
             IQueryable<Foo> items = target.AsQueryable<Foo>();
 
             //Assert
-            items.Count().ShouldBe(5);
+            items.Count().ShouldBe(6);
+
+            target.Remove(item);
+            target.SaveChanges();
         }
     }
 }

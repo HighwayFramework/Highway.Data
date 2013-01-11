@@ -63,6 +63,14 @@
     <Compile Include="..\..\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="Filtering\AndCriteria.cs" />
+    <Compile Include="Filtering\BasicCriteria.cs" />
+    <Compile Include="Filtering\CombinationCriteria.cs" />
+    <Compile Include="Filtering\Criteria.cs" />
+    <Compile Include="Filtering\CriteriaBuilder.cs" />
+    <Compile Include="Filtering\FieldIdentifier.cs" />
+    <Compile Include="Filtering\FilterExtensions.cs" />
+    <Compile Include="Filtering\OrCriteria.cs" />
     <Compile Include="Interceptors\Events\PostQueryEventArgs.cs" />
     <Compile Include="Interceptors\Events\PostSaveEventArgs.cs" />
     <Compile Include="Interceptors\Events\PreQueryEventArgs.cs" />

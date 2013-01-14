@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Highway.Data.Filtering
 {
@@ -69,5 +70,24 @@ namespace Highway.Data.Filtering
         {
             return Create(fieldIdentifier.FieldName, _lessThanOrEqual, value);
         }
+
+        public static Criteria ByOperator<T>(this FieldIdentifier<T> fieldIdentifier, string @operator, T value)
+        {
+            if (_operators.ContainsKey(@operator)) @operator = _operators[@operator];
+            return Create(fieldIdentifier.FieldName, @operator, value);
+        }
+
+        private static readonly Dictionary<string, string> _operators = new Dictionary<string, string>(){
+                {"equal", "=" },
+                {"greater than", ">" },
+                {"greater than or equal", ">=" },
+                {"less than", "<" },
+                {"less than or equal", "<=" },
+                {"on", "=" },
+                {"after", ">" },
+                {"on or after", ">=" },
+                {"before", "<" },
+                {"on or before", "<=" },
+            };
     }
 }

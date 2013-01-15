@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{85EBBA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.GettingStarted.AdvancedQueries", "Highway.Data.GettingStarted.AdvancedQueries\Highway.Data.GettingStarted.AdvancedQueries.csproj", "{D83DD6A1-4C79-4146-9E2D-E8C1D353BD3C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.GettingStarted.DynamicFiltering", "Highway.Data.GettingStarted.DynamicFiltering\Highway.Data.GettingStarted.DynamicFiltering.csproj", "{586617B6-9428-443A-A283-EB89ED9ADB08}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{D83DD6A1-4C79-4146-9E2D-E8C1D353BD3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D83DD6A1-4C79-4146-9E2D-E8C1D353BD3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D83DD6A1-4C79-4146-9E2D-E8C1D353BD3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{586617B6-9428-443A-A283-EB89ED9ADB08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{586617B6-9428-443A-A283-EB89ED9ADB08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{586617B6-9428-443A-A283-EB89ED9ADB08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{586617B6-9428-443A-A283-EB89ED9ADB08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

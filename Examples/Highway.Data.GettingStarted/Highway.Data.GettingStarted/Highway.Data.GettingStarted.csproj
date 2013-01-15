@@ -35,19 +35,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Logging">
-      <HintPath>..\packages\Highway.Data.EntityFramework.3.0.3.2\lib\net45\Common.Logging.dll</HintPath>
+      <HintPath>..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework">
-      <HintPath>..\packages\Highway.Data.EntityFramework.3.0.3.2\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Highway.Data">
-      <HintPath>..\packages\Highway.Data.EntityFramework.3.0.3.2\lib\net45\Highway.Data.dll</HintPath>
+      <HintPath>..\packages\Highway.Data.3.6.0.0\lib\net40\Highway.Data.dll</HintPath>
     </Reference>
     <Reference Include="Highway.Data.EntityFramework">
-      <HintPath>..\packages\Highway.Data.EntityFramework.3.0.3.2\lib\net45\Highway.Data.EntityFramework.dll</HintPath>
+      <HintPath>..\packages\Highway.Data.EntityFramework.3.6.0.0\lib\net40\Highway.Data.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
-      <HintPath>..\packages\Highway.Data.EntityFramework.3.0.3.2\lib\net45\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />

@@ -129,7 +129,6 @@ namespace :package do
 		Dir.mkdir('pack')
 		create_packs	
 		Dir.glob('pack/*') { |file| FileUtils.move(file,'nuget/') }
-		clean_lib
 		Dir.rmdir('pack')
 	end
 	
@@ -142,7 +141,6 @@ namespace :package do
 			FileUtils.move(file,'../nuget/')
 		end
 		Dir.chdir('..')
-		clean_lib
 		Dir.rmdir('pack')
 	end
 	

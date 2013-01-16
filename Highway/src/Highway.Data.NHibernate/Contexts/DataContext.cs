@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Common;
 using System.Linq;
 using Common.Logging;
+using Common.Logging.Simple;
 using Highway.Data.Interceptors.Events;
 using Highway.Data.Interfaces;
 using NHibernate;
@@ -22,13 +23,22 @@ namespace Highway.Data
         private IEventManager _eventManager;
 
         /// <summary>
-        /// Constructs a context
+        /// Constructs the context
         /// </summary>
-        /// <param name="connectionString">The standard SQL connection string for the Database</param>
-        /// <param name="mapping">The Mapping Configuration that will determine how the tables and objects interact</param>
-        public DataContext(ISession session)
+        /// <param name="session">nHibernate's session</param>
+        public DataContext(ISession session) : this(session, new NoOpLogger())
+        {
+        }
+
+        /// <summary>
+        /// Constructs the context
+        /// </summary>
+        /// <param name="session">nHibernate's session</param>
+        /// <param name="log">Common Logging logger</param>
+        public DataContext(ISession session, ILog log)
         {
             _session = session;
+            _log = log;
         }
 
         #region IObservableDataContext Members

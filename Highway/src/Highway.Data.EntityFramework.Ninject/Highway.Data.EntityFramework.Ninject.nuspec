@@ -14,8 +14,8 @@
     <copyright>Devlin Liles Copyright 2012</copyright>
     <tags>Architecture  ORM  Repository  Specification  Productivity</tags>
     <dependencies>
-      <dependency id="Highway.Data.EntityFramework" />
-	  <dependency id="Ninject" />
+      <dependency id="Highway.Data.EntityFramework" version="3.6.0.2" />
+	  <dependency id="Ninject" version="3.0.0.0" />
     </dependencies>
   </metadata>
 </package>

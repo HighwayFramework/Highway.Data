@@ -14,7 +14,7 @@
     <copyright>Jay Smith Copyright 2012</copyright>
     <tags>Architecture  ORM  Repository  Specification  Productivity</tags>
     <dependencies>
-      <dependency id="Highway.Data.EntityFramework" />
+      <dependency id="Highway.Data.EntityFramework" version="3.6.0.2" />
     </dependencies>
   </metadata>
 </package>

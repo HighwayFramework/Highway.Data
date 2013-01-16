@@ -149,7 +149,7 @@ namespace Highway.Data
         {
             _log.Trace("\tCommit");
             InvokePreSave();
-            _session.Transaction.Commit();
+            _session.Flush();
             InvokePostSave();
             _log.DebugFormat("\tCommited Changes");
             return 0;

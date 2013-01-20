@@ -97,6 +97,7 @@
     <Compile Include="Contexts\Given_A_Context_Without_Configuration.cs" />
     <Compile Include="Initializer\EntityFrameworkIntializer.cs" />
     <Compile Include="IntegrationTests\Given_A_EF_Context.cs" />
+    <Compile Include="IntegrationTests\Given_a_Stored_Proc.cs" />
     <Compile Include="Logging\Given_A_Context_With_a_Logger.cs" />
     <Compile Include="Mapping\BarMappingConfiguration.cs" />
     <Compile Include="Mapping\BaseMappingConfiguration.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="TestQueries\FindFoo.cs" />
     <Compile Include="TestQueries\ScalarFooTestQuery.cs" />
     <Compile Include="TestQueries\ScalarIntTestQuery.cs" />
+    <Compile Include="TestQueries\StoredProcTestQuery.cs" />
     <Compile Include="TestQueries\TestCommand.cs" />
     <Compile Include="UnitTests\EFFailureContext.cs" />
     <Compile Include="UnitTests\TestDataContext.cs" />

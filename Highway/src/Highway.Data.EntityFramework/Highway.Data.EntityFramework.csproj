@@ -81,6 +81,7 @@
     <Compile Include="Configuration\IAggregateConfiguration.cs" />
     <Compile Include="Contexts\DataContext.cs" />
     <Compile Include="Database\DropCreateInitializer.cs" />
+    <Compile Include="EntityExtensions.cs" />
     <Compile Include="Extensions\LoggingTraceExtensions.cs" />
     <Compile Include="Extensions\PerformanceTracingExtensions.cs" />
     <Compile Include="Factory\AggregateConfigurationFactory.cs" />
@@ -94,6 +95,10 @@
     <Compile Include="QueryObjects\AdvancedCommand.cs" />
     <Compile Include="QueryObjects\AdvancedQuery.cs" />
     <Compile Include="QueryObjects\AdvancedScalar.cs" />
+    <Compile Include="StoredProcedures\StoredProcedureAttributes.cs" />
+    <Compile Include="StoredProcedures\StoredProcedureHelpers.cs" />
+    <Compile Include="StoredProcedures\StoredProcedures.cs" />
+    <Compile Include="StoredProcedures\StoredProcs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 
 namespace Highway.Data
@@ -11,14 +12,17 @@ namespace Highway.Data
     public class DropCreateInitializer<T> : IDatabaseInitializer<T> where T : DbContext
     {
         private readonly Action<T> _seedAction;
+        private readonly Func<IEnumerable<string>> _storedProcs;
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="seedAction"></param>
-        public DropCreateInitializer(Action<T> seedAction = null)
+        /// <param name="seedAction">actions to execute</param>
+        /// <param name="storedProcs">stored procedure strings</param>
+        public DropCreateInitializer(Action<T> seedAction = null, Func<IEnumerable<string>> storedProcs = null)
         {
             _seedAction = seedAction;
+            _storedProcs = storedProcs;
         }
 
         #region IDatabaseInitializer<T> Members
@@ -34,6 +38,14 @@ namespace Highway.Data
                                                                  context.Database.Connection.Database));
             }
             context.Database.CreateIfNotExists();
+            if (_storedProcs != null)
+            {
+                foreach (var sp in _storedProcs())
+                {
+                    if(string.IsNullOrWhiteSpace(sp)) continue;
+                    context.Database.ExecuteSqlCommand(sp);
+                }
+            }
             if (_seedAction != null)
             {
                 _seedAction(context);

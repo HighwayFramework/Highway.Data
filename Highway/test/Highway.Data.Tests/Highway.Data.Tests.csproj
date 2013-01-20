@@ -112,6 +112,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Highway.Data.EntityFramework\Highway.Data.EntityFramework.csproj">
+      <Project>{726C5578-4D46-46FB-A58D-352E447E672A}</Project>
+      <Name>Highway.Data.EntityFramework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Highway.Data\Highway.Data.csproj">
       <Project>{B0CA9DAB-C5D4-4AC6-97E7-725B18191B2D}</Project>
       <Name>Highway.Data</Name>

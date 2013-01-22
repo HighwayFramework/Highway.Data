@@ -19,25 +19,27 @@ namespace Highway.Data
     {
         private readonly ILog _log;
         private readonly IMappingConfiguration _mapping;
-        private readonly ISessionFactory _sessionFactory;
+        private readonly ISession _session;
         private IEventManager _eventManager;
 
         /// <summary>
         /// Constructs the context
         /// </summary>
-        /// <param name="sessionFactory">nHibernate's sessionFactory</param>
-        public DataContext(ISessionFactory sessionFactory) : this(sessionFactory, new NoOpLogger())
+        /// <param name="session">nHibernate's session</param>
+        public DataContext(ISession session)
+            : this(session, new NoOpLogger())
         {
+
         }
 
         /// <summary>
         /// Constructs the context
         /// </summary>
-        /// <param name="sessionFactory">nHibernate's sessionFactory</param>
+        /// <param name="session">nHibernate's session</param>
         /// <param name="log">Common Logging logger</param>
-        public DataContext(ISessionFactory sessionFactory, ILog log)
+        public DataContext(ISession session, ILog log)
         {
-            _sessionFactory = sessionFactory;
+            _session = session;
             _log = log;
         }
 
@@ -51,12 +53,9 @@ namespace Highway.Data
         public IQueryable<T> AsQueryable<T>() where T : class
         {
             IQueryable<T> result = null;
-            _log.DebugFormat("Querying Object {0}", typeof (T).Name);
-            using(var session = _sessionFactory.OpenSession())
-            {
-                result = session.Query<T>();
-            }
-            _log.DebugFormat("Queried Object {0}", typeof (T).Name);
+            _log.DebugFormat("Querying Object {0}", typeof(T).Name);
+            result = _session.Query<T>();
+            _log.DebugFormat("Queried Object {0}", typeof(T).Name);
             return result;
         }
 
@@ -69,10 +68,7 @@ namespace Highway.Data
         public T Add<T>(T item) where T : class
         {
             _log.DebugFormat("Adding Object {0}", item);
-            using (var session = _sessionFactory.OpenSession())
-            {
-                session.SaveOrUpdate(item);
-            }
+            _session.SaveOrUpdate(item);
             _log.TraceFormat("Added Object {0}", item);
             return item;
         }
@@ -86,10 +82,7 @@ namespace Highway.Data
         public T Remove<T>(T item) where T : class
         {
             _log.DebugFormat("Removing Object {0}", item);
-            using (var session = _sessionFactory.OpenSession())
-            {
-                session.Delete(item);
-            }
+            _session.Delete(item);
             _log.TraceFormat("Removed Object {0}", item);
             return item;
         }
@@ -103,10 +96,7 @@ namespace Highway.Data
         public T Update<T>(T item) where T : class
         {
             _log.DebugFormat("Updating Object {0}", item);
-            using (var session = _sessionFactory.OpenSession())
-            {
-                session.Update(item);
-            } 
+            _session.Update(item);
             _log.TraceFormat("Updated Object {0}", item);
             return item;
         }
@@ -120,10 +110,7 @@ namespace Highway.Data
         public T Attach<T>(T item) where T : class
         {
             _log.DebugFormat("Attaching Object {0}", item);
-            using (var session = _sessionFactory.OpenSession())
-            {
-                session.Persist(item);
-            }
+            _session.Persist(item);
             _log.TraceFormat("Attached Object {0}", item);
             return item;
         }
@@ -137,10 +124,7 @@ namespace Highway.Data
         public T Detach<T>(T item) where T : class
         {
             _log.DebugFormat("Detaching Object {0}", item);
-            using (var session = _sessionFactory.OpenSession())
-            {
-                session.Evict(item);
-            }
+            _session.Evict(item);
             _log.TraceFormat("Detached Object {0}", item);
             return item;
         }
@@ -155,10 +139,7 @@ namespace Highway.Data
         public T Reload<T>(T item) where T : class
         {
             _log.DebugFormat("Reloading Object {0}", item);
-            using (var session = _sessionFactory.OpenSession())
-            {
-                session.Refresh(item);
-            }
+            _session.Refresh(item);
             _log.TraceFormat("Reloaded Object {0}", item);
             return item;
         }
@@ -171,10 +152,7 @@ namespace Highway.Data
         {
             _log.Trace("\tCommit");
             InvokePreSave();
-            using (var session = _sessionFactory.OpenSession())
-            {
-                session.Flush();
-            }
+            _session.Flush();
             InvokePostSave();
             _log.DebugFormat("\tCommited Changes");
             return 0;
@@ -229,8 +207,8 @@ namespace Highway.Data
 
         public void Dispose()
         {
-            _sessionFactory.Close();
-            _sessionFactory.Dispose();
+            _session.Close();
+            _session.Dispose();
         }
 
         #endregion
@@ -242,7 +220,7 @@ namespace Highway.Data
 
         private void InvokePreSave()
         {
-            if (PreSave != null) PreSave(this, new PreSaveEventArgs {});
+            if (PreSave != null) PreSave(this, new PreSaveEventArgs { });
         }
     }
 }

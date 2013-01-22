@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Mapping;
@@ -18,7 +19,7 @@ namespace Highway.Data.NHibernate.Tests
         {
             //Arrange
             var sessionFactory = TastFactory.CreateSessionFactory();
-            var target = new DataContext(sessionFactory);
+            var target = new DataContext(sessionFactory.OpenSession());
 
             //Act 
             var item = new Foo();
@@ -29,6 +30,20 @@ namespace Highway.Data.NHibernate.Tests
             Assert.IsNotNull(item.Id);
             Assert.AreNotEqual(default(int), item.Id);
             Console.WriteLine(item.Id);
+        }
+
+        [TestMethod]
+        public void Should_Be_Able_To_Run_Query()
+        {
+            //Arrange
+            var sessionFactory = TastFactory.CreateSessionFactory();
+            var target = new DataContext(sessionFactory.OpenSession());
+            
+            //Act
+            var result = new FindFoo().Execute(target).ToList();
+
+            //Assert
+            Assert.IsTrue(result.Any());
         }
     }
 

@@ -18,7 +18,7 @@ namespace Highway.Data.NHibernate.Tests
         {
             //Arrange
             var sessionFactory = TastFactory.CreateSessionFactory();
-            var target = new DataContext(sessionFactory.OpenSession());
+            var target = new DataContext(sessionFactory);
 
             //Act 
             var item = new Foo();

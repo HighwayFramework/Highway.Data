@@ -74,7 +74,7 @@ namespace Highway.Data.RavenDB.Tests.IntegrationTests
             IQueryable<Foo> items = target.AsQueryable<Foo>();
 
             //Assert
-            items.Count().ShouldBe(6);
+            items.Count().ShouldBe(5);
 
             target.Remove(item);
             target.SaveChanges();

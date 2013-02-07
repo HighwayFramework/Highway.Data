@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Data.Entity;
 using System.Reflection;
 using Highway.Data.Interceptors.Events;
 using Highway.Data.Interfaces;

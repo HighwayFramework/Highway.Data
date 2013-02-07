@@ -84,6 +84,9 @@
     <Compile Include="Interfaces\Queries\IObservableQuery.cs" />
     <Compile Include="Interfaces\Queries\IQueryBase.cs" />
     <Compile Include="Interfaces\Queries\IScalar.cs" />
+    <Compile Include="PrebuiltQueries\FindAll.cs" />
+    <Compile Include="PrebuiltQueries\GetById.cs" />
+    <Compile Include="PrebuiltQueries\Queries.cs" />
     <Compile Include="QueryObjects\Command.cs" />
     <Compile Include="QueryObjects\FindByCriteria.cs" />
     <Compile Include="QueryObjects\Query.cs" />

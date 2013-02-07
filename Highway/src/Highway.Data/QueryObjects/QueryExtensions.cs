@@ -24,7 +24,7 @@ namespace Highway.Data.QueryObjects
         }
 
         /// <summary>
-        /// 
+        /// Skip the number of items specified
         /// </summary>
         /// <param name="extend"></param>
         /// <param name="count"></param>
@@ -37,5 +37,7 @@ namespace Highway.Data.QueryObjects
             ((IExtendableQuery) extend).AddMethodExpression("Skip", generics, parameters);
             return extend;
         }
+
+        
     }
 }

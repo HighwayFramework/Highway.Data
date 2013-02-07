@@ -58,9 +58,6 @@
     <Reference Include="CommonServiceLocator.WindsorAdapter">
       <HintPath>..\..\packages\CommonServiceLocator.WindsorAdapter.1.0\lib\NET35\CommonServiceLocator.WindsorAdapter.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework">
-      <HintPath>..\..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
@@ -82,6 +79,9 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
+    <Reference Include="TechTalk.SpecFlow">
+      <HintPath>..\..\packages\SpecFlow.1.9.0\lib\net35\TechTalk.SpecFlow.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
@@ -104,6 +104,7 @@
     <Compile Include="Mapping\BazMappingConfiguration.cs" />
     <Compile Include="Mapping\QuxMappingConfiguration.cs" />
     <Compile Include="Performance\Given_A_Query_Can_Performance_Test_IT.cs" />
+    <Compile Include="Queries\Given_a_GetById_Query.cs" />
     <Compile Condition="'$(TargetFrameworkVersion)' == 'v4.5'" Include="Repositories\Given_An_Async_Repository.cs" />
     <Compile Include="TestCategories.cs" />
     <Compile Include="Mapping\BarMap.cs" />

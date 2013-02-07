@@ -1,6 +1,9 @@
+using System;
+using Highway.Data.PrebuiltQueries;
+
 namespace Highway.Data.Tests.TestDomain
 {
-    public class Foo
+    public class Foo : IIdentifiable<int>
     {
         [StoredProcedureAttributes.Name("testID")]
         public virtual int Id { get; set; }

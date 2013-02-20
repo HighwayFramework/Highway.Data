@@ -1,7 +1,7 @@
 ﻿using System;
-using Castle.MicroKernel;
 using Castle.MicroKernel.Registration;
 using Highway.Data.Interfaces;
+using Castle.Windsor;
 
 namespace Highway.Data.EntityFramework.Castle.Example
 {
@@ -11,7 +11,7 @@ namespace Highway.Data.EntityFramework.Castle.Example
         {
             const string SqlExpressConnectionString =
                 @"Data Source=(local)\SQLExpress;Initial Catalog=HighwayDemo;Integrated Security=True";
-            var container = new DefaultKernel();
+            var container = new WindsorContainer();
             container.Register(Component.For<IRepository>().ImplementedBy<Repository>(),
                                Component.For<IDataContext>().ImplementedBy<DataContext>().DependsOn(
                                    new {connectionString = SqlExpressConnectionString}),

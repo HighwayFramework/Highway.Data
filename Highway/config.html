@@ -1,0 +1,278 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <meta charset="utf-8" />
+    <title>Service Station</title>
+    <script type="text/javascript">
+        $().ready(function () {
+            $("div").hide();
+            $("select").change(function () {
+                var selector = "div.";
+                selector += $('#IoC').find(":selected").first().val();
+                selector += "." + $('#Data').find(":selected").first().val();
+                selector += "." + $('#Platform').find(":selected").first().val();
+                $("div").hide();
+                $(selector).show();
+            }).change();                  
+        });
+    </script>
+</head>
+<body>
+    <h1>Service Center</h1>
+    <pre>
+        This is the service center for configuring Highway.Data and your choice of IoC. If you would like to customize 
+        the code below please feel free to do so. This is meant to give you a place to start. Select your prefered storage 
+        method, inversion of control container, and platform. We will send this off to the code monkeys in the shop and 
+        give you back a configuration example for those selections. This serves as your registration for highway. If you chose 
+        you can register yourself *configure all the stuff*, but we provide this service free of charge. Try getting that at 
+        your local service center! Take care, and code safely.
+    </pre>
+    <select id="Data">
+        <option value="EF" selected="selected">Entity Framework</option>
+        <option value="NHibernate">NHibernate</option>
+        <option value="raven">RavenDB</option>
+        <option value="mongo">MongoDB</option>
+    </select>
+    <select id="IoC">
+        <option value="Castle" selected="selected">Castle</option>
+        <option value="StructureMap">StructureMap</option>
+        <option value="Unity">Unity</option>
+        <option value="Ninject">Ninject</option>
+    </select>
+    <select id="Platform">
+        <option value="Web" selected="selected">Web</option>
+    </select>
+    <div class="EF Castle Web" style="display:none">
+        <pre>
+using System;
+using System;
+using System.Linq;
+using System.Web.Mvc;
+using Castle.MicroKernel.Registration;
+using Castle.Windsor;
+using Common.Logging;
+using Common.Logging.Simple;
+using Highway.Data.EntityFramework.Castle;
+using Highway.Data.Interfaces;
+
+namespace Highway.Data.GettingStarted.IoC.UI
+{
+    public class MvcApplication : System.Web.HttpApplication
+    {
+        protected void Application_Start()
+        {
+            WireUpIoC();
+        }
+
+        private void WireUpIoC()
+        {
+            const string YOUR_CONNECTION_STRING =
+                @"Put your Db Connection String here";
+
+            var bootstrap = new Highway.Data.EntityFramework.Castle.CastleBootstrap();
+
+            var container = new WindsorContainer();
+            bootstrap.Install(container, null);
+
+            //Wiring in our types
+            container.Register(
+                //This is Highway.Data's Context
+                Component.For&ltIDataContext&gt().ImplementedBy&ltDataContext&gt()
+                .DependsOn(Dependency.OnConfigValue("connectionString", SqlExpressConnectionString)),
+                //This is Highway.Data's Repository
+                Component.For&ltIRepository&gt().ImplementedBy&ltRepository&gt(),
+                //This is Highway.Data's relational mappings Interface, but YOUR implementation
+                Component.For&ltIMappingConfiguration&gt().ImplementedBy&ltYOUR_MAPPINGS_HERE&gt(),
+                //This is Common.Loggings log interface, feel free to supply anything that uses it *cough* log4net
+                Component.For&ltILog&gt().ImplementedBy&ltNoOpLogger&gt(),
+                //This is Highway.Data's context configuration, by default use the default :-)
+                Component.For&ltIContextConfiguration&gt().ImplementedBy&ltDefaultContextConfiguration&gt());
+
+
+            //TODO: Wire up your types here
+
+        }
+    }
+}
+        </pre>
+    </div>
+    <div class="EF Unity Web" style="display:none">
+        <pre>
+using System;
+using System.Linq;
+using System.Web.Mvc;
+using Highway.Data.EntityFramework.Unity;
+using Highway.Data.Interfaces;
+using Microsoft.Practices.Unity;
+
+namespace Highway.Data.GettingStarted.IoC.UI
+{
+    // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
+    // visit http://go.microsoft.com/?LinkId=9394801
+
+    public class MvcApplication : System.Web.HttpApplication
+    {
+        protected void Application_Start()
+        {
+            AreaRegistration.RegisterAllAreas();
+
+            WireUpIoC();
+        }
+
+        private void WireUpIoC()
+        {
+            const string YOUR_CONNECTION_STRING =
+                @"insert your DB string here";
+
+            var unityContainer = new UnityContainer();
+            unityContainer.BuildHighway();
+            unityContainer.RegisterType&ltIMappingConfiguration, HighwayDataMappings&gt();
+            unityContainer.RegisterType&ltIRepository, Repository&gt();
+            unityContainer.RegisterType&ltIDataContext, DataContext&gt(new InjectionConstructor(YOUR_CONNECTION_STRING,
+                                                                                            new HighwayDataMappings()));
+
+
+
+            //TODO: Wire up your types here
+
+        }
+    }
+}
+        </pre>
+    </div>
+    <div class="EF StructureMap Web" style="display:none">
+        <pre>
+using System;
+using System;
+using System.Linq;
+using System.Web.Mvc;
+using Common.Logging;
+using Common.Logging.Simple;
+using Highway.Data.EntityFramework.StructureMap;
+using Highway.Data.Interfaces;
+
+namespace Highway.Data.GettingStarted.IoC.UI
+{
+    public class MvcApplication : System.Web.HttpApplication
+    {
+        protected void Application_Start()
+        {
+            WireUpIoC();
+        }
+
+        private void WireUpIoC()
+        {
+            const string YOUR_CONNECTION_STRING = @"Put your Db Connection String here";
+            
+            ObjectFactory.Initialize(x =&gt x.Scan(scan =&gt
+                {
+                    scan.TheCallingAssembly();
+                    scan.WithDefaultConventions();
+                    scan.AssembliesFromApplicationBaseDirectory();
+
+                    x.For&ltIMappingConfiguration&gt().Use&ltHighwayDataMappings&gt();
+                    x.For&ltIRepository&gt().Use&ltRepository&gt();
+                    x.For&ltIDataContext&gt().Use&ltDataContext&gt()
+                        .Ctor&ltstring&gt("connectionString").Is(SqlExpressConnectionString);
+                }));
+
+            // Use for Demos
+            // DropCreateDatabaseIfModelChanges, Migrations not supported yet.  (IDatabaseInitializers)
+            //Database.SetInitializer(new DropCreateDatabaseAlways&ltEntityFrameworkContext&gt());
+
+
+            //TODO: Wire up your types here
+
+        }
+    }
+}
+        </pre>
+    </div>
+    <div class="EF Ninject Web" style="display:none">
+        <pre>
+using System;
+using System.Linq;
+using System.Web.Mvc;
+using Common.Logging;
+using Common.Logging.Simple;
+using Highway.Data.EntityFramework.Ninject;
+using Highway.Data.Interfaces;
+
+namespace Highway.Data.GettingStarted.IoC.UI
+{
+    public class MvcApplication : System.Web.HttpApplication
+    {
+        protected void Application_Start()
+        {
+            WireUpIoC();
+        }
+
+        private void WireUpIoC()
+        {
+            const string YOUR_CONNECTION_STRING = @"Put your Db Connection String here";
+
+            var kernel = new StandardKernel();
+            kernel.BuildHighway();
+
+            //Wiring in our types
+            
+            //This is Highway.Data's Context
+            kernel.Bind&ltIDataContext&gt().To&ltDataContext&gt()
+                .WithConstructorArgument("connectionString", SqlExpressConnectionString)
+                //This is Highway.Data's relational mappings Interface, but YOUR implementation
+                .WithConstructorArgument("mapping", new HighwayDataMappings());
+            //This is Highway.Data's Repository
+            kernel.Bind&ltIRepository&gt().To&ltRepository&gt();
+            //This is Common.Loggings log interface, feel free to supply anything that uses it *cough* log4net
+            kernel.Bind&ltILog&gt().To&ltNoOpLogger&gt();
+            //This is Highway.Data's context configuration, by default use the default :-)
+            kernel.Bind&ltIContextConfiguration&gt().To&ltDefaultContextConfiguration&gt();
+
+
+            //TODO: Wire up your types here
+
+        }
+    }
+}
+        </pre>
+    </div>
+    <div class="NHibernate Castle Web">
+        <pre>Not Added Yet</pre>
+    </div>
+    <div class="NHibernate StructureMap Web">
+        <pre>Not Added Yet</pre>
+    </div>
+    <div class="NHibernate Unity Web">
+        <pre>Not Added Yet</pre>
+    </div>
+    <div class="NHibernate Ninject Web">
+        <pre>Not Added Yet</pre>
+    </div>
+    <div class="raven Castle Web">
+        <pre>Not Added Yet</pre>
+    </div>
+    <div class="raven StructureMap Web">
+        <pre>Not Added Yet</pre>
+    </div>
+    <div class="raven Unity Web">
+        <pre>Not Added Yet</pre>
+    </div>
+    <div class="raven Ninject Web">
+        <pre>Not Added Yet</pre>
+    </div>
+    <div class="mongo Castle Web">
+        <pre>Not Added Yet</pre>
+    </div>
+    <div class="mongo StructureMap Web">
+        <pre>Not Added Yet</pre>
+    </div>
+    <div class="mongo Unity Web">
+        <pre>Not Added Yet</pre>
+    </div>
+    <div class="mongo Ninject Web">
+        <pre>Not Added Yet</pre>
+    </div>
+</body>
+</html>

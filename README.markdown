@@ -89,16 +89,13 @@ Feel free to open issues on GitHub if you encounter any issues.  If you need a c
 
 ## NuGet Packages
 
-We provide three NuGet Packages:
-
-* [Highway.Data.EntityFramework][hwde-nuget] is the package most people will use, and contains our full Entity Framework implementation.
-* [Highway.Data.EntityFramework.Castle][hwdec-nuget] contains a Windsor Installer already setup for everything Highway.Data needs other than your Repository, Context and Mappings.
-* [Highway.Data][hwd-nuget] is our core abstractions, without an ORM dependency.
+We provide several NuGet Packages found here: [Highway.Data Packages][hwd-nuget]
 
 
 ## License
 
-<a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
+
+<a rel="license" href="http://www.apache.org/licenses/LICENSE-2.0.html"></a><br />This work is licensed under a <a rel="license" href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache 2.0 License</a>.
 
 
 [book]: http://www.packtpub.com/entity-framework-4-1-experts-test-driven-development-architecture-cookbook/book
@@ -108,6 +105,4 @@ We provide three NuGet Packages:
 [hwdoc]: http://highwayframework.github.com/Highway.Data/docs/index.html
 [dl]: http://devlinliles.com/
 [tr]: http://TimRayburn.net/about/
-[hwd-nuget]: https://nuget.org/packages/Highway.Data
-[hwde-nuget]: https://nuget.org/packages/Highway.Data.EntityFramework
-[hwdec-nuget]: https://nuget.org/packages/Highway.Data.EntityFramework.Castle
+[hwd-nuget]: http://nuget.org/packages?q=highway.data

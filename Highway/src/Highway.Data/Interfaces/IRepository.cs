@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Highway.Data.Interfaces
+namespace Highway.Data
 {
     /// <summary>
     /// The interface used to interact with the ORM Specific Implementations

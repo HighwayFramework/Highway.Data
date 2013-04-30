@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Highway.Data.Interfaces
+namespace Highway.Data
 {
     /// <summary>
     /// The interface to implement when using with the default Auditable Interceptor to specify an Auditable Entity

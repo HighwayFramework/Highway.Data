@@ -1,7 +1,7 @@
 using System;
 using Highway.Data.Interceptors.Events;
 
-namespace Highway.Data.Interfaces
+namespace Highway.Data
 {
     /// <summary>
     /// The interface used to surface events for queries that support interceptors

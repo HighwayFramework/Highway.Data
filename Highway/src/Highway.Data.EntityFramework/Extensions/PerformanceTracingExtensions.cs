@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using Common.Logging;
 using Common.Logging.Simple;
-using Highway.Data.Interfaces;
+using Highway.Data;
 
 namespace Highway.Data.EntityFramework
 {

@@ -1,4 +1,4 @@
-namespace Highway.Data.Interfaces
+namespace Highway.Data
 {
     /// <summary>
     /// An Interface for Scalar Queries that return a single value or object

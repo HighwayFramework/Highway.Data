@@ -3,12 +3,12 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using Highway.Data.Interceptors.Events;
-using Highway.Data.Interfaces;
+using Highway.Data;
 
 namespace Highway.Data.Interceptors
 {
     /// <summary>
-    /// An interceptor that operates pre-save to add audit information to the records being committed that implement the <see cref="Highway.Data.Interfaces.IAuditableEntity"/> interface
+    /// An interceptor that operates pre-save to add audit information to the records being committed that implement the <see cref="Highway.Data.IAuditableEntity"/> interface
     /// </summary>
     public class AuditableInterceptor : IInterceptor<PreSaveEventArgs>
     {

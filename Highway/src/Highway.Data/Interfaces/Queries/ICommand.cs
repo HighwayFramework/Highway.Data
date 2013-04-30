@@ -1,4 +1,4 @@
-namespace Highway.Data.Interfaces
+namespace Highway.Data
 {
     /// <summary>
     /// An Interface for Command Queries that return no value, or the return is ignored

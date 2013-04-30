@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using Highway.Data.EntityFramework.Tests.UnitTests;
-using Highway.Data.Interfaces;
+using Highway.Data;
 using Highway.Data.Tests.TestDomain;
 
 namespace Highway.Data.EntityFramework.Tests.Initializer

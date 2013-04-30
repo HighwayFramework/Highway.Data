@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Highway.Data.Interfaces;
+using Highway.Data;
 using NHibernate;
 
 namespace Highway.Data.QueryObjects

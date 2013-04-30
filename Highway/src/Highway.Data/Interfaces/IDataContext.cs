@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
 
-namespace Highway.Data.Interfaces
+namespace Highway.Data
 {
     /// <summary>
     /// The standard interface used to interact with an ORM specific implementation

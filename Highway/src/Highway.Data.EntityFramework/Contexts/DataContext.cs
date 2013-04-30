@@ -10,7 +10,7 @@ using Common.Logging;
 using Common.Logging.Simple;
 using Highway.Data.EntityFramework.Interfaces;
 using Highway.Data.Interceptors.Events;
-using Highway.Data.Interfaces;
+using Highway.Data;
 
 namespace Highway.Data
 {

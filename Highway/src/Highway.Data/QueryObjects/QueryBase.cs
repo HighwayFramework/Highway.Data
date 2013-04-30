@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Data.Entity;
 using System.Reflection;
 using Highway.Data.Interceptors.Events;
-using Highway.Data.Interfaces;
+using Highway.Data;
 
 namespace Highway.Data.QueryObjects
 {

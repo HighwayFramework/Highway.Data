@@ -1,5 +1,5 @@
 ﻿using System;
-using Highway.Data.Interfaces;
+using Highway.Data;
 using Raven.Client;
 
 namespace Highway.Data.QueryObjects

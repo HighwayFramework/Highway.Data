@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Objects;
 using System.Linq;
-using Highway.Data.Interfaces;
+using Highway.Data;
 
 namespace Highway.Data.EntityFramework.Tests.UnitTests
 {

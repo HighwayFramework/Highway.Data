@@ -1,4 +1,4 @@
-﻿namespace Highway.Data.Interfaces
+﻿namespace Highway.Data
 {
     /// <summary>
     /// This gives a standard interface for the user name service,

@@ -5,7 +5,7 @@ using System.Linq;
 using Common.Logging;
 using Common.Logging.Simple;
 using Highway.Data.Interceptors.Events;
-using Highway.Data.Interfaces;
+using Highway.Data;
 using Raven.Client;
 
 namespace Highway.Data

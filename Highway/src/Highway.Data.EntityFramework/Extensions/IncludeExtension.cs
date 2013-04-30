@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 using System.Data.Entity;
-using Highway.Data.Interfaces;
+using Highway.Data;
 
 // ReSharper disable CheckNamespace
 namespace Highway.Data.QueryObjects
@@ -14,17 +14,22 @@ namespace Highway.Data.QueryObjects
         /// <summary>
         /// Takes the specified number of records
         /// </summary>
-        /// <param name="extend"></param>
-        /// <param name="count"></param>
+        /// <param name="extend">Query to Extend</param>
+        /// <param name="propertiesToInclude">Property of related objects to include</param>
         /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public static IQuery<T> Include<T>(this IQuery<T> extend, int count)
+        /// <returns>Query with extension applied</returns>
+        public static IQuery<T> Include<T>(this IQuery<T> extend, params string[] propertiesToInclude)
         {
-            var generics = new[] { typeof(T) };
-            var parameters = new Expression[] { Expression.Constant(count) };
-            ((IExtendableQuery)extend).AddMethodExpression("Include", generics, parameters);
+            foreach (var s in propertiesToInclude)
+            {
+                var generics = new[] { typeof(T) };
+                var parameters = new Expression[] { Expression.Constant(s) };
+                ((IExtendableQuery)extend).AddMethodExpression("Include", generics, parameters);
+            }
             return extend;
         }
+
+
 
     }
 }

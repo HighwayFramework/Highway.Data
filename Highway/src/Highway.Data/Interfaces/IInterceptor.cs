@@ -1,7 +1,7 @@
 using System;
 using Highway.Data.Interceptors;
 
-namespace Highway.Data.Interfaces
+namespace Highway.Data
 {
     /// <summary>
     /// The standard interface for intercept

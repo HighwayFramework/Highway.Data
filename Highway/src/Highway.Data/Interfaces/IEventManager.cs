@@ -1,6 +1,6 @@
 using System;
 
-namespace Highway.Data.Interfaces
+namespace Highway.Data
 {
     /// <summary>
     /// The interface used to interact with the Event manager implementation for registration of Interceptors

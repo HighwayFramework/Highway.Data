@@ -8,7 +8,7 @@ using Castle.Windsor;
 using Highway.Data.EventManagement;
 using Highway.Data.Interceptors;
 using Highway.Data.Interceptors.Events;
-using Highway.Data.Interfaces;
+using Highway.Data;
 using Highway.Data.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;

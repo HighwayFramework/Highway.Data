@@ -1,7 +1,7 @@
 ﻿using System;
 using Common.Logging;
 using Common.Logging.Simple;
-using Highway.Data.Interfaces;
+using Highway.Data;
 
 namespace Highway.Data.RavenDB
 {

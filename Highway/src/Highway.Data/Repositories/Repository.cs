@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Highway.Data.Interfaces;
+using Highway.Data;
 
 namespace Highway.Data
 {

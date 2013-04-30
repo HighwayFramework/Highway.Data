@@ -5,7 +5,7 @@ using Castle.Windsor;
 using Common.Logging;
 using Common.Logging.Simple;
 using Highway.Data.EventManagement;
-using Highway.Data.Interfaces;
+using Highway.Data;
 using Highway.Data.Tests;
 using Highway.Data.Tests.TestDomain;
 using Highway.Test.MSTest;

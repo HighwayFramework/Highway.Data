@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Highway.Data.EventManagement;
 using Highway.Data.Interceptors.Events;
-using Highway.Data.Interfaces;
+using Highway.Data;
 
 namespace Highway.Data.Testing
 {

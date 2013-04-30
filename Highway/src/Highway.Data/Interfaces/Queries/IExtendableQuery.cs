@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace Highway.Data.Interfaces
+namespace Highway.Data
 {
     /// <summary>
     /// This interface is used to allow for extension of prebuilt queries

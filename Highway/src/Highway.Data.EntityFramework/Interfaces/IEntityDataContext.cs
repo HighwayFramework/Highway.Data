@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Common;
-using Highway.Data.Interfaces;
+using Highway.Data;
 
 namespace Highway.Data.EntityFramework.Interfaces
 {

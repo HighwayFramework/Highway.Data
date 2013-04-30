@@ -1,6 +1,6 @@
 using System;
 
-namespace Highway.Data.Interfaces
+namespace Highway.Data
 {
     /// <summary>
     /// The base interface that surfaces SQL output of the Query statement

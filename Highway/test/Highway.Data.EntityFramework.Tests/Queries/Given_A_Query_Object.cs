@@ -9,7 +9,7 @@ using CommonServiceLocator.WindsorAdapter;
 using Highway.Data.EntityFramework.Tests.Mapping;
 using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.EventManagement;
-using Highway.Data.Interfaces;
+using Highway.Data;
 using Highway.Data.QueryObjects;
 using Highway.Data.Tests.TestDomain;
 using Highway.Data.Tests.TestQueries;

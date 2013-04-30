@@ -2,7 +2,7 @@
 using System.Data.Entity;
 using System.Reflection;
 using Highway.Data.EntityFramework.Builder;
-using Highway.Data.Interfaces;
+using Highway.Data;
 
 namespace Highway.Data
 {

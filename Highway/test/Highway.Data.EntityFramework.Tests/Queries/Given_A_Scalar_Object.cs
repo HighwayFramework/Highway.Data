@@ -51,7 +51,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             var repository = new Repository(context);
 
             //Act
-            repository.Get(new ScalarFooTestQuery());
+            repository.Find(new ScalarFooTestQuery());
 
             //Assert
             context.VerifyAllExpectations();

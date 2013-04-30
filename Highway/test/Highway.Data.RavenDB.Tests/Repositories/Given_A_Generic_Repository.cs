@@ -85,7 +85,7 @@ namespace Highway.Data.RavenDB.Tests.UnitTests
             target = new Repository(context);
 
             //Act
-            int result = target.Get(new ScalarIntTestQuery());
+            int result = target.Find(new ScalarIntTestQuery());
 
             //Assert
             context.VerifyAllExpectations();
@@ -105,7 +105,7 @@ namespace Highway.Data.RavenDB.Tests.UnitTests
             target = new Repository(context);
 
             //Act
-            int result = target.Get(new ScalarIntTestQuery());
+            int result = target.Find(new ScalarIntTestQuery());
 
             //Assert
             context.VerifyAllExpectations();

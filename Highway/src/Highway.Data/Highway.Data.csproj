@@ -103,6 +103,7 @@
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\Queries\IExtendableQuery.cs" />
+    <Compile Include="Testing\InMemoryContext.cs" />
     <Compile Include="Utilities\DynamicQuery.cs" />
   </ItemGroup>
   <ItemGroup>

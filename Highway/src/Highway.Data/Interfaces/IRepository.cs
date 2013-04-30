@@ -31,7 +31,7 @@ namespace Highway.Data.Interfaces
         /// <typeparam name="T">The Entity being queried</typeparam>
         /// <param name="query">The prebuilt Query Object</param>
         /// <returns>The instance of <typeparamref name="T"/> returned from the query</returns>
-        T Get<T>(IScalar<T> query);
+        T Find<T>(IScalar<T> query);
 
         /// <summary>
         /// Executes a prebuilt <see cref="ICommand"/>

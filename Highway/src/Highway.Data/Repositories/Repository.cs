@@ -35,7 +35,7 @@ namespace Highway.Data
         /// <typeparam name="T">The Entity being queried</typeparam>
         /// <param name="query">The prebuilt Query Object</param>
         /// <returns>The instance of <typeparamref name="T"/> returned from the query</returns>
-        public T Get<T>(IScalar<T> query)
+        public T Find<T>(IScalar<T> query)
         {
             return query.Execute(Context);
         }

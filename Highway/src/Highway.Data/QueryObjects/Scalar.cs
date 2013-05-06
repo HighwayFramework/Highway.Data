@@ -1,7 +1,7 @@
 ﻿using System;
 using Highway.Data;
 
-namespace Highway.Data.QueryObjects
+namespace Highway.Data
 {
     /// <summary>
     /// Base implementation of a query that returns a single value or object

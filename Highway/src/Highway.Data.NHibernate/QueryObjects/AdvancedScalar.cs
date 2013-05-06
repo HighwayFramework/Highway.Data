@@ -2,7 +2,7 @@
 using Highway.Data;
 using NHibernate;
 
-namespace Highway.Data.QueryObjects
+namespace Highway.Data
 {
     /// <summary>
     /// Advanced query that returns a single value or object base on NHibernate

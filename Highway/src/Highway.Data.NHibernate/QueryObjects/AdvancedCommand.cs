@@ -2,7 +2,7 @@ using System;
 using Highway.Data;
 using NHibernate;
 
-namespace Highway.Data.QueryObjects
+namespace Highway.Data
 {
     /// <summary>
     /// An implementation that executes functions against the database tied to NHibernate

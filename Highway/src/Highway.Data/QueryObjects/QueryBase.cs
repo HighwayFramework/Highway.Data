@@ -8,7 +8,7 @@ using System.Reflection;
 using Highway.Data.Interceptors.Events;
 using Highway.Data;
 
-namespace Highway.Data.QueryObjects
+namespace Highway.Data
 {
     /// <summary>
     /// The base query that allows for appending expressions, query extensions, and eventing

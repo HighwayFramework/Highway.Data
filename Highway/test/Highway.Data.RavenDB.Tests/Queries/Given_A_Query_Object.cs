@@ -8,7 +8,6 @@ using Common.Logging.Simple;
 using CommonServiceLocator.WindsorAdapter;
 using Highway.Data.EventManagement;
 using Highway.Data;
-using Highway.Data.QueryObjects;
 using Highway.Data.RavenDB.Tests.TestQueries;
 using Highway.Data.Tests.TestDomain;
 using Highway.Test.MSTest;

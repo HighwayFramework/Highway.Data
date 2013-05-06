@@ -1,7 +1,7 @@
 using System.Linq.Expressions;
 using Highway.Data;
 
-namespace Highway.Data.QueryObjects
+namespace Highway.Data
 {
     /// <summary>
     /// A collection of extension methods for extending reusable IQuery objects

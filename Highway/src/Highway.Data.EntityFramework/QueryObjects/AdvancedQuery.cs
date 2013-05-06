@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Highway.Data;
 
-namespace Highway.Data.QueryObjects
+namespace Highway.Data
 {
     /// <summary>
     /// This query is tied to the implementation of EntityFramework

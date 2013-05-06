@@ -1,6 +1,6 @@
 ﻿using Highway.Data.Filtering;
 
-namespace Highway.Data.QueryObjects
+namespace Highway.Data
 {
     /// <summary>
     /// A Query object that takes Criteria and then returns the filtered IEnumerable

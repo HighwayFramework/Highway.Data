@@ -1,7 +1,7 @@
 using System;
 using Highway.Data;
 
-namespace Highway.Data.QueryObjects
+namespace Highway.Data
 {
     /// <summary>
     /// An implementation that executes functions against the database tied to Entity Framework

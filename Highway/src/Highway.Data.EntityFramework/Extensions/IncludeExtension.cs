@@ -3,7 +3,7 @@ using System.Data.Entity;
 using Highway.Data;
 
 // ReSharper disable CheckNamespace
-namespace Highway.Data.QueryObjects
+namespace Highway.Data
 // ReSharper restore CheckNamespace
 {
     /// <summary>
@@ -18,7 +18,7 @@ namespace Highway.Data.QueryObjects
         /// <param name="propertiesToInclude">Property of related objects to include</param>
         /// <typeparam name="T"></typeparam>
         /// <returns>Query with extension applied</returns>
-        public static IQuery<T> Include<T>(this IQuery<T> extend, params string[] propertiesToInclude)
+        public static Query<T,TK> Include<T, TK>(this Query<T,TK> extend, params string[] propertiesToInclude) where T : class
         {
             foreach (var s in propertiesToInclude)
             {

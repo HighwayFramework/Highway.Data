@@ -1,4 +1,4 @@
-﻿using Highway.Data.QueryObjects;
+﻿using Highway.Data;
 using Highway.Data.Tests.TestDomain;
 
 namespace Highway.Data.RavenDB.Tests.TestQueries

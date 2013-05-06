@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Highway.Data.QueryObjects;
+using Highway.Data;
 using System;
 
 namespace Highway.Data.PrebuiltQueries

@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using Highway.Data;
 using NHibernate;
 
-namespace Highway.Data.QueryObjects
+namespace Highway.Data
 {
     /// <summary>
     /// This query is tied to the implementation of NHibernate

@@ -21,7 +21,7 @@ using Rhino.Mocks;
 namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
     [TestClass]
-    public class Given_A_Query_Object
+    public class Given_A_ProjectionQuery_Object
     {
         internal static IWindsorContainer container;
 

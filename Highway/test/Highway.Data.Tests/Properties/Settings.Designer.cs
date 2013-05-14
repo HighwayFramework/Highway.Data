@@ -26,7 +26,7 @@ namespace Highway.Data.Tests.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("\r\n        Data Source=.;Initial Catalog=FEEFTest;Integrated Security=True\r\n      " +
+        [global::System.Configuration.DefaultSettingValueAttribute("\r\n        Data Source=.;Initial Catalog=HighwayDataTest;Integrated Security=True\r\n      " +
             "")]
         public string Connection {
             get {

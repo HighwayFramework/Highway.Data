@@ -10,6 +10,7 @@ namespace Highway.Data.EntityFramework.Tests.Mapping
             ToTable("Bazs");
             HasKey(x => x.Id);
             Property(x => x.Name).IsOptional();
+            HasMany(x => x.Quxes).WithOptional();
         }
     }
 }

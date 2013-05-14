@@ -1,3 +1,4 @@
+using System.Linq;
 using Highway.Data;
 using Highway.Data.Tests.TestDomain;
 
@@ -8,6 +9,15 @@ namespace Highway.Data.Tests.TestQueries
         public FindFoo()
         {
             ContextQuery = c => c.AsQueryable<Foo>();
+        }
+    }
+
+    public class FindFooName : Query<Foo,string>
+    {
+        public FindFooName()
+        {
+            Selector = context => context.AsQueryable<Foo>();
+            Projector = foos => foos.Select(x => x.Name);
         }
     }
 }

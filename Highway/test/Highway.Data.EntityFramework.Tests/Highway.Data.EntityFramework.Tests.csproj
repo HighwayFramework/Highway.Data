@@ -130,7 +130,6 @@
     <Compile Include="Performance\Given_A_Query_Can_Performance_Test_IT.cs" />
     <Compile Include="Queries\Given_A_ProjectionQuery_Object.cs" />
     <Compile Include="Queries\Given_a_GetById_Query.cs" />
-    <Compile Include="Queries\Given_A_Projection_Query.cs" />
     <Compile Condition="'$(TargetFrameworkVersion)' == 'v4.5'" Include="Repositories\Given_An_Async_Repository.cs" />
     <Compile Include="TestCategories.cs" />
     <Compile Include="Mapping\BarMap.cs" />

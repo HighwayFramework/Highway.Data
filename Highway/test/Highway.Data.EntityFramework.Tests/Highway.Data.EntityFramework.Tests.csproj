@@ -92,7 +92,6 @@
     <Compile Include="..\..\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="Async\Given_An_Async_enabled_Repository.cs" />
     <Compile Include="Contexts\Given_A_Context_Based_On_Database_First.cs" />
     <Compile Include="Contexts\Given_A_Context_Without_Configuration.cs" />
     <Compile Include="Initializer\EntityFrameworkIntializer.cs" />
@@ -106,7 +105,6 @@
     <Compile Include="Performance\Given_A_Query_Can_Performance_Test_IT.cs" />
     <Compile Include="Queries\Given_a_GetById_Query.cs" />
     <Compile Include="Queries\Given_A_Projection_Query.cs" />
-    <Compile Condition="'$(TargetFrameworkVersion)' == 'v4.5'" Include="Repositories\Given_An_Async_Repository.cs" />
     <Compile Include="TestCategories.cs" />
     <Compile Include="Mapping\BarMap.cs" />
     <Compile Include="Mapping\BazMap.cs" />

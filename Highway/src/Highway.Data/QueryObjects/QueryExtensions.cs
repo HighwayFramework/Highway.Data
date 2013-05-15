@@ -38,6 +38,35 @@ namespace Highway.Data
             return extend;
         }
 
+        /// <summary>
+        /// Takes the specified number of records
+        /// </summary>
+        /// <param name="extend"></param>
+        /// <param name="count"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static IQuery<TSelection, TProjection> Take<TSelection, TProjection>(this IQuery<TSelection, TProjection> extend, int count)
+        {
+            var generics = new[] { typeof(TSelection) };
+            var parameters = new Expression[] { Expression.Constant(count) };
+            ((IExtendableQuery)extend).AddMethodExpression("Take", generics, parameters);
+            return extend;
+        }
+
+        /// <summary>
+        /// Skip the number of items specified
+        /// </summary>
+        /// <param name="extend"></param>
+        /// <param name="count"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static IQuery<TSelection, TProjection> Skip<TSelection, TProjection>(this IQuery<TSelection, TProjection> extend, int count)
+        {
+            var generics = new[] { typeof(TSelection) };
+            var parameters = new Expression[] { Expression.Constant(count) };
+            ((IExtendableQuery)extend).AddMethodExpression("Skip", generics, parameters);
+            return extend;
+        }
         
     }
 }

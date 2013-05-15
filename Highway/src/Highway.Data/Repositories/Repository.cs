@@ -60,6 +60,17 @@ namespace Highway.Data
             return query.Execute(Context);
         }
 
+        /// <summary>
+        /// Executes a prebuilt <see cref="IQuery{T}"/> and returns an <see cref="IEnumerable{T}"/>
+        /// </summary>
+        /// <typeparam name="T">The Entity being queried</typeparam>
+        /// <param name="query">The prebuilt Query Object</param>
+        /// <returns>The <see cref="IEnumerable{T}"/> returned from the query</returns>
+        public IEnumerable<IProjection> Find<TSelection, IProjection>(IQuery<TSelection, IProjection> query) where TSelection : class
+        {
+            return query.Execute(Context);
+        }
+
         #endregion
     }
 }

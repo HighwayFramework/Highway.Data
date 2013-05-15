@@ -2,7 +2,7 @@
 using System.Data.Common;
 using Highway.Data;
 
-namespace Highway.Data.EntityFramework.Interfaces
+namespace Highway.Data.EntityFramework
 {
     /// <summary>
     /// 

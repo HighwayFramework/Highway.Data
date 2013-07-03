@@ -23,7 +23,7 @@ namespace Highway.Data
         /// <typeparam name="T">The Entity being queried</typeparam>
         /// <param name="query">The prebuilt Query Object</param>
         /// <returns>The <see cref="IEnumerable{T}"/> returned from the query</returns>
-        IEnumerable<T> Find<T>(IQuery<T> query) where T : class;
+        IEnumerable<T> Find<T>(IQuery<T> query);
 
         /// <summary>
         /// Executes a prebuilt <see cref="IScalar{T}"/> and returns a single instance of <typeparamref name="T"/>

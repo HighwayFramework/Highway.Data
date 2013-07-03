@@ -55,7 +55,7 @@ namespace Highway.Data
         /// <typeparam name="T">The Entity being queried</typeparam>
         /// <param name="query">The prebuilt Query Object</param>
         /// <returns>The <see cref="IEnumerable{T}"/> returned from the query</returns>
-        public IEnumerable<T> Find<T>(IQuery<T> query) where T : class
+        public IEnumerable<T> Find<T>(IQuery<T> query)
         {
             return query.Execute(Context);
         }

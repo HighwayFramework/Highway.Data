@@ -61,7 +61,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Highway.Data.Rest\Highway.Data.Rest.csproj">
+    <ProjectReference Include="..\..\src\Highway.Data.Rest\Highway.Data.Rest.csproj">
       <Project>{1FEB6F81-5621-49EF-9B54-3C1DD86D9BCB}</Project>
       <Name>Highway.Data.Rest</Name>
     </ProjectReference>

@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.Rest.ExampleAP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.Rest.ExampleAPI.Tests", "Highway.Data.Rest.ExampleAPI.Tests\Highway.Data.Rest.ExampleAPI.Tests.csproj", "{1054FAEB-822F-48DA-A31E-569156D3F2CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.Rest.Tests", "test\Highway.Data.Rest.Tests\Highway.Data.Rest.Tests.csproj", "{7736D2BB-2C10-4893-AB48-819E09C9C994}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Highway.vsmdi
@@ -100,6 +102,10 @@ Global
 		{1054FAEB-822F-48DA-A31E-569156D3F2CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1054FAEB-822F-48DA-A31E-569156D3F2CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1054FAEB-822F-48DA-A31E-569156D3F2CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7736D2BB-2C10-4893-AB48-819E09C9C994}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7736D2BB-2C10-4893-AB48-819E09C9C994}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7736D2BB-2C10-4893-AB48-819E09C9C994}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7736D2BB-2C10-4893-AB48-819E09C9C994}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,6 @@
 using Highway.Data.Rest.Configuration.Conventions;
 
-namespace Highway.Data.Rest.ExampleAPI.Tests
+namespace Highway.Data.Rest.Tests
 {
     public class OverrideTestConvention : DefaultConvention
     {

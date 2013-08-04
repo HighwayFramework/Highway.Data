@@ -46,6 +46,7 @@
     <Compile Include="Configuration\Conventions\IRestConvention.cs" />
     <Compile Include="Configuration\Interfaces\IKeyConfiguredType.cs" />
     <Compile Include="Configuration\Interfaces\IRestTypeConfiguration.cs" />
+    <Compile Include="Configuration\Interfaces\IRestTypeDefinition.cs" />
     <Compile Include="Configuration\Interfaces\IRouteConfiguredType.cs" />
     <Compile Include="Configuration\Entities\RestTypeConfiguration.cs" />
     <Compile Include="Configuration\IContextConfiguration.cs" />
@@ -55,7 +56,9 @@
     <Compile Include="Contexts\MappingDetail.cs" />
     <Compile Include="Contexts\ModelBuilder.cs" />
     <Compile Include="Contexts\ModelDefinitions.cs" />
+    <Compile Include="Expressions\ExpressionHelper.cs" />
     <Compile Include="Expressions\ExpressionExtensions.cs" />
+    <Compile Include="Expressions\ParameterRebinder.cs" />
     <Compile Include="Expressions\TypeOf.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

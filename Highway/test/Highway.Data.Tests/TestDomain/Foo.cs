@@ -13,5 +13,10 @@ namespace Highway.Data.Tests.TestDomain
 
         [StoredProcedureAttributes.Name("testAddress")]
         public virtual string Address { get; set; }
+
+        public object Test()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

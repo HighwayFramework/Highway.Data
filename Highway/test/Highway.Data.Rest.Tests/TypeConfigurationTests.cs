@@ -1,9 +1,13 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System;
+using System.Data;
+using FluentAssertions;
+using Highway.Data.Rest.Configuration.Entities;
+using Highway.Data.Rest.Configuration.Interfaces;
 using Highway.Data.Rest.Contexts;
 using Highway.Data.Tests.TestDomain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Highway.Data.Rest.ExampleAPI.Tests
+namespace Highway.Data.Rest.Tests
 {
     [TestClass]
     public class TypeConfigurationTests
@@ -15,10 +19,10 @@ namespace Highway.Data.Rest.ExampleAPI.Tests
             var target = new ModelBuilder();
 
             //act
-            var type = target.Entity<Foo>().WithRoute("values").WithKey("id");
+            var type = target.Entity<Foo>().WithRoute("values").WithKey("Id");
 
             //assert
-            Assert.AreEqual("values/{id}",type.Uri);
+            Assert.AreEqual("values/{Id}",type.Uri);
         }
 
         [TestMethod]
@@ -82,6 +86,49 @@ namespace Highway.Data.Rest.ExampleAPI.Tests
 
             //assert
             Assert.AreEqual("{id}/id", type.Uri);
+        }
+
+        [TestMethod]
+        public void ShouldNotAllowMethodSignaturesForKeys()
+        {
+            //arrange
+            var target = new ModelBuilder();
+
+            //act
+            Action act = () => target.Entity<Foo>().WithKey(x => x.Test());
+
+            //assert
+            act.ShouldThrow<InvalidExpressionException>();
+        }
+
+        [TestMethod]
+        public void SettingStringKeyShouldPopulateKeySelector()
+        {
+            //arrange
+            var target = new ModelBuilder();
+
+            //act
+            RestTypeConfiguration<Foo> restTypeConfiguration = target.Entity<Foo>();
+            IRestTypeDefinition typeDefinition = (IRestTypeDefinition) restTypeConfiguration.WithKey("Id"); ;
+
+            //assert
+            Assert.IsNotNull(typeDefinition.KeyProperty);
+
+        }
+
+        [TestMethod]
+        public void SettingStringKeyToInvalidPropertyShouldThrowException()
+        {
+            //arrange
+            var target = new ModelBuilder();
+
+            //act
+            RestTypeConfiguration<Foo> restTypeConfiguration = target.Entity<Foo>();
+            Action act = () => restTypeConfiguration.WithKey("id");
+
+            //assert
+            act.ShouldThrow<InvalidOperationException>();
+
         }
     }
 }

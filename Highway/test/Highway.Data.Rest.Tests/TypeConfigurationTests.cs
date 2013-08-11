@@ -4,7 +4,6 @@ using FluentAssertions;
 using Highway.Data.Rest.Configuration.Entities;
 using Highway.Data.Rest.Configuration.Interfaces;
 using Highway.Data.Rest.Contexts;
-using Highway.Data.Tests.TestDomain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highway.Data.Rest.Tests
@@ -22,7 +21,7 @@ namespace Highway.Data.Rest.Tests
             var type = target.Entity<Foo>().WithRoute("values").WithKey("Id");
 
             //assert
-            Assert.AreEqual("values/{Id}",type.Uri);
+            Assert.AreEqual("values/{Id}",type.SingleUri);
         }
 
         [TestMethod]
@@ -35,7 +34,7 @@ namespace Highway.Data.Rest.Tests
             var type = target.Entity<Foo>().WithRoute("values").WithKey(x => x.Id);
 
             //assert
-            Assert.AreEqual("values/{id}", type.Uri);
+            Assert.AreEqual("values/{id}", type.SingleUri);
         }
 
         [TestMethod]
@@ -48,7 +47,7 @@ namespace Highway.Data.Rest.Tests
             var type = target.Entity<Foo>().WithKey(x => x.Id);
 
             //assert
-            Assert.AreEqual("foos/{id}", type.Uri);
+            Assert.AreEqual("foos/{id}", type.SingleUri);
         }
 
         [TestMethod]
@@ -61,7 +60,7 @@ namespace Highway.Data.Rest.Tests
             var type = target.Entity<Foo>();
 
             //assert
-            Assert.AreEqual("foos/{id}", type.Uri);
+            Assert.AreEqual("foos/{id}", type.SingleUri);
         }
 
         [TestMethod]
@@ -73,7 +72,8 @@ namespace Highway.Data.Rest.Tests
             var type = target.Entity<Foo>();
 
             //assert
-            Assert.AreEqual("{Id}/Test", type.Uri);
+            type.SingleUri.Should().Be("{Id}/Test");
+            type.AllUri.Should().Be("{Id}");
         }
 
         [TestMethod]
@@ -85,7 +85,9 @@ namespace Highway.Data.Rest.Tests
             var type = target.Entity<Foo>();
 
             //assert
-            Assert.AreEqual("{id}/id", type.Uri);
+            type.SingleUri.Should().Be("{id}/id");
+            type.AllUri.Should().Be("{id}");
+            
         }
 
         [TestMethod]

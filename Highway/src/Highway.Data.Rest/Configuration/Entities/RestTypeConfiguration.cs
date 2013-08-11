@@ -45,10 +45,17 @@ namespace Highway.Data.Rest.Configuration.Entities
             return this;
         }
 
-        public string Uri
+        public string SingleUri
         {
-            get { return string.Format(_defaultConvention.DefaultFormat(), _route, _key); }
+            get { return string.Format(_defaultConvention.DefaultFormat().Single, _route, _key); }
         }
+
+        public string AllUri
+        {
+            get { return string.Format(_defaultConvention.DefaultFormat().All, _route, _key); }
+        }
+
+        public Type ConfiguredType { get { return typeof (T); } }
 
         public PropertyInfo KeyProperty { get; private set; }
     }

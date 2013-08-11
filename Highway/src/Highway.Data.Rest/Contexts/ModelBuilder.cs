@@ -8,7 +8,7 @@ namespace Highway.Data.Rest.Contexts
     public class ModelBuilder
     {
         private readonly IRestConvention _convention;
-        private List<IRestTypeDefinition> _types;
+        private readonly List<IRestTypeDefinition> _types;
 
         public ModelBuilder() : this(new DefaultConvention()) { }
         public ModelBuilder(IRestConvention convention)
@@ -19,7 +19,12 @@ namespace Highway.Data.Rest.Contexts
 
         public ModelDefinitions Compile()
         {
-            throw new System.NotImplementedException();
+            var modelDefinition = new ModelDefinitions();
+            foreach (var type in _types)
+            {
+                modelDefinition.Add(type);
+            }
+            return modelDefinition;
         }
 
         public RestTypeConfiguration<T> Entity<T>()

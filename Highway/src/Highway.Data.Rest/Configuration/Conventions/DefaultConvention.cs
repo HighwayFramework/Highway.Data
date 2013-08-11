@@ -14,9 +14,13 @@ namespace Highway.Data.Rest.Configuration.Conventions
             return "id";
         }
 
-        public virtual string DefaultFormat()
+        public virtual RestActionFormat DefaultFormat()
         {
-            return "{0}/{{{1}}}";
+            return new RestActionFormat()
+            {
+                Single = "{0}/{{{1}}}",
+                All = "{0}"
+            };
         }
     }
 }

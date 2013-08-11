@@ -15,9 +15,13 @@ namespace Highway.Data.Rest.Tests
             return "Id";
         }
 
-        public string DefaultFormat()
+        public RestActionFormat DefaultFormat()
         {
-            return "{{{1}}}/{0}";
+            return new RestActionFormat()
+            {
+                Single = "{{{1}}}/{0}",
+                All = "{{{1}}}"
+            };
         }
     }
 }

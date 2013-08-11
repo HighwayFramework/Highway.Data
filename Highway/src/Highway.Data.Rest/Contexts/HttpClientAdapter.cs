@@ -1,6 +1,7 @@
 ﻿namespace Highway.Data.Rest.Contexts
 {
-    public class MappingDetail
+    public class HttpClientAdapter
     {
+         
     }
 }

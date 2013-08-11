@@ -2,6 +2,6 @@
 {
     public interface IKeyConfiguredType
     {
-        string Uri { get; }
+        string SingleUri { get; }
     }
 }

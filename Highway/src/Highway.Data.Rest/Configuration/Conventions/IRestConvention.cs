@@ -8,6 +8,6 @@ namespace Highway.Data.Rest.Configuration.Conventions
 
         string DefaultKey(Type type);
 
-        string DefaultFormat();
+        RestActionFormat DefaultFormat();
     }
 }

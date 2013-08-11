@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Highway.Data.Tests.TestDomain;
 
 namespace Highway.Data.Rest.ExampleAPI.Controllers
 {
@@ -34,6 +35,18 @@ namespace Highway.Data.Rest.ExampleAPI.Controllers
         // DELETE api/values/5
         public void Delete(int id)
         {
+        }
+    }
+
+    public class FooController : ApiController
+    {
+        public IEnumerable<Foo> Get()
+        {
+            return new List<Foo>()
+            {
+                new Foo(){Address = "Test",Id = 1,Name = "Test"},
+                new Foo(){Address = "Devlin",Id = 1,Name = "Devlin"}
+            };
         }
     }
 }

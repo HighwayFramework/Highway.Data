@@ -38,8 +38,14 @@
     <Reference Include="FluentAssertions">
       <HintPath>..\..\packages\FluentAssertions.2.0.1\lib\net45\FluentAssertions.dll</HintPath>
     </Reference>
+    <Reference Include="Rhino.Mocks">
+      <HintPath>..\..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -54,10 +60,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DataContextTests.cs" />
+    <Compile Include="ModelBuilderTests.cs" />
     <Compile Include="OverrideTestConvention.cs" />
     <Compile Include="TestConvention.cs" />
     <Compile Include="TypeConfigurationTests.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -68,10 +75,6 @@
     <ProjectReference Include="..\..\src\Highway.Data\Highway.Data.csproj">
       <Project>{B0CA9DAB-C5D4-4AC6-97E7-725B18191B2D}</Project>
       <Name>Highway.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Highway.Data.Tests\Highway.Data.Tests.csproj">
-      <Project>{726A3CE4-CB5B-4E30-8F97-FE9705FF4F3C}</Project>
-      <Name>Highway.Data.Tests</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

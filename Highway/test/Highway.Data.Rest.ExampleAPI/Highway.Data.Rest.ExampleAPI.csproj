@@ -289,6 +289,16 @@
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Highway.Data\Highway.Data.csproj">
+      <Project>{B0CA9DAB-C5D4-4AC6-97E7-725B18191B2D}</Project>
+      <Name>Highway.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Highway.Data.Tests\Highway.Data.Tests.csproj">
+      <Project>{726A3CE4-CB5B-4E30-8F97-FE9705FF4F3C}</Project>
+      <Name>Highway.Data.Tests</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

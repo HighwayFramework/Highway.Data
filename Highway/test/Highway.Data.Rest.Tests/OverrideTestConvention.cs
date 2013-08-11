@@ -4,9 +4,13 @@ namespace Highway.Data.Rest.Tests
 {
     public class OverrideTestConvention : DefaultConvention
     {
-        public override string DefaultFormat()
+        public override RestActionFormat DefaultFormat()
         {
-            return "{{{1}}}/{1}";
+            return new RestActionFormat()
+            {
+                Single = "{{{1}}}/{1}",
+                All = "{{{1}}}"
+            };
         }
     }
 }

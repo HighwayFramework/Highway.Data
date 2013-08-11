@@ -6,7 +6,9 @@ namespace Highway.Data.Rest.Configuration.Interfaces
 {
     public interface IRestTypeDefinition
     {
-        string Uri { get; }
+        string SingleUri { get; }
+        string AllUri { get; }
+        Type ConfiguredType { get; }
         PropertyInfo KeyProperty { get; } 
     }
 }   

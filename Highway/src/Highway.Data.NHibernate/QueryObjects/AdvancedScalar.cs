@@ -13,7 +13,7 @@ namespace Highway.Data
         /// <summary>
         /// The query to be executed later
         /// </summary>
-        protected Func<ISession, T> ContextQuery { get; set; }
+        protected Func<DataContext, T> ContextQuery { get; set; }
 
         #region IScalar<T> Members
 
@@ -26,7 +26,7 @@ namespace Highway.Data
         {
             Context = context;
             CheckContextAndQuery(ContextQuery);
-            return ContextQuery((ISession)context);
+            return ContextQuery((DataContext)context);
         }
 
         #endregion

@@ -12,7 +12,7 @@ namespace Highway.Data
         /// <summary>
         /// The Command that will be executed at some point in the future
         /// </summary>
-        protected Action<ISession> ContextQuery { get; set; }
+        protected Action<DataContext> ContextQuery { get; set; }
 
         #region ICommand Members
 
@@ -24,7 +24,7 @@ namespace Highway.Data
         {
             Context = context;
             CheckContextAndQuery(ContextQuery);
-            ContextQuery((ISession) context);
+            ContextQuery((DataContext) context);
         }
 
         #endregion

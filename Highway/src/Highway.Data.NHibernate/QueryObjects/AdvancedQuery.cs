@@ -15,7 +15,7 @@ namespace Highway.Data
         /// <summary>
         /// This holds the expression that will be used to create the <see cref="IQueryable{T}"/> when executed on the context
         /// </summary>
-        protected Func<ISession, IQueryable<T>> ContextQuery { get; set; }
+        protected Func<DataContext, IQueryable<T>> ContextQuery { get; set; }
 
         #region IQuery<T> Members
 
@@ -56,7 +56,7 @@ namespace Highway.Data
         {
             try
             {
-                return ContextQuery((ISession)Context);
+                return ContextQuery((DataContext)Context);
             }
             catch (Exception)
             {

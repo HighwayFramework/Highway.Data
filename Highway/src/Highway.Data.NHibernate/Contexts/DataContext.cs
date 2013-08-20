@@ -193,7 +193,9 @@ namespace Highway.Data
                 {
                     command.Parameters.Add(dbParameter);
                 }
-                return command.ExecuteNonQuery();
+                var output = command.ExecuteNonQuery();
+                tx.Commit();
+                return output;
             }
         }
 

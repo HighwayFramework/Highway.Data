@@ -184,13 +184,17 @@ namespace Highway.Data
         /// <returns>The rows affected</returns>
         public int ExecuteSqlCommand(string sql, params DbParameter[] dbParams)
         {
-            IDbCommand command = _session.Connection.CreateCommand();
-            command.CommandText = sql;
-            foreach (var dbParameter in dbParams)
+            using (var tx = _session.BeginTransaction())
             {
-                command.Parameters.Add(dbParameter);
+                IDbCommand command = _session.Connection.CreateCommand();
+                tx.Enlist(command);
+                command.CommandText = sql;
+                foreach (var dbParameter in dbParams)
+                {
+                    command.Parameters.Add(dbParameter);
+                }
+                return command.ExecuteNonQuery();
             }
-            return command.ExecuteNonQuery();
         }
 
         /// <summary>

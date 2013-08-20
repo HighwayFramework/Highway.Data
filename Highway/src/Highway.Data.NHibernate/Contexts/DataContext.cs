@@ -19,7 +19,6 @@ namespace Highway.Data
     public partial class DataContext : IObservableDataContext, IDisposable
     {
         private readonly ILog _log;
-        private readonly IMappingConfiguration _mapping;
         private readonly ISession _session;
         private IEventManager _eventManager;
 

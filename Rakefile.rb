@@ -44,7 +44,7 @@ namespace :package do
 	def create_packs()
 		sh 'Highway/.nuget/nuget.exe pack Highway/src/Highway.Data/Highway.Data.csproj -o pack'
 		sh 'Highway/.nuget/nuget.exe pack Highway/src/Highway.Data.EntityFramework/Highway.Data.EntityFramework.csproj -o pack'
-		#sh 'Highway/.nuget/nuget.exe pack Highway/src/Highway.Data.NHibernate/Highway.Data.NHibernate.csproj -o pack'
+		sh 'Highway/.nuget/nuget.exe pack Highway/src/Highway.Data.NHibernate/Highway.Data.NHibernate.csproj -o pack'
 		#sh 'Highway/.nuget/nuget.exe pack Highway/src/Highway.Data.RavenDB/Highway.Data.RavenDB.csproj -o pack'
 		sh 'Highway/.nuget/nuget.exe pack Highway/src/Highway.Test.MSTest/Highway.Test.MSTest.csproj -o pack'
 	end

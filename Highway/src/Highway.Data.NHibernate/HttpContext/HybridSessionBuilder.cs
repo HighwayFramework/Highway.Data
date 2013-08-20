@@ -18,12 +18,12 @@ namespace Highway.Data.NHibernate
 
         public ISession GetSession()
         {
-            ISession session = getExistingOrNewSession();
+            ISession session = GetExistingOrNewSession();
             _logger.Debug("Using ISession " + session.GetHashCode());
             return session;
         }
 
-        private ISession getExistingOrNewSession()
+        private ISession GetExistingOrNewSession()
         {
             if (System.Web.HttpContext.Current != null)
             {

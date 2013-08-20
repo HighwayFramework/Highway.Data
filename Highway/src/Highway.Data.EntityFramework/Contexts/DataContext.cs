@@ -8,9 +8,8 @@ using System.Data.Objects;
 using System.Linq;
 using Common.Logging;
 using Common.Logging.Simple;
-using Highway.Data.EntityFramework.Interfaces;
+using Highway.Data.EntityFramework;
 using Highway.Data.Interceptors.Events;
-using Highway.Data;
 
 namespace Highway.Data
 {

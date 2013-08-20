@@ -96,7 +96,7 @@ namespace Highway.Data
     /// </summary>
     /// <typeparam name="TSelection">The Type that will be selected</typeparam>
     /// <typeparam name="TProjection">The type that will be projected</typeparam>
-    public class Query<TSelection, TProjection> : QueryBase, IQuery<TProjection> where TSelection : class
+    public class Query<TSelection, TProjection> : QueryBase, IQuery<TSelection, TProjection> where TSelection : class
     {
         public Query()
         {

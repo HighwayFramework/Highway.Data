@@ -48,7 +48,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             var repository = new Repository(context);
 
             //Act
-            repository.Find(new FindFoo());
+            repository.Find(new FindFooName());
 
             //Assert
             context.VerifyAllExpectations();
@@ -60,11 +60,11 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             //Arrange
             var context = MockRepository.GenerateStrictMock<IDataContext>();
             context.Expect(x => x.AsQueryable<Foo>()).Return(new List<Foo>().AsQueryable()).Repeat.Once();
-            var query = new FindFoo();
+            var query = new FindFooName();
 
 
             //Act
-            IEnumerable<Foo> items = query.Execute(context);
+            IEnumerable<string> items = query.Execute(context);
 
             //Assert
             context.VerifyAllExpectations();
@@ -75,7 +75,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
         public void When_Paging_Should_Affect_The_Base_Query_Before_It_Is_Executed()
         {
             //Arrange
-            var targetFoo = new Foo();
+            var targetFoo = new Foo(){Name = "Test"};
             var context = MockRepository.GenerateStrictMock<IDataContext>();
             context.Expect(x => x.AsQueryable<Foo>()).Return(new List<Foo>
                 {
@@ -85,21 +85,21 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
                     new Foo(),
                     targetFoo
                 }.AsQueryable()).Repeat.Once();
-            var query = new FindFoo();
+            var query = new FindFooName();
 
             //Act
-            IEnumerable<Foo> retVal = query.Skip(4).Take(1).Execute(context);
+            IEnumerable<string> retVal = query.Skip(4).Take(1).Execute(context);
 
 
             //Assert
-            retVal.First().ShouldBeSame(targetFoo);
+            retVal.First().ShouldBeSame(targetFoo.Name);
         }
 
         [TestMethod]
         public void When_Calling_Output_Sql_with_Context_It_Outputs_SQL()
         {
             //arrange
-            var target = new FindFoo();
+            var target = new FindFooName();
 
             var context = container.Resolve<IDataContext>();
 

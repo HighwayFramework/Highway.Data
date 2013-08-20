@@ -9,16 +9,16 @@ using Highway.Data.Interceptors.Events;
 using Highway.Data;
 using NHibernate;
 using NHibernate.Linq;
+using NHibernate.Transform;
 
 namespace Highway.Data
 {
     /// <summary>
-    /// A base implementation of the Code First Data DataContext for Entity Framework
+    /// A base implementation of the DataContext for use around a NHibernate Session
     /// </summary>
     public partial class DataContext : IObservableDataContext, IDisposable
     {
         private readonly ILog _log;
-        private readonly IMappingConfiguration _mapping;
         private readonly ISession _session;
         private IEventManager _eventManager;
 
@@ -168,7 +168,12 @@ namespace Highway.Data
         /// <returns>An <see cref="IEnumerable{T}"/> from the query return</returns>
         public IEnumerable<T> ExecuteSqlQuery<T>(string sql, params DbParameter[] dbParams)
         {
-            throw new NotImplementedException();
+            var executeSqlQuery = _session.CreateSQLQuery(sql);
+            foreach (var dbParameter in dbParams)
+            {
+                executeSqlQuery.SetParameter(dbParameter.ParameterName, dbParameter.Value);
+            }
+            return executeSqlQuery.SetResultTransformer(Transformers.AliasToBean<T>()).List<T>();
         }
 
         /// <summary>
@@ -179,7 +184,13 @@ namespace Highway.Data
         /// <returns>The rows affected</returns>
         public int ExecuteSqlCommand(string sql, params DbParameter[] dbParams)
         {
-            throw new NotImplementedException();
+            IDbCommand command = _session.Connection.CreateCommand();
+            command.CommandText = sql;
+            foreach (var dbParameter in dbParams)
+            {
+                command.Parameters.Add(dbParameter);
+            }
+            return command.ExecuteNonQuery();
         }
 
         /// <summary>

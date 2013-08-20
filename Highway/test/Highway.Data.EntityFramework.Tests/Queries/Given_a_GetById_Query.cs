@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
 using Common.Logging;
 using Common.Logging.Simple;
 using Highway.Data.EntityFramework.Tests.Mapping;
@@ -16,6 +17,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
         public void ShouldReturnFoo()
         {
             //Arrange
+            Database.SetInitializer(new DropCreateDatabaseAlways<TestDataContext>());
             var context = new TestDataContext(Settings.Default.Connection, new FooMappingConfiguration(),
                                               new ConsoleOutLogger("Test", LogLevel.All, true, true, true, string.Empty));
 

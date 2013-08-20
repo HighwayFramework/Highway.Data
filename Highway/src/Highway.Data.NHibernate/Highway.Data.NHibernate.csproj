@@ -65,7 +65,6 @@
     <Compile Include="..\..\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="Contexts\DataContext.cs" />
     <Compile Include="Contexts\ISessonDataContext.cs" />
     <Compile Include="Extensions\LoggingTraceExtensions.cs" />

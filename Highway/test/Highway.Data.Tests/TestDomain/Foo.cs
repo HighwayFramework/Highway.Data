@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Highway.Data.PrebuiltQueries;
 
 namespace Highway.Data.Tests.TestDomain
@@ -13,6 +14,12 @@ namespace Highway.Data.Tests.TestDomain
 
         [StoredProcedureAttributes.Name("testAddress")]
         public virtual string Address { get; set; }
+
+        public Bar Bar { get; set; }
+
+        public ICollection<Bar> Bars { get; set; }
+
+
 
         public object Test()
         {

@@ -32,11 +32,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Logging">
-      <HintPath>..\packages\Common.Logging.2.1.1\lib\net40\Common.Logging.dll</HintPath>
+    <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Highway.Data, Version=4.0.4.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Highway.Data.4.0.4.1\lib\net40\Highway.Data.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Net.Http">
       <HintPath>..\..\packages\HttpClient.0.3.0\lib\40\Microsoft.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.4.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
@@ -92,12 +100,6 @@
       <DependentUpon>Reflect.Overloads.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Highway.Data\Highway.Data.csproj">
-      <Project>{b0ca9dab-c5d4-4ac6-97e7-725b18191b2d}</Project>
-      <Name>Highway.Data</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="netfx\System\Reflection\Reflect.Overloads.tt">

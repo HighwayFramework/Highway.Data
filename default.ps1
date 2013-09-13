@@ -51,9 +51,10 @@ function rebuild([string]$slnPath) {
 }
 
 function create-packs {
-		pack-nuget .\Highway\src\Highway.Data\Highway.Data.csproj
-		pack-nuget .\Highway\src\Highway.Data.EntityFramework\Highway.Data.EntityFramework.csproj
-		pack-nuget .\Highway\src\Highway.Test.MSTest\Highway.Test.MSTest.csproj
+	pack-nuget .\Highway\src\Highway.Data\Highway.Data.csproj
+	pack-nuget .\Highway\src\Highway.Data.EntityFramework\Highway.Data.EntityFramework.csproj
+	pack-nuget .\Highway\src\Highway.Test.MSTest\Highway.Test.MSTest.csproj
+    pack-nuget .\Highway\src\Highway.Data.RavenDB\Highway.Data.RavenDB.csproj
 }
 
 function pack-nuget($prj) {

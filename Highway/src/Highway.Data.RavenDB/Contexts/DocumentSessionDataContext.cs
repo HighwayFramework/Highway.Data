@@ -5,6 +5,7 @@ using Raven.Client;
 using Raven.Client.Document;
 using Raven.Client.Indexes;
 using Raven.Client.Linq;
+using Raven.Abstractions.Data;
 
 namespace Highway.Data
 {
@@ -72,12 +73,12 @@ namespace Highway.Data
             _session.SaveChanges();
         }
 
-        public void Store(object entity, Guid etag)
+        public void Store(object entity, Etag etag)
         {
             _session.Store(entity,etag);
         }
 
-        public void Store(object entity, Guid etag, string id)
+        public void Store(object entity, Etag etag, string id)
         {
             _session.Store(entity,etag,id);
         }
@@ -93,5 +94,42 @@ namespace Highway.Data
         }
 
         public ISyncAdvancedSessionOperation Advanced { get; private set; }
+
+
+        public TResult[] Load<TTransformer, TResult>(IEnumerable<string> ids, Action<ILoadConfiguration> configure) where TTransformer : AbstractTransformerCreationTask, new()
+        {
+            return _session.Load<TTransformer, TResult>(ids, configure);
+        }
+
+        public TResult[] Load<TTransformer, TResult>(params string[] ids) where TTransformer : AbstractTransformerCreationTask, new()
+        {
+            return _session.Load<TTransformer, TResult>(ids);
+        }
+
+        public TResult Load<TTransformer, TResult>(string id, Action<ILoadConfiguration> configure) where TTransformer : AbstractTransformerCreationTask, new()
+        {
+            return _session.Load<TTransformer, TResult>(id, configure);
+        }
+
+        public TResult Load<TTransformer, TResult>(string id) where TTransformer : AbstractTransformerCreationTask, new()
+        {
+            return _session.Load<TTransformer, TResult>(id);
+        }
+
+        public T[] Load<T>(IEnumerable<ValueType> ids)
+        {
+            return _session.Load<T>(ids);
+        }
+
+        public T[] Load<T>(params ValueType[] ids)
+        {
+            return _session.Load<T>(ids);
+        }
+
+        public IRavenQueryable<T> Query<T>(string indexName, bool isMapReduce = false)
+        {
+            return _session.Query<T>(indexName, isMapReduce);
+        }
+
     }
 }

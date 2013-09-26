@@ -195,5 +195,52 @@ namespace Highway.Data.Tests.InMemory
             var posts = _context.AsQueryable<Post>();
             posts.Count().Should().Be(0);
         }
+
+        [TestMethod]
+        public void ShouldNotRemoveIfReferencedByAnotherObject()
+        {
+            // Arrange
+            var blog = new Blog();
+            var site1 = new Site() { Blog = blog };
+            var site2 = new Site() { Blog = blog };
+            _context.Add(site1);
+            _context.Add(site2);
+
+            // Act
+            _context.Remove(site1);
+            
+            // Assert
+            _context.AsQueryable<Site>().Count().Should().Be(1);
+            _context.AsQueryable<Site>().First().Should().BeSameAs(site2);
+            _context.AsQueryable<Blog>().Count().Should().Be(1);
+            _context.AsQueryable<Blog>().First().Should().BeSameAs(blog);
+        }
+
+        [TestMethod]
+        public void ShouldNotRemoveIfReferencedByAnotherCollection()
+        {
+            // Arrange
+            var post1 = new Post();
+            var post2 = new Post();
+            var blog1 = new Blog()
+            {
+                Posts = new List<Post> { post1, post2 }
+            };
+            var blog2 = new Blog()
+            {
+                Posts = new List<Post> { post1 }
+            };
+            _context.Add(blog1);
+            _context.Add(blog2);
+
+            // Act
+            //_context.Remove(post2);
+
+            // Assert
+            _context.AsQueryable<Post>().Count().Should().Be(1);
+            _context.AsQueryable<Post>().First().Should().BeSameAs(post1);
+            _context.AsQueryable<Blog>().Where(b => b.Posts.Count > 1).Count().Should().Be(0);
+
+        }
     }
 }

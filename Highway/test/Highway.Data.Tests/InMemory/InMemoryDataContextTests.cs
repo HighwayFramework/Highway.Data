@@ -279,5 +279,69 @@ namespace Highway.Data.Tests.InMemory
             _context.AsQueryable<Blog>().Single().Posts.Count().Should().Be(2);
             site.Blog.Should().BeNull();
         }
+
+        [TestMethod]
+        public void Commit_ShouldRemoveOrphanedCollectionMembers()
+        {
+            // Arrange
+            var post1 = new Post();
+            var post2 = new Post();
+            var blog = new Blog()
+            {
+                Posts = new List<Post> { post1, post2 }
+            };
+            _context.Add(blog);
+            _context.Commit();
+            blog.Posts.Remove(post2);
+
+            // Act
+            _context.Commit();
+
+            // Assert
+            _context.AsQueryable<Post>().Should().Contain(post1);
+            _context.AsQueryable<Post>().Should().NotContain(post2);
+        }
+
+
+        [TestMethod]
+        public void Commit_ShouldRemoveOrphanedCollectionMembersWhenWholeCollectionRemoved()
+        {
+            // Arrange
+            var post1 = new Post();
+            var post2 = new Post();
+            var blog = new Blog()
+            {
+                Posts = new List<Post> { post1, post2 }
+            };
+            _context.Add(blog);
+            _context.Commit();
+            blog.Posts = null;
+
+            // Act
+            _context.Commit();
+
+            // Assert
+            _context.AsQueryable<Post>().Should().NotContain(post1);
+            _context.AsQueryable<Post>().Should().NotContain(post2);
+            _context.AsQueryable<Post>().Count().Should().Be(0);
+        }
+
+        [TestMethod]
+        public void Commit_ShouldRemoveOrphanedMembers()
+        {
+            // Arrange
+            var blog = new Blog();
+            var site = new Site() { Blog = blog };
+            _context.Add(site);
+            _context.Commit();
+            site.Blog = null;
+
+            // Act
+            _context.Commit();
+
+            // Assert
+            _context.AsQueryable<Blog>().Should().NotContain(blog);
+            _context.AsQueryable<Blog>().Count().Should().Be(0);
+        }
     }
 }

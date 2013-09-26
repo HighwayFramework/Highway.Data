@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
-namespace Highway.Data.Contexts
+namespace Highway.Data.Contexts.TypeRepresentations
 {
     internal class ObjectRepresentation
     {
@@ -19,7 +17,6 @@ namespace Highway.Data.Contexts
             return typeof(T1) == Entity.GetType();
         }
 
-        protected virtual Type Type { get { return typeof(object); } }
         internal IEnumerable<ObjectRepresentation> RelatedEntities { get; set; }
 
         internal IEnumerable<ObjectRepresentation> AllRelated()
@@ -32,7 +29,7 @@ namespace Highway.Data.Contexts
             return items;
         }
 
-        public Guid Id { get; set; }
-        public Dictionary<object, Action> Parents { get; set; }
+        internal Guid Id { get; set; }
+        internal Dictionary<object, Action> Parents { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Highway.Data.Contexts.TypeRepresentations;
 using Highway.Data.Contexts.TypeUtilities;
 
 namespace Highway.Data.Contexts

@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace Highway.Data.Contexts
+namespace Highway.Data.Contexts.TypeRepresentations
 {
     internal sealed class ObjectRepresentationRepository
     {
@@ -31,7 +31,6 @@ namespace Highway.Data.Contexts
                 _data.AddRange(rep.AllRelated().Where(x=>x.Parents.Count == 1));
             }
         }
-
 
         internal bool Remove<T>(T item) where T : class
         {
@@ -61,7 +60,6 @@ namespace Highway.Data.Contexts
             return success;
         }
 
-        //Called through reflection
         private ObjectRepresentation AddChild(object parent, object item, Action removeAction)
         {
             var existing = _data.SingleOrDefault(x => x.Entity == item);

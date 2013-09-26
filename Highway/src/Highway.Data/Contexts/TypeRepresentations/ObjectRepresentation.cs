@@ -6,19 +6,21 @@ using System.Reflection;
 
 namespace Highway.Data.Contexts
 {
-    internal class ObjectRepresentationBase
+    internal class ObjectRepresentation
     {
+        internal object Entity { get; set; }
+
         public bool IsType<T1>()
         {
-            return Type == typeof(T1);
+            return typeof(T1) == Entity.GetType();
         }
 
         protected virtual Type Type { get { return typeof(object); } }
-        internal IEnumerable<ObjectRepresentationBase> RelatedEntities { get; set; }
+        internal IEnumerable<ObjectRepresentation> RelatedEntities { get; set; }
         public Action EntityRemove { get; set; }
         public object Parent { get; set; }
 
-        internal IEnumerable<ObjectRepresentationBase> AllRelated()
+        internal IEnumerable<ObjectRepresentation> AllRelated()
         {
             var items = RelatedEntities.ToList();
             foreach (var objectRepresentationBase in RelatedEntities)
@@ -28,38 +30,44 @@ namespace Highway.Data.Contexts
             return items;
         }
 
-        internal static TypeObjectRepresentation<T> Create<T>(T item)
+        internal static ObjectRepresentation Create<T>(T item)
         {
-            return new TypeObjectRepresentation<T>()
+            return new ObjectRepresentation()
             {
+                Id = Guid.NewGuid(),
                 Entity = item,
                 RelatedEntities = AddRelatedObjects(item),
             };
         }
 
-        internal static TypeObjectRepresentation<T> CreateChild<T>(T item, Action removeAction)
+        public Guid Id { get; set; }
+
+        internal static ObjectRepresentation CreateChild<T>(T item, Action removeAction)
         {
-            return new TypeObjectRepresentation<T>()
+            return new ObjectRepresentation()
             {
+                Id = Guid.NewGuid(),
                 Entity = item,
                 RelatedEntities = AddRelatedObjects(item),
                 EntityRemove = removeAction
             };
         }
 
-        private static IEnumerable<ObjectRepresentationBase> AddRelatedObjects<T>(T item)
+        private static IEnumerable<ObjectRepresentation> AddRelatedObjects<T>(T item)
         {
+            List<ObjectRepresentation> reps = new List<ObjectRepresentation>();
             foreach (var objectRepresentationBase in GetSingularRelationships(item))
             {
-                yield return objectRepresentationBase;
+                reps.Add(objectRepresentationBase);
             }
             foreach (var objectRepresentationBase in GetMultipleRelationships(item))
             {
-                yield return objectRepresentationBase;
+                reps.Add(objectRepresentationBase);
             }
+            return reps;
         }
 
-        private static IEnumerable<ObjectRepresentationBase> GetMultipleRelationships<T>(T item)
+        private static IEnumerable<ObjectRepresentation> GetMultipleRelationships<T>(T item)
         {
             var properties =
                 item.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
@@ -111,7 +119,7 @@ namespace Highway.Data.Contexts
             return o;
         }
 
-        private static IEnumerable<ObjectRepresentationBase> GetSingularRelationships<T>(T item)
+        private static IEnumerable<ObjectRepresentation> GetSingularRelationships<T>(T item)
         {
             var properties =
                 item.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(x => x.PropertyType.IsClass);
@@ -125,13 +133,13 @@ namespace Highway.Data.Contexts
             }
         }
 
-        private static ObjectRepresentationBase CreateChildTypedRepresetation(object child, Action removeAction)
+        private static ObjectRepresentation CreateChildTypedRepresetation(object child, Action removeAction)
         {
-            Type type = typeof(ObjectRepresentationBase);
+            Type type = typeof(ObjectRepresentation);
             var method = type.GetMethod("CreateChild", BindingFlags.NonPublic | BindingFlags.Static).GetGenericMethodDefinition();
             MethodInfo generic = method.MakeGenericMethod(child.GetType());
             var obj = generic.Invoke(null, new[] { child, removeAction});
-            return (ObjectRepresentationBase)obj;
+            return (ObjectRepresentation)obj;
         }
     }
 }

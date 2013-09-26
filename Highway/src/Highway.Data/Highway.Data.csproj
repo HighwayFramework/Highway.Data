@@ -64,8 +64,8 @@
       <Link>SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="Contexts\InMemoryDataContext.cs" />
-    <Compile Include="Contexts\TypeRepresentations\ObjectRepresentationBase.cs" />
-    <Compile Include="Contexts\TypeRepresentations\TypeObjectRepresentation.cs" />
+    <Compile Include="Contexts\TypeRepresentations\ObjectRepresentation.cs" />
+    <Compile Include="Contexts\TypeUtilities\CastExtensions.cs" />
     <Compile Include="Factories\IDataContextFactory.cs" />
     <Compile Include="Filtering\AndCriteria.cs" />
     <Compile Include="Filtering\BasicCriteria.cs" />

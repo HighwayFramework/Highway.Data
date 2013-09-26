@@ -47,6 +47,7 @@ namespace Highway.Data.Tests.InMemory
             _context.Add(item2);
 
             //assert
+            //TODO : Measured Equality instead of implicit ordering
             var site = _context.AsQueryable<Site>().First();
             site.Should().BeSameAs(item);
             var site2 = _context.AsQueryable<Site>().Last();
@@ -136,7 +137,6 @@ namespace Highway.Data.Tests.InMemory
 
             //assert
             _context.Data.Count(x => x.IsType<int>()).Should().Be(0);
-
         }
 
         [TestMethod]
@@ -171,6 +171,29 @@ namespace Highway.Data.Tests.InMemory
             _context.AsQueryable<Blog>().First().Posts.Count().Should().Be(0);
             _context.AsQueryable<Post>().Count().Should().Be(0);
 
+        }
+
+        [TestMethod]
+        public void ShouldRemoveDependentGraphOnBranchRemoval()
+        {
+            //arrange 
+            var post = new Post();
+            var blog = new Blog()
+            {
+                Posts = new List<Post>() { new Post(),post}
+            };
+            var site = new Site()
+            {
+                Blog = blog
+            };
+            _context.Add(site);
+
+            //act
+            _context.Remove(blog);
+
+            //assert
+            var posts = _context.AsQueryable<Post>();
+            posts.Count().Should().Be(0);
         }
     }
 }

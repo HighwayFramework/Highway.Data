@@ -1,11 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using Highway.Data.Contexts.TypeUtilities;
 
 namespace Highway.Data.Contexts
 {
     public class InMemoryDataContext : IDataContext
     {
-        internal List<ObjectRepresentationBase> Data = new List<ObjectRepresentationBase>();
+        internal List<ObjectRepresentation> Data = new List<ObjectRepresentation>();
 
         public void Dispose() { }
 
@@ -18,12 +22,12 @@ namespace Highway.Data.Contexts
 
         private IQueryable<T> GetCollection<T>() where T : class
         {
-            return Data.Where(x => x.IsType<T>()).Cast<TypeObjectRepresentation<T>>().Select(x => x.Entity).AsQueryable();
+            return Data.Where(x => x.IsType<T>()).Select(x => x.Entity).Cast<T>().AsQueryable();
         }
 
         public T Add<T>(T item) where T : class
         {
-            TypeObjectRepresentation<T> typeObjectRepresentation = ObjectRepresentationBase.Create(item);
+            var typeObjectRepresentation = ObjectRepresentation.Create(item);
             Data.Add(typeObjectRepresentation);
             Data.AddRange(typeObjectRepresentation.AllRelated());
             return item;
@@ -31,13 +35,22 @@ namespace Highway.Data.Contexts
     
         public T Remove<T>(T item) where T : class
         {
-            var representation = Data.Where(x => x.IsType<T>()).Cast<TypeObjectRepresentation<T>>().Where(x => x.Entity == item).ToList();
+            var representation = Data.Where(x => x.IsType<T>()).Where(x => x.Entity == item).ToList();
+
             foreach (var typeObjectRepresentation in representation)
             {
-                Data.Remove(typeObjectRepresentation);
+                var success = Data.Remove(typeObjectRepresentation);
+                if (!success) throw new InvalidDataException("Object was not removed");
                 if (typeObjectRepresentation.EntityRemove != null)
                 {
                     typeObjectRepresentation.EntityRemove();
+                }
+                foreach (var objectRepresentation in typeObjectRepresentation.AllRelated())
+                {
+                    var objRep = Data.Where(x => x.Id == objectRepresentation.Id);
+
+                    success = Data.Remove(objectRepresentation);
+                    if(!success) throw new InvalidDataException("Object was not removed");
                 }
             }
             return item;

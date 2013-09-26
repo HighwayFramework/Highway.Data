@@ -91,6 +91,8 @@
     <Compile Include="AutoMockingTest.cs" />
     <Compile Include="BaseTest.cs" />
     <Compile Include="ContainerTest.cs" />
+    <Compile Include="InMemory\GuidIdentityStrategyTests.cs" />
+    <Compile Include="InMemory\IntegerIdentityStrategyTests.cs" />
     <Compile Include="InMemory\Domain\Author.cs" />
     <Compile Include="InMemory\Domain\Blog.cs" />
     <Compile Include="InMemory\InMemoryDataContextTests.cs" />

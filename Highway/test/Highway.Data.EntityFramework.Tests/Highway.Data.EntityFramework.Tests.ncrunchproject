@@ -14,8 +14,11 @@
   <IncludeStaticReferencesInWorkspace>true</IncludeStaticReferencesInWorkspace>
   <DefaultTestTimeout>60000</DefaultTestTimeout>
   <UseBuildConfiguration></UseBuildConfiguration>
+  <UseBuildPlatform />
   <ProxyProcessPath></ProxyProcessPath>
   <UseCPUArchitecture>AutoDetect</UseCPUArchitecture>
+  <MSTestThreadApartmentState>STA</MSTestThreadApartmentState>
+  <BuildProcessArchitecture>x86</BuildProcessArchitecture>
   <IgnoredTests>
     <RegexTestSelector>
       <RegularExpression>Highway\.Data\.EntityFramework\.Tests\.IntegrationTests\.Given_A_EF_Context\..*</RegularExpression>
@@ -26,5 +29,8 @@
     <NamedTestSelector>
       <TestName>Highway.Data.EntityFramework.Tests.UnitTests.GivenAnAggregateContextFactory.ShouldAllowTwoDifferentContextsToBeLoadedInTheSameAppDomain</TestName>
     </NamedTestSelector>
+    <RegexTestSelector>
+      <RegularExpression>.*</RegularExpression>
+    </RegexTestSelector>
   </IgnoredTests>
 </ProjectConfiguration>

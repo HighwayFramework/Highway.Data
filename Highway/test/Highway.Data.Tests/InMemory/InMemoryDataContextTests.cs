@@ -136,7 +136,7 @@ namespace Highway.Data.Tests.InMemory
             _context.Add(site);
 
             //assert
-            _context.Data.Count(x => x.IsType<int>()).Should().Be(0);
+            _context.repo._data.Count(x => x.IsType<int>()).Should().Be(0);
         }
 
         [TestMethod]

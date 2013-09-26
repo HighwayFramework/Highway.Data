@@ -28,24 +28,7 @@ namespace Highway.Data.Contexts
 
         public T Remove<T>(T item) where T : class
         {
-            var representation = repo.Data<T>().Where(x => x.Entity == item).ToList();
-
-            foreach (var typeObjectRepresentation in representation)
-            {
-                var success = repo.Remove(typeObjectRepresentation);
-                if (!success) throw new InvalidDataException("Object was not removed");
-                if (typeObjectRepresentation.EntityRemove != null)
-                {
-                    typeObjectRepresentation.EntityRemove();
-                }
-                foreach (var objectRepresentation in typeObjectRepresentation.AllRelated())
-                {
-                    var objRep = repo.Data.Where(x => x.Id == objectRepresentation.Id);
-
-                    success = Data.Remove(objectRepresentation);
-                    if(!success) throw new InvalidDataException("Object was not removed");
-                }
-            }
+            repo.Remove(item);
             return item;
         }
 

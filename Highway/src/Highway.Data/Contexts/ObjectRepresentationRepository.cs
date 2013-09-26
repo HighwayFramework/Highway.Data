@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 
@@ -15,26 +16,67 @@ namespace Highway.Data.Contexts
             return _data.Where(x => x.IsType<T>()).Select(x => x.Entity).Cast<T>().AsQueryable();
         }
 
-        internal void Add<T>(T item)
+        internal void Add<T>(T item) where T : class
         {
-            var rep = new ObjectRepresentation()
+            var existing = _data.SingleOrDefault(x => x.Entity == item);
+            if (existing == null)
             {
-                Id = Guid.NewGuid(),
-                Entity = item,
-                RelatedEntities = AddRelatedObjects(item)
-            };
-            _data.Add(rep);
+                var rep = new ObjectRepresentation()
+                {
+                    Id = Guid.NewGuid(),
+                    Entity = item,
+                    RelatedEntities = AddRelatedObjects(item)
+                };
+                _data.Add(rep);
+                _data.AddRange(rep.AllRelated().Where(x=>x.Parents.Count == 1));
+            }
         }
 
-        internal ObjectRepresentation CreateChild<T>(T item, Action removeAction)
+
+        internal bool Remove<T>(T item) where T : class
         {
-            return new ObjectRepresentation()
+            var success = false;
+            var representation = _data.Where(x => x.Entity == item).ToList();
+            foreach (var rep in representation)
             {
-                Id = Guid.NewGuid(),
-                Entity = item,
-                RelatedEntities = AddRelatedObjects(item),
-                EntityRemove = removeAction
-            };
+                success = _data.Remove(rep);
+                if (!success) throw new InvalidDataException("Object was not removed");
+                foreach (var parent in rep.Parents)
+                {
+                    parent.Value();
+                }
+                foreach (var objectRepresentation in rep.AllRelated())
+                {
+                    if (objectRepresentation.Parents.Count == 1)
+                    {
+                        success = _data.Remove(objectRepresentation);
+                    }
+                    else
+                    {
+                        objectRepresentation.Parents[item]();
+                    }
+                    if (!success) throw new InvalidDataException("Dependent Object was not removed");
+                }
+            }
+            return success;
+        }
+
+        //Called through reflection
+        private ObjectRepresentation AddChild<T>(T item, Action removeAction, object parent) where T: class
+        {
+            var existing = _data.SingleOrDefault(x => x.Entity == item);
+            if(existing == null)
+            {
+                return new ObjectRepresentation()
+                {
+                    Id = Guid.NewGuid(),
+                    Entity = item,
+                    RelatedEntities = AddRelatedObjects(item),
+                    Parents = new Dictionary<object,Action> { {parent,removeAction}}
+                };    
+            }
+            existing.Parents.Add(parent,removeAction);
+            return existing;
         }
 
         private IEnumerable<ObjectRepresentation> AddRelatedObjects<T>(T item)
@@ -51,8 +93,26 @@ namespace Highway.Data.Contexts
             return reps;
         }
 
+        private IEnumerable<ObjectRepresentation> GetSingularRelationships<T>(T item)
+        {
+            List<ObjectRepresentation> reps = new List<ObjectRepresentation>();
+            var properties =
+                item.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(x => x.PropertyType.IsClass);
+            foreach (var propertyInfo in properties)
+            {
+                var child = propertyInfo.GetValue(item, null);
+                if (child == null) continue;
+                PropertyInfo info = propertyInfo;
+                Action removeAction = () => info.SetValue(item, null, null);
+                ObjectRepresentation childTypedRepresetation = CreateChildTypedRepresetation(item, child, removeAction);
+                if(childTypedRepresetation != null) reps.Add(childTypedRepresetation);
+            }
+            return reps;
+        }
+
         private IEnumerable<ObjectRepresentation> GetMultipleRelationships<T>(T item)
         {
+            List<ObjectRepresentation> reps = new List<ObjectRepresentation>();
             var properties =
                 item.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
                     .Where(x => typeof(IEnumerable).IsAssignableFrom(x.PropertyType));
@@ -67,9 +127,11 @@ namespace Highway.Data.Contexts
                 foreach (var childItem in childItems)
                 {
                     var removeAction = CreateRemoveFromCollectionAction(propertyInfo, item, childItem);
-                    yield return CreateChildTypedRepresetation(childItem, removeAction);
+                    ObjectRepresentation childTypedRepresetation = CreateChildTypedRepresetation(item, childItem, removeAction);
+                    if(childTypedRepresetation != null) reps.Add(childTypedRepresetation);
                 }
             }
+            return reps;
         }
 
 
@@ -104,33 +166,16 @@ namespace Highway.Data.Contexts
             return o;
         }
 
-        private IEnumerable<ObjectRepresentation> GetSingularRelationships<T>(T item)
+       
+        private ObjectRepresentation CreateChildTypedRepresetation(object parent, object child, Action removeAction)
         {
-            var properties =
-                item.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(x => x.PropertyType.IsClass);
-            foreach (var propertyInfo in properties)
-            {
-                var child = propertyInfo.GetValue(item, null);
-                if (child == null) continue;
-                PropertyInfo info = propertyInfo;
-                Action removeAction = () => info.SetValue(item, null, null);
-                yield return CreateChildTypedRepresetation(child, removeAction);
-            }
-        }
-
-        private ObjectRepresentation CreateChildTypedRepresetation(object child, Action removeAction)
-        {
-            Type type = typeof(ObjectRepresentation);
-            var method = type.GetMethod("CreateChild", BindingFlags.NonPublic | BindingFlags.Instance).GetGenericMethodDefinition();
+            Type type = this.GetType();
+            var method = type.GetMethod("AddChild", BindingFlags.NonPublic | BindingFlags.Instance).GetGenericMethodDefinition();
             MethodInfo generic = method.MakeGenericMethod(child.GetType());
-            var obj = generic.Invoke(null, new[] { child, removeAction });
+            var obj = generic.Invoke(this, new[] { child, removeAction, parent });
             return (ObjectRepresentation)obj;
         }
 
 
-        public bool Remove(ObjectRepresentation typeObjectRepresentation)
-        {
-            return _data.Remove(typeObjectRepresentation);
-        }
     }
 }

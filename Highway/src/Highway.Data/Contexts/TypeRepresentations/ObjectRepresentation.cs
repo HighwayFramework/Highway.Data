@@ -8,6 +8,10 @@ namespace Highway.Data.Contexts
 {
     internal class ObjectRepresentation
     {
+        public ObjectRepresentation()
+        {
+            Parents = new Dictionary<object, Action>();
+        }
         internal object Entity { get; set; }
 
         public bool IsType<T1>()
@@ -17,8 +21,6 @@ namespace Highway.Data.Contexts
 
         protected virtual Type Type { get { return typeof(object); } }
         internal IEnumerable<ObjectRepresentation> RelatedEntities { get; set; }
-        public Action EntityRemove { get; set; }
-        public object Parent { get; set; }
 
         internal IEnumerable<ObjectRepresentation> AllRelated()
         {
@@ -31,6 +33,6 @@ namespace Highway.Data.Contexts
         }
 
         public Guid Id { get; set; }
-
+        public Dictionary<object, Action> Parents { get; set; }
     }
 }

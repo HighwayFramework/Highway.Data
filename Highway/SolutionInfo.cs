@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("The fastest and smoothest way to great architecture")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Devlin Liles and Tim Rayburn")]
-[assembly: AssemblyProduct("Highway.Pavement")]
+[assembly: AssemblyProduct("Highway.Data")]
 [assembly: AssemblyCopyright("Copyright © Devlin Liles 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -30,6 +30,6 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("0.1.0.0")]
-[assembly: AssemblyFileVersion("0.1.0.0")]
-[assembly: AssemblyInformationalVersion("0.1.0.0")]
+[assembly: AssemblyVersion("4.0.5.1")]
+[assembly: AssemblyFileVersion("4.0.5.1")]
+[assembly: AssemblyInformationalVersion("4.0.5.1")]

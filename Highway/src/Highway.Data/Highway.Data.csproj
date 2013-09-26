@@ -64,6 +64,7 @@
       <Link>SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="Contexts\InMemoryDataContext.cs" />
+    <Compile Include="Contexts\ObjectRepresentationRepository.cs" />
     <Compile Include="Contexts\TypeRepresentations\ObjectRepresentation.cs" />
     <Compile Include="Contexts\TypeUtilities\CastExtensions.cs" />
     <Compile Include="Factories\IDataContextFactory.cs" />

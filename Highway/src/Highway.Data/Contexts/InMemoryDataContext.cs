@@ -9,7 +9,7 @@ namespace Highway.Data.Contexts
 {
     public class InMemoryDataContext : IDataContext
     {
-        internal List<ObjectRepresentation> Data = new List<ObjectRepresentation>();
+        internal ObjectRepresentationRepository repo = new ObjectRepresentationRepository();
 
         public void Dispose() { }
 
@@ -17,29 +17,22 @@ namespace Highway.Data.Contexts
 
         public IQueryable<T> AsQueryable<T>() where T : class
         {
-            return GetCollection<T>();
+            return repo.Data<T>();
         }
-
-        private IQueryable<T> GetCollection<T>() where T : class
-        {
-            return Data.Where(x => x.IsType<T>()).Select(x => x.Entity).Cast<T>().AsQueryable();
-        }
-
+        
         public T Add<T>(T item) where T : class
         {
-            var typeObjectRepresentation = ObjectRepresentation.Create(item);
-            Data.Add(typeObjectRepresentation);
-            Data.AddRange(typeObjectRepresentation.AllRelated());
+            repo.Add(item);
             return item;
         }
-    
+
         public T Remove<T>(T item) where T : class
         {
-            var representation = Data.Where(x => x.IsType<T>()).Where(x => x.Entity == item).ToList();
+            var representation = repo.Data<T>().Where(x => x.Entity == item).ToList();
 
             foreach (var typeObjectRepresentation in representation)
             {
-                var success = Data.Remove(typeObjectRepresentation);
+                var success = repo.Remove(typeObjectRepresentation);
                 if (!success) throw new InvalidDataException("Object was not removed");
                 if (typeObjectRepresentation.EntityRemove != null)
                 {
@@ -47,7 +40,7 @@ namespace Highway.Data.Contexts
                 }
                 foreach (var objectRepresentation in typeObjectRepresentation.AllRelated())
                 {
-                    var objRep = Data.Where(x => x.Id == objectRepresentation.Id);
+                    var objRep = repo.Data.Where(x => x.Id == objectRepresentation.Id);
 
                     success = Data.Remove(objectRepresentation);
                     if(!success) throw new InvalidDataException("Object was not removed");

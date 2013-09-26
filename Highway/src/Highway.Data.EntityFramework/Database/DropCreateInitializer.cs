@@ -32,9 +32,9 @@ namespace Highway.Data
             if (context.Database.Exists())
             {
                 context.Database.ExecuteSqlCommand(
-                    string.Format("use master; \r\n alter database {0} set single_user with rollback immediate;",
+                    string.Format("use master; \r\n alter database [{0}] set single_user with rollback immediate;",
                                   context.Database.Connection.Database));
-                context.Database.ExecuteSqlCommand(string.Format("use master; \r\n Drop database {0};",
+                context.Database.ExecuteSqlCommand(string.Format("use master; \r\n Drop database [{0}];",
                                                                  context.Database.Connection.Database));
             }
             context.Database.CreateIfNotExists();

@@ -1,4 +1,5 @@
 ﻿using System;
+using Highway.Pavement;
 
 namespace Highway.Data.Rest.Configuration.Conventions
 {

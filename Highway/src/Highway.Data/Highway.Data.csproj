@@ -63,6 +63,10 @@
     <Compile Include="..\..\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="Contexts\InMemoryDataContext.cs" />
+    <Compile Include="Contexts\TypeRepresentations\ObjectRepresentationBase.cs" />
+    <Compile Include="Contexts\TypeRepresentations\TypeObjectRepresentation.cs" />
+    <Compile Include="Factories\IDataContextFactory.cs" />
     <Compile Include="Filtering\AndCriteria.cs" />
     <Compile Include="Filtering\BasicCriteria.cs" />
     <Compile Include="Filtering\CombinationCriteria.cs" />

@@ -40,6 +40,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Highway.Data.4.0.4.1\lib\net40\Highway.Data.dll</HintPath>
     </Reference>
+    <Reference Include="Highway.Pavement">
+      <HintPath>..\..\packages\Highway.Pavement.0.1.0.0\lib\net45\Highway.Pavement.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Net.Http">
       <HintPath>..\..\packages\HttpClient.0.3.0\lib\40\Microsoft.Net.Http.dll</HintPath>
     </Reference>
@@ -73,7 +76,6 @@
     <Compile Include="Configuration\Entities\RestTypeConfiguration.cs" />
     <Compile Include="Configuration\Interfaces\IContextConfiguration.cs" />
     <Compile Include="Configuration\Interfaces\IMappingConfiguration.cs" />
-    <Compile Include="Configuration\PluralizationExtension.cs" />
     <Compile Include="Contexts\DataContext.cs" />
     <Compile Include="Contexts\HttpClientAdapter.cs" />
     <Compile Include="Contexts\ModelBuilder.cs" />

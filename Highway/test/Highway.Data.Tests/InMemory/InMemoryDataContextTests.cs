@@ -242,5 +242,37 @@ namespace Highway.Data.Tests.InMemory
             _context.AsQueryable<Blog>().Where(b => b.Posts.Count > 1).Count().Should().Be(0);
 
         }
+
+        [TestMethod]
+        public void ShouldRemoveFromParentButNotDeleteChildObjectsThatAreReferencedMoreThanOne()
+        {
+            //arrange 
+            
+            var post1 = new Post();
+            var post2 = new Post();
+            var blog1 = new Blog()
+            {
+                Posts = new List<Post> { post1, post2 }
+            };
+            var blog2 = new Blog()
+            {
+                Posts = new List<Post> {post1}
+            };
+            var site = new Site()
+            {
+                Blog = blog2
+            };
+            _context.Add(blog1);
+            _context.Add(site);
+
+            // Act
+            _context.Remove(blog2);
+
+            // Assert
+            _context.AsQueryable<Post>().Count().Should().Be(2);
+            _context.AsQueryable<Post>().First().Should().BeSameAs(post1);
+            _context.AsQueryable<Blog>().Single().Posts.Count().Should().Be(2);
+            site.Blog.Should().BeNull();
+        }
     }
 }

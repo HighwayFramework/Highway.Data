@@ -234,7 +234,7 @@ namespace Highway.Data.Tests.InMemory
             _context.Add(blog2);
 
             // Act
-            //_context.Remove(post2);
+            _context.Remove(post2);
 
             // Assert
             _context.AsQueryable<Post>().Count().Should().Be(1);

@@ -45,6 +45,7 @@ namespace Highway.Data.Contexts
 
         public int Commit()
         {
+            repo.CleanGraph();
             return 0;
         }
     }

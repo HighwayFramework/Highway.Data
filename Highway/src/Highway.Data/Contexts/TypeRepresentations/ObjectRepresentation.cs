@@ -8,7 +8,7 @@ namespace Highway.Data.Contexts.TypeRepresentations
     {
         public ObjectRepresentation()
         {
-            Parents = new Dictionary<object, Action>();
+            Parents = new Dictionary<object, Accessor>();
         }
         internal object Entity { get; set; }
 
@@ -30,6 +30,17 @@ namespace Highway.Data.Contexts.TypeRepresentations
         }
 
         internal Guid Id { get; set; }
-        internal Dictionary<object, Action> Parents { get; set; }
+        internal Dictionary<object, Accessor> Parents { get; set; }
+
+        public List<ObjectRepresentation> GetObjectRepresentationsToPrune()
+        {
+            return AllRelated().Where(x => x.Orphaned()).ToList();
+        }
+
+        public bool Orphaned()
+        {
+            if (!Parents.Any()) return true;
+            return Parents.All(accessor => accessor.Value == null || accessor.Value.GetterFunc == null || accessor.Value.GetterFunc(accessor.Key, this.Entity) == null);
+        }
     }
 }

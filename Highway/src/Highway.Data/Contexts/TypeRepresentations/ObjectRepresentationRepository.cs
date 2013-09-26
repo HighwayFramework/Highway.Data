@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -42,7 +43,7 @@ namespace Highway.Data.Contexts.TypeRepresentations
                 if (!success) throw new InvalidDataException("Object was not removed");
                 foreach (var parent in rep.Parents)
                 {
-                    parent.Value();
+                    parent.Value.RemoveAction();
                 }
                 foreach (var objectRepresentation in rep.AllRelated())
                 {
@@ -52,7 +53,7 @@ namespace Highway.Data.Contexts.TypeRepresentations
                     }
                     else
                     {
-                        objectRepresentation.Parents[item]();
+                        objectRepresentation.Parents[item].RemoveAction();
                     }
                     if (!success) throw new InvalidDataException("Dependent Object was not removed");
                 }
@@ -60,7 +61,7 @@ namespace Highway.Data.Contexts.TypeRepresentations
             return success;
         }
 
-        private ObjectRepresentation AddChild(object parent, object item, Action removeAction)
+        private ObjectRepresentation AddChild(object item, object parent = null, Action removeAction = null, Func<object,object,object> getterFunc = null)
         {
             var existing = _data.SingleOrDefault(x => x.Entity == item);
             if(existing == null)
@@ -70,10 +71,10 @@ namespace Highway.Data.Contexts.TypeRepresentations
                     Id = Guid.NewGuid(),
                     Entity = item,
                     RelatedEntities = AddRelatedObjects(item),
-                    Parents = new Dictionary<object,Action> { {parent,removeAction}}
+                    Parents = new Dictionary<object, Accessor> { { parent, new Accessor(removeAction, getterFunc) } }
                 };    
             }
-            existing.Parents.Add(parent,removeAction);
+            existing.Parents.Add(parent, new Accessor(removeAction,getterFunc));
             return existing;
         }
 
@@ -101,8 +102,9 @@ namespace Highway.Data.Contexts.TypeRepresentations
                 var child = propertyInfo.GetValue(item, null);
                 if (child == null) continue;
                 PropertyInfo info = propertyInfo;
+                Func<object, object, object> getterFunc = (parent,kid) => propertyInfo.GetValue(parent, null);
                 Action removeAction = () => info.SetValue(item, null, null);
-                ObjectRepresentation childTypedRepresetation = AddChild(item, child, removeAction);
+                ObjectRepresentation childTypedRepresetation = AddChild(child, item, removeAction, getterFunc);
                 if(childTypedRepresetation != null) reps.Add(childTypedRepresetation);
             }
             return reps;
@@ -116,20 +118,29 @@ namespace Highway.Data.Contexts.TypeRepresentations
                     .Where(x => typeof(IEnumerable).IsAssignableFrom(x.PropertyType));
             foreach (var propertyInfo in properties)
             {
-                var genericArguments = propertyInfo.PropertyType.GetGenericArguments();
-                if (genericArguments.Count() != 1) continue;
-                var listType = genericArguments[0];
                 var child = propertyInfo.GetValue(item, null);
                 if (child == null) continue;
                 var childItems = (IEnumerable)child;
                 foreach (var childItem in childItems)
                 {
                     var removeAction = CreateRemoveFromCollectionAction(propertyInfo, item, childItem);
-                    ObjectRepresentation childTypedRepresetation = AddChild(item, childItem,removeAction);
+                    var getterFunc = CreateGetterFromCollectionFunc(propertyInfo, childItem);
+                    ObjectRepresentation childTypedRepresetation = AddChild(childItem, item, removeAction, getterFunc);
                     if(childTypedRepresetation != null) reps.Add(childTypedRepresetation);
                 }
             }
             return reps;
+        }
+
+        private Func<object,object,object> CreateGetterFromCollectionFunc(PropertyInfo propertyInfo, object childItem)
+        {
+            return (parent, child) =>
+            {
+                var value = propertyInfo.GetValue(parent, null);
+                if (value == null) return null;
+                var collection = (IEnumerable) value;
+                return collection.Cast<object>().FirstOrDefault(item => item == child);
+            };
         }
 
 
@@ -164,5 +175,18 @@ namespace Highway.Data.Contexts.TypeRepresentations
             return o;
         }
 
+        public void CleanGraph()
+        {
+            var objectRepresentations = _data.Where(x=>x.Parents.Count == 0).ToList();
+            foreach (var root in objectRepresentations)
+            {
+                var orphans = root.GetObjectRepresentationsToPrune();
+                foreach (var objectRepresentation in orphans)
+                {
+                    _data.Remove(objectRepresentation);
+                }
+
+            }
+        }
     }
 }

@@ -67,6 +67,7 @@
     <Compile Include="Contexts\IdentityStrategy\IdentityStrategy.cs" />
     <Compile Include="Contexts\InMemoryDataContext.cs" />
     <Compile Include="Contexts\IdentityStrategy\IntegerIdentityStrategy.cs" />
+    <Compile Include="Contexts\TypeRepresentations\Accessor.cs" />
     <Compile Include="Contexts\TypeRepresentations\ObjectRepresentationRepository.cs" />
     <Compile Include="Contexts\TypeRepresentations\ObjectRepresentation.cs" />
     <Compile Include="Contexts\TypeUtilities\CastExtensions.cs" />

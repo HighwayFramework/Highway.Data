@@ -114,6 +114,29 @@ namespace Highway.Data.Tests.InMemory
         }
 
         [TestMethod]
+        public void Add_ShouldNotAddAnItemTwiceForMultipleReferences()
+        {
+            //arrange 
+            var post = new Post();
+            var blog = new Blog()
+            {
+                Posts = new List<Post>() { post, new Post() }
+            };
+            var blog2 = new Blog()
+            {
+                Posts = new List<Post>() {post}
+            };
+            _context.Add(blog);
+
+            //act
+            _context.Add(blog2);
+
+            //assert
+            _context.AsQueryable<Post>().Count().Should().Be(2);
+        }
+
+
+        [TestMethod]
         public void Add_ShouldIgnoreNullCollections()
         {
             //arrange 
@@ -292,6 +315,7 @@ namespace Highway.Data.Tests.InMemory
             };
             _context.Add(blog);
             _context.Commit();
+
             blog.Posts.Remove(post2);
 
             // Act

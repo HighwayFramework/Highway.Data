@@ -92,6 +92,7 @@
     <Compile Include="BaseTest.cs" />
     <Compile Include="ContainerTest.cs" />
     <Compile Include="InMemory\GuidIdentityStrategyTests.cs" />
+    <Compile Include="InMemory\InMemoryDataContextPerfTests.cs" />
     <Compile Include="InMemory\IntegerIdentityStrategyTests.cs" />
     <Compile Include="InMemory\Domain\Author.cs" />
     <Compile Include="InMemory\Domain\Blog.cs" />

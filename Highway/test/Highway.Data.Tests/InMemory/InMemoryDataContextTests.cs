@@ -22,32 +22,37 @@ namespace Highway.Data.Tests.InMemory
         }
 
         [TestMethod]
-        public void ShouldStoreASite()
+        public void Add_ShouldStoreASite()
         {
             //arrange 
-            //act
             var item = new Site();
+
+            //act
             _context.Add(item);
 
-            var site = _context.AsQueryable<Site>().First();
-
             //assert
+            var site = _context.AsQueryable<Site>().First();
             site.Should().BeSameAs(item);
         }
 
         [TestMethod]
-        public void ShouldStoreTwoSites()
+        public void Add_ShouldStoreTwoSites()
         {
             //arrange 
+            var item = new Site();
+            var item2 = new Site();
 
             //act
-            var item = new Site();
             _context.Add(item);
-            var item2 = new Site();
             _context.Add(item2);
 
             //assert
-            //TODO : Measured Equality instead of implicit ordering
+            _context.AsQueryable<Site>()
+                .Any(s => object.ReferenceEquals(item, s))
+                .Should().BeTrue();
+            _context.AsQueryable<Site>()
+                .Any(s => object.ReferenceEquals(item2, s))
+                .Should().BeTrue();
             var site = _context.AsQueryable<Site>().First();
             site.Should().BeSameAs(item);
             var site2 = _context.AsQueryable<Site>().Last();
@@ -55,7 +60,7 @@ namespace Highway.Data.Tests.InMemory
         }
 
         [TestMethod]
-        public void ShouldStoreBlogWithAuthor()
+        public void Add_ShouldStoreBlogWithAuthor()
         {
             //arrange 
             var blog = new Blog()
@@ -72,7 +77,7 @@ namespace Highway.Data.Tests.InMemory
         }
 
         [TestMethod]
-        public void ShouldStoreThreeLevelsOfObjects()
+        public void Add_ShouldStoreThreeLevelsOfObjects()
         {
             //arrange 
             var site = new Site()
@@ -93,7 +98,7 @@ namespace Highway.Data.Tests.InMemory
         }
 
         [TestMethod]
-        public void ShouldIncludeAllRelatedItemsFromRelatedCollections()
+        public void Add_ShouldIncludeAllRelatedItemsFromRelatedCollections()
         {
             //arrange 
             var blog = new Blog()
@@ -109,7 +114,7 @@ namespace Highway.Data.Tests.InMemory
         }
 
         [TestMethod]
-        public void ShouldIgnoreNullCollections()
+        public void Add_ShouldIgnoreNullCollections()
         {
             //arrange 
             var blog = new Blog()
@@ -126,7 +131,7 @@ namespace Highway.Data.Tests.InMemory
         }
 
         [TestMethod]
-        public void ShouldIgnoreNonReferenceTypeProperties()
+        public void Add_ShouldIgnoreNonReferenceTypeProperties()
         {
             //arrange 
             var site = new Site();
@@ -140,13 +145,13 @@ namespace Highway.Data.Tests.InMemory
         }
 
         [TestMethod]
-        public void ShouldDeleteAnObjectFromRelatedObjects()
+        public void Remove_ShouldDeleteAnObjectFromRelatedObjects()
         {
             //arrange 
             var site = new Site() {Blog = new Blog()};
+            _context.Add(site);
 
             //act
-            _context.Add(site);
             _context.Remove(site.Blog);
 
             //assert
@@ -156,14 +161,14 @@ namespace Highway.Data.Tests.InMemory
         }
 
         [TestMethod]
-        public void ShouldRemoveObjectFromRelatedCollection()
+        public void Remove_ShouldRemoveObjectFromRelatedCollection()
         {
             //arrange 
             Post post = new Post();
             var blog = new Blog() { Posts = new List<Post>(){post} };
+            _context.Add(blog);
 
             //act
-            _context.Add(blog);
             _context.Remove(post);
 
             //assert
@@ -174,7 +179,7 @@ namespace Highway.Data.Tests.InMemory
         }
 
         [TestMethod]
-        public void ShouldRemoveDependentGraphOnBranchRemoval()
+        public void Remove_ShouldRemoveDependentGraphOnBranchRemoval()
         {
             //arrange 
             var post = new Post();
@@ -197,7 +202,7 @@ namespace Highway.Data.Tests.InMemory
         }
 
         [TestMethod]
-        public void ShouldNotRemoveIfReferencedByAnotherObject()
+        public void Remove_ShouldNotRemoveIfReferencedByAnotherObject()
         {
             // Arrange
             var blog = new Blog();
@@ -217,7 +222,7 @@ namespace Highway.Data.Tests.InMemory
         }
 
         [TestMethod]
-        public void ShouldNotRemoveIfReferencedByAnotherCollection()
+        public void Remove_ShouldNotRemoveIfReferencedByAnotherCollection()
         {
             // Arrange
             var post1 = new Post();
@@ -244,7 +249,7 @@ namespace Highway.Data.Tests.InMemory
         }
 
         [TestMethod]
-        public void ShouldRemoveFromParentButNotDeleteChildObjectsThatAreReferencedMoreThanOne()
+        public void Remove_ShouldRemoveFromParentButNotDeleteChildObjectsThatAreReferencedMoreThanOne()
         {
             //arrange 
             

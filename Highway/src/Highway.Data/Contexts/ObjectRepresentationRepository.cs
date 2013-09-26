@@ -62,7 +62,7 @@ namespace Highway.Data.Contexts
         }
 
         //Called through reflection
-        private ObjectRepresentation AddChild<T>(T item, Action removeAction, object parent) where T: class
+        private ObjectRepresentation AddChild(object parent, object item, Action removeAction)
         {
             var existing = _data.SingleOrDefault(x => x.Entity == item);
             if(existing == null)
@@ -104,7 +104,7 @@ namespace Highway.Data.Contexts
                 if (child == null) continue;
                 PropertyInfo info = propertyInfo;
                 Action removeAction = () => info.SetValue(item, null, null);
-                ObjectRepresentation childTypedRepresetation = CreateChildTypedRepresetation(item, child, removeAction);
+                ObjectRepresentation childTypedRepresetation = AddChild(item, child, removeAction);
                 if(childTypedRepresetation != null) reps.Add(childTypedRepresetation);
             }
             return reps;
@@ -127,7 +127,7 @@ namespace Highway.Data.Contexts
                 foreach (var childItem in childItems)
                 {
                     var removeAction = CreateRemoveFromCollectionAction(propertyInfo, item, childItem);
-                    ObjectRepresentation childTypedRepresetation = CreateChildTypedRepresetation(item, childItem, removeAction);
+                    ObjectRepresentation childTypedRepresetation = AddChild(item, childItem,removeAction);
                     if(childTypedRepresetation != null) reps.Add(childTypedRepresetation);
                 }
             }
@@ -165,17 +165,6 @@ namespace Highway.Data.Contexts
             object o = Activator.CreateInstance(genericType);
             return o;
         }
-
-       
-        private ObjectRepresentation CreateChildTypedRepresetation(object parent, object child, Action removeAction)
-        {
-            Type type = this.GetType();
-            var method = type.GetMethod("AddChild", BindingFlags.NonPublic | BindingFlags.Instance).GetGenericMethodDefinition();
-            MethodInfo generic = method.MakeGenericMethod(child.GetType());
-            var obj = generic.Invoke(this, new[] { child, removeAction, parent });
-            return (ObjectRepresentation)obj;
-        }
-
 
     }
 }

@@ -99,6 +99,9 @@
     <Compile Include="InMemory\InMemoryDataContextTests.cs" />
     <Compile Include="InMemory\Domain\Post.cs" />
     <Compile Include="InMemory\Domain\Site.cs" />
+    <Compile Include="InMemory\ScenarioTests\BlogLifeTime.cs" />
+    <Compile Include="InMemory\ScenarioTests\Queries\FindBlogByTitle.cs" />
+    <Compile Include="InMemory\ScenarioTests\Services\TestBlogService.cs" />
     <Compile Include="TestDomain\Bar.cs" />
     <Compile Include="TestDomain\Baz.cs" />
     <Compile Include="TestDomain\Qux.cs" />
@@ -130,6 +133,7 @@
       <Name>Highway.Data</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

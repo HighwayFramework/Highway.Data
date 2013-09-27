@@ -1,13 +1,14 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Security.Policy;
 using FluentAssertions;
 using Highway.Data.Contexts;
 using Highway.Data.Tests.InMemory.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Site = Highway.Data.Tests.InMemory.Domain.Site;
+
+#endregion
 
 namespace Highway.Data.Tests.InMemory
 {
@@ -32,7 +33,7 @@ namespace Highway.Data.Tests.InMemory
             _context.Add(item);
 
             //assert
-            var site = _context.AsQueryable<Site>().First();
+            Site site = _context.AsQueryable<Site>().First();
             site.Should().BeSameAs(item);
         }
 
@@ -49,22 +50,18 @@ namespace Highway.Data.Tests.InMemory
 
             //assert
             _context.AsQueryable<Site>()
-                .Any(s => object.ReferenceEquals(item, s))
+                .Any(s => ReferenceEquals(item, s))
                 .Should().BeTrue();
             _context.AsQueryable<Site>()
-                .Any(s => object.ReferenceEquals(item2, s))
+                .Any(s => ReferenceEquals(item2, s))
                 .Should().BeTrue();
-            var site = _context.AsQueryable<Site>().First();
-            site.Should().BeSameAs(item);
-            var site2 = _context.AsQueryable<Site>().Last();
-            site2.Should().BeSameAs(item2);
         }
 
         [TestMethod]
         public void Add_ShouldStoreBlogWithAuthor()
         {
             //arrange 
-            var blog = new Blog()
+            var blog = new Blog
             {
                 Author = new Author()
             };
@@ -81,9 +78,9 @@ namespace Highway.Data.Tests.InMemory
         public void Add_ShouldStoreThreeLevelsOfObjects()
         {
             //arrange 
-            var site = new Site()
+            var site = new Site
             {
-                Blog = new Blog()
+                Blog = new Blog
                 {
                     Author = new Author()
                 }
@@ -102,9 +99,9 @@ namespace Highway.Data.Tests.InMemory
         public void Add_ShouldIncludeAllRelatedItemsFromRelatedCollections()
         {
             //arrange 
-            var blog = new Blog()
+            var blog = new Blog
             {
-                Posts = new List<Post>() {new Post(), new Post()}
+                Posts = new List<Post> {new Post(), new Post()}
             };
 
             //act
@@ -119,13 +116,13 @@ namespace Highway.Data.Tests.InMemory
         {
             //arrange 
             var post = new Post();
-            var blog = new Blog()
+            var blog = new Blog
             {
-                Posts = new List<Post>() { post, new Post() }
+                Posts = new List<Post> {post, new Post()}
             };
-            var blog2 = new Blog()
+            var blog2 = new Blog
             {
-                Posts = new List<Post>() {post}
+                Posts = new List<Post> {post}
             };
             _context.Add(blog);
 
@@ -135,12 +132,12 @@ namespace Highway.Data.Tests.InMemory
             //assert
             _context.AsQueryable<Post>().Count().Should().Be(2);
         }
-        
+
         [TestMethod]
         public void Add_ShouldIgnoreNullCollections()
         {
             //arrange 
-            var blog = new Blog()
+            var blog = new Blog
             {
                 Posts = null
             };
@@ -150,7 +147,6 @@ namespace Highway.Data.Tests.InMemory
 
             //assert
             _context.AsQueryable<Post>().Count().Should().Be(0);
-
         }
 
         [TestMethod]
@@ -159,7 +155,7 @@ namespace Highway.Data.Tests.InMemory
             //arrange 
             var site = new Site();
             site.Id = 2;
-            
+
             //act
             _context.Add(site);
 
@@ -171,7 +167,7 @@ namespace Highway.Data.Tests.InMemory
         public void Remove_ShouldDeleteAnObjectFromRelatedObjects()
         {
             //arrange 
-            var site = new Site() {Blog = new Blog()};
+            var site = new Site {Blog = new Blog()};
             _context.Add(site);
 
             //act
@@ -180,15 +176,14 @@ namespace Highway.Data.Tests.InMemory
             //assert
             _context.AsQueryable<Blog>().Count().Should().Be(0);
             _context.AsQueryable<Site>().First().Blog.Should().BeNull();
-
         }
 
         [TestMethod]
         public void Remove_ShouldRemoveObjectFromRelatedCollection()
         {
             //arrange 
-            Post post = new Post();
-            var blog = new Blog() { Posts = new List<Post>(){post} };
+            var post = new Post();
+            var blog = new Blog {Posts = new List<Post> {post}};
             _context.Add(blog);
 
             //act
@@ -198,7 +193,6 @@ namespace Highway.Data.Tests.InMemory
             _context.AsQueryable<Blog>().Count().Should().Be(1);
             _context.AsQueryable<Blog>().First().Posts.Count().Should().Be(0);
             _context.AsQueryable<Post>().Count().Should().Be(0);
-
         }
 
         [TestMethod]
@@ -206,11 +200,11 @@ namespace Highway.Data.Tests.InMemory
         {
             //arrange 
             var post = new Post();
-            var blog = new Blog()
+            var blog = new Blog
             {
-                Posts = new List<Post>() { new Post(),post}
+                Posts = new List<Post> {new Post(), post}
             };
-            var site = new Site()
+            var site = new Site
             {
                 Blog = blog
             };
@@ -220,7 +214,7 @@ namespace Highway.Data.Tests.InMemory
             _context.Remove(blog);
 
             //assert
-            var posts = _context.AsQueryable<Post>();
+            IQueryable<Post> posts = _context.AsQueryable<Post>();
             posts.Count().Should().Be(0);
         }
 
@@ -229,14 +223,14 @@ namespace Highway.Data.Tests.InMemory
         {
             // Arrange
             var blog = new Blog();
-            var site1 = new Site() { Blog = blog };
-            var site2 = new Site() { Blog = blog };
+            var site1 = new Site {Blog = blog};
+            var site2 = new Site {Blog = blog};
             _context.Add(site1);
             _context.Add(site2);
 
             // Act
             _context.Remove(site1);
-            
+
             // Assert
             _context.AsQueryable<Site>().Count().Should().Be(1);
             _context.AsQueryable<Site>().First().Should().BeSameAs(site2);
@@ -250,13 +244,13 @@ namespace Highway.Data.Tests.InMemory
             // Arrange
             var post1 = new Post();
             var post2 = new Post();
-            var blog1 = new Blog()
+            var blog1 = new Blog
             {
-                Posts = new List<Post> { post1, post2 }
+                Posts = new List<Post> {post1, post2}
             };
-            var blog2 = new Blog()
+            var blog2 = new Blog
             {
-                Posts = new List<Post> { post1 }
+                Posts = new List<Post> {post1}
             };
             _context.Add(blog1);
             _context.Add(blog2);
@@ -268,25 +262,24 @@ namespace Highway.Data.Tests.InMemory
             _context.AsQueryable<Post>().Count().Should().Be(1);
             _context.AsQueryable<Post>().First().Should().BeSameAs(post1);
             _context.AsQueryable<Blog>().Where(b => b.Posts.Count > 1).Count().Should().Be(0);
-
         }
 
         [TestMethod]
         public void Remove_ShouldRemoveFromParentButNotDeleteChildObjectsThatAreReferencedMoreThanOne()
         {
             //arrange 
-            
+
             var post1 = new Post();
             var post2 = new Post();
-            var blog1 = new Blog()
+            var blog1 = new Blog
             {
-                Posts = new List<Post> { post1, post2 }
+                Posts = new List<Post> {post1, post2}
             };
-            var blog2 = new Blog()
+            var blog2 = new Blog
             {
                 Posts = new List<Post> {post1}
             };
-            var site = new Site()
+            var site = new Site
             {
                 Blog = blog2
             };
@@ -309,9 +302,9 @@ namespace Highway.Data.Tests.InMemory
             // Arrange
             var post1 = new Post();
             var post2 = new Post();
-            var blog = new Blog()
+            var blog = new Blog
             {
-                Posts = new List<Post> { post1, post2 }
+                Posts = new List<Post> {post1, post2}
             };
             _context.Add(blog);
             _context.Commit();
@@ -332,9 +325,9 @@ namespace Highway.Data.Tests.InMemory
             // Arrange
             var post1 = new Post();
             var post2 = new Post();
-            var blog = new Blog()
+            var blog = new Blog
             {
-                Posts = new List<Post> { post1, post2 }
+                Posts = new List<Post> {post1, post2}
             };
             _context.Add(blog);
             _context.Commit();
@@ -354,7 +347,7 @@ namespace Highway.Data.Tests.InMemory
         {
             // Arrange
             var blog = new Blog();
-            var site = new Site() { Blog = blog };
+            var site = new Site {Blog = blog};
             _context.Add(site);
             _context.Commit();
             site.Blog = null;
@@ -388,7 +381,7 @@ namespace Highway.Data.Tests.InMemory
         {
             //Arrange
             _context.RegisterIdentityStrategy(new IntegerIdentityStrategy<Post>(x => x.Id));
-            var post = new Post(){Id = 0};
+            var post = new Post {Id = 0};
 
             //Act
             _context.Add(post);
@@ -403,7 +396,7 @@ namespace Highway.Data.Tests.InMemory
             //Arrange
             _context.RegisterIdentityStrategy(new IntegerIdentityStrategy<Post>(x => x.Id));
             var blog = new Blog();
-            blog.Posts.Add(new Post(){Id = 0});
+            blog.Posts.Add(new Post {Id = 0});
 
             //Act
             _context.Add(blog);
@@ -418,7 +411,7 @@ namespace Highway.Data.Tests.InMemory
             //Arrange
             _context.RegisterIdentityStrategy(new GuidIdentityStrategy<Author>(x => x.Id));
             var blog = new Blog();
-            blog.Author = new Author(){Id = Guid.Empty};
+            blog.Author = new Author {Id = Guid.Empty};
 
             //Act
             _context.Add(blog);
@@ -436,7 +429,7 @@ namespace Highway.Data.Tests.InMemory
             var blog = new Blog();
             _context.Add(blog);
             _context.Commit();
-            blog.Posts.Add(new Post() { Id = 0 });
+            blog.Posts.Add(new Post {Id = 0});
 
             //Act
             _context.Commit();

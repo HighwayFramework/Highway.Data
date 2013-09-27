@@ -5,12 +5,20 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Highway.Data.Contexts.TypeRepresentations
 {
     internal sealed class ObjectRepresentationRepository
     {
+        public ObjectRepresentationRepository()
+        {
+            IdentityStrategies = new Dictionary<Type, Action<object>>();    
+        }
+
         internal List<ObjectRepresentation> _data = new List<ObjectRepresentation>();
+        public Dictionary<Type,Action<object>> IdentityStrategies { get; set; }
+
 
         internal IQueryable<T> Data<T>()
         {
@@ -22,6 +30,10 @@ namespace Highway.Data.Contexts.TypeRepresentations
             var existing = _data.SingleOrDefault(x => x.Entity == item);
             if (existing == null)
             {
+                if (IdentityStrategies.ContainsKey(item.GetType()))
+                {
+                    IdentityStrategies[item.GetType()](item);
+                }
                 var rep = new ObjectRepresentation()
                 {
                     Id = Guid.NewGuid(),
@@ -66,6 +78,10 @@ namespace Highway.Data.Contexts.TypeRepresentations
             var existing = _data.SingleOrDefault(x => x.Entity == item);
             if(existing == null)
             {
+                if (IdentityStrategies.ContainsKey(item.GetType()))
+                {
+                    IdentityStrategies[item.GetType()](item);
+                }
                 return new ObjectRepresentation()
                 {
                     Id = Guid.NewGuid(),

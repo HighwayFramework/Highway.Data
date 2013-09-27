@@ -10,7 +10,13 @@ namespace Highway.Data.Tests.InMemory.ScenarioTests
     [TestClass]
     public class BlogLifeTime
     {
-        private static IRepository repo = new Repository(new InMemoryDataContext());
+        private IRepository repo;
+
+        [TestInitialize]
+        public void Setup()
+        {
+            repo = new Repository(new InMemoryDataContext());
+        }
 
         [TestMethod]
         public void ShouldCreateStoreAndRetrieve()

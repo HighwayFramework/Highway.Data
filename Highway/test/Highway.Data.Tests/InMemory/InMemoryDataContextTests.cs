@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Security.Policy;
@@ -134,8 +135,7 @@ namespace Highway.Data.Tests.InMemory
             //assert
             _context.AsQueryable<Post>().Count().Should().Be(2);
         }
-
-
+        
         [TestMethod]
         public void Add_ShouldIgnoreNullCollections()
         {
@@ -381,6 +381,68 @@ namespace Highway.Data.Tests.InMemory
 
             //Assert
             _context.AsQueryable<Post>().Count().Should().Be(1);
+        }
+
+        [TestMethod]
+        public void Add_ShouldUseIdentityForType()
+        {
+            //Arrange
+            _context.RegisterIdentityStrategy(new IntegerIdentityStrategy<Post>(x => x.Id));
+            var post = new Post(){Id = 0};
+
+            //Act
+            _context.Add(post);
+
+            //Assert
+            post.Id.Should().NotBe(0);
+        }
+
+        [TestMethod]
+        public void Add_ShouldUseIdentityForRelatedCollectionTypes()
+        {
+            //Arrange
+            _context.RegisterIdentityStrategy(new IntegerIdentityStrategy<Post>(x => x.Id));
+            var blog = new Blog();
+            blog.Posts.Add(new Post(){Id = 0});
+
+            //Act
+            _context.Add(blog);
+
+            //Assert
+            blog.Posts.Single().Id.Should().NotBe(0);
+        }
+
+        [TestMethod]
+        public void Add_ShouldUseIdentityForRelatedTypes()
+        {
+            //Arrange
+            _context.RegisterIdentityStrategy(new GuidIdentityStrategy<Author>(x => x.Id));
+            var blog = new Blog();
+            blog.Author = new Author(){Id = Guid.Empty};
+
+            //Act
+            _context.Add(blog);
+
+            //Assert
+            blog.Author.Id.Should().NotBe(Guid.Empty);
+        }
+
+
+        [TestMethod]
+        public void Commit_ShouldUseIdentityForRelatedCollectionTypes()
+        {
+            //Arrange
+            _context.RegisterIdentityStrategy(new IntegerIdentityStrategy<Post>(x => x.Id));
+            var blog = new Blog();
+            _context.Add(blog);
+            _context.Commit();
+            blog.Posts.Add(new Post() { Id = 0 });
+
+            //Act
+            _context.Commit();
+
+            //Assert
+            blog.Posts.Single().Id.Should().NotBe(0);
         }
     }
 }

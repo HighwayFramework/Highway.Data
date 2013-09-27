@@ -49,5 +49,17 @@ namespace Highway.Data.Contexts
             repo.FindChanges();
             return 0;
         }
+
+        public void RegisterIdentityStrategy<T>(IIdentityStrategy<T> integerIdentityStrategy) where T : class
+        {
+            if (repo.IdentityStrategies.ContainsKey(typeof (T)))
+            {
+                repo.IdentityStrategies[typeof (T)] = (obj) => integerIdentityStrategy.Assign((T)obj);
+            }
+            else
+            {
+                repo.IdentityStrategies.Add(typeof(T), (obj) => integerIdentityStrategy.Assign((T)obj));
+            }
+        }
     }
 }

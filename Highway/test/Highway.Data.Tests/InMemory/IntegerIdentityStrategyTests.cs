@@ -20,7 +20,7 @@ namespace Highway.Data.Tests.InMemory
         public void Setup()
         {
             IntegerIdentityStrategy<Post>.LastValue = seedNumber;
-            target = new IntegerIdentityStrategy<Post>();
+            target = new IntegerIdentityStrategy<Post>(x => x.Id);
         }
 
         [TestMethod]
@@ -33,6 +33,19 @@ namespace Highway.Data.Tests.InMemory
 
             // Assert
             result.Should().Be(seedNumber + 1);
+        }
+
+        [TestMethod]
+        public void Assign_ShouldAssignIdOfPost()
+        {
+            // Arrange
+            var post = new Post { Id = 0 };
+
+            // Act
+            target.Assign(post);
+
+            // Assert
+            post.Id.Should().Be(seedNumber + 1);
         }
     }
 }

@@ -12,13 +12,12 @@ namespace Highway.Data.Tests.InMemory
     [TestClass]
     public class GuidIdentityStrategyTests
     {
-        private GuidIdentityStrategy<Post> target;
-        private readonly Guid seedValue = Guid.NewGuid();
+        private GuidIdentityStrategy<Blog> target;
 
         [TestInitialize]
         public void Setup()
         {
-            target = new GuidIdentityStrategy<Post>();
+            target = new GuidIdentityStrategy<Blog>(x => x.Id);
         }
 
         [TestMethod]
@@ -32,6 +31,20 @@ namespace Highway.Data.Tests.InMemory
 
             // Assert
             val1.Should().NotBe(val2);
+        }
+
+
+        [TestMethod]
+        public void Assign_ShouldAssignIdOfBlog()
+        {
+            // Arrange
+            var blog = new Blog { Id = Guid.Empty };
+
+            // Act
+            target.Assign(blog);
+
+            // Assert
+            blog.Id.Should().NotBe(Guid.Empty);
         }
     }
 }

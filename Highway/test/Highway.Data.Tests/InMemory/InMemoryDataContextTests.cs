@@ -326,7 +326,6 @@ namespace Highway.Data.Tests.InMemory
             _context.AsQueryable<Post>().Should().NotContain(post2);
         }
 
-
         [TestMethod]
         public void Commit_ShouldRemoveOrphanedCollectionMembersWhenWholeCollectionRemoved()
         {
@@ -366,6 +365,22 @@ namespace Highway.Data.Tests.InMemory
             // Assert
             _context.AsQueryable<Blog>().Should().NotContain(blog);
             _context.AsQueryable<Blog>().Count().Should().Be(0);
+        }
+
+        [TestMethod]
+        public void Commit_ShouldAddNewLeafMembers()
+        {
+            //Arrange
+            var blog = new Blog();
+            _context.Add(blog);
+            _context.Commit();
+
+            //Act
+            blog.Posts.Add(new Post());
+            _context.Commit();
+
+            //Assert
+            _context.AsQueryable<Post>().Count().Should().Be(1);
         }
     }
 }

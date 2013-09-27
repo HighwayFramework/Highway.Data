@@ -74,7 +74,11 @@ namespace Highway.Data.Contexts.TypeRepresentations
                     Parents = new Dictionary<object, Accessor> { { parent, new Accessor(removeAction, getterFunc) } }
                 };    
             }
-            existing.Parents.Add(parent, new Accessor(removeAction,getterFunc));
+            if (!existing.Parents.ContainsKey(parent))
+            {
+                existing.Parents.Add(parent, new Accessor(removeAction, getterFunc));    
+            }
+            
             return existing;
         }
 
@@ -186,6 +190,16 @@ namespace Highway.Data.Contexts.TypeRepresentations
                     _data.Remove(objectRepresentation);
                 }
 
+            }
+        }
+
+        public void FindChanges()
+        {
+            var objectRepresentations = _data.Where(x => x.Parents.Count == 0).ToList();
+            foreach (var root in objectRepresentations)
+            {
+                root.RelatedEntities = AddRelatedObjects(root.Entity);
+                _data.AddRange(root.AllRelated().Where(x => x.Parents.Count == 1 && !_data.Contains(x)));
             }
         }
     }

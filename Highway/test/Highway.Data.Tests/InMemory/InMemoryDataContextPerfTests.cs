@@ -23,7 +23,7 @@ namespace Highway.Data.Tests.InMemory
         public void ShouldPerformBetterThan10msInserts()
         {
             Stopwatch sw = Stopwatch.StartNew();
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 100; i++)
             {
                 _context.Add(new Site()
                 {
@@ -31,12 +31,30 @@ namespace Highway.Data.Tests.InMemory
                     {
                         Author = new Author(),
                         Id = Guid.NewGuid(),
-                        Posts = new List<Post>() {new Post(), new Post()}
+                        Posts = new List<Post>() { new Post(), new Post() }
                     }
                 });
             }
             sw.Stop();
-            var averageInsert = sw.ElapsedMilliseconds/1000;
+            var averageInsert = sw.ElapsedMilliseconds / 1000;
+            averageInsert.Should().BeLessOrEqualTo(10);
+            Console.WriteLine("Average Time for insert of graph is {0}", averageInsert);
+        }
+
+        [TestMethod]
+        public void ShouldPerformCommitsBetterThan10ms()
+        {
+            //Arrange
+            Stopwatch sw = Stopwatch.StartNew();
+            for (int i = 0; i < 100; i++)
+            {
+                var blog = new Blog();
+                _context.Add(blog);
+                blog.Posts.Add(new Post());
+                _context.Commit();
+            }
+            sw.Stop();
+            var averageInsert = sw.ElapsedMilliseconds / 1000;
             averageInsert.Should().BeLessOrEqualTo(10);
             Console.WriteLine("Average Time for insert of graph is {0}", averageInsert);
         }

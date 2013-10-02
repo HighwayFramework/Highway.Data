@@ -50,6 +50,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.Rest.ExampleAPI", "test\Highway.Data.Rest.ExampleAPI\Highway.Data.Rest.ExampleAPI.csproj", "{C16DFFDF-D169-42F5-BFC5-5AFE3EFDEDDA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{2E4A8212-4368-46F9-83A7-DF69640E579F}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\About Highway.md = Documentation\About Highway.md
+		Documentation\Highway.Data Getting Started.md = Documentation\Highway.Data Getting Started.md
+		Documentation\Highway.Data.EntityFramework Getting Started.md = Documentation\Highway.Data.EntityFramework Getting Started.md
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.DriversEducation.GettingStarted", "Examples\Highway.DriversEducation.GettingStarted\Highway.DriversEducation.GettingStarted.csproj", "{1142034A-F0AA-44AB-A065-61A628B712DB}"
 EndProject

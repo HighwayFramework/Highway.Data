@@ -23,5 +23,22 @@ namespace Highway.DriversEducation.GettingStarted.Exam
             //assert
             context.AsQueryable<Driver>().Count(x => x.Name == "Devlin").Should().Be(1);
         }
+
+        [TestMethod]
+        public void ShouldQueryDriversByName()
+        {
+            //arrange 
+            var context = new InMemoryDataContext();
+            context.Add(new Driver("Devlin"));
+            context.Add(new Driver("Tim"));
+
+            var service = new DriversEducationService(new Repository(context));
+
+            //act
+            Driver driver = service.GetDriver("Devlin");
+
+            //assert
+            driver.Should().NotBeNull();
+        }
     }
 }

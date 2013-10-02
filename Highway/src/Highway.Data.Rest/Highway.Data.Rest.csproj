@@ -40,8 +40,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Highway.Data.4.0.4.1\lib\net40\Highway.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Highway.Pavement">
-      <HintPath>..\..\packages\Highway.Pavement.0.1.0.0\lib\net45\Highway.Pavement.dll</HintPath>
+    <Reference Include="Highway.Pavement, Version=0.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Highway.Pavement.0.2.1.0\lib\net40\Highway.Pavement.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Net.Http">
       <HintPath>..\..\packages\HttpClient.0.3.0\lib\40\Microsoft.Net.Http.dll</HintPath>

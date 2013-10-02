@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
+using Highway.Pavement.Collections;
 
 namespace Highway.Data.Contexts.TypeRepresentations
 {
@@ -16,7 +17,7 @@ namespace Highway.Data.Contexts.TypeRepresentations
             IdentityStrategies = new Dictionary<Type, Action<object>>();    
         }
 
-        internal List<ObjectRepresentation> _data = new List<ObjectRepresentation>();
+        internal ConcurrentList<ObjectRepresentation> _data = new ConcurrentList<ObjectRepresentation>();
         public Dictionary<Type,Action<object>> IdentityStrategies { get; set; }
 
 
@@ -41,7 +42,10 @@ namespace Highway.Data.Contexts.TypeRepresentations
                     RelatedEntities = AddRelatedObjects(item)
                 };
                 _data.Add(rep);
-                _data.AddRange(rep.AllRelated().Where(x=>x.Parents.Count == 1));
+                foreach (var objRep in rep.AllRelated().Where(x => x.Parents.Count == 1))
+                {
+                    _data.Add(objRep);
+                }
             }
         }
 
@@ -215,7 +219,10 @@ namespace Highway.Data.Contexts.TypeRepresentations
             foreach (var root in objectRepresentations)
             {
                 root.RelatedEntities = AddRelatedObjects(root.Entity);
-                _data.AddRange(root.AllRelated().Where(x => x.Parents.Count == 1 && !_data.Contains(x)));
+                foreach (var objRep in root.AllRelated().Where(x => x.Parents.Count == 1 && !_data.Contains(x)))
+                {
+                    _data.Add(objRep);
+                }
             }
         }
     }

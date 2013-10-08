@@ -78,7 +78,6 @@
     <Compile Include="Contexts\DataContext.cs" />
     <Compile Include="Database\DropCreateInitializer.cs" />
     <Compile Include="EntityExtensions.cs" />
-    <Compile Include="Extensions\IncludeExtension.cs" />
     <Compile Include="Extensions\LoggingTraceExtensions.cs" />
     <Compile Include="Extensions\PerformanceTracingExtensions.cs" />
     <Compile Include="Interceptors\AuditableInterceptor.cs" />

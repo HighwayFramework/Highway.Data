@@ -7,7 +7,7 @@ properties {
 
 task default -depends build
 task build -depends build-all
-task test -depends test-all
+task test -depends build-all, test-all
 task pack -depends pack-all
 task push -depends push-all
 

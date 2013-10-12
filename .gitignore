@@ -15,5 +15,6 @@ _ReSharper*
 packages
 TestResults
 
+buildarchive
 *.ncrunchsolution
 _NCrunch_Highway

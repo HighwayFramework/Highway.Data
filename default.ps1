@@ -32,7 +32,13 @@ task test-all -depends clean_buildarchive, Clean-TestResults {
     $test_dlls = Get-ChildItem -Recurse ".\Highway\Test\**\bin\release\*Tests.dll" |
         ?{ $_.Directory.Parent.Parent.Name -eq ($_.Name.replace(".dll","")) }
     
-    $test_dlls | % { exec { & "$mstest" /testcontainer:$($_.FullName) } }
+    $test_dlls | % { 
+        try {
+            exec { & "$mstest" /testcontainer:$($_.FullName) } 
+        } finally {
+            cp .\TestResults\*.trx $build_archive -Verbose
+        }
+    }
 } -postaction {
     if (Test-IsCI) {
         cp .\TestResults\*.trx $build_archive -Verbose

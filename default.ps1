@@ -5,8 +5,9 @@ properties {
     $pack_dir = ".\pack"
     $build_archive = ".\buildarchive\"
     $version_number = "4.2.0.0"
+    $nuget_version_number = $version_number
     if ($Env:BUILD_NUMBER -ne $null) {
-        $version_number += "-$Env:BUILD_NUMBER"
+        $nuget_version_number += "-$Env:BUILD_NUMBER"
     }
 }
 
@@ -78,6 +79,8 @@ task clean-testresults {
 task Update-Version {
     $solution_info = Get-Content .\Highway\SolutionInfo.cs
     $solution_info = $solution_info -replace 'Version\(".+"\)', "Version(`"$version_number`")"
+    $solution_info = $solution_info -replace 'AssemblyFileVersion\(".+"\)', "AssemblyFileVersion(`"$nuget_version_number`")"
+    $solution_info = $solution_info -replace 'AssemblyInformationalVersion\(".+"\)', "AssemblyInformationalVersion(`"$nuget_version_number`")"
     Set-Content -Path .\Highway\SolutionInfo.cs -Value $solution_info
     if (Test-ModifiedInGIT .\Highway\SolutionInfo.cs) {
         Write-Warning "SolutionInfo.cs changed, most likely updating to a new version"
@@ -97,6 +100,7 @@ function Test-PackageDoesNotExist() {
 }
 
 function Test-ModifiedInGIT($path) {
+    if (Test-IsCI -eq $false) { return $false }
     $status_result = & git status $path --porcelain
     $status_result -ne $null
 }

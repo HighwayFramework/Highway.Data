@@ -70,7 +70,7 @@ task push-all -depends clean-nuget, pack-all {
     rm $pack_dir -Recurse -Force
 }
 
-task clean_buildarchive {
+task clean-buildarchive {
     Reset-Directory $build_archive
 }
 

@@ -17,9 +17,8 @@ task test-all {
     $mstest = $mstest.FullName
     $test_dlls = Get-ChildItem -Recurse ".\Highway\Test\**\bin\release\*Tests.dll" |
         ?{ $_.Directory.Parent.Parent.Name -eq ($_.Name.replace(".dll","")) }
-    exec { 
-        $test_dlls | % { & "$mstest" /testcontainer:$($_.FullName) }
-    }
+    
+    $test_dlls | % { exec { & "$mstest" /testcontainer:$($_.FullName) } }
 }
 
 task build-all {
@@ -47,6 +46,8 @@ task nuget-clean {
 }
 
 function rebuild([string]$slnPath) { 
+    Set-Content Env:\EnableNuGetPackageRestore -Value true
+    .\Highway\.nuget\nuget.exe restore $slnPath
     exec { msbuild $slnPath /t:rebuild /v:q /clp:ErrorsOnly /nologo /p:Configuration=$build_config }
 }
 

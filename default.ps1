@@ -3,6 +3,10 @@ Framework "4.0"
 properties {
     $build_config = "Release"
     $pack_dir = ".\pack"
+    $version_number = "4.2.0.0"
+    if ($Env:BUILD_NUMBER -ne $null) {
+        $version_number += "-$Env:BUILD_NUMBER"
+    }
 }
 
 ##########################################################################################
@@ -29,7 +33,7 @@ task test-all -depends Clean-TestResults {
     $test_dlls | % { exec { & "$mstest" /testcontainer:$($_.FullName) } }
 }
 
-task build-all {
+task build-all -depends Update-Version {
     rebuild .\Highway\Highway.sln
 }
 
@@ -57,10 +61,23 @@ task clean-testresults {
     Remove-Item -Force -Recurse .\TestResults -ErrorAction SilentlyContinue
 }
 
+task Update-Version {
+    $solution_info = Get-Content .\Highway\SolutionInfo.cs
+    $solution_info = $solution_info -replace 'Version\(".+"\)', "Version(`"$version_number`")"
+    Set-Content -Path .\Highway\SolutionInfo.cs -Value $solution_info
+    if (Test-ModifiedInGIT .\Highway\SolutionInfo.cs) {
+        Write-Warning "SolutionInfo.cs changed, most likely updating to a new version"
+    }
+}
+
 ##########################################################################################
 # Functions
 ##########################################################################################
 
+function Test-ModifiedInGIT($path) {
+    $status_result = & git status $path --porcelain
+    $status_result -ne $null
+}
 
 function rebuild([string]$slnPath) { 
     Set-Content Env:\EnableNuGetPackageRestore -Value true

@@ -42,11 +42,10 @@ task build-all -depends Update-Version {
     rebuild .\Highway\Highway.sln
 }
 
-task pack-ci -depends clean-buildarchive, pack-all -precondition Test-IsCI {
+task pack-ci -depends clean-buildarchive, pack-all -precondition { Test-IsCI } {
     dir -Path .\pack\*.nupkg | % { 
         cp $_ $build_archive
-    }
-    rm $pack_dir -Recurse -Force   
+    } 
 }
 
 task pack-all -depends Test-PackageDoesNotExist, clean-nuget {

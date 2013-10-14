@@ -41,7 +41,6 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
         {
             base.BeforeEachTest();
             Database.SetInitializer(new EntityFrameworkIntializer());
-            target.AsQueryable<Foo>().ToList();
         }
 
         [TestMethod, TestCategory(TestCategories.Database)]

@@ -1,4 +1,5 @@
 Framework "4.0"
+Import-Module .\DatabaseDeploy.psm1 -DisableNameChecking
 
 properties {
     $build_config = "Release"
@@ -12,14 +13,20 @@ task pack -depends pack-all
 task push -depends push-all
 
 
-task test-all {
-    $mstest = Get-ChildItem -Recurse -Force 'C:\Program Files (x86)\Microsoft Visual Studio *\Common7\IDE\MSTest.exe'
+task test-all -depends DeployDb {
+    $mstest = Get-ChildItem -Recurse -Force 'C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\IDE\MSTest.exe'
     $mstest = $mstest.FullName
     $test_dlls = Get-ChildItem -Recurse ".\Highway\Test\**\bin\release\*Tests.dll" |
         ?{ $_.Directory.Parent.Parent.Name -eq ($_.Name.replace(".dll","")) }
     exec { 
         $test_dlls | % { & "$mstest" /testcontainer:$($_.FullName) }
     }
+}
+
+task DeployDb {
+    Publish-DACPAC -DACPAC ".\Highway\test\Highway.Data.Tests.Db\bin\Debug\Highway.Data.Tests.Db.dacpac" `
+    -PublishProfile ".\Highway\test\Highway.Data.Tests.Db\Highway.Data.Tests.Db.publish.xml" `
+    -ConnectionString "Server=.;Integrated Security=SSPI;" -Database "Highway.Test"
 }
 
 task build-all {

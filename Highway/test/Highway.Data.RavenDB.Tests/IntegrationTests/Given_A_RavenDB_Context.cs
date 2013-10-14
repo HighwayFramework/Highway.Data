@@ -16,7 +16,7 @@ using Raven.Client.Embedded;
 namespace Highway.Data.RavenDB.Tests.IntegrationTests
 {
     [TestClass]
-    public class Given_A_EF_Context : ContainerTest<DataContext>
+    public class Given_A_RavenDb_Context : ContainerTest<DataContext>
     {
         public override DataContext ResolveTarget()
         {
@@ -74,7 +74,7 @@ namespace Highway.Data.RavenDB.Tests.IntegrationTests
             IQueryable<Foo> items = target.AsQueryable<Foo>();
 
             //Assert
-            items.Count().ShouldBe(5);
+            items.Count().ShouldBe(6);
 
             target.Remove(item);
             target.SaveChanges();

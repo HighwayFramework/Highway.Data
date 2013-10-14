@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[Foos]
+(
+	[Id] INT NOT NULL IDENTITY PRIMARY KEY, 
+    [Name] NCHAR(100) NULL, 
+)

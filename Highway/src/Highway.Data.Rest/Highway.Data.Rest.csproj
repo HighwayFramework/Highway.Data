@@ -31,6 +31,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Highway.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -40,9 +46,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Highway.Data.4.0.4.1\lib\net40\Highway.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Highway.Pavement, Version=0.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Highway.Pavement, Version=0.3.0.0, Culture=neutral, PublicKeyToken=fe803c9600455796, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Highway.Pavement.0.2.1.0\lib\net40\Highway.Pavement.dll</HintPath>
+      <HintPath>..\..\packages\Highway.Pavement.0.3.0.0\lib\net40\Highway.Pavement.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Net.Http">
       <HintPath>..\..\packages\HttpClient.0.3.0\lib\40\Microsoft.Net.Http.dll</HintPath>
@@ -105,6 +111,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Highway.snk" />
     <None Include="netfx\System\Reflection\Reflect.Overloads.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Reflect.Overloads.cs</LastGenOutput>

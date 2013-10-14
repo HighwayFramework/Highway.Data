@@ -14,7 +14,7 @@
     <copyright>Devlin Liles Copyright 2012</copyright>
     <tags>Architecture  ORM  Repository  Specification  Productivity</tags>
     <dependencies>
-      <dependency id="Highway.Data" version="4.0.5.3"/>
+      <dependency id="Highway.Data" version="4.1.0.1"/>
 	  <dependency id="NHibernate" version="3.3.2.4" />
     </dependencies>
   </metadata>

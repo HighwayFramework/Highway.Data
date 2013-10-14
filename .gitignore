@@ -10,11 +10,11 @@ TestResult.xml
 # This line keeps the db in check - comment it out to update the starting db
 data
 _ReSharper*
-lib/golden_cap.zip
 *.orig
 *.cache
 packages
 TestResults
 
+buildarchive
 *.ncrunchsolution
 _NCrunch_Highway

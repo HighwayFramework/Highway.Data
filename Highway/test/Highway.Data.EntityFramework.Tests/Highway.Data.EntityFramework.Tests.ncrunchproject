@@ -14,7 +14,7 @@
   <IncludeStaticReferencesInWorkspace>true</IncludeStaticReferencesInWorkspace>
   <DefaultTestTimeout>60000</DefaultTestTimeout>
   <UseBuildConfiguration></UseBuildConfiguration>
-  <UseBuildPlatform />
+  <UseBuildPlatform></UseBuildPlatform>
   <ProxyProcessPath></ProxyProcessPath>
   <UseCPUArchitecture>AutoDetect</UseCPUArchitecture>
   <MSTestThreadApartmentState>STA</MSTestThreadApartmentState>
@@ -30,7 +30,37 @@
       <TestName>Highway.Data.EntityFramework.Tests.UnitTests.GivenAnAggregateContextFactory.ShouldAllowTwoDifferentContextsToBeLoadedInTheSameAppDomain</TestName>
     </NamedTestSelector>
     <RegexTestSelector>
-      <RegularExpression>.*</RegularExpression>
+      <RegularExpression>Highway\.Data\.EntityFramework\.Tests\.IntegrationTests\.Given_a_Stored_Proc\..*</RegularExpression>
+    </RegexTestSelector>
+    <RegexTestSelector>
+      <RegularExpression>Highway\.Data\.EntityFramework\.Tests\.Logging\.Given_A_Context_With_a_Logger\..*</RegularExpression>
+    </RegexTestSelector>
+    <RegexTestSelector>
+      <RegularExpression>Highway\.Data\.EntityFramework\.Tests\.Performance\.Given_A_Query_Can_Performance_Test_It\..*</RegularExpression>
+    </RegexTestSelector>
+    <RegexTestSelector>
+      <RegularExpression>Highway\.Data\.EntityFramework\.Tests\.UnitTests\.Given_A_Collection_Of_T\..*</RegularExpression>
+    </RegexTestSelector>
+    <RegexTestSelector>
+      <RegularExpression>Highway\.Data\.EntityFramework\.Tests\.UnitTests\.Given_A_Context_Based_On_Database_First\..*</RegularExpression>
+    </RegexTestSelector>
+    <RegexTestSelector>
+      <RegularExpression>Highway\.Data\.EntityFramework\.Tests\.UnitTests\.Given_A_Context_Without_Configuration\..*</RegularExpression>
+    </RegexTestSelector>
+    <RegexTestSelector>
+      <RegularExpression>Highway\.Data\.EntityFramework\.Tests\.UnitTests\.Given_A_Context_Without_Mappings\..*</RegularExpression>
+    </RegexTestSelector>
+    <RegexTestSelector>
+      <RegularExpression>Highway\.Data\.EntityFramework\.Tests\.UnitTests\.Given_A_Generic_Repository\..*</RegularExpression>
+    </RegexTestSelector>
+    <RegexTestSelector>
+      <RegularExpression>Highway\.Data\.EntityFramework\.Tests\.UnitTests\.Given_A_ProjectionQuery_Object\..*</RegularExpression>
+    </RegexTestSelector>
+    <RegexTestSelector>
+      <RegularExpression>Highway\.Data\.EntityFramework\.Tests\.UnitTests\.Given_A_Query_Object\..*</RegularExpression>
+    </RegexTestSelector>
+    <RegexTestSelector>
+      <RegularExpression>Highway\.Data\.EntityFramework\.Tests\.UnitTests\.GivenAnEventExtendableContext\..*</RegularExpression>
     </RegexTestSelector>
   </IgnoredTests>
 </ProjectConfiguration>

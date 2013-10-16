@@ -26,9 +26,8 @@ task push -depends push-all
 ##########################################################################################
 # Tasks
 ##########################################################################################
-
-task test-all -depends clean-buildarchive, Clean-TestResults {
-    $mstest = Get-ChildItem -Recurse -Force 'C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\IDE\MSTest.exe'
+task test-all {
+    $mstest = Get-ChildItem -Recurse -Force 'C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\MSTest.exe'
     $mstest = $mstest.FullName
     $test_dlls = Get-ChildItem -Recurse ".\Highway\Test\**\bin\release\*Tests.dll" |
         ?{ $_.Directory.Parent.Parent.Name -eq ($_.Name.replace(".dll","")) }

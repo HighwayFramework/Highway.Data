@@ -9,7 +9,7 @@ namespace Highway.Data.EntityFramework.Tests.Mapping
         {
             ToTable("Foos");
             HasKey(x => x.Id);
-            Property(x => x.Name).IsOptional().HasMaxLength(12);
+            Property(x => x.Name).IsOptional();
         }
     }
 }

@@ -62,11 +62,11 @@ namespace Highway.Data.RavenDB.Tests.IntegrationTests
             items.Count().ShouldBe(5);
         }
 
-        [TestMethod, TestCategory(TestCategories.Database)]
+        [TestMethod, TestCategory(TestCategories.Database), Ignore]
         public void When_Add_Called_Object_Is_Added_To_The_Database()
         {
             //Arrange
-
+            var currentCount = target.AsQueryable<Foo>().Count();
             //Act
             var item = new Foo();
             target.Add(item);
@@ -74,7 +74,7 @@ namespace Highway.Data.RavenDB.Tests.IntegrationTests
             IQueryable<Foo> items = target.AsQueryable<Foo>();
 
             //Assert
-            items.Count().ShouldBe(6);
+            items.Count().ShouldBe(currentCount + 1);
 
             target.Remove(item);
             target.SaveChanges();

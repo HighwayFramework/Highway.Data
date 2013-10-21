@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Highway.Data.EventManagement;
 using Highway.Data.Interceptors;
 using Highway.Data.Interceptors.Events;
-using Highway.Data;
 using Highway.Data.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
 
-namespace Highway.Data.RavenDB.Tests.UnitTests
+namespace Highway.Data.RavenDB.Tests.Contexts
 {
     [TestClass]
     public class GivenAnEventExtendableContext : ContainerTest<CommitEventsMockContext>
@@ -117,7 +115,6 @@ namespace Highway.Data.RavenDB.Tests.UnitTests
         public event EventHandler<PostSaveEventArgs> PostSave;
 
         #endregion
-
         public void Reload<T>() where T : class
         {
             throw new NotImplementedException();

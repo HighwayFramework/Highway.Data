@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Data.Common;
@@ -26,7 +25,7 @@ namespace Highway.Data
         {
             Type basetype = null;
             foreach (Type i in listtype.GetInterfaces())
-                if (i.IsGenericType && i.GetGenericTypeDefinition().Equals(typeof(IEnumerable<>)))
+                if (i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEnumerable<>))
                     basetype = i.GetGenericArguments()[0];
 
             return basetype;

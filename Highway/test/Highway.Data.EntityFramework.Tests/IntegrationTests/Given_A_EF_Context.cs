@@ -11,7 +11,6 @@ using Highway.Data.EntityFramework.Tests.Mapping;
 using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.EntityFramework.Tests.UnitTests;
 using Highway.Data.EventManagement;
-using Highway.Data;
 using Highway.Data.Tests;
 using Highway.Data.Tests.TestDomain;
 using Highway.Test.MSTest;

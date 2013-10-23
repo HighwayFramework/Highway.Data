@@ -35,7 +35,7 @@ task push -depends push-all
 task test-all {
     $mstest = Get-ChildItem -Recurse -Force 'C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\MSTest.exe'
     $mstest = $mstest.FullName
-    $test_dlls = Get-ChildItem -Recurse ".\Highway\Test\**\bin\release\*Tests.dll" |
+    $test_dlls = Get-ChildItem -Recurse ".\Highway\Test\**\bin\$build_config\*Tests.dll" |
         ?{ $_.Directory.Parent.Parent.Name -eq ($_.Name.replace(".dll","")) }
     
     $test_dlls | % { 
@@ -52,7 +52,7 @@ task test-all {
 }
 
 task DeployDb {
-    Publish-DACPAC -DACPAC ".\Highway\test\Highway.Data.Tests.Db\bin\Debug\Highway.Data.Tests.Db.dacpac" `
+    Publish-DACPAC -DACPAC ".\Highway\test\Highway.Data.Tests.Db\bin\$build_config\Highway.Data.Tests.Db.dacpac" `
     -PublishProfile ".\Highway\test\Highway.Data.Tests.Db\Highway.Data.Tests.Db.publish.xml" `
     -ConnectionString "Server=.;Integrated Security=SSPI;" -Database "Highway.Test"
 }

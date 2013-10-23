@@ -2,6 +2,12 @@ Framework "4.0"
 Import-Module .\DatabaseDeploy.psm1 -DisableNameChecking
 
 properties {
+    $msbuildexe = Get-Item "C:\Program Files (x86)\MSBuild\12.0\bin\amd64\msbuild.exe" -ErrorAction SilentlyContinue
+    if ($msbuildexe -eq $null) {
+        $msbuildexe = Get-Item "C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe" -ErrorAction SilentlyContinue
+        Assert ($msbuildexe -ne $null) "Unable to locate MSBuild.exe"
+    }
+
     $build_config = "Release"
     $pack_dir = ".\pack"
     $build_archive = ".\buildarchive\"
@@ -129,7 +135,7 @@ function Reset-Directory($path) {
 function rebuild([string]$slnPath) { 
     Set-Content Env:\EnableNuGetPackageRestore -Value true
     .\Highway\.nuget\nuget.exe restore $slnPath
-    exec { msbuild $slnPath /t:rebuild /v:q /clp:ErrorsOnly /nologo /p:Configuration=$build_config }
+    exec { & $msbuildexe $slnPath /t:rebuild /v:q /clp:ErrorsOnly /nologo /p:Configuration=$build_config }
 }
 
 function pack-nuget($prj) {

@@ -32,7 +32,7 @@ task push -depends push-all
 ##########################################################################################
 # Tasks
 ##########################################################################################
-task test-all {
+task test-all -depends clean-buildarchive {
     $mstest = Get-ChildItem -Recurse -Force 'C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\MSTest.exe'
     $mstest = $mstest.FullName
     $test_dlls = Get-ChildItem -Recurse ".\Highway\Test\**\bin\$build_config\*Tests.dll" |
@@ -42,7 +42,7 @@ task test-all {
         try {
             exec { & "$mstest" /testcontainer:$($_.FullName) } 
         } finally {
-            cp .\TestResults\*.trx $build_archive -Verbose
+            Move-Item .\TestResults\*.trx $build_archive -Verbose
         }
     }
 } -postaction {
@@ -52,8 +52,10 @@ task test-all {
 }
 
 task DeployDb {
-    Publish-DACPAC -DACPAC ".\Highway\test\Highway.Data.Tests.Db\bin\$build_config\Highway.Data.Tests.Db.dacpac" `
-    -PublishProfile ".\Highway\test\Highway.Data.Tests.Db\Highway.Data.Tests.Db.publish.xml" `
+    $pac = get-item ".\Highway\test\Highway.Data.Tests.Db\bin\$build_config\Highway.Data.Tests.Db.dacpac"
+    $pacxml = get-item ".\Highway\test\Highway.Data.Tests.Db\Highway.Data.Tests.Db.publish.xml"
+    Publish-DACPAC -DACPAC  $pac.FullName `
+    -PublishProfile $pacxml.FullName `
     -ConnectionString "Server=.;Integrated Security=SSPI;" -Database "Highway.Test"
 }
 
@@ -67,7 +69,7 @@ task pack-ci -depends clean-buildarchive, pack-all -precondition { Test-IsCI } {
     } 
 }
 
-task pack-all -depends Test-PackageDoesNotExist, clean-nuget {
+task pack-all -depends clean-nuget {
 	pack-nuget .\Highway\src\Highway.Data\Highway.Data.csproj
 	pack-nuget .\Highway\src\Highway.Data.EntityFramework\Highway.Data.EntityFramework.csproj
 	pack-nuget .\Highway\src\Highway.Test.MSTest\Highway.Test.MSTest.csproj
@@ -111,10 +113,6 @@ task Update-Version {
 
 function Test-IsCI {
     $Env:TEAMCITY_VERSION -ne $null
-}
-
-function Test-PackageDoesNotExist() {
-    (ls ".\nuget\*$version_number.nupkg" | Measure-Object).Count -gt 0
 }
 
 function Test-ModifiedInGIT($path) {

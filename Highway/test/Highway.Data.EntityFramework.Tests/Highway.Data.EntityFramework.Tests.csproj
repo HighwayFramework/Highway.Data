@@ -118,6 +118,8 @@
     </Compile>
     <Compile Include="Contexts\Given_A_Context_Based_On_Database_First.cs" />
     <Compile Include="Contexts\Given_A_Context_Without_Configuration.cs" />
+    <Compile Include="Factories\ContextFactoryTests.cs" />
+    <Compile Include="Factories\RepositoryFactoryTests.cs" />
     <Compile Include="Initializer\EntityFrameworkIntializer.cs" />
     <Compile Include="IntegrationTests\Given_A_EF_Context.cs" />
     <Compile Include="IntegrationTests\Given_a_Stored_Proc.cs" />

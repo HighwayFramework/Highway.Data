@@ -81,10 +81,15 @@
     <Compile Include="Configuration\DefaultContextConfiguration.cs" />
     <Compile Include="Configuration\IAggregateConfiguration.cs" />
     <Compile Include="Contexts\DataContext.cs" />
+    <Compile Include="Contexts\DomainContext.cs" />
+    <Compile Include="Contexts\IDomainContext.cs" />
     <Compile Include="Database\DropCreateInitializer.cs" />
+    <Compile Include="Domain\ContextFactory.cs" />
+    <Compile Include="Domain\IContextFactory.cs" />
     <Compile Include="EntityExtensions.cs" />
     <Compile Include="Extensions\LoggingTraceExtensions.cs" />
     <Compile Include="Extensions\PerformanceTracingExtensions.cs" />
+    <Compile Include="Factories\RepositoryFactory.cs" />
     <Compile Include="Interceptors\AuditableInterceptor.cs" />
     <Compile Include="Interfaces\IEntityDataContext.cs" />
     <Compile Include="Mappings\IContextConfiguration.cs" />

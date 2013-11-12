@@ -99,5 +99,6 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
             entry.State.ShouldBe(EntityState.Detached);
             target.Dispose();
         }
+        
     }
 }

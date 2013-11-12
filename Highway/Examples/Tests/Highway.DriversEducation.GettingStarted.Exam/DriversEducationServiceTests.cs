@@ -3,6 +3,7 @@ using System.Linq;
 using FluentAssertions;
 using Highway.Data;
 using Highway.Data.Contexts;
+using Highway.DriversEducation.GettingStarted.Exam.Properties;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highway.DriversEducation.GettingStarted.Exam
@@ -21,7 +22,7 @@ namespace Highway.DriversEducation.GettingStarted.Exam
             service.AddDriver("Devlin");
 
             //assert
-            context.AsQueryable<Driver>().Count(x => x.Name == "Devlin").Should().Be(1);
+            context.AsQueryable<Driver>().Count(x => x.LastName == "Devlin").Should().Be(1);
         }
 
         [TestMethod]
@@ -29,13 +30,13 @@ namespace Highway.DriversEducation.GettingStarted.Exam
         {
             //arrange 
             var context = new InMemoryDataContext();
-            context.Add(new Driver("Devlin"));
-            context.Add(new Driver("Tim"));
+            context.Add(new Driver("Devlin", "Liles"));
+            context.Add(new Driver("Tim","Rayburn"));
 
             var service = new DriversEducationService(new Repository(context));
 
             //act
-            Driver driver = service.GetDriver("Devlin");
+            Driver driver = service.GetDriver("Liles");
 
             //assert
             driver.Should().NotBeNull();

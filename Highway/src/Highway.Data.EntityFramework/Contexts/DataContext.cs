@@ -105,7 +105,7 @@ namespace Highway.Data
         {
             _log.DebugFormat("Querying Object {0}", typeof (T).Name);
             DbSet<T> result = Set<T>();
-            _log.DebugFormat("Queried Object {0}", typeof (T).Name);
+            _log.TraceFormat("Queried Object {0}", typeof (T).Name);
             return result;
         }
 

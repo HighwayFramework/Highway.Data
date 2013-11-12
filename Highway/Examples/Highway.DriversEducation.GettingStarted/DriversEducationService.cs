@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +20,7 @@ namespace Highway.DriversEducation.GettingStarted
 
         public void AddDriver(string name)
         {
-            _repository.Context.Add(new Driver(name));
+            _repository.Context.Add(new Driver(){LastName = name});
         }
 
         public Driver GetDriver(string name)
@@ -32,13 +34,30 @@ namespace Highway.DriversEducation.GettingStarted
         }
     }
 
+    public class SwapInstructors : Scalar<int>
+    {
+        public SwapInstructors(Instructor currentInstructor, Instructor newInstructor)
+        {
+            ContextQuery = context =>
+            {
+                foreach(var driver in currentInstructor.Drivers)
+	    		{
+	    			driver.Instructor = newInstructor;
+	    		}
+	    		return context.Commit();
+            };
+        }
+    }
+
+
+
     public class RemoveDrivers : Command
     {
         public RemoveDrivers(string name)
         {
             ContextQuery = c =>
             {
-                foreach (var driver in c.AsQueryable<Driver>().Where(x=>x.Name == name))
+                foreach (var driver in c.AsQueryable<Driver>().Where(x=>x.LastName == name))
                 {
                     c.Remove(driver);
                 }
@@ -51,7 +70,7 @@ namespace Highway.DriversEducation.GettingStarted
     {
         public DriverByName(string name)
         {
-            ContextQuery = c => c.AsQueryable<Driver>().Single(x => x.Name == name);
+            ContextQuery = c => c.AsQueryable<Driver>().Single(x => x.LastName == name);
         }
     }
 
@@ -59,17 +78,33 @@ namespace Highway.DriversEducation.GettingStarted
     {
         public DriversByName(string name)
         {
-            ContextQuery = c => c.AsQueryable<Driver>().Where(x => x.Name == name);
+            ContextQuery = c => c.AsQueryable<Driver>().Where(x => x.LastName == name);
         }
     }
 
     public class Driver
     {
-        public string Name { get; set; }
-
-        public Driver(string name)
+        public Driver()
         {
-            Name = name;
+            
         }
+        public Driver(string firstName, string lastName)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+        }
+
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int Score { get; set; }
+        public Instructor Instructor { get; set; }
     }
+
+    public class Instructor
+    {
+        public int Id { get; set; }
+        public ICollection<Driver> Drivers { get; set; }
+    }
+
 }

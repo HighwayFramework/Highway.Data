@@ -200,19 +200,6 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// The reference to EventManager that allows for ordered event handling and registration
-        /// </summary>
-        public IEventManager EventManager
-        {
-            get { return _eventManager; }
-            set
-            {
-                _eventManager = value;
-                _eventManager.Context = this;
-            }
-        }
-
-        /// <summary>
         /// The event fired just before the commit of the ORM
         /// </summary>
         public event EventHandler<PreSaveEventArgs> PreSave;

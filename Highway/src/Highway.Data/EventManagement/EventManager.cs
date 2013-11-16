@@ -12,11 +12,8 @@ namespace Highway.Data.EventManagement
     /// </summary>
     public class EventManager : IEventManager
     {
-        private readonly List<IInterceptor<PostSaveEventArgs>> _postSaveInterceptors =
-            new List<IInterceptor<PostSaveEventArgs>>();
-
-        private readonly List<IInterceptor<PreSaveEventArgs>> _preSaveInterceptors =
-            new List<IInterceptor<PreSaveEventArgs>>();
+        private readonly List<IInterceptor<PostSaveEventArgs>> _postSaveInterceptors = new List<IInterceptor<PostSaveEventArgs>>();
+        private readonly List<IInterceptor<PreSaveEventArgs>> _preSaveInterceptors = new List<IInterceptor<PreSaveEventArgs>>();
 
         private IObservableDataContext _context;
 

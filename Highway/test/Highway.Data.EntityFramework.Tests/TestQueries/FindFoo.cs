@@ -1,8 +1,7 @@
 using System.Linq;
-using Highway.Data;
 using Highway.Data.Tests.TestDomain;
 
-namespace Highway.Data.Tests.TestQueries
+namespace Highway.Data.EntityFramework.Tests.TestQueries
 {
     public class FindFoo : Query<Foo>
     {

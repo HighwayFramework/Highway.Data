@@ -7,12 +7,12 @@ using Common.Logging.Simple;
 using Highway.Data.EntityFramework.Tests.Initializer;
 using Highway.Data.EntityFramework.Tests.Mapping;
 using Highway.Data.EntityFramework.Tests.Properties;
+using Highway.Data.EntityFramework.Tests.TestQueries;
 using Highway.Data.EntityFramework.Tests.UnitTests;
 using Highway.Data.EventManagement;
 using Highway.Data;
 using Highway.Data.Tests;
 using Highway.Data.Tests.TestDomain;
-using Highway.Data.Tests.TestQueries;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highway.Data.EntityFramework.Tests.IntegrationTests

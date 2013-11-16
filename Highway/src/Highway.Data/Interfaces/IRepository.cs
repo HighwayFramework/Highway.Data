@@ -8,9 +8,9 @@ namespace Highway.Data
     public interface IRepository
     {
         /// <summary>
-        /// Reference to the Context the repository is using
+        /// Reference to the Context the repository, allowing for create, update, and delete
         /// </summary>
-        IDataContext Context { get; }
+        IUnitOfWork Context { get; }
 
         /// <summary>
         /// Reference to the EventManager the repository is using

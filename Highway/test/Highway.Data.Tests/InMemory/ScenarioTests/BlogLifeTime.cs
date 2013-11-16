@@ -45,7 +45,7 @@ namespace Highway.Data.Tests.InMemory.ScenarioTests
 
             //Assert
             blogService.Posts("Testing").Count().Should().Be(1);
-            repo.Context.AsQueryable<Post>().Count().Should().Be(1);
+            (repo.Context as IDataContext).AsQueryable<Post>().Count().Should().Be(1);
         }
     }
 }

@@ -6,21 +6,10 @@ using System.Linq;
 namespace Highway.Data
 {
     /// <summary>
-    /// The standard interface used to interact with an ORM specific implementation
+    /// This is the interface that gives an API for the Create, Update, and Delete functions of CRUD
     /// </summary>
-    public interface IDataContext : IDisposable
+    public interface IUnitOfWork
     {
-        /// <summary>
-        /// The reference to EventManager that allows for ordered event handling and registration
-        /// </summary>
-        IEventManager EventManager { get; set; }
-
-        /// <summary>
-        /// This gives a mockable wrapper around normal Set method that allows for testablity
-        /// </summary>
-        /// <typeparam name="T">The Entity being queried</typeparam>
-        /// <returns><see cref="IQueryable{T}"/></returns>
-        IQueryable<T> AsQueryable<T>() where T : class;
 
         /// <summary>
         /// Adds the provided instance of <typeparamref name="T"/> to the data context
@@ -60,5 +49,19 @@ namespace Highway.Data
         /// </summary>
         /// <returns>the number of rows affected</returns>
         int Commit();
+    }
+
+
+    /// <summary>
+    /// The standard interface used to interact with an ORM specific implementation
+    /// </summary>
+    public interface IDataContext : IUnitOfWork, IDisposable
+    {
+        /// <summary>
+        /// This gives a mock-able wrapper around normal Set method that allows for test-ablity
+        /// </summary>
+        /// <typeparam name="T">The Entity being queried</typeparam>
+        /// <returns><see cref="IQueryable{T}"/></returns>
+        IQueryable<T> AsQueryable<T>() where T : class;
     }
 }

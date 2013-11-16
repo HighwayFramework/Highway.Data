@@ -120,7 +120,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Contexts\Given_An_Event_Extendable_Context.cs" />
     <Compile Include="IntegrationTests\Given_A_RavenDB_Context.cs" />
     <Compile Include="Queries\Given_A_Query_Object.cs" />
     <Compile Include="Queries\Given_A_Scalar_Object.cs" />
@@ -154,6 +153,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Contexts\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

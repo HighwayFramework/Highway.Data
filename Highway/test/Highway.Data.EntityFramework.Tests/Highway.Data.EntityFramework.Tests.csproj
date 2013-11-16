@@ -116,8 +116,8 @@
     <Compile Include="..\..\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="Contexts\Given_A_Context_Based_On_Database_First.cs" />
-    <Compile Include="Contexts\Given_A_Context_Without_Configuration.cs" />
+    <Compile Include="Contexts\DomainContextTests.cs" />
+    <Compile Include="Contexts\DatabaseFirstContextTests.cs" />
     <Compile Include="Factories\ContextFactoryTests.cs" />
     <Compile Include="Factories\RepositoryFactoryTests.cs" />
     <Compile Include="Initializer\EntityFrameworkIntializer.cs" />
@@ -172,9 +172,8 @@
     <Compile Include="TestQueries\TestCommand.cs" />
     <Compile Include="UnitTests\EFFailureContext.cs" />
     <Compile Include="UnitTests\TestDataContext.cs" />
-    <Compile Include="Contexts\Given_An_Event_Extendable_Context.cs" />
     <Compile Include="Enumerable\Given_A_Collection_Of_T.cs" />
-    <Compile Include="Contexts\Given_A_Context_Without_Mappings.cs" />
+    <Compile Include="Contexts\DataContextTests.cs" />
     <Compile Include="Repositories\Given_A_Generic_Repository.cs" />
     <Compile Include="Queries\Given_A_Query_Object.cs" />
     <Compile Include="Queries\Given_A_Scalar_Object.cs" />

@@ -1,13 +1,12 @@
 ﻿using System.Data.Entity;
 using System.Linq;
-using Highway.Data.EntityFramework.Tests.Initializer;
 using Highway.Data.EntityFramework.Tests.TestContexts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Highway.Data.EntityFramework.Tests.UnitTests
+namespace Highway.Data.EntityFramework.Tests.Contexts
 {
     [TestClass]
-    public class Given_A_Context_Based_On_Database_First
+    public class DatabaseFirstContextTests
     {
         [TestMethod]
         public void Should_Not_Call_Code_First_Bindings()
@@ -26,6 +25,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             var members = context.AsQueryable<Member>().ToList();
 
             //Assert
+            Assert.IsTrue(members.Count() >= 5);
         }
     }
 }

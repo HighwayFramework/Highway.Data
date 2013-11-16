@@ -8,11 +8,6 @@ namespace Highway.Data
     public interface IEventManager
     {
         /// <summary>
-        /// A reference to context that allows for usaged and event wiring
-        /// </summary>
-        IObservableDataContext Context { get; set; }
-
-        /// <summary>
         /// Allows for the Registration of IInterceptor<typeparamref name="T"/> objects that will hook to events in priority order
         /// </summary>
         /// <param name="interceptor">The interceptor to be registered to an event</param>

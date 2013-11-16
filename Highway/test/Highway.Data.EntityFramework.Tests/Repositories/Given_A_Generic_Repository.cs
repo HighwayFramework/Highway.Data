@@ -6,16 +6,16 @@ using Common.Logging;
 using Common.Logging.Simple;
 using Highway.Data.EntityFramework.Tests.Mapping;
 using Highway.Data.EntityFramework.Tests.Properties;
+using Highway.Data.EntityFramework.Tests.TestQueries;
+using Highway.Data.EntityFramework.Tests.UnitTests;
 using Highway.Data.EventManagement;
-using Highway.Data;
 using Highway.Data.Tests;
 using Highway.Data.Tests.TestDomain;
-using Highway.Data.Tests.TestQueries;
 using Highway.Test.MSTest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
 
-namespace Highway.Data.EntityFramework.Tests.UnitTests
+namespace Highway.Data.EntityFramework.Tests.Repositories
 {
     [TestClass]
     public class Given_A_Generic_Repository : ContainerTest<Repository>

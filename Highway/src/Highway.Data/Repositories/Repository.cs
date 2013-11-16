@@ -8,13 +8,15 @@ namespace Highway.Data
     /// </summary>
     public class Repository : IRepository
     {
+        private IDataContext _context;
+
         /// <summary>
         /// Creates a Repository that uses the context provided
         /// </summary>
         /// <param name="context">The data context that this repository uses</param>
         public Repository(IDataContext context)
         {
-            Context = context;
+            _context = context;
         }
 
         #region IRepository Members
@@ -22,7 +24,10 @@ namespace Highway.Data
         /// <summary>
         /// Reference to the DataContext the repository is using
         /// </summary>
-        public IDataContext Context { get; private set; }
+        public IUnitOfWork Context
+        {
+            get { return _context; }
+        }
 
         /// <summary>
         /// Reference to the EventManager the repository is using
@@ -37,7 +42,7 @@ namespace Highway.Data
         /// <returns>The instance of <typeparamref name="T"/> returned from the query</returns>
         public T Find<T>(IScalar<T> query)
         {
-            return query.Execute(Context);
+            return query.Execute(_context);
         }
 
         /// <summary>
@@ -46,7 +51,7 @@ namespace Highway.Data
         /// <param name="command">The prebuilt command object</param>
         public void Execute(ICommand command)
         {
-            command.Execute(Context);
+            command.Execute(_context);
         }
 
         /// <summary>
@@ -57,7 +62,7 @@ namespace Highway.Data
         /// <returns>The <see cref="IEnumerable{T}"/> returned from the query</returns>
         public IEnumerable<T> Find<T>(IQuery<T> query)
         {
-            return query.Execute(Context);
+            return query.Execute(_context);
         }
 
         /// <summary>
@@ -68,7 +73,7 @@ namespace Highway.Data
         /// <returns>The <see cref="IEnumerable{T}"/> returned from the query</returns>
         public IEnumerable<IProjection> Find<TSelection, IProjection>(IQuery<TSelection, IProjection> query) where TSelection : class
         {
-            return query.Execute(Context);
+            return query.Execute(_context);
         }
 
         #endregion

@@ -1,14 +1,13 @@
-﻿using System.Data.Entity;
-using System.Linq;
+﻿using System.Linq;
 using Common.Logging;
 using Common.Logging.Simple;
 using Highway.Data.EntityFramework.Tests.Mapping;
 using Highway.Data.EntityFramework.Tests.Properties;
-using Highway.Data.PrebuiltQueries;
+using Highway.Data.EntityFramework.Tests.UnitTests;
 using Highway.Data.Tests.TestDomain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Highway.Data.EntityFramework.Tests.UnitTests
+namespace Highway.Data.EntityFramework.Tests.Queries
 {
     [TestClass]
     public class Given_a_GetById_Query
@@ -24,7 +23,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             context.Add(item);
             context.Commit();
 
-            var target = Queries.GetById<Foo>(item.Id);
+            var target = PrebuiltQueries.Queries.GetById<Foo>(item.Id);
 
             //Act
             var result = target.Execute(context);
@@ -49,7 +48,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             context.Commit();
             var expectedCount = context.AsQueryable<Foo>().Count();
 
-            var target = Queries.FindAll<Foo>();
+            var target = PrebuiltQueries.Queries.FindAll<Foo>();
 
             //Act
             var results = target.Execute(context);

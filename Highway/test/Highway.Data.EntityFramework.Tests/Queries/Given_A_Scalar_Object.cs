@@ -8,17 +8,17 @@ using Common.Logging.Simple;
 using CommonServiceLocator.WindsorAdapter;
 using Highway.Data.EntityFramework.Tests.Mapping;
 using Highway.Data.EntityFramework.Tests.Properties;
+using Highway.Data.EntityFramework.Tests.TestQueries;
+using Highway.Data.EntityFramework.Tests.UnitTests;
 using Highway.Data.EventManagement;
-using Highway.Data;
 using Highway.Data.Tests;
 using Highway.Data.Tests.TestDomain;
-using Highway.Data.Tests.TestQueries;
 using Highway.Test.MSTest;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
 
-namespace Highway.Data.EntityFramework.Tests.UnitTests
+namespace Highway.Data.EntityFramework.Tests.Queries
 {
     [TestClass]
     public class Given_A_Scalar_Object : BaseTest<object>

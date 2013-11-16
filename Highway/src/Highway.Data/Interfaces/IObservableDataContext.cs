@@ -1,4 +1,5 @@
 using System;
+using Highway.Data.EventManagement;
 using Highway.Data.Interceptors.Events;
 
 namespace Highway.Data
@@ -9,13 +10,13 @@ namespace Highway.Data
     public interface IObservableDataContext : IDataContext
     {
         /// <summary>
-        /// The event fired just before the commit of the ORM
+        /// The event fired just before the commit of the persistence
         /// </summary>
-        event EventHandler<PreSaveEventArgs> PreSave;
+        event EventHandler<InterceptorEventArgs> BeforeSave;
 
         /// <summary>
-        /// The event fired just after the commit of the ORM
+        /// The event fired just after the commit of the persistence
         /// </summary>
-        event EventHandler<PostSaveEventArgs> PostSave;
+        event EventHandler<InterceptorEventArgs> AfterSaved;
     }
 }

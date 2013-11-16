@@ -6,7 +6,6 @@ using System.Linq;
 using Common.Logging;
 using Common.Logging.Simple;
 using Highway.Data.Interceptors.Events;
-using Highway.Data;
 using NHibernate;
 using NHibernate.Linq;
 using NHibernate.Transform;
@@ -16,11 +15,10 @@ namespace Highway.Data
     /// <summary>
     /// A base implementation of the DataContext for use around a NHibernate Session
     /// </summary>
-    public partial class DataContext : IObservableDataContext, IDisposable
+    public partial class DataContext : IDataContext, IDisposable
     {
         private readonly ILog _log;
         private readonly ISession _session;
-        private IEventManager _eventManager;
 
         /// <summary>
         /// Constructs the context
@@ -42,8 +40,6 @@ namespace Highway.Data
             _session = session;
             _log = log;
         }
-
-        #region IObservableDataContext Members
 
         /// <summary>
         /// This gives a mockable wrapper around the normal <see cref="DbSet{T}"/> method that allows for testablity
@@ -151,9 +147,7 @@ namespace Highway.Data
         public int Commit()
         {
             _log.Trace("\tCommit");
-            InvokePreSave();
             _session.Flush();
-            InvokePostSave();
             _log.DebugFormat("\tCommited Changes");
             return 0;
         }
@@ -199,32 +193,11 @@ namespace Highway.Data
             }
         }
 
-        /// <summary>
-        /// The event fired just before the commit of the ORM
-        /// </summary>
-        public event EventHandler<PreSaveEventArgs> PreSave;
-
-        /// <summary>
-        /// The event fired just after the commit of the ORM
-        /// </summary>
-        public event EventHandler<PostSaveEventArgs> PostSave;
-
+      
         public void Dispose()
         {
             _session.Close();
             _session.Dispose();
-        }
-
-        #endregion
-
-        private void InvokePostSave()
-        {
-            if (PostSave != null) PostSave(this, new PostSaveEventArgs());
-        }
-
-        private void InvokePreSave()
-        {
-            if (PreSave != null) PreSave(this, new PreSaveEventArgs { });
         }
     }
 }

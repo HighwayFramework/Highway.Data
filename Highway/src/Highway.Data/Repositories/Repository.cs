@@ -30,11 +30,6 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Reference to the EventManager the repository is using
-        /// </summary>
-        public IEventManager EventManager { get; private set; }
-
-        /// <summary>
         /// Executes a prebuilt <see cref="IScalar{T}"/> and returns a single instance of <typeparamref name="T"/>
         /// </summary>
         /// <typeparam name="T">The Entity being queried</typeparam>

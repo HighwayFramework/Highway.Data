@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Highway.Data.PrebuiltQueries
+namespace Highway.Data
 {
     /// <summary>
     /// Base Library of queries already built

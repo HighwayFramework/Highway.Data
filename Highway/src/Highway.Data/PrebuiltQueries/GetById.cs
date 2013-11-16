@@ -2,10 +2,10 @@
 using Highway.Data;
 using System;
 
-namespace Highway.Data.PrebuiltQueries
+namespace Highway.Data
 {
     /// <summary>
-    /// 
+    /// This pre-built query get a specific type by the Id provided
     /// </summary>
     /// <typeparam name="TId"></typeparam>
     /// <typeparam name="T"></typeparam>

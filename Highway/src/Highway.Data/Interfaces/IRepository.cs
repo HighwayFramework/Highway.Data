@@ -13,11 +13,6 @@ namespace Highway.Data
         IUnitOfWork Context { get; }
 
         /// <summary>
-        /// Reference to the EventManager the repository is using
-        /// </summary>
-        IEventManager EventManager { get; }
-
-        /// <summary>
         /// Executes a prebuilt <see cref="IQuery{T}"/> and returns an <see cref="IEnumerable{T}"/>
         /// </summary>
         /// <typeparam name="T">The Entity being queried</typeparam>

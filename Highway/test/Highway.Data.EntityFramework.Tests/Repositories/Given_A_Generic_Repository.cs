@@ -23,8 +23,6 @@ namespace Highway.Data.EntityFramework.Tests.Repositories
         public override void RegisterComponents(IWindsorContainer container)
         {
             container.Register(
-                Component.For<IEventManager>()
-                    .ImplementedBy<EventManager>(),
                 Component.For<IDataContext>().ImplementedBy<TestDataContext>()
                     .DependsOn(new
                         {

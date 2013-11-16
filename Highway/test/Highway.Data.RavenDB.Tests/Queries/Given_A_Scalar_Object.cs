@@ -37,8 +37,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
                 RunInMemory = true
             };
             embeddableDocumentStore.Initialize();
-            _container.Register(Component.For<IEventManager>().ImplementedBy<EventManager>().LifestyleTransient(),
-                               Component.For<IDataContext>().ImplementedBy<DataContext>().LifestyleTransient(),
+            _container.Register(Component.For<IDataContext>().ImplementedBy<DataContext>().LifestyleTransient(),
                                Component.For<IDocumentStore>().Instance(embeddableDocumentStore),
                                Component.For<IDocumentSession>().Instance(embeddableDocumentStore.OpenSession()),
                                Component.For<ILog>().ImplementedBy<NoOpLogger>());

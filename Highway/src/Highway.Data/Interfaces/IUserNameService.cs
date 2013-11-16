@@ -2,7 +2,7 @@
 {
     /// <summary>
     /// This gives a standard interface for the user name service,
-    /// Which is leveraged by the PreSave interceptors to supply user names for audit tagging on entities.
+    /// Which is leveraged by the BeforeSave interceptors to supply user names for audit tagging on entities.
     /// </summary>
     public interface IUserNameService
     {

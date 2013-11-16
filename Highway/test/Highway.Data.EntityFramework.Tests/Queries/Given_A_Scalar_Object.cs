@@ -31,8 +31,7 @@ namespace Highway.Data.EntityFramework.Tests.Queries
             _container = new WindsorContainer();
             ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(_container));
             _container.Kernel.Resolver.AddSubResolver(new ArrayResolver(_container.Kernel));
-            _container.Register(Component.For<IEventManager>().ImplementedBy<EventManager>().LifestyleTransient(),
-                               Component.For<IDataContext>().ImplementedBy<TestDataContext>().DependsOn(
+            _container.Register(Component.For<IDataContext>().ImplementedBy<TestDataContext>().DependsOn(
                                    new { connectionString = Settings.Default.Connection }).LifestyleTransient(),
                                Component.For<IMappingConfiguration>().ImplementedBy<FooMappingConfiguration>().
                                    LifestyleTransient(),

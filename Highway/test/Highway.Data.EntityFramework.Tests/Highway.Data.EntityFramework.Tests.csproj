@@ -116,8 +116,10 @@
     <Compile Include="..\..\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="AdvancedFeatures\EventManagement\TestPreSaveInterceptor.cs" />
     <Compile Include="Contexts\DomainContextTests.cs" />
     <Compile Include="Contexts\DatabaseFirstContextTests.cs" />
+    <Compile Include="EventManagementTests.cs" />
     <Compile Include="Factories\ContextFactoryTests.cs" />
     <Compile Include="Factories\RepositoryFactoryTests.cs" />
     <Compile Include="Initializer\EntityFrameworkIntializer.cs" />

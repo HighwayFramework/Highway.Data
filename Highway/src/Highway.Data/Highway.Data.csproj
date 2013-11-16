@@ -82,6 +82,8 @@
     <Compile Include="Contexts\TypeRepresentations\ObjectRepresentationRepository.cs" />
     <Compile Include="Contexts\TypeRepresentations\ObjectRepresentation.cs" />
     <Compile Include="Contexts\TypeUtilities\CastExtensions.cs" />
+    <Compile Include="EventManagement\InterceptorEventArgs.cs" />
+    <Compile Include="EventManagement\Interfaces\BaseInterceptor.cs" />
     <Compile Include="Factories\IDataContextFactory.cs" />
     <Compile Include="Filtering\AndCriteria.cs" />
     <Compile Include="Filtering\BasicCriteria.cs" />
@@ -98,12 +100,11 @@
     <Compile Include="EventManagement\EventManager.cs" />
     <Compile Include="Interceptors\InterceptorResult.cs" />
     <Compile Include="Interfaces\Queries\ICommand.cs" />
-    <Compile Include="Interfaces\IEventManager.cs" />
-    <Compile Include="Interfaces\IInterceptor.cs" />
     <Compile Include="Interfaces\IObservableDataContext.cs" />
     <Compile Include="Interfaces\Queries\IObservableQuery.cs" />
     <Compile Include="Interfaces\Queries\IQueryBase.cs" />
     <Compile Include="Interfaces\Queries\IScalar.cs" />
+    <Compile Include="PrebuiltQueries\RemoveById.cs" />
     <Compile Include="PrebuiltQueries\FindAll.cs" />
     <Compile Include="PrebuiltQueries\GetById.cs" />
     <Compile Include="PrebuiltQueries\Queries.cs" />

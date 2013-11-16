@@ -2,6 +2,8 @@
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using Highway.Data.EventManagement;
+using Highway.Data.EventManagement.Interfaces;
 using Highway.Data.Interceptors.Events;
 using Highway.Data;
 
@@ -10,7 +12,7 @@ namespace Highway.Data.Interceptors
     /// <summary>
     /// An interceptor that operates pre-save to add audit information to the records being committed that implement the <see cref="Highway.Data.IAuditableEntity"/> interface
     /// </summary>
-    public class AuditableInterceptor : IInterceptor<PreSaveEventArgs>
+    public class AuditableInterceptor : IInterceptor
     {
         private readonly IUserNameService _userNameService;
 
@@ -32,9 +34,24 @@ namespace Highway.Data.Interceptors
         /// <param name="context">The data context that raised the event</param>
         /// <param name="eventArgs">The event arguments that were passed from the context</param>
         /// <returns>An Interceptor Result</returns>
-        public InterceptorResult Execute(IDataContext context, PreSaveEventArgs eventArgs)
+        public InterceptorResult Execute(IDataContext context, InterceptorEventArgs eventArgs)
         {
-            var efContext = context as DbContext;
+            return InterceptorResult.Succeeded();
+        }
+
+        /// <summary>
+        ///  The priority order that this interceptor has for ordered execution by the event manager
+        /// </summary>
+        public int Priority { get; set; }
+
+        public bool AppliesTo(EventType eventType)
+        {
+            return eventType.HasFlag(EventType.BeforeSave);
+        }
+
+        public InterceptorResult Apply(IDataContext dataContext, EventType eventType)
+        {
+            var efContext = dataContext as DbContext;
             if (efContext == null)
                 throw new InvalidOperationException(
                     "Entity Framework Interceptors must be used with Entity Framework Contexts");
@@ -50,35 +67,30 @@ namespace Highway.Data.Interceptors
                 .Where(e => e.Entity is IAuditableEntity)
                 .ToList()
                 .ForEach(e =>
+                {
+                    var entity = e.Entity as IAuditableEntity;
+                    if (entity != null)
                     {
-                        var entity = e.Entity as IAuditableEntity;
-                        if (entity != null)
-                        {
-                            entity.CreatedDate = entity.ModifiedDate = DateTime.Now;
-                            entity.CreatedBy = entity.ModifiedBy = userName;
-                        }
-                    });
+                        entity.CreatedDate = entity.ModifiedDate = DateTime.Now;
+                        entity.CreatedBy = entity.ModifiedBy = userName;
+                    }
+                });
 
             efContext.ChangeTracker.Entries().Where(x => x.State == EntityState.Modified)
                 .Where(e => e.Entity is IAuditableEntity)
                 .ToList()
                 .ForEach(e =>
+                {
+                    var entity = e.Entity as IAuditableEntity;
+                    if (entity != null)
                     {
-                        var entity = e.Entity as IAuditableEntity;
-                        if (entity != null)
-                        {
-                            entity.ModifiedDate = DateTime.Now;
-                            entity.ModifiedBy = userName;
-                        }
-                    });
+                        entity.ModifiedDate = DateTime.Now;
+                        entity.ModifiedBy = userName;
+                    }
+                });
             efContext.ChangeTracker.DetectChanges();
-            return new InterceptorResult();
+            return InterceptorResult.Succeeded();
         }
-
-        /// <summary>
-        ///  The priority order that this interceptor has for ordered execution by the event manager
-        /// </summary>
-        public int Priority { get; set; }
 
         #endregion
     }

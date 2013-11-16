@@ -14,8 +14,6 @@ namespace Highway.Data.Contexts
 
         public void Dispose() { }
 
-        public IEventManager EventManager { get; set; }
-
         public IQueryable<T> AsQueryable<T>() where T : class
         {
             return repo.Data<T>();

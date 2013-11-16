@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Highway.Data.PrebuiltQueries;
+using Highway.Data;
 
 namespace Highway.Data.Tests.TestDomain
 {

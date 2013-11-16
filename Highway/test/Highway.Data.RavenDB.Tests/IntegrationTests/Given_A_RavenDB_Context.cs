@@ -31,8 +31,7 @@ namespace Highway.Data.RavenDB.Tests.IntegrationTests
                 RunInMemory = true
             };
             embeddableDocumentStore.Initialize();
-            container.Register(Component.For<IEventManager>().ImplementedBy<EventManager>().LifestyleTransient(),
-                               Component.For<IDocumentStore>().Instance(embeddableDocumentStore),
+            container.Register(Component.For<IDocumentStore>().Instance(embeddableDocumentStore),
                                Component.For<IDocumentSession>().Instance(embeddableDocumentStore.OpenSession()),
                                Component.For<ILog>().ImplementedBy<NoOpLogger>());
             base.RegisterComponents(container);

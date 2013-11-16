@@ -46,12 +46,6 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             throw new NotImplementedException();
         }
 
-        public IEventManager EventManager
-        {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
-        }
-
         public int ExecuteSqlCommand(string sql, params DbParameter[] dbParams)
         {
             throw new NotImplementedException();

@@ -28,7 +28,6 @@ namespace Highway.Data.Rest.Contexts
         public DataContext(IMappingConfiguration mapping, IHttpClientAdapter httpClientAdapter) : this(mapping,httpClientAdapter,new NoOpLogger()) { }
 
         public void Dispose() { }
-        public IEventManager EventManager { get; set; }
         public IQueryable<T> AsQueryable<T>() where T : class
         {
             if (_config == null)

@@ -27,8 +27,7 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
 
         public override void RegisterComponents(IWindsorContainer container)
         {
-            container.Register(Component.For<IEventManager>().ImplementedBy<EventManager>(),
-                               Component.For<IMappingConfiguration>().ImplementedBy<FooMappingConfiguration>(),
+            container.Register(Component.For<IMappingConfiguration>().ImplementedBy<FooMappingConfiguration>(),
                                Component.For<ILog>().ImplementedBy<NoOpLogger>(),
                                Component.For<IContextConfiguration>().ImplementedBy(null));
 

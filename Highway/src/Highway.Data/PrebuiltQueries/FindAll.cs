@@ -1,7 +1,7 @@
 ﻿using System;
 using Highway.Data;
 
-namespace Highway.Data.PrebuiltQueries
+namespace Highway.Data
 {
     /// <summary>
     /// Finds all items of a certain type in the database
@@ -10,7 +10,7 @@ namespace Highway.Data.PrebuiltQueries
     public class FindAll<T> : Query<T> where T : class
     {
         /// <summary>
-        /// Constructs a findall
+        /// Constructs a find all query for the specified type
         /// </summary>
         public FindAll()
         {

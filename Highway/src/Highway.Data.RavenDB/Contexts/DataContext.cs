@@ -13,17 +13,13 @@ namespace Highway.Data
     /// <summary>
     /// A base implementation of the RavenDB DataContext
     /// </summary>
-    public partial class DataContext : IObservableDataContext
+    public partial class DataContext : IDataContext
     {
         private readonly ILog _log;
-        private IEventManager _eventManager;
 
-        #region IObservableDataContext Members
-
-        public DataContext(IDocumentSession session, ILog log, IEventManager eventManager)
+        public DataContext(IDocumentSession session, ILog log)
         {
             _log = log;
-            _eventManager = eventManager;
             _session = session;
         }
 
@@ -104,33 +100,9 @@ namespace Highway.Data
         public int Commit()
         {
             _log.Trace("\tCommit");
-            InvokePreSave();
             SaveChanges();
-            InvokePostSave();
             _log.DebugFormat("\tCommited Changes");
             return 0;
-        }
-
-        /// <summary>
-        /// The event fired just before the commit of the ORM
-        /// </summary>
-        public event EventHandler<PreSaveEventArgs> PreSave;
-
-        /// <summary>
-        /// The event fired just after the commit of the ORM
-        /// </summary>
-        public event EventHandler<PostSaveEventArgs> PostSave;
-
-        #endregion
-
-        private void InvokePostSave()
-        {
-            if (PostSave != null) PostSave(this, new PostSaveEventArgs());
-        }
-
-        private void InvokePreSave()
-        {
-            if (PreSave != null) PreSave(this, new PreSaveEventArgs {});
         }
 
         public void Dispose()

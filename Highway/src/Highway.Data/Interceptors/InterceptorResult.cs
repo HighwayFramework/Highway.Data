@@ -3,8 +3,12 @@ namespace Highway.Data.Interceptors
     /// <summary>
     /// Results from any interceptor operation that gives a flag to tell the event manager to proceed to the next priority in line or not.
     /// </summary>
-    public struct InterceptorResult
+    public class InterceptorResult
     {
+        internal InterceptorResult()
+        {
+            
+        }
         /// <summary>
         /// A boolean flag for the event manager to decide if it will continue to process or error
         /// </summary>

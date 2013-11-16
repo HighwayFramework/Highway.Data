@@ -23,7 +23,7 @@ namespace Highway.Data.EntityFramework.Tests.Queries
             context.Add(item);
             context.Commit();
 
-            var target = PrebuiltQueries.Queries.GetById<Foo>(item.Id);
+            var target = Data.Queries.GetById<Foo>(item.Id);
 
             //Act
             var result = target.Execute(context);
@@ -48,7 +48,7 @@ namespace Highway.Data.EntityFramework.Tests.Queries
             context.Commit();
             var expectedCount = context.AsQueryable<Foo>().Count();
 
-            var target = PrebuiltQueries.Queries.FindAll<Foo>();
+            var target = Data.Queries.FindAll<Foo>();
 
             //Act
             var results = target.Execute(context);

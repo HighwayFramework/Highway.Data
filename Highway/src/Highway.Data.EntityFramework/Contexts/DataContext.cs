@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Common;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
-using System.Data.Objects;
 using System.Linq;
 using Common.Logging;
 using Common.Logging.Simple;
 using Highway.Data.EntityFramework;
 using Highway.Data.EventManagement;
 using Highway.Data.EventManagement.Interfaces;
-using Highway.Data.Interceptors.Events;
 
 namespace Highway.Data
 {

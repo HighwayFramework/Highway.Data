@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.Objects;
 using System.Linq;
 
 namespace Highway.Data.Domain

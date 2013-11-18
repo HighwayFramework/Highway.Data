@@ -32,13 +32,4 @@ namespace Highway.Data.Domain
             return (IDataContext) o;
         }
     }
-
-    public interface IDomain
-    {
-        string ConnectionString { get; set; }
-
-        IMappingConfiguration Mappings { get; set; }
-
-        IContextConfiguration Context { get; set; }
-    }
 }

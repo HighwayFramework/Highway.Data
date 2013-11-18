@@ -124,7 +124,6 @@
     </Compile>
     <Compile Include="AdvancedFeatures\EventManagement\TestPreSaveInterceptor.cs" />
     <Compile Include="Contexts\DomainContextTests.cs" />
-    <Compile Include="Contexts\DatabaseFirstContextTests.cs" />
     <Compile Include="EventManagementTests.cs" />
     <Compile Include="Factories\ContextFactoryTests.cs" />
     <Compile Include="Factories\RepositoryFactoryTests.cs" />

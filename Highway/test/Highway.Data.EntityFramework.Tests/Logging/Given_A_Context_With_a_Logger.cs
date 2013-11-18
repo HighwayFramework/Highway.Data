@@ -16,7 +16,7 @@ namespace Highway.Data.EntityFramework.Tests.Logging
     [TestClass]
     public class Given_A_Context_With_a_Logger
     {
-        [TestMethod]
+        [TestMethod, TestCategory("Database")]
         public void Should_Add_log_messages_for_add()
         {
             //Arrange

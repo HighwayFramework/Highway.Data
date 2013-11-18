@@ -12,6 +12,10 @@ namespace Highway.Data
         public DomainContext(T domain)
             : base(domain.ConnectionString, domain.Mappings, domain.Context, new NoOpLogger())
         {
+            foreach (var @event in domain.Events)
+            {
+                EventManager.Register(@event);
+            }
         }
     }
 }

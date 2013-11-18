@@ -25,7 +25,7 @@ namespace Highway.Data
         private readonly bool _databaseFirst;
         private readonly ILog _log;
         private readonly IMappingConfiguration _mapping;
-        private EventManager _eventManager;
+        protected EventManager EventManager;
 
         /// <summary>
         ///     Constructs a context
@@ -78,7 +78,7 @@ namespace Highway.Data
             _mapping = mapping;
             _log = log;
             if (contextConfiguration != null) contextConfiguration.ConfigureContext(this);
-            _eventManager = new EventManager(this);
+            EventManager = new EventManager(this);
         }
 
         /// <summary>

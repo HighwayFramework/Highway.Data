@@ -1,7 +1,9 @@
 ﻿#region
 
+using System.Collections.Generic;
 using Highway.Data.Domain;
 using Highway.Data.EntityFramework.Tests.Properties;
+using Highway.Data.EventManagement.Interfaces;
 using Highway.Test.MSTest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
@@ -81,6 +83,7 @@ namespace Highway.Data.EntityFramework.Tests.Factories
         public BarDomain()
         {
             ConnectionString = Settings.Default.Connection;
+            Events = new List<IInterceptor>();
         }
 
         public string ConnectionString { get; set; }
@@ -88,6 +91,7 @@ namespace Highway.Data.EntityFramework.Tests.Factories
         public IMappingConfiguration Mappings { get; set; }
 
         public IContextConfiguration Context { get; set; }
+        public List<IInterceptor> Events { get; set; }
     }
 
 
@@ -96,6 +100,7 @@ namespace Highway.Data.EntityFramework.Tests.Factories
         public FooDomain()
         {
             ConnectionString = Settings.Default.Connection;
+            Events = new List<IInterceptor>();
         }
 
         public string ConnectionString { get; set; }
@@ -103,5 +108,6 @@ namespace Highway.Data.EntityFramework.Tests.Factories
         public IMappingConfiguration Mappings { get; set; }
 
         public IContextConfiguration Context { get; set; }
+        public List<IInterceptor> Events { get; set; }
     }
 }

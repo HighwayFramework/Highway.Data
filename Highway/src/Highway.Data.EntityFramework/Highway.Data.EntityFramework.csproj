@@ -89,6 +89,7 @@
     <Compile Include="Database\DropCreateInitializer.cs" />
     <Compile Include="Domain\ContextFactory.cs" />
     <Compile Include="Domain\IContextFactory.cs" />
+    <Compile Include="Interfaces\IDomain.cs" />
     <Compile Include="EntityExtensions.cs" />
     <Compile Include="Extensions\LoggingTraceExtensions.cs" />
     <Compile Include="Extensions\PerformanceTracingExtensions.cs" />

@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using Highway.Data.Domain;
 using Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement;
+using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.EventManagement.Interfaces;
 using Highway.Test.MSTest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -24,6 +25,7 @@ namespace Highway.Data.EntityFramework.Tests.EventManagement
             {
                 testPreSaveInterceptor
             };
+            domain.ConnectionString = Settings.Default.Connection;
 
             //act
             var context = new DomainContext<TestDomain>(domain);

@@ -58,10 +58,13 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="dbo" />
+    <Folder Include="dbo\Tables\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Foos.sql" />
-    <Build Include="dbo\Bars.sql" />
+    <Build Include="dbo\Tables\Quxes.sql" />
+    <Build Include="dbo\Tables\__MigrationHistory.sql" />
+    <Build Include="dbo\Tables\Bars.sql" />
+    <Build Include="dbo\Tables\Foos.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Highway.Data.Tests.Db.publish.xml" />

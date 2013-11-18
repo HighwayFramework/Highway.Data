@@ -1,5 +1,0 @@
-﻿CREATE TABLE [dbo].[Bars]
-(
-	[Id] INT NOT NULL IDENTITY PRIMARY KEY, 
-    [Name] NCHAR(100) NULL
-)

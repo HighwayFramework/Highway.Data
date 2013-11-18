@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿#region
+
 using System.Linq;
-using System.Reflection;
 using Highway.Data.Contexts.TypeRepresentations;
-using Highway.Data.Contexts.TypeUtilities;
+
+#endregion
 
 namespace Highway.Data.Contexts
 {
@@ -12,13 +11,15 @@ namespace Highway.Data.Contexts
     {
         internal ObjectRepresentationRepository repo = new ObjectRepresentationRepository();
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public IQueryable<T> AsQueryable<T>() where T : class
         {
             return repo.Data<T>();
         }
-        
+
         public T Add<T>(T item) where T : class
         {
             repo.Add(item);
@@ -52,11 +53,11 @@ namespace Highway.Data.Contexts
         {
             if (repo.IdentityStrategies.ContainsKey(typeof (T)))
             {
-                repo.IdentityStrategies[typeof (T)] = (obj) => integerIdentityStrategy.Assign((T)obj);
+                repo.IdentityStrategies[typeof (T)] = obj => integerIdentityStrategy.Assign((T) obj);
             }
             else
             {
-                repo.IdentityStrategies.Add(typeof(T), (obj) => integerIdentityStrategy.Assign((T)obj));
+                repo.IdentityStrategies.Add(typeof (T), obj => integerIdentityStrategy.Assign((T) obj));
             }
         }
     }

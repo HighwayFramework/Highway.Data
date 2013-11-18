@@ -1,4 +1,8 @@
-﻿using Highway.Data.Rest.Contexts;
+﻿#region
+
+using Highway.Data.Rest.Contexts;
+
+#endregion
 
 namespace Highway.Data.Rest.Configuration
 {

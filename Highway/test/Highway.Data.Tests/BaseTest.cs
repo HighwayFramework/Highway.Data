@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+#endregion
 
 namespace Highway.Data.Tests
 {
@@ -22,7 +26,7 @@ namespace Highway.Data.Tests
         public virtual void AfterEachTest()
         {
             if (TestContext.CurrentTestOutcome != UnitTestOutcome.Passed)
-                Console.WriteLine("=== Result : " + TestContext.CurrentTestOutcome.ToString());
+                Console.WriteLine("=== Result : " + TestContext.CurrentTestOutcome);
             if ((target as IDisposable) != null)
                 using (target as IDisposable)
                 {

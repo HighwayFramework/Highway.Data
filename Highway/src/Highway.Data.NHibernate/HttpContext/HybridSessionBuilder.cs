@@ -1,20 +1,25 @@
-﻿using Common.Logging;
+﻿#region
+
+using System.Web;
+using Common.Logging;
 using Common.Logging.Simple;
 using NHibernate;
+
+#endregion
 
 namespace Highway.Data.NHibernate
 {
     public class HybridSessionBuilder : ISessionBuilder
     {
+        private static ISession _currentSession;
+        private static ISessionFactory _sessionFactory;
+        private readonly ILog _logger;
+
         public HybridSessionBuilder(ISessionFactory sessionFactory, ILog logger)
         {
             _sessionFactory = sessionFactory;
             _logger = logger ?? new NoOpLogger();
         }
-
-        private static ISession _currentSession;
-        private static ISessionFactory _sessionFactory;
-        private readonly ILog _logger;
 
         public ISession GetSession()
         {
@@ -23,9 +28,14 @@ namespace Highway.Data.NHibernate
             return session;
         }
 
+        public ISession GetExistingWebSession()
+        {
+            return HttpContext.Current.Items[GetType().FullName] as ISession;
+        }
+
         private ISession GetExistingOrNewSession()
         {
-            if (System.Web.HttpContext.Current != null)
+            if (HttpContext.Current != null)
             {
                 ISession session = GetExistingWebSession();
                 if (session == null)
@@ -52,16 +62,11 @@ namespace Highway.Data.NHibernate
             return _currentSession;
         }
 
-        public ISession GetExistingWebSession()
-        {
-            return System.Web.HttpContext.Current.Items[GetType().FullName] as ISession;
-        }
-
         private ISession OpenSessionAndAddToContext()
         {
             ISession session = _sessionFactory.OpenSession();
-            System.Web.HttpContext.Current.Items.Remove(GetType().FullName);
-            System.Web.HttpContext.Current.Items.Add(GetType().FullName, session);
+            HttpContext.Current.Items.Remove(GetType().FullName);
+            HttpContext.Current.Items.Add(GetType().FullName, session);
             return session;
         }
 

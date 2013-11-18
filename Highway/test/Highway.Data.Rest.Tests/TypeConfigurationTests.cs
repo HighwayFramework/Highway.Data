@@ -1,10 +1,14 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Data;
 using FluentAssertions;
 using Highway.Data.Rest.Configuration.Entities;
 using Highway.Data.Rest.Configuration.Interfaces;
 using Highway.Data.Rest.Contexts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+#endregion
 
 namespace Highway.Data.Rest.Tests
 {
@@ -21,7 +25,7 @@ namespace Highway.Data.Rest.Tests
             var type = target.Entity<Foo>().WithRoute("values").WithKey("Id");
 
             //assert
-            Assert.AreEqual("values/{Id}",type.SingleUri);
+            Assert.AreEqual("values/{Id}", type.SingleUri);
         }
 
         [TestMethod]
@@ -87,7 +91,6 @@ namespace Highway.Data.Rest.Tests
             //assert
             type.SingleUri.Should().Be("{id}/id");
             type.AllUri.Should().Be("{id}");
-            
         }
 
         [TestMethod]
@@ -111,11 +114,11 @@ namespace Highway.Data.Rest.Tests
 
             //act
             RestTypeConfiguration<Foo> restTypeConfiguration = target.Entity<Foo>();
-            IRestTypeDefinition typeDefinition = (IRestTypeDefinition) restTypeConfiguration.WithKey("Id"); ;
+            IRestTypeDefinition typeDefinition = (IRestTypeDefinition) restTypeConfiguration.WithKey("Id");
+            ;
 
             //assert
             Assert.IsNotNull(typeDefinition.KeyProperty);
-
         }
 
         [TestMethod]
@@ -130,7 +133,6 @@ namespace Highway.Data.Rest.Tests
 
             //assert
             act.ShouldThrow<InvalidOperationException>();
-
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using System.Linq;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
@@ -6,8 +8,6 @@ using Castle.Windsor;
 using Common.Logging;
 using Common.Logging.Simple;
 using CommonServiceLocator.WindsorAdapter;
-using Highway.Data.EventManagement;
-using Highway.Data;
 using Highway.Data.RavenDB.Tests.TestQueries;
 using Highway.Data.Tests.TestDomain;
 using Highway.Test.MSTest;
@@ -16,6 +16,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Raven.Client;
 using Raven.Client.Embedded;
 using Rhino.Mocks;
+
+#endregion
 
 namespace Highway.Data.RavenDB.Tests.Queries
 {
@@ -30,15 +32,16 @@ namespace Highway.Data.RavenDB.Tests.Queries
             container = new WindsorContainer();
             ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(container));
             container.Kernel.Resolver.AddSubResolver(new ArrayResolver(container.Kernel));
-            var embeddableDocumentStore = new EmbeddableDocumentStore()
-                {
-                    DataDirectory = "", RunInMemory = true
-                };
+            var embeddableDocumentStore = new EmbeddableDocumentStore
+            {
+                DataDirectory = "",
+                RunInMemory = true
+            };
             embeddableDocumentStore.Initialize();
             container.Register(Component.For<IDataContext>().ImplementedBy<DataContext>().LifestyleTransient(),
-                               Component.For<IDocumentStore>().Instance(embeddableDocumentStore),
-                               Component.For<IDocumentSession>().Instance(embeddableDocumentStore.OpenSession()),
-                               Component.For<ILog>().ImplementedBy<NoOpLogger>());
+                Component.For<IDocumentStore>().Instance(embeddableDocumentStore),
+                Component.For<IDocumentSession>().Instance(embeddableDocumentStore.OpenSession()),
+                Component.For<ILog>().ImplementedBy<NoOpLogger>());
         }
 
         [TestMethod]
@@ -80,13 +83,13 @@ namespace Highway.Data.RavenDB.Tests.Queries
             var targetFoo = new Foo();
             var context = MockRepository.GenerateStrictMock<IDataContext>();
             context.Expect(x => x.AsQueryable<Foo>()).Return(new List<Foo>
-                {
-                    new Foo(),
-                    new Foo(),
-                    new Foo(),
-                    new Foo(),
-                    targetFoo
-                }.AsQueryable()).Repeat.Once();
+            {
+                new Foo(),
+                new Foo(),
+                new Foo(),
+                new Foo(),
+                targetFoo
+            }.AsQueryable()).Repeat.Once();
             var query = new FindFoo();
 
             //Act

@@ -1,14 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using FluentAssertions;
+﻿#region
+
 using Highway.Data.Rest.Configuration;
-using Highway.Data.Rest.Configuration.Defaults;
-using Highway.Data.Rest.Configuration.Interfaces;
 using Highway.Data.Rest.Contexts;
-using Highway.Data.Rest.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Rhino.Mocks;
+
+#endregion
 
 namespace Highway.Data.Rest.Tests
 {

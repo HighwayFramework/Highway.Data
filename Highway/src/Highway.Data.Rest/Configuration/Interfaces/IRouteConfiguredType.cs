@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Linq.Expressions;
+
+#endregion
 
 namespace Highway.Data.Rest.Configuration.Interfaces
 {

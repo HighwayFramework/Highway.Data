@@ -1,5 +1,9 @@
+#region
+
 using System.Linq;
 using Highway.Data.Tests.TestDomain;
+
+#endregion
 
 namespace Highway.Data.EntityFramework.Tests.TestQueries
 {
@@ -11,7 +15,7 @@ namespace Highway.Data.EntityFramework.Tests.TestQueries
         }
     }
 
-    public class FindFooName : Query<Foo,string>
+    public class FindFooName : Query<Foo, string>
     {
         public FindFooName()
         {

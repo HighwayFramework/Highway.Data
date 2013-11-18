@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using System.Linq;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Common.Logging;
 using Common.Logging.Simple;
-using Highway.Data.EventManagement;
-using Highway.Data;
 using Highway.Data.RavenDB.Tests.TestQueries;
 using Highway.Data.Tests;
 using Highway.Data.Tests.TestDomain;
@@ -15,6 +15,8 @@ using Raven.Client;
 using Raven.Client.Embedded;
 using Rhino.Mocks;
 
+#endregion
+
 namespace Highway.Data.RavenDB.Tests.UnitTests
 {
     [TestClass]
@@ -22,16 +24,16 @@ namespace Highway.Data.RavenDB.Tests.UnitTests
     {
         public override void RegisterComponents(IWindsorContainer container)
         {
-            var embeddableDocumentStore = new EmbeddableDocumentStore()
+            var embeddableDocumentStore = new EmbeddableDocumentStore
             {
                 DataDirectory = "",
                 RunInMemory = true
             };
             embeddableDocumentStore.Initialize();
             container.Register(Component.For<IDataContext>().ImplementedBy<DataContext>().LifestyleTransient(),
-                               Component.For<IDocumentStore>().Instance(embeddableDocumentStore),
-                               Component.For<IDocumentSession>().Instance(embeddableDocumentStore.OpenSession()),
-                               Component.For<ILog>().ImplementedBy<NoOpLogger>());
+                Component.For<IDocumentStore>().Instance(embeddableDocumentStore),
+                Component.For<IDocumentSession>().Instance(embeddableDocumentStore.OpenSession()),
+                Component.For<ILog>().ImplementedBy<NoOpLogger>());
             base.RegisterComponents(container);
         }
 
@@ -55,9 +57,9 @@ namespace Highway.Data.RavenDB.Tests.UnitTests
             var context = MockRepository.GenerateStrictMock<IDataContext>();
             context.Expect(x => x.AsQueryable<Foo>()).Return(
                 new List<Foo>
-                    {
-                        new Foo {Id = 1, Name = "Test"}
-                    }.AsQueryable());
+                {
+                    new Foo {Id = 1, Name = "Test"}
+                }.AsQueryable());
             target = new Repository(context);
 
             //Act
@@ -78,9 +80,9 @@ namespace Highway.Data.RavenDB.Tests.UnitTests
             var context = MockRepository.GenerateStrictMock<IDataContext>();
             context.Expect(x => x.AsQueryable<Foo>()).Return(
                 new List<Foo>
-                    {
-                        new Foo {Id = 1, Name = "Test"}
-                    }.AsQueryable());
+                {
+                    new Foo {Id = 1, Name = "Test"}
+                }.AsQueryable());
             target = new Repository(context);
 
             //Act
@@ -98,9 +100,9 @@ namespace Highway.Data.RavenDB.Tests.UnitTests
             var context = MockRepository.GenerateStrictMock<IDataContext>();
             context.Expect(x => x.AsQueryable<Foo>()).Return(
                 new List<Foo>
-                    {
-                        new Foo {Id = 1, Name = "Test"}
-                    }.AsQueryable());
+                {
+                    new Foo {Id = 1, Name = "Test"}
+                }.AsQueryable());
             target = new Repository(context);
 
             //Act
@@ -119,9 +121,9 @@ namespace Highway.Data.RavenDB.Tests.UnitTests
             var foo = new Foo {Id = 1, Name = "Test"};
             context.Expect(x => x.AsQueryable<Foo>()).Return(
                 new List<Foo>
-                    {
-                        foo
-                    }.AsQueryable());
+                {
+                    foo
+                }.AsQueryable());
             target = new Repository(context);
 
             //Act
@@ -139,9 +141,9 @@ namespace Highway.Data.RavenDB.Tests.UnitTests
             var context = MockRepository.GenerateStrictMock<IDataContext>();
             context.Expect(x => x.AsQueryable<Foo>()).Return(
                 new List<Foo>
-                    {
-                        new Foo {Id = 1, Name = "Test"}
-                    }.AsQueryable());
+                {
+                    new Foo {Id = 1, Name = "Test"}
+                }.AsQueryable());
             target = new Repository(context);
 
             //Act

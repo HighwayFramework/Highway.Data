@@ -1,9 +1,10 @@
-﻿using System;
+﻿#region
+
 using System.Collections.Generic;
-using System.Data.Entity;
 using Highway.Data.EntityFramework.Tests.UnitTests;
-using Highway.Data;
 using Highway.Data.Tests.TestDomain;
+
+#endregion
 
 namespace Highway.Data.EntityFramework.Tests.Initializer
 {
@@ -22,7 +23,6 @@ END";
 
         public EntityFrameworkIntializer() : base(SeedDatabase, GetStoredProcedures)
         {
-            
         }
 
         private static IEnumerable<string> GetStoredProcedures()

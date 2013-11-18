@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Data.Entity;
 using System.Linq;
 using Castle.MicroKernel.Registration;
@@ -10,6 +12,8 @@ using Highway.Data.Tests;
 using Highway.Data.Tests.TestDomain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
+
+#endregion
 
 namespace Highway.Data.EntityFramework.Tests.Contexts
 {

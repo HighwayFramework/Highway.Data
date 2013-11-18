@@ -1,4 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿#region
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+#endregion
 
 namespace Highway.Test.MSTest
 {
@@ -6,10 +10,10 @@ namespace Highway.Test.MSTest
     {
         public static void ShouldContain(this string input, string contents)
         {
-           if (!input.ToLowerInvariant().Contains(contents))
-           {
-               Assert.Fail(string.Format("input ({0}) doesn't contain search string ({1})", input, contents));
-           }
+            if (!input.ToLowerInvariant().Contains(contents))
+            {
+                Assert.Fail("input ({0}) doesn't contain search string ({1})", input, contents);
+            }
         }
 
         public static void ShouldContainWithCase(this string input, string contents)

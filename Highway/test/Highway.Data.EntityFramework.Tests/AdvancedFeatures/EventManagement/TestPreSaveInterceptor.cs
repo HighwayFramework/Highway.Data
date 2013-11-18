@@ -1,11 +1,21 @@
-﻿using Highway.Data.EventManagement.Interfaces;
+﻿#region
+
+using Highway.Data.EventManagement.Interfaces;
 using Highway.Data.Interceptors;
+
+#endregion
 
 namespace Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement
 {
     public class TestPreSaveInterceptor : IInterceptor
     {
-        public int Priority { get { return 10; } }
+        public bool WasCalled { get; set; }
+
+        public int Priority
+        {
+            get { return 10; }
+        }
+
         public bool AppliesTo(EventType eventType)
         {
             return eventType == EventType.BeforeSave;
@@ -13,10 +23,8 @@ namespace Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement
 
         public InterceptorResult Apply(IDataContext dataContext, EventType eventType)
         {
-            this.WasCalled = true;
+            WasCalled = true;
             return InterceptorResult.Succeeded();
         }
-
-        public bool WasCalled { get; set; }
     }
 }

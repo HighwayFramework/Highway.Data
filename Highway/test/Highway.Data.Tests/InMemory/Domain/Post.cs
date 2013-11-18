@@ -1,5 +1,4 @@
-﻿using System;
-namespace Highway.Data.Tests.InMemory.Domain
+﻿namespace Highway.Data.Tests.InMemory.Domain
 {
     public class Post
     {

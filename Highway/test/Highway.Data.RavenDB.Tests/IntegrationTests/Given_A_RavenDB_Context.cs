@@ -1,17 +1,18 @@
-﻿
+﻿#region
+
 using System.Linq;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Common.Logging;
 using Common.Logging.Simple;
-using Highway.Data.EventManagement;
-using Highway.Data;
 using Highway.Data.Tests;
 using Highway.Data.Tests.TestDomain;
 using Highway.Test.MSTest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Raven.Client;
 using Raven.Client.Embedded;
+
+#endregion
 
 namespace Highway.Data.RavenDB.Tests.IntegrationTests
 {
@@ -25,15 +26,15 @@ namespace Highway.Data.RavenDB.Tests.IntegrationTests
 
         public override void RegisterComponents(IWindsorContainer container)
         {
-            var embeddableDocumentStore = new EmbeddableDocumentStore()
+            var embeddableDocumentStore = new EmbeddableDocumentStore
             {
                 DataDirectory = "",
                 RunInMemory = true
             };
             embeddableDocumentStore.Initialize();
             container.Register(Component.For<IDocumentStore>().Instance(embeddableDocumentStore),
-                               Component.For<IDocumentSession>().Instance(embeddableDocumentStore.OpenSession()),
-                               Component.For<ILog>().ImplementedBy<NoOpLogger>());
+                Component.For<IDocumentSession>().Instance(embeddableDocumentStore.OpenSession()),
+                Component.For<ILog>().ImplementedBy<NoOpLogger>());
             base.RegisterComponents(container);
         }
 

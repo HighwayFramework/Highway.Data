@@ -1,12 +1,16 @@
+#region
+
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
 using Highway.Data.Rest.ExampleAPI.Areas.HelpPage.Models;
 
+#endregion
+
 namespace Highway.Data.Rest.ExampleAPI.Areas.HelpPage.Controllers
 {
     /// <summary>
-    /// The controller that will handle requests for the help page.
+    ///     The controller that will handle requests for the help page.
     /// </summary>
     public class HelpController : Controller
     {

@@ -1,19 +1,22 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Linq;
 using Common.Logging;
 using Common.Logging.Simple;
-using Highway.Data.Interceptors.Events;
 using NHibernate;
 using NHibernate.Linq;
 using NHibernate.Transform;
 
+#endregion
+
 namespace Highway.Data
 {
     /// <summary>
-    /// A base implementation of the DataContext for use around a NHibernate Session
+    ///     A base implementation of the DataContext for use around a NHibernate Session
     /// </summary>
     public partial class DataContext : IDataContext, IDisposable
     {
@@ -21,17 +24,16 @@ namespace Highway.Data
         private readonly ISession _session;
 
         /// <summary>
-        /// Constructs the context
+        ///     Constructs the context
         /// </summary>
         /// <param name="session">nHibernate's session</param>
         public DataContext(ISession session)
             : this(session, new NoOpLogger())
         {
-
         }
 
         /// <summary>
-        /// Constructs the context
+        ///     Constructs the context
         /// </summary>
         /// <param name="session">nHibernate's session</param>
         /// <param name="log">Common Logging logger</param>
@@ -42,25 +44,27 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// This gives a mockable wrapper around the normal <see cref="DbSet{T}"/> method that allows for testablity
+        ///     This gives a mockable wrapper around the normal <see cref="DbSet{T}" /> method that allows for testablity
         /// </summary>
         /// <typeparam name="T">The Entity being queried</typeparam>
-        /// <returns><see cref="IQueryable{T}"/></returns>
+        /// <returns>
+        ///     <see cref="IQueryable{T}" />
+        /// </returns>
         public IQueryable<T> AsQueryable<T>() where T : class
         {
             IQueryable<T> result = null;
-            _log.DebugFormat("Querying Object {0}", typeof(T).Name);
+            _log.DebugFormat("Querying Object {0}", typeof (T).Name);
             result = _session.Query<T>();
-            _log.DebugFormat("Queried Object {0}", typeof(T).Name);
+            _log.DebugFormat("Queried Object {0}", typeof (T).Name);
             return result;
         }
 
         /// <summary>
-        /// Adds the provided instance of <typeparamref name="T"/> to the data context
+        ///     Adds the provided instance of <typeparamref name="T" /> to the data context
         /// </summary>
         /// <typeparam name="T">The Entity Type being added</typeparam>
-        /// <param name="item">The <typeparamref name="T"/> you want to add</param>
-        /// <returns>The <typeparamref name="T"/> you added</returns>
+        /// <param name="item">The <typeparamref name="T" /> you want to add</param>
+        /// <returns>The <typeparamref name="T" /> you added</returns>
         public T Add<T>(T item) where T : class
         {
             _log.DebugFormat("Adding Object {0}", item);
@@ -70,11 +74,11 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Removes the provided instance of <typeparamref name="T"/> from the data context
+        ///     Removes the provided instance of <typeparamref name="T" /> from the data context
         /// </summary>
         /// <typeparam name="T">The Entity Type being removed</typeparam>
-        /// <param name="item">The <typeparamref name="T"/> you want to remove</param>
-        /// <returns>The <typeparamref name="T"/> you removed</returns>
+        /// <param name="item">The <typeparamref name="T" /> you want to remove</param>
+        /// <returns>The <typeparamref name="T" /> you removed</returns>
         public T Remove<T>(T item) where T : class
         {
             _log.DebugFormat("Removing Object {0}", item);
@@ -84,11 +88,11 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Updates the provided instance of <typeparamref name="T"/> in the data context
+        ///     Updates the provided instance of <typeparamref name="T" /> in the data context
         /// </summary>
         /// <typeparam name="T">The Entity Type being updated</typeparam>
-        /// <param name="item">The <typeparamref name="T"/> you want to update</param>
-        /// <returns>The <typeparamref name="T"/> you updated</returns>
+        /// <param name="item">The <typeparamref name="T" /> you want to update</param>
+        /// <returns>The <typeparamref name="T" /> you updated</returns>
         public T Update<T>(T item) where T : class
         {
             _log.DebugFormat("Updating Object {0}", item);
@@ -97,41 +101,13 @@ namespace Highway.Data
             return item;
         }
 
-        /// <summary>
-        /// Attaches the provided instance of <typeparamref name="T"/> to the data context
-        /// </summary>
-        /// <typeparam name="T">The Entity Type being attached</typeparam>
-        /// <param name="item">The <typeparamref name="T"/> you want to attach</param>
-        /// <returns>The <typeparamref name="T"/> you attached</returns>
-        public T Attach<T>(T item) where T : class
-        {
-            _log.DebugFormat("Attaching Object {0}", item);
-            _session.Persist(item);
-            _log.TraceFormat("Attached Object {0}", item);
-            return item;
-        }
 
         /// <summary>
-        /// Detaches the provided instance of <typeparamref name="T"/> from the data context
-        /// </summary>
-        /// <typeparam name="T">The Entity Type being detached</typeparam>
-        /// <param name="item">The <typeparamref name="T"/> you want to detach</param>
-        /// <returns>The <typeparamref name="T"/> you detached</returns>
-        public T Detach<T>(T item) where T : class
-        {
-            _log.DebugFormat("Detaching Object {0}", item);
-            _session.Evict(item);
-            _log.TraceFormat("Detached Object {0}", item);
-            return item;
-        }
-
-
-        /// <summary>
-        /// Reloads the provided instance of <typeparamref name="T"/> from the database
+        ///     Reloads the provided instance of <typeparamref name="T" /> from the database
         /// </summary>
         /// <typeparam name="T">The Entity Type being reloaded</typeparam>
-        /// <param name="item">The <typeparamref name="T"/> you want to reload</param>
-        /// <returns>The <typeparamref name="T"/> you reloaded</returns>
+        /// <param name="item">The <typeparamref name="T" /> you want to reload</param>
+        /// <returns>The <typeparamref name="T" /> you reloaded</returns>
         public T Reload<T>(T item) where T : class
         {
             _log.DebugFormat("Reloading Object {0}", item);
@@ -141,7 +117,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Commits all currently tracked entity changes
+        ///     Commits all currently tracked entity changes
         /// </summary>
         /// <returns>the number of rows affected</returns>
         public int Commit()
@@ -152,14 +128,48 @@ namespace Highway.Data
             return 0;
         }
 
+        public void Dispose()
+        {
+            _session.Close();
+            _session.Dispose();
+        }
+
         /// <summary>
-        /// Executes a SQL command and tries to map the returned datasets into an <see cref="IEnumerable{T}"/>
-        /// The results should have the same column names as the Entity Type has properties
+        ///     Attaches the provided instance of <typeparamref name="T" /> to the data context
+        /// </summary>
+        /// <typeparam name="T">The Entity Type being attached</typeparam>
+        /// <param name="item">The <typeparamref name="T" /> you want to attach</param>
+        /// <returns>The <typeparamref name="T" /> you attached</returns>
+        public T Attach<T>(T item) where T : class
+        {
+            _log.DebugFormat("Attaching Object {0}", item);
+            _session.Persist(item);
+            _log.TraceFormat("Attached Object {0}", item);
+            return item;
+        }
+
+        /// <summary>
+        ///     Detaches the provided instance of <typeparamref name="T" /> from the data context
+        /// </summary>
+        /// <typeparam name="T">The Entity Type being detached</typeparam>
+        /// <param name="item">The <typeparamref name="T" /> you want to detach</param>
+        /// <returns>The <typeparamref name="T" /> you detached</returns>
+        public T Detach<T>(T item) where T : class
+        {
+            _log.DebugFormat("Detaching Object {0}", item);
+            _session.Evict(item);
+            _log.TraceFormat("Detached Object {0}", item);
+            return item;
+        }
+
+        /// <summary>
+        ///     Executes a SQL command and tries to map the returned datasets into an <see cref="IEnumerable{T}" />
+        ///     The results should have the same column names as the Entity Type has properties
         /// </summary>
         /// <typeparam name="T">The Entity Type that the return should be mapped to</typeparam>
         /// <param name="sql">The Sql Statement</param>
         /// <param name="dbParams">A List of Database Parameters for the Query</param>
-        /// <returns>An <see cref="IEnumerable{T}"/> from the query return</returns>
+        /// <returns>An <see cref="IEnumerable{T}" /> from the query return</returns>
         public IEnumerable<T> ExecuteSqlQuery<T>(string sql, params DbParameter[] dbParams)
         {
             var executeSqlQuery = _session.CreateSQLQuery(sql);
@@ -171,7 +181,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Executes a SQL command and returns the standard int return from the query
+        ///     Executes a SQL command and returns the standard int return from the query
         /// </summary>
         /// <param name="sql">The Sql Statement</param>
         /// <param name="dbParams">A List of Database Parameters for the Query</param>
@@ -191,13 +201,6 @@ namespace Highway.Data
                 tx.Commit();
                 return output;
             }
-        }
-
-      
-        public void Dispose()
-        {
-            _session.Close();
-            _session.Dispose();
         }
     }
 }

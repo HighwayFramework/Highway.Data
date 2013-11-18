@@ -1,16 +1,20 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
+
+#endregion
 
 namespace Highway.Data
 {
     /// <summary>
-    /// Extensions to make dealing with enumerable collections easier
+    ///     Extensions to make dealing with enumerable collections easier
     /// </summary>
     public static class EnumerableExtensions
     {
         /// <summary>
-        /// Executes an action for each item in an enumerable collection, this breaks defered execution
+        ///     Executes an action for each item in an enumerable collection, this breaks defered execution
         /// </summary>
         /// <param name="items">The collection to be executed against</param>
         /// <param name="action">The action to be executed against the collection</param>

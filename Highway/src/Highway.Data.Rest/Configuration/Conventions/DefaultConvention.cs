@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using Highway.Pavement;
+
+#endregion
 
 namespace Highway.Data.Rest.Configuration.Conventions
 {
@@ -17,7 +21,7 @@ namespace Highway.Data.Rest.Configuration.Conventions
 
         public virtual RestActionFormat DefaultFormat()
         {
-            return new RestActionFormat()
+            return new RestActionFormat
             {
                 Single = "{0}/{{{1}}}",
                 All = "{0}"

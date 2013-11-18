@@ -1,3 +1,5 @@
+#region
+
 using System.Collections.Generic;
 using System.Linq;
 using Castle.MicroKernel.Registration;
@@ -6,8 +8,6 @@ using Castle.Windsor;
 using Common.Logging;
 using Common.Logging.Simple;
 using CommonServiceLocator.WindsorAdapter;
-using Highway.Data.EventManagement;
-using Highway.Data;
 using Highway.Data.RavenDB.Tests.TestQueries;
 using Highway.Data.Tests;
 using Highway.Data.Tests.TestDomain;
@@ -17,6 +17,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Raven.Client;
 using Raven.Client.Embedded;
 using Rhino.Mocks;
+
+#endregion
 
 namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
@@ -31,16 +33,16 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             _container = new WindsorContainer();
             ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(_container));
             _container.Kernel.Resolver.AddSubResolver(new ArrayResolver(_container.Kernel));
-            var embeddableDocumentStore = new EmbeddableDocumentStore()
+            var embeddableDocumentStore = new EmbeddableDocumentStore
             {
                 DataDirectory = "",
                 RunInMemory = true
             };
             embeddableDocumentStore.Initialize();
             _container.Register(Component.For<IDataContext>().ImplementedBy<DataContext>().LifestyleTransient(),
-                               Component.For<IDocumentStore>().Instance(embeddableDocumentStore),
-                               Component.For<IDocumentSession>().Instance(embeddableDocumentStore.OpenSession()),
-                               Component.For<ILog>().ImplementedBy<NoOpLogger>());
+                Component.For<IDocumentStore>().Instance(embeddableDocumentStore),
+                Component.For<IDocumentSession>().Instance(embeddableDocumentStore.OpenSession()),
+                Component.For<ILog>().ImplementedBy<NoOpLogger>());
         }
 
 

@@ -1,11 +1,12 @@
+#region
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Highway.Data.Tests.InMemory.Domain;
-using Highway.Data.Contexts;
 using FluentAssertions;
+using Highway.Data.Contexts;
+using Highway.Data.Tests.InMemory.Domain;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+#endregion
 
 namespace Highway.Data.Tests.InMemory
 {
@@ -38,7 +39,7 @@ namespace Highway.Data.Tests.InMemory
         public void Assign_ShouldAssignIdOfBlog()
         {
             // Arrange
-            var blog = new Blog { Id = Guid.Empty };
+            var blog = new Blog {Id = Guid.Empty};
 
             // Act
             target.Assign(blog);

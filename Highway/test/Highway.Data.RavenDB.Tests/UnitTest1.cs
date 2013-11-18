@@ -1,5 +1,8 @@
-﻿using System;
+﻿#region
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+#endregion
 
 namespace Highway.Data.RavenDB.Tests
 {

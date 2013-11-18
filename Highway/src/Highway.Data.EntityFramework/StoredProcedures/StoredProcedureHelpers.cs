@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,15 +11,17 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.SqlServer.Server;
 
+#endregion
+
 namespace Highway.Data
 {
     /// <summary>
-    /// Contains extension methods to Code First database objects for Stored Procedure processing
+    ///     Contains extension methods to Code First database objects for Stored Procedure processing
     /// </summary>
     internal static class StoredProcedureHelpers
     {
         /// <summary>
-        /// Get the underlying class type for lists, etc. that implement IEnumerable<>.
+        ///     Get the underlying class type for lists, etc. that implement IEnumerable<>.
         /// </summary>
         /// <param name="listtype"></param>
         /// <returns></returns>
@@ -25,13 +29,14 @@ namespace Highway.Data
         {
             Type basetype = null;
             foreach (Type i in listtype.GetInterfaces())
-                if (i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEnumerable<>))
+                if (i.IsGenericType && i.GetGenericTypeDefinition() == typeof (IEnumerable<>))
                     basetype = i.GetGenericArguments()[0];
 
             return basetype;
         }
+
         /// <summary>
-        /// Get properties of a type that do not have the 'NotMapped' attribute
+        ///     Get properties of a type that do not have the 'NotMapped' attribute
         /// </summary>
         /// <param name="t">Type to examine for properites</param>
         /// <returns>Array of properties that can be filled</returns>
@@ -39,13 +44,13 @@ namespace Highway.Data
         {
             var props1 = t.GetProperties();
             var props2 = props1
-                .Where(p => GetAttribute<NotMappedAttribute>((PropertyInfo) p) == null)
+                .Where(p => GetAttribute<NotMappedAttribute>(p) == null)
                 .Select(p => p);
             return props2.ToArray();
         }
 
         /// <summary>
-        /// Get an attribute for a type
+        ///     Get an attribute for a type
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="memberInfo"></param>
@@ -54,12 +59,12 @@ namespace Highway.Data
         public static T GetAttribute<T>(this Type type)
             where T : Attribute
         {
-            var attributes = type.GetCustomAttributes(typeof(T), false).FirstOrDefault();
-            return (T)attributes;
+            var attributes = type.GetCustomAttributes(typeof (T), false).FirstOrDefault();
+            return (T) attributes;
         }
 
         /// <summary>
-        /// Get an attribute for a property
+        ///     Get an attribute for a property
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="memberInfo"></param>
@@ -68,13 +73,13 @@ namespace Highway.Data
         public static T GetAttribute<T>(this PropertyInfo propertyinfo)
             where T : Attribute
         {
-            var attributes = propertyinfo.GetCustomAttributes(typeof(T), false).FirstOrDefault();
-            return (T)attributes;
+            var attributes = propertyinfo.GetCustomAttributes(typeof (T), false).FirstOrDefault();
+            return (T) attributes;
         }
 
         /// <summary>
-        /// Read data for the current result row from a reader into a destination object, by the name
-        /// of the properties on the destination object.
+        ///     Read data for the current result row from a reader into a destination object, by the name
+        ///     of the properties on the destination object.
         /// </summary>
         /// <param name="reader">data reader holding return data</param>
         /// <param name="t">object to populate</param>
@@ -94,14 +99,14 @@ namespace Highway.Data
 
                     // get the requested value from the returned dataset and handle null values
                     var data = reader[name];
-                    if (data.GetType() == typeof(System.DBNull))
+                    if (data.GetType() == typeof (DBNull))
                         p.SetValue(t, null, null);
                     else
                         p.SetValue(t, reader[name], null);
                 }
                 catch (Exception ex)
                 {
-                    if (ex.GetType() == typeof(IndexOutOfRangeException))
+                    if (ex.GetType() == typeof (IndexOutOfRangeException))
                     {
                         // if the result set doesn't have this value, intercept the exception
                         // and set the property value to null / 0
@@ -117,8 +122,8 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Read data for the current result row from a reader into a destination object, by the name
-        /// of the properties on the destination object.
+        ///     Read data for the current result row from a reader into a destination object, by the name
+        ///     of the properties on the destination object.
         /// </summary>
         /// <param name="reader">data reader holding return data</param>
         /// <param name="t">object to populate</param>
@@ -138,14 +143,14 @@ namespace Highway.Data
 
                     // get the requested value from the returned dataset and handle null values
                     var data = reader[name];
-                    if (data.GetType() == typeof(System.DBNull))
+                    if (data.GetType() == typeof (DBNull))
                         p.SetValue(t, null, null);
                     else
                         p.SetValue(t, reader[name], null);
                 }
                 catch (Exception ex)
                 {
-                    if (ex.GetType() == typeof(IndexOutOfRangeException))
+                    if (ex.GetType() == typeof (IndexOutOfRangeException))
                     {
                         // if the result set doesn't have this value, intercept the exception
                         // and set the property value to null / 0
@@ -155,7 +160,7 @@ namespace Highway.Data
                     {
                         // tell the user *where* we had an exception
                         Exception outer = new Exception(String.Format("Exception processing return column {0} in {1}",
-                                                                      name, t.GetType().Name), ex);
+                            name, t.GetType().Name), ex);
 
                         // something bad happened, pass on the exception
                         throw outer;
@@ -167,20 +172,20 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Do the work of converting a source data object to SqlDataRecords 
-        /// using the parameter attributes to create the table valued parameter definition
+        ///     Do the work of converting a source data object to SqlDataRecords
+        ///     using the parameter attributes to create the table valued parameter definition
         /// </summary>
         /// <returns></returns>
         internal static IEnumerable<SqlDataRecord> TableValuedParameter(IList table)
         {
             // get the object type underlying our table
-            Type t = StoredProcedureHelpers.GetUnderlyingType(table.GetType());
+            Type t = GetUnderlyingType(table.GetType());
 
             // list of converted values to be returned to the caller
             List<SqlDataRecord> recordlist = new List<SqlDataRecord>();
 
             // get all mapped properties
-            PropertyInfo[] props = StoredProcedureHelpers.GetMappedProperties(t);
+            PropertyInfo[] props = t.GetMappedProperties();
 
             // get the column definitions, into an array
             List<SqlMetaData> columnlist = new List<SqlMetaData>();
@@ -221,9 +226,9 @@ namespace Highway.Data
                     case SqlDbType.Decimal:
                         // get column precision and scale
                         var pa = p.GetAttribute<StoredProcedureAttributes.Precision>();
-                        Byte precision = (null == pa) ? (byte)10 : pa.Value;
+                        Byte precision = (null == pa) ? (byte) 10 : pa.Value;
                         var sca = p.GetAttribute<StoredProcedureAttributes.Scale>();
-                        Byte scale = (null == sca) ? (byte)2 : sca.Value;
+                        Byte scale = (null == sca) ? (byte) 2 : sca.Value;
                         column = new SqlMetaData(name, coltype, precision, scale);
                         break;
 
@@ -245,8 +250,8 @@ namespace Highway.Data
                 {
                     // locate the value of the matching property
                     var value = props.Where(p => p.Name == mapping[columnlist[i].Name])
-                                     .First()
-                                     .GetValue(s, null);
+                        .First()
+                        .GetValue(s, null);
 
                     // set the value
                     record.SetValue(i, value);

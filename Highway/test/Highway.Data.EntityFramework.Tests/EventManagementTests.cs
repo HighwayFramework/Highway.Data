@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using Highway.Data.Domain;
 using Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement;
 using Highway.Data.EventManagement.Interfaces;
 using Highway.Test.MSTest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Rhino.Mocks;
+
+#endregion
 
 namespace Highway.Data.EntityFramework.Tests.EventManagement
 {
@@ -17,7 +20,7 @@ namespace Highway.Data.EntityFramework.Tests.EventManagement
             //arrange 
             var domain = new TestDomain();
             var testPreSaveInterceptor = new TestPreSaveInterceptor();
-            domain.Events = new List<IInterceptor>()
+            domain.Events = new List<IInterceptor>
             {
                 testPreSaveInterceptor
             };
@@ -33,9 +36,9 @@ namespace Highway.Data.EntityFramework.Tests.EventManagement
 
     public class TestDomain : IDomain
     {
+        public List<IInterceptor> Events { get; set; }
         public string ConnectionString { get; set; }
         public IMappingConfiguration Mappings { get; set; }
         public IContextConfiguration Context { get; set; }
-        public List<IInterceptor> Events { get; set; }
     }
 }

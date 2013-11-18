@@ -1,13 +1,17 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+
+#endregion
 
 namespace Highway.Data
 {
     /// <summary>
-    /// ****    FOR DEVELOPMENT USAGE ONLY              ****
-    /// ****    DO NOT PUT THIS IN PRODUCTION CODE      ****
-    /// This class will clear the existing connections to the database and drop the database
+    ///     ****    FOR DEVELOPMENT USAGE ONLY              ****
+    ///     ****    DO NOT PUT THIS IN PRODUCTION CODE      ****
+    ///     This class will clear the existing connections to the database and drop the database
     /// </summary>
     public class DropCreateInitializer<T> : IDatabaseInitializer<T> where T : DbContext
     {
@@ -15,7 +19,6 @@ namespace Highway.Data
         private readonly Func<IEnumerable<string>> _storedProcs;
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="seedAction">actions to execute</param>
         /// <param name="storedProcs">stored procedure strings</param>
@@ -33,16 +36,16 @@ namespace Highway.Data
             {
                 context.Database.ExecuteSqlCommand(
                     string.Format("use master; \r\n alter database [{0}] set single_user with rollback immediate;",
-                                  context.Database.Connection.Database));
+                        context.Database.Connection.Database));
                 context.Database.ExecuteSqlCommand(string.Format("use master; \r\n Drop database [{0}];",
-                                                                 context.Database.Connection.Database));
+                    context.Database.Connection.Database));
             }
             context.Database.CreateIfNotExists();
             if (_storedProcs != null)
             {
                 foreach (var sp in _storedProcs())
                 {
-                    if(string.IsNullOrWhiteSpace(sp)) continue;
+                    if (string.IsNullOrWhiteSpace(sp)) continue;
                     context.Database.ExecuteSqlCommand(sp);
                 }
             }

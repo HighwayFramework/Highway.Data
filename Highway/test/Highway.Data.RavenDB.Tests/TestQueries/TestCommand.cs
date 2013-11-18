@@ -1,5 +1,8 @@
-﻿using Highway.Data;
+﻿#region
+
 using Highway.Data.Tests.TestDomain;
+
+#endregion
 
 namespace Highway.Data.RavenDB.Tests.TestQueries
 {
@@ -8,10 +11,10 @@ namespace Highway.Data.RavenDB.Tests.TestQueries
         public TestCommand()
         {
             ContextQuery = db =>
-                {
-                    db.AsQueryable<Foo>();
-                    Called = true;
-                };
+            {
+                db.AsQueryable<Foo>();
+                Called = true;
+            };
         }
 
         public bool Called { get; set; }

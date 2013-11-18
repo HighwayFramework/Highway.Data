@@ -1,16 +1,19 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Highway.Data.Tests.InMemory.Domain;
-using Highway.Data.Contexts;
+﻿#region
+
 using FluentAssertions;
+using Highway.Data.Contexts;
+using Highway.Data.Tests.InMemory.Domain;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+#endregion
 
 namespace Highway.Data.Tests.InMemory
 {
-
     [TestClass]
     public class IntegerIdentityStrategyTests
     {
-        private IntegerIdentityStrategy<Post> target;
         private readonly int seedNumber = 500;
+        private IntegerIdentityStrategy<Post> target;
 
         [TestInitialize]
         public void Setup()
@@ -35,7 +38,7 @@ namespace Highway.Data.Tests.InMemory
         public void Assign_ShouldAssignIdOfPost()
         {
             // Arrange
-            var post = new Post { Id = 0 };
+            var post = new Post {Id = 0};
 
             // Act
             target.Assign(post);

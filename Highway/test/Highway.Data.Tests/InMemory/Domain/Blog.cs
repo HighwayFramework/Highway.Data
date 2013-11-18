@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+
+#endregion
 
 namespace Highway.Data.Tests.InMemory.Domain
 {

@@ -1,3 +1,5 @@
+#region
+
 using System.Collections.Generic;
 using System.Linq;
 using Castle.MicroKernel.Registration;
@@ -10,13 +12,14 @@ using Highway.Data.EntityFramework.Tests.Mapping;
 using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.EntityFramework.Tests.TestQueries;
 using Highway.Data.EntityFramework.Tests.UnitTests;
-using Highway.Data.EventManagement;
 using Highway.Data.Tests;
 using Highway.Data.Tests.TestDomain;
 using Highway.Test.MSTest;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
+
+#endregion
 
 namespace Highway.Data.EntityFramework.Tests.Queries
 {
@@ -32,10 +35,10 @@ namespace Highway.Data.EntityFramework.Tests.Queries
             ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(_container));
             _container.Kernel.Resolver.AddSubResolver(new ArrayResolver(_container.Kernel));
             _container.Register(Component.For<IDataContext>().ImplementedBy<TestDataContext>().DependsOn(
-                                   new { connectionString = Settings.Default.Connection }).LifestyleTransient(),
-                               Component.For<IMappingConfiguration>().ImplementedBy<FooMappingConfiguration>().
-                                   LifestyleTransient(),
-                               Component.For<ILog>().ImplementedBy<NoOpLogger>());
+                new {connectionString = Settings.Default.Connection}).LifestyleTransient(),
+                Component.For<IMappingConfiguration>().ImplementedBy<FooMappingConfiguration>().
+                    LifestyleTransient(),
+                Component.For<ILog>().ImplementedBy<NoOpLogger>());
         }
 
 

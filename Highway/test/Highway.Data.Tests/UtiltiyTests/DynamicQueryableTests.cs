@@ -1,11 +1,14 @@
-﻿using System.Collections;
+﻿#region
+
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq.Dynamic;
 using System.Linq;
-using Microsoft.CSharp;
+using System.Linq.Dynamic;
 using Highway.Data.Tests.TestDomain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+#endregion
 
 namespace Highway.Data.Tests.UtiltiyTests
 {
@@ -20,7 +23,7 @@ namespace Highway.Data.Tests.UtiltiyTests
 
             //Assert
             Assert.IsTrue(results.Count() == 1);
-            Assert.AreEqual("Devlin",results.Single().Name);
+            Assert.AreEqual("Devlin", results.Single().Name);
         }
 
         [TestMethod]
@@ -31,18 +34,18 @@ namespace Highway.Data.Tests.UtiltiyTests
 
             //Assert
             Assert.IsTrue(results.Count() == 3);
-            Assert.AreEqual("Devlin",results.Cast<dynamic>().First().FirstName);
+            Assert.AreEqual("Devlin", results.Cast<dynamic>().First().FirstName);
         }
     }
 
     public class BaseCollectionTests
     {
-        public ICollection<Foo> items = new Collection<Foo>()
-            {
-                new Foo() {Name = "Devlin"},
-                new Foo() {Name = "Tim"},
-                new Foo() {Name = "Allen"}
-            };
+        public ICollection<Foo> items = new Collection<Foo>
+        {
+            new Foo {Name = "Devlin"},
+            new Foo {Name = "Tim"},
+            new Foo {Name = "Allen"}
+        };
     }
 
     [TestClass]
@@ -69,6 +72,5 @@ namespace Highway.Data.Tests.UtiltiyTests
             Assert.IsTrue(results.Count() == 3);
             Assert.AreEqual("Devlin", results.Cast<dynamic>().First().FirstName);
         }
-
     }
 }

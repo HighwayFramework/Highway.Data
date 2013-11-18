@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using System.Linq;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
@@ -8,12 +10,13 @@ using Highway.Data.EntityFramework.Tests.Mapping;
 using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.EntityFramework.Tests.TestQueries;
 using Highway.Data.EntityFramework.Tests.UnitTests;
-using Highway.Data.EventManagement;
 using Highway.Data.Tests;
 using Highway.Data.Tests.TestDomain;
 using Highway.Test.MSTest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
+
+#endregion
 
 namespace Highway.Data.EntityFramework.Tests.Repositories
 {
@@ -25,10 +28,10 @@ namespace Highway.Data.EntityFramework.Tests.Repositories
             container.Register(
                 Component.For<IDataContext>().ImplementedBy<TestDataContext>()
                     .DependsOn(new
-                        {
-                            connectionString = Settings.Default.Connection,
-                            configurations = new[] {new FooMappingConfiguration()},
-                        }),
+                    {
+                        connectionString = Settings.Default.Connection,
+                        configurations = new[] {new FooMappingConfiguration()},
+                    }),
                 Component.For<IMappingConfiguration>()
                     .ImplementedBy<FooMappingConfiguration>(),
                 Component.For<ILog>().ImplementedBy<NoOpLogger>());
@@ -55,9 +58,9 @@ namespace Highway.Data.EntityFramework.Tests.Repositories
             var context = MockRepository.GenerateStrictMock<IDataContext>();
             context.Expect(x => x.AsQueryable<Foo>()).Return(
                 new List<Foo>
-                    {
-                        new Foo {Id = 1, Name = "Test"}
-                    }.AsQueryable());
+                {
+                    new Foo {Id = 1, Name = "Test"}
+                }.AsQueryable());
             target = new Repository(context);
 
             //Act
@@ -78,9 +81,9 @@ namespace Highway.Data.EntityFramework.Tests.Repositories
             var context = MockRepository.GenerateStrictMock<IDataContext>();
             context.Expect(x => x.AsQueryable<Foo>()).Return(
                 new List<Foo>
-                    {
-                        new Foo {Id = 1, Name = "Test"}
-                    }.AsQueryable());
+                {
+                    new Foo {Id = 1, Name = "Test"}
+                }.AsQueryable());
             target = new Repository(context);
 
             //Act
@@ -98,9 +101,9 @@ namespace Highway.Data.EntityFramework.Tests.Repositories
             var context = MockRepository.GenerateStrictMock<IDataContext>();
             context.Expect(x => x.AsQueryable<Foo>()).Return(
                 new List<Foo>
-                    {
-                        new Foo {Id = 1, Name = "Test"}
-                    }.AsQueryable());
+                {
+                    new Foo {Id = 1, Name = "Test"}
+                }.AsQueryable());
             target = new Repository(context);
 
             //Act
@@ -119,9 +122,9 @@ namespace Highway.Data.EntityFramework.Tests.Repositories
             var foo = new Foo {Id = 1, Name = "Test"};
             context.Expect(x => x.AsQueryable<Foo>()).Return(
                 new List<Foo>
-                    {
-                        foo
-                    }.AsQueryable());
+                {
+                    foo
+                }.AsQueryable());
             target = new Repository(context);
 
             //Act
@@ -139,9 +142,9 @@ namespace Highway.Data.EntityFramework.Tests.Repositories
             var context = MockRepository.GenerateStrictMock<IDataContext>();
             context.Expect(x => x.AsQueryable<Foo>()).Return(
                 new List<Foo>
-                    {
-                        new Foo {Id = 1, Name = "Test"}
-                    }.AsQueryable());
+                {
+                    new Foo {Id = 1, Name = "Test"}
+                }.AsQueryable());
             target = new Repository(context);
 
             //Act

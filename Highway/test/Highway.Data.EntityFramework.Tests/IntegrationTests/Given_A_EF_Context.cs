@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿#region
+
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -10,11 +11,12 @@ using Highway.Data.EntityFramework.Tests.Initializer;
 using Highway.Data.EntityFramework.Tests.Mapping;
 using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.EntityFramework.Tests.UnitTests;
-using Highway.Data.EventManagement;
 using Highway.Data.Tests;
 using Highway.Data.Tests.TestDomain;
 using Highway.Test.MSTest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+#endregion
 
 namespace Highway.Data.EntityFramework.Tests.IntegrationTests
 {
@@ -29,8 +31,8 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
         public override void RegisterComponents(IWindsorContainer container)
         {
             container.Register(Component.For<IMappingConfiguration>().ImplementedBy<FooMappingConfiguration>(),
-                               Component.For<ILog>().ImplementedBy<NoOpLogger>(),
-                               Component.For<IContextConfiguration>().ImplementedBy(null));
+                Component.For<ILog>().ImplementedBy<NoOpLogger>(),
+                Component.For<IContextConfiguration>().ImplementedBy(null));
 
             base.RegisterComponents(container);
         }
@@ -98,6 +100,5 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
             entry.State.ShouldBe(EntityState.Detached);
             target.Dispose();
         }
-        
     }
 }

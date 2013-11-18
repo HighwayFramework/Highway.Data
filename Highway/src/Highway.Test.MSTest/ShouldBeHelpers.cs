@@ -1,4 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿#region
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+#endregion
 
 namespace Highway.Test.MSTest
 {
@@ -7,7 +11,7 @@ namespace Highway.Test.MSTest
         public static void ShouldBe<T>(this T actual, T expected)
         {
             Assert.AreEqual(expected, actual,
-                            string.Format("Actual {0} was not equal to Expected {1}", actual, expected));
+                string.Format("Actual {0} was not equal to Expected {1}", actual, expected));
         }
     }
 }

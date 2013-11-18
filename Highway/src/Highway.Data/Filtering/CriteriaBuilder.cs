@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
+
+#endregion
 
 namespace Highway.Data.Filtering
 {
@@ -15,6 +19,20 @@ namespace Highway.Data.Filtering
         private static string _greaterThanOrEqual = ">=";
         private static string _lessThan = "<";
         private static string _lessThanOrEqual = "<=";
+
+        private static readonly Dictionary<string, string> _operators = new Dictionary<string, string>
+        {
+            {"equal", "="},
+            {"greater than", ">"},
+            {"greater than or equal", ">="},
+            {"less than", "<"},
+            {"less than or equal", "<="},
+            {"on", "="},
+            {"after", ">"},
+            {"on or after", ">="},
+            {"before", "<"},
+            {"on or before", "<="},
+        };
 
         internal static BasicCriteria<T> Create<T>(string fieldName, string operation, T value)
         {
@@ -76,18 +94,5 @@ namespace Highway.Data.Filtering
             if (_operators.ContainsKey(@operator)) @operator = _operators[@operator];
             return Create(fieldIdentifier.FieldName, @operator, value);
         }
-
-        private static readonly Dictionary<string, string> _operators = new Dictionary<string, string>(){
-                {"equal", "=" },
-                {"greater than", ">" },
-                {"greater than or equal", ">=" },
-                {"less than", "<" },
-                {"less than or equal", "<=" },
-                {"on", "=" },
-                {"after", ">" },
-                {"on or after", ">=" },
-                {"before", "<" },
-                {"on or before", "<=" },
-            };
     }
 }

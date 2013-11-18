@@ -1,4 +1,8 @@
-﻿using Highway.Data.Tests.TestDomain;
+﻿#region
+
+using Highway.Data.Tests.TestDomain;
+
+#endregion
 
 namespace Highway.Data.EntityFramework.Tests.TestQueries
 {
@@ -7,10 +11,10 @@ namespace Highway.Data.EntityFramework.Tests.TestQueries
         public TestCommand()
         {
             ContextQuery = db =>
-                {
-                    db.AsQueryable<Foo>();
-                    Called = true;
-                };
+            {
+                db.AsQueryable<Foo>();
+                Called = true;
+            };
         }
 
         public bool Called { get; set; }

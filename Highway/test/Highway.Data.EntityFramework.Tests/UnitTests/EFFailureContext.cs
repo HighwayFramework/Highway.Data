@@ -1,8 +1,12 @@
+#region
+
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
+
+#endregion
 
 namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
@@ -25,16 +29,6 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             throw new NotImplementedException();
         }
 
-        public T Attach<T>(T item) where T : class
-        {
-            throw new NotImplementedException();
-        }
-
-        public T Detach<T>(T item) where T : class
-        {
-            throw new NotImplementedException();
-        }
-
         public T Reload<T>(T item) where T : class
         {
             throw new NotImplementedException();
@@ -45,22 +39,32 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
             throw new NotImplementedException();
         }
 
-        public int ExecuteSqlCommand(string sql, params DbParameter[] dbParams)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<T> ExecuteSqlQuery<T>(string sql, params DbParameter[] dbParams)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Dispose()
         {
             throw new NotImplementedException();
         }
 
         IQueryable<T> IDataContext.AsQueryable<T>()
+        {
+            throw new NotImplementedException();
+        }
+
+        public T Attach<T>(T item) where T : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public T Detach<T>(T item) where T : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public int ExecuteSqlCommand(string sql, params DbParameter[] dbParams)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<T> ExecuteSqlQuery<T>(string sql, params DbParameter[] dbParams)
         {
             throw new NotImplementedException();
         }

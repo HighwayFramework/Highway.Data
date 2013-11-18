@@ -1,12 +1,16 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Linq;
+
+#endregion
 
 namespace Highway.Data
 {
-    public class RemoveById<TId,T> : Command where T : class, IIdentifiable<TId> where TId : struct, IEquatable<TId>
+    public class RemoveById<TId, T> : Command where T : class, IIdentifiable<TId> where TId : struct, IEquatable<TId>
     {
         /// <summary>
-        /// This pre-built command removes an object from the persistence store by the id provided
+        ///     This pre-built command removes an object from the persistence store by the id provided
         /// </summary>
         /// <param name="id">id of the object to remove</param>
         public RemoveById(TId id)

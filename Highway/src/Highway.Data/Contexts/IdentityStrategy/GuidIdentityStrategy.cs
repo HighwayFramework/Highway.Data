@@ -1,14 +1,14 @@
+#region
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Linq.Expressions;
+
+#endregion
 
 namespace Highway.Data.Contexts
 {
     public class GuidIdentityStrategy<T> : IdentityStrategy<T, Guid>
-            where T : class
+        where T : class
     {
         static GuidIdentityStrategy()
         {
@@ -19,6 +19,5 @@ namespace Highway.Data.Contexts
             : base(property)
         {
         }
-         
     }
 }

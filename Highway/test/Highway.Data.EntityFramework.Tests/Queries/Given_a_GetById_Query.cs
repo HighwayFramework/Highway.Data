@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿#region
+
+using System.Linq;
 using Common.Logging;
 using Common.Logging.Simple;
 using Highway.Data.EntityFramework.Tests.Mapping;
@@ -7,17 +9,19 @@ using Highway.Data.EntityFramework.Tests.UnitTests;
 using Highway.Data.Tests.TestDomain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+#endregion
+
 namespace Highway.Data.EntityFramework.Tests.Queries
 {
     [TestClass]
     public class Given_a_GetById_Query
     {
-        [TestMethod,Ignore]
+        [TestMethod, Ignore]
         public void ShouldReturnFoo()
         {
             //Arrange
             var context = new TestDataContext(Settings.Default.Connection, new FooMappingConfiguration(),
-                                              new ConsoleOutLogger("Test", LogLevel.All, true, true, true, string.Empty));
+                new ConsoleOutLogger("Test", LogLevel.All, true, true, true, string.Empty));
 
             var item = new Foo();
             context.Add(item);
@@ -34,12 +38,12 @@ namespace Highway.Data.EntityFramework.Tests.Queries
             context.Commit();
         }
 
-        [TestMethod,Ignore]
+        [TestMethod, Ignore]
         public void ShouldReturnAllFoos()
         {
             //Arrange
             var context = new TestDataContext(Settings.Default.Connection, new FooMappingConfiguration(),
-                                             new ConsoleOutLogger("Test", LogLevel.All, true, true, true, string.Empty));
+                new ConsoleOutLogger("Test", LogLevel.All, true, true, true, string.Empty));
 
             var item = new Foo();
             var item2 = new Foo();

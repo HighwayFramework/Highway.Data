@@ -1,6 +1,9 @@
+#region
+
 using System.Linq;
-using Highway.Data;
 using Highway.Data.Tests.TestDomain;
+
+#endregion
 
 namespace Highway.Data.RavenDB.Tests.TestQueries
 {

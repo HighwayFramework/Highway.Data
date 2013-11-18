@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿#region
+
+using System.Data.Entity;
 using Common.Logging;
 using Highway.Data.EntityFramework.Tests.Mapping;
 using Highway.Data.EntityFramework.Tests.Properties;
@@ -6,6 +8,8 @@ using Highway.Data.EntityFramework.Tests.UnitTests;
 using Highway.Data.Tests.TestDomain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
+
+#endregion
 
 namespace Highway.Data.EntityFramework.Tests.Logging
 {

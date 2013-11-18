@@ -1,44 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Data;
-using System.Reflection;
+﻿#region
+
+using System;
 using System.Collections;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
-using System.Linq.Expressions;
+using System.Linq;
+using System.Reflection;
+
+#endregion
 
 namespace Highway.Data
 {
     /// <summary>
-    /// Holds multiple Result Sets returned from a Stored Procedure call. 
+    ///     Holds multiple Result Sets returned from a Stored Procedure call.
     /// </summary>
     public class ResultsList : IEnumerable
     {
         // our internal object that is the list of results lists
-        List<List<object>> thelist = new List<List<object>>();
+        private readonly List<List<object>> thelist = new List<List<object>>();
 
         /// <summary>
-        /// Add a results list to the results set
-        /// </summary>
-        /// <param name="list"></param>
-        public void Add(List<object> list)
-        {
-            thelist.Add(list);
-        }
-
-        /// <summary>
-        /// Return an enumerator over the internal list
-        /// </summary>
-        /// <returns>Enumerator over List<object> that make up the result sets </returns>
-        public IEnumerator GetEnumerator()
-        {
-            return thelist.GetEnumerator();
-        }
-
-        /// <summary>
-        /// Return the count of result sets
+        ///     Return the count of result sets
         /// </summary>
         public Int32 Count
         {
@@ -46,7 +29,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Get the nth results list item
+        ///     Get the nth results list item
         /// </summary>
         /// <param name="index"></param>
         /// <returns>List of objects that make up the result set</returns>
@@ -56,7 +39,25 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Return the result set that contains a particular type and does a cast to that type.
+        ///     Return an enumerator over the internal list
+        /// </summary>
+        /// <returns>Enumerator over List<object> that make up the result sets </returns>
+        public IEnumerator GetEnumerator()
+        {
+            return thelist.GetEnumerator();
+        }
+
+        /// <summary>
+        ///     Add a results list to the results set
+        /// </summary>
+        /// <param name="list"></param>
+        public void Add(List<object> list)
+        {
+            thelist.Add(list);
+        }
+
+        /// <summary>
+        ///     Return the result set that contains a particular type and does a cast to that type.
         /// </summary>
         /// <typeparam name="T">Type that was listed in StoredProc object as a possible return type for the stored procedure</typeparam>
         /// <returns>List of T; if no results match, returns an empty list</returns>
@@ -66,7 +67,7 @@ namespace Highway.Data
             foreach (List<object> list in thelist.Where(p => p.Count > 0).Select(p => p))
             {
                 // compare types of the first element - this is why we filter for non-empty results
-                if (typeof(T) == list[0].GetType())
+                if (typeof (T) == list[0].GetType())
                 {
                     // do cast to return type
                     return list.Cast<T>().Select(p => p).ToList();
@@ -78,7 +79,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Return the result set that contains a particular type and does a cast to that type.
+        ///     Return the result set that contains a particular type and does a cast to that type.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns>Array of T; if no results match, returns an empty array</returns>
@@ -88,7 +89,7 @@ namespace Highway.Data
             foreach (List<object> list in thelist.Where(p => p.Count > 0).Select(p => p))
             {
                 // compare types of the first element - this is why we filter for non-empty results
-                if (typeof(T) == list[0].GetType())
+                if (typeof (T) == list[0].GetType())
                 {
                     // do cast to return type
                     return list.Cast<T>().Select(p => p).ToArray();
@@ -101,13 +102,19 @@ namespace Highway.Data
     }
 
     /// <summary>
-    /// Genericized version of StoredProc object, takes a .Net POCO object type for the parameters. 
+    ///     Genericized version of StoredProc object, takes a .Net POCO object type for the parameters.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class StoredProc<T> : StoredProc
     {
         /// <summary>
-        /// Constructor. Note that the return type objects must have a default constructor!
+        ///     Contains a mapping of property names to parameter names. We do this since this mapping is complex;
+        ///     i.e. the default parameter name may be overridden by the Name attribute
+        /// </summary>
+        internal Dictionary<String, String> MappedParams = new Dictionary<string, string>();
+
+        /// <summary>
+        ///     Constructor. Note that the return type objects must have a default constructor!
         /// </summary>
         /// <param name="types">Types returned by the stored procedure. Order is important!</param>
         public StoredProc(params Type[] types)
@@ -116,15 +123,15 @@ namespace Highway.Data
             schema = "dbo";
 
             // allow override by attribute
-            var schema_attr = typeof(T).GetAttribute<StoredProcedureAttributes.Schema>();
+            var schema_attr = typeof (T).GetAttribute<StoredProcedureAttributes.Schema>();
             if (null != schema_attr)
                 schema = schema_attr.Value;
 
             // set default proc name
-            procname = typeof(T).Name;
+            procname = typeof (T).Name;
 
             // allow override by attribute
-            var procname_attr = typeof(T).GetAttribute<StoredProcedureAttributes.Name>();
+            var procname_attr = typeof (T).GetAttribute<StoredProcedureAttributes.Name>();
             if (null != procname_attr)
                 procname = procname_attr.Value;
 
@@ -132,20 +139,14 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Contains a mapping of property names to parameter names. We do this since this mapping is complex; 
-        /// i.e. the default parameter name may be overridden by the Name attribute
-        /// </summary>
-        internal Dictionary<String, String> MappedParams = new Dictionary<string, string>();
-
-        /// <summary>
-        /// Store output parameter values back into the data object
+        ///     Store output parameter values back into the data object
         /// </summary>
         /// <param name="parms">List of parameters</param>
         /// <param name="data">Source data object</param>
         internal void ProcessOutputParms(IEnumerable<SqlParameter> parms, T data)
         {
             // get the list of properties for this type
-            PropertyInfo[] props = typeof(T).GetMappedProperties();
+            PropertyInfo[] props = typeof (T).GetMappedProperties();
 
             // we want to write data back to properties for every non-input only parameter
             foreach (SqlParameter parm in parms
@@ -162,7 +163,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Convert parameters from type T properties to SqlParameters
+        ///     Convert parameters from type T properties to SqlParameters
         /// </summary>
         /// <param name="data">Source data object</param>
         /// <returns></returns>
@@ -176,14 +177,14 @@ namespace Highway.Data
 
             // properties that we're converting to parameters are everything without
             // a NotMapped attribute
-            foreach (PropertyInfo p in typeof(T).GetMappedProperties())
+            foreach (PropertyInfo p in typeof (T).GetMappedProperties())
             {
                 //---------------------------------------------------------------------------------
                 // process attributes
                 //---------------------------------------------------------------------------------
 
                 // create parameter and store default name - property name
-                SqlParameter holder = new SqlParameter()
+                SqlParameter holder = new SqlParameter
                 {
                     ParameterName = p.Name
                 };
@@ -257,7 +258,7 @@ namespace Highway.Data
                     holder.TypeName += (null != tvpname) ? tvpname.Value : p.Name;
 
                     // generate table valued parameter
-                    holder.Value = StoredProcedureHelpers.TableValuedParameter((IList)value);
+                    holder.Value = StoredProcedureHelpers.TableValuedParameter((IList) value);
                 }
                 else
                 {
@@ -277,7 +278,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Fluent API - assign owner (schema)
+        ///     Fluent API - assign owner (schema)
         /// </summary>
         /// <param name="owner"></param>
         /// <returns></returns>
@@ -288,7 +289,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Fluent API - assign procedure name
+        ///     Fluent API - assign procedure name
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
@@ -299,8 +300,8 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Fluent API - set the data types of resultsets returned by the stored procedure. 
-        /// Order is important! Note that the return type objects must have a default constructor!
+        ///     Fluent API - set the data types of resultsets returned by the stored procedure.
+        ///     Order is important! Note that the return type objects must have a default constructor!
         /// </summary>
         /// <param name="types"></param>
         /// <returns></returns>
@@ -312,66 +313,20 @@ namespace Highway.Data
     }
 
     /// <summary>
-    /// Represents a Stored Procedure in the database. Note that the return type objects
-    /// must have a default constructor!
+    ///     Represents a Stored Procedure in the database. Note that the return type objects
+    ///     must have a default constructor!
     /// </summary>
     public class StoredProc
     {
         /// <summary>
-        /// Database owner of this object
+        ///     List of data types that this stored procedure returns as result sets.
+        ///     Order is important!
         /// </summary>
-        public String schema { get; set; }
+        internal List<Type> outputtypes = new List<Type>();
 
         /// <summary>
-        /// Name of the stored procedure
-        /// </summary>
-        public String procname { get; set; }
-
-        /// <summary>
-        /// Fluent API - assign owner (schema)
-        /// </summary>
-        /// <param name="owner"></param>
-        /// <returns></returns>
-        public StoredProc HasOwner(String owner)
-        {
-            schema = owner;
-            return this;
-        }
-
-        /// <summary>
-        /// Fluent API - assign procedure name
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        public StoredProc HasName(String name)
-        {
-            procname = name;
-            return this;
-        }
-
-        /// <summary>
-        /// Fluent API - set the data types of resultsets returned by the stored procedure. 
-        /// Order is important! Note that the return type objects must have a default constructor!
-        /// </summary>
-        /// <param name="types"></param>
-        /// <returns></returns>
-        public StoredProc ReturnsTypes(params Type[] types)
-        {
-            outputtypes.AddRange(types);
-            return this;
-        }
-
-        /// <summary>
-        /// Get the fully (schema plus owner) name of the stored procedure
-        /// </summary>
-        internal String fullname
-        {
-            get { return schema + "." + procname; }
-        }
-
-        /// <summary>
-        /// Constructors. Note that the return type objects
-        /// must have a default constructor!
+        ///     Constructors. Note that the return type objects
+        ///     must have a default constructor!
         /// </summary>
         public StoredProc()
         {
@@ -399,17 +354,63 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// List of data types that this stored procedure returns as result sets. 
-        /// Order is important!
+        ///     Database owner of this object
         /// </summary>
-        internal List<Type> outputtypes = new List<Type>();
+        public String schema { get; set; }
 
         /// <summary>
-        /// Get an array of types returned
+        ///     Name of the stored procedure
+        /// </summary>
+        public String procname { get; set; }
+
+        /// <summary>
+        ///     Get the fully (schema plus owner) name of the stored procedure
+        /// </summary>
+        internal String fullname
+        {
+            get { return schema + "." + procname; }
+        }
+
+        /// <summary>
+        ///     Get an array of types returned
         /// </summary>
         internal Type[] returntypes
         {
             get { return outputtypes.ToArray(); }
+        }
+
+        /// <summary>
+        ///     Fluent API - assign owner (schema)
+        /// </summary>
+        /// <param name="owner"></param>
+        /// <returns></returns>
+        public StoredProc HasOwner(String owner)
+        {
+            schema = owner;
+            return this;
+        }
+
+        /// <summary>
+        ///     Fluent API - assign procedure name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public StoredProc HasName(String name)
+        {
+            procname = name;
+            return this;
+        }
+
+        /// <summary>
+        ///     Fluent API - set the data types of resultsets returned by the stored procedure.
+        ///     Order is important! Note that the return type objects must have a default constructor!
+        /// </summary>
+        /// <param name="types"></param>
+        /// <returns></returns>
+        public StoredProc ReturnsTypes(params Type[] types)
+        {
+            outputtypes.AddRange(types);
+            return this;
         }
     }
 }

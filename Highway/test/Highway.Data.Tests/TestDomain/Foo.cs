@@ -1,14 +1,14 @@
+#region
+
 using System;
 using System.Collections.Generic;
-using Highway.Data;
+
+#endregion
 
 namespace Highway.Data.Tests.TestDomain
 {
     public class Foo : IIdentifiable<int>
     {
-        [StoredProcedureAttributes.Name("testID")]
-        public virtual int Id { get; set; }
-
         [StoredProcedureAttributes.Name("testName")]
         public virtual string Name { get; set; }
 
@@ -19,6 +19,8 @@ namespace Highway.Data.Tests.TestDomain
 
         public ICollection<Bar> Bars { get; set; }
 
+        [StoredProcedureAttributes.Name("testID")]
+        public virtual int Id { get; set; }
 
 
         public object Test()

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using System.Linq;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
@@ -10,12 +12,13 @@ using Highway.Data.EntityFramework.Tests.Mapping;
 using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.EntityFramework.Tests.TestQueries;
 using Highway.Data.EntityFramework.Tests.UnitTests;
-using Highway.Data.EventManagement;
 using Highway.Data.Tests.TestDomain;
 using Highway.Test.MSTest;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
+
+#endregion
 
 namespace Highway.Data.EntityFramework.Tests.Queries
 {
@@ -31,10 +34,10 @@ namespace Highway.Data.EntityFramework.Tests.Queries
             ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(container));
             container.Kernel.Resolver.AddSubResolver(new ArrayResolver(container.Kernel));
             container.Register(Component.For<IDataContext>().ImplementedBy<TestDataContext>().DependsOn(
-                                   new {connectionString = Settings.Default.Connection}).LifestyleTransient(),
-                               Component.For<IMappingConfiguration>().ImplementedBy<FooMappingConfiguration>().
-                                   LifestyleTransient(),
-                               Component.For<ILog>().ImplementedBy<NoOpLogger>());
+                new {connectionString = Settings.Default.Connection}).LifestyleTransient(),
+                Component.For<IMappingConfiguration>().ImplementedBy<FooMappingConfiguration>().
+                    LifestyleTransient(),
+                Component.For<ILog>().ImplementedBy<NoOpLogger>());
         }
 
         [TestMethod]
@@ -73,16 +76,16 @@ namespace Highway.Data.EntityFramework.Tests.Queries
         public void When_Paging_Should_Affect_The_Base_Query_Before_It_Is_Executed()
         {
             //Arrange
-            var targetFoo = new Foo(){Name = "Test"};
+            var targetFoo = new Foo {Name = "Test"};
             var context = MockRepository.GenerateStrictMock<IDataContext>();
             context.Expect(x => x.AsQueryable<Foo>()).Return(new List<Foo>
-                {
-                    new Foo(),
-                    new Foo(),
-                    new Foo(),
-                    new Foo(),
-                    targetFoo
-                }.AsQueryable()).Repeat.Once();
+            {
+                new Foo(),
+                new Foo(),
+                new Foo(),
+                new Foo(),
+                targetFoo
+            }.AsQueryable()).Repeat.Once();
             var query = new FindFooName();
 
             //Act
@@ -102,10 +105,10 @@ namespace Highway.Data.EntityFramework.Tests.Queries
             var context = container.Resolve<IDataContext>();
 
             //act
-            string sqlOutput = target.OutputSQLStatement(context); 
+            string sqlOutput = target.OutputSQLStatement(context);
 
             //assert
-            
+
             sqlOutput.ShouldNotBeNull();
             sqlOutput.ShouldContain("from");
         }

@@ -1,7 +1,11 @@
-﻿using System.Data.Entity;
+﻿#region
+
+using System.Data.Entity;
 using System.Linq;
 using Highway.Data.EntityFramework.Tests.TestContexts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+#endregion
 
 namespace Highway.Data.EntityFramework.Tests.Contexts
 {
@@ -13,12 +17,12 @@ namespace Highway.Data.EntityFramework.Tests.Contexts
         {
             //Arrange
             Database.SetInitializer(new DropCreateInitializer<DataContext>(c =>
+            {
+                for (int i = 0; i < 5; i++)
                 {
-                    for (int i = 0; i < 5; i++)
-                    {
-                        c.Add(new Member());
-                    }
-                }));
+                    c.Add(new Member());
+                }
+            }));
             var context = new DataContext("name=TDDAirEntities");
 
             //Act

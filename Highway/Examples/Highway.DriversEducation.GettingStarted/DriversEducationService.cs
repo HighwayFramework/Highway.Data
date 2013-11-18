@@ -1,11 +1,10 @@
-﻿using System;
+﻿#region
+
 using System.Collections.Generic;
-using System.Data.Common;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Highway.Data;
+
+#endregion
 
 namespace Highway.DriversEducation.GettingStarted
 {
@@ -20,7 +19,7 @@ namespace Highway.DriversEducation.GettingStarted
 
         public void AddDriver(string name)
         {
-            _repository.Context.Add(new Driver(){LastName = name});
+            _repository.Context.Add(new Driver {LastName = name});
         }
 
         public Driver GetDriver(string name)
@@ -40,15 +39,14 @@ namespace Highway.DriversEducation.GettingStarted
         {
             ContextQuery = context =>
             {
-                foreach(var driver in currentInstructor.Drivers)
-	    		{
-	    			driver.Instructor = newInstructor;
-	    		}
-	    		return context.Commit();
+                foreach (var driver in currentInstructor.Drivers)
+                {
+                    driver.Instructor = newInstructor;
+                }
+                return context.Commit();
             };
         }
     }
-
 
 
     public class RemoveDrivers : Command
@@ -57,7 +55,7 @@ namespace Highway.DriversEducation.GettingStarted
         {
             ContextQuery = c =>
             {
-                foreach (var driver in c.AsQueryable<Driver>().Where(x=>x.LastName == name))
+                foreach (var driver in c.AsQueryable<Driver>().Where(x => x.LastName == name))
                 {
                     c.Remove(driver);
                 }
@@ -86,8 +84,8 @@ namespace Highway.DriversEducation.GettingStarted
     {
         public Driver()
         {
-            
         }
+
         public Driver(string firstName, string lastName)
         {
             FirstName = firstName;
@@ -106,5 +104,4 @@ namespace Highway.DriversEducation.GettingStarted
         public int Id { get; set; }
         public ICollection<Driver> Drivers { get; set; }
     }
-
 }

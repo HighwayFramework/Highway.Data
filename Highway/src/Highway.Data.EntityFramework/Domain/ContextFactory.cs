@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Linq;
+
+#endregion
 
 namespace Highway.Data.Domain
 {
@@ -21,10 +25,10 @@ namespace Highway.Data.Domain
         public IDataContext Create(Type type)
         {
             var domain = _domains.FirstOrDefault(x => x.GetType() == type);
-            var d1 = typeof(DomainContext<>);
-            Type[] typeArgs = { type };
+            var d1 = typeof (DomainContext<>);
+            Type[] typeArgs = {type};
             var makeme = d1.MakeGenericType(typeArgs);
-            object o = Activator.CreateInstance(makeme,domain);
+            object o = Activator.CreateInstance(makeme, domain);
             return (IDataContext) o;
         }
     }
@@ -36,7 +40,5 @@ namespace Highway.Data.Domain
         IMappingConfiguration Mappings { get; set; }
 
         IContextConfiguration Context { get; set; }
-
-
     }
 }

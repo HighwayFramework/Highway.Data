@@ -1,9 +1,13 @@
-﻿using System.Linq;
+﻿#region
+
+using System.Linq;
 using FluentAssertions;
 using Highway.Data.Contexts;
 using Highway.Data.Tests.InMemory.Domain;
 using Highway.Data.Tests.InMemory.ScenarioTests.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+#endregion
 
 namespace Highway.Data.Tests.InMemory.ScenarioTests
 {
@@ -23,24 +27,23 @@ namespace Highway.Data.Tests.InMemory.ScenarioTests
         {
             //Arrange
 
-            var author = new Author()
+            var author = new Author
             {
                 FirstName = "Devlin",
                 LastName = "Liles",
                 Email = "devlin@devlinliles.com",
                 TwitterHandle = "@DevlinLiles"
             };
-           
-            
+
+
             //Act - Scenario
             var blogService = new TestBlogService(repo);
-            blogService.StartBlog("Testing",author);
+            blogService.StartBlog("Testing", author);
 
-            blogService.Post("Testing", new Post()
+            blogService.Post("Testing", new Post
             {
                 Title = "Test One",
                 Body = "This is a body paragraph"
-
             });
 
             //Assert

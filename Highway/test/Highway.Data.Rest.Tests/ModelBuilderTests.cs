@@ -1,7 +1,12 @@
-﻿using FluentAssertions;
+﻿#region
+
+using System;
+using FluentAssertions;
 using Highway.Data.Rest.Configuration.Conventions;
 using Highway.Data.Rest.Contexts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+#endregion
 
 namespace Highway.Data.Rest.Tests
 {
@@ -13,12 +18,12 @@ namespace Highway.Data.Rest.Tests
         {
             //arrange
             var target = new ModelBuilder(new DefaultConvention());
-            
+
             //act
             var result = target.Compile();
 
             //assert
-            Assert.AreEqual(0,result.Count);
+            Assert.AreEqual(0, result.Count);
         }
 
         [TestMethod]
@@ -33,7 +38,7 @@ namespace Highway.Data.Rest.Tests
 
             //assert
             result.Count.Should().Be(1);
-            result.ContainsKey(typeof(Foo)).Should().BeTrue();
+            result.ContainsKey(typeof (Foo)).Should().BeTrue();
             result[typeof (Foo)].AllUri.Should().Be("foos");
         }
 
@@ -52,15 +57,14 @@ namespace Highway.Data.Rest.Tests
 
             //assert
             result.Count.Should().Be(4);
-            result.ContainsKey(typeof(Foo)).Should().BeTrue();
-            result[typeof(Foo)].AllUri.Should().Be("foos");
-            result.ContainsKey(typeof(Bar)).Should().BeTrue();
-            result[typeof(Bar)].AllUri.Should().Be("bars");
-            result.ContainsKey(typeof(Baz)).Should().BeTrue();
-            result[typeof(Baz)].AllUri.Should().Be("bazzes");
-            result.ContainsKey(typeof(Qux)).Should().BeTrue();
-            result[typeof(Qux)].AllUri.Should().Be("quxes");
-
+            result.ContainsKey(typeof (Foo)).Should().BeTrue();
+            result[typeof (Foo)].AllUri.Should().Be("foos");
+            result.ContainsKey(typeof (Bar)).Should().BeTrue();
+            result[typeof (Bar)].AllUri.Should().Be("bars");
+            result.ContainsKey(typeof (Baz)).Should().BeTrue();
+            result[typeof (Baz)].AllUri.Should().Be("bazzes");
+            result.ContainsKey(typeof (Qux)).Should().BeTrue();
+            result[typeof (Qux)].AllUri.Should().Be("quxes");
         }
     }
 
@@ -70,7 +74,7 @@ namespace Highway.Data.Rest.Tests
 
         public int Test()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 

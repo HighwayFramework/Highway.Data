@@ -1,4 +1,8 @@
-﻿using System.Web.Helpers;
+﻿#region
+
+using System.Web.Helpers;
+
+#endregion
 
 namespace Highway.Data.Rest.Extensions
 {

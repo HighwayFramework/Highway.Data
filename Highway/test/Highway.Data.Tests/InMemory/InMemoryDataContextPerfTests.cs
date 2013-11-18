@@ -1,10 +1,14 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using FluentAssertions;
 using Highway.Data.Contexts;
 using Highway.Data.Tests.InMemory.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+#endregion
 
 namespace Highway.Data.Tests.InMemory
 {
@@ -25,18 +29,18 @@ namespace Highway.Data.Tests.InMemory
             Stopwatch sw = Stopwatch.StartNew();
             for (int i = 0; i < 100; i++)
             {
-                _context.Add(new Site()
+                _context.Add(new Site
                 {
-                    Blog = new Blog()
+                    Blog = new Blog
                     {
                         Author = new Author(),
                         Id = Guid.NewGuid(),
-                        Posts = new List<Post>() { new Post(), new Post() }
+                        Posts = new List<Post> {new Post(), new Post()}
                     }
                 });
             }
             sw.Stop();
-            var averageInsert = sw.ElapsedMilliseconds / 1000;
+            var averageInsert = sw.ElapsedMilliseconds/1000;
             averageInsert.Should().BeLessOrEqualTo(10);
             Console.WriteLine("Average Time for insert of graph is {0}", averageInsert);
         }
@@ -54,7 +58,7 @@ namespace Highway.Data.Tests.InMemory
                 _context.Commit();
             }
             sw.Stop();
-            var averageInsert = sw.ElapsedMilliseconds / 1000;
+            var averageInsert = sw.ElapsedMilliseconds/1000;
             averageInsert.Should().BeLessOrEqualTo(10);
             Console.WriteLine("Average Time for insert of graph is {0}", averageInsert);
         }

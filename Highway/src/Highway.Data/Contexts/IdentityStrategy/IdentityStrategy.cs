@@ -1,24 +1,29 @@
+#region
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using System.Threading;
+
+#endregion
 
 namespace Highway.Data.Contexts
 {
     public abstract class IdentityStrategy<TType, TIdentity> : IIdentityStrategy<TType>
-            where TType : class
+        where TType : class
     {
         public static TIdentity LastValue = default(TIdentity);
         public static Func<TIdentity> Generator = null;
 
-        private readonly Action<TType> identitySetter = null;
+        private readonly Action<TType> identitySetter;
 
         public IdentityStrategy(Expression<Func<TType, TIdentity>> property)
         {
-            identitySetter = obj => GetPropertyFromExpression(property).SetValue(obj, this.Next(), null);
+            identitySetter = obj => GetPropertyFromExpression(property).SetValue(obj, Next(), null);
+        }
+
+        public void Assign(TType entity)
+        {
+            identitySetter.Invoke(entity);
         }
 
         public TIdentity Next()
@@ -27,12 +32,7 @@ namespace Highway.Data.Contexts
             return Generator.Invoke();
         }
 
-        public void Assign(TType entity)
-        {
-            identitySetter.Invoke(entity);
-        }
-
-        private PropertyInfo GetPropertyFromExpression(Expression<Func<TType,TIdentity>> lambda)
+        private PropertyInfo GetPropertyFromExpression(Expression<Func<TType, TIdentity>> lambda)
         {
             MemberExpression Exp = null;
             Expression Sub;
@@ -41,24 +41,24 @@ namespace Highway.Data.Contexts
             // comes as Convert(originalexpression)
             if (lambda.Body is UnaryExpression)
             {
-                UnaryExpression UnExp = (UnaryExpression)lambda.Body;
+                UnaryExpression UnExp = (UnaryExpression) lambda.Body;
                 if (UnExp.Operand is MemberExpression)
                 {
-                    Exp = (MemberExpression)UnExp.Operand;
+                    Exp = (MemberExpression) UnExp.Operand;
                 }
                 else
                     throw new ArgumentException();
             }
             else if (lambda.Body is MemberExpression)
             {
-                Exp = (MemberExpression)lambda.Body;
+                Exp = (MemberExpression) lambda.Body;
             }
             else
             {
                 throw new ArgumentException();
             }
 
-            return (PropertyInfo)Exp.Member;
+            return (PropertyInfo) Exp.Member;
         }
     }
 }

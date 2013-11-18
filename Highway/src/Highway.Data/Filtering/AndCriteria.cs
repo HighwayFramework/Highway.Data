@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
+
+#endregion
 
 namespace Highway.Data.Filtering
 {
@@ -21,7 +25,7 @@ namespace Highway.Data.Filtering
 
         public override object[] GetFilterArguments()
         {
-            var args = new  List<object>();
+            var args = new List<object>();
             args.AddRange(_leftCriteria.GetFilterArguments());
             args.AddRange(_rightCriteria.GetFilterArguments());
             return args.ToArray();

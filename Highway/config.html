@@ -1,27 +1,27 @@
 ﻿<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <meta charset="utf-8" />
-    <title>Service Station</title>
-    <script type="text/javascript">
-        $().ready(function () {
-            $("div").hide();
-            $("select").change(function () {
-                var selector = "div.";
-                selector += $('#IoC').find(":selected").first().val();
-                selector += "." + $('#Data').find(":selected").first().val();
-                selector += "." + $('#Platform').find(":selected").first().val();
+    <head>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"> </script>
+        <meta charset="utf-8" />
+        <title>Service Station</title>
+        <script type="text/javascript">
+            $().ready(function() {
                 $("div").hide();
-                $(selector).show();
-            }).change();                  
-        });
-    </script>
-</head>
-<body>
-    <h1>Service Center</h1>
-    <pre>
+                $("select").change(function() {
+                    var selector = "div.";
+                    selector += $('#IoC').find(":selected").first().val();
+                    selector += "." + $('#Data').find(":selected").first().val();
+                    selector += "." + $('#Platform').find(":selected").first().val();
+                    $("div").hide();
+                    $(selector).show();
+                }).change();
+            });
+        </script>
+    </head>
+    <body>
+        <h1>Service Center</h1>
+        <pre>
         This is the service center for configuring Highway.Data and your choice of IoC. If you would like to customize 
         the code below please feel free to do so. This is meant to give you a place to start. Select your prefered storage 
         method, inversion of control container, and platform. We will send this off to the code monkeys in the shop and 
@@ -29,22 +29,22 @@
         you can register yourself *configure all the stuff*, but we provide this service free of charge. Try getting that at 
         your local service center! Take care, and code safely.
     </pre>
-    <select id="Data">
-        <option value="EF" selected="selected">Entity Framework</option>
-        <option value="NHibernate">NHibernate</option>
-        <option value="raven">RavenDB</option>
-    </select>
-    <select id="IoC">
-        <option value="Castle" selected="selected">Castle</option>
-        <option value="StructureMap">StructureMap</option>
-        <option value="Unity">Unity</option>
-        <option value="Ninject">Ninject</option>
-    </select>
-    <select id="Platform">
-        <option value="Web" selected="selected">Web</option>
-    </select>
-    <div class="EF Castle Web" style="display:none">
-        <pre>
+        <select id="Data">
+            <option value="EF" selected="selected">Entity Framework</option>
+            <option value="NHibernate">NHibernate</option>
+            <option value="raven">RavenDB</option>
+        </select>
+        <select id="IoC">
+            <option value="Castle" selected="selected">Castle</option>
+            <option value="StructureMap">StructureMap</option>
+            <option value="Unity">Unity</option>
+            <option value="Ninject">Ninject</option>
+        </select>
+        <select id="Platform">
+            <option value="Web" selected="selected">Web</option>
+        </select>
+        <div class="EF Castle Web" style="display: none">
+            <pre>
 using System;
 using System;
 using System.Linq;
@@ -96,9 +96,9 @@ namespace Highway.Data.GettingStarted.IoC.UI
     }
 }
         </pre>
-    </div>
-    <div class="EF Unity Web" style="display:none">
-        <pre>
+        </div>
+        <div class="EF Unity Web" style="display: none">
+            <pre>
 using System;
 using System.Linq;
 using System.Web.Mvc;
@@ -140,9 +140,9 @@ namespace Highway.Data.GettingStarted.IoC.UI
     }
 }
         </pre>
-    </div>
-    <div class="EF StructureMap Web" style="display:none">
-        <pre>
+        </div>
+        <div class="EF StructureMap Web" style="display: none">
+            <pre>
 using System;
 using System;
 using System.Linq;
@@ -188,9 +188,9 @@ namespace Highway.Data.GettingStarted.IoC.UI
     }
 }
         </pre>
-    </div>
-    <div class="EF Ninject Web" style="display:none">
-        <pre>
+        </div>
+        <div class="EF Ninject Web" style="display: none">
+            <pre>
 using System;
 using System.Linq;
 using System.Web.Mvc;
@@ -236,42 +236,42 @@ namespace Highway.Data.GettingStarted.IoC.UI
     }
 }
         </pre>
-    </div>
-    <div class="NHibernate Castle Web">
-        <pre>Not Added Yet</pre>
-    </div>
-    <div class="NHibernate StructureMap Web">
-        <pre>Not Added Yet</pre>
-    </div>
-    <div class="NHibernate Unity Web">
-        <pre>Not Added Yet</pre>
-    </div>
-    <div class="NHibernate Ninject Web">
-        <pre>Not Added Yet</pre>
-    </div>
-    <div class="raven Castle Web">
-        <pre>Not Added Yet</pre>
-    </div>
-    <div class="raven StructureMap Web">
-        <pre>Not Added Yet</pre>
-    </div>
-    <div class="raven Unity Web">
-        <pre>Not Added Yet</pre>
-    </div>
-    <div class="raven Ninject Web">
-        <pre>Not Added Yet</pre>
-    </div>
-    <div class="mongo Castle Web">
-        <pre>Not Added Yet</pre>
-    </div>
-    <div class="mongo StructureMap Web">
-        <pre>Not Added Yet</pre>
-    </div>
-    <div class="mongo Unity Web">
-        <pre>Not Added Yet</pre>
-    </div>
-    <div class="mongo Ninject Web">
-        <pre>Not Added Yet</pre>
-    </div>
-</body>
+        </div>
+        <div class="NHibernate Castle Web">
+            <pre>Not Added Yet</pre>
+        </div>
+        <div class="NHibernate StructureMap Web">
+            <pre>Not Added Yet</pre>
+        </div>
+        <div class="NHibernate Unity Web">
+            <pre>Not Added Yet</pre>
+        </div>
+        <div class="NHibernate Ninject Web">
+            <pre>Not Added Yet</pre>
+        </div>
+        <div class="raven Castle Web">
+            <pre>Not Added Yet</pre>
+        </div>
+        <div class="raven StructureMap Web">
+            <pre>Not Added Yet</pre>
+        </div>
+        <div class="raven Unity Web">
+            <pre>Not Added Yet</pre>
+        </div>
+        <div class="raven Ninject Web">
+            <pre>Not Added Yet</pre>
+        </div>
+        <div class="mongo Castle Web">
+            <pre>Not Added Yet</pre>
+        </div>
+        <div class="mongo StructureMap Web">
+            <pre>Not Added Yet</pre>
+        </div>
+        <div class="mongo Unity Web">
+            <pre>Not Added Yet</pre>
+        </div>
+        <div class="mongo Ninject Web">
+            <pre>Not Added Yet</pre>
+        </div>
+    </body>
 </html>

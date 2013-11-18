@@ -86,7 +86,6 @@
     <Compile Include="Configuration\IAggregateConfiguration.cs" />
     <Compile Include="Contexts\DataContext.cs" />
     <Compile Include="Contexts\DomainContext.cs" />
-    <Compile Include="Contexts\IDomainContext.cs" />
     <Compile Include="Database\DropCreateInitializer.cs" />
     <Compile Include="Domain\ContextFactory.cs" />
     <Compile Include="Domain\IContextFactory.cs" />

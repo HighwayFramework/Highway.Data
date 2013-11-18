@@ -1,7 +1,11 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using Highway.Data.Rest.Configuration.Conventions;
 using Highway.Data.Rest.Configuration.Entities;
 using Highway.Data.Rest.Configuration.Interfaces;
+
+#endregion
 
 namespace Highway.Data.Rest.Contexts
 {
@@ -10,7 +14,10 @@ namespace Highway.Data.Rest.Contexts
         private readonly IRestConvention _convention;
         private readonly List<IRestTypeDefinition> _types;
 
-        public ModelBuilder() : this(new DefaultConvention()) { }
+        public ModelBuilder() : this(new DefaultConvention())
+        {
+        }
+
         public ModelBuilder(IRestConvention convention)
         {
             _types = new List<IRestTypeDefinition>();
@@ -29,7 +36,7 @@ namespace Highway.Data.Rest.Contexts
 
         public RestTypeConfiguration<T> Entity<T>()
         {
-            var typeConfig =  new RestTypeConfiguration<T>(_convention);
+            var typeConfig = new RestTypeConfiguration<T>(_convention);
             _types.Add(typeConfig);
             return typeConfig;
         }

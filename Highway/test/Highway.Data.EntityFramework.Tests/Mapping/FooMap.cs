@@ -1,5 +1,9 @@
-﻿using System.Data.Entity.ModelConfiguration;
+﻿#region
+
+using System.Data.Entity.ModelConfiguration;
 using Highway.Data.Tests.TestDomain;
+
+#endregion
 
 namespace Highway.Data.EntityFramework.Tests.Mapping
 {

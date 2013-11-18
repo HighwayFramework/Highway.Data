@@ -1,8 +1,12 @@
-﻿using Highway.Data.Domain;
+﻿#region
+
+using Highway.Data.Domain;
 using Highway.Data.Factories;
 using Highway.Test.MSTest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
+
+#endregion
 
 namespace Highway.Data.EntityFramework.Tests.Factories
 {
@@ -31,7 +35,7 @@ namespace Highway.Data.EntityFramework.Tests.Factories
             IRepositoryFactory factory = new RepositoryFactory(contextFactory);
 
             // act
-            IRepository repo = factory.Create(typeof(FooDomain));
+            IRepository repo = factory.Create(typeof (FooDomain));
 
             // assert
             repo.ShouldNotBeNull();

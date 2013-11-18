@@ -1,4 +1,8 @@
-﻿using NHibernate;
+﻿#region
+
+using NHibernate;
+
+#endregion
 
 namespace Highway.Data.NHibernate
 {

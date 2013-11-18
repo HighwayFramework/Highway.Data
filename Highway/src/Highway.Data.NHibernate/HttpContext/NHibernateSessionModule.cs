@@ -1,15 +1,18 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Web;
 using Common.Logging;
 using NHibernate;
-using NHibernate.Cfg;
+
+#endregion
 
 namespace Highway.Data.NHibernate
 {
     public class NHibernateSessionModule : IHttpModule
     {
-        private readonly ISessionBuilder _sessionBuilder;
         private readonly ILog _logger;
+        private readonly ISessionBuilder _sessionBuilder;
 
         public NHibernateSessionModule(ISessionBuilder sessionBuilder, ILog logger)
         {
@@ -34,6 +37,6 @@ namespace Highway.Data.NHibernate
                 _logger.Debug("Disposing of ISession " + session.GetHashCode());
                 session.Dispose();
             }
-        } 
+        }
     }
 }

@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using Highway.Data.Domain;
+
+#endregion
 
 namespace Highway.Data.Factories
 {

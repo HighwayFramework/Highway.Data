@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+﻿#region
+
+using System;
 using System.Linq.Expressions;
+using System.Threading;
+
+#endregion
 
 namespace Highway.Data.Contexts
 {

@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+#endregion
 
 namespace Highway.Test.MSTest
 {
@@ -12,8 +16,8 @@ namespace Highway.Test.MSTest
         public static void ShouldBeOfType<T>(this object item)
         {
             Assert.IsInstanceOfType(item, typeof (T),
-                                    string.Format("Object of Type {0} was not the expected Type of {1}",
-                                                  item.GetType().Name, typeof (T).Name));
+                string.Format("Object of Type {0} was not the expected Type of {1}",
+                    item.GetType().Name, typeof (T).Name));
         }
     }
 }

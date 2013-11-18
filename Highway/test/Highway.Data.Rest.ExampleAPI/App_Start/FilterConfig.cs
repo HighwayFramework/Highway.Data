@@ -1,5 +1,8 @@
-﻿using System.Web;
+﻿#region
+
 using System.Web.Mvc;
+
+#endregion
 
 namespace Highway.Data.Rest.ExampleAPI
 {

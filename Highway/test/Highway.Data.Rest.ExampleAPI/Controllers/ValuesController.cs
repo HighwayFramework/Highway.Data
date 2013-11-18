@@ -1,10 +1,10 @@
-﻿using System;
+﻿#region
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using Highway.Data.Tests.TestDomain;
+
+#endregion
 
 namespace Highway.Data.Rest.ExampleAPI.Controllers
 {
@@ -13,7 +13,7 @@ namespace Highway.Data.Rest.ExampleAPI.Controllers
         // GET api/values
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new[] {"value1", "value2"};
         }
 
         // GET api/values/5
@@ -23,12 +23,12 @@ namespace Highway.Data.Rest.ExampleAPI.Controllers
         }
 
         // POST api/values
-        public void Post([FromBody]string value)
+        public void Post([FromBody] string value)
         {
         }
 
         // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody] string value)
         {
         }
 
@@ -42,10 +42,10 @@ namespace Highway.Data.Rest.ExampleAPI.Controllers
     {
         public IEnumerable<Foo> Get()
         {
-            return new List<Foo>()
+            return new List<Foo>
             {
-                new Foo(){Address = "Test",Id = 1,Name = "Test"},
-                new Foo(){Address = "Devlin",Id = 1,Name = "Devlin"}
+                new Foo {Address = "Test", Id = 1, Name = "Test"},
+                new Foo {Address = "Devlin", Id = 1, Name = "Devlin"}
             };
         }
     }

@@ -1,6 +1,9 @@
-﻿using System;
-using System.Linq.Expressions;
+﻿#region
+
+using System;
 using System.Reflection;
+
+#endregion
 
 namespace Highway.Data.Rest.Configuration.Interfaces
 {
@@ -9,6 +12,6 @@ namespace Highway.Data.Rest.Configuration.Interfaces
         string SingleUri { get; }
         string AllUri { get; }
         Type ConfiguredType { get; }
-        PropertyInfo KeyProperty { get; } 
+        PropertyInfo KeyProperty { get; }
     }
-}   
+}

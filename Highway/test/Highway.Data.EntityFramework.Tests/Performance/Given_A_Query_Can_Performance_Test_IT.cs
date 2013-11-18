@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -10,6 +12,8 @@ using Highway.Data.EntityFramework.Tests.TestQueries;
 using Highway.Data.EntityFramework.Tests.UnitTests;
 using Highway.Data.Tests.TestDomain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+#endregion
 
 namespace Highway.Data.EntityFramework.Tests.Performance
 {
@@ -23,7 +27,7 @@ namespace Highway.Data.EntityFramework.Tests.Performance
             Database.SetInitializer(new DropCreateDatabaseAlways<TestDataContext>());
             var consoleOutLogger = new ConsoleOutLogger("Performance", LogLevel.All, true, true, true, "");
             var context = new TestDataContext(Settings.Default.Connection, new FooMappingConfiguration(),
-                                              consoleOutLogger);
+                consoleOutLogger);
 
             //Act
             IEnumerable<Foo> result = null;
@@ -49,7 +53,7 @@ namespace Highway.Data.EntityFramework.Tests.Performance
             Database.SetInitializer(new DropCreateDatabaseAlways<TestDataContext>());
             var consoleOutLogger = new ConsoleOutLogger("Performance", LogLevel.All, true, true, true, "");
             var context = new TestDataContext(Settings.Default.Connection, new FooMappingConfiguration(),
-                                              consoleOutLogger);
+                consoleOutLogger);
             List<Foo> nullResult = context.AsQueryable<Foo>().ToList();
 
             //Act
@@ -69,14 +73,14 @@ namespace Highway.Data.EntityFramework.Tests.Performance
             Database.SetInitializer(new DropCreateDatabaseAlways<TestDataContext>());
             var consoleOutLogger = new ConsoleOutLogger("Performance", LogLevel.All, true, true, true, "");
             var context = new TestDataContext(Settings.Default.Connection, new FooMappingConfiguration(),
-                                              consoleOutLogger);
+                consoleOutLogger);
 
             //Act
             IEnumerable<Foo> result = null;
             try
             {
                 var query = new FindFoo();
-                context.RunStartUpPerformanceTest(query, consoleOutLogger, maxAllowableMilliseconds: -1);
+                context.RunStartUpPerformanceTest(query, consoleOutLogger, -1);
             }
             catch (Exception e)
             {

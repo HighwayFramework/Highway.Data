@@ -1,43 +1,45 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Data.Entity;
 using System.Reflection;
 using Highway.Data.Interceptors.Events;
-using Highway.Data;
+
+#endregion
 
 namespace Highway.Data
 {
     /// <summary>
-    /// The base query that allows for appending expressions, query extensions, and eventing
+    ///     The base query that allows for appending expressions, query extensions, and eventing
     /// </summary>
     public abstract class QueryBase : IExtendableQuery, IObservableQuery
     {
         private static readonly ReadOnlyCollection<MethodInfo> QueryableMethods;
 
         /// <summary>
-        /// Holds the expressions to be appended
+        ///     Holds the expressions to be appended
         /// </summary>
         protected List<Tuple<MethodInfo, Expression[]>> ExpressionList = new List<Tuple<MethodInfo, Expression[]>>();
 
         static QueryBase()
         {
             QueryableMethods = new ReadOnlyCollection<MethodInfo>(typeof (Queryable)
-                                                                      .GetMethods(BindingFlags.Public |
-                                                                                  BindingFlags.Static).ToList());
+                .GetMethods(BindingFlags.Public |
+                            BindingFlags.Static).ToList());
         }
 
         /// <summary>
-        /// The reference to the <see cref="IDataContext"/> that gives data connection
+        ///     The reference to the <see cref="IDataContext" /> that gives data connection
         /// </summary>
         protected IDataContext Context { get; set; }
 
         #region IExtendableQuery Members
 
         /// <summary>
-        /// Adds a method to the expression in the query object
+        ///     Adds a method to the expression in the query object
         /// </summary>
         /// <param name="methodName">The name of the method to be added i.e. GroupBy</param>
         /// <param name="generics">Any type parameters needed by the method to be added</param>
@@ -56,19 +58,19 @@ namespace Highway.Data
         #region IObservableQuery Members
 
         /// <summary>
-        /// The event fired just before the query goes to the database
+        ///     The event fired just before the query goes to the database
         /// </summary>
         public event EventHandler<PreQueryEventArgs> PreQuery;
 
         /// <summary>
-        /// The event fire just after the data is translated into objects but before the data is returned.
+        ///     The event fire just after the data is translated into objects but before the data is returned.
         /// </summary>
         public event EventHandler<PostQueryEventArgs> PostQuery;
 
         #endregion
 
         /// <summary>
-        /// Checks the context and the Query for null
+        ///     Checks the context and the Query for null
         /// </summary>
         /// <param name="query">The query to be executed</param>
         protected void CheckContextAndQuery(object query)

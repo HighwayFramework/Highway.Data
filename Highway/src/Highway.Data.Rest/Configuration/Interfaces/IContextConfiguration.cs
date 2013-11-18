@@ -2,6 +2,6 @@
 {
     public interface IContextConfiguration
     {
-        string BaseUri { get; set; } 
+        string BaseUri { get; set; }
     }
 }

@@ -1,4 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
+
+#endregion
+
 namespace Highway.Data.Tests.InMemory.Domain
 {
     public class Author
@@ -7,6 +12,7 @@ namespace Highway.Data.Tests.InMemory.Domain
         {
             Id = Guid.NewGuid();
         }
+
         public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

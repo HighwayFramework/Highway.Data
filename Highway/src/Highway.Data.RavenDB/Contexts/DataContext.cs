@@ -1,17 +1,15 @@
-﻿using System;
-using System.Data;
-using System.Data.Common;
+﻿#region
+
 using System.Linq;
 using Common.Logging;
-using Common.Logging.Simple;
-using Highway.Data.Interceptors.Events;
-using Highway.Data;
 using Raven.Client;
+
+#endregion
 
 namespace Highway.Data
 {
     /// <summary>
-    /// A base implementation of the RavenDB DataContext
+    ///     A base implementation of the RavenDB DataContext
     /// </summary>
     public partial class DataContext : IDataContext
     {
@@ -24,10 +22,12 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// This gives a mockable wrapper around the normal <see cref="DbSet{T}"/> method that allows for testablity
+        ///     This gives a mockable wrapper around the normal <see cref="DbSet{T}" /> method that allows for testablity
         /// </summary>
         /// <typeparam name="T">The Entity being queried</typeparam>
-        /// <returns><see cref="IQueryable{T}"/></returns>
+        /// <returns>
+        ///     <see cref="IQueryable{T}" />
+        /// </returns>
         public IQueryable<T> AsQueryable<T>() where T : class
         {
             _log.DebugFormat("Querying Object {0}", typeof (T).Name);
@@ -37,11 +37,11 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Adds the provided instance of <typeparamref name="T"/> to the data context
+        ///     Adds the provided instance of <typeparamref name="T" /> to the data context
         /// </summary>
         /// <typeparam name="T">The Entity Type being added</typeparam>
-        /// <param name="item">The <typeparamref name="T"/> you want to add</param>
-        /// <returns>The <typeparamref name="T"/> you added</returns>
+        /// <param name="item">The <typeparamref name="T" /> you want to add</param>
+        /// <returns>The <typeparamref name="T" /> you added</returns>
         public T Add<T>(T item) where T : class
         {
             _log.DebugFormat("Adding Object {0}", item);
@@ -51,11 +51,11 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Removes the provided instance of <typeparamref name="T"/> from the data context
+        ///     Removes the provided instance of <typeparamref name="T" /> from the data context
         /// </summary>
         /// <typeparam name="T">The Entity Type being removed</typeparam>
-        /// <param name="item">The <typeparamref name="T"/> you want to remove</param>
-        /// <returns>The <typeparamref name="T"/> you removed</returns>
+        /// <param name="item">The <typeparamref name="T" /> you want to remove</param>
+        /// <returns>The <typeparamref name="T" /> you removed</returns>
         public T Remove<T>(T item) where T : class
         {
             _log.DebugFormat("Removing Object {0}", item);
@@ -65,11 +65,11 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Updates the provided instance of <typeparamref name="T"/> in the data context
+        ///     Updates the provided instance of <typeparamref name="T" /> in the data context
         /// </summary>
         /// <typeparam name="T">The Entity Type being updated</typeparam>
-        /// <param name="item">The <typeparamref name="T"/> you want to update</param>
-        /// <returns>The <typeparamref name="T"/> you updated</returns>
+        /// <param name="item">The <typeparamref name="T" /> you want to update</param>
+        /// <returns>The <typeparamref name="T" /> you updated</returns>
         public T Update<T>(T item) where T : class
         {
             _log.DebugFormat("Updating Object {0}", item);
@@ -79,11 +79,11 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Reloads the provided instance of <typeparamref name="T"/> from the database
+        ///     Reloads the provided instance of <typeparamref name="T" /> from the database
         /// </summary>
         /// <typeparam name="T">The Entity Type being reloaded</typeparam>
-        /// <param name="item">The <typeparamref name="T"/> you want to reload</param>
-        /// <returns>The <typeparamref name="T"/> you reloaded</returns>
+        /// <param name="item">The <typeparamref name="T" /> you want to reload</param>
+        /// <returns>The <typeparamref name="T" /> you reloaded</returns>
         public T Reload<T>(T item) where T : class
         {
             _log.DebugFormat("Reloading Object {0}", item);
@@ -94,7 +94,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Commits all currently tracked entity changes
+        ///     Commits all currently tracked entity changes
         /// </summary>
         /// <returns>the number of rows affected</returns>
         public int Commit()

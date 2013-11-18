@@ -1,15 +1,19 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Raven.Abstractions.Data;
 using Raven.Client;
 using Raven.Client.Document;
 using Raven.Client.Indexes;
 using Raven.Client.Linq;
-using Raven.Abstractions.Data;
+
+#endregion
 
 namespace Highway.Data
 {
-    public partial class DataContext : IDocumentSession 
+    public partial class DataContext : IDocumentSession
     {
         private readonly IDocumentSession _session;
 
@@ -36,11 +40,6 @@ namespace Highway.Data
         public T1 Load<T1>(ValueType id)
         {
             return _session.Load<T1>(id);
-        }
-
-        public IRavenQueryable<T1> Query<T1>(string indexName)
-        {
-            return _session.Query<T1>(indexName);
         }
 
         public IRavenQueryable<T1> Query<T1>()
@@ -75,12 +74,12 @@ namespace Highway.Data
 
         public void Store(object entity, Etag etag)
         {
-            _session.Store(entity,etag);
+            _session.Store(entity, etag);
         }
 
         public void Store(object entity, Etag etag, string id)
         {
-            _session.Store(entity,etag,id);
+            _session.Store(entity, etag, id);
         }
 
         public void Store(dynamic entity)
@@ -90,28 +89,32 @@ namespace Highway.Data
 
         public void Store(dynamic entity, string id)
         {
-            _session.Store(entity,id);
+            _session.Store(entity, id);
         }
 
         public ISyncAdvancedSessionOperation Advanced { get; private set; }
 
 
-        public TResult[] Load<TTransformer, TResult>(IEnumerable<string> ids, Action<ILoadConfiguration> configure) where TTransformer : AbstractTransformerCreationTask, new()
+        public TResult[] Load<TTransformer, TResult>(IEnumerable<string> ids, Action<ILoadConfiguration> configure)
+            where TTransformer : AbstractTransformerCreationTask, new()
         {
             return _session.Load<TTransformer, TResult>(ids, configure);
         }
 
-        public TResult[] Load<TTransformer, TResult>(params string[] ids) where TTransformer : AbstractTransformerCreationTask, new()
+        public TResult[] Load<TTransformer, TResult>(params string[] ids)
+            where TTransformer : AbstractTransformerCreationTask, new()
         {
             return _session.Load<TTransformer, TResult>(ids);
         }
 
-        public TResult Load<TTransformer, TResult>(string id, Action<ILoadConfiguration> configure) where TTransformer : AbstractTransformerCreationTask, new()
+        public TResult Load<TTransformer, TResult>(string id, Action<ILoadConfiguration> configure)
+            where TTransformer : AbstractTransformerCreationTask, new()
         {
             return _session.Load<TTransformer, TResult>(id, configure);
         }
 
-        public TResult Load<TTransformer, TResult>(string id) where TTransformer : AbstractTransformerCreationTask, new()
+        public TResult Load<TTransformer, TResult>(string id)
+            where TTransformer : AbstractTransformerCreationTask, new()
         {
             return _session.Load<TTransformer, TResult>(id);
         }
@@ -131,5 +134,9 @@ namespace Highway.Data
             return _session.Query<T>(indexName, isMapReduce);
         }
 
+        public IRavenQueryable<T1> Query<T1>(string indexName)
+        {
+            return _session.Query<T1>(indexName);
+        }
     }
 }

@@ -1,12 +1,11 @@
-﻿using System;
+﻿#region
+
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Web.Http;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Highway.Data.Rest.ExampleAPI;
 using Highway.Data.Rest.ExampleAPI.Controllers;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+#endregion
 
 namespace Highway.Data.Rest.ExampleAPI.Tests.Controllers
 {

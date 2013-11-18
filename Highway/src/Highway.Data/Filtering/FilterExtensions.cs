@@ -1,12 +1,15 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic;
-using System.Text.RegularExpressions;
+
+#endregion
 
 namespace Highway.Data.Filtering
 {
     /// <summary>
-    /// Basic Extensions for building the Filtering API
+    ///     Basic Extensions for building the Filtering API
     /// </summary>
     public static class FilterExtensions
     {
@@ -22,12 +25,12 @@ namespace Highway.Data.Filtering
 
         public static Criteria And(this Criteria leftCritera, Criteria rightCriteria)
         {
-            return new AndCriteria(leftCritera,rightCriteria);
+            return new AndCriteria(leftCritera, rightCriteria);
         }
 
         public static Criteria Or(this Criteria leftCriteria, Criteria rightCriteria)
         {
-            return new OrCriteria(leftCriteria,rightCriteria);
+            return new OrCriteria(leftCriteria, rightCriteria);
         }
     }
 }

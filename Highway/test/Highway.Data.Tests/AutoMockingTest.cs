@@ -1,6 +1,10 @@
+#region
+
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.Resolvers;
 using Castle.Windsor;
+
+#endregion
 
 namespace Highway.Data.Tests
 {

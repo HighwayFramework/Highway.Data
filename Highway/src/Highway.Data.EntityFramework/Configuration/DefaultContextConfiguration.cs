@@ -1,9 +1,13 @@
-﻿using System.Data.Entity;
+﻿#region
+
+using System.Data.Entity;
+
+#endregion
 
 namespace Highway.Data
 {
     /// <summary>
-    /// Default Settings of Lazy loading and proxy generation off.
+    ///     Default Settings of Lazy loading and proxy generation off.
     /// </summary>
     public class DefaultContextConfiguration : IContextConfiguration
     {

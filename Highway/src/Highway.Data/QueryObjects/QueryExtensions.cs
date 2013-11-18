@@ -1,15 +1,18 @@
+#region
+
 using System.Linq.Expressions;
-using Highway.Data;
+
+#endregion
 
 namespace Highway.Data
 {
     /// <summary>
-    /// A collection of extension methods for extending reusable IQuery objects
+    ///     A collection of extension methods for extending reusable IQuery objects
     /// </summary>
     public static class QueryExtensions
     {
         /// <summary>
-        /// Takes the specified number of records
+        ///     Takes the specified number of records
         /// </summary>
         /// <param name="extend"></param>
         /// <param name="count"></param>
@@ -24,7 +27,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Skip the number of items specified
+        ///     Skip the number of items specified
         /// </summary>
         /// <param name="extend"></param>
         /// <param name="count"></param>
@@ -39,34 +42,35 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Takes the specified number of records
+        ///     Takes the specified number of records
         /// </summary>
         /// <param name="extend"></param>
         /// <param name="count"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static IQuery<TSelection, TProjection> Take<TSelection, TProjection>(this IQuery<TSelection, TProjection> extend, int count)
+        public static IQuery<TSelection, TProjection> Take<TSelection, TProjection>(
+            this IQuery<TSelection, TProjection> extend, int count)
         {
-            var generics = new[] { typeof(TSelection) };
-            var parameters = new Expression[] { Expression.Constant(count) };
-            ((IExtendableQuery)extend).AddMethodExpression("Take", generics, parameters);
+            var generics = new[] {typeof (TSelection)};
+            var parameters = new Expression[] {Expression.Constant(count)};
+            ((IExtendableQuery) extend).AddMethodExpression("Take", generics, parameters);
             return extend;
         }
 
         /// <summary>
-        /// Skip the number of items specified
+        ///     Skip the number of items specified
         /// </summary>
         /// <param name="extend"></param>
         /// <param name="count"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static IQuery<TSelection, TProjection> Skip<TSelection, TProjection>(this IQuery<TSelection, TProjection> extend, int count)
+        public static IQuery<TSelection, TProjection> Skip<TSelection, TProjection>(
+            this IQuery<TSelection, TProjection> extend, int count)
         {
-            var generics = new[] { typeof(TSelection) };
-            var parameters = new Expression[] { Expression.Constant(count) };
-            ((IExtendableQuery)extend).AddMethodExpression("Skip", generics, parameters);
+            var generics = new[] {typeof (TSelection)};
+            var parameters = new Expression[] {Expression.Constant(count)};
+            ((IExtendableQuery) extend).AddMethodExpression("Skip", generics, parameters);
             return extend;
         }
-        
     }
 }

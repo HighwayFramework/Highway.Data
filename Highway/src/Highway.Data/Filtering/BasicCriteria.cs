@@ -22,8 +22,7 @@
 
         public override object[] GetFilterArguments()
         {
-            return new object[] { Value };
+            return new object[] {Value};
         }
-
     }
 }

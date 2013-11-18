@@ -1,5 +1,9 @@
-﻿using System.Linq;
+﻿#region
+
+using System.Linq;
 using Highway.Data.Tests.InMemory.Domain;
+
+#endregion
 
 namespace Highway.Data.Tests.InMemory.ScenarioTests.Queries
 {

@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
+
+#endregion
 
 namespace Highway.Data.Contexts.TypeRepresentations
 {
@@ -10,14 +14,18 @@ namespace Highway.Data.Contexts.TypeRepresentations
         {
             Parents = new Dictionary<object, Accessor>();
         }
+
         internal object Entity { get; set; }
+
+        internal IEnumerable<ObjectRepresentation> RelatedEntities { get; set; }
+
+        internal Guid Id { get; set; }
+        internal Dictionary<object, Accessor> Parents { get; set; }
 
         public bool IsType<T1>()
         {
-            return typeof(T1) == Entity.GetType();
+            return typeof (T1) == Entity.GetType();
         }
-
-        internal IEnumerable<ObjectRepresentation> RelatedEntities { get; set; }
 
         internal IEnumerable<ObjectRepresentation> AllRelated()
         {
@@ -29,9 +37,6 @@ namespace Highway.Data.Contexts.TypeRepresentations
             return items;
         }
 
-        internal Guid Id { get; set; }
-        internal Dictionary<object, Accessor> Parents { get; set; }
-
         public List<ObjectRepresentation> GetObjectRepresentationsToPrune()
         {
             return AllRelated().Where(x => x.Orphaned()).ToList();
@@ -40,7 +45,11 @@ namespace Highway.Data.Contexts.TypeRepresentations
         public bool Orphaned()
         {
             if (!Parents.Any()) return true;
-            return Parents.All(accessor => accessor.Value == null || accessor.Value.GetterFunc == null || accessor.Value.GetterFunc(accessor.Key, this.Entity) == null);
+            return
+                Parents.All(
+                    accessor =>
+                        accessor.Value == null || accessor.Value.GetterFunc == null ||
+                        accessor.Value.GetterFunc(accessor.Key, Entity) == null);
         }
     }
 }

@@ -1,5 +1,9 @@
+#region
+
 using System;
 using Highway.Data.Rest.Configuration.Conventions;
+
+#endregion
 
 namespace Highway.Data.Rest.Tests
 {
@@ -17,7 +21,7 @@ namespace Highway.Data.Rest.Tests
 
         public RestActionFormat DefaultFormat()
         {
-            return new RestActionFormat()
+            return new RestActionFormat
             {
                 Single = "{{{1}}}/{0}",
                 All = "{{{1}}}"

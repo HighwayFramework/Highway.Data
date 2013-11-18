@@ -99,6 +99,7 @@
     <Compile Include="Interceptors\Events\PreSaveEventArgs.cs" />
     <Compile Include="EventManagement\EventManager.cs" />
     <Compile Include="Interceptors\InterceptorResult.cs" />
+    <Compile Include="Interfaces\IDomainContext.cs" />
     <Compile Include="Interfaces\Queries\ICommand.cs" />
     <Compile Include="Interfaces\IObservableDataContext.cs" />
     <Compile Include="Interfaces\Queries\IObservableQuery.cs" />

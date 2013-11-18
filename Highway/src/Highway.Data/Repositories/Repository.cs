@@ -1,17 +1,21 @@
-﻿using System.Collections.Generic;
-using Highway.Data;
+﻿#region
+
+using System.Collections.Generic;
+
+#endregion
 
 namespace Highway.Data
 {
     /// <summary>
-    /// A Entity Framework Specific repository implementation that uses Specification pattern to execute Queries in a controlled fashion.
+    ///     A Entity Framework Specific repository implementation that uses Specification pattern to execute Queries in a
+    ///     controlled fashion.
     /// </summary>
     public class Repository : IRepository
     {
-        private IDataContext _context;
+        private readonly IDataContext _context;
 
         /// <summary>
-        /// Creates a Repository that uses the context provided
+        ///     Creates a Repository that uses the context provided
         /// </summary>
         /// <param name="context">The data context that this repository uses</param>
         public Repository(IDataContext context)
@@ -22,7 +26,7 @@ namespace Highway.Data
         #region IRepository Members
 
         /// <summary>
-        /// Reference to the DataContext the repository is using
+        ///     Reference to the DataContext the repository is using
         /// </summary>
         public IUnitOfWork Context
         {
@@ -30,18 +34,18 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Executes a prebuilt <see cref="IScalar{T}"/> and returns a single instance of <typeparamref name="T"/>
+        ///     Executes a prebuilt <see cref="IScalar{T}" /> and returns a single instance of <typeparamref name="T" />
         /// </summary>
         /// <typeparam name="T">The Entity being queried</typeparam>
         /// <param name="query">The prebuilt Query Object</param>
-        /// <returns>The instance of <typeparamref name="T"/> returned from the query</returns>
+        /// <returns>The instance of <typeparamref name="T" /> returned from the query</returns>
         public T Find<T>(IScalar<T> query)
         {
             return query.Execute(_context);
         }
 
         /// <summary>
-        /// Executes a prebuilt <see cref="ICommand"/>
+        ///     Executes a prebuilt <see cref="ICommand" />
         /// </summary>
         /// <param name="command">The prebuilt command object</param>
         public void Execute(ICommand command)
@@ -50,23 +54,24 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Executes a prebuilt <see cref="IQuery{T}"/> and returns an <see cref="IEnumerable{T}"/>
+        ///     Executes a prebuilt <see cref="IQuery{T}" /> and returns an <see cref="IEnumerable{T}" />
         /// </summary>
         /// <typeparam name="T">The Entity being queried</typeparam>
         /// <param name="query">The prebuilt Query Object</param>
-        /// <returns>The <see cref="IEnumerable{T}"/> returned from the query</returns>
+        /// <returns>The <see cref="IEnumerable{T}" /> returned from the query</returns>
         public IEnumerable<T> Find<T>(IQuery<T> query)
         {
             return query.Execute(_context);
         }
 
         /// <summary>
-        /// Executes a prebuilt <see cref="IQuery{T}"/> and returns an <see cref="IEnumerable{T}"/>
+        ///     Executes a prebuilt <see cref="IQuery{T}" /> and returns an <see cref="IEnumerable{T}" />
         /// </summary>
         /// <typeparam name="T">The Entity being queried</typeparam>
         /// <param name="query">The prebuilt Query Object</param>
-        /// <returns>The <see cref="IEnumerable{T}"/> returned from the query</returns>
-        public IEnumerable<IProjection> Find<TSelection, IProjection>(IQuery<TSelection, IProjection> query) where TSelection : class
+        /// <returns>The <see cref="IEnumerable{T}" /> returned from the query</returns>
+        public IEnumerable<IProjection> Find<TSelection, IProjection>(IQuery<TSelection, IProjection> query)
+            where TSelection : class
         {
             return query.Execute(_context);
         }

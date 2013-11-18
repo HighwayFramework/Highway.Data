@@ -1,15 +1,19 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Linq.Expressions;
 using System.Reflection;
 using Highway.Data.Rest.Configuration.Conventions;
 using Highway.Data.Rest.Configuration.Interfaces;
 using Highway.Data.Rest.Expressions;
 
+#endregion
+
 namespace Highway.Data.Rest.Configuration.Entities
 {
-    public class RestTypeConfiguration<T> : 
+    public class RestTypeConfiguration<T> :
         IKeyConfiguredType,
-        IRouteConfiguredType<T>, 
+        IRouteConfiguredType<T>,
         IRestTypeConfiguration<T>,
         IRestTypeDefinition
 
@@ -21,8 +25,13 @@ namespace Highway.Data.Rest.Configuration.Entities
         public RestTypeConfiguration(IRestConvention convention)
         {
             _defaultConvention = convention;
-            _route = convention.DefaultRoute(typeof(T));
-            _key = convention.DefaultKey(typeof(T));
+            _route = convention.DefaultRoute(typeof (T));
+            _key = convention.DefaultKey(typeof (T));
+        }
+
+        public string SingleUri
+        {
+            get { return string.Format(_defaultConvention.DefaultFormat().Single, _route, _key); }
         }
 
         public IRouteConfiguredType<T> WithRoute(string value)
@@ -31,7 +40,19 @@ namespace Highway.Data.Rest.Configuration.Entities
             return this;
         }
 
-        public IKeyConfiguredType  WithKey(string id)
+        public string AllUri
+        {
+            get { return string.Format(_defaultConvention.DefaultFormat().All, _route, _key); }
+        }
+
+        public Type ConfiguredType
+        {
+            get { return typeof (T); }
+        }
+
+        public PropertyInfo KeyProperty { get; private set; }
+
+        public IKeyConfiguredType WithKey(string id)
         {
             _key = id;
             KeyProperty = TypeOf<T>.PropertyInfo(id);
@@ -44,19 +65,5 @@ namespace Highway.Data.Rest.Configuration.Entities
             KeyProperty = TypeOf<T>.PropertyInfo(selector);
             return this;
         }
-
-        public string SingleUri
-        {
-            get { return string.Format(_defaultConvention.DefaultFormat().Single, _route, _key); }
-        }
-
-        public string AllUri
-        {
-            get { return string.Format(_defaultConvention.DefaultFormat().All, _route, _key); }
-        }
-
-        public Type ConfiguredType { get { return typeof (T); } }
-
-        public PropertyInfo KeyProperty { get; private set; }
     }
 }

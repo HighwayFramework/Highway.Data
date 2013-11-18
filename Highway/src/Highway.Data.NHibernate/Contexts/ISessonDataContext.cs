@@ -1,10 +1,14 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Data;
 using System.Linq.Expressions;
 using NHibernate;
 using NHibernate.Engine;
 using NHibernate.Stat;
 using NHibernate.Type;
+
+#endregion
 
 namespace Highway.Data
 {
@@ -17,74 +21,47 @@ namespace Highway.Data
 
         public IDbConnection Disconnect()
         {
-
-           
-                return _session.Disconnect();
-            
+            return _session.Disconnect();
         }
 
         public void Reconnect()
         {
-
-            
-               _session.Reconnect();
-            
+            _session.Reconnect();
         }
 
         public void Reconnect(IDbConnection connection)
         {
-
-            
-               _session.Reconnect(connection);
-            
+            _session.Reconnect(connection);
         }
 
         public IDbConnection Close()
         {
-
-            
-               return _session.Close();
-            
+            return _session.Close();
         }
 
         public void CancelQuery()
         {
-
-            
-               _session.CancelQuery();
-            
+            _session.CancelQuery();
         }
 
         public bool IsDirty()
         {
-
-            
-               return _session.IsDirty();
-            
+            return _session.IsDirty();
         }
 
         public bool IsReadOnly(object entityOrProxy)
         {
-
-            
-               return _session.IsReadOnly(entityOrProxy);
-            
+            return _session.IsReadOnly(entityOrProxy);
         }
 
         public void SetReadOnly(object entityOrProxy, bool readOnly)
         {
-
-            
-               _session.SetReadOnly(entityOrProxy, readOnly);
-            
+            _session.SetReadOnly(entityOrProxy, readOnly);
         }
 
         public object GetIdentifier(object obj)
         {
-
-            
-               return _session.GetIdentifier(obj);
-            
+            return _session.GetIdentifier(obj);
         }
 
         public bool Contains(object obj)

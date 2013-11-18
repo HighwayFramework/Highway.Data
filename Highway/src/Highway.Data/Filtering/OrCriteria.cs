@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
+
+#endregion
 
 namespace Highway.Data.Filtering
 {
@@ -16,7 +20,8 @@ namespace Highway.Data.Filtering
 
         public override string GetFilterString()
         {
-            var filterString = string.Format("({0} || {1})", _leftCriteria.GetFilterString(), _rightCriteria.GetFilterString());
+            var filterString = string.Format("({0} || {1})", _leftCriteria.GetFilterString(),
+                _rightCriteria.GetFilterString());
             return filterString;
         }
 

@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Entity;
@@ -11,20 +13,22 @@ using Highway.Data.EntityFramework;
 using Highway.Data.EventManagement;
 using Highway.Data.EventManagement.Interfaces;
 
+#endregion
+
 namespace Highway.Data
 {
     /// <summary>
-    /// A base implementation of the Code First Data DataContext for Entity Framework
+    ///     A base implementation of the Code First Data DataContext for Entity Framework
     /// </summary>
     public class DataContext : DbContext, IEntityDataContext
     {
+        private readonly bool _databaseFirst;
         private readonly ILog _log;
         private readonly IMappingConfiguration _mapping;
         private EventManager _eventManager;
-        private bool _databaseFirst;
 
         /// <summary>
-        /// Constructs a context
+        ///     Constructs a context
         /// </summary>
         /// <param name="connectionString">The standard SQL connection string for the Database</param>
         /// <param name="mapping">The Mapping Configuration that will determine how the tables and objects interact</param>
@@ -34,7 +38,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Constructs a context
+        ///     Constructs a context
         /// </summary>
         /// <param name="connectionString">The standard SQL connection string for the Database</param>
         /// <param name="mapping">The Mapping Configuration that will determine how the tables and objects interact</param>
@@ -45,27 +49,30 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Constructs a context
+        ///     Constructs a context
         /// </summary>
         /// <param name="connectionString">The standard SQL connection string for the Database</param>
         /// <param name="mapping">The Mapping Configuration that will determine how the tables and objects interact</param>
-        /// <param name="contextConfiguration">The context specific configuration that will change context level behavior ( Optional )</param>
+        /// <param name="contextConfiguration">
+        ///     The context specific configuration that will change context level behavior (
+        ///     Optional )
+        /// </param>
         public DataContext(string connectionString, IMappingConfiguration mapping,
-                           IContextConfiguration contextConfiguration)
+            IContextConfiguration contextConfiguration)
             : this(connectionString, mapping, contextConfiguration, new NoOpLogger())
         {
         }
 
 
         /// <summary>
-        /// Constructs a context
+        ///     Constructs a context
         /// </summary>
         /// <param name="connectionString">The standard SQL connection string for the Database</param>
         /// <param name="mapping">The Mapping Configuration that will determine how the tables and objects interact</param>
         /// <param name="contextConfiguration">The context specific configuration that will change context level behavior</param>
         /// <param name="log">The logger being supplied for this context ( Optional )</param>
         public DataContext(string connectionString, IMappingConfiguration mapping,
-                           IContextConfiguration contextConfiguration, ILog log)
+            IContextConfiguration contextConfiguration, ILog log)
             : base(connectionString)
         {
             _mapping = mapping;
@@ -75,18 +82,23 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Database first way to construct the data context for Highway.Data.EntityFramework
+        ///     Database first way to construct the data context for Highway.Data.EntityFramework
         /// </summary>
-        /// <param name="databaseFirstConnectionString">The metadata embedded connection string from database first Entity Framework</param>
-        public DataContext(string databaseFirstConnectionString) : this(databaseFirstConnectionString,new NoOpLogger())
+        /// <param name="databaseFirstConnectionString">
+        ///     The metadata embedded connection string from database first Entity
+        ///     Framework
+        /// </param>
+        public DataContext(string databaseFirstConnectionString) : this(databaseFirstConnectionString, new NoOpLogger())
         {
-           
         }
 
         /// <summary>
-        /// Database first way to construct the data context for Highway.Data.EntityFramework
+        ///     Database first way to construct the data context for Highway.Data.EntityFramework
         /// </summary>
-        /// <param name="databaseFirstConnectionString">The metadata embedded connection string from database first Entity Framework</param>
+        /// <param name="databaseFirstConnectionString">
+        ///     The metadata embedded connection string from database first Entity
+        ///     Framework
+        /// </param>
         /// <param name="log">The logger for the database first context</param>
         public DataContext(string databaseFirstConnectionString, ILog log) : base(databaseFirstConnectionString)
         {
@@ -94,14 +106,15 @@ namespace Highway.Data
             _log = log;
         }
 
-
         #region IObservableDataContext Members
 
         /// <summary>
-        /// This gives a mockable wrapper around the normal <see cref="DbSet{T}"/> method that allows for testablity
+        ///     This gives a mockable wrapper around the normal <see cref="DbSet{T}" /> method that allows for testablity
         /// </summary>
         /// <typeparam name="T">The Entity being queried</typeparam>
-        /// <returns><see cref="IQueryable{T}"/></returns>
+        /// <returns>
+        ///     <see cref="IQueryable{T}" />
+        /// </returns>
         public IQueryable<T> AsQueryable<T>() where T : class
         {
             _log.DebugFormat("Querying Object {0}", typeof (T).Name);
@@ -111,11 +124,11 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Adds the provided instance of <typeparamref name="T"/> to the data context
+        ///     Adds the provided instance of <typeparamref name="T" /> to the data context
         /// </summary>
         /// <typeparam name="T">The Entity Type being added</typeparam>
-        /// <param name="item">The <typeparamref name="T"/> you want to add</param>
-        /// <returns>The <typeparamref name="T"/> you added</returns>
+        /// <param name="item">The <typeparamref name="T" /> you want to add</param>
+        /// <returns>The <typeparamref name="T" /> you added</returns>
         public T Add<T>(T item) where T : class
         {
             _log.DebugFormat("Adding Object {0}", item);
@@ -125,11 +138,11 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Removes the provided instance of <typeparamref name="T"/> from the data context
+        ///     Removes the provided instance of <typeparamref name="T" /> from the data context
         /// </summary>
         /// <typeparam name="T">The Entity Type being removed</typeparam>
-        /// <param name="item">The <typeparamref name="T"/> you want to remove</param>
-        /// <returns>The <typeparamref name="T"/> you removed</returns>
+        /// <param name="item">The <typeparamref name="T" /> you want to remove</param>
+        /// <returns>The <typeparamref name="T" /> you removed</returns>
         public T Remove<T>(T item) where T : class
         {
             _log.DebugFormat("Removing Object {0}", item);
@@ -139,11 +152,11 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Updates the provided instance of <typeparamref name="T"/> in the data context
+        ///     Updates the provided instance of <typeparamref name="T" /> in the data context
         /// </summary>
         /// <typeparam name="T">The Entity Type being updated</typeparam>
-        /// <param name="item">The <typeparamref name="T"/> you want to update</param>
-        /// <returns>The <typeparamref name="T"/> you updated</returns>
+        /// <param name="item">The <typeparamref name="T" /> you want to update</param>
+        /// <returns>The <typeparamref name="T" /> you updated</returns>
         public T Update<T>(T item) where T : class
         {
             _log.TraceFormat("Retrieving State Entry For Object {0}", item);
@@ -160,11 +173,11 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Attaches the provided instance of <typeparamref name="T"/> to the data context
+        ///     Attaches the provided instance of <typeparamref name="T" /> to the data context
         /// </summary>
         /// <typeparam name="T">The Entity Type being attached</typeparam>
-        /// <param name="item">The <typeparamref name="T"/> you want to attach</param>
-        /// <returns>The <typeparamref name="T"/> you attached</returns>
+        /// <param name="item">The <typeparamref name="T" /> you want to attach</param>
+        /// <returns>The <typeparamref name="T" /> you attached</returns>
         public T Attach<T>(T item) where T : class
         {
             _log.DebugFormat("Attaching Object {0}", item);
@@ -174,11 +187,11 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Detaches the provided instance of <typeparamref name="T"/> from the data context
+        ///     Detaches the provided instance of <typeparamref name="T" /> from the data context
         /// </summary>
         /// <typeparam name="T">The Entity Type being detached</typeparam>
-        /// <param name="item">The <typeparamref name="T"/> you want to detach</param>
-        /// <returns>The <typeparamref name="T"/> you detached</returns>
+        /// <param name="item">The <typeparamref name="T" /> you want to detach</param>
+        /// <returns>The <typeparamref name="T" /> you detached</returns>
         public T Detach<T>(T item) where T : class
         {
             _log.TraceFormat("Retrieving State Entry For Object {0}", item);
@@ -195,11 +208,11 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Reloads the provided instance of <typeparamref name="T"/> from the database
+        ///     Reloads the provided instance of <typeparamref name="T" /> from the database
         /// </summary>
         /// <typeparam name="T">The Entity Type being reloaded</typeparam>
-        /// <param name="item">The <typeparamref name="T"/> you want to reload</param>
-        /// <returns>The <typeparamref name="T"/> you reloaded</returns>
+        /// <param name="item">The <typeparamref name="T" /> you want to reload</param>
+        /// <returns>The <typeparamref name="T" /> you reloaded</returns>
         public T Reload<T>(T item) where T : class
         {
             _log.TraceFormat("Retrieving State Entry For Object {0}", item);
@@ -216,7 +229,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Commits all currently tracked entity changes
+        ///     Commits all currently tracked entity changes
         /// </summary>
         /// <returns>the number of rows affected</returns>
         public int Commit()
@@ -231,13 +244,13 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Executes a SQL command and tries to map the returned datasets into an <see cref="IEnumerable{T}"/>
-        /// The results should have the same column names as the Entity Type has properties
+        ///     Executes a SQL command and tries to map the returned datasets into an <see cref="IEnumerable{T}" />
+        ///     The results should have the same column names as the Entity Type has properties
         /// </summary>
         /// <typeparam name="T">The Entity Type that the return should be mapped to</typeparam>
         /// <param name="sql">The Sql Statement</param>
         /// <param name="dbParams">A List of Database Parameters for the Query</param>
-        /// <returns>An <see cref="IEnumerable{T}"/> from the query return</returns>
+        /// <returns>An <see cref="IEnumerable{T}" /> from the query return</returns>
         public IEnumerable<T> ExecuteSqlQuery<T>(string sql, params DbParameter[] dbParams)
         {
             string[] parameters =
@@ -247,7 +260,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Executes a SQL command and returns the standard int return from the query
+        ///     Executes a SQL command and returns the standard int return from the query
         /// </summary>
         /// <param name="sql">The Sql Statement</param>
         /// <param name="dbParams">A List of Database Parameters for the Query</param>
@@ -259,14 +272,14 @@ namespace Highway.Data
             _log.TraceFormat("Executing SQL {0}, with parameters {1}", sql, string.Join(",", parameters));
             return base.Database.ExecuteSqlCommand(sql, dbParams);
         }
-        
+
         /// <summary>
-        /// The event fired just before the commit of the ORM
+        ///     The event fired just before the commit of the ORM
         /// </summary>
         public event EventHandler<InterceptorEventArgs> BeforeSave;
 
         /// <summary>
-        /// The event fired just after the commit of the ORM
+        ///     The event fired just after the commit of the ORM
         /// </summary>
         public event EventHandler<InterceptorEventArgs> AfterSaved;
 
@@ -280,7 +293,7 @@ namespace Highway.Data
 
         private void InvokePostSave()
         {
-            if (AfterSaved != null) AfterSaved(this, InterceptorEventArgs.ForEvent(EventType.AfterSave) );
+            if (AfterSaved != null) AfterSaved(this, InterceptorEventArgs.ForEvent(EventType.AfterSave));
         }
 
         private void InvokePreSave()
@@ -289,7 +302,6 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="procedureName"></param>
         /// <param name="dbParams"></param>
@@ -303,18 +315,19 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// This method is called when the model for a derived context has been initialized, but
-        ///                 before the model has been locked down and used to initialize the context.  The default
-        ///                 implementation of this method takes the <see cref="IMappingConfiguration"/> array passed in on construction and applies them. 
-        /// If no configuration mappings were passed it it does nothing.
+        ///     This method is called when the model for a derived context has been initialized, but
+        ///     before the model has been locked down and used to initialize the context.  The default
+        ///     implementation of this method takes the <see cref="IMappingConfiguration" /> array passed in on construction and
+        ///     applies them.
+        ///     If no configuration mappings were passed it it does nothing.
         /// </summary>
         /// <remarks>
-        /// Typically, this method is called only once when the first instance of a derived context
-        ///                 is created.  The model for that context is then cached and is for all further instances of
-        ///                 the context in the app domain.  This caching can be disabled by setting the ModelCaching
-        ///                 property on the given ModelBuidler, but note that this can seriously degrade performance.
-        ///                 More control over caching is provided through use of the DbModelBuilder and DbContextFactory
-        ///                 classes directly.
+        ///     Typically, this method is called only once when the first instance of a derived context
+        ///     is created.  The model for that context is then cached and is for all further instances of
+        ///     the context in the app domain.  This caching can be disabled by setting the ModelCaching
+        ///     property on the given ModelBuidler, but note that this can seriously degrade performance.
+        ///     More control over caching is provided through use of the DbModelBuilder and DbContextFactory
+        ///     classes directly.
         /// </remarks>
         /// <param name="modelBuilder">The builder that defines the model for the context being created.</param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

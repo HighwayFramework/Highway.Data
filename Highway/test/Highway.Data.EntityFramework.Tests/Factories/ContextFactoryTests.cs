@@ -1,11 +1,12 @@
-﻿using Highway.Data.Domain;
-using Highway.Data.EntityFramework.Tests.Mapping;
+﻿#region
+
+using Highway.Data.Domain;
 using Highway.Data.EntityFramework.Tests.Properties;
-using Highway.Data.Tests.TestDomain;
 using Highway.Test.MSTest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Data.Entity;
 using Rhino.Mocks;
+
+#endregion
 
 namespace Highway.Data.EntityFramework.Tests.Factories
 {
@@ -17,7 +18,7 @@ namespace Highway.Data.EntityFramework.Tests.Factories
         {
             //arrange 
             IContextFactory factory = new ContextFactory(new FooDomain());
-            
+
             //act
             IDataContext context = factory.Create<FooDomain>();
 
@@ -46,7 +47,7 @@ namespace Highway.Data.EntityFramework.Tests.Factories
             IContextFactory factory = new ContextFactory(new FooDomain(), new BarDomain());
 
             // act
-            IDataContext context = factory.Create(typeof(FooDomain));
+            IDataContext context = factory.Create(typeof (FooDomain));
 
             // assert
             context.ShouldBeOfType<IDataContext>();
@@ -66,8 +67,8 @@ namespace Highway.Data.EntityFramework.Tests.Factories
             fooDomain.Mappings = fooMappings;
 
             // act
-            IDataContext context1 = factory.Create(typeof(FooDomain));
-            IDataContext context2 = factory.Create(typeof(BarDomain));
+            IDataContext context1 = factory.Create(typeof (FooDomain));
+            IDataContext context2 = factory.Create(typeof (BarDomain));
 
             // assert
             context1.ShouldBeOfType<IDataContext>();
@@ -83,9 +84,9 @@ namespace Highway.Data.EntityFramework.Tests.Factories
         }
 
         public string ConnectionString { get; set; }
-        
+
         public IMappingConfiguration Mappings { get; set; }
-        
+
         public IContextConfiguration Context { get; set; }
     }
 
@@ -98,9 +99,9 @@ namespace Highway.Data.EntityFramework.Tests.Factories
         }
 
         public string ConnectionString { get; set; }
-        
+
         public IMappingConfiguration Mappings { get; set; }
-        
+
         public IContextConfiguration Context { get; set; }
     }
 }

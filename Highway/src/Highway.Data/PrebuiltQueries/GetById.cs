@@ -1,18 +1,20 @@
-﻿using System.Linq;
-using Highway.Data;
+﻿#region
+
 using System;
+using System.Linq;
+
+#endregion
 
 namespace Highway.Data
 {
     /// <summary>
-    /// This pre-built query get a specific type by the Id provided
+    ///     This pre-built query get a specific type by the Id provided
     /// </summary>
     /// <typeparam name="TId"></typeparam>
     /// <typeparam name="T"></typeparam>
-    public class GetById<TId,T> : Scalar<T> where T : class, IIdentifiable<TId> where TId : struct, IEquatable<TId>
+    public class GetById<TId, T> : Scalar<T> where T : class, IIdentifiable<TId> where TId : struct, IEquatable<TId>
     {
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="id"></param>
         public GetById(TId id)
@@ -22,11 +24,10 @@ namespace Highway.Data
     }
 
     /// <summary>
-    /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public interface IIdentifiable<T> where T : IEquatable<T>
     {
-       T Id { get; set; }
+        T Id { get; set; }
     }
 }

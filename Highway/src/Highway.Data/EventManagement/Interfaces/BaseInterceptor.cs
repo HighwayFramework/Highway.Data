@@ -6,24 +6,31 @@ using Highway.Data.Interceptors;
 
 namespace Highway.Data.EventManagement.Interfaces
 {
-    public interface IInterceptor
+    /// <summary>
+    /// Base interface for dealing with event interception
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public interface IEventInterceptor<in T>  : IInterceptor
     {
-        int Priority { get; }
+       
 
-        bool AppliesTo(EventType eventType);
-
-        InterceptorResult Apply(IDataContext dataContext, EventType eventType);
+        /// <summary>
+        /// Executes the interceptors that were applied during the domain creation
+        /// </summary>
+        /// <param name="context">The DataContext that the current interceptor is using</param>
+        /// <param name="eventArgs">the EventArgs for the current event being intercepted</param>
+        /// <returns></returns>
+        InterceptorResult Apply(IDataContext context, T eventArgs);
     }
 
-    public enum EventType
+    /// <summary>
+    /// Base interface for dealing with event interception
+    /// </summary>
+    public interface IInterceptor
     {
-        BeforeSave,
-        AfterSave,
-        BeforeQuery,
-        AfterQuery,
-        BeforeScalar,
-        AfterScalar,
-        BeforeCommand,
-        AfterCommand
+        /// <summary>
+        /// Priority for the interceptor, execution is low to high
+        /// </summary>
+        int Priority { get; }
     }
 }

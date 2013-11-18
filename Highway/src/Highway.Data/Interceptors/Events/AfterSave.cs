@@ -1,4 +1,4 @@
-﻿#region
+#region
 
 using System;
 
@@ -7,9 +7,9 @@ using System;
 namespace Highway.Data.Interceptors.Events
 {
     /// <summary>
-    ///     The Event Arguments for a Pre-Save Interceptor to use
+    ///     The Event Arguments for a Post-Save Interceptor to use
     /// </summary>
-    public class PreSaveEventArgs : EventArgs
+    public class AfterSave : EventArgs
     {
     }
 }

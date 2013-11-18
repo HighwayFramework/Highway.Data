@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Highway.Data.EventManagement.Interfaces;
 using Highway.Data.Interceptors;
+using Highway.Data.Interceptors.Events;
 
 #endregion
 
@@ -29,23 +30,35 @@ namespace Highway.Data.EventManagement
             _context.AfterSaved += HandleEvent;
         }
 
-        private void HandleEvent(object sender, InterceptorEventArgs e)
+        private void HandleEvent(object sender, AfterSave e)
         {
-            foreach (var interceptor in _interceptors.Where(x => x.AppliesTo(e.EventType)).OrderBy(x => x.Priority))
+            var events = _interceptors.OfType<IEventInterceptor<AfterSave>>().OrderBy(x => x.Priority);
+            foreach (var eventInterceptor in events)
             {
-                InterceptorResult result = interceptor.Apply(_context, e.EventType);
-                if (result.ContinueExecution == false) break;
+                var result = eventInterceptor.Apply(_context, e);
+                if (!result.ContinueExecution) break;
             }
         }
 
-        /// <summary>
-        ///     Allows for the Registration of <see cref="IInterceptor" /> objects that will hook to events in priority order
-        /// </summary>
-        /// <param name="interceptor">The interceptor to be registered to an event</param>
-        public void Register(IInterceptor interceptor)
+        private void HandleEvent(object sender, BeforeSave e)
         {
-            if (_interceptors.Contains(interceptor)) return;
-            _interceptors.Add(interceptor);
+            var events = _interceptors.OfType<IEventInterceptor<BeforeSave>>().OrderBy(x => x.Priority);
+            foreach (var eventInterceptor in events)
+            {
+                var result = eventInterceptor.Apply(_context, e);
+                if (!result.ContinueExecution) break;
+            }
+        }
+
+
+        /// <summary>
+        ///     Allows for the Registration of <see cref="IEventInterceptor{T}" /> objects that will hook to events in priority order
+        /// </summary>
+        /// <param name="eventInterceptor">The eventInterceptor to be registered to an event</param>
+        public void Register(IInterceptor eventInterceptor)
+        {
+            if (_interceptors.Contains(eventInterceptor)) return;
+            _interceptors.Add(eventInterceptor);
         }
     }
 }

@@ -1,11 +1,13 @@
 ﻿#region
 
+using System;
 using System.Collections.Generic;
 using FluentAssertions;
 using Highway.Data.Domain;
 using Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement;
 using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.EventManagement.Interfaces;
+using Highway.Data.Interceptors.Events;
 using Highway.Test.MSTest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -21,7 +23,7 @@ namespace Highway.Data.EntityFramework.Tests.EventManagement
         {
             //arrange 
             var domain = new TestDomain();
-            var testPreSaveInterceptor = new TestPreSaveInterceptor();
+            var testPreSaveInterceptor = new TestEventInterceptor<BeforeSave>(1);
             domain.Events = new List<IInterceptor>
             {
                 testPreSaveInterceptor
@@ -41,8 +43,8 @@ namespace Highway.Data.EntityFramework.Tests.EventManagement
         {
             //arrange 
             var domain = new TestDomain();
-            var testPreSaveInterceptor = new TestPreSaveInterceptor(1);
-            var testPreSaveInterceptor2 = new TestPreSaveInterceptor(2);
+            var testPreSaveInterceptor = new TestEventInterceptor<BeforeSave>(1);
+            var testPreSaveInterceptor2 = new TestEventInterceptor<BeforeSave>(2);
             domain.Events = new List<IInterceptor>
             {
                 testPreSaveInterceptor,
@@ -65,7 +67,7 @@ namespace Highway.Data.EntityFramework.Tests.EventManagement
         {
             //arrange 
             var domain = new TestDomain();
-            var testPreSaveInterceptor = new TestPostSaveInterceptor(1);
+            var testPreSaveInterceptor = new TestEventInterceptor<AfterSave>(1);
             domain.Events = new List<IInterceptor>
             {
                 testPreSaveInterceptor
@@ -85,8 +87,8 @@ namespace Highway.Data.EntityFramework.Tests.EventManagement
         {
             //arrange 
             var domain = new TestDomain();
-            var testPreSaveInterceptor = new TestPostSaveInterceptor(1);
-            var testPreSaveInterceptor2 = new TestPostSaveInterceptor(2);
+            var testPreSaveInterceptor = new TestEventInterceptor<AfterSave>(1);
+            var testPreSaveInterceptor2 = new TestEventInterceptor<AfterSave>(2);
             domain.Events = new List<IInterceptor>
             {
                 testPreSaveInterceptor,
@@ -103,13 +105,5 @@ namespace Highway.Data.EntityFramework.Tests.EventManagement
             testPreSaveInterceptor2.WasCalled.ShouldBeTrue();
             testPreSaveInterceptor.CallTime.Should().BeBefore(testPreSaveInterceptor2.CallTime);
         }
-    }
-
-    public class TestDomain : IDomain
-    {
-        public List<IInterceptor> Events { get; set; }
-        public string ConnectionString { get; set; }
-        public IMappingConfiguration Mappings { get; set; }
-        public IContextConfiguration Context { get; set; }
     }
 }

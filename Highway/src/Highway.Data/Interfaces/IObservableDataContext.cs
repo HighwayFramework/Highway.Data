@@ -2,6 +2,7 @@
 
 using System;
 using Highway.Data.EventManagement;
+using Highway.Data.Interceptors.Events;
 
 #endregion
 
@@ -15,11 +16,11 @@ namespace Highway.Data
         /// <summary>
         ///     The event fired just before the commit of the persistence
         /// </summary>
-        event EventHandler<InterceptorEventArgs> BeforeSave;
+        event EventHandler<BeforeSave> BeforeSave;
 
         /// <summary>
         ///     The event fired just after the commit of the persistence
         /// </summary>
-        event EventHandler<InterceptorEventArgs> AfterSaved;
+        event EventHandler<AfterSave> AfterSaved;
     }
 }

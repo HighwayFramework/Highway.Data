@@ -12,6 +12,7 @@ using Common.Logging.Simple;
 using Highway.Data.EntityFramework;
 using Highway.Data.EventManagement;
 using Highway.Data.EventManagement.Interfaces;
+using Highway.Data.Interceptors.Events;
 
 #endregion
 
@@ -276,12 +277,12 @@ namespace Highway.Data
         /// <summary>
         ///     The event fired just before the commit of the ORM
         /// </summary>
-        public event EventHandler<InterceptorEventArgs> BeforeSave;
+        public event EventHandler<BeforeSave> BeforeSave;
 
         /// <summary>
         ///     The event fired just after the commit of the ORM
         /// </summary>
-        public event EventHandler<InterceptorEventArgs> AfterSaved;
+        public event EventHandler<AfterSave> AfterSaved;
 
         #endregion
 
@@ -293,12 +294,12 @@ namespace Highway.Data
 
         private void InvokePostSave()
         {
-            if (AfterSaved != null) AfterSaved(this, InterceptorEventArgs.ForEvent(EventType.AfterSave));
+            if (AfterSaved != null) AfterSaved(this, new AfterSave());
         }
 
         private void InvokePreSave()
         {
-            if (BeforeSave != null) BeforeSave(this, InterceptorEventArgs.ForEvent(EventType.BeforeSave));
+            if (BeforeSave != null) BeforeSave(this, new BeforeSave());
         }
 
         /// <summary>

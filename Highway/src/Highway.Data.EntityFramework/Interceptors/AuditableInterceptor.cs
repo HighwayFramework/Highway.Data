@@ -5,42 +5,38 @@ using System.Data.Entity;
 using System.Linq;
 using Highway.Data.EventManagement;
 using Highway.Data.EventManagement.Interfaces;
+using Highway.Data.Interceptors.Events;
 
 #endregion
 
 namespace Highway.Data.Interceptors
 {
     /// <summary>
-    ///     An interceptor that operates pre-save to add audit information to the records being committed that implement the
+    ///     An eventInterceptor that operates pre-save to add audit information to the records being committed that implement the
     ///     <see cref="Highway.Data.IAuditableEntity" /> interface
     /// </summary>
-    public class AuditableInterceptor : IInterceptor
+    public class AuditableEventInterceptor : IEventInterceptor<BeforeSave>
     {
         private readonly IUserNameService _userNameService;
 
         /// <summary>
-        ///     Creates a interceptor for audit data attachment
+        ///     Creates a eventInterceptor for audit data attachment
         /// </summary>
         /// <param name="userNameService">Application Service that provides current user name</param>
-        /// <param name="priority">The order in the priority stack that the interceptor should operate on</param>
-        public AuditableInterceptor(IUserNameService userNameService, int priority = 0)
+        /// <param name="priority">The order in the priority stack that the eventInterceptor should operate on</param>
+        public AuditableEventInterceptor(IUserNameService userNameService, int priority = 0)
         {
             _userNameService = userNameService;
         }
 
-        #region IInterceptor<PreSaveEventArgs> Members
+        #region IEventInterceptor<PreSaveEventArgs> Members
 
         /// <summary>
-        ///     The priority order that this interceptor has for ordered execution by the event manager
+        ///     The priority order that this eventInterceptor has for ordered execution by the event manager
         /// </summary>
         public int Priority { get; set; }
 
-        public bool AppliesTo(EventType eventType)
-        {
-            return eventType.HasFlag(EventType.BeforeSave);
-        }
-
-        public InterceptorResult Apply(IDataContext dataContext, EventType eventType)
+        public InterceptorResult Apply(IDataContext dataContext, BeforeSave eventArgs)
         {
             var efContext = dataContext as DbContext;
             if (efContext == null)
@@ -80,17 +76,6 @@ namespace Highway.Data.Interceptors
                     }
                 });
             efContext.ChangeTracker.DetectChanges();
-            return InterceptorResult.Succeeded();
-        }
-
-        /// <summary>
-        ///     Executes the interceptor handle an event based on the event arguments
-        /// </summary>
-        /// <param name="context">The data context that raised the event</param>
-        /// <param name="eventArgs">The event arguments that were passed from the context</param>
-        /// <returns>An Interceptor Result</returns>
-        public InterceptorResult Execute(IDataContext context, InterceptorEventArgs eventArgs)
-        {
             return InterceptorResult.Succeeded();
         }
 

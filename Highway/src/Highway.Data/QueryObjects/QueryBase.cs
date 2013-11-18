@@ -60,12 +60,12 @@ namespace Highway.Data
         /// <summary>
         ///     The event fired just before the query goes to the database
         /// </summary>
-        public event EventHandler<PreQueryEventArgs> PreQuery;
+        public event EventHandler<BeforeQuery> BeforeQuery;
 
         /// <summary>
         ///     The event fire just after the data is translated into objects but before the data is returned.
         /// </summary>
-        public event EventHandler<PostQueryEventArgs> PostQuery;
+        public event EventHandler<AfterQuery> AfterQuery;
 
         #endregion
 

@@ -82,7 +82,6 @@
     <Compile Include="Contexts\TypeRepresentations\ObjectRepresentationRepository.cs" />
     <Compile Include="Contexts\TypeRepresentations\ObjectRepresentation.cs" />
     <Compile Include="Contexts\TypeUtilities\CastExtensions.cs" />
-    <Compile Include="EventManagement\InterceptorEventArgs.cs" />
     <Compile Include="EventManagement\Interfaces\BaseInterceptor.cs" />
     <Compile Include="Factories\IDataContextFactory.cs" />
     <Compile Include="Filtering\AndCriteria.cs" />
@@ -93,10 +92,14 @@
     <Compile Include="Filtering\FieldIdentifier.cs" />
     <Compile Include="Filtering\FilterExtensions.cs" />
     <Compile Include="Filtering\OrCriteria.cs" />
-    <Compile Include="Interceptors\Events\PostQueryEventArgs.cs" />
-    <Compile Include="Interceptors\Events\PostSaveEventArgs.cs" />
-    <Compile Include="Interceptors\Events\PreQueryEventArgs.cs" />
-    <Compile Include="Interceptors\Events\PreSaveEventArgs.cs" />
+    <Compile Include="Interceptors\Events\AfterCommand.cs" />
+    <Compile Include="Interceptors\Events\AfterScalar.cs" />
+    <Compile Include="Interceptors\Events\BeforeCommand.cs" />
+    <Compile Include="Interceptors\Events\BeforeScalar.cs" />
+    <Compile Include="Interceptors\Events\BeforeQuery.cs" />
+    <Compile Include="Interceptors\Events\AfterSave.cs" />
+    <Compile Include="Interceptors\Events\AfterQuery.cs" />
+    <Compile Include="Interceptors\Events\BeforeSave.cs" />
     <Compile Include="EventManagement\EventManager.cs" />
     <Compile Include="Interceptors\InterceptorResult.cs" />
     <Compile Include="Interfaces\IDomainContext.cs" />

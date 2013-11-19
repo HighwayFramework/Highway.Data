@@ -1,18 +1,14 @@
-﻿#region
-
-using System.Linq;
+﻿using System.Linq;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Common.Logging;
 using Common.Logging.Simple;
+using FluentAssertions;
 using Highway.Data.Tests;
 using Highway.Data.Tests.TestDomain;
-using Highway.Test.MSTest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Raven.Client;
 using Raven.Client.Embedded;
-
-#endregion
 
 namespace Highway.Data.RavenDB.Tests.IntegrationTests
 {
@@ -59,7 +55,7 @@ namespace Highway.Data.RavenDB.Tests.IntegrationTests
             IQueryable<Foo> items = target.AsQueryable<Foo>();
 
             //Assert
-            items.Count().ShouldBe(5);
+            items.Count().Should().Be(5);
         }
 
         [TestMethod, TestCategory(TestCategories.Database), Ignore]
@@ -74,7 +70,7 @@ namespace Highway.Data.RavenDB.Tests.IntegrationTests
             IQueryable<Foo> items = target.AsQueryable<Foo>();
 
             //Assert
-            items.Count().ShouldBe(currentCount + 1);
+            items.Count().Should().Be(currentCount + 1);
 
             target.Remove(item);
             target.SaveChanges();

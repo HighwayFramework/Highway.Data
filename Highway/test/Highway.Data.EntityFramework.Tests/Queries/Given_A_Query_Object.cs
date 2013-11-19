@@ -1,6 +1,4 @@
-﻿#region
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
@@ -8,17 +6,15 @@ using Castle.Windsor;
 using Common.Logging;
 using Common.Logging.Simple;
 using CommonServiceLocator.WindsorAdapter;
+using FluentAssertions;
 using Highway.Data.EntityFramework.Tests.Mapping;
 using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.EntityFramework.Tests.TestQueries;
 using Highway.Data.EntityFramework.Tests.UnitTests;
 using Highway.Data.Tests.TestDomain;
-using Highway.Test.MSTest;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
-
-#endregion
 
 namespace Highway.Data.EntityFramework.Tests.Queries
 {
@@ -69,7 +65,7 @@ namespace Highway.Data.EntityFramework.Tests.Queries
 
             //Assert
             context.VerifyAllExpectations();
-            items.ShouldNotBeNull();
+            items.Should().NotBeNull();
         }
 
         [TestMethod]
@@ -93,7 +89,7 @@ namespace Highway.Data.EntityFramework.Tests.Queries
 
 
             //Assert
-            retVal.First().ShouldBeSame(targetFoo);
+            retVal.First().Should().BeSameAs(targetFoo);
         }
 
         [TestMethod]
@@ -109,8 +105,8 @@ namespace Highway.Data.EntityFramework.Tests.Queries
 
             //assert
 
-            sqlOutput.ShouldNotBeNull();
-            sqlOutput.ShouldContain("from");
+            sqlOutput.Should().NotBeNull();
+            sqlOutput.Should().Contain("FROM");
         }
     }
 }

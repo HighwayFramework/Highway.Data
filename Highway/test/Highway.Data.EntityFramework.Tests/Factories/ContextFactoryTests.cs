@@ -1,14 +1,10 @@
-﻿#region
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using FluentAssertions;
 using Highway.Data.Domain;
 using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.EventManagement.Interfaces;
-using Highway.Test.MSTest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
-
-#endregion
 
 namespace Highway.Data.EntityFramework.Tests.Factories
 {
@@ -25,7 +21,7 @@ namespace Highway.Data.EntityFramework.Tests.Factories
             IDataContext context = factory.Create<FooDomain>();
 
             //assert
-            context.ShouldNotBeNull();
+            context.Should().NotBeNull();
         }
 
         [TestMethod]
@@ -38,7 +34,7 @@ namespace Highway.Data.EntityFramework.Tests.Factories
             IDataContext context = factory.Create<FooDomain>();
 
             // assert
-            context.ShouldBeOfType<IDomainContext<FooDomain>>();
+            context.Should().BeAssignableTo<IDomainContext<FooDomain>>();
         }
 
 
@@ -52,7 +48,7 @@ namespace Highway.Data.EntityFramework.Tests.Factories
             IDataContext context = factory.Create(typeof (FooDomain));
 
             // assert
-            context.ShouldBeOfType<IDataContext>();
+            context.Should().BeAssignableTo<IDataContext>();
         }
 
 
@@ -73,8 +69,8 @@ namespace Highway.Data.EntityFramework.Tests.Factories
             IDataContext context2 = factory.Create(typeof (BarDomain));
 
             // assert
-            context1.ShouldBeOfType<IDataContext>();
-            context2.ShouldBeOfType<IDataContext>();
+            context1.Should().BeAssignableTo<IDataContext>();
+            context2.Should().BeAssignableTo<IDataContext>();
         }
     }
 

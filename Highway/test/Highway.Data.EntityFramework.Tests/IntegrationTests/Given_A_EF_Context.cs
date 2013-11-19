@@ -1,22 +1,18 @@
-﻿#region
-
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Common.Logging;
 using Common.Logging.Simple;
+using FluentAssertions;
 using Highway.Data.EntityFramework.Tests.Initializer;
 using Highway.Data.EntityFramework.Tests.Mapping;
 using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.EntityFramework.Tests.UnitTests;
 using Highway.Data.Tests;
 using Highway.Data.Tests.TestDomain;
-using Highway.Test.MSTest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-#endregion
 
 namespace Highway.Data.EntityFramework.Tests.IntegrationTests
 {
@@ -52,7 +48,7 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
             IQueryable<Foo> items = target.AsQueryable<Foo>();
 
             //Assert
-            items.Count().ShouldBe(5);
+            items.Count().Should().BeGreaterOrEqualTo(5);
         }
 
         [TestMethod, TestCategory(TestCategories.Database)]
@@ -67,7 +63,7 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
             //Assert
             target.ChangeTracker.DetectChanges();
             DbEntityEntry<Foo> entry = target.Entry(item);
-            entry.State.ShouldBe(EntityState.Added);
+            entry.State.Should().Be(EntityState.Added);
         }
 
         [TestMethod, TestCategory(TestCategories.Database)]
@@ -82,7 +78,7 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
             //Assert
             target.ChangeTracker.DetectChanges();
             DbEntityEntry<Foo> entry = target.Entry(item);
-            entry.State.ShouldBe(EntityState.Deleted);
+            entry.State.Should().Be(EntityState.Deleted);
         }
 
         [TestMethod, TestCategory(TestCategories.Database)]
@@ -97,7 +93,7 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
             //Assert
             target.ChangeTracker.DetectChanges();
             DbEntityEntry<Foo> entry = target.Entry(item);
-            entry.State.ShouldBe(EntityState.Detached);
+            entry.State.Should().Be(EntityState.Detached);
             target.Dispose();
         }
     }

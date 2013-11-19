@@ -1,5 +1,3 @@
-#region
-
 using System.Collections.Generic;
 using System.Linq;
 using Castle.MicroKernel.Registration;
@@ -8,17 +6,15 @@ using Castle.Windsor;
 using Common.Logging;
 using Common.Logging.Simple;
 using CommonServiceLocator.WindsorAdapter;
+using FluentAssertions;
 using Highway.Data.RavenDB.Tests.TestQueries;
 using Highway.Data.Tests;
 using Highway.Data.Tests.TestDomain;
-using Highway.Test.MSTest;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Raven.Client;
 using Raven.Client.Embedded;
 using Rhino.Mocks;
-
-#endregion
 
 namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
@@ -79,7 +75,7 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
 
             //Assert
             context.VerifyAllExpectations();
-            result.ShouldBe(0);
+            result.Should().Be(0);
         }
     }
 }

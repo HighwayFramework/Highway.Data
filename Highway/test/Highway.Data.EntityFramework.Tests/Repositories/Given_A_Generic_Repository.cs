@@ -1,22 +1,18 @@
-﻿#region
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Common.Logging;
 using Common.Logging.Simple;
+using FluentAssertions;
 using Highway.Data.EntityFramework.Tests.Mapping;
 using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.EntityFramework.Tests.TestQueries;
 using Highway.Data.EntityFramework.Tests.UnitTests;
 using Highway.Data.Tests;
 using Highway.Data.Tests.TestDomain;
-using Highway.Test.MSTest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
-
-#endregion
 
 namespace Highway.Data.EntityFramework.Tests.Repositories
 {
@@ -48,7 +44,7 @@ namespace Highway.Data.EntityFramework.Tests.Repositories
             var repository = new Repository(context);
 
             //Assert
-            repository.Context.ShouldBeSame(context);
+            repository.Context.Should().BeSameAs(context);
         }
 
         [TestMethod]
@@ -69,9 +65,9 @@ namespace Highway.Data.EntityFramework.Tests.Repositories
             //Assert
             context.VerifyAllExpectations();
             Foo foo = result.First();
-            foo.ShouldNotBeNull();
-            foo.Id.ShouldBe(1);
-            foo.Name.ShouldBe("Test");
+            foo.Should().NotBeNull();
+            foo.Id.Should().Be(1);
+            foo.Name.Should().Be("Test");
         }
 
         [TestMethod]
@@ -91,7 +87,7 @@ namespace Highway.Data.EntityFramework.Tests.Repositories
 
             //Assert
             context.VerifyAllExpectations();
-            result.ShouldBe(1);
+            result.Should().Be(1);
         }
 
         [TestMethod]
@@ -111,7 +107,7 @@ namespace Highway.Data.EntityFramework.Tests.Repositories
 
             //Assert
             context.VerifyAllExpectations();
-            result.ShouldBe(1);
+            result.Should().Be(1);
         }
 
         [TestMethod]
@@ -132,7 +128,7 @@ namespace Highway.Data.EntityFramework.Tests.Repositories
 
             //Assert
             context.VerifyAllExpectations();
-            result.ShouldBe(foo);
+            result.Should().Be(foo);
         }
 
         [TestMethod]
@@ -153,7 +149,7 @@ namespace Highway.Data.EntityFramework.Tests.Repositories
 
             //Assert
             context.VerifyAllExpectations();
-            testCommand.Called.ShouldBeTrue();
+            testCommand.Called.Should().BeTrue();
         }
     }
 }

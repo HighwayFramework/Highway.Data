@@ -1,17 +1,10 @@
-﻿#region
-
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using FluentAssertions;
-using Highway.Data.Domain;
 using Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement;
 using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.EventManagement.Interfaces;
 using Highway.Data.Interceptors.Events;
-using Highway.Test.MSTest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-#endregion
 
 namespace Highway.Data.EntityFramework.Tests.EventManagement
 {
@@ -35,7 +28,7 @@ namespace Highway.Data.EntityFramework.Tests.EventManagement
             context.Commit();
 
             //assert
-            testPreSaveInterceptor.WasCalled.ShouldBeTrue();
+            testPreSaveInterceptor.WasCalled.Should().BeTrue();
         }
 
         [TestMethod]
@@ -57,8 +50,8 @@ namespace Highway.Data.EntityFramework.Tests.EventManagement
             context.Commit();
 
             //assert
-            testPreSaveInterceptor.WasCalled.ShouldBeTrue();
-            testPreSaveInterceptor2.WasCalled.ShouldBeTrue();
+            testPreSaveInterceptor.WasCalled.Should().BeTrue();
+            testPreSaveInterceptor2.WasCalled.Should().BeTrue();
             testPreSaveInterceptor.CallTime.Should().BeBefore(testPreSaveInterceptor2.CallTime);
         }
 
@@ -79,7 +72,7 @@ namespace Highway.Data.EntityFramework.Tests.EventManagement
             context.Commit();
 
             //assert
-            testPreSaveInterceptor.WasCalled.ShouldBeTrue();
+            testPreSaveInterceptor.WasCalled.Should().BeTrue();
         }
 
         [TestMethod]
@@ -101,8 +94,8 @@ namespace Highway.Data.EntityFramework.Tests.EventManagement
             context.Commit();
 
             //assert
-            testPreSaveInterceptor.WasCalled.ShouldBeTrue();
-            testPreSaveInterceptor2.WasCalled.ShouldBeTrue();
+            testPreSaveInterceptor.WasCalled.Should().BeTrue();
+            testPreSaveInterceptor2.WasCalled.Should().BeTrue();
             testPreSaveInterceptor.CallTime.Should().BeBefore(testPreSaveInterceptor2.CallTime);
         }
     }

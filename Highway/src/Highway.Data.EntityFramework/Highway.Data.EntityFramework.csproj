@@ -81,8 +81,11 @@
     <Compile Include="..\..\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="Configuration\ConfigurationRegistrarAdapater.cs" />
     <Compile Include="Configuration\DbModelBuilderAdapter.cs" />
     <Compile Include="Configuration\DefaultContextConfiguration.cs" />
+    <Compile Include="Configuration\IConfigurationRegistrarAdapater.cs" />
+    <Compile Include="Configuration\IDbModelBuilderAdapter.cs" />
     <Compile Include="Contexts\DataContext.cs" />
     <Compile Include="Contexts\DomainContext.cs" />
     <Compile Include="Database\DropCreateInitializer.cs" />

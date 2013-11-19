@@ -10,7 +10,7 @@ namespace Highway.Data
 {
     public class DbModelBuilderAdapter : DbModelBuilder, IDbModelBuilderAdapter
     {
-        public new ConfigurationRegistrarAdapater Configurations
+        public new IConfigurationRegistrarAdapater Configurations
         {
             get { return new ConfigurationRegistrarAdapater(base.Configurations); }
         }

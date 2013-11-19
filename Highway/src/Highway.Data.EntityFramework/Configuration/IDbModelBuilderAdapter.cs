@@ -5,6 +5,6 @@
     /// </summary>
     public interface IDbModelBuilderAdapter
     {
-        new ConfigurationRegistrarAdapater Configurations { get; }
+        IConfigurationRegistrarAdapater Configurations { get; }
     }
 }

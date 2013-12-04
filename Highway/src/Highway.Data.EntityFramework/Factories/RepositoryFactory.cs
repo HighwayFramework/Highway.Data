@@ -1,9 +1,5 @@
-﻿#region
-
-using System;
+﻿using System;
 using Highway.Data.Domain;
-
-#endregion
 
 namespace Highway.Data.Factories
 {
@@ -26,11 +22,5 @@ namespace Highway.Data.Factories
         {
             return new Repository(_contextFactory.Create(type));
         }
-    }
-
-    public interface IRepositoryFactory
-    {
-        IRepository Create<T>() where T : class, IDomain;
-        IRepository Create(Type type);
     }
 }

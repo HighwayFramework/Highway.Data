@@ -24,7 +24,7 @@ namespace Highway.Data.EntityFramework.Tests.EventManagement
             domain.ConnectionString = Settings.Default.Connection;
 
             //act
-            var context = new Repository(new DomainContext<TestDomain>(domain),domain);
+            var context = new Repository(new DomainContext<TestDomain>(domain), domain.Events);
             context.Commit();
 
             //assert

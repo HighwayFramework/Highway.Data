@@ -1,8 +1,4 @@
-﻿#region
-
-using System.Collections.Generic;
-
-#endregion
+﻿using System.Collections.Generic;
 
 namespace Highway.Data
 {
@@ -22,8 +18,6 @@ namespace Highway.Data
         {
             _context = context;
         }
-
-        #region IRepository Members
 
         /// <summary>
         ///     Reference to the DataContext the repository is using
@@ -75,7 +69,5 @@ namespace Highway.Data
         {
             return query.Execute(_context);
         }
-
-        #endregion
     }
 }

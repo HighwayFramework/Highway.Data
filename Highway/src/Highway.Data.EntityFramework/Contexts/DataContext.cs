@@ -1,6 +1,4 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Entity;
@@ -10,11 +8,6 @@ using System.Linq;
 using Common.Logging;
 using Common.Logging.Simple;
 using Highway.Data.EntityFramework;
-using Highway.Data.EventManagement;
-using Highway.Data.EventManagement.Interfaces;
-using Highway.Data.Interceptors.Events;
-
-#endregion
 
 namespace Highway.Data
 {
@@ -26,7 +19,6 @@ namespace Highway.Data
         private readonly bool _databaseFirst;
         private readonly ILog _log;
         private readonly IMappingConfiguration _mapping;
-        protected EventManager EventManager;
 
         /// <summary>
         ///     Constructs a context
@@ -79,7 +71,6 @@ namespace Highway.Data
             _mapping = mapping;
             _log = log;
             if (contextConfiguration != null) contextConfiguration.ConfigureContext(this);
-            EventManager = new EventManager(this);
         }
 
         /// <summary>
@@ -106,8 +97,6 @@ namespace Highway.Data
             _databaseFirst = true;
             _log = log;
         }
-
-        #region IObservableDataContext Members
 
         /// <summary>
         ///     This gives a mockable wrapper around the normal <see cref="DbSet{T}" /> method that allows for testablity
@@ -233,13 +222,11 @@ namespace Highway.Data
         ///     Commits all currently tracked entity changes
         /// </summary>
         /// <returns>the number of rows affected</returns>
-        public int Commit()
+        public virtual int Commit()
         {
             _log.Trace("\tCommit");
             base.ChangeTracker.DetectChanges();
-            InvokePreSave();
             int result = base.SaveChanges();
-            InvokePostSave();
             _log.DebugFormat("\tCommited {0} Changes", result);
             return result;
         }
@@ -274,32 +261,11 @@ namespace Highway.Data
             return base.Database.ExecuteSqlCommand(sql, dbParams);
         }
 
-        /// <summary>
-        ///     The event fired just before the commit of the ORM
-        /// </summary>
-        public event EventHandler<BeforeSave> BeforeSave;
-
-        /// <summary>
-        ///     The event fired just after the commit of the ORM
-        /// </summary>
-        public event EventHandler<AfterSave> AfterSaved;
-
-        #endregion
 
         private DbEntityEntry<T> GetChangeTrackingEntry<T>(T item) where T : class
         {
             DbEntityEntry<T> entry = base.Entry(item);
             return entry;
-        }
-
-        private void InvokePostSave()
-        {
-            if (AfterSaved != null) AfterSaved(this, new AfterSave());
-        }
-
-        private void InvokePreSave()
-        {
-            if (BeforeSave != null) BeforeSave(this, new BeforeSave());
         }
 
         /// <summary>

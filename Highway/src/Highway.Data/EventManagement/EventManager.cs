@@ -1,5 +1,6 @@
 ﻿#region
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Highway.Data.EventManagement.Interfaces;
@@ -14,42 +15,31 @@ namespace Highway.Data.EventManagement
     ///     The base implementation of the Event manager for registration of Interceptors, and execution of them in an ordered
     ///     fashion
     /// </summary>
-    public class EventManager
+    public class EventManager<T> where T : class
     {
-        private readonly IObservableDataContext _context;
+        private readonly IDomainContext<T> _context;
         private readonly List<IInterceptor> _interceptors = new List<IInterceptor>();
 
         /// <summary>
         ///     Creates the event management system used internally in Highway.Data DataContexts
         /// </summary>
         /// <param name="context"></param>
-        public EventManager(IObservableDataContext context)
+        public EventManager(IDomainContext<T> context)
         {
             _context = context;
             _context.BeforeSave += HandleEvent;
             _context.AfterSaved += HandleEvent;
         }
 
-        private void HandleEvent(object sender, AfterSave e)
+        private void HandleEvent<TEvent>(object sender, TEvent e) where TEvent : EventArgs
         {
-            var events = _interceptors.OfType<IEventInterceptor<AfterSave>>().OrderBy(x => x.Priority);
+            var events = _interceptors.OfType<IEventInterceptor<TEvent>>().OrderBy(x => x.Priority);
             foreach (var eventInterceptor in events)
             {
                 var result = eventInterceptor.Apply(_context, e);
                 if (!result.ContinueExecution) break;
             }
         }
-
-        private void HandleEvent(object sender, BeforeSave e)
-        {
-            var events = _interceptors.OfType<IEventInterceptor<BeforeSave>>().OrderBy(x => x.Priority);
-            foreach (var eventInterceptor in events)
-            {
-                var result = eventInterceptor.Apply(_context, e);
-                if (!result.ContinueExecution) break;
-            }
-        }
-
 
         /// <summary>
         ///     Allows for the Registration of <see cref="IEventInterceptor{T}" /> objects that will hook to events in priority order

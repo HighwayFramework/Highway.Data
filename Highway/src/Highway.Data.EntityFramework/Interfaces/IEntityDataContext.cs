@@ -9,7 +9,7 @@ namespace Highway.Data.EntityFramework
 {
     /// <summary>
     /// </summary>
-    public interface IEntityDataContext : IObservableDataContext
+    public interface IEntityDataContext : IDataContext
     {
         /// <summary>
         ///     Executes a SQL command and tries to map the returned datasets into an <see cref="IEnumerable{T}" />

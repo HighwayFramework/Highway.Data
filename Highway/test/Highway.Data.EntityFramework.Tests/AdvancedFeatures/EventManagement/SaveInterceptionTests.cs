@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Highway.Data.EntityFramework.Tests.EventManagement
 {
     [TestClass]
-    public class EventManagementTests
+    public class SaveInterceptionTests
     {
         [TestMethod]
         public void ShouldRegisterOneEventHandlerForPreSave()

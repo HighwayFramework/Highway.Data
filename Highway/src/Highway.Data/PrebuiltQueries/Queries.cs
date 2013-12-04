@@ -26,9 +26,7 @@ namespace Highway.Data
             return new GetById<long, T>(id);
         }
 
-        [Obsolete(
-            "Use with GREAT care, This returns the ENTIRE table into memory.  If you intend to do this, and wish to clear the warning, please instantiate Highway.Data.PreBuiltQueries.FindAll instead."
-            )]
+        [Obsolete("Use with GREAT care, This returns the ENTIRE table into memory.  If you intend to do this, and wish to clear the warning, please instantiate Highway.Data.PreBuiltQueries.FindAll instead.")]
         public static FindAll<T> FindAll<T>() where T : class
         {
             return new FindAll<T>();

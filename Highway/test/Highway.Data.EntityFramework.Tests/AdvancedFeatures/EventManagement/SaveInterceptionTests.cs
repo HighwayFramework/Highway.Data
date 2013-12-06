@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using FluentAssertions;
-using Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement;
+using Highway.Data.EntityFramework.Tests.EventManagement;
 using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.EventManagement.Interfaces;
 using Highway.Data.Interceptors.Events;
+using Highway.Data.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Highway.Data.EntityFramework.Tests.EventManagement
+namespace Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement
 {
     [TestClass]
     public class SaveInterceptionTests
@@ -24,8 +25,8 @@ namespace Highway.Data.EntityFramework.Tests.EventManagement
             domain.ConnectionString = Settings.Default.Connection;
 
             //act
-            var context = new DomainContext<TestDomain>(domain);
-            context.Commit();
+            var repo = new DomainRepository<TestDomain>(new DomainContext<TestDomain>(domain),domain);
+            repo.Context.Commit();
 
             //assert
             testPreSaveInterceptor.WasCalled.Should().BeTrue();
@@ -46,8 +47,8 @@ namespace Highway.Data.EntityFramework.Tests.EventManagement
             domain.ConnectionString = Settings.Default.Connection;
 
             //act
-            var context = new DomainContext<TestDomain>(domain);
-            context.Commit();
+            var repo = new DomainRepository<TestDomain>(new DomainContext<TestDomain>(domain), domain);
+            repo.Context.Commit();
 
             //assert
             testPreSaveInterceptor.WasCalled.Should().BeTrue();
@@ -68,8 +69,8 @@ namespace Highway.Data.EntityFramework.Tests.EventManagement
             domain.ConnectionString = Settings.Default.Connection;
 
             //act
-            var context = new DomainContext<TestDomain>(domain);
-            context.Commit();
+            var repo = new DomainRepository<TestDomain>(new DomainContext<TestDomain>(domain), domain);
+            repo.Context.Commit();
 
             //assert
             testPreSaveInterceptor.WasCalled.Should().BeTrue();
@@ -90,8 +91,8 @@ namespace Highway.Data.EntityFramework.Tests.EventManagement
             domain.ConnectionString = Settings.Default.Connection;
 
             //act
-            var context = new DomainContext<TestDomain>(domain);
-            context.Commit();
+            var repo = new DomainRepository<TestDomain>(new DomainContext<TestDomain>(domain), domain);
+            repo.Context.Commit();
 
             //assert
             testPreSaveInterceptor.WasCalled.Should().BeTrue();

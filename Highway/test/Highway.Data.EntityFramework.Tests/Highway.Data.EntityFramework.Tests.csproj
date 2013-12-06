@@ -127,7 +127,9 @@
     <Compile Include="..\..\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="AdvancedFeatures\EventManagement\CommandExecutionTests.cs" />
     <Compile Include="AdvancedFeatures\EventManagement\QueryExecutionTests.cs" />
+    <Compile Include="AdvancedFeatures\EventManagement\ScalarExecutionTests.cs" />
     <Compile Include="AdvancedFeatures\EventManagement\TestInterceptor.cs" />
     <Compile Include="AdvancedFeatures\TestDomain.cs" />
     <Compile Include="Contexts\DomainContextTests.cs" />

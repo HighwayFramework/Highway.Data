@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using FluentAssertions;
 using Highway.Data.EntityFramework.Tests.EventManagement;
 using Highway.Data.EntityFramework.Tests.Properties;
@@ -12,14 +11,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement
 {
     [TestClass]
-    public class QueryExecutionTests
+    public class CommandExecutionTests
     {
         [TestMethod]
-        public void ShouldAddSingleInterceptorForPreQueryExecution()
+        public void ShouldAddSingleInterceptorForPreCommandExecution()
         {
             //Arrange
             var domain = new TestDomain();
-            var interceptor = new TestEventInterceptor<BeforeQuery>(1);
+            var interceptor = new TestEventInterceptor<BeforeCommand>(1);
             domain.Events = new List<IInterceptor>
             {
                 interceptor
@@ -27,8 +26,8 @@ namespace Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement
             domain.ConnectionString = Settings.Default.Connection;
 
             //act
-            var repository = new RepositoryFactory(new []{domain}).Create<TestDomain>();
-            repository.Find(new EmptyQuery());
+            var repository = new RepositoryFactory(new[] { domain }).Create<TestDomain>();
+            repository.Execute(new EmptyCommand());
 
             //assert
             interceptor.WasCalled.Should().BeTrue();
@@ -36,12 +35,12 @@ namespace Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement
         }
 
         [TestMethod]
-        public void ShouldAddTwoInterceptorForPreQueryExecution()
+        public void ShouldAddTwoInterceptorForPreCommandExecution()
         {
             //Arrange
             var domain = new TestDomain();
-            var interceptor = new TestEventInterceptor<BeforeQuery>(1);
-            var interceptorTwo = new TestEventInterceptor<BeforeQuery>(2);
+            var interceptor = new TestEventInterceptor<BeforeCommand>(1);
+            var interceptorTwo = new TestEventInterceptor<BeforeCommand>(2);
             domain.Events = new List<IInterceptor>
             {
                 interceptorTwo,
@@ -50,8 +49,8 @@ namespace Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement
             domain.ConnectionString = Settings.Default.Connection;
 
             //act
-            var repository = new RepositoryFactory(new []{domain}).Create<TestDomain>();
-            repository.Find(new EmptyQuery());
+            var repository = new RepositoryFactory(new[] { domain }).Create<TestDomain>();
+            repository.Execute(new EmptyCommand());
 
             //assert
             interceptor.WasCalled.Should().BeTrue();
@@ -61,11 +60,11 @@ namespace Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement
         }
 
         [TestMethod]
-        public void ShouldAddSingleInterceptorForAfterQueryExecution()
+        public void ShouldAddSingleInterceptorForAfterCommandExecution()
         {
             //Arrange
             var domain = new TestDomain();
-            var interceptor = new TestEventInterceptor<AfterQuery>(1);
+            var interceptor = new TestEventInterceptor<AfterCommand>(1);
             domain.Events = new List<IInterceptor>
             {
                 interceptor
@@ -74,7 +73,7 @@ namespace Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement
 
             //act
             var repository = new RepositoryFactory(new[] { domain }).Create<TestDomain>();
-            repository.Find(new EmptyQuery());
+            repository.Execute(new EmptyCommand());
 
             //assert
             interceptor.WasCalled.Should().BeTrue();
@@ -82,12 +81,12 @@ namespace Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement
         }
 
         [TestMethod]
-        public void ShouldAddTwoInterceptorForAfterQueryExecution()
+        public void ShouldAddTwoInterceptorForAfterCommandExecution()
         {
             //Arrange
             var domain = new TestDomain();
-            var interceptor = new TestEventInterceptor<AfterQuery>(1);
-            var interceptorTwo = new TestEventInterceptor<AfterQuery>(2);
+            var interceptor = new TestEventInterceptor<AfterCommand>(1);
+            var interceptorTwo = new TestEventInterceptor<AfterCommand>(2);
             domain.Events = new List<IInterceptor>
             {
                 interceptorTwo,
@@ -97,7 +96,7 @@ namespace Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement
 
             //act
             var repository = new RepositoryFactory(new[] { domain }).Create<TestDomain>();
-            repository.Find(new EmptyQuery());
+            repository.Execute(new EmptyCommand());
 
             //assert
             interceptor.WasCalled.Should().BeTrue();
@@ -107,11 +106,11 @@ namespace Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement
         }
     }
 
-    public class EmptyQuery : Query<Foo>
+    public class EmptyCommand : Command
     {
-        public EmptyQuery()
+        public EmptyCommand()
         {
-            ContextQuery = c=> new List<Foo>().AsQueryable();
+            ContextQuery = c => { };
         }
     }
 }

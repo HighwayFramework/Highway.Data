@@ -6,6 +6,7 @@ using System.Linq;
 using Highway.Data.EventManagement.Interfaces;
 using Highway.Data.Interceptors;
 using Highway.Data.Interceptors.Events;
+using Highway.Data.Repositories;
 
 #endregion
 
@@ -17,15 +18,16 @@ namespace Highway.Data.EventManagement
     /// </summary>
     public class EventManager<T> where T : class
     {
-        private readonly IDomainContext<T> _context;
+        private readonly IDomainRepository<T> _repository;
         private readonly List<IInterceptor> _interceptors = new List<IInterceptor>();
 
         /// <summary>
         ///     Creates the event management system used internally in Highway.Data DataContexts
         /// </summary>
-        /// <param name="context"></param>
-        public EventManager(IDomainContext<T> context)
+        /// <param name="repository">the repository that events will come from</param>
+        public EventManager(IDomainRepository<T> repository)
         {
+<<<<<<< HEAD
             _context = context;
             _context.BeforeSave += HandleEvent;
             _context.AfterSave += HandleEvent;
@@ -34,13 +36,103 @@ namespace Highway.Data.EventManagement
         private void HandleEvent<TEvent>(object sender, TEvent e) where TEvent : EventArgs
         {
             var events = _interceptors.OfType<IEventInterceptor<TEvent>>().OrderBy(x => x.Priority);
+=======
+            _repository = repository;
+            _repository.DomainContext.AfterSave += HandleEvent;
+            _repository.DomainContext.BeforeSave += HandleEvent;
+            _repository.AfterQuery += HandleEvent;
+            _repository.BeforeQuery += HandleEvent;
+            _repository.BeforeCommand += HandleEvent;
+            _repository.BeforeScalar += HandleEvent;
+            _repository.AfterCommand += HandleEvent;
+            _repository.AfterScalar += HandleEvent;
+
+        }
+
+        private void HandleEvent(object sender, AfterSave e)
+        {
+            var events = _interceptors.OfType<IEventInterceptor<AfterSave>>().OrderBy(x => x.Priority);
+>>>>>>> Initial working version of pre and post all query objects.
             foreach (var eventInterceptor in events)
             {
-                var result = eventInterceptor.Apply(_context, e);
+                var result = eventInterceptor.Apply(_repository.DomainContext, e);
                 if (!result.ContinueExecution) break;
             }
         }
 
+<<<<<<< HEAD
+=======
+        private void HandleEvent(object sender, BeforeSave e)
+        {
+            var events = _interceptors.OfType<IEventInterceptor<BeforeSave>>().OrderBy(x => x.Priority);
+            foreach (var eventInterceptor in events)
+            {
+                var result = eventInterceptor.Apply(_repository.DomainContext, e);
+                if (!result.ContinueExecution) break;
+            }
+        }
+
+        private void HandleEvent(object sender, BeforeQuery e)
+        {
+            var events = _interceptors.OfType<IEventInterceptor<BeforeQuery>>().OrderBy(x => x.Priority);
+            foreach (var eventInterceptor in events)
+            {
+                var result = eventInterceptor.Apply(_repository.DomainContext, e);
+                if (!result.ContinueExecution) break;
+            }
+        }
+
+        private void HandleEvent(object sender, AfterQuery e)
+        {
+            var events = _interceptors.OfType<IEventInterceptor<AfterQuery>>().OrderBy(x => x.Priority);
+            foreach (var eventInterceptor in events)
+            {
+                var result = eventInterceptor.Apply(_repository.DomainContext, e);
+                if (!result.ContinueExecution) break;
+            }
+        }
+
+        private void HandleEvent(object sender, BeforeScalar e)
+        {
+            var events = _interceptors.OfType<IEventInterceptor<BeforeScalar>>().OrderBy(x => x.Priority);
+            foreach (var eventInterceptor in events)
+            {
+                var result = eventInterceptor.Apply(_repository.DomainContext, e);
+                if (!result.ContinueExecution) break;
+            }
+        }
+
+        private void HandleEvent(object sender, AfterScalar e)
+        {
+            var events = _interceptors.OfType<IEventInterceptor<AfterScalar>>().OrderBy(x => x.Priority);
+            foreach (var eventInterceptor in events)
+            {
+                var result = eventInterceptor.Apply(_repository.DomainContext, e);
+                if (!result.ContinueExecution) break;
+            }
+        }
+
+        private void HandleEvent(object sender, BeforeCommand e)
+        {
+            var events = _interceptors.OfType<IEventInterceptor<BeforeCommand>>().OrderBy(x => x.Priority);
+            foreach (var eventInterceptor in events)
+            {
+                var result = eventInterceptor.Apply(_repository.DomainContext, e);
+                if (!result.ContinueExecution) break;
+            }
+        }
+
+        private void HandleEvent(object sender, AfterCommand e)
+        {
+            var events = _interceptors.OfType<IEventInterceptor<AfterCommand>>().OrderBy(x => x.Priority);
+            foreach (var eventInterceptor in events)
+            {
+                var result = eventInterceptor.Apply(_repository.DomainContext, e);
+                if (!result.ContinueExecution) break;
+            }
+        }
+
+>>>>>>> Initial working version of pre and post all query objects.
         /// <summary>
         ///     Allows for the Registration of <see cref="IEventInterceptor{T}" /> objects that will hook to events in priority order
         /// </summary>

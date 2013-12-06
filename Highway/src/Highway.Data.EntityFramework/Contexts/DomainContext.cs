@@ -1,34 +1,14 @@
-<<<<<<< HEAD
-﻿#region
-
-using System;
-using Common.Logging.Simple;
-using Highway.Data.Domain;
-using Highway.Data.Interceptors.Events;
-
-=======
-﻿#region
-
 using System;
 using Common.Logging.Simple;
 using Highway.Data.Interceptors.Events;
 
->>>>>>> WIP
-#endregion
 
 namespace Highway.Data
 {
-<<<<<<< HEAD
-    /// <summary>
-    /// Context that allows 
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-=======
     /// <summary>
     /// A Context that is constrained to a specified Domain
     /// </summary>
     /// <typeparam name="T">The Domain this context is specific for</typeparam>
->>>>>>> Initial working version of pre and post all query objects.
     public class DomainContext<T> : DataContext, IDomainContext<T> where T : class, IDomain
     {
         /// <summary>
@@ -38,34 +18,8 @@ namespace Highway.Data
         public DomainContext(T domain)
             : base(domain.ConnectionString, domain.Mappings, domain.Context, new NoOpLogger())
         {
-<<<<<<< HEAD
-            foreach (var @event in domain.Events)
-            {
-                EventManager.Register(@event);
-            }
         }
 
-
-        /// <summary>
-        ///     The event fired just before the commit of the ORM
-        /// </summary>
-        public event EventHandler<BeforeSave> BeforeSave;
-
-        /// <summary>
-        ///     The event fired just after the commit of the ORM
-        /// </summary>
-        public event EventHandler<AfterSave> AfterSaved;
-        private void InvokePostSave()
-        {
-            if (AfterSaved != null) AfterSaved(this, new AfterSave());
-        }
-
-        private void InvokePreSave()
-        {
-            if (BeforeSave != null) BeforeSave(this, new BeforeSave());
-=======
-            
-        }
 
         public override int Commit()
         {
@@ -93,7 +47,6 @@ namespace Highway.Data
         private void OnBeforeSave()
         {
             if (BeforeSave != null) BeforeSave(this, new BeforeSave());
->>>>>>> WIP
         }
     }
 }

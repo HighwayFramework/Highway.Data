@@ -27,16 +27,6 @@ namespace Highway.Data.EventManagement
         /// <param name="repository">the repository that events will come from</param>
         public EventManager(IDomainRepository<T> repository)
         {
-<<<<<<< HEAD
-            _context = context;
-            _context.BeforeSave += HandleEvent;
-            _context.AfterSave += HandleEvent;
-        }
-
-        private void HandleEvent<TEvent>(object sender, TEvent e) where TEvent : EventArgs
-        {
-            var events = _interceptors.OfType<IEventInterceptor<TEvent>>().OrderBy(x => x.Priority);
-=======
             _repository = repository;
             _repository.DomainContext.AfterSave += HandleEvent;
             _repository.DomainContext.BeforeSave += HandleEvent;
@@ -52,7 +42,6 @@ namespace Highway.Data.EventManagement
         private void HandleEvent(object sender, AfterSave e)
         {
             var events = _interceptors.OfType<IEventInterceptor<AfterSave>>().OrderBy(x => x.Priority);
->>>>>>> Initial working version of pre and post all query objects.
             foreach (var eventInterceptor in events)
             {
                 var result = eventInterceptor.Apply(_repository.DomainContext, e);
@@ -60,8 +49,6 @@ namespace Highway.Data.EventManagement
             }
         }
 
-<<<<<<< HEAD
-=======
         private void HandleEvent(object sender, BeforeSave e)
         {
             var events = _interceptors.OfType<IEventInterceptor<BeforeSave>>().OrderBy(x => x.Priority);
@@ -131,8 +118,7 @@ namespace Highway.Data.EventManagement
                 if (!result.ContinueExecution) break;
             }
         }
-
->>>>>>> Initial working version of pre and post all query objects.
+        
         /// <summary>
         ///     Allows for the Registration of <see cref="IEventInterceptor{T}" /> objects that will hook to events in priority order
         /// </summary>

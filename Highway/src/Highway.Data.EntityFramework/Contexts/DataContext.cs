@@ -261,25 +261,12 @@ namespace Highway.Data
             return base.Database.ExecuteSqlCommand(sql, dbParams);
         }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        
-        #endregion
->>>>>>> WIP
-
-=======
->>>>>>> Initial working version of pre and post all query objects.
         private DbEntityEntry<T> GetChangeTrackingEntry<T>(T item) where T : class
         {
             DbEntityEntry<T> entry = base.Entry(item);
             return entry;
         }
 
-<<<<<<< HEAD
-=======
-        
->>>>>>> WIP
         /// <summary>
         /// </summary>
         /// <param name="procedureName"></param>

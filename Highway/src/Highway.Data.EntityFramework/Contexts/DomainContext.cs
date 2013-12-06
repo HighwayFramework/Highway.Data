@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿#region
 
 using System;
@@ -5,6 +6,14 @@ using Common.Logging.Simple;
 using Highway.Data.Domain;
 using Highway.Data.Interceptors.Events;
 
+=======
+﻿#region
+
+using System;
+using Common.Logging.Simple;
+using Highway.Data.Interceptors.Events;
+
+>>>>>>> WIP
 #endregion
 
 namespace Highway.Data
@@ -18,6 +27,7 @@ namespace Highway.Data
         public DomainContext(T domain)
             : base(domain.ConnectionString, domain.Mappings, domain.Context, new NoOpLogger())
         {
+<<<<<<< HEAD
             foreach (var @event in domain.Events)
             {
                 EventManager.Register(@event);
@@ -42,6 +52,29 @@ namespace Highway.Data
         private void InvokePreSave()
         {
             if (BeforeSave != null) BeforeSave(this, new BeforeSave());
+=======
+            
+        }
+
+        /// <summary>
+        ///     The event fired just before the commit of the ORM
+        /// </summary>
+        public event EventHandler<BeforeSave> BeforeSave;
+
+        /// <summary>
+        ///     The event fired just after the commit of the ORM
+        /// </summary>
+        public event EventHandler<AfterSave> AfterSave;
+
+        private void InvokePostSave()
+        {
+            if (AfterSave != null) AfterSave(this, new AfterSave());
+        }
+
+        private void InvokePreSave()
+        {
+            if (BeforeSave != null) BeforeSave(this, new BeforeSave());
+>>>>>>> WIP
         }
     }
 }

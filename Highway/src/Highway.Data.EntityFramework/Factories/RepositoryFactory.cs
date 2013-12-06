@@ -1,26 +1,49 @@
+<<<<<<< HEAD
 ﻿using System;
 using Highway.Data.Domain;
+=======
+﻿#region
+
+using System;
+using System.Linq;
+using Highway.Data.Repositories;
+>>>>>>> WIP
 
 namespace Highway.Data.Factories
 {
     public class RepositoryFactory : IRepositoryFactory
     {
-        private readonly IContextFactory _contextFactory;
+        private readonly IDomain[] _domains;
 
-        public RepositoryFactory(IContextFactory contextFactory)
+        public RepositoryFactory(IDomain[] domains)
         {
-            _contextFactory = contextFactory;
+            _domains = domains;
         }
 
 
         public IRepository Create<T>() where T : class, IDomain
         {
-            return new Repository(_contextFactory.Create<T>());
+            var domain = _domains.OfType<T>().SingleOrDefault();
+            var context = new DomainContext<T>(domain);
+            return new DomainRepository<T>(context,domain);
         }
 
         public IRepository Create(Type type)
         {
-            return new Repository(_contextFactory.Create(type));
+            var domain = _domains.FirstOrDefault(x => x.GetType() == type);
+            var d1 = typeof(DomainContext<>);
+            Type[] typeArgs = { type };
+            var contextCtor = d1.MakeGenericType(typeArgs);
+            object untypedObject = Activator.CreateInstance(contextCtor, domain);
+
+            var r1 = typeof(DomainRepository<>);
+            var repositoryCtor = r1.MakeGenericType(typeArgs);
+            object repo = Activator.CreateInstance(repositoryCtor, untypedObject, domain);
+            return (IRepository) repo;
         }
+<<<<<<< HEAD
     }
+=======
+    }
+>>>>>>> WIP
 }

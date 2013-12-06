@@ -6,6 +6,11 @@ namespace Highway.Data.EntityFramework.Tests.EventManagement
 {
     public class TestDomain : IDomain
     {
+        public TestDomain()
+        {
+            ConnectionString = "name=Stupid";
+            Events = new List<IInterceptor>();
+        }
         public List<IInterceptor> Events { get; set; }
 
         //This is not here

@@ -136,10 +136,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Highway.Data.RavenDB\Highway.Data.RavenDB.csproj">
-      <Project>{A677DDBC-6200-48EF-B7A1-70947C5E01DF}</Project>
-      <Name>Highway.Data.RavenDB</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\Highway.Data\Highway.Data.csproj">
       <Project>{B0CA9DAB-C5D4-4AC6-97E7-725B18191B2D}</Project>
       <Name>Highway.Data</Name>

@@ -13,6 +13,6 @@ namespace Highway.Data
         /// <summary>
         ///     The event fired just after the commit of the persistence
         /// </summary>
-        event EventHandler<AfterSave> AfterSaved;
+        event EventHandler<AfterSave> AfterSave;
     }
 }

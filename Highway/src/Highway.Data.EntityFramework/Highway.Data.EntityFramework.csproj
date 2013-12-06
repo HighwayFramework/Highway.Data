@@ -105,6 +105,7 @@
     <Compile Include="QueryObjects\AdvancedCommand.cs" />
     <Compile Include="QueryObjects\AdvancedQuery.cs" />
     <Compile Include="QueryObjects\AdvancedScalar.cs" />
+    <Compile Include="Repositories\DomainRepository.cs" />
     <Compile Include="StoredProcedures\StoredProcedureAttributes.cs" />
     <Compile Include="StoredProcedures\StoredProcedureHelpers.cs" />
     <Compile Include="StoredProcedures\StoredProcedures.cs" />

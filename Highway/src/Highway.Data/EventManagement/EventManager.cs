@@ -28,7 +28,7 @@ namespace Highway.Data.EventManagement
         {
             _context = context;
             _context.BeforeSave += HandleEvent;
-            _context.AfterSaved += HandleEvent;
+            _context.AfterSave += HandleEvent;
         }
 
         private void HandleEvent<TEvent>(object sender, TEvent e) where TEvent : EventArgs

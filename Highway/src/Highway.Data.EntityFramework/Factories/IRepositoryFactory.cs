@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using System;
 
 namespace Highway.Data.Factories
@@ -22,4 +23,15 @@ namespace Highway.Data.Factories
         /// <returns><see cref="IRepository"/></returns>
         IRepository Create(Type type);
     }
+=======
+﻿using System;
+
+namespace Highway.Data.Factories
+{
+    public interface IRepositoryFactory
+    {
+        IRepository Create<T>() where T : class, IDomain;
+        IRepository Create(Type type);
+    }
+>>>>>>> WIP
 }

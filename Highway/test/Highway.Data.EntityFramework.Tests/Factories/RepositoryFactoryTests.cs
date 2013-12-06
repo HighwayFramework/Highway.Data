@@ -1,7 +1,7 @@
 ﻿#region
 
 using FluentAssertions;
-using Highway.Data.Domain;
+using Highway.Data.EntityFramework.Tests.EventManagement;
 using Highway.Data.Factories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
@@ -17,11 +17,10 @@ namespace Highway.Data.EntityFramework.Tests.Factories
         public void ShouldCreateRepository()
         {
             // arrange
-            var contextFactory = MockRepository.GenerateMock<IContextFactory>();
-            IRepositoryFactory factory = new RepositoryFactory(contextFactory);
+            IRepositoryFactory factory = new RepositoryFactory(new []{new TestDomain()});
 
             // act
-            IRepository repo = factory.Create<FooDomain>();
+            IRepository repo = factory.Create<TestDomain>();
 
             // assert
             repo.Should().NotBeNull();
@@ -31,11 +30,10 @@ namespace Highway.Data.EntityFramework.Tests.Factories
         public void ShouldCreateRepositoryFromType()
         {
             // arrange
-            var contextFactory = MockRepository.GenerateMock<IContextFactory>();
-            IRepositoryFactory factory = new RepositoryFactory(contextFactory);
+            IRepositoryFactory factory = new RepositoryFactory(new[] { new TestDomain() });
 
             // act
-            IRepository repo = factory.Create(typeof (FooDomain));
+            IRepository repo = factory.Create(typeof (TestDomain));
 
             // assert
             repo.Should().NotBeNull();

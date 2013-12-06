@@ -33,7 +33,7 @@ namespace Highway.Data
         /// <typeparam name="T">The Entity being queried</typeparam>
         /// <param name="query">The prebuilt Query Object</param>
         /// <returns>The instance of <typeparamref name="T" /> returned from the query</returns>
-        public T Find<T>(IScalar<T> query)
+        public virtual T Find<T>(IScalar<T> query)
         {
             return query.Execute(_context);
         }
@@ -42,7 +42,7 @@ namespace Highway.Data
         ///     Executes a prebuilt <see cref="ICommand" />
         /// </summary>
         /// <param name="command">The prebuilt command object</param>
-        public void Execute(ICommand command)
+        public virtual void Execute(ICommand command)
         {
             command.Execute(_context);
         }
@@ -53,7 +53,7 @@ namespace Highway.Data
         /// <typeparam name="T">The Entity being queried</typeparam>
         /// <param name="query">The prebuilt Query Object</param>
         /// <returns>The <see cref="IEnumerable{T}" /> returned from the query</returns>
-        public IEnumerable<T> Find<T>(IQuery<T> query)
+        public virtual IEnumerable<T> Find<T>(IQuery<T> query)
         {
             return query.Execute(_context);
         }
@@ -64,7 +64,7 @@ namespace Highway.Data
         /// <typeparam name="T">The Entity being queried</typeparam>
         /// <param name="query">The prebuilt Query Object</param>
         /// <returns>The <see cref="IEnumerable{T}" /> returned from the query</returns>
-        public IEnumerable<IProjection> Find<TSelection, IProjection>(IQuery<TSelection, IProjection> query)
+        public virtual IEnumerable<IProjection> Find<TSelection, IProjection>(IQuery<TSelection, IProjection> query)
             where TSelection : class
         {
             return query.Execute(_context);

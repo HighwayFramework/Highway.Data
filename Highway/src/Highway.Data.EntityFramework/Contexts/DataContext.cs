@@ -261,6 +261,11 @@ namespace Highway.Data
             return base.Database.ExecuteSqlCommand(sql, dbParams);
         }
 
+<<<<<<< HEAD
+=======
+        
+        #endregion
+>>>>>>> WIP
 
         private DbEntityEntry<T> GetChangeTrackingEntry<T>(T item) where T : class
         {
@@ -268,6 +273,10 @@ namespace Highway.Data
             return entry;
         }
 
+<<<<<<< HEAD
+=======
+        
+>>>>>>> WIP
         /// <summary>
         /// </summary>
         /// <param name="procedureName"></param>

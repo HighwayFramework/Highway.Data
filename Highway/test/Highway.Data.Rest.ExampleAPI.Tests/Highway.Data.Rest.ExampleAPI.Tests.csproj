@@ -132,14 +132,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Highway.Data.Rest.ExampleAPI\Highway.Data.Rest.ExampleAPI.csproj">
-      <Project>{C16DFFDF-D169-42F5-BFC5-5AFE3EFDEDDA}</Project>
-      <Name>Highway.Data.Rest.ExampleAPI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\Highway.Data.Rest\Highway.Data.Rest.csproj">
-      <Project>{1FEB6F81-5621-49EF-9B54-3C1DD86D9BCB}</Project>
-      <Name>Highway.Data.Rest</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\Highway.Data\Highway.Data.csproj">
       <Project>{B0CA9DAB-C5D4-4AC6-97E7-725B18191B2D}</Project>
       <Name>Highway.Data</Name>

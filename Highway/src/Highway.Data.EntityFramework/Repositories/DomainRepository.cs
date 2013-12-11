@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Highway.Data.EventManagement;
 using Highway.Data.Interceptors.Events;
 
@@ -25,17 +26,17 @@ namespace Highway.Data.Repositories
 
         public override IEnumerable<T1> Find<T1>(IQuery<T1> query)
         {
-            OnBeforeQuery(new BeforeQuery());
+            OnBeforeQuery(new BeforeQuery(query));
             var result =  base.Find(query);
-            OnAfterQuery(new AfterQuery());
+            OnAfterQuery(new AfterQuery(result));
             return result;
         }
 
         public override IEnumerable<TProjection> Find<TSelection, TProjection>(IQuery<TSelection, TProjection> query)
         {
-            OnBeforeQuery(new BeforeQuery());
+            OnBeforeQuery(new BeforeQuery(query));
             var results = base.Find(query);
-            OnAfterQuery(new AfterQuery());
+            OnAfterQuery(new AfterQuery(results));
             return results;
         }
 

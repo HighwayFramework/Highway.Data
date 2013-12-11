@@ -1,6 +1,7 @@
 #region
 
 using System;
+using System.Collections.Generic;
 
 #endregion
 
@@ -11,5 +12,11 @@ namespace Highway.Data.Interceptors.Events
     /// </summary>
     public class AfterQuery : EventArgs
     {
+        public object Result { get; set; }
+
+        public AfterQuery(object result)
+        {
+            Result = result;
+        }
     }
 }

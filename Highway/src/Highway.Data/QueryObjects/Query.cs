@@ -107,8 +107,6 @@ namespace Highway.Data
         protected Func<IDataContext, IQueryable<TSelection>> Selector { get; set; }
         protected Func<IQueryable<TSelection>, IQueryable<TProjection>> Projector { get; set; }
 
-        #region IQuery<T> Members
-
         /// <summary>
         ///     This executes the expression in ContextQuery on the context that is passed in, resulting in a
         ///     <see cref="IQueryable{T}" /> that is returned as an <see cref="IEnumerable{T}" />
@@ -140,8 +138,6 @@ namespace Highway.Data
 
             return query.ToString();
         }
-
-        #endregion
 
         /// <summary>
         ///     This method allows for the extension of Ordering and Grouping on the prebuild Query

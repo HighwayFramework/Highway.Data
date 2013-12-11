@@ -75,7 +75,7 @@ namespace Highway.Data
         /// <returns></returns>
         public string OutputQuery(IDataContext context)
         {
-            return ExtendQuery(Selector).ToString();
+            return ExtendQuery().ToString();
         }
 
         /// <summary>
@@ -86,6 +86,8 @@ namespace Highway.Data
         {
             return Selector(Context);
         }
+
+
 
         /// <summary>
         ///     Gives the ability to append an <see cref="IQueryable" /> onto the current query

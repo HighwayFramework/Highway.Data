@@ -88,6 +88,7 @@
     <Compile Include="Configuration\IDbModelBuilderAdapter.cs" />
     <Compile Include="Contexts\DataContext.cs" />
     <Compile Include="Contexts\DomainContext.cs" />
+    <Compile Include="Contexts\InMemoryDomainContext.cs" />
     <Compile Include="Database\DropCreateInitializer.cs" />
     <Compile Include="Factories\IRepositoryFactory.cs" />
     <Compile Include="Interfaces\IDomain.cs" />

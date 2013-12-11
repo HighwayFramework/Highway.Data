@@ -12,6 +12,7 @@ using Highway.Data.EventManagement.Interfaces;
 using Highway.Data.Factories;
 using Highway.Data.Interceptors;
 using Highway.Data.Interceptors.Events;
+using Highway.Data.Repositories;
 using Highway.Data.Tests.TestDomain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -125,13 +126,16 @@ namespace Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement
             domain.ConnectionString = Settings.Default.Connection;
 
             //act
-            var repository = new RepositoryFactory(new[] { domain }).Create<TestDomain>();
-            var emptyQuery = new EmptyQuery();
-            repository.Find(emptyQuery);
+            var inMemoryDomainContext = new InMemoryDomainContext<TestDomain>(domain);
+            inMemoryDomainContext.Add(new Foo() {Name = "Test"});
+            inMemoryDomainContext.Add(new Foo() {Name = "Should Not Show up"});
+            inMemoryDomainContext.Commit();
+            var repository = new DomainRepository<TestDomain>(inMemoryDomainContext, domain);
+            var emptyQuery = new AllFoos();
+            var results = repository.Find(emptyQuery);
 
             //assert
-            PropertyInfo propertyInfo = typeof (EmptyQuery).GetProperty("ContextQuery",BindingFlags.NonPublic | BindingFlags.Instance);
-            var field = propertyInfo.GetValue(emptyQuery);
+            results.Count().Should().Be(1);
         }
     }
 
@@ -143,8 +147,8 @@ namespace Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement
         }
         public InterceptorResult Apply(IDataContext context, BeforeQuery eventArgs)
         {
-            var query = eventArgs.Query as EmptyQuery;
-            var func = ExtractQuery<EmptyQuery, Foo>(query);
+            var query = eventArgs.Query as AllFoos;
+            var func = ExtractQuery<AllFoos, Foo>(query);
             return InterceptorResult.Succeeded();
         }
 
@@ -156,6 +160,14 @@ namespace Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement
         }
 
         public int Priority { get; private set; }
+    }
+
+    public class AllFoos : Query<Foo>
+    {
+        public AllFoos()
+        {
+            ContextQuery = c => c.AsQueryable<Foo>();
+        }
     }
 
     public class EmptyQuery : Query<Foo>

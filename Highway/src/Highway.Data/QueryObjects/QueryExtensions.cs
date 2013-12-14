@@ -1,5 +1,6 @@
 #region
 
+using System;
 using System.Linq.Expressions;
 
 #endregion
@@ -70,6 +71,14 @@ namespace Highway.Data
             var generics = new[] {typeof (TSelection)};
             var parameters = new Expression[] {Expression.Constant(count)};
             ((IExtendableQuery) extend).AddMethodExpression("Skip", generics, parameters);
+            return extend;
+        }
+
+        public static IQuery<T> Where<T>(this IQuery<T> extend, Expression<Func<T,bool>> predicate)
+        {
+            var generics = new[] { typeof(T) };
+            var parameters = new Expression[] { predicate };
+            ((IExtendableQuery)extend).AddMethodExpression("Where", generics, parameters);
             return extend;
         }
     }

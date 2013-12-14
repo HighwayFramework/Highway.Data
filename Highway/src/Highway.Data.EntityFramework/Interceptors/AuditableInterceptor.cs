@@ -79,6 +79,11 @@ namespace Highway.Data.Interceptors
             return InterceptorResult.Succeeded();
         }
 
+        public bool AppliesTo(BeforeSave eventArgs)
+        {
+            return true;
+        }
+
         #endregion
     }
 }

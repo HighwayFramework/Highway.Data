@@ -29,5 +29,10 @@ namespace Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement
             CallTime = DateTime.Now;
             return InterceptorResult.Succeeded();
         }
+
+        public bool AppliesTo(T eventArgs)
+        {
+            return true;
+        }
     }
 }

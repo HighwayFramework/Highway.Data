@@ -115,8 +115,7 @@ namespace Highway.Data.EntityFramework
             Stopwatch sw = Stopwatch.StartNew();
             T[] results = query.Execute(context).ToArray();
             sw.Stop();
-            log.TraceFormat("Completed Context Compilation in {0} ms for {1} records",
-                sw.ElapsedMilliseconds, results.Count());
+            log.TraceFormat("Completed Context Compilation in {0} ms for {1} records", sw.ElapsedMilliseconds, results.Count());
             if (sw.ElapsedMilliseconds > maxAllowableMilliseconds)
                 throw new InvalidOperationException(
                     string.Format(

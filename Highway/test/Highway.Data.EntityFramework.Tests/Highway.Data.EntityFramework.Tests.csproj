@@ -128,6 +128,7 @@
       <Link>SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="AdvancedFeatures\EventManagement\CommandExecutionTests.cs" />
+    <Compile Include="AdvancedFeatures\EventManagement\EmptyQuery.cs" />
     <Compile Include="AdvancedFeatures\EventManagement\QueryExecutionTests.cs" />
     <Compile Include="AdvancedFeatures\EventManagement\ScalarExecutionTests.cs" />
     <Compile Include="AdvancedFeatures\EventManagement\TestInterceptor.cs" />
@@ -136,7 +137,8 @@
     <Compile Include="AdvancedFeatures\EventManagement\SaveInterceptionTests.cs" />
     <Compile Include="Factories\RepositoryFactoryTests.cs" />
     <Compile Include="Initializer\EntityFrameworkIntializer.cs" />
-    <Compile Include="IntegrationTests\Given_A_EF_Context.cs" />
+    <Compile Include="IntegrationTests\AssemblyConfigurationTests.cs" />
+    <Compile Include="IntegrationTests\BasicQueryTests.cs" />
     <Compile Include="IntegrationTests\Given_a_Stored_Proc.cs" />
     <Compile Include="Logging\Given_A_Context_With_a_Logger.cs" />
     <Compile Include="Mapping\BarMappingConfiguration.cs" />

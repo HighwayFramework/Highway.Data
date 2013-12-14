@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using Castle.MicroKernel.ModelBuilder.Descriptors;
@@ -10,8 +8,8 @@ using Highway.Data.EntityFramework.Tests.EventManagement;
 using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.EventManagement.Interfaces;
 using Highway.Data.Factories;
-using Highway.Data.Interceptors;
 using Highway.Data.Interceptors.Events;
+using Highway.Data.PrebuiltInterceptors;
 using Highway.Data.Repositories;
 using Highway.Data.Tests.TestDomain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -118,7 +116,7 @@ namespace Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement
         {
             //Arrange
             var domain = new TestDomain();
-            var interceptor = new AppendWhere();
+            var interceptor = new AppendWhere<Foo>(1, foo => foo.Name == "Test", typeof(AllFoos));
             domain.Events = new List<IInterceptor>
             {
                 interceptor
@@ -139,42 +137,11 @@ namespace Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement
         }
     }
 
-    public class AppendWhere : IEventInterceptor<BeforeQuery>
-    {
-        public AppendWhere()
-        {
-            Priority = 1;
-        }
-        public InterceptorResult Apply(IDataContext context, BeforeQuery eventArgs)
-        {
-            var query = eventArgs.Query as AllFoos;
-            var func = ExtractQuery<AllFoos, Foo>(query);
-            return InterceptorResult.Succeeded();
-        }
-
-        private Func<IDataContext, IQueryable<TK>> ExtractQuery<T, TK>(T query) where T : IQueryBase
-        {
-            var fieldDescription = typeof (T).GetProperty("ContextQuery", BindingFlags.NonPublic | BindingFlags.Instance);
-            object value = fieldDescription.GetValue(query);
-            return value as Func<IDataContext,IQueryable<TK>>;
-        }
-
-        public int Priority { get; private set; }
-    }
-
     public class AllFoos : Query<Foo>
     {
         public AllFoos()
         {
             ContextQuery = c => c.AsQueryable<Foo>();
-        }
-    }
-
-    public class EmptyQuery : Query<Foo>
-    {
-        public EmptyQuery()
-        {
-            ContextQuery = c=> new List<Foo>().AsQueryable();
         }
     }
 }

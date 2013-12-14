@@ -17,16 +17,16 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Highway.Data.EntityFramework.Tests.IntegrationTests
 {
     [TestClass]
-    public class Given_A_EF_Context : ContainerTest<TestDataContext>
+    public class AssemblyConfigurationTests : ContainerTest<TestDataContext>
     {
-        public override TestDataContext ResolveTarget()
+     public override TestDataContext ResolveTarget()
         {
             return Container.Resolve<TestDataContext>(new {connectionString = Settings.Default.Connection});
         }
 
         public override void RegisterComponents(IWindsorContainer container)
         {
-            container.Register(Component.For<IMappingConfiguration>().ImplementedBy<FooMappingConfiguration>(),
+            container.Register(Component.For<IMappingConfiguration>().Instance(Mappings.CreateFromAssembly<FooMap>()),
                 Component.For<ILog>().ImplementedBy<NoOpLogger>(),
                 Component.For<IContextConfiguration>().ImplementedBy(null));
 

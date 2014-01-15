@@ -32,7 +32,7 @@ Now that we have a test, lets work on an implementation. In this implementation 
 
 We just need to add a driver to the database. 
 
-```
+``` csharp
     public class DriversEducationService
     {
         private readonly IRepository _repository;
@@ -65,7 +65,7 @@ This gives us the ability to separate the persistence from the business logic of
 
 Once we have added an object we will obviously need to query the object back out. For this we will need to use a mixture of [Specification Pattern](http://en.wikipedia.org/wiki/Specification_pattern "Specification Pattern") and [Query Object Pattern](http://martinfowler.com/eaaCatalog/queryObject.html "Query Object Pattern"). Below is the test for querying back an object. 
 
-```
+``` csharp
     [TestMethod]
     public void ShouldQueryDriversByName()
     {
@@ -86,7 +86,7 @@ Once we have added an object we will obviously need to query the object back out
 
 And our service code that passes the test.
 
-```
+``` csharp
     public Driver GetDriver(string name)
     {
         return _repository.Find(new DriverByName(name));
@@ -95,7 +95,7 @@ And our service code that passes the test.
 
 With the following query.
 
-```
+``` csharp
     public class DriverByName : Scalar<Driver>
     {
         public DriverByName(string name)
@@ -107,7 +107,7 @@ With the following query.
 
 If we want to query a collection of entities, that is as simple as changing the base class our query object inherits from.
 
-```
+``` csharp
     public class DriversByName : Query<Driver>
     {
         public DriversByName(string name)
@@ -119,7 +119,7 @@ If we want to query a collection of entities, that is as simple as changing the 
 
 Built into the framework is the ability to fire off commands that affect the database but don't return a value. The syntax is very similar.
 
-```
+``` csharp
     public void RemoveDriversByName(string name)
     {
         _repository.Execute(new RemoveDrivers(name));

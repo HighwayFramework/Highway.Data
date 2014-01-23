@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using Common.Logging;
 using Common.Logging.Simple;
@@ -24,7 +25,7 @@ namespace Highway.Data.EntityFramework.Tests.Performance
         public void Should_Throw_An_Error_When_Query_Is_To_Slow()
         {
             //Arrange
-            Database.SetInitializer(new DropCreateDatabaseAlways<TestDataContext>());
+            Database.SetInitializer(new CreateDatabaseIfNotExists<TestDataContext>());
             var consoleOutLogger = new ConsoleOutLogger("Performance", LogLevel.All, true, true, true, "");
             var context = new TestDataContext(Settings.Default.Connection, new FooMappingConfiguration(),
                 consoleOutLogger);
@@ -37,7 +38,8 @@ namespace Highway.Data.EntityFramework.Tests.Performance
             }
             catch (Exception e)
             {
-                Assert.IsTrue(e.Message.Contains("Query FindFoo"));
+                Console.WriteLine(e.Message);
+                Assert.IsTrue(e.Message.Contains("FindFoo"));
             }
 
 

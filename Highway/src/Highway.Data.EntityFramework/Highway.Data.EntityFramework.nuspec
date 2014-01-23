@@ -10,12 +10,13 @@
     <projectUrl>https://github.com/HighwayFramework</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>First Major Release</releaseNotes>
+    <releaseNotes></releaseNotes>
     <copyright>Devlin Liles Copyright 2012</copyright>
     <tags>Architecture  ORM  Repository  Specification  Productivity</tags>
     <dependencies>
-      <dependency id="Highway.Data" version="4.1.0.1" />
-	  <dependency id="EntityFramework" version="5.0.0.0" />
+      <dependency id="Highway.Data" version="5.0.0.0" />
+	  <dependency id="EntityFramework" version="6.0.0.0" />
+      <dependency id="Common.Logging" version="2.1.2" />
     </dependencies>
   </metadata>
 </package>

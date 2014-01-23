@@ -11,7 +11,7 @@ properties {
     $build_config = "Release"
     $pack_dir = ".\pack"
     $build_archive = ".\buildarchive\"
-    $version_number = "4.2.0.0"
+    $version_number = "5.0.0.0"
     $nuget_version_number = $version_number
     if ($Env:BUILD_NUMBER -ne $null) {
         $nuget_version_number += "-$Env:BUILD_NUMBER"
@@ -72,8 +72,6 @@ task pack-ci -depends clean-buildarchive, pack-all -precondition { Test-IsCI } {
 task pack-all -depends clean-nuget {
 	pack-nuget .\Highway\src\Highway.Data\Highway.Data.csproj
 	pack-nuget .\Highway\src\Highway.Data.EntityFramework\Highway.Data.EntityFramework.csproj
-	pack-nuget .\Highway\src\Highway.Test.MSTest\Highway.Test.MSTest.csproj
-    pack-nuget .\Highway\src\Highway.Data.RavenDB\Highway.Data.RavenDB.csproj
 }
 
 task push-all -depends clean-nuget, pack-all {

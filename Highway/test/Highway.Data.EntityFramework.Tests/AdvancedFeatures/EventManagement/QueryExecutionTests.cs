@@ -32,7 +32,7 @@ namespace Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement
             domain.ConnectionString = Settings.Default.Connection;
 
             //act
-            var repository = new RepositoryFactory(new []{domain}).Create<TestDomain>();
+            var repository = new DomainRepositoryFactory(new []{domain}).Create<TestDomain>();
             repository.Find(new EmptyQuery());
 
             //assert
@@ -55,7 +55,7 @@ namespace Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement
             domain.ConnectionString = Settings.Default.Connection;
 
             //act
-            var repository = new RepositoryFactory(new []{domain}).Create<TestDomain>();
+            var repository = new DomainRepositoryFactory(new []{domain}).Create<TestDomain>();
             repository.Find(new EmptyQuery());
 
             //assert
@@ -78,7 +78,7 @@ namespace Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement
             domain.ConnectionString = Settings.Default.Connection;
 
             //act
-            var repository = new RepositoryFactory(new[] { domain }).Create<TestDomain>();
+            var repository = new DomainRepositoryFactory(new[] { domain }).Create<TestDomain>();
             repository.Find(new EmptyQuery());
 
             //assert
@@ -101,7 +101,7 @@ namespace Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement
             domain.ConnectionString = Settings.Default.Connection;
 
             //act
-            var repository = new RepositoryFactory(new[] { domain }).Create<TestDomain>();
+            var repository = new DomainRepositoryFactory(new[] { domain }).Create<TestDomain>();
             repository.Find(new EmptyQuery());
 
             //assert

@@ -1,5 +1,6 @@
 ﻿#region
 
+using Common.Logging.Simple;
 using FluentAssertions;
 using Highway.Data.EntityFramework.Tests.EventManagement;
 using Highway.Data.Factories;
@@ -17,7 +18,7 @@ namespace Highway.Data.EntityFramework.Tests.Factories
         public void ShouldCreateRepository()
         {
             // arrange
-            IRepositoryFactory factory = new RepositoryFactory(new []{new TestDomain()});
+            IDomainRepositoryFactory factory = new DomainRepositoryFactory(new []{new TestDomain()});
 
             // act
             IRepository repo = factory.Create<TestDomain>();
@@ -30,10 +31,66 @@ namespace Highway.Data.EntityFramework.Tests.Factories
         public void ShouldCreateRepositoryFromType()
         {
             // arrange
-            IRepositoryFactory factory = new RepositoryFactory(new[] { new TestDomain() });
+            IDomainRepositoryFactory factory = new DomainRepositoryFactory(new[] { new TestDomain() });
 
             // act
             IRepository repo = factory.Create(typeof (TestDomain));
+
+            // assert
+            repo.Should().NotBeNull();
+        }
+
+        [TestMethod]
+        public void ShouldCreateSimpleRepositoryWithAllParams()
+        {
+            //Arrange
+            var testDomain = new TestDomain();
+            IRepositoryFactory factory = new RepositoryFactory(testDomain.ConnectionString,testDomain.Mappings, testDomain.Context, new NoOpLogger());
+
+            //Act
+            IRepository repo = factory.Create();
+
+            // assert
+            repo.Should().NotBeNull();
+        }
+
+        [TestMethod]
+        public void ShouldCreateSimpleRepositoryWithContextNoLog()
+        {
+            //Arrange
+            var testDomain = new TestDomain();
+            IRepositoryFactory factory = new RepositoryFactory(testDomain.ConnectionString, testDomain.Mappings, testDomain.Context);
+
+            //Act
+            IRepository repo = factory.Create();
+
+            // assert
+            repo.Should().NotBeNull();
+        }
+
+        [TestMethod]
+        public void ShouldCreateSimpleRepositoryWithLogNoContext()
+        {
+            //Arrange
+            var testDomain = new TestDomain();
+            IRepositoryFactory factory = new RepositoryFactory(testDomain.ConnectionString, testDomain.Mappings, testDomain.Context, new NoOpLogger());
+
+            //Act
+            IRepository repo = factory.Create();
+
+            // assert
+            repo.Should().NotBeNull();
+        }
+
+        [TestMethod]
+        public void ShouldCreateSimpleRepositoryWithMinimum()
+        {
+            //Arrange
+            var testDomain = new TestDomain();
+            IRepositoryFactory factory = new RepositoryFactory(testDomain.ConnectionString, testDomain.Mappings, new NoOpLogger());
+
+            //Act
+            IRepository repo = factory.Create();
 
             // assert
             repo.Should().NotBeNull();

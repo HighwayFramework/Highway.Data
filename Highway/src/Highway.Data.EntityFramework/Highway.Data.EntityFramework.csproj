@@ -87,12 +87,13 @@
     <Compile Include="Contexts\InMemoryDomainContext.cs" />
     <Compile Include="Database\DropCreateInitializer.cs" />
     <Compile Include="DefaultContextConfiguration.cs" />
+    <Compile Include="Factories\IDomainRepositoryFactory.cs" />
     <Compile Include="Factories\IRepositoryFactory.cs" />
     <Compile Include="Interfaces\IDomain.cs" />
     <Compile Include="EntityExtensions.cs" />
     <Compile Include="Extensions\LoggingTraceExtensions.cs" />
     <Compile Include="Extensions\PerformanceTracingExtensions.cs" />
-    <Compile Include="Factories\RepositoryFactory.cs" />
+    <Compile Include="Factories\DomainRepositoryFactory.cs" />
     <Compile Include="Interceptors\AuditableInterceptor.cs" />
     <Compile Include="Interfaces\IEntityDataContext.cs" />
     <Compile Include="Mappings\IContextConfiguration.cs" />

@@ -20,6 +20,7 @@ namespace Highway.Data.EntityFramework.Tests.Initializer
             {
                 context.Add(new Foo());
             }
+            context.SaveChanges();
         }
     }
 }

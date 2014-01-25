@@ -42,7 +42,7 @@ namespace Highway.Data.Contexts
             return item;
         }
 
-        public int Commit()
+        public virtual int Commit()
         {
             repo.CleanGraph();
             repo.FindChanges();

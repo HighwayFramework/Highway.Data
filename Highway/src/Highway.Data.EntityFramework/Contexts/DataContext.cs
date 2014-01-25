@@ -26,7 +26,7 @@ namespace Highway.Data
         /// <param name="connectionString">The standard SQL connection string for the Database</param>
         /// <param name="mapping">The Mapping Configuration that will determine how the tables and objects interact</param>
         public DataContext(string connectionString, IMappingConfiguration mapping)
-            : this(connectionString, mapping, null, new NoOpLogger())
+            : this(connectionString, mapping, new DefaultContextConfiguration(), new NoOpLogger())
         {
         }
 
@@ -37,7 +37,7 @@ namespace Highway.Data
         /// <param name="mapping">The Mapping Configuration that will determine how the tables and objects interact</param>
         /// <param name="log">The logger being supplied for this context ( Optional )</param>
         public DataContext(string connectionString, IMappingConfiguration mapping, ILog log)
-            : this(connectionString, mapping, null, log)
+            : this(connectionString, mapping, new DefaultContextConfiguration(), log)
         {
         }
 

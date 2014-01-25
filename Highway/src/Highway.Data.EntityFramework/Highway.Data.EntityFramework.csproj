@@ -86,6 +86,7 @@
     <Compile Include="Contexts\DomainContext.cs" />
     <Compile Include="Contexts\InMemoryDomainContext.cs" />
     <Compile Include="Database\DropCreateInitializer.cs" />
+    <Compile Include="DefaultContextConfiguration.cs" />
     <Compile Include="Factories\IRepositoryFactory.cs" />
     <Compile Include="Interfaces\IDomain.cs" />
     <Compile Include="EntityExtensions.cs" />

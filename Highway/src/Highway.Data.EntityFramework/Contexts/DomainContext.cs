@@ -1,4 +1,5 @@
 using System;
+using Common.Logging;
 using Common.Logging.Simple;
 using Highway.Data.Interceptors.Events;
 
@@ -17,6 +18,16 @@ namespace Highway.Data
         /// <param name="domain"></param>
         public DomainContext(T domain)
             : base(domain.ConnectionString, domain.Mappings, domain.Context, new NoOpLogger())
+        {
+        }
+
+        /// <summary>
+        /// Constructs the domain context
+        /// </summary>
+        /// <param name="domain">domain for context</param>
+        /// <param name="logger">logger</param>
+        public DomainContext(T domain, ILog logger)
+            : base(domain.ConnectionString, domain.Mappings, domain.Context, logger)
         {
         }
 

@@ -11,7 +11,7 @@ properties {
     $build_config = "Release"
     $pack_dir = ".\pack"
     $build_archive = ".\buildarchive\"
-    $version_number = "5.0.0.1"
+    $version_number = "5.0.1.0"
     $nuget_version_number = $version_number
     if ($Env:BUILD_NUMBER -ne $null) {
         $nuget_version_number += "-$Env:BUILD_NUMBER"

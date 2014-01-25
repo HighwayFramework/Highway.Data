@@ -3,6 +3,10 @@ using Highway.Data.Interceptors.Events;
 
 namespace Highway.Data
 {
+    /// <summary>
+    /// Contract for a Domain Context
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IDomainContext<in T> : IDataContext where T : class
     {
         /// <summary>

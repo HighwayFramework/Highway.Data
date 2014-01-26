@@ -50,6 +50,7 @@ namespace Highway.Data.Interceptors
             var deletedEntities = efContext.ChangeTracker.Entries().Where(x => x.State == EntityState.Deleted).Where(e => e.Entity is IAuditableEntity).ToList();
 #endif
 
+            var modifiedDate = DateTime.Now;
             efContext.ChangeTracker.Entries().Where(x => x.State == EntityState.Added)
                 .Where(e => e.Entity is IAuditableEntity)
                 .ToList()
@@ -58,8 +59,10 @@ namespace Highway.Data.Interceptors
                     var entity = e.Entity as IAuditableEntity;
                     if (entity != null)
                     {
-                        entity.CreatedDate = entity.ModifiedDate = DateTime.Now;
-                        entity.CreatedBy = entity.ModifiedBy = userName;
+                        entity.CreatedDate = modifiedDate;
+                        entity.ModifiedDate = modifiedDate;
+                        entity.CreatedBy = userName;
+                        entity.ModifiedBy = userName;
                     }
                 });
 
@@ -71,7 +74,7 @@ namespace Highway.Data.Interceptors
                     var entity = e.Entity as IAuditableEntity;
                     if (entity != null)
                     {
-                        entity.ModifiedDate = DateTime.Now;
+                        entity.ModifiedDate = modifiedDate;
                         entity.ModifiedBy = userName;
                     }
                 });

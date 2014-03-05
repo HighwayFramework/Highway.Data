@@ -103,6 +103,7 @@
     <Compile Include="AutoMockingTest.cs" />
     <Compile Include="BaseTest.cs" />
     <Compile Include="ContainerTest.cs" />
+    <Compile Include="InMemory\Bug Tests\TestThrowsExceptionWithListEntityType.cs" />
     <Compile Include="InMemory\GuidIdentityStrategyTests.cs" />
     <Compile Include="InMemory\InMemoryDataContextPerfTests.cs" />
     <Compile Include="InMemory\IntegerIdentityStrategyTests.cs" />

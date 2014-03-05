@@ -46,7 +46,7 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
             target.SaveChanges();
         }
 
-        [TestMethod, TestCategory(TestCategories.Database)]
+        [TestMethod, TestCategory(TestCategories.Database), Ignore]
         public void Should_Call_Stored_Procedure_and_Return_An_Entity()
         {
             //Arrange

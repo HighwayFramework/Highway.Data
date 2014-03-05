@@ -42,13 +42,18 @@ namespace Highway.Data.Contexts
             return item;
         }
 
-        public int Commit()
+        public virtual int Commit()
         {
             repo.CleanGraph();
             repo.FindChanges();
             return 0;
         }
 
+        /// <summary>
+        /// This method allows you to register database "identity" like strategies for auto incrementing keys, or new guid keys, etc...
+        /// </summary>
+        /// <param name="integerIdentityStrategy">The strategy to use for an object</param>
+        /// <typeparam name="T">The type to use it from</typeparam>
         public void RegisterIdentityStrategy<T>(IIdentityStrategy<T> integerIdentityStrategy) where T : class
         {
             if (repo.IdentityStrategies.ContainsKey(typeof (T)))

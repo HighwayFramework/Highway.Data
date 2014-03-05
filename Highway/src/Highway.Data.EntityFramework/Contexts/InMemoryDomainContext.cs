@@ -4,14 +4,22 @@ using Highway.Data.Interceptors.Events;
 
 namespace Highway.Data
 {
+    /// <summary>
+    /// In memory test stub for context configuration
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class InMemoryDomainContext<T> : InMemoryDataContext, IDomainContext<T> where T : class, IDomain
     {
+        /// <summary>
+        /// Constructs an in memory domain context
+        /// </summary>
+        /// <param name="domain"></param>
         public InMemoryDomainContext(T domain)
         {
 
         }
 
-        public int Commit()
+        public override int Commit()
         {
             OnBeforeSave(new BeforeSave());
             base.Commit();

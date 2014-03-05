@@ -6,12 +6,12 @@ namespace Highway.Data
 {
     public interface IDomain
     {
-        string ConnectionString { get; set; }
+        string ConnectionString { get; }
 
-        IMappingConfiguration Mappings { get; set; }
+        IMappingConfiguration Mappings { get;}
 
-        IContextConfiguration Context { get; set; }
+        IContextConfiguration Context { get; }
 
-        List<IInterceptor> Events { get; set; }
+        List<IInterceptor> Events { get; }
     }
 }

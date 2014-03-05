@@ -1,25 +1,14 @@
-﻿using System;
-
-namespace Highway.Data.Factories
+﻿namespace Highway.Data.Factories
 {
     /// <summary>
-    /// Interface for the factories of <see cref="IRepository"/>
+    /// Simple repository factory
     /// </summary>
     public interface IRepositoryFactory
     {
-
         /// <summary>
-        /// Creates a repository for the specified <see cref="IDomain"/>
+        /// Creates a repository for the requested domain
         /// </summary>
-        /// <typeparam name="T">Domain for repository</typeparam>
-        /// <returns><see cref="IRepository"/></returns>
-        IRepository Create<T>() where T : class, IDomain;
-
-        /// <summary>
-        /// Creates a repository for the specified <see cref="IDomain"/>
-        /// </summary>
-        /// <param name="T">Domain for repository</param>
-        /// <returns><see cref="IRepository"/></returns>
-        IRepository Create(Type type);
+        /// <returns>Domain specific repository</returns>
+        IRepository Create();
     }
 }

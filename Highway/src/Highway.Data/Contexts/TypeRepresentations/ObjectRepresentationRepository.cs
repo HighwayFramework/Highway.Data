@@ -47,7 +47,10 @@ namespace Highway.Data.Contexts.TypeRepresentations
                 _data.Add(rep);
                 foreach (var objRep in rep.AllRelated().Where(x => x.Parents.Count == 1))
                 {
-                    _data.Add(objRep);
+                    if (_data.SingleOrDefault(x => x.Entity == objRep.Entity) == null)
+                    {
+                        _data.Add(objRep);
+                    }
                 }
             }
         }

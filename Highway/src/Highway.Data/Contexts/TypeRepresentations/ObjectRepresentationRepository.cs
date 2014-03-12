@@ -23,7 +23,6 @@ namespace Highway.Data.Contexts.TypeRepresentations
 
         public Dictionary<Type, Action<object>> IdentityStrategies { get; set; }
 
-
         internal IQueryable<T> Data<T>()
         {
             return _data.Where(x => x.IsType<T>()).Select(x => x.Entity).Cast<T>().AsQueryable();
@@ -47,8 +46,6 @@ namespace Highway.Data.Contexts.TypeRepresentations
                 rep.RelatedEntities = AddRelatedObjects(item);
             }
         }
-
-
 
         internal ObjectRepresentation GetExistingObjectRepresentationFromEntity(object item)
         {
@@ -182,7 +179,6 @@ namespace Highway.Data.Contexts.TypeRepresentations
                 return collection.Cast<object>().FirstOrDefault(item => item == child);
             };
         }
-
 
         private Action CreateRemoveFromCollectionAction(PropertyInfo propertyInfo, object item, object childItem)
         {

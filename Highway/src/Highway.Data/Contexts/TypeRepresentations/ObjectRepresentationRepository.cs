@@ -23,7 +23,6 @@ namespace Highway.Data.Contexts.TypeRepresentations
 
         public Dictionary<Type, Action<object>> IdentityStrategies { get; set; }
 
-
         internal IQueryable<T> Data<T>()
         {
             return _data.Where(x => x.IsType<T>()).Select(x => x.Entity).Cast<T>().AsQueryable();
@@ -31,8 +30,7 @@ namespace Highway.Data.Contexts.TypeRepresentations
 
         internal void Add<T>(T item) where T : class
         {
-            var existing = _data.SingleOrDefault(x => x.Entity == item);
-            if (existing == null)
+            if (GetExistingObjectRepresentationFromEntity(item) == null)
             {
                 if (IdentityStrategies.ContainsKey(item.GetType()))
                 {
@@ -41,18 +39,17 @@ namespace Highway.Data.Contexts.TypeRepresentations
                 var rep = new ObjectRepresentation
                 {
                     Id = Guid.NewGuid(),
-                    Entity = item,
-                    RelatedEntities = AddRelatedObjects(item)
+                    Entity = item
                 };
+
                 _data.Add(rep);
-                foreach (var objRep in rep.AllRelated().Where(x => x.Parents.Count == 1))
-                {
-                    if (_data.SingleOrDefault(x => x.Entity == objRep.Entity) == null)
-                    {
-                        _data.Add(objRep);
-                    }
-                }
+                rep.RelatedEntities = AddRelatedObjects(item);
             }
+        }
+
+        internal ObjectRepresentation GetExistingObjectRepresentationFromEntity(object item)
+        {
+            return _data.SingleOrDefault(x => x.Entity == item);
         }
 
         internal bool Remove<T>(T item) where T : class
@@ -93,13 +90,20 @@ namespace Highway.Data.Contexts.TypeRepresentations
                 {
                     IdentityStrategies[item.GetType()](item);
                 }
-                return new ObjectRepresentation
+                var objectRepresentation = new ObjectRepresentation
                 {
                     Id = Guid.NewGuid(),
                     Entity = item,
-                    RelatedEntities = AddRelatedObjects(item),
                     Parents = new Dictionary<object, Accessor> {{parent, new Accessor(removeAction, getterFunc)}}
                 };
+
+                if (GetExistingObjectRepresentationFromEntity(objectRepresentation.Entity) == null)
+                {
+                    _data.Add(objectRepresentation);
+                    objectRepresentation.RelatedEntities = AddRelatedObjects(item);
+                }
+
+                return objectRepresentation;
             }
             if (!existing.Parents.ContainsKey(parent))
             {
@@ -175,7 +179,6 @@ namespace Highway.Data.Contexts.TypeRepresentations
                 return collection.Cast<object>().FirstOrDefault(item => item == child);
             };
         }
-
 
         private Action CreateRemoveFromCollectionAction(PropertyInfo propertyInfo, object item, object childItem)
         {

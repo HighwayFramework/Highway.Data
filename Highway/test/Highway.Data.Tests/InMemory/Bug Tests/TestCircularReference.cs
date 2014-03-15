@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using FluentAssertions;
 using Highway.Data;
 using Highway.Data.Contexts;
 
@@ -118,6 +118,39 @@ namespace Highway.Data.Tests.InMemory.BugTests
             Assert.AreEqual(this._grandParent, grandParent);
             Assert.AreEqual(this._parent, parent);
             Assert.AreEqual(this._child, child);
+        }
+
+        [TestMethod]
+        public void ShouldAllowCircularHeirarchies()
+        {
+            var grandparent = new CircularReference() {Id = 1, Outer = null};
+            var parent = new CircularReference() {Id = 2, Outer = grandparent};
+            var child = new CircularReference() {Id = 3, Outer = parent};
+            grandparent.Inner = parent;
+            parent.Inner = child;
+
+            this._context.Add(grandparent);
+            this._context.Commit();
+
+            var circularReferences = this._context.AsQueryable<CircularReference>();
+            circularReferences.Count().Should().Be(3);
+            circularReferences.Single(x => x.Id == 1).Inner.Should().BeSameAs(parent);
+            circularReferences.Single(x => x.Id == 2).Inner.Should().BeSameAs(child);
+            circularReferences.Single(x => x.Id == 3).Inner.Should().BeNull();
+            circularReferences.Single(x => x.Id == 3).Outer.Should().BeSameAs(parent);
+            circularReferences.Single(x => x.Id == 2).Outer.Should().BeSameAs(grandparent);
+            circularReferences.Single(x => x.Id == 1).Outer.Should().BeNull();
+
+
+        }
+
+
+        class CircularReference
+        {
+            public int Id { get; set; }
+            public CircularReference Inner { get; set; }
+            public CircularReference Outer { get; set; }
+
         }
 
         class Child

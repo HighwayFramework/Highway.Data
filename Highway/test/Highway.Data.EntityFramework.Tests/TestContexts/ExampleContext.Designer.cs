@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\source\highway\data\Highway\test\Highway.Data.EntityFramework.Tests\TestContexts\ExampleContext.edmx'. 
+﻿// T4 code generation is enabled for model 'E:\Code\Fun\HighwayFramework\Data\Highway\test\Highway.Data.EntityFramework.Tests\TestContexts\ExampleContext.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

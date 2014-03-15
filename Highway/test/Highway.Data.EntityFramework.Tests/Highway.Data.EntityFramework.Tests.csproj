@@ -11,7 +11,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Highway.Data.EntityFramework.Tests</RootNamespace>
     <AssemblyName>Highway.Data.EntityFramework.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -148,7 +148,6 @@
     <Compile Include="Performance\Given_A_Query_Can_Performance_Test_IT.cs" />
     <Compile Include="Queries\Given_A_ProjectionQuery_Object.cs" />
     <Compile Include="Queries\Given_a_GetById_Query.cs" />
-    <Compile Condition="'$(TargetFrameworkVersion)' == 'v4.5'" Include="Repositories\Given_An_Async_Repository.cs" />
     <Compile Include="TestCategories.cs" />
     <Compile Include="Mapping\BarMap.cs" />
     <Compile Include="Mapping\BazMap.cs" />

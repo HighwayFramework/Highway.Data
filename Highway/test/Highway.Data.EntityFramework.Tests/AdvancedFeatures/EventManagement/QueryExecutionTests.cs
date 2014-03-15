@@ -124,7 +124,7 @@ namespace Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement
             domain.ConnectionString = Settings.Default.Connection;
 
             //act
-            var inMemoryDomainContext = new InMemoryDomainContext<TestDomain>(domain);
+            var inMemoryDomainContext = new InMemoryDomainContext<TestDomain>();
             inMemoryDomainContext.Add(new Foo() {Name = "Test"});
             inMemoryDomainContext.Add(new Foo() {Name = "Should Not Show up"});
             inMemoryDomainContext.Commit();

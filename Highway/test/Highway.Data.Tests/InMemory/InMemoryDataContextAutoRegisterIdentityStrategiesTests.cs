@@ -53,6 +53,19 @@ namespace Highway.Data.Tests.InMemory
         }
 
         [TestMethod]
+        public void Add_ShouldNotChangeIdWhenIdExisting()
+        {
+            //Arrange
+            var entity = new Entity { Id = 25 };
+
+            //Act
+            _context.Add(entity);
+
+            //Assert
+            entity.Id.Should().Be(25);
+        }
+
+        [TestMethod]
         public void Add_ShouldUseIdentityForRelatedCollectionTypes()
         {
             //Arrange

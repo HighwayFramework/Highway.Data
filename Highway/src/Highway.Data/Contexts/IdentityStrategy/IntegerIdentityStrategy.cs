@@ -25,5 +25,10 @@ namespace Highway.Data.Contexts
         {
             return Interlocked.Increment(ref LastValue);
         }
+
+        protected override bool IsDefaultUnsetValue(int id)
+        {
+            return id == 0;
+        }
     }
 }

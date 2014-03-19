@@ -27,5 +27,9 @@ namespace Highway.Data.Contexts
         {
             lock (lockObject) { return ++LastValue; }
         }
+        protected override bool IsDefaultUnsetValue(short id)
+        {
+            return id == 0;
+        }
     }
 }

@@ -10,8 +10,8 @@ namespace Highway.Data
     /// <summary>
     ///     This pre-built query get a specific type by the Id provided
     /// </summary>
-    /// <typeparam name="TId"></typeparam>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="TId">The type of ID.</typeparam>
+    /// <typeparam name="T">The type to get.</typeparam>
     public class GetById<TId, T> : Scalar<T> where T : class, IIdentifiable<TId> where TId : struct, IEquatable<TId>
     {
         /// <summary>

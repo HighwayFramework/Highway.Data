@@ -17,6 +17,9 @@ namespace Highway.Data.Repositories
 
         event EventHandler<AfterCommand> AfterCommand;
 
+        /// <summary>
+        /// Gets the contract for a Domain Context
+        /// </summary>
         IDomainContext<T> DomainContext { get; } 
     }
 }

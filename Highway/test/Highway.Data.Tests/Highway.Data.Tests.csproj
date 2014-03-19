@@ -114,6 +114,7 @@
     <Compile Include="InMemory\InMemoryDataContextTests.cs" />
     <Compile Include="InMemory\Domain\Post.cs" />
     <Compile Include="InMemory\Domain\Site.cs" />
+    <Compile Include="InMemory\ShortIdentityStrategyTests.cs" />
     <Compile Include="InMemory\LongIdentityStrategyTests.cs" />
     <Compile Include="InMemory\ScenarioTests\BlogLifeTime.cs" />
     <Compile Include="InMemory\ScenarioTests\Queries\FindBlogByTitle.cs" />

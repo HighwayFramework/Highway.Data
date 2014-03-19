@@ -32,10 +32,7 @@ namespace Highway.Data.Contexts.TypeRepresentations
         {
             if (GetExistingObjectRepresentationFromEntity(item) == null)
             {
-                if (IdentityStrategies.ContainsKey(item.GetType()))
-                {
-                    IdentityStrategies[item.GetType()](item);
-                }
+                ApplyIdentityStrategy<T>(item);
                 var rep = new ObjectRepresentation
                 {
                     Id = Guid.NewGuid(),
@@ -44,6 +41,18 @@ namespace Highway.Data.Contexts.TypeRepresentations
 
                 _data.Add(rep);
                 rep.RelatedEntities = AddRelatedObjects(item);
+            }
+        }
+
+        private void ApplyIdentityStrategy<T>(T item) where T : class
+        {
+            var type = item.GetType();
+            var types = new List<Type>(type.GetInterfaces());
+            types.Add(type);
+            var intersectingType = IdentityStrategies.Keys.Intersect(types).FirstOrDefault();
+            if (intersectingType != null)
+            {
+                IdentityStrategies[intersectingType](item);
             }
         }
 
@@ -86,10 +95,8 @@ namespace Highway.Data.Contexts.TypeRepresentations
             var existing = _data.SingleOrDefault(x => x.Entity == item);
             if (existing == null)
             {
-                if (IdentityStrategies.ContainsKey(item.GetType()))
-                {
-                    IdentityStrategies[item.GetType()](item);
-                }
+                ApplyIdentityStrategy(item);
+
                 var objectRepresentation = new ObjectRepresentation
                 {
                     Id = Guid.NewGuid(),

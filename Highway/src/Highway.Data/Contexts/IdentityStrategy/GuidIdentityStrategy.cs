@@ -19,5 +19,10 @@ namespace Highway.Data.Contexts
             : base(property)
         {
         }
+
+        protected override bool IsDefaultUnsetValue(Guid id)
+        {
+            return id == Guid.Empty;
+        }
     }
 }

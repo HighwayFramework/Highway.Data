@@ -17,7 +17,7 @@ namespace Highway.Data.Factories
         /// <summary>
         /// Creates a repository for the specified <paramref name="type"/>
         /// </summary>
-        /// <param name="type">Type for repository.</param>
+        /// <param name="type">Type for repository</param>
         /// <returns><see cref="IRepository"/></returns>
         IRepository Create(Type type);
     }

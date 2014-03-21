@@ -54,7 +54,7 @@ namespace Highway.Data
         /// <param name="context">Code First database context object</param>
         /// <param name="tablename">Qualified name of proc to call</param>
         /// <param name="parms">List of ParameterHolder objects - input and output parameters</param>
-        /// <param name="outputtypes">List of types to expect in return. Each type *must* have a default constructor.</param>
+        /// <param name="outputtypes">List of types to expect in return. Each type *must* have a default constructor</param>
         /// <returns></returns>
         internal static ResultsList ReadFromStoredProc(this DbContext context,
             String procname,

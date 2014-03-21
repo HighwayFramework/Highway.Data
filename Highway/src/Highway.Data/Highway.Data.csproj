@@ -105,6 +105,7 @@
     <Compile Include="EventManagement\EventManager.cs" />
     <Compile Include="Interceptors\InterceptorResult.cs" />
     <Compile Include="Interfaces\IDomainContext.cs" />
+    <Compile Include="Interfaces\IIdentifiable.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Interfaces\IDomainRepository.cs" />
     <Compile Include="Interfaces\Queries\ICommand.cs" />

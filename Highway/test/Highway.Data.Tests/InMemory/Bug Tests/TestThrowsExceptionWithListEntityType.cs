@@ -53,13 +53,13 @@ namespace Highway.Data.Tests.InMemory.BugTests
         public string Code { get; set; }
 
         public string Name { get; set; }
-    }
+       }
 
     public class CreatePollingDeviceSpecification
     {
         public string DeviceModel { get; set; }
     }
-    
+
 
     public class BusinessEntity : IIdentifiable<long>
     {
@@ -123,7 +123,7 @@ namespace Highway.Data.Tests.InMemory.BugTests
 
     }
 
-    public class Customer
+        class Customer
     {
         public void SetBusinessEntity(BusinessEntity businessEntity)
         {
@@ -136,14 +136,15 @@ namespace Highway.Data.Tests.InMemory.BugTests
         }
     }
 
-    public class EntityType
+        class EntityType
     {
         public int Id { get; set; }
 
         public string EntityTypeName { get; set; }
     }
 
-    public class StatusType
+        class StatusType
     {
     }
+}
 }

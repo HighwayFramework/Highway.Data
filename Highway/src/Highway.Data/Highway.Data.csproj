@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Highway.Data</RootNamespace>
     <AssemblyName>Highway.Data</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -76,6 +76,8 @@
     <Compile Include="Contexts\IdentityStrategy\GuidIdentityStrategy.cs" />
     <Compile Include="Contexts\IdentityStrategy\IdentityStrategy.cs" />
     <Compile Include="Contexts\IdentityStrategy\IIdentityStrategy.cs" />
+    <Compile Include="Contexts\IdentityStrategy\ShortdentityStrategy.cs" />
+    <Compile Include="Contexts\IdentityStrategy\LongIdentityStrategy.cs" />
     <Compile Include="Contexts\InMemoryDataContext.cs" />
     <Compile Include="Contexts\IdentityStrategy\IntegerIdentityStrategy.cs" />
     <Compile Include="Contexts\TypeRepresentations\Accessor.cs" />
@@ -103,6 +105,7 @@
     <Compile Include="EventManagement\EventManager.cs" />
     <Compile Include="Interceptors\InterceptorResult.cs" />
     <Compile Include="Interfaces\IDomainContext.cs" />
+    <Compile Include="Interfaces\IIdentifiable.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Interfaces\IDomainRepository.cs" />
     <Compile Include="Interfaces\Queries\ICommand.cs" />

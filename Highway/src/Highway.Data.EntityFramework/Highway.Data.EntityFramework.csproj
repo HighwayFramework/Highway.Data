@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Highway.Data.EntityFramework</RootNamespace>
     <AssemblyName>Highway.Data.EntityFramework</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -103,9 +103,12 @@
     <Compile Include="Mappings\TypeMappings.cs" />
     <Compile Include="PrebuiltInterceptors\AppendWhere.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryObjects\SqlCommand.cs" />
+    <Compile Include="QueryObjects\SqlQuery.cs" />
     <Compile Include="QueryObjects\AdvancedCommand.cs" />
     <Compile Include="QueryObjects\AdvancedQuery.cs" />
     <Compile Include="QueryObjects\AdvancedScalar.cs" />
+    <Compile Include="QueryObjects\SqlScalar.cs" />
     <Compile Include="Repositories\DomainRepository.cs" />
     <Compile Include="StoredProcedures\StoredProcedureAttributes.cs" />
     <Compile Include="StoredProcedures\StoredProcedureHelpers.cs" />

@@ -8,25 +8,24 @@ using System.Threading;
 
 namespace Highway.Data.Contexts
 {
-    public class IntegerIdentityStrategy<T> : IdentityStrategy<T, int>
+    public class LongIdentityStrategy<T> : IdentityStrategy<T, long>
         where T : class
     {
-        static IntegerIdentityStrategy()
+        static LongIdentityStrategy()
         {
-            Generator = GenerateInt;
+            Generator = GenerateLong;
         }
 
-        public IntegerIdentityStrategy(Expression<Func<T, int>> property)
+        public LongIdentityStrategy(Expression<Func<T, long>> property)
             : base(property)
         {
         }
 
-        private static int GenerateInt()
+        private static long GenerateLong()
         {
             return Interlocked.Increment(ref LastValue);
         }
-
-        protected override bool IsDefaultUnsetValue(int id)
+        protected override bool IsDefaultUnsetValue(long id)
         {
             return id == 0;
         }

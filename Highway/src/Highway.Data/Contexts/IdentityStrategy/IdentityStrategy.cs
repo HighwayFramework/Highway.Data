@@ -18,8 +18,15 @@ namespace Highway.Data.Contexts
 
         public IdentityStrategy(Expression<Func<TType, TIdentity>> property)
         {
-            identitySetter = obj => GetPropertyFromExpression(property).SetValue(obj, Next(), null);
+            identitySetter = obj => 
+            {
+                var propertyInfo = GetPropertyFromExpression(property);
+                var id = (TIdentity) propertyInfo.GetValue(obj, null);
+                if(IsDefaultUnsetValue(id)) propertyInfo.SetValue(obj,  Next(), null);
+            };
         }
+
+        protected abstract bool IsDefaultUnsetValue(TIdentity id);
 
         public void Assign(TType entity)
         {

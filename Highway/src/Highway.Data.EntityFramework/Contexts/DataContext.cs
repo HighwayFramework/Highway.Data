@@ -295,7 +295,7 @@ namespace Highway.Data
         ///     More control over caching is provided through use of the DbModelBuilder and DbContextFactory
         ///     classes directly.
         /// </remarks>
-        /// <param name="modelBuilder">The builder that defines the model for the context being created.</param>
+        /// <param name="modelBuilder">The builder that defines the model for the context being created</param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             if (_databaseFirst) throw new UnintentionalCodeFirstException();

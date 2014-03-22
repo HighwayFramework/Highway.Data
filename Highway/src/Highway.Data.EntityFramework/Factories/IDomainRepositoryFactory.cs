@@ -7,7 +7,6 @@ namespace Highway.Data.Factories
     /// </summary>
     public interface IDomainRepositoryFactory
     {
-
         /// <summary>
         /// Creates a repository for the specified <see cref="IDomain"/>
         /// </summary>
@@ -16,9 +15,9 @@ namespace Highway.Data.Factories
         IRepository Create<T>() where T : class, IDomain;
 
         /// <summary>
-        /// Creates a repository for the specified <see cref="IDomain"/>
+        /// Creates a repository for the specified <paramref name="type"/>
         /// </summary>
-        /// <param name="T">Domain for repository</param>
+        /// <param name="type">Type for repository</param>
         /// <returns><see cref="IRepository"/></returns>
         IRepository Create(Type type);
     }

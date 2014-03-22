@@ -10,15 +10,6 @@ namespace Highway.Data
     /// <typeparam name="T"></typeparam>
     public class InMemoryDomainContext<T> : InMemoryDataContext, IDomainContext<T> where T : class, IDomain
     {
-        /// <summary>
-        /// Constructs an in memory domain context
-        /// </summary>
-        /// <param name="domain"></param>
-        public InMemoryDomainContext(T domain)
-        {
-
-        }
-
         public override int Commit()
         {
             OnBeforeSave(new BeforeSave());

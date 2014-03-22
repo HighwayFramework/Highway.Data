@@ -22,7 +22,7 @@ namespace Highway.Data.Tests.InMemory.BugTests
                 "abbr",
                 string.Empty,
                 new StatusType(),
-                new List<EntityType> {new EntityType()},
+                new List<EntityType> { new EntityType() },
                 new DateTime(2014, 1, 1),
                 null);
             repo.Context.Add(businessEntity);
@@ -53,7 +53,7 @@ namespace Highway.Data.Tests.InMemory.BugTests
         public string Code { get; set; }
 
         public string Name { get; set; }
-       }
+    }
 
     public class CreatePollingDeviceSpecification
     {
@@ -123,7 +123,7 @@ namespace Highway.Data.Tests.InMemory.BugTests
 
     }
 
-        class Customer
+    public class Customer
     {
         public void SetBusinessEntity(BusinessEntity businessEntity)
         {
@@ -136,15 +136,14 @@ namespace Highway.Data.Tests.InMemory.BugTests
         }
     }
 
-        class EntityType
+    public class EntityType
     {
         public int Id { get; set; }
 
         public string EntityTypeName { get; set; }
     }
 
-        class StatusType
+    public class StatusType
     {
     }
-}
 }

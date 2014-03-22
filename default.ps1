@@ -94,7 +94,9 @@ task clean-testresults {
     Reset-Directory .\TestResults
 }
 
-task Update-Version {
+task Update-Version -depends Update-Version-SolutionInfo, Update-Version-EFNuSpec
+
+task Update-Version-SolutionInfo {
     $solution_info = Get-Content .\Highway\SolutionInfo.cs
     $solution_info = $solution_info -replace 'Version\(".+"\)', "Version(`"$version_number`")"
     $solution_info = $solution_info -replace 'AssemblyFileVersion\(".+"\)', "AssemblyFileVersion(`"$nuget_version_number`")"
@@ -102,6 +104,16 @@ task Update-Version {
     Set-Content -Path .\Highway\SolutionInfo.cs -Value $solution_info
     if (Test-ModifiedInGIT .\Highway\SolutionInfo.cs) {
         Write-Warning "SolutionInfo.cs changed, most likely updating to a new version"
+    }
+}
+
+task Update-Version-EFNuSpec {
+    $path = "Highway\src\Highway.Data.EntityFramework\Highway.Data.EntityFramework.nuspec"
+    $content = Get-Content $path
+    $content = $content -replace 'id="Highway.Data" version=".+"', "id=`"Highway.Data`" version=`"$version_number`""
+    Set-Content -Path $path -Value $content
+    if (Test-ModifiedInGIT $path) {
+        Write-Warning "$path changed, most likely updating to a new version"
     }
 }
 

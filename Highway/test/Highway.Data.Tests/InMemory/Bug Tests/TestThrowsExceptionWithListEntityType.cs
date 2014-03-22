@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
-using Highway.Data;
 using Highway.Data.Contexts;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -16,26 +14,59 @@ namespace Highway.Data.Tests.InMemory.BugTests
         [TestMethod]
         public void ShouldNotThrowErrorOnAdd()
         {
-            this._context = new InMemoryDataContext();
+            _context = new InMemoryDataContext();
+            var repo = new Repository(_context);
             var businessEntity = new BusinessEntity(
                 1,
                 "name",
                 "abbr",
                 string.Empty,
                 new StatusType(),
-                new List<EntityType>() { new EntityType() },
+                new List<EntityType> {new EntityType()},
                 new DateTime(2014, 1, 1),
                 null);
-            this._context.Add(businessEntity);
-       }
+            repo.Context.Add(businessEntity);
+        }
+
+
+        [TestMethod]
+        public void ShouldNotThrowErrorsOnAddWithSimilarThings()
+        {
+            var repo = new Repository(new InMemoryDataContext());
+            var specification = new CreatePollingDeviceSpecification { DeviceModel = "Test" };
+
+            var deviceModel = new DeviceModel
+            {
+                Id = 1,
+                Code = specification.DeviceModel,
+                Name = specification.DeviceModel
+            };
+            repo.Context.Add(deviceModel);
+            repo.Context.Commit();
+        }
     }
+
+    public class DeviceModel : IIdentifiable<long>
+    {
+        public long Id { get; set; }
+
+        public string Code { get; set; }
+
+        public string Name { get; set; }
+    }
+
+    public class CreatePollingDeviceSpecification
+    {
+        public string DeviceModel { get; set; }
+    }
+    
 
     public class BusinessEntity : IIdentifiable<long>
     {
 
         public BusinessEntity(long id, string name, string abbreviation, string epaNumber, StatusType status, List<EntityType> entityTypes, DateTime startDate, DateTime? endDate)
         {
-            ValidateInitialValues(name, abbreviation, entityTypes);
+            ValidateInitialValues(abbreviation);
 
             EntityTypes = entityTypes;
             Id = id;
@@ -48,7 +79,7 @@ namespace Highway.Data.Tests.InMemory.BugTests
 
         }
 
-        private static void ValidateInitialValues(string name, string abbreviation, List<EntityType> entityTypes)
+        private static void ValidateInitialValues(string abbreviation)
         {
             if (abbreviation.Length != 4)
             {
@@ -85,9 +116,9 @@ namespace Highway.Data.Tests.InMemory.BugTests
         public void SetCustomer(Customer customer)
         {
             customer.SetBusinessEntity(this);
-            customer.SetEntityType(new EntityType() { Id = 1, EntityTypeName = "Customer" });
+            customer.SetEntityType(new EntityType { Id = 1, EntityTypeName = "Customer" });
 
-            this.Customer = customer;
+            Customer = customer;
         }
 
     }

@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B91E975D-C195-49BC-86D5-550F8DE379BD}"
 	ProjectSection(SolutionItems) = preProject
@@ -49,6 +49,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.DriversEducation.Ge
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Highway.Data.Tests.Db", "test\Highway.Data.Tests.Db\Highway.Data.Tests.Db.sqlproj", "{52E5F632-D10C-4CD4-8534-FD1C481CCA76}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InMemoryContextTest", "test\InMemoryContextTest\InMemoryContextTest.csproj", "{3D6061D1-2284-4052-88C7-780EFD353FCB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +87,10 @@ Global
 		{52E5F632-D10C-4CD4-8534-FD1C481CCA76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52E5F632-D10C-4CD4-8534-FD1C481CCA76}.Release|Any CPU.Build.0 = Release|Any CPU
 		{52E5F632-D10C-4CD4-8534-FD1C481CCA76}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{3D6061D1-2284-4052-88C7-780EFD353FCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D6061D1-2284-4052-88C7-780EFD353FCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D6061D1-2284-4052-88C7-780EFD353FCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D6061D1-2284-4052-88C7-780EFD353FCB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

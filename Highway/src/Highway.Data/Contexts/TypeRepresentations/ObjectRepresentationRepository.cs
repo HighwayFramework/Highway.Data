@@ -148,8 +148,8 @@ namespace Highway.Data.Contexts.TypeRepresentations
                 PropertyInfo info = propertyInfo;
                 Func<object, object, object> getterFunc = (parent, kid) => propertyInfo.GetValue(parent, null);
                 Action removeAction = () => info.SetValue(item, null, null);
-                ObjectRepresentation childTypedRepresetation = AddChild(child, item, removeAction, getterFunc);
-                if (childTypedRepresetation != null) reps.Add(childTypedRepresetation);
+                ObjectRepresentation childTypeRepresentation = AddChild(child, item, removeAction, getterFunc);
+                if (childTypeRepresentation != null) reps.Add(childTypeRepresentation);
             }
             return reps;
         }
@@ -169,8 +169,8 @@ namespace Highway.Data.Contexts.TypeRepresentations
                 {
                     var removeAction = CreateRemoveFromCollectionAction(propertyInfo, item, childItem);
                     var getterFunc = CreateGetterFromCollectionFunc(propertyInfo, childItem);
-                    ObjectRepresentation childTypedRepresetation = AddChild(childItem, item, removeAction, getterFunc);
-                    if (childTypedRepresetation != null) reps.Add(childTypedRepresetation);
+                    ObjectRepresentation childTypeRepresentation = AddChild(childItem, item, removeAction, getterFunc);
+                    if (childTypeRepresentation != null) reps.Add(childTypeRepresentation);
                 }
             }
             return reps;

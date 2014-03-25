@@ -76,7 +76,7 @@
     <Compile Include="Contexts\IdentityStrategy\GuidIdentityStrategy.cs" />
     <Compile Include="Contexts\IdentityStrategy\IdentityStrategy.cs" />
     <Compile Include="Contexts\IdentityStrategy\IIdentityStrategy.cs" />
-    <Compile Include="Contexts\IdentityStrategy\ShortdentityStrategy.cs" />
+    <Compile Include="Contexts\IdentityStrategy\ShortIdentityStrategy.cs" />
     <Compile Include="Contexts\IdentityStrategy\LongIdentityStrategy.cs" />
     <Compile Include="Contexts\InMemoryDataContext.cs" />
     <Compile Include="Contexts\IdentityStrategy\IntegerIdentityStrategy.cs" />

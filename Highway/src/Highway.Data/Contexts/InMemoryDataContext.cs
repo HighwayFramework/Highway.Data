@@ -3,6 +3,7 @@
 using System.Linq;
 using Highway.Data.Contexts.TypeRepresentations;
 using System;
+using System.Collections;
 
 #endregion
 
@@ -11,6 +12,9 @@ namespace Highway.Data.Contexts
     public class InMemoryDataContext : IDataContext
     {
         internal ObjectRepresentationRepository repo = new ObjectRepresentationRepository();
+
+        Queue addQueue = new Queue();
+        Queue removeQueue = new Queue();
 
         public InMemoryDataContext()
         {
@@ -36,13 +40,13 @@ namespace Highway.Data.Contexts
 
         public T Add<T>(T item) where T : class
         {
-            repo.Add(item);
+            addQueue.Enqueue(item);
             return item;
         }
 
         public T Remove<T>(T item) where T : class
         {
-            repo.Remove(item);
+            removeQueue.Enqueue(item);
             return item;
         }
 
@@ -58,6 +62,8 @@ namespace Highway.Data.Contexts
 
         public virtual int Commit()
         {
+            AddAllFromQueueIntoRepository();
+            RemoveAllFromQueueFromRepository();
             repo.CleanGraph();
             repo.FindChanges();
             return 0;
@@ -77,6 +83,21 @@ namespace Highway.Data.Contexts
             else
             {
                 repo.IdentityStrategies.Add(typeof(T), obj => identityStrategy.Assign((T)obj));
+            }
+        }
+
+        private void AddAllFromQueueIntoRepository()
+        {
+            while (addQueue.Count > 0)
+            {
+                repo.Add(addQueue.Dequeue());
+            }
+        }
+        private void RemoveAllFromQueueFromRepository()
+        {
+            while (removeQueue.Count > 0)
+            {
+                repo.Remove(removeQueue.Dequeue());
             }
         }
     }

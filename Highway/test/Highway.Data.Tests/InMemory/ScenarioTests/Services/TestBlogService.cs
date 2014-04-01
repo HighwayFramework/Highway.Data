@@ -20,6 +20,7 @@ namespace Highway.Data.Tests.InMemory.ScenarioTests.Services
         public void StartBlog(string title, Author author)
         {
             _repo.Context.Add(new Blog(title) {Author = author});
+            _repo.Context.Commit();
         }
 
         public void Post(string title, Post post)

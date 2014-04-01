@@ -47,6 +47,7 @@ namespace Highway.Data.Tests.InMemory
 
             //Act
             _context.Add(entity);
+            _context.Commit();
 
             //Assert
             entity.Id.Should().NotBe(0);
@@ -74,6 +75,7 @@ namespace Highway.Data.Tests.InMemory
 
             //Act
             _context.Add(entity);
+            _context.Commit();
 
             //Assert
             entity.MyProperties.Single().Id.Should().NotBe(0);
@@ -88,6 +90,7 @@ namespace Highway.Data.Tests.InMemory
 
             //Act
             _context.Add(entity);
+            _context.Commit();
 
             //Assert
             entity.MyProperty.Id.Should().NotBe(0);

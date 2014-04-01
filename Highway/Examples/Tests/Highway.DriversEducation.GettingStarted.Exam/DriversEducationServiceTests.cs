@@ -22,6 +22,7 @@ namespace Highway.DriversEducation.GettingStarted.Exam
 
             //act
             service.AddDriver("Devlin");
+            context.Commit();
 
             //assert
             context.AsQueryable<Driver>().Count(x => x.LastName == "Devlin").Should().Be(1);
@@ -34,6 +35,7 @@ namespace Highway.DriversEducation.GettingStarted.Exam
             var context = new InMemoryDataContext();
             context.Add(new Driver("Devlin", "Liles"));
             context.Add(new Driver("Tim", "Rayburn"));
+            context.Commit();
 
             var service = new DriversEducationService(new Repository(context));
 

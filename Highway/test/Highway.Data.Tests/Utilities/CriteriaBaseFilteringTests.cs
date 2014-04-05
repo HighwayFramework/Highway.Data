@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 #endregion
 
-namespace Highway.Data.Tests.UtiltiyTests
+namespace Highway.Data.Tests.Utilities
 {
     [TestClass]
     public class CriteriaBaseFilteringTests

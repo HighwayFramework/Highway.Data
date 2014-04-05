@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Highway.Data.Utilities;
 
-namespace Highway.Data.Tests.Utility.CloneExtension
+namespace Highway.Data.Tests.Utilities.CloneExtension
 {
     [TestClass]
     public class CloneExtensionCircularReferenceSimpleTests

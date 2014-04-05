@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Highway.Data.Utilities;
 
-namespace Highway.Data.Tests.Utility.CloneExtension
+namespace Highway.Data.Tests.Utilities.CloneExtension
 {
     public class Employer
     {

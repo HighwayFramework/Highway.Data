@@ -30,34 +30,16 @@ namespace Highway.Data.Contexts.TypeRepresentations
 
         internal void Add<T>(T item) where T : class
         {
-            if (GetExistingObjectRepresentationFromEntity(item) == null)
+            if (EntityExistsInRepository(item)) return;
+
+            ApplyIdentityStrategy<T>(item);
+            var rep = new ObjectRepresentation
             {
-                ApplyIdentityStrategy<T>(item);
-                var rep = new ObjectRepresentation
-                {
-                    Entity = item
-                };
+                Entity = item
+            };
 
-                _data.Add(rep);
-                rep.RelatedEntities = AddRelatedObjects(item);
-            }
-        }
-
-        private void ApplyIdentityStrategy<T>(T item) where T : class
-        {
-            var type = item.GetType();
-            var types = new List<Type>(type.GetInterfaces());
-            types.Add(type);
-            var intersectingType = IdentityStrategies.Keys.Intersect(types).FirstOrDefault();
-            if (intersectingType != null)
-            {
-                IdentityStrategies[intersectingType](item);
-            }
-        }
-
-        internal ObjectRepresentation GetExistingObjectRepresentationFromEntity(object item)
-        {
-            return _data.SingleOrDefault(x => x.Entity == item);
+            _data.Add(rep);
+            rep.RelatedEntities = AddRelatedObjects(item);
         }
 
         internal bool Remove<T>(T item) where T : class
@@ -88,34 +70,33 @@ namespace Highway.Data.Contexts.TypeRepresentations
             return success;
         }
 
-        private ObjectRepresentation AddChild(object item, object parent = null, Action removeAction = null,
+        private ObjectRepresentation CreateChildObjectRepresentation(object item, object parent = null, Action removeAction = null,
             Func<object, object, object> getterFunc = null)
         {
-            var existing = _data.SingleOrDefault(x => x.Entity == item);
-            if (existing == null)
+            if (EntityExistsInRepository(item))
+            {
+                var objectRepresentation = _data.SingleOrDefault(x => x.Entity == item);
+                if (!objectRepresentation.Parents.ContainsKey(parent))
+                {
+                    objectRepresentation.Parents.Add(parent, new Accessor(removeAction, getterFunc));
+                }
+                return objectRepresentation;
+            }
+            else
             {
                 ApplyIdentityStrategy(item);
 
                 var objectRepresentation = new ObjectRepresentation
                 {
                     Entity = item,
-                    Parents = new Dictionary<object, Accessor> {{parent, new Accessor(removeAction, getterFunc)}}
+                    Parents = new Dictionary<object, Accessor> { { parent, new Accessor(removeAction, getterFunc) } }
                 };
 
-                if (GetExistingObjectRepresentationFromEntity(objectRepresentation.Entity) == null)
-                {
-                    _data.Add(objectRepresentation);
-                    objectRepresentation.RelatedEntities = AddRelatedObjects(item);
-                }
+                _data.Add(objectRepresentation);
+                objectRepresentation.RelatedEntities = AddRelatedObjects(item);
 
                 return objectRepresentation;
             }
-            if (!existing.Parents.ContainsKey(parent))
-            {
-                existing.Parents.Add(parent, new Accessor(removeAction, getterFunc));
-            }
-
-            return existing;
         }
 
         private IEnumerable<ObjectRepresentation> AddRelatedObjects<T>(T item)
@@ -138,16 +119,16 @@ namespace Highway.Data.Contexts.TypeRepresentations
             var properties =
                 item.GetType()
                     .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                    .Where(x => x.PropertyType.IsClass && !typeof(IEnumerable).IsAssignableFrom(x.PropertyType));
+                    .Where(x => x.PropertyType.IsClass
+                        && !typeof(IEnumerable).IsAssignableFrom(x.PropertyType)
+                        && x.GetValue(item, null) != null);
             foreach (var propertyInfo in properties)
             {
                 var child = propertyInfo.GetValue(item, null);
-                if (child == null) continue;
-                PropertyInfo info = propertyInfo;
                 Func<object, object, object> getterFunc = (parent, kid) => propertyInfo.GetValue(parent, null);
-                Action removeAction = () => info.SetValue(item, null, null);
-                ObjectRepresentation childTypeRepresentation = AddChild(child, item, removeAction, getterFunc);
-                if (childTypeRepresentation != null) reps.Add(childTypeRepresentation);
+                Action removeAction = () => propertyInfo.SetValue(item, null, null);
+                ObjectRepresentation childTypeRepresentation = CreateChildObjectRepresentation(child, item, removeAction, getterFunc);
+                reps.Add(childTypeRepresentation);
             }
             return reps;
         }
@@ -157,18 +138,17 @@ namespace Highway.Data.Contexts.TypeRepresentations
             List<ObjectRepresentation> reps = new List<ObjectRepresentation>();
             var properties =
                 item.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                    .Where(x => typeof (IEnumerable).IsAssignableFrom(x.PropertyType));
+                    .Where(x => typeof(IEnumerable).IsAssignableFrom(x.PropertyType)
+                        && x.GetValue(item, null) != null);
             foreach (var propertyInfo in properties)
             {
-                var child = propertyInfo.GetValue(item, null);
-                if (child == null) continue;
-                var childItems = (IEnumerable) child;
-                foreach (var childItem in childItems)
+                var childCollection = (IEnumerable)propertyInfo.GetValue(item, null);
+                foreach (var child in childCollection)
                 {
-                    var removeAction = CreateRemoveFromCollectionAction(propertyInfo, item, childItem);
-                    var getterFunc = CreateGetterFromCollectionFunc(propertyInfo, childItem);
-                    ObjectRepresentation childTypeRepresentation = AddChild(childItem, item, removeAction, getterFunc);
-                    if (childTypeRepresentation != null) reps.Add(childTypeRepresentation);
+                    var removeAction = CreateRemoveFromCollectionAction(propertyInfo, item, child);
+                    var getterFunc = CreateGetterFromCollectionFunc(propertyInfo, child);
+                    ObjectRepresentation childTypeRepresentation = CreateChildObjectRepresentation(child, item, removeAction, getterFunc);
+                    reps.Add(childTypeRepresentation);
                 }
             }
             return reps;
@@ -180,7 +160,7 @@ namespace Highway.Data.Contexts.TypeRepresentations
             {
                 var value = propertyInfo.GetValue(parent, null);
                 if (value == null) return null;
-                var collection = (IEnumerable) value;
+                var collection = (IEnumerable)value;
                 return collection.Cast<object>().FirstOrDefault(item => item == child);
             };
         }
@@ -193,12 +173,12 @@ namespace Highway.Data.Contexts.TypeRepresentations
                 if (items == null) return;
                 var list = CreateGenericList(childItem.GetType());
                 MethodInfo mListAdd = list.GetType().GetMethod("Add");
-                var childItems = (IEnumerable) items;
+                var childItems = (IEnumerable)items;
                 foreach (var itemInList in childItems)
                 {
                     if (itemInList != childItem)
                     {
-                        mListAdd.Invoke(list, new[] {itemInList});
+                        mListAdd.Invoke(list, new[] { itemInList });
                     }
                 }
 
@@ -208,8 +188,8 @@ namespace Highway.Data.Contexts.TypeRepresentations
 
         private Object CreateGenericList(Type type)
         {
-            Type listType = typeof (List<>);
-            Type[] typeArgs = {type};
+            Type listType = typeof(List<>);
+            Type[] typeArgs = { type };
             Type genericType = listType.MakeGenericType(typeArgs);
             object o = Activator.CreateInstance(genericType);
             return o;
@@ -239,6 +219,23 @@ namespace Highway.Data.Contexts.TypeRepresentations
                     _data.Add(objRep);
                 }
             }
+        }
+
+        private void ApplyIdentityStrategy<T>(T item) where T : class
+        {
+            var type = item.GetType();
+            var types = new List<Type>(type.GetInterfaces());
+            types.Add(type);
+            var intersectingType = IdentityStrategies.Keys.Intersect(types).FirstOrDefault();
+            if (intersectingType != null)
+            {
+                IdentityStrategies[intersectingType](item);
+            }
+        }
+
+        internal bool EntityExistsInRepository(object item)
+        {
+            return _data.Any(x => x.Entity == item);
         }
     }
 }

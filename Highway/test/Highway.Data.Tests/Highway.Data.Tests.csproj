@@ -132,6 +132,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UtiltiyTests\DynamicQueryableTests.cs" />
     <Compile Include="UtiltiyTests\CriteriaBaseFilteringTests.cs" />
+    <Compile Include="UtiltiyTests\CloneExtension\CloneExtensionCircularReferenceTests.cs" />
+    <Compile Include="UtiltiyTests\CloneExtension\CloneExtensionComplexTypesTests.cs" />
+    <Compile Include="UtiltiyTests\CloneExtension\CloneExtensionSimpleTypesTests.cs" />
     <Compile Include="UtiltiyTests\ObservableExtensionTests.cs" />
   </ItemGroup>
   <ItemGroup>

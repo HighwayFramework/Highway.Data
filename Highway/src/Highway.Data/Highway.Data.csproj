@@ -133,6 +133,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\Queries\IExtendableQuery.cs" />
     <Compile Include="Utilities\DynamicQuery.cs" />
+    <Compile Include="Utilities\CloneExtension.cs" />
     <Compile Include="Utilities\ObservableExtension.cs" />
   </ItemGroup>
   <ItemGroup>

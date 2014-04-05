@@ -35,7 +35,6 @@ namespace Highway.Data.Contexts.TypeRepresentations
                 ApplyIdentityStrategy<T>(item);
                 var rep = new ObjectRepresentation
                 {
-                    Id = Guid.NewGuid(),
                     Entity = item
                 };
 
@@ -99,7 +98,6 @@ namespace Highway.Data.Contexts.TypeRepresentations
 
                 var objectRepresentation = new ObjectRepresentation
                 {
-                    Id = Guid.NewGuid(),
                     Entity = item,
                     Parents = new Dictionary<object, Accessor> {{parent, new Accessor(removeAction, getterFunc)}}
                 };

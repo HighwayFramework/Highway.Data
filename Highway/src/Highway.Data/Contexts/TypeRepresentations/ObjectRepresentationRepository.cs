@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Highway.Data.Utilities;
 using Highway.Pavement.Collections;
 
 #endregion
@@ -32,7 +33,6 @@ namespace Highway.Data.Contexts.TypeRepresentations
         {
             if (EntityExistsInRepository(item)) return;
 
-            ApplyIdentityStrategy<T>(item);
             var rep = new ObjectRepresentation
             {
                 Entity = item
@@ -84,8 +84,6 @@ namespace Highway.Data.Contexts.TypeRepresentations
             }
             else
             {
-                ApplyIdentityStrategy(item);
-
                 var objectRepresentation = new ObjectRepresentation
                 {
                     Entity = item,
@@ -195,7 +193,7 @@ namespace Highway.Data.Contexts.TypeRepresentations
             return o;
         }
 
-        public void CleanGraph()
+        private void CleanGraph()
         {
             var objectRepresentations = _data.Where(x => x.Parents.Count == 0).ToList();
             foreach (var root in objectRepresentations)
@@ -208,7 +206,7 @@ namespace Highway.Data.Contexts.TypeRepresentations
             }
         }
 
-        public void FindChanges()
+        private void FindChanges()
         {
             var objectRepresentations = _data.Where(x => x.Parents.Count == 0).ToList();
             foreach (var root in objectRepresentations)
@@ -233,9 +231,24 @@ namespace Highway.Data.Contexts.TypeRepresentations
             }
         }
 
+        private void ApplyIdentityStrategies()
+        {
+            foreach (var entity in _data.Select(x => x.Entity))
+            {
+                ApplyIdentityStrategy(entity);
+            }
+        }
+
         internal bool EntityExistsInRepository(object item)
         {
             return _data.Any(x => x.Entity == item);
+        }
+
+        internal void Commit()
+        {
+            CleanGraph();
+            FindChanges();
+            ApplyIdentityStrategies();
         }
     }
 }

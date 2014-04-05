@@ -64,8 +64,7 @@ namespace Highway.Data.Contexts
         {
             AddAllFromQueueIntoRepository();
             RemoveAllFromQueueFromRepository();
-            repo.CleanGraph();
-            repo.FindChanges();
+            repo.Commit();
             return 0;
         }
 

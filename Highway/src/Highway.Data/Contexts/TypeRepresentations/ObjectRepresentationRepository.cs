@@ -136,7 +136,8 @@ namespace Highway.Data.Contexts.TypeRepresentations
             List<ObjectRepresentation> reps = new List<ObjectRepresentation>();
             var properties =
                 item.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                    .Where(x => typeof(IEnumerable).IsAssignableFrom(x.PropertyType)
+                    .Where(x => x.PropertyType != typeof(string)
+                        && typeof(IEnumerable).IsAssignableFrom(x.PropertyType)
                         && x.GetValue(item, null) != null);
             foreach (var propertyInfo in properties)
             {

@@ -11,13 +11,17 @@ namespace Highway.Data.Contexts
 {
     public class InMemoryDataContext : IDataContext
     {
-        internal ObjectRepresentationRepository repo = new ObjectRepresentationRepository();
-
-        Queue addQueue = new Queue();
-        Queue removeQueue = new Queue();
+        internal readonly ObjectRepresentationRepository repo;
 
         public InMemoryDataContext()
         {
+            repo = new ObjectRepresentationRepository();
+            RegisterIIdentifiables();
+        }
+
+        internal InMemoryDataContext(ObjectRepresentationRepository repo)
+        {
+            this.repo = repo;
             RegisterIIdentifiables();
         }
 
@@ -33,37 +37,35 @@ namespace Highway.Data.Contexts
         {
         }
 
-        public IQueryable<T> AsQueryable<T>() where T : class
+        public virtual IQueryable<T> AsQueryable<T>() where T : class
         {
             return repo.Data<T>();
         }
 
-        public T Add<T>(T item) where T : class
+        public virtual T Add<T>(T item) where T : class
         {
-            addQueue.Enqueue(item);
+            repo.Add(item);
             return item;
         }
 
-        public T Remove<T>(T item) where T : class
+        public virtual T Remove<T>(T item) where T : class
         {
-            removeQueue.Enqueue(item);
+            repo.Remove(item);
             return item;
         }
 
-        public T Update<T>(T item) where T : class
+        public virtual T Update<T>(T item) where T : class
         {
             return item;
         }
 
-        public T Reload<T>(T item) where T : class
+        public virtual T Reload<T>(T item) where T : class
         {
             return item;
         }
 
         public virtual int Commit()
         {
-            AddAllFromQueueIntoRepository();
-            RemoveAllFromQueueFromRepository();
             repo.Commit();
             return 0;
         }
@@ -82,21 +84,6 @@ namespace Highway.Data.Contexts
             else
             {
                 repo.IdentityStrategies.Add(typeof(T), obj => identityStrategy.Assign((T)obj));
-            }
-        }
-
-        private void AddAllFromQueueIntoRepository()
-        {
-            while (addQueue.Count > 0)
-            {
-                repo.Add(addQueue.Dequeue());
-            }
-        }
-        private void RemoveAllFromQueueFromRepository()
-        {
-            while (removeQueue.Count > 0)
-            {
-                repo.Remove(removeQueue.Dequeue());
             }
         }
     }

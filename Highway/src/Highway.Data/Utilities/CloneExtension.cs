@@ -10,39 +10,30 @@ namespace Highway.Data.Utilities
 {
     public static class CloneExtension
     {
-        private static Dictionary<object, object> originalToCloneMap;
+        private static IDictionary<object, object> originalToCloneMap;
 
-        public static Dictionary<object, object> CloneMap<T>(this T originalObject) where T : class
-        {
-            return CloneMap<T>(originalObject, new Dictionary<object, object>());
-        }
-
-        public static Dictionary<object, object> CloneMap<T>(this T originalObject, Dictionary<object, object> existingOriginalToCloneMap) where T : class
+        public static T Clone<T>(this T originalObject, IDictionary<object, object> existingOriginalToCloneMap) where T : class
         {
             originalToCloneMap = existingOriginalToCloneMap ?? new Dictionary<object, object>();
-
-            ExecuteClone(originalObject);
-
-            return originalToCloneMap;
-        }
-
-        public static T Clone<T>(this T originalObject) where T : class
-        {
-            originalToCloneMap = new Dictionary<object, object>();
 
             var cloneObject = ExecuteClone(originalObject);
 
             return cloneObject;
         }
 
+        public static T Clone<T>(this T originalObject) where T : class
+        {
+            return Clone<T>(originalObject, null);
+        }
+
         public static T ExecuteClone<T>(this T originalObject) where T : class
         {
-            if(originalToCloneMap.ContainsKey(originalObject))
+            if (originalToCloneMap.ContainsKey(originalObject))
                 return (T)originalToCloneMap[originalObject];
 
             var cloneObject = (T)InstantiateClone(originalObject);
-            
-            if(!typeof(IEnumerable).IsAssignableFrom(originalObject.GetType()))
+
+            if (!typeof(IEnumerable).IsAssignableFrom(originalObject.GetType()))
                 CloneFields(originalObject, cloneObject);
 
             return cloneObject;
@@ -107,7 +98,7 @@ namespace Highway.Data.Utilities
             {
                 throw new MissingMethodException(string.Format("Possible missing default constructor for {0}. Can be private. Required for EF as well.", t), e);
             }
-            
+
             originalToCloneMap.Add(classObject, cloneObject);
             return cloneObject;
         }
@@ -119,18 +110,16 @@ namespace Highway.Data.Utilities
                 originalCollection.GetType().GetGenericArguments());
             var cloneCollection = (T)Activator.CreateInstance(genericType);
 
-            var isIListType = typeof(IList).IsAssignableFrom(collectionType);
+            if (!typeof(IList).IsAssignableFrom(collectionType))
+                throw new NotSupportedException("Uncertain of what other collection types to handle.");
 
             originalToCloneMap.Add(originalCollection, cloneCollection);
 
             foreach (var item in (IEnumerable)originalCollection)
             {
-                if(isIListType)
-                    ((IList)cloneCollection).Add(ExecuteClone(item));
-                else
-                    throw new NotSupportedException("Uncertain of what other collection types to handle.");
+                ((IList)cloneCollection).Add(ExecuteClone(item));
             }
-            
+
             return cloneCollection;
         }
     }

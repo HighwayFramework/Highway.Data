@@ -2,12 +2,14 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Highway.Data.Utilities;
+using System.Collections.Generic;
 
 namespace Highway.Data.Tests.Utilities.CloneExtension
 {
     public class Employer
     {
         public Employee Ceo { get; set; }
+        public List<Employee> Employees { get; set; }
     }
 
     public class Employee : Person
@@ -31,8 +33,35 @@ namespace Highway.Data.Tests.Utilities.CloneExtension
 
             Assert.IsNotNull(employerClone.Ceo);
             Assert.AreNotSame(employer.Ceo, employerClone.Ceo);
+        }
 
-            //TODO: 
+        [TestMethod]
+        public void ShouldNotThrowExceptionWithNullReferences()
+        {
+            var employer = new Employer { Ceo = null };
+
+            var employerClone = employer.Clone();
+            
+            Assert.IsNull(employerClone.Ceo);
+        }
+
+        [TestMethod]
+        public void ShouldCloneCollection()
+        {
+            var employer = new Employer
+            {
+                Ceo = new Employee(),
+                Employees = new List<Employee>
+                {
+                    new Employee{FirstName="John"},
+                    new Employee()
+                }
+            };
+
+            var employerClone = employer.Clone();
+
+            Assert.AreEqual(2, employerClone.Employees.Count);
+            Assert.AreEqual("John", employerClone.Employees.First().FirstName);
         }
 
         [TestMethod]

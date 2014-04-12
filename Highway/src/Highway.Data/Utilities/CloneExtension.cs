@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -9,29 +10,47 @@ namespace Highway.Data.Utilities
 {
     public static class CloneExtension
     {
-        private static Dictionary<object, object> originalToCloneMapping = new Dictionary<object, object>();
+        private static Dictionary<object, object> originalToCloneMap;
+
+        public static Dictionary<object, object> CloneMap<T>(this T originalObject) where T : class
+        {
+            return CloneMap<T>(originalObject, new Dictionary<object, object>());
+        }
+
+        public static Dictionary<object, object> CloneMap<T>(this T originalObject, Dictionary<object, object> existingOriginalToCloneMap) where T : class
+        {
+            originalToCloneMap = existingOriginalToCloneMap ?? new Dictionary<object, object>();
+
+            ExecuteClone(originalObject);
+
+            return originalToCloneMap;
+        }
+
         public static T Clone<T>(this T originalObject) where T : class
         {
+            originalToCloneMap = new Dictionary<object, object>();
+
             var cloneObject = ExecuteClone(originalObject);
-            originalToCloneMapping.Clear();
+
             return cloneObject;
         }
 
         public static T ExecuteClone<T>(this T originalObject) where T : class
         {
-            if(originalToCloneMapping.ContainsKey(originalObject))
-                return (T)originalToCloneMapping[originalObject];
+            if(originalToCloneMap.ContainsKey(originalObject))
+                return (T)originalToCloneMap[originalObject];
 
-            var cloneObject = InstantiateClone(originalObject);
-            originalToCloneMapping.Add(originalObject, cloneObject);
-            CloneFields(originalObject, cloneObject);
+            var cloneObject = (T)InstantiateClone(originalObject);
+            
+            if(!typeof(IEnumerable).IsAssignableFrom(originalObject.GetType()))
+                CloneFields(originalObject, cloneObject);
 
             return cloneObject;
         }
 
         private static void CloneFields<T>(T originalObject, T cloneObject)
         {
-            Type type = typeof(T);
+            Type type = originalObject.GetType();
 
             do
             {
@@ -50,7 +69,9 @@ namespace Highway.Data.Utilities
                 var fieldInfo = type.GetField(field.Name, BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
                 var value = fieldInfo.GetValue(originalObject);
 
-                if (fieldInfo.FieldType.IsPrimitive || fieldInfo.FieldType == typeof(string)) fieldInfo.SetValue(cloneObject, value);
+                if (value == null) continue;
+
+                if (fieldInfo.FieldType.IsPrimitive || fieldInfo.FieldType == typeof(string) || fieldInfo.FieldType == typeof(Guid)) fieldInfo.SetValue(cloneObject, value);
                 else
                 {
                     var methodInfo = typeof(CloneExtension).GetMethod("ExecuteClone");
@@ -63,12 +84,54 @@ namespace Highway.Data.Utilities
 
         private static T InstantiateClone<T>(T originalObject)
         {
-            Type t = typeof(T);
+            if (typeof(IEnumerable).IsAssignableFrom(originalObject.GetType()))
+                return InstantiateCollectionClone(originalObject);
+            else
+                return InstantiateClassClone(originalObject);
+        }
+
+        private static T InstantiateClassClone<T>(T classObject)
+        {
+            Type t = classObject.GetType();
 
             ConstructorInfo ci = t.GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public,
                 System.Type.DefaultBinder, System.Type.EmptyTypes, null);
 
-            return (T)ci.Invoke(null);
+            T cloneObject;
+
+            try
+            {
+                cloneObject = (T)ci.Invoke(null);
+            }
+            catch (NullReferenceException e)
+            {
+                throw new MissingMethodException(string.Format("Possible missing default constructor for {0}. Can be private. Required for EF as well.", t), e);
+            }
+            
+            originalToCloneMap.Add(classObject, cloneObject);
+            return cloneObject;
+        }
+
+        private static T InstantiateCollectionClone<T>(T originalCollection)
+        {
+            var collectionType = originalCollection.GetType().GetGenericTypeDefinition();
+            Type genericType = collectionType.MakeGenericType(
+                originalCollection.GetType().GetGenericArguments());
+            var cloneCollection = (T)Activator.CreateInstance(genericType);
+
+            var isIListType = typeof(IList).IsAssignableFrom(collectionType);
+
+            originalToCloneMap.Add(originalCollection, cloneCollection);
+
+            foreach (var item in (IEnumerable)originalCollection)
+            {
+                if(isIListType)
+                    ((IList)cloneCollection).Add(ExecuteClone(item));
+                else
+                    throw new NotSupportedException("Uncertain of what other collection types to handle.");
+            }
+            
+            return cloneCollection;
         }
     }
 }

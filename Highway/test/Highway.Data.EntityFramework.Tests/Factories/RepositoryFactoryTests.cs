@@ -28,6 +28,20 @@ namespace Highway.Data.EntityFramework.Tests.Factories
         }
 
         [TestMethod]
+        public void ShouldCreateRepositoryWhenDomainEventsAreNull()
+        {
+            // arrange
+            var testDomain = new TestDomain { Events = null };
+            IDomainRepositoryFactory factory = new DomainRepositoryFactory(new []{testDomain});
+
+            // act
+            IRepository repo = factory.Create<TestDomain>();
+
+            // assert
+            repo.Should().NotBeNull();
+        }
+
+        [TestMethod]
         public void ShouldCreateRepositoryFromType()
         {
             // arrange

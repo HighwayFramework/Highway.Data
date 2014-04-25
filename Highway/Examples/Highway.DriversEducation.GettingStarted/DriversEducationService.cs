@@ -20,6 +20,7 @@ namespace Highway.DriversEducation.GettingStarted
         public void AddDriver(string name)
         {
             _repository.Context.Add(new Driver {LastName = name});
+            _repository.Context.Commit();
         }
 
         public Driver GetDriver(string name)

@@ -19,7 +19,6 @@ namespace Highway.Data.Contexts.TypeRepresentations
 
         internal IEnumerable<ObjectRepresentation> RelatedEntities { get; set; }
 
-        internal Guid Id { get; set; }
         internal Dictionary<object, Accessor> Parents { get; set; }
 
         public bool IsType<T1>()

@@ -103,6 +103,11 @@
     <Compile Include="AutoMockingTest.cs" />
     <Compile Include="BaseTest.cs" />
     <Compile Include="ContainerTest.cs" />
+    <Compile Include="InMemory\ActiveDataContext\InMemoryActiveDataContextTwoCollectionTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="InMemory\ActiveDataContext\InMemoryActiveDataContextTwoLevelTests.cs" />
+    <Compile Include="InMemory\ActiveDataContext\InMemoryActiveDataContextOneLevelTests.cs" />
     <Compile Include="InMemory\Bug Tests\TestCircularReference.cs" />
     <Compile Include="InMemory\Bug Tests\TestThrowsExceptionWithDuplicateElement.cs" />
     <Compile Include="InMemory\Bug Tests\TestThrowsExceptionWithListEntityType.cs" />
@@ -130,9 +135,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UtiltiyTests\DynamicQueryableTests.cs" />
-    <Compile Include="UtiltiyTests\CriteriaBaseFilteringTests.cs" />
-    <Compile Include="UtiltiyTests\ObservableExtensionTests.cs" />
+    <Compile Include="Utilities\CloneExtension\CloneExtensionCircularReferenceTests.cs" />
+    <Compile Include="Utilities\CloneExtension\CloneExtensionComplexTypesTests.cs" />
+    <Compile Include="Utilities\CloneExtension\CloneExtensionSimpleTypesTests.cs" />
+    <Compile Include="Utilities\CriteriaBaseFilteringTests.cs" />
+    <Compile Include="Utilities\DynamicQueryableTests.cs" />
+    <Compile Include="Utilities\ObservableExtensionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

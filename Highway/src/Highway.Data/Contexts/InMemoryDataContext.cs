@@ -3,6 +3,7 @@
 using System.Linq;
 using Highway.Data.Contexts.TypeRepresentations;
 using System;
+using System.Collections;
 
 #endregion
 
@@ -10,10 +11,17 @@ namespace Highway.Data.Contexts
 {
     public class InMemoryDataContext : IDataContext
     {
-        internal ObjectRepresentationRepository repo = new ObjectRepresentationRepository();
+        internal readonly ObjectRepresentationRepository repo;
 
         public InMemoryDataContext()
         {
+            repo = new ObjectRepresentationRepository();
+            RegisterIIdentifiables();
+        }
+
+        internal InMemoryDataContext(ObjectRepresentationRepository repo)
+        {
+            this.repo = repo;
             RegisterIIdentifiables();
         }
 
@@ -29,37 +37,36 @@ namespace Highway.Data.Contexts
         {
         }
 
-        public IQueryable<T> AsQueryable<T>() where T : class
+        public virtual IQueryable<T> AsQueryable<T>() where T : class
         {
             return repo.Data<T>();
         }
 
-        public T Add<T>(T item) where T : class
+        public virtual T Add<T>(T item) where T : class
         {
             repo.Add(item);
             return item;
         }
 
-        public T Remove<T>(T item) where T : class
+        public virtual T Remove<T>(T item) where T : class
         {
             repo.Remove(item);
             return item;
         }
 
-        public T Update<T>(T item) where T : class
+        public virtual T Update<T>(T item) where T : class
         {
             return item;
         }
 
-        public T Reload<T>(T item) where T : class
+        public virtual T Reload<T>(T item) where T : class
         {
             return item;
         }
 
         public virtual int Commit()
         {
-            repo.CleanGraph();
-            repo.FindChanges();
+            repo.Commit();
             return 0;
         }
 

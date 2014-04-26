@@ -5,7 +5,7 @@ using FluentAssertions;
 using Highway.Data.Tests.TestDomain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Highway.Data.Tests.UtiltiyTests
+namespace Highway.Data.Tests.Utilities
 {
     [TestClass]
     public class ObservableExtensionTests

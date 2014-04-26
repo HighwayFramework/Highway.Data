@@ -73,11 +73,13 @@
     <Compile Include="..\..\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="Collections\BiDictionary.cs" />
     <Compile Include="Contexts\IdentityStrategy\GuidIdentityStrategy.cs" />
     <Compile Include="Contexts\IdentityStrategy\IdentityStrategy.cs" />
     <Compile Include="Contexts\IdentityStrategy\IIdentityStrategy.cs" />
     <Compile Include="Contexts\IdentityStrategy\ShortIdentityStrategy.cs" />
     <Compile Include="Contexts\IdentityStrategy\LongIdentityStrategy.cs" />
+    <Compile Include="Contexts\InMemoryActiveDataContext.cs" />
     <Compile Include="Contexts\InMemoryDataContext.cs" />
     <Compile Include="Contexts\IdentityStrategy\IntegerIdentityStrategy.cs" />
     <Compile Include="Contexts\TypeRepresentations\Accessor.cs" />
@@ -133,6 +135,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\Queries\IExtendableQuery.cs" />
     <Compile Include="Utilities\DynamicQuery.cs" />
+    <Compile Include="Utilities\CloneExtension.cs" />
     <Compile Include="Utilities\ObservableExtension.cs" />
   </ItemGroup>
   <ItemGroup>

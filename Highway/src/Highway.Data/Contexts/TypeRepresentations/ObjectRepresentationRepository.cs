@@ -120,7 +120,9 @@ namespace Highway.Data.Contexts.TypeRepresentations
         {
             List<ObjectRepresentation> reps = new List<ObjectRepresentation>();
             var properties =
-                item.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(x => x.PropertyType.IsClass);
+                item.GetType()
+                    .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                    .Where(x => x.PropertyType.IsClass && !typeof(IEnumerable).IsAssignableFrom(x.PropertyType));
             foreach (var propertyInfo in properties)
             {
                 var child = propertyInfo.GetValue(item, null);

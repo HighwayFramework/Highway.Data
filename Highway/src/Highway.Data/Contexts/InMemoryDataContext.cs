@@ -12,6 +12,8 @@ namespace Highway.Data.Contexts
     public class InMemoryDataContext : IDataContext
     {
         internal readonly ObjectRepresentationRepository repo;
+        private readonly Queue addQueue = new Queue();
+        private readonly Queue removeQueue = new Queue();
 
         public InMemoryDataContext()
         {
@@ -44,13 +46,13 @@ namespace Highway.Data.Contexts
 
         public virtual T Add<T>(T item) where T : class
         {
-            repo.Add(item);
+            addQueue.Enqueue(item);
             return item;
         }
 
         public virtual T Remove<T>(T item) where T : class
         {
-            repo.Remove(item);
+            removeQueue.Enqueue(item);
             return item;
         }
 
@@ -66,6 +68,7 @@ namespace Highway.Data.Contexts
 
         public virtual int Commit()
         {
+            ProcessCommitQueues();
             repo.Commit();
             return 0;
         }
@@ -84,6 +87,27 @@ namespace Highway.Data.Contexts
             else
             {
                 repo.IdentityStrategies.Add(typeof(T), obj => identityStrategy.Assign((T)obj));
+            }
+        }
+
+        protected void ProcessCommitQueues() 
+        {
+            AddAllFromQueueIntoRepository();
+            RemoveAllFromQueueFromRepository();
+        }
+
+        private void AddAllFromQueueIntoRepository()
+        {
+            while (addQueue.Count > 0)
+            {
+                repo.Add(addQueue.Dequeue());
+            }
+        }
+        private void RemoveAllFromQueueFromRepository()
+        {
+            while (removeQueue.Count > 0)
+            {
+                repo.Remove(removeQueue.Dequeue());
             }
         }
     }

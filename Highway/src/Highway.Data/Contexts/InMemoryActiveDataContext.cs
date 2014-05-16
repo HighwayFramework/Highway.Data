@@ -15,9 +15,6 @@ namespace Highway.Data.Contexts
 {
     public class InMemoryActiveDataContext : InMemoryDataContext, IDataContext
     {
-        private Queue addQueue = new Queue();
-        private Queue removeQueue = new Queue();
-
         private int commitVersion = 0;
         private static int CommitCounter = 0;
         internal static ObjectRepresentationRepository Repo = new ObjectRepresentationRepository();
@@ -38,14 +35,14 @@ namespace Highway.Data.Contexts
         public override T Add<T>(T item)
         {
             var repoItem = item.Clone(entityToRepoEntityMap);
-            addQueue.Enqueue(repoItem);
+            base.Add(repoItem);
             return item;
         }
 
         public override T Remove<T>(T item)
         {
             var repoItem = entityToRepoEntityMap[item];
-            removeQueue.Enqueue(repoItem);
+            base.Remove(repoItem);
             return item;
         }
 
@@ -78,12 +75,11 @@ namespace Highway.Data.Contexts
                     CopyPrimitives(pair.Key, pair.Value);
             }
 
-            AddAllFromQueueIntoRepository();
-            RemoveAllFromQueueFromRepository();
+            ProcessCommitQueues();
 
             UpdateForwardEntityToRepoEntityMap();
 
-            base.Commit();
+            repo.Commit();
 
             foreach (var pair in entityToRepoEntityMap.Reverse)
             {
@@ -135,20 +131,6 @@ namespace Highway.Data.Contexts
                     || fieldInfo.FieldType == typeof(string)
                     || fieldInfo.FieldType == typeof(Guid))
                     fieldInfo.SetValue(destination, value);
-            }
-        }
-        private void AddAllFromQueueIntoRepository()
-        {
-            while (addQueue.Count > 0)
-            {
-                repo.Add(addQueue.Dequeue());
-            }
-        }
-        private void RemoveAllFromQueueFromRepository()
-        {
-            while (removeQueue.Count > 0)
-            {
-                repo.Remove(removeQueue.Dequeue());
             }
         }
 

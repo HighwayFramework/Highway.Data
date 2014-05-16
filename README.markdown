@@ -45,6 +45,7 @@ We just need to add a driver to the database.
         public void AddDriver(string name)
         {
             _repository.Context.Add(new Driver(name));
+            _repository.Context.Commit();
         }
     }
 
@@ -73,6 +74,7 @@ Once we have added an object we will obviously need to query the object back out
         var context = new InMemoryDataContext();
         context.Add(new Driver("Devlin"));
         context.Add(new Driver("Tim"));
+        context.Commit();
 
         var service = new DriversEducationService(new Repository(context));
 

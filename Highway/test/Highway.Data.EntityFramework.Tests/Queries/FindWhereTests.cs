@@ -64,9 +64,9 @@ namespace Highway.Data.Tests.InMemory.ScenarioTests
         [TestMethod]
         public void ShouldOrderTheResults()
         {
-            var posts = repo.Find(FindWhere<Post>.OrderedBy(
-                p => p.Title.StartsWith("Test") && !p.Title.Contains("Two"),
-                p => p.Title));
+            var posts = repo.Find(
+                new FindWhere<Post>(p => p.Title.StartsWith("Test") && !p.Title.Contains("Two"))
+                .OrderedBy(p => p.Title));
             posts.Count().Should().Be(2);
             posts.First().Title.Should().Be("Test First");
             posts.Last().Title.Should().Be("Test One");

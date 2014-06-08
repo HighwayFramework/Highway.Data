@@ -149,6 +149,7 @@
     <Compile Include="Mapping\BazMappingConfiguration.cs" />
     <Compile Include="Mapping\QuxMappingConfiguration.cs" />
     <Compile Include="Performance\Given_A_Query_Can_Performance_Test_IT.cs" />
+    <Compile Include="Queries\FindWhereTests.cs" />
     <Compile Include="Queries\Given_A_ProjectionQuery_Object.cs" />
     <Compile Include="Queries\Given_a_GetById_Query.cs" />
     <Compile Include="TestCategories.cs" />

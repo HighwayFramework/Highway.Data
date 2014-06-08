@@ -118,6 +118,7 @@
     <Compile Include="Interfaces\Queries\IObservableQuery.cs" />
     <Compile Include="Interfaces\Queries\IQueryBase.cs" />
     <Compile Include="Interfaces\Queries\IScalar.cs" />
+    <Compile Include="PrebuiltQueries\FindWhere.cs" />
     <Compile Include="PrebuiltQueries\RemoveById.cs" />
     <Compile Include="PrebuiltQueries\FindAll.cs" />
     <Compile Include="PrebuiltQueries\GetById.cs" />

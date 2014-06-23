@@ -89,6 +89,17 @@
     <Compile Include="Contexts\InMemoryDomainContext.cs" />
     <Compile Include="Database\DropCreateInitializer.cs" />
     <Compile Include="DefaultContextConfiguration.cs" />
+    <Compile Include="Extensions\GraphDiff\DbContextExtensions.cs" />
+    <Compile Include="Extensions\GraphDiff\GraphDiffConfiguration.cs" />
+    <Compile Include="Extensions\GraphDiff\Internal\ConfigurationVisitor.cs" />
+    <Compile Include="Extensions\GraphDiff\Internal\DebugExtensions.cs" />
+    <Compile Include="Extensions\GraphDiff\Internal\Extensions.cs" />
+    <Compile Include="Extensions\GraphDiff\Internal\GraphDiffer.cs" />
+    <Compile Include="Extensions\GraphDiff\Internal\Graph\AssociatedEntityGraphNode.cs" />
+    <Compile Include="Extensions\GraphDiff\Internal\Graph\CollectionGraphNode.cs" />
+    <Compile Include="Extensions\GraphDiff\Internal\Graph\GraphNode.cs" />
+    <Compile Include="Extensions\GraphDiff\Internal\Graph\OwnedEntityGraphNode.cs" />
+    <Compile Include="Extensions\GraphDiff\IUpdateConfiguration.cs" />
     <Compile Include="Factories\IDomainRepositoryFactory.cs" />
     <Compile Include="Factories\IRepositoryFactory.cs" />
     <Compile Include="Interfaces\IDomain.cs" />

@@ -104,6 +104,9 @@
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.LoadTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="RefactorThis.GraphDiff">
+      <HintPath>..\..\packages\RefactorThis.GraphDiff.2.0.1\lib\RefactorThis.GraphDiff.dll</HintPath>
+    </Reference>
     <Reference Include="Rhino.Mocks">
       <HintPath>..\..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
     </Reference>
@@ -115,6 +118,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="TechTalk.SpecFlow">
@@ -139,6 +143,23 @@
     <Compile Include="Contexts\DomainContextTests.cs" />
     <Compile Include="AdvancedFeatures\EventManagement\SaveInterceptionTests.cs" />
     <Compile Include="Factories\RepositoryFactoryTests.cs" />
+    <Compile Include="GraphDiffs\Bootstrapper.cs" />
+    <Compile Include="GraphDiffs\Models\TestModels.cs" />
+    <Compile Include="GraphDiffs\TestBase.cs" />
+    <Compile Include="GraphDiffs\TestDbContext.cs" />
+    <Compile Include="GraphDiffs\Tests\AddAggregateBehaviours.cs" />
+    <Compile Include="GraphDiffs\Tests\AssociatedCollectionBehaviours.cs" />
+    <Compile Include="GraphDiffs\Tests\AssociatedEntityBehaviours.cs" />
+    <Compile Include="GraphDiffs\Tests\AttachedBehaviours.cs" />
+    <Compile Include="GraphDiffs\Tests\ConfigurationVisitorBehaviours.cs" />
+    <Compile Include="GraphDiffs\Tests\ErrorHandlingBehaviours.cs" />
+    <Compile Include="GraphDiffs\Tests\GuidKeyBehaviors.cs" />
+    <Compile Include="GraphDiffs\Tests\MiscBehaviours.cs" />
+    <Compile Include="GraphDiffs\Tests\OneMemberBehaviours.cs" />
+    <Compile Include="GraphDiffs\Tests\OptimisticConcurrencyBehaviours.cs" />
+    <Compile Include="GraphDiffs\Tests\OwnedCollectionBehaviours.cs" />
+    <Compile Include="GraphDiffs\Tests\OwnedEntityBehaviours.cs" />
+    <Compile Include="GraphDiffs\Tests\ThirdTierBehaviours.cs" />
     <Compile Include="Initializer\EntityFrameworkIntializer.cs" />
     <Compile Include="IntegrationTests\AssemblyConfigurationTests.cs" />
     <Compile Include="IntegrationTests\BasicQueryTests.cs" />
@@ -199,7 +220,9 @@
     <Compile Include="Queries\Given_A_Scalar_Object.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="LoadTest1.loadtest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -263,6 +286,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

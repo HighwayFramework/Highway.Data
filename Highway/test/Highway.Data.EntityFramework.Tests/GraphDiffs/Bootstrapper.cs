@@ -9,7 +9,15 @@ namespace Highway.Data.EntityFramework.Tests.GraphDiffs
         [AssemblyInitialize]
         public static void Initialize(TestContext context)
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<TestDbContext>());
+            Database.SetInitializer(new DropCreateDatabaseAlways<TestDbContext>());
+            using (var db = new TestDbContext())
+            {
+                if (db.Database.Exists())
+                {
+                    db.Database.Delete();
+                }
+                db.Database.Create();
+            }
         }
     }
 }

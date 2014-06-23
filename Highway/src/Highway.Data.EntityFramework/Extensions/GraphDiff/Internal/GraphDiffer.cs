@@ -74,8 +74,8 @@ namespace Highway.Data.EntityFramework.Extensions.GraphDiff.Internal
         private static T CreateInstance()
         {
             // This allows for a protected or internal parameterless constructor
-            const BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance;
-            var ctor = typeof (T).GetConstructor(flags, null, new Type[0], null);
+            const BindingFlags Flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance;
+            var ctor = typeof (T).GetConstructor(Flags, null, new Type[0], null);
             var instance = ctor.Invoke(null);
             return (T) instance;
         }
@@ -101,7 +101,9 @@ namespace Highway.Data.EntityFramework.Extensions.GraphDiff.Internal
             ParameterExpression parameter = Expression.Parameter(typeof(T));
             Expression expression = CreateEqualsExpression(entity, keyProperties[0], parameter);
             for (int i = 1; i < keyProperties.Count; i++)
+            {
                 expression = Expression.And(expression, CreateEqualsExpression(entity, keyProperties[i], parameter));
+            }
 
             return Expression.Lambda<Func<T, bool>>(expression, parameter);
         }

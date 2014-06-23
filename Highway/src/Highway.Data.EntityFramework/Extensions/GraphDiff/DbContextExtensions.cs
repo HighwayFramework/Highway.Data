@@ -17,8 +17,8 @@ using Highway.Data.EntityFramework.Extensions.GraphDiff.Internal.Graph;
 
 namespace Highway.Data
 {
-	public static class DbContextExtensions
-	{
+    public static class DbContextExtensions
+    {
         /// <summary>
         /// Merges a graph of entities with the data store.
         /// </summary>
@@ -27,31 +27,29 @@ namespace Highway.Data
         /// <param name="entity">The root entity.</param>
         /// <param name="mapping">The mapping configuration to define the bounds of the graph</param>
         /// <returns>The attached entity graph</returns>
-	    public static T UpdateGraph<T>(this IDataContext context, T entity, Expression<Func<IUpdateConfiguration<T>, object>> mapping = null) where T : class
+        public static T UpdateGraph<T>(this IDataContext context, T entity, Expression<Func<IUpdateConfiguration<T>, object>> mapping = null) where T : class
         {
-            var dbContext = context as DbContext;
-            if (dbContext == null)
+            var typedContext = context as DbContext;
+            if (typedContext == null)
             {
                 return entity;
             }
             var root = mapping == null ? new GraphNode() : new ConfigurationVisitor<T>().GetNodes(mapping);
             var graphDiffer = new GraphDiffer<T>(root);
-            return graphDiffer.Merge(dbContext, entity);
-	    }
+            return graphDiffer.Merge(typedContext, entity);
+        }
 
-	    /// <summary>
-	    /// Updates multiple entity graphs
-	    /// </summary>
-	    /// <param name="context">The database context to attach / detach objects from</param>
-	    /// <param name="entities">the root entities</param>
-	    /// <param name="mapping">the map for doing the graph update</param>
-	    /// <typeparam name="T">the type of the root entities</typeparam>
-	    /// <returns>the attached entity graphs</returns>
-	    public static IEnumerable<T> UpdateGraphs<T>(this IDataContext context, IEnumerable<T> entities,
-	        Expression<Func<IUpdateConfiguration<T>, object>> mapping = null) where T : class
-	    {
-	        return entities.Select(x => context.UpdateGraph(x, mapping));
-	    }
-        
-	}
+        /// <summary>
+        /// Updates multiple entity graphs
+        /// </summary>
+        /// <param name="context">The database context to attach / detach objects from</param>
+        /// <param name="entities">the root entities</param>
+        /// <param name="mapping">the map for doing the graph update</param>
+        /// <typeparam name="T">the type of the root entities</typeparam>
+        /// <returns>the attached entity graphs</returns>
+        public static IEnumerable<T> UpdateGraphs<T>(this IDataContext context, IEnumerable<T> entities, Expression<Func<IUpdateConfiguration<T>, object>> mapping = null) where T : class
+        {
+            return entities.Select(x => context.UpdateGraph(x, mapping));
+        }
+    }
 }

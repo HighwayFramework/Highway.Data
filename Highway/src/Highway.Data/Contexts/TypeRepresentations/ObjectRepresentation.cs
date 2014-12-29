@@ -28,13 +28,24 @@ namespace Highway.Data.Contexts.TypeRepresentations
 
         internal IEnumerable<ObjectRepresentation> AllRelated()
         {
+            List<ObjectRepresentation> evaluatedObjects = new List<ObjectRepresentation>();
+            return AllRelated(evaluatedObjects);
+        }
+
+        internal IEnumerable<ObjectRepresentation> AllRelated(List<ObjectRepresentation> evaluatedObjects)
+        {
             var items = RelatedEntities.ToList();
             foreach (var objectRepresentationBase in RelatedEntities)
             {
-                items.AddRange(objectRepresentationBase.AllRelated());
+                if (evaluatedObjects.Contains(objectRepresentationBase))
+                {
+                    continue;
+                }
+                evaluatedObjects.Add(objectRepresentationBase);
+                items.AddRange(objectRepresentationBase.AllRelated(evaluatedObjects));
             }
             return items;
-        }
+        } 
 
         public List<ObjectRepresentation> GetObjectRepresentationsToPrune()
         {

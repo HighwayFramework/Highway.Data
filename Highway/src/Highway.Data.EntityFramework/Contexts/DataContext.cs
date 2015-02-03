@@ -100,12 +100,13 @@ namespace Highway.Data
 
         /// <summary>
         ///     This gives a mockable wrapper around the normal <see cref="DbSet{T}" /> method that allows for testablity
+        ///     This method is now virtual to allow for the injection of cross cutting concerns.
         /// </summary>
         /// <typeparam name="T">The Entity being queried</typeparam>
         /// <returns>
         ///     <see cref="IQueryable{T}" />
         /// </returns>
-        public IQueryable<T> AsQueryable<T>() where T : class
+        public virtual IQueryable<T> AsQueryable<T>() where T : class
         {
             _log.DebugFormat("Querying Object {0}", typeof (T).Name);
             DbSet<T> result = Set<T>();

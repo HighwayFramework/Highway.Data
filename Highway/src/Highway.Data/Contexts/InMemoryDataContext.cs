@@ -29,10 +29,10 @@ namespace Highway.Data.Contexts
 
         private void RegisterIIdentifiables()
         {
-            RegisterIdentityStrategy<IIdentifiable<int>>(new IntegerIdentityStrategy<IIdentifiable<int>>(x => x.Id));
-            RegisterIdentityStrategy<IIdentifiable<short>>(new ShortIdentityStrategy<IIdentifiable<short>>(x => x.Id));
-            RegisterIdentityStrategy<IIdentifiable<long>>(new LongIdentityStrategy<IIdentifiable<long>>(x => x.Id));
-            RegisterIdentityStrategy<IIdentifiable<Guid>>(new GuidIdentityStrategy<IIdentifiable<Guid>>(x => x.Id));
+            RegisterIdentityStrategy(new IntegerIdentityStrategy<IIdentifiable<int>>(x => x.Id));
+            RegisterIdentityStrategy(new ShortIdentityStrategy<IIdentifiable<short>>(x => x.Id));
+            RegisterIdentityStrategy(new LongIdentityStrategy<IIdentifiable<long>>(x => x.Id));
+            RegisterIdentityStrategy(new GuidIdentityStrategy<IIdentifiable<Guid>>(x => x.Id));
         }
 
         public void Dispose()
@@ -90,6 +90,9 @@ namespace Highway.Data.Contexts
             }
         }
 
+        /// <summary>
+        /// Processes the held but uncommitted adds and removes from the context
+        /// </summary>
         protected void ProcessCommitQueues() 
         {
             AddAllFromQueueIntoRepository();

@@ -1,6 +1,4 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,8 +8,6 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
 using Microsoft.SqlServer.Server;
-
-#endregion
 
 namespace Highway.Data
 {
@@ -29,7 +25,7 @@ namespace Highway.Data
         {
             Type basetype = null;
             foreach (Type i in listtype.GetInterfaces())
-                if (i.IsGenericType && i.GetGenericTypeDefinition() == typeof (IEnumerable<>))
+                if (i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEnumerable<>))
                     basetype = i.GetGenericArguments()[0];
 
             return basetype;
@@ -59,8 +55,8 @@ namespace Highway.Data
         public static T GetAttribute<T>(this Type type)
             where T : Attribute
         {
-            var attributes = type.GetCustomAttributes(typeof (T), false).FirstOrDefault();
-            return (T) attributes;
+            var attributes = type.GetCustomAttributes(typeof(T), false).FirstOrDefault();
+            return (T)attributes;
         }
 
         /// <summary>
@@ -73,8 +69,8 @@ namespace Highway.Data
         public static T GetAttribute<T>(this PropertyInfo propertyinfo)
             where T : Attribute
         {
-            var attributes = propertyinfo.GetCustomAttributes(typeof (T), false).FirstOrDefault();
-            return (T) attributes;
+            var attributes = propertyinfo.GetCustomAttributes(typeof(T), false).FirstOrDefault();
+            return (T)attributes;
         }
 
         /// <summary>
@@ -99,22 +95,16 @@ namespace Highway.Data
 
                     // get the requested value from the returned dataset and handle null values
                     var data = reader[name];
-                    if (data.GetType() == typeof (DBNull))
+                    if (data.GetType() == typeof(DBNull))
                         p.SetValue(t, null, null);
                     else
                         p.SetValue(t, reader[name], null);
                 }
-                catch (Exception ex)
+                catch (IndexOutOfRangeException ex)
                 {
-                    if (ex.GetType() == typeof (IndexOutOfRangeException))
-                    {
-                        // if the result set doesn't have this value, intercept the exception
-                        // and set the property value to null / 0
-                        p.SetValue(t, null, null);
-                    }
-                    else
-                        // something bad happened, pass on the exception
-                        throw ex;
+                    // if the result set doesn't have this value, intercept the exception
+                    // and set the property value to null / 0
+                    p.SetValue(t, null, null);
                 }
             }
 
@@ -143,28 +133,25 @@ namespace Highway.Data
 
                     // get the requested value from the returned dataset and handle null values
                     var data = reader[name];
-                    if (data.GetType() == typeof (DBNull))
+                    if (data.GetType() == typeof(DBNull))
                         p.SetValue(t, null, null);
                     else
                         p.SetValue(t, reader[name], null);
                 }
+                catch (IndexOutOfRangeException ex)
+                {
+                    // if the result set doesn't have this value, intercept the exception
+                    // and set the property value to null / 0
+                    p.SetValue(t, null, null);
+                }
                 catch (Exception ex)
                 {
-                    if (ex.GetType() == typeof (IndexOutOfRangeException))
-                    {
-                        // if the result set doesn't have this value, intercept the exception
-                        // and set the property value to null / 0
-                        p.SetValue(t, null, null);
-                    }
-                    else
-                    {
-                        // tell the user *where* we had an exception
-                        Exception outer = new Exception(String.Format("Exception processing return column {0} in {1}",
-                            name, t.GetType().Name), ex);
+                    // tell the user *where* we had an exception
+                    Exception outer = new Exception(String.Format("Exception processing return column {0} in {1}",
+                        name, t.GetType().Name), ex);
 
-                        // something bad happened, pass on the exception
-                        throw outer;
-                    }
+                    // something bad happened, pass on the exception
+                    throw outer;
                 }
             }
 
@@ -226,9 +213,9 @@ namespace Highway.Data
                     case SqlDbType.Decimal:
                         // get column precision and scale
                         var pa = p.GetAttribute<StoredProcedureAttributes.Precision>();
-                        Byte precision = (null == pa) ? (byte) 10 : pa.Value;
+                        Byte precision = (null == pa) ? (byte)10 : pa.Value;
                         var sca = p.GetAttribute<StoredProcedureAttributes.Scale>();
-                        Byte scale = (null == sca) ? (byte) 2 : sca.Value;
+                        Byte scale = (null == sca) ? (byte)2 : sca.Value;
                         column = new SqlMetaData(name, coltype, precision, scale);
                         break;
 

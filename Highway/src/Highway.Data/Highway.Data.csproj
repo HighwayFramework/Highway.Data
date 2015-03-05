@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Highway.Data</RootNamespace>
     <AssemblyName>Highway.Data</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -66,6 +66,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -86,11 +87,13 @@
     <Compile Include="Contexts\InMemoryActiveDataContext.cs" />
     <Compile Include="Contexts\InMemoryDataContext.cs" />
     <Compile Include="Contexts\IdentityStrategy\IntegerIdentityStrategy.cs" />
+    <Compile Include="Contexts\InMemoryDomainContext.cs" />
     <Compile Include="Contexts\TypeRepresentations\Accessor.cs" />
     <Compile Include="Contexts\TypeRepresentations\ObjectRepresentationRepository.cs" />
     <Compile Include="Contexts\TypeRepresentations\ObjectRepresentation.cs" />
     <Compile Include="Contexts\TypeUtilities\CastExtensions.cs" />
     <Compile Include="EventManagement\Interfaces\BaseInterceptor.cs" />
+    <Compile Include="Extensions\QueryableExtensions.cs" />
     <Compile Include="Factories\IDataContextFactory.cs" />
     <Compile Include="Filtering\AndCriteria.cs" />
     <Compile Include="Filtering\BasicCriteria.cs" />
@@ -118,6 +121,59 @@
     <Compile Include="Interfaces\Queries\IObservableQuery.cs" />
     <Compile Include="Interfaces\Queries\IQueryBase.cs" />
     <Compile Include="Interfaces\Queries\IScalar.cs" />
+    <Compile Include="OData\GeneralExtensions.cs" />
+    <Compile Include="OData\IMemberNameResolver.cs" />
+    <Compile Include="OData\IModelFilter.cs" />
+    <Compile Include="OData\IPredicateConverter.cs" />
+    <Compile Include="OData\IRuntimeTypeProvider.cs" />
+    <Compile Include="OData\MemberNameResolver.cs" />
+    <Compile Include="OData\MethodProvider.cs" />
+    <Compile Include="OData\ModelFilter.cs" />
+    <Compile Include="OData\ModelFilterExtensions.cs" />
+    <Compile Include="OData\ODataResult.cs" />
+    <Compile Include="OData\Parser\ExpressionTokenizer.cs" />
+    <Compile Include="OData\Parser\FilterExpressionFactory.cs" />
+    <Compile Include="OData\Parser\FunctionExtensions.cs" />
+    <Compile Include="OData\Parser\FunctionTokenSet.cs" />
+    <Compile Include="OData\Parser\IFilterExpressionFactory.cs" />
+    <Compile Include="OData\Parser\IParameterParser.cs" />
+    <Compile Include="OData\Parser\ISelectExpressionFactory.cs" />
+    <Compile Include="OData\Parser\ISortExpressionFactory.cs" />
+    <Compile Include="OData\Parser\ParameterParser.cs" />
+    <Compile Include="OData\Parser\Readers\BooleanExpressionFactory.cs" />
+    <Compile Include="OData\Parser\Readers\ByteArrayExpressionFactory.cs" />
+    <Compile Include="OData\Parser\Readers\ByteArrayExpressionFactoryBase.cs" />
+    <Compile Include="OData\Parser\Readers\ByteExpressionFactory.cs" />
+    <Compile Include="OData\Parser\Readers\DateTimeExpressionFactory.cs" />
+    <Compile Include="OData\Parser\Readers\DateTimeOffsetExpressionFactory.cs" />
+    <Compile Include="OData\Parser\Readers\DecimalExpressionFactory.cs" />
+    <Compile Include="OData\Parser\Readers\DoubleExpressionFactory.cs" />
+    <Compile Include="OData\Parser\Readers\EnumExpressionFactory.cs" />
+    <Compile Include="OData\Parser\Readers\GuidExpressionFactory.cs" />
+    <Compile Include="OData\Parser\Readers\IntExpressionFactory.cs" />
+    <Compile Include="OData\Parser\Readers\IValueExpressionFactory.cs" />
+    <Compile Include="OData\Parser\Readers\LongExpressionFactory.cs" />
+    <Compile Include="OData\Parser\Readers\ParameterValueReader.cs" />
+    <Compile Include="OData\Parser\Readers\ShortExpressionFactory.cs" />
+    <Compile Include="OData\Parser\Readers\SingleExpressionFactory.cs" />
+    <Compile Include="OData\Parser\Readers\StreamExpressionFactory.cs" />
+    <Compile Include="OData\Parser\Readers\TimeSpanExpressionFactory.cs" />
+    <Compile Include="OData\Parser\Readers\UnsignedIntExpressionFactory.cs" />
+    <Compile Include="OData\Parser\Readers\UnsignedLongExpressionFactory.cs" />
+    <Compile Include="OData\Parser\Readers\UnsignedShortExpressionFactory.cs" />
+    <Compile Include="OData\Parser\Readers\ValueExpressionFactoryBase.cs" />
+    <Compile Include="OData\Parser\SelectExpressionFactory.cs" />
+    <Compile Include="OData\Parser\SortDescription.cs" />
+    <Compile Include="OData\Parser\SortDirection.cs" />
+    <Compile Include="OData\Parser\SortExpressionFactory.cs" />
+    <Compile Include="OData\Parser\TokenOperatorExtensions.cs" />
+    <Compile Include="OData\Parser\TokenSet.cs" />
+    <Compile Include="OData\PredicateConverter.cs" />
+    <Compile Include="OData\PredicateMapper.cs" />
+    <Compile Include="OData\RuntimeTypeProvider.cs" />
+    <Compile Include="OData\StringConstants.cs" />
+    <Compile Include="OData\UntypedCountedQueryable.cs" />
+    <Compile Include="OData\UntypedQueryable.cs" />
     <Compile Include="PrebuiltQueries\FindWhere.cs" />
     <Compile Include="PrebuiltQueries\RemoveById.cs" />
     <Compile Include="PrebuiltQueries\FindAll.cs" />
@@ -130,6 +186,23 @@
     <Compile Include="QueryObjects\QueryExtensions.cs" />
     <Compile Include="QueryObjects\Scalar.cs" />
     <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Security\DataEntitlements\Expressions\CollectionBehavior.cs" />
+    <Compile Include="Security\DataEntitlements\Expressions\SecurityExpressionVistor.cs" />
+    <Compile Include="Security\DataEntitlements\ISecuredRelationshipBuilder.cs" />
+    <Compile Include="Security\DataEntitlements\IncludePathMetadataFragment.cs" />
+    <Compile Include="Security\DataEntitlements\Expressions\IncludeSecurityExpressionBuilder.cs" />
+    <Compile Include="Security\DataEntitlements\IEntitlementProvider.cs" />
+    <Compile Include="Security\DataEntitlements\ISecuredMappingsProvider.cs" />
+    <Compile Include="Security\DataEntitlements\Expressions\ParameterToMemberExpressionRebinder.cs" />
+    <Compile Include="Security\DataEntitlements\SecuredExtensions.cs" />
+    <Compile Include="Security\DataEntitlements\SecuredMappingsCache.cs" />
+    <Compile Include="Security\DataEntitlements\SecuredODataQuery.cs" />
+    <Compile Include="Security\DataEntitlements\Expressions\SecuredPredicateBuilder.cs" />
+    <Compile Include="Security\DataEntitlements\SecuredQuery.cs" />
+    <Compile Include="Security\DataEntitlements\Expressions\SecuredRelationship.cs" />
+    <Compile Include="Security\DataEntitlements\Expressions\SecuredRelationshipFragment.cs" />
+    <Compile Include="Security\DataEntitlements\WhenNull.cs" />
+    <Compile Include="Security\ISecuredDataContext.cs" />
     <Compile Include="Services\DefaultUserNameService.cs" />
     <Compile Include="Interfaces\IAuditableEntity.cs" />
     <Compile Include="Interfaces\IUserNameService.cs" />

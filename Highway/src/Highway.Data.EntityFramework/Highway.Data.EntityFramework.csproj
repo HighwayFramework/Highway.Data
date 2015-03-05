@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Highway.Data.EntityFramework</RootNamespace>
     <AssemblyName>Highway.Data.EntityFramework</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -62,10 +62,10 @@
       <HintPath>..\..\packages\Common.Logging.Core.2.2.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework">
-      <HintPath>..\..\packages\EntityFramework.6.0.2\lib\net40\EntityFramework.dll</HintPath>
+      <HintPath>..\..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\..\packages\EntityFramework.6.0.2\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -123,6 +123,10 @@
     <Compile Include="QueryObjects\AdvancedScalar.cs" />
     <Compile Include="QueryObjects\SqlScalar.cs" />
     <Compile Include="Repositories\DomainRepository.cs" />
+    <Compile Include="Security\ISecuredDomainRepositoryFactory.cs" />
+    <Compile Include="Security\SecuredDomainContext.cs" />
+    <Compile Include="Security\SecuredDomainRepositoryFactory.cs" />
+    <Compile Include="Security\SecuredInMemoryDomainContext.cs" />
     <Compile Include="StoredProcedures\StoredProcedureAttributes.cs" />
     <Compile Include="StoredProcedures\StoredProcedureHelpers.cs" />
     <Compile Include="StoredProcedures\StoredProcedures.cs" />

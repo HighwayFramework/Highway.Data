@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("InMemoryContextTest")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Enterprise Products")]
+[assembly: AssemblyCompany("Highway Framework")]
 [assembly: AssemblyProduct("InMemoryContextTest")]
-[assembly: AssemblyCopyright("Copyright © Enterprise Products 2014")]
+[assembly: AssemblyCopyright("Copyright © Devlin Liles and Tim Rayburn 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

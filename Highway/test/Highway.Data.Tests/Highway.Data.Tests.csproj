@@ -91,6 +91,7 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
@@ -130,6 +131,16 @@
     <Compile Include="InMemory\ScenarioTests\BlogLifeTime.cs" />
     <Compile Include="InMemory\ScenarioTests\Queries\FindBlogByTitle.cs" />
     <Compile Include="InMemory\ScenarioTests\Services\TestBlogService.cs" />
+    <Compile Include="OData\BasicODataQueryTests.cs" />
+    <Compile Include="Security\ExampleDomain.cs" />
+    <Compile Include="Security\ExampleLeaf.cs" />
+    <Compile Include="Security\ExampleRoot.cs" />
+    <Compile Include="Security\NullPermissiveExampleSecuredRelationshipBuilder.cs" />
+    <Compile Include="Security\NullRestrictiveExampleSecuredRelationshipBuilder.cs" />
+    <Compile Include="Security\ParameterToMemberRebinderTests.cs" />
+    <Compile Include="Security\SecuredInMemoryTests.cs" />
+    <Compile Include="Security\SecuredMappingConfigurationTests.cs" />
+    <Compile Include="Security\SecuredMappingsCacheTests.cs" />
     <Compile Include="TestDomain\Bar.cs" />
     <Compile Include="TestDomain\Baz.cs" />
     <Compile Include="TestDomain\Qux.cs" />

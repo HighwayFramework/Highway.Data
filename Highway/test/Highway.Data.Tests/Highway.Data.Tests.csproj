@@ -124,6 +124,7 @@
     </Compile>
     <Compile Include="InMemory\ActiveDataContext\InMemoryActiveDataContextTwoLevelTests.cs" />
     <Compile Include="InMemory\ActiveDataContext\InMemoryActiveDataContextOneLevelTests.cs" />
+    <Compile Include="InMemory\Bug Tests\PopulateReferencesTests.cs" />
     <Compile Include="InMemory\Bug Tests\TestCircularReference.cs" />
     <Compile Include="InMemory\Bug Tests\TestThrowsExceptionWithDuplicateElement.cs" />
     <Compile Include="InMemory\Bug Tests\TestThrowsExceptionWithListEntityType.cs" />

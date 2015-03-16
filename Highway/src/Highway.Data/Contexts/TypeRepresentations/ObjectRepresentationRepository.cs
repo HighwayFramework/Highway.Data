@@ -40,6 +40,59 @@ namespace Highway.Data.Contexts.TypeRepresentations
 
             _data.Add(rep);
             rep.RelatedEntities = AddRelatedObjects(item);
+            UpdateExistingRepresentations(rep);
+        }
+
+        private void UpdateExistingRepresentations(ObjectRepresentation rep)
+        {
+            var type = rep.Entity.GetType();
+            var nonPrimitivePropertiesFromObject = type.GetProperties().Where(x => !x.PropertyType.IsPrimitive).ToList();
+            var typesCurrentlyStored = rep.RelatedEntities.Select(x => x.Entity.GetType()).ToList();
+            List<object> referencedProperties = new List<object>();
+            foreach (var info in nonPrimitivePropertiesFromObject)
+            {
+                if (typesCurrentlyStored.Contains(info.PropertyType.ToSingleType()))
+                {
+                    if (info.PropertyType.IsEnumerable())
+                    {
+                        IEnumerable values = (IEnumerable) info.GetValue(rep.Entity, null);
+                        referencedProperties.AddRange(values.Cast<object>());
+                    }
+                    else
+                    {
+                        referencedProperties.Add(info.GetValue(rep.Entity, null));    
+                    }
+                }
+            }
+
+            foreach (var data in rep.RelatedEntities.Where(x => typesCurrentlyStored.Contains(x.Entity.GetType())))
+            {
+                if (!referencedProperties.Contains(data.Entity))
+                {
+                    continue;                    
+                }
+                var collectionType = typeof(ICollection<>).MakeGenericType(type);
+                var propertiesThatReferToRepresentation =
+                    data.Entity.GetType()
+                        .GetProperties()
+                        .Where(x => x.PropertyType == type || x.PropertyType.IsAssignableFrom(collectionType));
+                var addMethod = collectionType.GetMethod("Add");
+                var propertyInfos = propertiesThatReferToRepresentation.ToList();
+                if (!propertyInfos.Any() || propertyInfos.Count() > 1)
+                {
+                    return;
+                }
+                var referencingProperty = propertyInfos.Single();
+                if (referencingProperty.PropertyType.IsAssignableFrom(collectionType))
+                {
+                    var collection = referencingProperty.GetValue(data.Entity, null);
+                    addMethod.Invoke(collection, new[] { rep.Entity });
+                }
+                else
+                {
+                    referencingProperty.SetValue(data.Entity, rep.Entity, null);
+                }
+            }
         }
 
         internal bool Remove<T>(T item) where T : class

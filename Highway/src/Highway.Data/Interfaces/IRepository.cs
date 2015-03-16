@@ -1,6 +1,7 @@
 #region
 
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 #endregion
 
@@ -37,5 +38,36 @@ namespace Highway.Data
         /// </summary>
         /// <param name="command">The prebuilt command object</param>
         void Execute(ICommand command);
+
+        /// <summary>
+        ///     Executes a prebuilt <see cref="ICommand" /> asynchronously
+        /// </summary>
+        /// <param name="command">The prebuilt command object</param>
+        Task ExecuteAsync(ICommand command);
+
+        /// <summary>
+        ///     Executes a prebuilt <see cref="IScalar{T}" /> and returns a single instance of <typeparamref name="T" />
+        /// </summary>
+        /// <typeparam name="T">The Entity being queried</typeparam>
+        /// <param name="query">The prebuilt Query Object</param>
+        /// <returns>The task that will return an instance of <typeparamref name="T" /> from the query</returns>
+        Task<T> FindAsync<T>(IScalar<T> query);
+
+        /// <summary>
+        ///     Executes a prebuilt <see cref="IQuery{T}" /> and returns an <see cref="IEnumerable{T}" />
+        /// </summary>
+        /// <typeparam name="T">The Entity being queried</typeparam>
+        /// <param name="query">The prebuilt Query Object</param>
+        /// <returns>The task that will return <see cref="IEnumerable{T}" /> from the query</returns>
+        Task<IEnumerable<T>> FindAsync<T>(IQuery<T> query);
+
+        /// <summary>
+        ///     Executes a prebuilt <see cref="IQuery{T}" /> and returns an <see cref="IEnumerable{T}" />
+        /// </summary>
+        /// <typeparam name="T">The Entity being queried</typeparam>
+        /// <param name="query">The prebuilt Query Object</param>
+        /// <returns>The task that will return <see cref="IEnumerable{T}" /> from the query</returns>
+        Task<IEnumerable<IProjection>> FindAsync<TSelection, IProjection>(IQuery<TSelection, IProjection> query)
+            where TSelection : class;
     }
 }

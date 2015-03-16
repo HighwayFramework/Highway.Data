@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Threading.Tasks;
 using Common.Logging;
 using Common.Logging.Simple;
 using Highway.Data.EntityFramework;
@@ -226,9 +227,22 @@ namespace Highway.Data
         public virtual int Commit()
         {
             _log.Trace("\tCommit");
-            base.ChangeTracker.DetectChanges();
-            int result = base.SaveChanges();
+            ChangeTracker.DetectChanges();
+            int result = SaveChanges();
             _log.DebugFormat("\tCommited {0} Changes", result);
+            return result;
+        }
+
+        /// <summary>
+        ///     Commits all currently tracked entity changes asynchronously
+        /// </summary>
+        /// <returns>the number of rows affected</returns>
+        public virtual Task<int> CommitAsync()
+        {
+            _log.Trace("\tCommit");
+            ChangeTracker.DetectChanges();
+            Task<int> result = SaveChangesAsync();
+            result.ContinueWith(x => _log.DebugFormat("\tCommited {0} Changes", result));
             return result;
         }
 
@@ -245,7 +259,7 @@ namespace Highway.Data
             string[] parameters =
                 dbParams.Select(x => string.Format("{0} : {1} : {2}\t", x.ParameterName, x.Value, x.DbType)).ToArray();
             _log.TraceFormat("Executing SQL {0}, with parameters {1}", sql, string.Join(",", parameters));
-            return base.Database.SqlQuery<T>(sql, dbParams);
+            return Database.SqlQuery<T>(sql, dbParams);
         }
 
         /// <summary>
@@ -259,12 +273,12 @@ namespace Highway.Data
             string[] parameters =
                 dbParams.Select(x => string.Format("{0} : {1} : {2}\t", x.ParameterName, x.Value, x.DbType)).ToArray();
             _log.TraceFormat("Executing SQL {0}, with parameters {1}", sql, string.Join(",", parameters));
-            return base.Database.ExecuteSqlCommand(sql, dbParams);
+            return Database.ExecuteSqlCommand(sql, dbParams);
         }
 
         protected virtual DbEntityEntry<T> GetChangeTrackingEntry<T>(T item) where T : class
         {
-            DbEntityEntry<T> entry = base.Entry(item);
+            DbEntityEntry<T> entry = Entry(item);
             return entry;
         }
 
@@ -278,7 +292,7 @@ namespace Highway.Data
             string[] parameters =
                 dbParams.Select(x => string.Format("{0} : {1} : {2}\t", x.Name, x.Value, x.ParameterType)).ToArray();
             _log.TraceFormat("Executing Procedure {0}, with parameters {1}", procedureName, string.Join(",", parameters));
-            return base.Database.SqlQuery<int>(procedureName, dbParams).FirstOrDefault();
+            return Database.SqlQuery<int>(procedureName, dbParams).FirstOrDefault();
         }
 
         /// <summary>

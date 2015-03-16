@@ -4,6 +4,7 @@ using System.Linq;
 using Highway.Data.Contexts.TypeRepresentations;
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 
 #endregion
 
@@ -73,6 +74,13 @@ namespace Highway.Data.Contexts
             return 0;
         }
 
+        public virtual Task<int> CommitAsync()
+        {
+            var task = new Task<int>(Commit);
+            task.Start();
+            return task;
+        }
+
         /// <summary>
         /// This method allows you to register database "identity" like strategies for auto incrementing keys, or new guid keys, etc...
         /// </summary>
@@ -93,7 +101,7 @@ namespace Highway.Data.Contexts
         /// <summary>
         /// Processes the held but uncommitted adds and removes from the context
         /// </summary>
-        protected void ProcessCommitQueues() 
+        protected void ProcessCommitQueues()
         {
             AddAllFromQueueIntoRepository();
             RemoveAllFromQueueFromRepository();

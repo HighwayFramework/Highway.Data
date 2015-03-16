@@ -8,28 +8,11 @@ namespace Highway.Data.OData
 {
     public class UntypedQueryable<T> : IQueryable<object>
     {
-        private readonly IQueryable _source;
-
-        public UntypedQueryable(IQueryable<T> source, Expression<Func<T, object>> projection)
+        public UntypedQueryable(IQueryable<T> source, Expression<Func<T, object>> selectExpression)
         {
-            _source = projection == null
-                ? (IQueryable) source
-                : source.Select(projection);
-        }
-
-        public Expression Expression
-        {
-            get { return _source.Expression; }
-        }
-
-        public Type ElementType
-        {
-            get { return typeof (T); }
-        }
-
-        public IQueryProvider Provider
-        {
-            get { return _source.Provider; }
+            _source = selectExpression == null ?
+                (IQueryable)source :
+                source.Select(selectExpression);
         }
 
         public IEnumerator<object> GetEnumerator()
@@ -41,5 +24,31 @@ namespace Highway.Data.OData
         {
             return GetEnumerator();
         }
+
+        public Type ElementType
+        {
+            get
+            {
+                return typeof(T);
+            }
+        }
+
+        public Expression Expression
+        {
+            get
+            {
+                return _source.Expression;
+            }
+        }
+
+        public IQueryProvider Provider
+        {
+            get
+            {
+                return _source.Provider;
+            }
+        }
+
+        private readonly IQueryable _source;
     }
 }

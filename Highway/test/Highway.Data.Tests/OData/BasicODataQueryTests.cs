@@ -15,13 +15,13 @@ namespace Highway.Data.Tests.OData
         [TestMethod]
         public void ShouldApplyPaging()
         {
-            var uri = new Uri("http://localhost/Something/To/Test?$skip=1&$top=1");
+            var uri = new Uri("http://localhost/Something/To/Test?$inlinecount=allpages&$skip=1&$top=1");
             var context = GetTestContext();
-            var resultingQueryable = context.AsQueryable<ExampleLeaf>().Filter(HttpUtility.ParseQueryString(uri.Query));
+            var repo = new Repository(context);
 
-            var results = resultingQueryable.ToList();
-            results.Should().HaveCount(1);
-            results.Single().Id.Should().Be(2);
+            var odataResponse = repo.Find(new GetByOData<ExampleLeaf>(HttpUtility.ParseQueryString(uri.Query)));
+            odataResponse.Count.Should().Be(3);
+            odataResponse.Results.Should().HaveCount(1);
         }
 
         [TestMethod]

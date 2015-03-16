@@ -1,11 +1,7 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-
-#endregion
 
 namespace Highway.Data
 {
@@ -18,41 +14,6 @@ namespace Highway.Data
         ///     This holds the expression that will be used to create the <see cref="IQueryable{T}" /> when executed on the context
         /// </summary>
         protected Func<DataContext, IQueryable<T>> ContextQuery { get; set; }
-
-        #region IQuery<T> Members
-
-        /// <summary>
-        ///     This executes the expression in ContextQuery on the context that is passed in, resulting in a
-        ///     <see cref="IQueryable{T}" /> that is returned as an <see cref="IEnumerable{T}" />
-        /// </summary>
-        /// <param name="context">the data context that the query should be executed against</param>
-        /// <returns>
-        ///     <see cref="IEnumerable{T}" />
-        /// </returns>
-        public virtual IEnumerable<T> Execute(IDataContext context)
-        {
-            IQueryable<T> task = PrepareQuery(context);
-            return task;
-        }
-
-        /// <summary>
-        ///     This executes the expression against the passed in context to generate the SQL statement, but doesn't execute the
-        ///     IQueryable<typeparamref name="T" /> against the data context
-        /// </summary>
-        /// <param name="context">The data context that the query is evaluated and the SQL is generated against</param>
-        /// <returns></returns>
-        public string OutputSQLStatement(IDataContext context)
-        {
-            return OutputQuery(context);
-        }
-
-        public string OutputQuery(IDataContext context)
-        {
-            IQueryable<T> query = PrepareQuery(context);
-            return query.ToString();
-        }
-
-        #endregion
 
         /// <summary>
         ///     This method allows for the extension of Ordering and Grouping on the prebuild Query
@@ -75,24 +36,44 @@ namespace Highway.Data
         /// </summary>
         /// <param name="query">The query containing the expressions to append</param>
         /// <returns>The combined query</returns>
-        protected IQueryable<T> AppendExpressions(IQueryable<T> query)
+        protected virtual IQueryable<T> AppendExpressions(IQueryable<T> query)
         {
-            IQueryable<T> source = query;
+            var source = query;
             foreach (var exp in ExpressionList)
             {
-                List<Expression> newParams = exp.Item2.ToList();
+                var newParams = exp.Item2.ToList();
                 newParams.Insert(0, source.Expression);
                 source = source.Provider.CreateQuery<T>(Expression.Call(null, exp.Item1, newParams));
             }
             return source;
         }
 
-        private IQueryable<T> PrepareQuery(IDataContext context)
+        protected virtual IQueryable<T> PrepareQuery(IDataContext context)
         {
             Context = context;
             CheckContextAndQuery(ContextQuery);
-            IQueryable<T> query = ExtendQuery();
+            var query = ExtendQuery();
             return AppendExpressions(query);
+        }
+
+        /// <summary>
+        ///     This executes the expression in ContextQuery on the context that is passed in, resulting in a
+        ///     <see cref="IQueryable{T}" /> that is returned as an <see cref="IEnumerable{T}" />
+        /// </summary>
+        /// <param name="context">the data context that the query should be executed against</param>
+        /// <returns>
+        ///     <see cref="IEnumerable{T}" />
+        /// </returns>
+        public virtual IEnumerable<T> Execute(IDataContext context)
+        {
+            var task = PrepareQuery(context);
+            return task;
+        }
+
+        public string OutputQuery(IDataContext context)
+        {
+            var query = PrepareQuery(context);
+            return query.ToString();
         }
     }
 
@@ -106,42 +87,6 @@ namespace Highway.Data
     {
         protected Func<DataContext, IQueryable<TSelection>> Selector { get; set; }
         protected Func<IQueryable<TSelection>, IQueryable<TProjection>> Projector { get; set; }
-
-        #region IQuery<T> Members
-
-        /// <summary>
-        ///     This executes the expression in ContextQuery on the context that is passed in, resulting in a
-        ///     <see cref="IQueryable{T}" /> that is returned as an <see cref="IEnumerable{T}" />
-        /// </summary>
-        /// <param name="context">the data context that the query should be executed against</param>
-        /// <returns>
-        ///     <see cref="IEnumerable{T}" />
-        /// </returns>
-        public virtual IEnumerable<TProjection> Execute(IDataContext context)
-        {
-            IQueryable<TProjection> task = PrepareQuery(context);
-            return task;
-        }
-
-        /// <summary>
-        ///     This executes the expression against the passed in context to generate the SQL statement, but doesn't execute the
-        ///     IQueryable<typeparamref name="T" /> against the data context
-        /// </summary>
-        /// <param name="context">The data context that the query is evaluated and the SQL is generated against</param>
-        /// <returns></returns>
-        public string OutputSQLStatement(IDataContext context)
-        {
-            return OutputQuery(context);
-        }
-
-        public string OutputQuery(IDataContext context)
-        {
-            IQueryable<TProjection> query = PrepareQuery(context);
-
-            return query.ToString();
-        }
-
-        #endregion
 
         /// <summary>
         ///     This method allows for the extension of Ordering and Grouping on the prebuild Query
@@ -157,24 +102,50 @@ namespace Highway.Data
         /// </summary>
         /// <param name="query">The query containing the expressions to append</param>
         /// <returns>The combined query</returns>
-        protected IQueryable<TProjection> AppendExpressions(IQueryable<TSelection> query)
+        protected virtual IQueryable<TProjection> AppendExpressions(IQueryable<TSelection> query)
         {
             var source = query;
             foreach (var exp in ExpressionList)
             {
-                List<Expression> newParams = exp.Item2.ToList();
+                var newParams = exp.Item2.ToList();
                 newParams.Insert(0, source.Expression);
                 source = source.Provider.CreateQuery<TSelection>(Expression.Call(null, exp.Item1, newParams));
             }
             return Projector(source);
         }
 
-        private IQueryable<TProjection> PrepareQuery(IDataContext context)
+        /// <summary>
+        /// Appends the projection to the query and prepares it for execution
+        /// </summary>
+        /// <param name="context">the context to prepare against</param>
+        /// <returns>The preppared but unexecuted queryable</returns>
+        protected virtual IQueryable<TProjection> PrepareQuery(IDataContext context)
         {
             Context = context;
             CheckContextAndQuery(Selector);
             var query = ExtendQuery();
             return AppendExpressions(query);
+        }
+
+        /// <summary>
+        ///     This executes the expression in ContextQuery on the context that is passed in, resulting in a
+        ///     <see cref="IQueryable{T}" /> that is returned as an <see cref="IEnumerable{T}" />
+        /// </summary>
+        /// <param name="context">the data context that the query should be executed against</param>
+        /// <returns>
+        ///     <see cref="IEnumerable{T}" />
+        /// </returns>
+        public virtual IEnumerable<TProjection> Execute(IDataContext context)
+        {
+            var task = PrepareQuery(context);
+            return task;
+        }
+
+        public virtual string OutputQuery(IDataContext context)
+        {
+            var query = PrepareQuery(context);
+
+            return query.ToString();
         }
     }
 }

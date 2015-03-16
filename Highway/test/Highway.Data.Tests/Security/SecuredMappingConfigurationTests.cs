@@ -13,7 +13,7 @@ namespace Highway.Data.Tests.Security
         {
             var mappings = new NullPermissiveExampleSecuredRelationshipBuilder();
 
-            var maps = mappings.BuildSecuredRelationships();
+            var maps = mappings.BuildRelationships();
 
             maps.Where(x => x.Secured == typeof(ExampleLeaf) && x.SecuredBy == typeof(IEnumerable<ExampleRoot>)).Should().HaveCount(1);
         }
@@ -23,7 +23,7 @@ namespace Highway.Data.Tests.Security
         {
             var mappings = new NullPermissiveExampleSecuredRelationshipBuilder();
 
-            var maps = mappings.BuildSecuredRelationships();
+            var maps = mappings.BuildRelationships();
 
             maps.Where(x => typeof(ExampleLeaf).IsAssignableFrom(x.Secured) && typeof(ExampleRoot).IsAssignableFrom(x.SecuredBy)).Should().HaveCount(1);
         }
@@ -33,7 +33,7 @@ namespace Highway.Data.Tests.Security
         {
             var mappings = new NullPermissiveExampleSecuredRelationshipBuilder();
 
-            var maps = mappings.BuildSecuredRelationships();
+            var maps = mappings.BuildRelationships();
             var map = maps.Single(x => x.Secured == typeof(ExampleLeaf) && x.SecuredBy == typeof(ExampleRoot));
             var listToFilter = new List<ExampleLeaf>
                                    {
@@ -63,7 +63,7 @@ namespace Highway.Data.Tests.Security
         {
             var mappings = new NullPermissiveExampleSecuredRelationshipBuilder();
 
-            var maps = mappings.BuildSecuredRelationships();
+            var maps = mappings.BuildRelationships();
             var map = maps.Single(x => x.Secured == typeof(ExampleLeaf) && x.SecuredBy == typeof(IEnumerable<ExampleRoot>));
             var listToFilter = new List<ExampleLeaf>
                                    {

@@ -18,8 +18,8 @@ namespace Highway.Data.Tests.Security
             sessionGovernor.Expect(x => x.IsEntitledToAll(typeof(ExampleRoot))).Return(false);
             sessionGovernor.Expect(x => x.GetEntitledIds(typeof(ExampleRoot))).Return(new long[] { 1, 2, 3 });
 
-            var securedMappingsCache = new SecuredMappingsCache(new ISecuredRelationshipBuilder[] { new NullPermissiveExampleSecuredRelationshipBuilder() });
-            var context = new SecuredInMemoryDomainContext<ExampleDomain>(sessionGovernor, securedMappingsCache);
+            var securedMappingsCache = new MappingsCache(new ISecuredRelationshipBuilder[] { new NullPermissiveExampleSecuredRelationshipBuilder() });
+            var context = new InMemoryDomainContext<ExampleDomain>(sessionGovernor, securedMappingsCache);
             var singleNonMatchingLeaf = new ExampleLeaf
                                             {
                                                 SecuredRoot = new ExampleRoot { Id = 4 }, 
@@ -84,8 +84,8 @@ namespace Highway.Data.Tests.Security
             sessionGovernor.Expect(x => x.IsEntitledToAll(typeof(ExampleRoot))).Return(false);
             sessionGovernor.Expect(x => x.GetEntitledIds(typeof(ExampleRoot))).Return(new long[] { 1, 2, 3 });
 
-            var securedMappingsCache = new SecuredMappingsCache(new ISecuredRelationshipBuilder[] { new NullPermissiveExampleSecuredRelationshipBuilder() });
-            var context = new SecuredInMemoryDomainContext<ExampleDomain>(sessionGovernor, securedMappingsCache);
+            var securedMappingsCache = new MappingsCache(new ISecuredRelationshipBuilder[] { new NullPermissiveExampleSecuredRelationshipBuilder() });
+            var context = new InMemoryDomainContext<ExampleDomain>(sessionGovernor, securedMappingsCache);
             var singleNonMatchingLeaf = new ExampleLeaf
                                             {
                                                 SecuredRoot = new ExampleRoot { Id = 4 }, 
@@ -163,8 +163,8 @@ namespace Highway.Data.Tests.Security
             sessionGovernor.Expect(x => x.IsEntitledToAll(typeof(ExampleRoot))).Return(false);
             sessionGovernor.Expect(x => x.GetEntitledIds(typeof(ExampleRoot))).Return(new long[] { 1, 2, 3 });
 
-            var securedMappingsCache = new SecuredMappingsCache(new ISecuredRelationshipBuilder[] { new NullPermissiveExampleSecuredRelationshipBuilder() });
-            var context = new SecuredInMemoryDomainContext<ExampleDomain>(sessionGovernor, securedMappingsCache);
+            var securedMappingsCache = new MappingsCache(new ISecuredRelationshipBuilder[] { new NullPermissiveExampleSecuredRelationshipBuilder() });
+            var context = new InMemoryDomainContext<ExampleDomain>(sessionGovernor, securedMappingsCache);
             var nonMatchingLeaf = new ExampleLeaf
                                       {
                                           SecuredRoot = new ExampleRoot { Id = 4 }
@@ -192,8 +192,8 @@ namespace Highway.Data.Tests.Security
             sessionGovernor.Expect(x => x.IsEntitledToAll(typeof(ExampleRoot))).Return(false);
             sessionGovernor.Expect(x => x.GetEntitledIds(typeof(ExampleRoot))).Return(new long[] { 1, 2, 3 });
 
-            var securedMappingsCache = new SecuredMappingsCache(new ISecuredRelationshipBuilder[] { new NullPermissiveExampleSecuredRelationshipBuilder() });
-            var context = new SecuredInMemoryDomainContext<ExampleDomain>(sessionGovernor, securedMappingsCache);
+            var securedMappingsCache = new MappingsCache(new ISecuredRelationshipBuilder[] { new NullPermissiveExampleSecuredRelationshipBuilder() });
+            var context = new InMemoryDomainContext<ExampleDomain>(sessionGovernor, securedMappingsCache);
             var nonMatchingLeaf = new ExampleLeaf
                                       {
                                           SecuredRoots = new[] { new ExampleRoot { Id = 4 } }

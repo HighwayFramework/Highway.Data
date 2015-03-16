@@ -48,19 +48,20 @@
     <AssemblyOriginatorKeyFile>Highway.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Logging, Version=2.2.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+    <Reference Include="Common.Logging, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Common.Logging.2.2.0\lib\net40\Common.Logging.dll</HintPath>
+      <HintPath>..\..\packages\Common.Logging.3.0.0\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging.Core">
-      <HintPath>..\..\packages\Common.Logging.Core.2.2.0\lib\net40\Common.Logging.Core.dll</HintPath>
+    <Reference Include="Common.Logging.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
     <Reference Include="Highway.Pavement">
       <HintPath>..\..\packages\Highway.Pavement.0.3.0.0\lib\net40\Highway.Pavement.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\CommonServiceLocator.1.2\lib\portable-windows8+net40+sl5+windowsphone8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -126,6 +127,7 @@
     <Compile Include="OData\IModelFilter.cs" />
     <Compile Include="OData\IPredicateConverter.cs" />
     <Compile Include="OData\IRuntimeTypeProvider.cs" />
+    <Compile Include="OData\IWebApiContentConverter.cs" />
     <Compile Include="OData\MemberNameResolver.cs" />
     <Compile Include="OData\MethodProvider.cs" />
     <Compile Include="OData\ModelFilter.cs" />
@@ -175,6 +177,8 @@
     <Compile Include="OData\UntypedCountedQueryable.cs" />
     <Compile Include="OData\UntypedQueryable.cs" />
     <Compile Include="PrebuiltQueries\FindWhere.cs" />
+    <Compile Include="OData\Queries\GetByOData.cs" />
+    <Compile Include="OData\Queries\ODataQuery.cs" />
     <Compile Include="PrebuiltQueries\RemoveById.cs" />
     <Compile Include="PrebuiltQueries\FindAll.cs" />
     <Compile Include="PrebuiltQueries\GetById.cs" />
@@ -186,23 +190,6 @@
     <Compile Include="QueryObjects\QueryExtensions.cs" />
     <Compile Include="QueryObjects\Scalar.cs" />
     <Compile Include="Repositories\Repository.cs" />
-    <Compile Include="Security\DataEntitlements\Expressions\CollectionBehavior.cs" />
-    <Compile Include="Security\DataEntitlements\Expressions\SecurityExpressionVistor.cs" />
-    <Compile Include="Security\DataEntitlements\ISecuredRelationshipBuilder.cs" />
-    <Compile Include="Security\DataEntitlements\IncludePathMetadataFragment.cs" />
-    <Compile Include="Security\DataEntitlements\Expressions\IncludeSecurityExpressionBuilder.cs" />
-    <Compile Include="Security\DataEntitlements\IEntitlementProvider.cs" />
-    <Compile Include="Security\DataEntitlements\ISecuredMappingsProvider.cs" />
-    <Compile Include="Security\DataEntitlements\Expressions\ParameterToMemberExpressionRebinder.cs" />
-    <Compile Include="Security\DataEntitlements\SecuredExtensions.cs" />
-    <Compile Include="Security\DataEntitlements\SecuredMappingsCache.cs" />
-    <Compile Include="Security\DataEntitlements\SecuredODataQuery.cs" />
-    <Compile Include="Security\DataEntitlements\Expressions\SecuredPredicateBuilder.cs" />
-    <Compile Include="Security\DataEntitlements\SecuredQuery.cs" />
-    <Compile Include="Security\DataEntitlements\Expressions\SecuredRelationship.cs" />
-    <Compile Include="Security\DataEntitlements\Expressions\SecuredRelationshipFragment.cs" />
-    <Compile Include="Security\DataEntitlements\WhenNull.cs" />
-    <Compile Include="Security\ISecuredDataContext.cs" />
     <Compile Include="Services\DefaultUserNameService.cs" />
     <Compile Include="Interfaces\IAuditableEntity.cs" />
     <Compile Include="Interfaces\IUserNameService.cs" />

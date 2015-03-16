@@ -44,7 +44,7 @@ namespace Highway.Data
         /// <param name="methodName">The name of the method to be added i.e. GroupBy</param>
         /// <param name="generics">Any type parameters needed by the method to be added</param>
         /// <param name="parameters">Any object parameters needed by the method to be added</param>
-        public void AddMethodExpression(string methodName, Type[] generics, Expression[] parameters)
+        public virtual void AddMethodExpression(string methodName, Type[] generics, Expression[] parameters)
         {
             MethodInfo orderMethodInfo =
                 QueryableMethods.First(m => m.Name == methodName && m.GetParameters().Length == parameters.Length + 1);
@@ -73,7 +73,7 @@ namespace Highway.Data
         ///     Checks the context and the Query for null
         /// </summary>
         /// <param name="query">The query to be executed</param>
-        protected void CheckContextAndQuery(object query)
+        protected virtual void CheckContextAndQuery(object query)
         {
             if (Context == null) throw new InvalidOperationException("DataContext cannot be null.");
             if (query == null) throw new InvalidOperationException("Null Query cannot be executed.");

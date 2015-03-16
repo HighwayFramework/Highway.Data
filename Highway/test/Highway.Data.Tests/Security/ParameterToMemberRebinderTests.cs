@@ -251,7 +251,7 @@ namespace Highway.Data.Tests.Security
 
             // x => x.SecuredRoots.Any(c => ids.Contains(c.Id))
 
-            var resultingCombined = SecuredExtensions.CombineCollectionPropertySelectorWithPredicate(selectorExpression, predicateExpression);
+            var resultingCombined = SecurityExtensions.CombineCollectionPropertySelectorWithPredicate(selectorExpression, predicateExpression);
 
             var resultingPredicate = (Func<ExampleLeaf, bool>)resultingCombined.Compile();
 

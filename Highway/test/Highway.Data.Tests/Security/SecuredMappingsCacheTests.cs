@@ -14,7 +14,7 @@ namespace Highway.Data.Tests.Security
         {
             // Act
             var exampleMappingConfiguration = new ISecuredRelationshipBuilder[] { _exampleSecuredRelationshipBuilder };
-            Action action = () => new SecuredMappingsCache(exampleMappingConfiguration);
+            Action action = () => new MappingsCache(exampleMappingConfiguration);
 
             // Assert
             action.ShouldNotThrow();
@@ -25,10 +25,10 @@ namespace Highway.Data.Tests.Security
         {
             // Arrange
             var exampleMappingConfigurations = new ISecuredRelationshipBuilder[] { _exampleSecuredRelationshipBuilder };
-            var securedMappingsCache = new SecuredMappingsCache(exampleMappingConfigurations);
+            var securedMappingsCache = new MappingsCache(exampleMappingConfigurations);
 
             // Act
-            var securedMappings = securedMappingsCache.GetSecuredRelationships<ExampleLeaf>().ToList();
+            var securedMappings = securedMappingsCache.GetRelationships<ExampleLeaf>().ToList();
 
             // Assert
             securedMappings.Should().NotBeNull();
@@ -40,10 +40,10 @@ namespace Highway.Data.Tests.Security
         {
             // Arrange
             var exampleMappingConfigurations = new ISecuredRelationshipBuilder[] { _exampleSecuredRelationshipBuilder, _exampleSecuredRelationshipBuilder2 };
-            var securedMappingsCache = new SecuredMappingsCache(exampleMappingConfigurations);
+            var securedMappingsCache = new MappingsCache(exampleMappingConfigurations);
 
             // Act
-            var securedMappings = securedMappingsCache.GetSecuredRelationships<ExampleLeaf>().ToList();
+            var securedMappings = securedMappingsCache.GetRelationships<ExampleLeaf>().ToList();
 
             // Assert
             securedMappings.Should().NotBeNull();

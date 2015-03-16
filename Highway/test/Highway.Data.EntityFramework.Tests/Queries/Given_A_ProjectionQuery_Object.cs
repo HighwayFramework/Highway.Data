@@ -101,7 +101,7 @@ namespace Highway.Data.EntityFramework.Tests.Queries
             var context = container.Resolve<IDataContext>();
 
             //act
-            string sqlOutput = target.OutputSQLStatement(context);
+            string sqlOutput = target.OutputQuery(context);
 
             //assert
 

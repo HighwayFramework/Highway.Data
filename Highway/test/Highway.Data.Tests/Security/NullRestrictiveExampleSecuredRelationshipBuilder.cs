@@ -7,7 +7,7 @@ namespace Highway.Data.Tests.Security
 {
     internal class NullRestrictiveExampleSecuredRelationshipBuilder : ISecuredRelationshipBuilder
     {
-        public IEnumerable<SecuredRelationship> BuildSecuredRelationships()
+        public IEnumerable<SecuredRelationship> BuildRelationships()
         {
             yield return this.Secure<ExampleLeaf>().By<ExampleRoot, long>(x => x.SecuredRoot, WhenNull.Deny);
             yield return this.Secure<ExampleLeaf>().ByCollection<ExampleRoot, long>(x => x.SecuredRoots, WhenNull.Deny);

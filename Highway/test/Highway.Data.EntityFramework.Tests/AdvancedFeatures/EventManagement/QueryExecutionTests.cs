@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using Castle.MicroKernel.ModelBuilder.Descriptors;
 using FluentAssertions;
+using Highway.Data.Contexts;
 using Highway.Data.EntityFramework.Tests.EventManagement;
 using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.EventManagement.Interfaces;

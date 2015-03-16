@@ -4,11 +4,16 @@ using System.Net;
 
 namespace Highway.Data.OData
 {
+    /// <summary>
+    /// The object represents a JSON and XML serializable OData result.
+    /// </summary>
+    /// <typeparam name="T">The type of the resulting objects</typeparam>
     public class ODataResult<T>
     {
-        private readonly List<object> _results;
-        private int? _count;
-
+        /// <summary>
+        /// Creates an OData result for the provided Queryable
+        /// </summary>
+        /// <param name="sourceQueryable">The queryable to wrap into the OData results</param>
         public ODataResult(UntypedQueryable<T> sourceQueryable)
         {
             _results = sourceQueryable.ToList();
@@ -19,22 +24,24 @@ namespace Highway.Data.OData
             }
         }
 
-        public dynamic GetResults()
+        /// <summary>
+        /// The objects returned by the query after OData filters, paging, sorting, and projection were applied
+        /// </summary>
+        public List<object> Results
         {
-            dynamic result;
-            if (_count.HasValue)
-            {
-                result = new
-                {
-                    Count = _count.Value,
-                    Results = _results
-                };
-            }
-            else
-            {
-                result = _results;
-            }
-            return result;
+            get { return _results; }
         }
+
+        /// <summary>
+        /// The count of the objects in the query after Odata filtering was applied
+        /// </summary>
+        public int? Count
+        {
+            get { return _count; }
+        }
+
+        private readonly List<object> _results;
+
+        private readonly int? _count;
     }
 }

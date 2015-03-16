@@ -120,7 +120,7 @@ namespace Highway.Data
         /// <typeparam name="T">The Entity Type being added</typeparam>
         /// <param name="item">The <typeparamref name="T" /> you want to add</param>
         /// <returns>The <typeparamref name="T" /> you added</returns>
-        public T Add<T>(T item) where T : class
+        public virtual T Add<T>(T item) where T : class
         {
             _log.DebugFormat("Adding Object {0}", item);
             Set<T>().Add(item);
@@ -134,7 +134,7 @@ namespace Highway.Data
         /// <typeparam name="T">The Entity Type being removed</typeparam>
         /// <param name="item">The <typeparamref name="T" /> you want to remove</param>
         /// <returns>The <typeparamref name="T" /> you removed</returns>
-        public T Remove<T>(T item) where T : class
+        public virtual T Remove<T>(T item) where T : class
         {
             _log.DebugFormat("Removing Object {0}", item);
             Set<T>().Remove(item);
@@ -148,7 +148,7 @@ namespace Highway.Data
         /// <typeparam name="T">The Entity Type being updated</typeparam>
         /// <param name="item">The <typeparamref name="T" /> you want to update</param>
         /// <returns>The <typeparamref name="T" /> you updated</returns>
-        public T Update<T>(T item) where T : class
+        public virtual T Update<T>(T item) where T : class
         {
             _log.TraceFormat("Retrieving State Entry For Object {0}", item);
             DbEntityEntry<T> entry = GetChangeTrackingEntry(item);
@@ -169,7 +169,7 @@ namespace Highway.Data
         /// <typeparam name="T">The Entity Type being attached</typeparam>
         /// <param name="item">The <typeparamref name="T" /> you want to attach</param>
         /// <returns>The <typeparamref name="T" /> you attached</returns>
-        public T Attach<T>(T item) where T : class
+        public virtual T Attach<T>(T item) where T : class
         {
             _log.DebugFormat("Attaching Object {0}", item);
             Set<T>().Attach(item);
@@ -183,7 +183,7 @@ namespace Highway.Data
         /// <typeparam name="T">The Entity Type being detached</typeparam>
         /// <param name="item">The <typeparamref name="T" /> you want to detach</param>
         /// <returns>The <typeparamref name="T" /> you detached</returns>
-        public T Detach<T>(T item) where T : class
+        public virtual T Detach<T>(T item) where T : class
         {
             _log.TraceFormat("Retrieving State Entry For Object {0}", item);
             DbEntityEntry<T> entry = GetChangeTrackingEntry(item);
@@ -204,7 +204,7 @@ namespace Highway.Data
         /// <typeparam name="T">The Entity Type being reloaded</typeparam>
         /// <param name="item">The <typeparamref name="T" /> you want to reload</param>
         /// <returns>The <typeparamref name="T" /> you reloaded</returns>
-        public T Reload<T>(T item) where T : class
+        public virtual T Reload<T>(T item) where T : class
         {
             _log.TraceFormat("Retrieving State Entry For Object {0}", item);
             DbEntityEntry<T> entry = GetChangeTrackingEntry(item);
@@ -240,7 +240,7 @@ namespace Highway.Data
         /// <param name="sql">The Sql Statement</param>
         /// <param name="dbParams">A List of Database Parameters for the Query</param>
         /// <returns>An <see cref="IEnumerable{T}" /> from the query return</returns>
-        public IEnumerable<T> ExecuteSqlQuery<T>(string sql, params DbParameter[] dbParams)
+        public virtual IEnumerable<T> ExecuteSqlQuery<T>(string sql, params DbParameter[] dbParams)
         {
             string[] parameters =
                 dbParams.Select(x => string.Format("{0} : {1} : {2}\t", x.ParameterName, x.Value, x.DbType)).ToArray();
@@ -254,7 +254,7 @@ namespace Highway.Data
         /// <param name="sql">The Sql Statement</param>
         /// <param name="dbParams">A List of Database Parameters for the Query</param>
         /// <returns>The rows affected</returns>
-        public int ExecuteSqlCommand(string sql, params DbParameter[] dbParams)
+        public virtual int ExecuteSqlCommand(string sql, params DbParameter[] dbParams)
         {
             string[] parameters =
                 dbParams.Select(x => string.Format("{0} : {1} : {2}\t", x.ParameterName, x.Value, x.DbType)).ToArray();
@@ -262,7 +262,7 @@ namespace Highway.Data
             return base.Database.ExecuteSqlCommand(sql, dbParams);
         }
 
-        private DbEntityEntry<T> GetChangeTrackingEntry<T>(T item) where T : class
+        protected virtual DbEntityEntry<T> GetChangeTrackingEntry<T>(T item) where T : class
         {
             DbEntityEntry<T> entry = base.Entry(item);
             return entry;
@@ -273,7 +273,7 @@ namespace Highway.Data
         /// <param name="procedureName"></param>
         /// <param name="dbParams"></param>
         /// <returns></returns>
-        public int ExecuteFunction(string procedureName, params ObjectParameter[] dbParams)
+        public virtual int ExecuteFunction(string procedureName, params ObjectParameter[] dbParams)
         {
             string[] parameters =
                 dbParams.Select(x => string.Format("{0} : {1} : {2}\t", x.Name, x.Value, x.ParameterType)).ToArray();

@@ -54,6 +54,6 @@ namespace Highway.Data.OData
         /// </summary>
         /// <param name="source">The source query to project.</param>
         /// <returns>A projected enumeration source query.</returns>
-        IQueryable<object> Project(IQueryable<T> source);
+        UntypedQueryable<T> Project(IQueryable<T> source);
     }
 }

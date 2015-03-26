@@ -15,10 +15,41 @@ namespace Highway.Data
     public class ODataQuery<T> : QueryBase, IScalar<ODataResult<T>>
         where T : class
     {
-        public ODataQuery(NameValueCollection queryParameters)
+        public ODataQuery(NameValueCollection queryParameters, ExpandBehavior expandBehavior = ExpandBehavior.None)
         {
+            queryParameters = ApplyExpansionBehavior(queryParameters, expandBehavior);
             ModelFilter = new ParameterParser<T>().Parse(queryParameters);
         }
+
+        private NameValueCollection ApplyExpansionBehavior(NameValueCollection queryParameters, ExpandBehavior expandBehavior)
+        {
+            switch (expandBehavior)
+            {
+                case ExpandBehavior.OneLevel:
+                    {
+                        var values = queryParameters.GetValues("$expand");
+                        if (values != null)
+                        {
+                            queryParameters.Remove("$expand");
+                            foreach (var value in values.Where(value => !value.Contains("/")))
+                            {
+                                queryParameters.Add("$expand", value);
+                            }
+                        }
+                    }
+                    break;
+                case ExpandBehavior.None:
+                    {
+                        queryParameters.Remove("$expand");
+                        return queryParameters;
+                    }
+                default:
+                    return queryParameters;
+
+            }
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         ///     This executes the expression in ContextQuery on the context that is passed in, resulting in a an <see cref="ODataResult{T}"/>
         /// </summary>
@@ -92,5 +123,24 @@ namespace Highway.Data
         protected Func<IDataContext, IQueryable<T>> ContextQuery { get; set; }
 
         protected readonly IModelFilter<T> ModelFilter;
+    }
+
+    /// <summary>
+    /// Expand behavior modifies how the $expand keyword in OData functions
+    /// </summary>
+    public enum ExpandBehavior
+    {
+        /// <summary>
+        /// None disables the ability to expand at all ( this is the Highway.Data default )
+        /// </summary>
+        None,
+        /// <summary>
+        /// SingleLevel allows for expansion of objects directly related to the object under query
+        /// </summary>
+        OneLevel,
+        /// <summary>
+        /// All allows for any expansion ( this is the OData specification default )
+        /// </summary>
+        All
     }
 }

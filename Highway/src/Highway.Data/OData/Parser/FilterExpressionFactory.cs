@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using Highway.Data.OData.Extensions;
 using Highway.Data.OData.Parser.Readers;
 
 namespace Highway.Data.OData.Parser
@@ -91,18 +92,33 @@ namespace Highway.Data.OData.Parser
             switch (token.ToLowerInvariant())
             {
                 case "eq":
-                    if (left.Type.IsEnum && left.Type.GetCustomAttributes(typeof (FlagsAttribute), true).Any())
+                    if (left.Type.IsEnum)
                     {
-                        var underlyingType = Enum.GetUnderlyingType(left.Type);
-                        var leftValue = Expression.Convert(left, underlyingType);
-                        var rightValue = Expression.Convert(right, underlyingType);
-                        var andExpression = Expression.And(leftValue, rightValue);
-                        return Expression.Equal(andExpression, rightValue);
+                        if (left.Type.GetCustomAttributes(typeof (FlagsAttribute), true).Any())
+                        {
+                            var underlyingType = Enum.GetUnderlyingType(left.Type);
+                            var leftValue = Expression.Convert(left, underlyingType);
+                            var rightEnum = right.UnwrapEnumValue(left.Type);
+                            var rightValue = Expression.Convert(rightEnum, underlyingType);
+                            var andExpression = Expression.And(leftValue, rightValue);
+                            return Expression.Equal(andExpression, rightValue);
+                        }
+                        else
+                        {
+                            var rightValue = right.UnwrapEnumValue(left.Type);
+                            return Expression.Equal(left, rightValue);
+                        }
                     }
-
                     return Expression.Equal(left, right);
                 case "ne":
-                    return Expression.NotEqual(left, right);
+                {
+                    if (!left.Type.IsEnum)
+                    {
+                        return Expression.NotEqual(left, right);
+                    }
+                    var rightValue = right.UnwrapEnumValue(left.Type);
+                    return Expression.NotEqual(left, rightValue);
+                }
                 case "gt":
                     return Expression.GreaterThan(left, right);
                 case "ge":

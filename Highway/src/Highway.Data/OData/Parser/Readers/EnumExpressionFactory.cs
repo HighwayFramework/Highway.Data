@@ -29,8 +29,7 @@ namespace Highway.Data.OData.Parser.Readers
 
                 return Expression.Constant(Enum.Parse(type, value));
             }
-
-            throw new FormatException("Could not read " + token + " as Enum.");
+            return Expression.Constant(token);
         }
 
         private Type LoadType(string arg)

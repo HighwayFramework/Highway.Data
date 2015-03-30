@@ -72,5 +72,46 @@ namespace Highway.Data.Tests.OData.Parser
 
 			Assert.True(originalResult.SequenceEqual(deserializedResult));
 		}
+
+        [Test]
+        public void WhenApplyingSerializedExpressionThenCreatesSameResultAsOriginalExpressionWithEnumToNumberComparison()
+        {
+            Func<FakeItem, bool> original = x => (x.ChoiceValue & Choice.That) == Choice.That && x.IntValue >= 3;
+
+            var factory = new FilterExpressionFactory(new MemberNameResolver(), Enumerable.Empty<IValueExpressionFactory>());
+            var deserialized = factory.Create<FakeItem>("ChoiceValue eq 2 And IntValue ge 3");
+
+            var originalResult = _collection.Where(original).ToArray();
+            var deserializedResult = _collection.Where(deserialized.Compile()).ToArray();
+
+            Assert.True(originalResult.SequenceEqual(deserializedResult));
+        }
+
+        [Test]
+        public void WhenApplyingSerializedExpressionThenCreatesSameResultAsOriginalExpressionWithNotFlagsEnumComparison()
+        {
+            Func<FakeItem, bool> original = x => x.NotFlagsValue == NotFlags.Fine && x.IntValue >= 3;
+
+            var factory = new FilterExpressionFactory(new MemberNameResolver(), Enumerable.Empty<IValueExpressionFactory>());
+            var deserialized = factory.Create<FakeItem>("NotFlagsValue eq Highway.Data.Tests.OData.NotFlags'Fine' And IntValue ge 3");
+
+            var originalResult = _collection.Where(original).ToArray();
+            var deserializedResult = _collection.Where(deserialized.Compile()).ToArray();
+
+            Assert.True(originalResult.SequenceEqual(deserializedResult));
+        }
+
+        [Test]
+        public void WhenApplyingSerializedExpressionThenCreatesSameResultAsOriginalExpressionWithNotFlagsEnumToNumberComparison()
+        {
+            Func<FakeItem, bool> original = x => x.NotFlagsValue == NotFlags.Fine && x.IntValue >= 3;
+            var factory = new FilterExpressionFactory(new MemberNameResolver(), Enumerable.Empty<IValueExpressionFactory>());
+            var deserialized = factory.Create<FakeItem>("NotFlagsValue eq 3 And IntValue ge 3");
+
+            var originalResult = _collection.Where(original).ToArray();
+            var deserializedResult = _collection.Where(deserialized.Compile()).ToArray();
+
+            Assert.True(originalResult.SequenceEqual(deserializedResult));
+        }
 	}
 }

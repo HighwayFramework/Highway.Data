@@ -58,6 +58,8 @@ namespace Highway.Data.Tests.OData
 		[DataMember(Name = "Choice")]
 		public Choice ChoiceValue { get; set; }
 
+        public NotFlags NotFlagsValue { get; set; }
+
 		public ChildFakeItem Child { get; set; }
 
 		public ICollection<FakeChildItem> Children

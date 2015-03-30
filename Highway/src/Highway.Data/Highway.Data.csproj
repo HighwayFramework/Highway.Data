@@ -126,6 +126,7 @@
     <Compile Include="Interfaces\Queries\IObservableQuery.cs" />
     <Compile Include="Interfaces\Queries\IQueryBase.cs" />
     <Compile Include="Interfaces\Queries\IScalar.cs" />
+    <Compile Include="OData\Extensions\ExpressionExtensions.cs" />
     <Compile Include="OData\GeneralExtensions.cs" />
     <Compile Include="OData\IMemberNameResolver.cs" />
     <Compile Include="OData\IModelFilter.cs" />

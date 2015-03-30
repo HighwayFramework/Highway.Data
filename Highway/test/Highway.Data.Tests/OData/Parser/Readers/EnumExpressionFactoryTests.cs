@@ -36,12 +36,12 @@ namespace Highway.Data.Tests.OData.Parser.Readers
 			Assert.IsAssignableFrom<Choice>(expression.Value);
 		}
 
-		[Test]
-		public void WhenFilterIsIncorrectFormatThenThrows()
-		{
-			const string Parameter = "blah";
+        [Test]
+        public void WhenFilterIncludesNumberForEnumValueThenReturnExpressionHoldsThatNumber()
+        {
+            var expression = _factory.Convert("1");
 
-			Assert.Throws<FormatException>(() => _factory.Convert(Parameter));
-		}
+            Assert.IsAssignableFrom<string>(expression.Value);
+        }
 	}
 }

@@ -170,6 +170,7 @@
     <Compile Include="OData\Fakes\NorthwindCustomer.cs" />
     <Compile Include="OData\Fakes\QualityFlags.cs" />
     <Compile Include="OData\ModelFilterExtensionsTests.cs" />
+    <Compile Include="OData\NotFlags.cs" />
     <Compile Include="OData\Parser\ExpressionTokenizerTests.cs" />
     <Compile Include="OData\Parser\FilterExpressionFactoryTests.cs" />
     <Compile Include="OData\Parser\FilterTests.cs" />

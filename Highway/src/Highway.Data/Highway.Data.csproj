@@ -96,7 +96,6 @@
     <Compile Include="Contexts\TypeRepresentations\Accessor.cs" />
     <Compile Include="Contexts\TypeRepresentations\ObjectRepresentationRepository.cs" />
     <Compile Include="Contexts\TypeRepresentations\ObjectRepresentation.cs" />
-    <Compile Include="Contexts\TypeUtilities\CastExtensions.cs" />
     <Compile Include="EventManagement\Interfaces\BaseInterceptor.cs" />
     <Compile Include="Extensions\QueryableExtensions.cs" />
     <Compile Include="Factories\IDataContextFactory.cs" />
@@ -216,6 +215,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Contexts\IdentityStrategy\Configuration\" />
+    <Folder Include="Contexts\TypeUtilities\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

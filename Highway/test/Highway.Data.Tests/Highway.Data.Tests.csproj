@@ -93,6 +93,13 @@
       <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="Rhino.Mocks">
       <HintPath>..\..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
     </Reference>
@@ -102,6 +109,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -144,7 +152,54 @@
     <Compile Include="InMemory\ScenarioTests\BlogLifeTime.cs" />
     <Compile Include="InMemory\ScenarioTests\Queries\FindBlogByTitle.cs" />
     <Compile Include="InMemory\ScenarioTests\Services\TestBlogService.cs" />
+    <Compile Include="OData\AliasItem.cs" />
+    <Compile Include="OData\AnonymousTypeSerializerHelper.cs" />
     <Compile Include="OData\BasicODataQueryTests.cs" />
+    <Compile Include="OData\ChildFakeItem.cs" />
+    <Compile Include="OData\Choice.cs" />
+    <Compile Include="OData\ComplexDomainFilterTests.cs" />
+    <Compile Include="OData\FakeChildItem.cs" />
+    <Compile Include="OData\FakeGrandChildItem.cs" />
+    <Compile Include="OData\FakeItem.cs" />
+    <Compile Include="OData\Fakes\ComplexDomain\PropertyInstanceData.cs" />
+    <Compile Include="OData\Fakes\ComplexDomain\PropertyInstanceValueData.cs" />
+    <Compile Include="OData\Fakes\ComplexDomain\TypeInstanceData.cs" />
+    <Compile Include="OData\Fakes\ComplexDomain\ValueTypeDefinitionData.cs" />
+    <Compile Include="OData\Fakes\DataPoint.cs" />
+    <Compile Include="OData\Fakes\IDataPoint.cs" />
+    <Compile Include="OData\Fakes\NorthwindCustomer.cs" />
+    <Compile Include="OData\Fakes\QualityFlags.cs" />
+    <Compile Include="OData\ModelFilterExtensionsTests.cs" />
+    <Compile Include="OData\Parser\ExpressionTokenizerTests.cs" />
+    <Compile Include="OData\Parser\FilterExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\FilterTests.cs" />
+    <Compile Include="OData\Parser\ParameterParserTests.cs" />
+    <Compile Include="OData\Parser\ParseParent.cs" />
+    <Compile Include="OData\Parser\Readers\BooleanExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\ByteArrayExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\ByteExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\DateTimeExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\DateTimeOffsetExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\DecimalExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\DoubleExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\EnumExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\GuidExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\IntExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\LongExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\ParameterValueReaderTests.cs" />
+    <Compile Include="OData\Parser\Readers\ShortExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\SingleExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\StreamExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\TimeSpanExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\UnsignedIntExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\UnsignedLongExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\UnsignedShortExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\SelectExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\SortExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\TokenSetTests.cs" />
+    <Compile Include="OData\PredicateMapperTests.cs" />
+    <Compile Include="OData\RuntimeTypeProviderTests.cs" />
+    <Compile Include="OData\SelectExpressionFactoryTests.cs" />
     <Compile Include="Security\ExampleDomain.cs" />
     <Compile Include="Security\ExampleLeaf.cs" />
     <Compile Include="Security\ExampleRoot.cs" />

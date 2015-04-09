@@ -31,7 +31,7 @@ namespace Highway.Data.EntityFramework.DynamicFilters
 
             string entityName = expression.Input.Variable.ResultType.EdmType.Name;
             var filterList = expression.Input.Variable.ResultType.EdmType.MetadataProperties
-                                .Where(mp => mp.Name.Contains("customannotation:" + DynamicFilterConstants.ATTRIBUTE_NAME_PREFIX))
+                                .Where(mp => mp.Name.Contains("customannotation:" + DynamicFilterConstants.AttributeNamePrefix))
                                 .Select(m => m.Value as DynamicFilterDefinition);
 
             var newFilterExpression = BuildFilterExpressionWithDynamicFilters(entityName, filterList, expression.Input, expression.Predicate);
@@ -52,7 +52,7 @@ namespace Highway.Data.EntityFramework.DynamicFilters
 
             string entityName = expression.Target.Name;
             var filterList = expression.Target.ElementType.MetadataProperties
-                .Where(mp => mp.Name.Contains("customannotation:" + DynamicFilterConstants.ATTRIBUTE_NAME_PREFIX))
+                .Where(mp => mp.Name.Contains("customannotation:" + DynamicFilterConstants.AttributeNamePrefix))
                 .Select(m => m.Value as DynamicFilterDefinition);
 
             var baseResult = base.Visit(expression);

@@ -1,8 +1,4 @@
-﻿//#if (DEBUG)
-//#define DEBUGPRINT
-//#endif
-
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Common.CommandTrees;
@@ -19,13 +15,13 @@ namespace Highway.Data.EntityFramework.DynamicFilters
     {
         #region Privates
 
-        private DynamicFilterDefinition _Filter;
-        private DbExpressionBinding _Binding;
-        private ObjectContext _ObjectContext;
+        private readonly DynamicFilterDefinition _filter;
+        private readonly DbExpressionBinding _binding;
+        private readonly ObjectContext _objectContext;
 
-        private Dictionary<Expression, DbExpression> _ExpressionToDbExpressionMap = new Dictionary<Expression, DbExpression>();
-        private Dictionary<string, DbPropertyExpression> _Properties = new Dictionary<string, DbPropertyExpression>();
-        private Dictionary<string, DbParameterReferenceExpression> _Parameters = new Dictionary<string, DbParameterReferenceExpression>();
+        private readonly Dictionary<Expression, DbExpression> _expressionToDbExpressionMap = new Dictionary<Expression, DbExpression>();
+        private readonly Dictionary<string, DbPropertyExpression> _properties = new Dictionary<string, DbPropertyExpression>();
+        private readonly Dictionary<string, DbParameterReferenceExpression> _parameters = new Dictionary<string, DbParameterReferenceExpression>();
 
         #endregion
 
@@ -41,9 +37,9 @@ namespace Highway.Data.EntityFramework.DynamicFilters
 
         private LambdaToDbExpressionVisitor(DynamicFilterDefinition filter, DbExpressionBinding binding, ObjectContext objectContext)
         {
-            _Filter = filter;
-            _Binding = binding;
-            _ObjectContext = objectContext;
+            _filter = filter;
+            _binding = binding;
+            _objectContext = objectContext;
         }
 
         #endregion
@@ -52,10 +48,6 @@ namespace Highway.Data.EntityFramework.DynamicFilters
 
         protected override Expression VisitBinary(BinaryExpression node)
         {
-#if (DEBUGPRINT)
-            System.Diagnostics.Debug.Print("VisitBinary: {0}", node);
-#endif
-
             var expression = base.VisitBinary(node) as BinaryExpression;
 
             DbExpression dbExpression;
@@ -81,29 +73,29 @@ namespace Highway.Data.EntityFramework.DynamicFilters
                         else if (IsNullableExpressionOfType<DbPropertyExpression>(rightExpression) && IsNullableExpressionOfType<DbParameterReferenceExpression>(leftExpression))
                             dbExpression = CreateEqualComparisonOfNullablePropToNullableParam(rightExpression, leftExpression);
                         else
-                            dbExpression = DbExpressionBuilder.Equal(leftExpression, rightExpression);
+                            dbExpression = leftExpression.Equal(rightExpression);
                         break;
                     case ExpressionType.NotEqual:
-                        dbExpression = DbExpressionBuilder.NotEqual(leftExpression, rightExpression);
+                        dbExpression = leftExpression.NotEqual(rightExpression);
                         break;
                     case ExpressionType.GreaterThan:
-                        dbExpression = DbExpressionBuilder.GreaterThan(leftExpression, rightExpression);
+                        dbExpression = leftExpression.GreaterThan(rightExpression);
                         break;
                     case ExpressionType.GreaterThanOrEqual:
-                        dbExpression = DbExpressionBuilder.GreaterThanOrEqual(leftExpression, rightExpression);
+                        dbExpression = leftExpression.GreaterThanOrEqual(rightExpression);
                         break;
                     case ExpressionType.LessThan:
-                        dbExpression = DbExpressionBuilder.LessThan(leftExpression, rightExpression);
+                        dbExpression = leftExpression.LessThan(rightExpression);
                         break;
                     case ExpressionType.LessThanOrEqual:
-                        dbExpression = DbExpressionBuilder.LessThanOrEqual(leftExpression, rightExpression);
+                        dbExpression = leftExpression.LessThanOrEqual(rightExpression);
                         break;
 
                     case ExpressionType.AndAlso:
-                        dbExpression = DbExpressionBuilder.And(leftExpression, rightExpression);
+                        dbExpression = leftExpression.And(rightExpression);
                         break;
                     case ExpressionType.OrElse:
-                        dbExpression = DbExpressionBuilder.Or(leftExpression, rightExpression);
+                        dbExpression = leftExpression.Or(rightExpression);
                         break;
 
                     default:
@@ -139,7 +131,7 @@ namespace Highway.Data.EntityFramework.DynamicFilters
         /// <returns></returns>
         private DbExpression MapNullComparison(Expression expression, ExpressionType comparisonType)
         {
-            DbExpression dbExpression = DbExpressionBuilder.IsNull(GetDbExpressionForExpression(expression));
+            DbExpression dbExpression = GetDbExpressionForExpression(expression).IsNull();
 
             switch (comparisonType)
             {
@@ -147,7 +139,7 @@ namespace Highway.Data.EntityFramework.DynamicFilters
                     return dbExpression;
                 case ExpressionType.NotEqual:
                     //  Creates expression: !([expression] is null)
-                    return DbExpressionBuilder.Not(dbExpression);
+                    return dbExpression.Not();
             }
 
             throw new NotImplementedException(string.Format("Unhandled comparisonType of {0} in LambdaToDbExpressionVisitor.MapNullComparison", comparisonType));
@@ -155,10 +147,6 @@ namespace Highway.Data.EntityFramework.DynamicFilters
 
         protected override Expression VisitConstant(ConstantExpression node)
         {
-#if (DEBUGPRINT)
-            System.Diagnostics.Debug.Print("VisitConstant: {0}", node);
-#endif
-
             var expression = base.VisitConstant(node);
 
             var type = node.Type;
@@ -170,33 +158,33 @@ namespace Highway.Data.EntityFramework.DynamicFilters
             }
 
             if (type == typeof(byte[]))
-                MapExpressionToDbExpression(expression, DbConstantExpression.FromBinary((byte[])node.Value));
+                MapExpressionToDbExpression(expression, DbExpression.FromBinary((byte[])node.Value));
             else if (type == typeof(bool))
-                MapExpressionToDbExpression(expression, DbConstantExpression.FromBoolean((bool?)node.Value));
+                MapExpressionToDbExpression(expression, DbExpression.FromBoolean((bool?)node.Value));
             else if (type == typeof(byte))
-                MapExpressionToDbExpression(expression, DbConstantExpression.FromByte((byte?)node.Value));
+                MapExpressionToDbExpression(expression, DbExpression.FromByte((byte?)node.Value));
             else if (type == typeof(DateTime))
-                MapExpressionToDbExpression(expression, DbConstantExpression.FromDateTime((DateTime?)node.Value));
+                MapExpressionToDbExpression(expression, DbExpression.FromDateTime((DateTime?)node.Value));
             else if (type == typeof(DateTimeOffset))
-                MapExpressionToDbExpression(expression, DbConstantExpression.FromDateTimeOffset((DateTimeOffset?)node.Value));
+                MapExpressionToDbExpression(expression, DbExpression.FromDateTimeOffset((DateTimeOffset?)node.Value));
             else if (type == typeof(decimal))
-                MapExpressionToDbExpression(expression, DbConstantExpression.FromDecimal((decimal?)node.Value));
+                MapExpressionToDbExpression(expression, DbExpression.FromDecimal((decimal?)node.Value));
             else if (type == typeof(double))
-                MapExpressionToDbExpression(expression, DbConstantExpression.FromDouble((double?)node.Value));
+                MapExpressionToDbExpression(expression, DbExpression.FromDouble((double?)node.Value));
             else if (type == typeof(Guid))
-                MapExpressionToDbExpression(expression, DbConstantExpression.FromGuid((Guid?)node.Value));
+                MapExpressionToDbExpression(expression, DbExpression.FromGuid((Guid?)node.Value));
             else if (type == typeof(Int16))
-                MapExpressionToDbExpression(expression, DbConstantExpression.FromInt16((Int16?)node.Value));
+                MapExpressionToDbExpression(expression, DbExpression.FromInt16((Int16?)node.Value));
             else if (type == typeof(Int32))
-                MapExpressionToDbExpression(expression, DbConstantExpression.FromInt32((Int32?)node.Value));
+                MapExpressionToDbExpression(expression, DbExpression.FromInt32((Int32?)node.Value));
             else if (type.IsEnum)
-                MapExpressionToDbExpression(expression, DbConstantExpression.FromInt32((Int32)node.Value));
+                MapExpressionToDbExpression(expression, DbExpression.FromInt32((Int32)node.Value));
             else if (type == typeof(Int64))
-                MapExpressionToDbExpression(expression, DbConstantExpression.FromInt64((Int64?)node.Value));
+                MapExpressionToDbExpression(expression, DbExpression.FromInt64((Int64?)node.Value));
             else if (type == typeof(float))
-                MapExpressionToDbExpression(expression, DbConstantExpression.FromSingle((float?)node.Value));
+                MapExpressionToDbExpression(expression, DbExpression.FromSingle((float?)node.Value));
             else if (type == typeof(string))
-                MapExpressionToDbExpression(expression, DbConstantExpression.FromString((string)node.Value));
+                MapExpressionToDbExpression(expression, DbExpression.FromString((string)node.Value));
             else
                 throw new NotImplementedException(string.Format("Unhandled Type of {0} for Constant value {1} in LambdaToDbExpressionVisitor.VisitConstant", node.Type.Name, node.Value ?? "null"));
 
@@ -211,10 +199,6 @@ namespace Highway.Data.EntityFramework.DynamicFilters
         /// <returns></returns>
         protected override Expression VisitMember(MemberExpression node)
         {
-#if (DEBUGPRINT)
-            System.Diagnostics.Debug.Print("VisitMember: {0}, expression.NodeType={1}, Member={2}", node, node.Expression.NodeType, node.Member);
-#endif
-
             var expression = base.VisitMember(node) as MemberExpression;
 
             if ((expression.Expression.NodeType == ExpressionType.Parameter) && (expression.Expression.Type.IsClass || expression.Expression.Type.IsInterface))
@@ -232,16 +216,16 @@ namespace Highway.Data.EntityFramework.DynamicFilters
                     propertyName = expression.Member.Name;
 
                 //  TODO: To support different class/interfaces, can we figure out the correct binding from what's in expression.Expression?
-                var edmType = _Binding.VariableType.EdmType as EntityType;
+                var edmType = _binding.VariableType.EdmType as EntityType;
 
                 DbPropertyExpression propertyExpression;
-                if (!_Properties.TryGetValue(propertyName, out propertyExpression))
+                if (!_properties.TryGetValue(propertyName, out propertyExpression))
                 {
                     //  Not created yet
 
                     //  Need to map through the EdmType properties to find the actual database/cspace name for the entity property.
                     //  It may be different from the entity property!
-                    var edmProp = edmType.Properties.Where(p => p.MetadataProperties.Any(m => m.Name == "PreferredName" && m.Value.Equals(propertyName))).FirstOrDefault();
+                    var edmProp = edmType.Properties.FirstOrDefault(p => p.MetadataProperties.Any(m => m.Name == "PreferredName" && m.Value.Equals(propertyName)));
                     if (edmProp == null)
                     {
                         //  Accessing properties outside the main entity is not supported and will cause this exception.
@@ -249,12 +233,8 @@ namespace Highway.Data.EntityFramework.DynamicFilters
                     }
                     //  database column name is now in edmProp.Name.  Use that instead of filter.ColumnName
 
-                    propertyExpression = DbExpressionBuilder.Property(DbExpressionBuilder.Variable(_Binding.VariableType, _Binding.VariableName), edmProp.Name);
-                    _Properties.Add(propertyName, propertyExpression);
-
-#if (DEBUGPRINT)
-                    System.Diagnostics.Debug.Print("Created new property expression for {0}", propertyName);
-#endif
+                    propertyExpression = _binding.VariableType.Variable(_binding.VariableName).Property(edmProp.Name);
+                    _properties.Add(propertyName, propertyExpression);
                 }
 
                 //  Nothing else to do here
@@ -271,7 +251,7 @@ namespace Highway.Data.EntityFramework.DynamicFilters
             {
                 case "HasValue":
                     //  Map HasValue to !IsNull
-                    dbExpression = DbExpressionBuilder.Not(DbExpressionBuilder.IsNull(objectExpression));
+                    dbExpression = objectExpression.IsNull().Not();
                     break;
                 case "Value":
                     //  This is a nullable Value accessor so just map to the object itself and it will be mapped for us
@@ -294,16 +274,12 @@ namespace Highway.Data.EntityFramework.DynamicFilters
         /// <returns></returns>
         protected override Expression VisitParameter(ParameterExpression node)
         {
-#if (DEBUGPRINT)
-            System.Diagnostics.Debug.Print("VisitParameter: {0}", node);
-#endif
-
             var expression = base.VisitParameter(node);
 
             if (node.Type.IsClass || node.Type.IsInterface)
                 return expression;      //  Ignore class or interface param
 
-            if (_Parameters.ContainsKey(node.Name))
+            if (_parameters.ContainsKey(node.Name))
                 return expression;      //  Already created sql parameter for this node.Name
 
             //  Create a new DbParameterReferenceExpression for this parameter.
@@ -316,28 +292,20 @@ namespace Highway.Data.EntityFramework.DynamicFilters
         private DbParameterReferenceExpression CreateParameter(string name, Type type)
         {
             DbParameterReferenceExpression param;
-            if (_Parameters.TryGetValue(name, out param))
+            if (_parameters.TryGetValue(name, out param))
                 return param;
 
             var typeUsage = TypeUsageForPrimitiveType(type);
-            string dynFilterParamName = _Filter.CreateDynamicFilterName(name);
+            string dynFilterParamName = _filter.CreateDynamicFilterName(name);
             param = typeUsage.Parameter(dynFilterParamName);
 
-#if (DEBUGPRINT)
-            System.Diagnostics.Debug.Print("Created new parameter for {0}: {1}", name, dynFilterParamName);
-#endif
-
-            _Parameters.Add(name, param);
+            _parameters.Add(name, param);
 
             return param;
         }
 
         protected override Expression VisitUnary(UnaryExpression node)
         {
-#if (DEBUGPRINT)
-            System.Diagnostics.Debug.Print("VisitUnary: {0}", node);
-#endif
-
             var expression = base.VisitUnary(node) as UnaryExpression;
 
             DbExpression operandExpression = GetDbExpressionForExpression(expression.Operand);
@@ -345,10 +313,10 @@ namespace Highway.Data.EntityFramework.DynamicFilters
             switch (expression.NodeType)
             {
                 case ExpressionType.Not:
-                    MapExpressionToDbExpression(expression, DbExpressionBuilder.Not(operandExpression));
+                    MapExpressionToDbExpression(expression, operandExpression.Not());
                     break;
                 case ExpressionType.Convert:
-                    MapExpressionToDbExpression(expression, DbExpressionBuilder.CastTo(operandExpression, TypeUsageForPrimitiveType(expression.Type)));
+                    MapExpressionToDbExpression(expression, operandExpression.CastTo(TypeUsageForPrimitiveType(expression.Type)));
                     break;
                 default:
                     throw new NotImplementedException(string.Format("Unhandled NodeType of {0} in LambdaToDbExpressionVisitor.VisitUnary", expression.NodeType));
@@ -359,20 +327,12 @@ namespace Highway.Data.EntityFramework.DynamicFilters
 
         protected override Expression VisitConditional(ConditionalExpression node)
         {
-#if (DEBUGPRINT)
-            System.Diagnostics.Debug.Print("VisitConditional: {0}", node);
-#endif
-
             throw new NotImplementedException("Conditionals in Lambda expressions are not supported");
             //return base.VisitConditional(node);
         }
 
         protected override Expression VisitMethodCall(MethodCallExpression node)
         {
-#if (DEBUGPRINT)
-            System.Diagnostics.Debug.Print("VisitMethodCall: {0}", node);
-#endif
-
             var expression = base.VisitMethodCall(node) as MethodCallExpression;
 
             switch(node.Method.Name)
@@ -410,7 +370,7 @@ namespace Highway.Data.EntityFramework.DynamicFilters
                 Type paramType = PrimitiveTypeForType(collectionObjExp.Type);
 
                 var param = CreateParameter(paramName, paramType);
-                dbExpression = DbExpressionBuilder.Equal(argExpression, param);
+                dbExpression = argExpression.Equal(param);
             }
             else
             {
@@ -450,7 +410,7 @@ namespace Highway.Data.EntityFramework.DynamicFilters
                     var allExpressions = parameterExpressionList.Cast<DbExpression>().Union(constantExpressionList.Cast<DbExpression>());
                     foreach (var paramReference in allExpressions)
                     {
-                        var equalsExpression = DbExpressionBuilder.Equal(argExpression, paramReference);
+                        var equalsExpression = argExpression.Equal(paramReference);
                         if (dbExpression == null)
                             dbExpression = equalsExpression;
                         else
@@ -460,7 +420,7 @@ namespace Highway.Data.EntityFramework.DynamicFilters
                 else
                 {
                     //  All values are constants so can use DbInExpression
-                    dbExpression = DbExpressionBuilder.In(argExpression, constantExpressionList);
+                    dbExpression = argExpression.In(constantExpressionList);
                 }
             }
 
@@ -482,7 +442,7 @@ namespace Highway.Data.EntityFramework.DynamicFilters
                 if ((constantExpression == null) || (constantExpression.Value == null))
                     throw new NullReferenceException("Parameter to StartsWith cannot be null");
 
-                dbExpression = DbExpressionBuilder.Like(srcExpression, DbExpressionBuilder.Constant(constantExpression.Value.ToString() + "%"));
+                dbExpression = srcExpression.Like(DbExpressionBuilder.Constant(constantExpression.Value.ToString() + "%"));
             }
             else
             {
@@ -492,7 +452,7 @@ namespace Highway.Data.EntityFramework.DynamicFilters
                 //  It works but generates some crazy conditions using charindex which I don't think will use indexes as well as "like"...
                 //dbExpression = DbExpressionBuilder.Equal(DbExpressionBuilder.True, srcExpression.StartsWith(argExpression));
 
-                dbExpression = DbExpressionBuilder.Like(srcExpression, argExpression.Concat(DbExpressionBuilder.Constant("%")));
+                dbExpression = srcExpression.Like(argExpression.Concat(DbExpressionBuilder.Constant("%")));
             }
 
             MapExpressionToDbExpression(expression, dbExpression);
@@ -518,7 +478,7 @@ namespace Highway.Data.EntityFramework.DynamicFilters
 
         private void MapExpressionToDbExpression(Expression expression, DbExpression dbExpression)
         {
-            _ExpressionToDbExpressionMap[expression] = dbExpression;
+            _expressionToDbExpressionMap[expression] = dbExpression;
         }
 
         private DbExpression GetDbExpressionForExpression(Expression expression)
@@ -533,7 +493,7 @@ namespace Highway.Data.EntityFramework.DynamicFilters
             }
 
             DbExpression dbExpression;
-            if (!_ExpressionToDbExpressionMap.TryGetValue(expression, out dbExpression))
+            if (!_expressionToDbExpressionMap.TryGetValue(expression, out dbExpression))
                 throw new FormatException(string.Format("DbExpression not found for expression: {0}", expression));
 
             return dbExpression;
@@ -541,7 +501,7 @@ namespace Highway.Data.EntityFramework.DynamicFilters
 
         private TypeUsage TypeUsageForPrimitiveType(Type type)
         {
-            return TypeUsageForPrimitiveType(type, _ObjectContext);
+            return TypeUsageForPrimitiveType(type, _objectContext);
         }
 
         public static TypeUsage TypeUsageForPrimitiveType(Type type, ObjectContext objectContext)
@@ -565,11 +525,11 @@ namespace Highway.Data.EntityFramework.DynamicFilters
                 //  May not even be necessary to specify these Facets, but just to be safe.  And only way to create them is to call the internal Create method...
                 var createMethod = typeof(Facet).GetMethod("Create", BindingFlags.NonPublic | BindingFlags.Static, null, new Type[] { typeof(FacetDescription), typeof(object) }, null);
 
-                var facetDescription = Facet.GetGeneralFacetDescriptions().FirstOrDefault(fd => fd.FacetName == "Nullable");
+                var facetDescription = MetadataItem.GetGeneralFacetDescriptions().FirstOrDefault(fd => fd.FacetName == "Nullable");
                 if (facetDescription != null)
                     facetList.Add((Facet)createMethod.Invoke(null, new object[] { facetDescription, true }));
 
-                facetDescription = Facet.GetGeneralFacetDescriptions().FirstOrDefault(fd => fd.FacetName == "DefaultValue");
+                facetDescription = MetadataItem.GetGeneralFacetDescriptions().FirstOrDefault(fd => fd.FacetName == "DefaultValue");
                 if (facetDescription != null)
                     facetList.Add((Facet)createMethod.Invoke(null, new object[] { facetDescription, null }));
             }

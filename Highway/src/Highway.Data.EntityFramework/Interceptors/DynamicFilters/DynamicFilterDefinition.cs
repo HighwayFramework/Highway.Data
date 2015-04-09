@@ -19,15 +19,15 @@ namespace Highway.Data.EntityFramework.DynamicFilters
 
         private Type _CLRType;
 
-        public string AttributeName { get { return string.Concat(DynamicFilterConstants.ATTRIBUTE_NAME_PREFIX, DynamicFilterConstants.DELIMETER, _CLRType.Name, DynamicFilterConstants.DELIMETER, FilterName); } }
+        public string AttributeName { get { return string.Concat(DynamicFilterConstants.AttributeNamePrefix, DynamicFilterConstants.Delimeter, _CLRType.Name, DynamicFilterConstants.Delimeter, FilterName); } }
         public string CreateDynamicFilterName(string parameterName)
         {
-            return string.Concat(DynamicFilterConstants.PARAMETER_NAME_PREFIX, DynamicFilterConstants.DELIMETER, FilterName, DynamicFilterConstants.DELIMETER, parameterName);
+            return string.Concat(DynamicFilterConstants.ParameterNamePrefix, DynamicFilterConstants.Delimeter, FilterName, DynamicFilterConstants.Delimeter, parameterName);
         }
 
         public string CreateFilterDisabledParameterName()
         {
-            return string.Concat(DynamicFilterConstants.PARAMETER_NAME_PREFIX, DynamicFilterConstants.DELIMETER, FilterName, DynamicFilterConstants.DELIMETER, DynamicFilterConstants.FILTER_DISABLED_NAME);
+            return string.Concat(DynamicFilterConstants.ParameterNamePrefix, DynamicFilterConstants.Delimeter, FilterName, DynamicFilterConstants.Delimeter, DynamicFilterConstants.FilterDisabledName);
         }
 
         internal DynamicFilterDefinition(string filterName, LambdaExpression predicate, string columnName, Type clrType)

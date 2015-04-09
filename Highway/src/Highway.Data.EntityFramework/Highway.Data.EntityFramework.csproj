@@ -91,15 +91,15 @@
     <Compile Include="Contexts\DomainContext.cs" />
     <Compile Include="Database\DropCreateInitializer.cs" />
     <Compile Include="DefaultContextConfiguration.cs" />
-    <Compile Include="DynamicFilters\DynamicFilterCommandInterceptor.cs" />
-    <Compile Include="DynamicFilters\DynamicFilterConstants.cs" />
-    <Compile Include="DynamicFilters\DynamicFilterConvention.cs" />
-    <Compile Include="DynamicFilters\DynamicFilterDefinition.cs" />
-    <Compile Include="DynamicFilters\DynamicFilterExtensions.cs" />
-    <Compile Include="DynamicFilters\DynamicFilterInterceptor.cs" />
-    <Compile Include="DynamicFilters\DynamicFilterParameters.cs" />
-    <Compile Include="DynamicFilters\DynamicFilterQueryVisitor.cs" />
-    <Compile Include="DynamicFilters\LambdaToDbExpressionVisitor.cs" />
+    <Compile Include="Interceptors\DynamicFilters\DynamicFilterCommandInterceptor.cs" />
+    <Compile Include="Interceptors\DynamicFilters\DynamicFilterConstants.cs" />
+    <Compile Include="Interceptors\DynamicFilters\DynamicFilterConvention.cs" />
+    <Compile Include="Interceptors\DynamicFilters\DynamicFilterDefinition.cs" />
+    <Compile Include="Interceptors\DynamicFilters\DynamicFilterExtensions.cs" />
+    <Compile Include="Interceptors\DynamicFilters\DynamicFilterInterceptor.cs" />
+    <Compile Include="Interceptors\DynamicFilters\DynamicFilterParameters.cs" />
+    <Compile Include="Interceptors\DynamicFilters\DynamicFilterQueryVisitor.cs" />
+    <Compile Include="Interceptors\DynamicFilters\LambdaToDbExpressionVisitor.cs" />
     <Compile Include="Interceptors\SoftDelete\SoftDeleteAttribute.cs" />
     <Compile Include="Interceptors\SoftDelete\SoftDeleteInterceptor.cs" />
     <Compile Include="Interceptors\SoftDelete\SoftDeleteQueryVisitor.cs" />
@@ -150,6 +150,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="DynamicFilters\" />
     <Folder Include="Security\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

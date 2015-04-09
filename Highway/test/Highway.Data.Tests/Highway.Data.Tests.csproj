@@ -201,6 +201,13 @@
     <Compile Include="OData\PredicateMapperTests.cs" />
     <Compile Include="OData\RuntimeTypeProviderTests.cs" />
     <Compile Include="OData\SelectExpressionFactoryTests.cs" />
+    <Compile Include="Security\ComplexDomain\AudioBlog.cs" />
+    <Compile Include="Security\ComplexDomain\Author.cs" />
+    <Compile Include="Security\ComplexDomain\Blog.cs" />
+    <Compile Include="Security\ComplexDomain\LiveStreamBlog.cs" />
+    <Compile Include="Security\ComplexDomain\Mapping\BlogSecurityMap.cs" />
+    <Compile Include="Security\ComplexDomain\Post.cs" />
+    <Compile Include="Security\ComplexDomain\VideoBlog.cs" />
     <Compile Include="Security\ExampleDomain.cs" />
     <Compile Include="Security\ExampleLeaf.cs" />
     <Compile Include="Security\ExampleRoot.cs" />

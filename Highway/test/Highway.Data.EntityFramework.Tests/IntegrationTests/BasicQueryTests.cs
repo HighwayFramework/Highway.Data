@@ -21,7 +21,7 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
     {
         public override TestDataContext ResolveTarget()
         {
-            return Container.Resolve<TestDataContext>(new {connectionString = Settings.Default.Connection});
+            return Container.Resolve<TestDataContext>(new { connectionString = Settings.Default.Connection, logger = new ConsoleOutLogger("Test", LogLevel.All, false, false, false, string.Empty) });
         }
 
         public override void RegisterComponents(IWindsorContainer container)

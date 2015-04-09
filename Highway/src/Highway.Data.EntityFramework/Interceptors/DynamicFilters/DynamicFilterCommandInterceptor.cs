@@ -36,7 +36,7 @@ namespace Highway.Data.EntityFramework.DynamicFilters
 
         private void SetDynamicFilterParameterValues(DbCommand command, DbContext context)
         {
-            if ((command == null) || (command.Parameters == null) || (command.Parameters.Count == 0) || (context == null))
+            if ((command == null) || (command.Parameters.Count == 0) || (context == null))
                 return;
 
             context.SetSqlParameters(command);

@@ -7,7 +7,7 @@ using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 
-namespace Highway.Data.EntityFramework.DynamicFilters
+namespace Highway.Data.EntityFramework.Interceptors.DynamicFilters
 {
     public class DynamicFilterQueryVisitor : DefaultExpressionVisitor
     {

@@ -1,9 +1,7 @@
-#region
 
 using System;
 using Highway.Data.Interceptors.Events;
 
-#endregion
 
 namespace Highway.Data
 {

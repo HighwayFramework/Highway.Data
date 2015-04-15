@@ -1,11 +1,9 @@
-#region
 
 using Castle.Facilities.TypedFactory;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.Windsor;
 
-#endregion
 
 namespace Highway.Data.Tests
 {

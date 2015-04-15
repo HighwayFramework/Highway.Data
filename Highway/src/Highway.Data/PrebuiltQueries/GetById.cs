@@ -1,9 +1,7 @@
-﻿#region
-
+﻿
 using System;
 using System.Linq;
 
-#endregion
 
 namespace Highway.Data
 {

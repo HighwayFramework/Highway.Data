@@ -1,10 +1,8 @@
-﻿#region
-
+﻿
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic;
 
-#endregion
 
 namespace Highway.Data.Filtering
 {

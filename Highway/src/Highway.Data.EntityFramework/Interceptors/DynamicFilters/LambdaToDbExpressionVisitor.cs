@@ -9,12 +9,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Highway.Data.EntityFramework.DynamicFilters
+namespace Highway.Data.EntityFramework.Interceptors.DynamicFilters
 {
     internal class LambdaToDbExpressionVisitor : ExpressionVisitor
     {
-        #region Privates
-
+        
         private readonly DynamicFilterDefinition _filter;
         private readonly DbExpressionBinding _binding;
         private readonly ObjectContext _objectContext;
@@ -23,10 +22,8 @@ namespace Highway.Data.EntityFramework.DynamicFilters
         private readonly Dictionary<string, DbPropertyExpression> _properties = new Dictionary<string, DbPropertyExpression>();
         private readonly Dictionary<string, DbParameterReferenceExpression> _parameters = new Dictionary<string, DbParameterReferenceExpression>();
 
-        #endregion
-
-        #region Static methods & private Constructor
-
+        
+        
         public static DbExpression Convert(DynamicFilterDefinition filter, DbExpressionBinding binding, ObjectContext objectContext)
         {
             var visitor = new LambdaToDbExpressionVisitor(filter, binding, objectContext);
@@ -42,10 +39,8 @@ namespace Highway.Data.EntityFramework.DynamicFilters
             _objectContext = objectContext;
         }
 
-        #endregion
-
-        #region ExpressionVisitor Overrides
-
+        
+        
         protected override Expression VisitBinary(BinaryExpression node)
         {
             var expression = base.VisitBinary(node) as BinaryExpression;
@@ -472,10 +467,8 @@ namespace Highway.Data.EntityFramework.DynamicFilters
             return DbExpressionBuilder.Constant(value);
         }
 
-        #endregion
-
-        #region Expression Mapping helpers
-
+        
+        
         private void MapExpressionToDbExpression(Expression expression, DbExpression dbExpression)
         {
             _expressionToDbExpressionMap[expression] = dbExpression;
@@ -607,6 +600,5 @@ namespace Highway.Data.EntityFramework.DynamicFilters
             return (constantExpr.Value == null);
         }
 
-        #endregion
-    }
+            }
 }

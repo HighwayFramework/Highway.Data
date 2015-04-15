@@ -15,5 +15,6 @@ namespace Highway.Data.Services
             return "Default User";
         }
 
-            }
+        #endregion
+    }
 }

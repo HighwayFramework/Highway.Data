@@ -1,5 +1,4 @@
-﻿#region
-
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,6 @@ using Highway.Data.Interceptors;
 using Highway.Data.Interceptors.Events;
 using Highway.Data.Repositories;
 
-#endregion
 
 namespace Highway.Data.EventManagement
 {

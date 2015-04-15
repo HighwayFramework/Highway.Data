@@ -1,4 +1,3 @@
-#region
 
 using System;
 using System.Collections;
@@ -6,14 +5,12 @@ using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.Resolvers;
 using Rhino.Mocks;
 
-#endregion
 
 namespace Highway.Data.Tests
 {
     public class AutoMockingLazyComponentLoader : ILazyComponentLoader
     {
-        #region ILazyComponentLoader Members
-
+        
         public IRegistration Load(string key, Type service, IDictionary arguments)
         {
             //if (service.IsArray)
@@ -27,6 +24,5 @@ namespace Highway.Data.Tests
             return Component.For(service).Instance(MockRepository.GenerateMock(service, new Type[0]));
         }
 
-        #endregion
-    }
+            }
 }

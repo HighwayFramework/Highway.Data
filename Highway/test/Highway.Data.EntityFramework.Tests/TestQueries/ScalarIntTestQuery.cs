@@ -1,9 +1,7 @@
-#region
 
 using System.Linq;
 using Highway.Data.Tests.TestDomain;
 
-#endregion
 
 namespace Highway.Data.EntityFramework.Tests.TestQueries
 {

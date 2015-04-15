@@ -11,7 +11,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
-namespace Highway.Data.EntityFramework.DynamicFilters
+namespace Highway.Data.EntityFramework.Interceptors.DynamicFilters
 {
     public static class DynamicFilterExtensions
     {
@@ -642,7 +642,7 @@ namespace Highway.Data.EntityFramework.DynamicFilters
                 throw new ArgumentNullException("Lambda expression is null");
 
             var body = expression.Body as MemberExpression;
-            if ((body == null) || (body.Member == null) || string.IsNullOrEmpty(body.Member.Name))
+            if ((body == null) || string.IsNullOrEmpty(body.Member.Name))
             {
                 //  The expression does not specify a column - it's a lambda expression/predicate that will need to
                 //  be expanded by LabdaToDbExprssionVisitor during the query evaluation.
@@ -650,8 +650,7 @@ namespace Highway.Data.EntityFramework.DynamicFilters
             }
 
             var propertyExpression = body.Expression as MemberExpression;
-            if ((propertyExpression != null) && (propertyExpression.Member != null) &&
-                (propertyExpression.Member.Name != body.Member.Name))
+            if ((propertyExpression != null) && (propertyExpression.Member.Name != body.Member.Name))
             {
                 //  The expression is a property accessor - i.e. field.HasValue.  It's a lambda expression/predicate
                 return null;

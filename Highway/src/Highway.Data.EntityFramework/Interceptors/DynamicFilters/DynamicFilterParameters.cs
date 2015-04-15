@@ -1,6 +1,6 @@
 ﻿using System.Collections.Concurrent;
 
-namespace Highway.Data.EntityFramework.DynamicFilters
+namespace Highway.Data.EntityFramework.Interceptors.DynamicFilters
 {
     public class DynamicFilterParameters
     {

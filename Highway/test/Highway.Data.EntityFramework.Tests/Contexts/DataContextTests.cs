@@ -1,5 +1,4 @@
-﻿#region
-
+﻿
 using System;
 using System.Data.Entity;
 using System.Linq;
@@ -13,7 +12,6 @@ using Highway.Data.Tests.TestDomain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
 
-#endregion
 
 namespace Highway.Data.EntityFramework.Tests.Contexts
 {

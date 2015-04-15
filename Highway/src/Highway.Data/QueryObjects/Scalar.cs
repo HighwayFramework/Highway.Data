@@ -1,11 +1,9 @@
-﻿#region
-
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-#endregion
 
 namespace Highway.Data
 {
@@ -20,8 +18,7 @@ namespace Highway.Data
         /// </summary>
         protected Func<IDataContext, T> ContextQuery { get; set; }
 
-        #region IScalar<T> Members
-
+        
         /// <summary>
         ///     Executes the expression against the passed in context
         /// </summary>
@@ -34,8 +31,7 @@ namespace Highway.Data
             return ContextQuery(context);
         }
 
-        #endregion
-    }
+            }
 
     /// <summary>
     ///     Base implementation of a query that returns a single value or object

@@ -1,5 +1,4 @@
-﻿#region
-
+﻿
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,7 +7,6 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Highway.Data.Interceptors.Events;
 
-#endregion
 
 namespace Highway.Data
 {
@@ -36,8 +34,7 @@ namespace Highway.Data
         /// </summary>
         protected IDataContext Context { get; set; }
 
-        #region IExtendableQuery Members
-
+        
         /// <summary>
         ///     Adds a method to the expression in the query object
         /// </summary>
@@ -53,10 +50,8 @@ namespace Highway.Data
             ExpressionList.Add(new Tuple<MethodInfo, Expression[]>(orderMethodInfo, parameters));
         }
 
-        #endregion
-
-        #region IObservableQuery Members
-
+        
+        
         /// <summary>
         ///     The event fired just before the query goes to the database
         /// </summary>
@@ -67,8 +62,7 @@ namespace Highway.Data
         /// </summary>
         public event EventHandler<AfterQuery> AfterQuery;
 
-        #endregion
-
+        
         /// <summary>
         ///     Checks the context and the Query for null
         /// </summary>

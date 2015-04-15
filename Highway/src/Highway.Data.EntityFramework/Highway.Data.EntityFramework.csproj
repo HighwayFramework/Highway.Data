@@ -137,6 +137,54 @@
     <Compile Include="QueryObjects\AdvancedScalar.cs" />
     <Compile Include="QueryObjects\SqlScalar.cs" />
     <Compile Include="Repositories\DomainRepository.cs" />
+    <Compile Include="Security\Configuration\ChildSecurableRootDescriptor.cs" />
+    <Compile Include="Security\Configuration\ComplexAndPathDescriptor.cs" />
+    <Compile Include="Security\Configuration\ComplexAndRelationship.cs" />
+    <Compile Include="Security\Configuration\ComplexOrPathDescriptor.cs" />
+    <Compile Include="Security\Configuration\ComplexOrRelationship.cs" />
+    <Compile Include="Security\Configuration\EntitySecurityConfiguration.cs" />
+    <Compile Include="Security\Configuration\IChildRootBuilder.cs" />
+    <Compile Include="Security\Configuration\IComplexPathBuilder.cs" />
+    <Compile Include="Security\Configuration\IComplexRelationshipBuilder.cs" />
+    <Compile Include="Security\Configuration\IParentRootBuilder.cs" />
+    <Compile Include="Security\Configuration\IProvideRelationships.cs" />
+    <Compile Include="Security\Configuration\IRelationshipBuilder.cs" />
+    <Compile Include="Security\Configuration\IRootBuilder.cs" />
+    <Compile Include="Security\Configuration\ISimplePathBuilder.cs" />
+    <Compile Include="Security\Configuration\ParentSecurableRootDescriptor.cs" />
+    <Compile Include="Security\Configuration\PathBuilder.cs" />
+    <Compile Include="Security\Configuration\PathDescriptor.cs" />
+    <Compile Include="Security\Configuration\Relationship.cs" />
+    <Compile Include="Security\Configuration\RelationshipBuilder.cs" />
+    <Compile Include="Security\Configuration\RootDescriptor.cs" />
+    <Compile Include="Security\Configuration\SecurableBuilder.cs" />
+    <Compile Include="Security\Configuration\SecurityConfiguration.cs" />
+    <Compile Include="Security\Configuration\SimplePathDescriptor.cs" />
+    <Compile Include="Security\Configuration\SimpleRelationship.cs" />
+    <Compile Include="Security\Configuration\SimpleSecurableRootDescriptor.cs" />
+    <Compile Include="Security\Expressions\CollectionBehavior.cs" />
+    <Compile Include="Security\Expressions\EstreamSecurityExpressionVistor.cs" />
+    <Compile Include="Security\Expressions\ExpressionDetail.cs" />
+    <Compile Include="Security\Expressions\ExpressionDetailBuilder.cs" />
+    <Compile Include="Security\Expressions\IncludePathMetadataFragment.cs" />
+    <Compile Include="Security\Expressions\IncludeSecurityExpressionBuilder.cs" />
+    <Compile Include="Security\Expressions\ParameterToMemberExpressionRebinder.cs" />
+    <Compile Include="Security\Expressions\SecuredIdSelectBuilder.cs" />
+    <Compile Include="Security\Expressions\SecuredPredicateBuilder.cs" />
+    <Compile Include="Security\Extensions\LambdaExpressionExtensions.cs" />
+    <Compile Include="Security\Extensions\ObjectExtensions.cs" />
+    <Compile Include="Security\Extensions\TypeExtensions.cs" />
+    <Compile Include="Security\Interfaces\IBuildSecuredRelationships.cs" />
+    <Compile Include="Security\Interfaces\IProvideEntitlements.cs" />
+    <Compile Include="Security\Interfaces\IProvideSecureMappings.cs" />
+    <Compile Include="Security\Interfaces\ISecuredDataContext.cs" />
+    <Compile Include="Security\Interfaces\ISecuredEstreamDomainRepositoryFactory.cs" />
+    <Compile Include="Security\Queries\GetByOdata.cs" />
+    <Compile Include="Security\Queries\ODataQuery.cs" />
+    <Compile Include="Security\Queries\Query.cs" />
+    <Compile Include="Security\Queries\SecuredScalar.cs" />
+    <Compile Include="Security\SecuredRelationshipCache.cs" />
+    <Compile Include="Security\WhenNull.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -151,7 +199,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DynamicFilters\" />
-    <Folder Include="Security\" />
+    <Folder Include="Interceptors\Security\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

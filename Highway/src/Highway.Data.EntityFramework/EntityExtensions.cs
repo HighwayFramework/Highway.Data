@@ -1,9 +1,7 @@
-﻿#region
-
+﻿
 using System;
 using System.Data.Entity;
 
-#endregion
 
 namespace Highway.Data
 {

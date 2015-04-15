@@ -1,5 +1,4 @@
-﻿#region
-
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,7 +7,6 @@ using System.Linq.Dynamic;
 using Highway.Data.Tests.TestDomain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-#endregion
 
 namespace Highway.Data.Tests.Utilities
 {

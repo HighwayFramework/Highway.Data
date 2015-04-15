@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Highway.Data.EntityFramework.DynamicFilters
+namespace Highway.Data.EntityFramework.Interceptors.DynamicFilters
 {
     internal class DynamicFilterDefinition
     {

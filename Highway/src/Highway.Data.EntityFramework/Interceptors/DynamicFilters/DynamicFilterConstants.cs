@@ -1,5 +1,5 @@
 ﻿
-namespace Highway.Data.EntityFramework.DynamicFilters
+namespace Highway.Data.EntityFramework.Interceptors.DynamicFilters
 {
     internal static class DynamicFilterConstants
     {

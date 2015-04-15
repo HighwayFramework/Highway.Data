@@ -1,8 +1,6 @@
-#region
 
 using System;
 
-#endregion
 
 namespace Highway.Data
 {

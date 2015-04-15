@@ -3,7 +3,7 @@ using System.Data.Entity.Core.Metadata.Edm;
 using System.Data.Entity.Infrastructure.Interception;
 using System.Linq;
 
-namespace Highway.Data.EntityFramework.DynamicFilters
+namespace Highway.Data.EntityFramework.Interceptors.DynamicFilters
 {
     public class DynamicFilterInterceptor : IDbCommandTreeInterceptor
     {

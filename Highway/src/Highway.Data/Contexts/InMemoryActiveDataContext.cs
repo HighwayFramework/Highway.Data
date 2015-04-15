@@ -1,5 +1,4 @@
-﻿#region
-
+﻿
 using System.Linq;
 using Highway.Data.Contexts.TypeRepresentations;
 using System;
@@ -10,7 +9,6 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Highway.Data.Collections;
 
-#endregion
 
 namespace Highway.Data.Contexts
 {

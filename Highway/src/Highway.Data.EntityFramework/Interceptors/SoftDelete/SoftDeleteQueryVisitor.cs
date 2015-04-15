@@ -23,10 +23,8 @@ namespace Highway.Data.EntityFramework.Interceptors.SoftDelete
                 if (table.Properties.Any(p => p.Name == column))
                 {
                     var binding = DbExpressionBuilder.Bind(expression);
-                    return DbExpressionBuilder.Filter(
-                        binding,
-                        DbExpressionBuilder.NotEqual(DbExpressionBuilder.Property(DbExpressionBuilder.Variable(binding.VariableType, binding.VariableName), column),
-                            DbExpression.FromBoolean(true)));
+                    var predicate = binding.VariableType.Variable(binding.VariableName).Property(column).NotEqual(DbExpression.FromBoolean(true));
+                    return binding.Filter(predicate);
                 }
             }
 

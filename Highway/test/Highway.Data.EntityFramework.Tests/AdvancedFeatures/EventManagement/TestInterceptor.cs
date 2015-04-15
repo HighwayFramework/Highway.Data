@@ -1,12 +1,10 @@
-﻿#region
-
+﻿
 using System;
 using System.Threading;
 using Highway.Data.EventManagement.Interfaces;
 using Highway.Data.Interceptors;
 using Highway.Data.Interceptors.Events;
 
-#endregion
 
 namespace Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement
 {

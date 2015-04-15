@@ -1,5 +1,4 @@
-﻿#region
-
+﻿
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +8,6 @@ using System.Reflection;
 using Highway.Data.Utilities;
 using Highway.Pavement.Collections;
 
-#endregion
 
 namespace Highway.Data.Contexts.TypeRepresentations
 {

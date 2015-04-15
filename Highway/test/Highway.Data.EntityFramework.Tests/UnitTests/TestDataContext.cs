@@ -1,8 +1,6 @@
-#region
 
 using Common.Logging;
 
-#endregion
 
 namespace Highway.Data.EntityFramework.Tests.UnitTests
 {

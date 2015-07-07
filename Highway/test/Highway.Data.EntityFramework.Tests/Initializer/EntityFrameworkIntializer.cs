@@ -1,10 +1,8 @@
-﻿#region
-
+﻿
 using System.Collections.Generic;
 using Highway.Data.EntityFramework.Tests.UnitTests;
 using Highway.Data.Tests.TestDomain;
 
-#endregion
 
 namespace Highway.Data.EntityFramework.Tests.Initializer
 {

@@ -1,5 +1,4 @@
-﻿#region
-
+﻿
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,7 +6,6 @@ using System.Linq;
 using Common.Logging;
 using Common.Logging.Simple;
 
-#endregion
 
 namespace Highway.Data.EntityFramework
 {

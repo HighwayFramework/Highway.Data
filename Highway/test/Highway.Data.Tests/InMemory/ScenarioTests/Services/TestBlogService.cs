@@ -1,10 +1,8 @@
-﻿#region
-
+﻿
 using System.Collections.Generic;
 using Highway.Data.Tests.InMemory.Domain;
 using Highway.Data.Tests.InMemory.ScenarioTests.Queries;
 
-#endregion
 
 namespace Highway.Data.Tests.InMemory.ScenarioTests.Services
 {

@@ -1,5 +1,4 @@
-﻿#region
-
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +6,6 @@ using FluentAssertions;
 using Highway.Data.Contexts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-#endregion
 
 namespace Highway.Data.Tests.InMemory
 {

@@ -1,8 +1,6 @@
-﻿#region
-
+﻿
 using Highway.Data.Filtering;
 
-#endregion
 
 namespace Highway.Data
 {

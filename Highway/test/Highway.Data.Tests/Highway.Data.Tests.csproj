@@ -51,36 +51,53 @@
     <AssemblyOriginatorKeyFile>Highway.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Castle.Core.3.2.1\lib\net45\Castle.Core.dll</HintPath>
+      <HintPath>..\..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Windsor, Version=3.2.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+    <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Castle.Windsor.3.2.1\lib\net45\Castle.Windsor.dll</HintPath>
+      <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging, Version=2.2.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Common.Logging.2.2.0\lib\net40\Common.Logging.dll</HintPath>
+    <Reference Include="Common.Logging">
+      <HintPath>..\..\packages\Common.Logging.3.2.0\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Common.Logging.Core">
-      <HintPath>..\..\packages\Common.Logging.Core.2.2.0\lib\net40\Common.Logging.Core.dll</HintPath>
+      <HintPath>..\..\packages\Common.Logging.Core.3.2.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
     <Reference Include="CommonServiceLocator.WindsorAdapter">
       <HintPath>..\..\packages\CommonServiceLocator.WindsorAdapter.1.0\lib\NET35\CommonServiceLocator.WindsorAdapter.dll</HintPath>
     </Reference>
-    <Reference Include="FluentAssertions">
-      <HintPath>..\..\packages\FluentAssertions.2.1.0.0\lib\net40\FluentAssertions.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentAssertions, Version=3.3.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\FluentAssertions.3.3.0\lib\net45\FluentAssertions.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentAssertions.Core">
+      <HintPath>..\..\packages\FluentAssertions.3.3.0\lib\net45\FluentAssertions.Core.dll</HintPath>
     </Reference>
     <Reference Include="Highway.Pavement">
       <HintPath>..\..\packages\Highway.Pavement.0.3.0.0\lib\net40\Highway.Pavement.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\CommonServiceLocator.1.2\lib\portable-windows8+net40+sl5+windowsphone8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="Rhino.Mocks">
       <HintPath>..\..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
     </Reference>
@@ -90,7 +107,8 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
@@ -112,6 +130,7 @@
     </Compile>
     <Compile Include="InMemory\ActiveDataContext\InMemoryActiveDataContextTwoLevelTests.cs" />
     <Compile Include="InMemory\ActiveDataContext\InMemoryActiveDataContextOneLevelTests.cs" />
+    <Compile Include="InMemory\Bug Tests\PopulateReferencesTests.cs" />
     <Compile Include="InMemory\Bug Tests\TestIgnoreGetter.cs" />
     <Compile Include="InMemory\Bug Tests\TestCircularReference.cs" />
     <Compile Include="InMemory\Bug Tests\TestThrowsExceptionWithDuplicateElement.cs" />
@@ -131,6 +150,71 @@
     <Compile Include="InMemory\ScenarioTests\BlogLifeTime.cs" />
     <Compile Include="InMemory\ScenarioTests\Queries\FindBlogByTitle.cs" />
     <Compile Include="InMemory\ScenarioTests\Services\TestBlogService.cs" />
+    <Compile Include="OData\AliasItem.cs" />
+    <Compile Include="OData\AnonymousTypeSerializerHelper.cs" />
+    <Compile Include="OData\BasicODataQueryTests.cs" />
+    <Compile Include="OData\ChildFakeItem.cs" />
+    <Compile Include="OData\Choice.cs" />
+    <Compile Include="OData\ComplexDomainFilterTests.cs" />
+    <Compile Include="OData\FakeChildItem.cs" />
+    <Compile Include="OData\FakeGrandChildItem.cs" />
+    <Compile Include="OData\FakeItem.cs" />
+    <Compile Include="OData\Fakes\ComplexDomain\PropertyInstanceData.cs" />
+    <Compile Include="OData\Fakes\ComplexDomain\PropertyInstanceValueData.cs" />
+    <Compile Include="OData\Fakes\ComplexDomain\TypeInstanceData.cs" />
+    <Compile Include="OData\Fakes\ComplexDomain\ValueTypeDefinitionData.cs" />
+    <Compile Include="OData\Fakes\DataPoint.cs" />
+    <Compile Include="OData\Fakes\IDataPoint.cs" />
+    <Compile Include="OData\Fakes\NorthwindCustomer.cs" />
+    <Compile Include="OData\Fakes\QualityFlags.cs" />
+    <Compile Include="OData\ModelFilterExtensionsTests.cs" />
+    <Compile Include="OData\NotFlags.cs" />
+    <Compile Include="OData\Parser\ExpressionTokenizerTests.cs" />
+    <Compile Include="OData\Parser\FilterExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\FilterTests.cs" />
+    <Compile Include="OData\Parser\ParameterParserTests.cs" />
+    <Compile Include="OData\Parser\ParseParent.cs" />
+    <Compile Include="OData\Parser\Readers\BooleanExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\ByteArrayExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\ByteExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\DateTimeExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\DateTimeOffsetExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\DecimalExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\DoubleExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\EnumExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\GuidExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\IntExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\LongExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\ParameterValueReaderTests.cs" />
+    <Compile Include="OData\Parser\Readers\ShortExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\SingleExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\StreamExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\TimeSpanExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\UnsignedIntExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\UnsignedLongExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\Readers\UnsignedShortExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\SelectExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\SortExpressionFactoryTests.cs" />
+    <Compile Include="OData\Parser\TokenSetTests.cs" />
+    <Compile Include="OData\PredicateMapperTests.cs" />
+    <Compile Include="OData\RuntimeTypeProviderTests.cs" />
+    <Compile Include="OData\SelectExpressionFactoryTests.cs" />
+    <Compile Include="Security\ComplexDomain\AudioBlog.cs" />
+    <Compile Include="Security\ComplexDomain\Author.cs" />
+    <Compile Include="Security\ComplexDomain\Blog.cs" />
+    <Compile Include="Security\ComplexDomain\LiveStreamBlog.cs" />
+    <Compile Include="Security\ComplexDomain\Mapping\BlogSecurityMap.cs" />
+    <Compile Include="Security\ComplexDomain\Post.cs" />
+    <Compile Include="Security\ComplexDomain\VideoBlog.cs" />
+    <Compile Include="Security\ExampleDomain.cs" />
+    <Compile Include="Security\ExampleLeaf.cs" />
+    <Compile Include="Security\ExampleRoot.cs" />
+    <Compile Include="Security\NullPermissiveExampleSecuredRelationshipBuilder.cs" />
+    <Compile Include="Security\NullRestrictiveExampleSecuredRelationshipBuilder.cs" />
+    <Compile Include="Security\ParameterToMemberRebinderTests.cs" />
+    <Compile Include="Security\SecuredInMemoryTests.cs" />
+    <Compile Include="Security\SecuredMappingConfigurationTests.cs" />
+    <Compile Include="Security\SecuredMappingsCacheTests.cs" />
     <Compile Include="TestDomain\Bar.cs" />
     <Compile Include="TestDomain\Baz.cs" />
     <Compile Include="TestDomain\Qux.cs" />
@@ -158,6 +242,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Highway.Data.Security\Highway.Data.Security.csproj">
+      <Project>{D6BBD313-BA23-4AD0-9EF0-26B46DCDAC54}</Project>
+      <Name>Highway.Data.Security</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Highway.Data.EntityFramework\Highway.Data.EntityFramework.csproj">
       <Project>{726c5578-4d46-46fb-a58d-352e447e672a}</Project>
       <Name>Highway.Data.EntityFramework</Name>

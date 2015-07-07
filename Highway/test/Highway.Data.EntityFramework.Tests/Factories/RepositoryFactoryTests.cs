@@ -1,5 +1,4 @@
-﻿#region
-
+﻿
 using Common.Logging.Simple;
 using FluentAssertions;
 using Highway.Data.EntityFramework.Tests.EventManagement;
@@ -7,7 +6,6 @@ using Highway.Data.Factories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
 
-#endregion
 
 namespace Highway.Data.EntityFramework.Tests.Factories
 {

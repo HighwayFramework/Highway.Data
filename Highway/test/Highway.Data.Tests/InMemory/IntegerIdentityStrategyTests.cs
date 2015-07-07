@@ -1,11 +1,9 @@
-﻿#region
-
+﻿
 using FluentAssertions;
 using Highway.Data.Contexts;
 using Highway.Data.Tests.InMemory.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-#endregion
 
 namespace Highway.Data.Tests.InMemory
 {

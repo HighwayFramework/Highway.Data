@@ -1,8 +1,6 @@
-﻿#region
-
+﻿
 using Highway.Data.Interceptors;
 
-#endregion
 
 namespace Highway.Data.EventManagement.Interfaces
 {

@@ -1,10 +1,8 @@
-﻿#region
-
+﻿
 using System;
 using System.Linq.Expressions;
 using System.Threading;
 
-#endregion
 
 namespace Highway.Data.Contexts
 {

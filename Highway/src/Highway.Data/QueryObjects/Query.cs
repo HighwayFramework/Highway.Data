@@ -1,11 +1,7 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-
-#endregion
 
 namespace Highway.Data
 {
@@ -19,8 +15,6 @@ namespace Highway.Data
         ///     This holds the expression that will be used to create the <see cref="IQueryable{T}" /> when executed on the context
         /// </summary>
         protected Func<IDataContext, IQueryable<T>> ContextQuery { get; set; }
-
-        #region IQuery<T> Members
 
         /// <summary>
         ///     This executes the expression in ContextQuery on the context that is passed in, resulting in a
@@ -42,18 +36,16 @@ namespace Highway.Data
         /// </summary>
         /// <param name="context">The data context that the query is evaluated and the SQL is generated against</param>
         /// <returns></returns>
-        public string OutputSQLStatement(IDataContext context)
+        public virtual string OutputSQLStatement(IDataContext context)
         {
             return OutputQuery(context);
         }
 
-        public string OutputQuery(IDataContext context)
+        public virtual string OutputQuery(IDataContext context)
         {
             IQueryable<T> query = PrepareQuery(context);
             return query.ToString();
         }
-
-        #endregion
 
         /// <summary>
         ///     This method allows for the extension of Ordering and Grouping on the prebuild Query
@@ -76,7 +68,7 @@ namespace Highway.Data
         /// </summary>
         /// <param name="query">The query containing the expressions to append</param>
         /// <returns>The combined query</returns>
-        protected IQueryable<T> AppendExpressions(IQueryable<T> query)
+        protected virtual IQueryable<T> AppendExpressions(IQueryable<T> query)
         {
             IQueryable<T> source = query;
             foreach (var exp in ExpressionList)
@@ -88,7 +80,7 @@ namespace Highway.Data
             return source;
         }
 
-        private IQueryable<T> PrepareQuery(IDataContext context)
+        protected virtual IQueryable<T> PrepareQuery(IDataContext context)
         {
             Context = context;
             CheckContextAndQuery(ContextQuery);
@@ -121,18 +113,7 @@ namespace Highway.Data
             return task;
         }
 
-        /// <summary>
-        ///     This executes the expression against the passed in context to generate the SQL statement, but doesn't execute the
-        ///     IQueryable<typeparamref name="T" /> against the data context
-        /// </summary>
-        /// <param name="context">The data context that the query is evaluated and the SQL is generated against</param>
-        /// <returns></returns>
-        public string OutputSQLStatement(IDataContext context)
-        {
-            return OutputQuery(context);
-        }
-
-        public string OutputQuery(IDataContext context)
+        public virtual string OutputQuery(IDataContext context)
         {
             IQueryable<TProjection> query = PrepareQuery(context);
 
@@ -165,7 +146,7 @@ namespace Highway.Data
             return Projector(source);
         }
 
-        private IQueryable<TProjection> PrepareQuery(IDataContext context)
+        protected IQueryable<TProjection> PrepareQuery(IDataContext context)
         {
             Context = context;
             CheckContextAndQuery(Selector);

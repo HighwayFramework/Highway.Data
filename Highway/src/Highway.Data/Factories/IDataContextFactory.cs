@@ -1,8 +1,6 @@
-﻿#region
-
+﻿
 using System.Data.Common;
 
-#endregion
 
 namespace Highway.Data.Factories
 {

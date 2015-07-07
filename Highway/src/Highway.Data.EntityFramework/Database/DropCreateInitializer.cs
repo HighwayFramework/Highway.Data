@@ -1,10 +1,8 @@
-﻿#region
-
+﻿
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 
-#endregion
 
 namespace Highway.Data
 {
@@ -28,8 +26,7 @@ namespace Highway.Data
             _storedProcs = storedProcs;
         }
 
-        #region IDatabaseInitializer<T> Members
-
+        
         public void InitializeDatabase(T context)
         {
             context.Database.CreateIfNotExists();
@@ -48,6 +45,5 @@ namespace Highway.Data
             }
         }
 
-        #endregion
-    }
+            }
 }

@@ -1,4 +1,6 @@
-﻿namespace Highway.Data
+﻿using System.Threading.Tasks;
+
+namespace Highway.Data
 {
     /// <summary>
     ///     This is the interface that gives an API for the Create, Update, and Delete functions of CRUD
@@ -43,5 +45,11 @@
         /// </summary>
         /// <returns>the number of rows affected</returns>
         int Commit();
+
+        /// <summary>
+        ///     Commits all currently tracked entity changes asynchronously
+        /// </summary>
+        /// <returns>the number of rows affected</returns>
+        Task<int> CommitAsync();
     }
 }

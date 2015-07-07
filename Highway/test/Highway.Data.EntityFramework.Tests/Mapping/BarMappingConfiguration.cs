@@ -1,8 +1,6 @@
-#region
 
 using System.Data.Entity;
 
-#endregion
 
 namespace Highway.Data.EntityFramework.Tests.Mapping
 {

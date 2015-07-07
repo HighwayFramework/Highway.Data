@@ -1,5 +1,4 @@
-﻿#region
-
+﻿
 using System.Linq;
 using Highway.Data.Contexts.TypeRepresentations;
 using System;
@@ -7,9 +6,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Highway.Data.Utilities;
 using System.Reflection;
+using System.Threading.Tasks;
 using Highway.Data.Collections;
 
-#endregion
 
 namespace Highway.Data.Contexts
 {
@@ -28,8 +27,8 @@ namespace Highway.Data.Contexts
 
         public static void DropRepository()
         {
-            InMemoryActiveDataContext.Repo = new ObjectRepresentationRepository();
-            InMemoryActiveDataContext.CommitCounter = 0;
+            Repo = new ObjectRepresentationRepository();
+            CommitCounter = 0;
         }
 
         public override T Add<T>(T item)
@@ -66,7 +65,7 @@ namespace Highway.Data.Contexts
 
         public override int Commit()
         {
-            if (commitVersion != InMemoryActiveDataContext.CommitCounter)
+            if (commitVersion != CommitCounter)
                 throw new InvalidOperationException("Cannot commit on stale data. Possibly need to requery. Unexpected scenario.");
 
             foreach (var pair in entityToRepoEntityMap)
@@ -87,9 +86,16 @@ namespace Highway.Data.Contexts
                     CopyPrimitives(pair.Key, pair.Value);
             }
 
-            commitVersion = ++InMemoryActiveDataContext.CommitCounter;
+            commitVersion = ++CommitCounter;
 
             return 0;
+        }
+
+        public override Task<int> CommitAsync()
+        {
+            var commitAsync = new Task<int>(Commit);
+            commitAsync.Start();
+            return commitAsync;
         }
 
         private void UpdateForwardEntityToRepoEntityMap()
@@ -103,14 +109,14 @@ namespace Highway.Data.Contexts
 
         private void UpdateMapFromRepo()
         {
-            if (commitVersion == InMemoryActiveDataContext.CommitCounter) return;
+            if (commitVersion == CommitCounter) return;
 
             foreach (var item in Repo._data.Select(o => o.Entity))
             {
                 item.Clone(entityToRepoEntityMap.Reverse);
             }
 
-            commitVersion = InMemoryActiveDataContext.CommitCounter;
+            commitVersion = CommitCounter;
         }
 
         private void CopyPrimitives(object source, object destination)

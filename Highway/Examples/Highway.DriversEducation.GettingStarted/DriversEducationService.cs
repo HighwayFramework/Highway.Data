@@ -1,10 +1,8 @@
-﻿#region
-
+﻿
 using System.Collections.Generic;
 using System.Linq;
 using Highway.Data;
 
-#endregion
 
 namespace Highway.DriversEducation.GettingStarted
 {

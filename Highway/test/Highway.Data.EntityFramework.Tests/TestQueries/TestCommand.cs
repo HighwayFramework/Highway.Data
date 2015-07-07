@@ -1,8 +1,6 @@
-﻿#region
-
+﻿
 using Highway.Data.Tests.TestDomain;
 
-#endregion
 
 namespace Highway.Data.EntityFramework.Tests.TestQueries
 {

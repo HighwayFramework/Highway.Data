@@ -1,10 +1,8 @@
-﻿#region
-
+﻿
 using System;
 using Common.Logging;
 using Common.Logging.Simple;
 
-#endregion
 
 namespace Highway.Data.EntityFramework
 {

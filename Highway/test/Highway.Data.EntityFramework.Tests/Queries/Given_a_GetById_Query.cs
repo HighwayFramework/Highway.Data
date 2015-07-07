@@ -1,5 +1,4 @@
-﻿#region
-
+﻿
 using System.Linq;
 using Common.Logging;
 using Common.Logging.Simple;
@@ -9,7 +8,6 @@ using Highway.Data.EntityFramework.Tests.UnitTests;
 using Highway.Data.Tests.TestDomain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-#endregion
 
 namespace Highway.Data.EntityFramework.Tests.Queries
 {

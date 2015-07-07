@@ -1,11 +1,9 @@
-﻿#region
-
+﻿
 using System.Collections.Generic;
 using System.Linq;
 using Highway.Data.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-#endregion
 
 namespace Highway.Data.EntityFramework.Tests.Enumerable
 {
@@ -30,8 +28,7 @@ namespace Highway.Data.EntityFramework.Tests.Enumerable
             list.All(x => x.Called);
         }
 
-        #region Nested type: TestActionHolder
-
+        
         private class TestActionHolder
         {
             public bool Called { get; set; }
@@ -42,6 +39,5 @@ namespace Highway.Data.EntityFramework.Tests.Enumerable
             }
         }
 
-        #endregion
-    }
+            }
 }

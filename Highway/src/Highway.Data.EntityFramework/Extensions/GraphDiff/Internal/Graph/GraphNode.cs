@@ -12,8 +12,7 @@ namespace Highway.Data.EntityFramework.Extensions.GraphDiff.Internal.Graph
 {
     internal class GraphNode
     {
-        #region Fields, Properties Constructors
-
+        
         public GraphNode Parent { get; private set; }
         public Stack<GraphNode> Members { get; private set; }
         
@@ -42,8 +41,7 @@ namespace Highway.Data.EntityFramework.Extensions.GraphDiff.Internal.Graph
             Parent = parent;
         }
 
-        #endregion
-
+        
         // overridden by different implementations
         public virtual void Update<T>(DbContext context, T persisted, T updating) where T : class
         {

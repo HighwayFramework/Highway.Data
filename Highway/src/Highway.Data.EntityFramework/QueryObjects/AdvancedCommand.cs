@@ -1,8 +1,6 @@
-#region
 
 using System;
 
-#endregion
 
 namespace Highway.Data
 {
@@ -16,8 +14,7 @@ namespace Highway.Data
         /// </summary>
         protected Action<DataContext> ContextQuery { get; set; }
 
-        #region ICommand Members
-
+        
         /// <summary>
         ///     Executes the expression against the passed in context and ignores the returned value if any
         /// </summary>
@@ -29,6 +26,5 @@ namespace Highway.Data
             ContextQuery((DataContext) context);
         }
 
-        #endregion
-    }
+            }
 }

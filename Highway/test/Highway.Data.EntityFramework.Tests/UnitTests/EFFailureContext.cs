@@ -1,19 +1,16 @@
-#region
 
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
+using System.Threading.Tasks;
 
-#endregion
 
 namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
     public class EFFailureContext : IDataContext
     {
-        #region IDataContext Members
-
         public T Add<T>(T item) where T : class
         {
             throw new NotImplementedException();
@@ -35,6 +32,11 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
         }
 
         public int Commit()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> CommitAsync()
         {
             throw new NotImplementedException();
         }
@@ -68,8 +70,6 @@ namespace Highway.Data.EntityFramework.Tests.UnitTests
         {
             throw new NotImplementedException();
         }
-
-        #endregion
 
         public IQueryable<T> AsQueryable<T>()
         {

@@ -1,15 +1,13 @@
-﻿#region
-
+﻿
 using System;
 using System.Data.Entity;
 using System.Linq;
-using Highway.Data.EventManagement;
 using Highway.Data.EventManagement.Interfaces;
+using Highway.Data.Interceptors;
 using Highway.Data.Interceptors.Events;
 
-#endregion
 
-namespace Highway.Data.Interceptors
+namespace Highway.Data.EntityFramework.Interceptors
 {
     /// <summary>
     ///     An eventInterceptor that operates pre-save to add audit information to the records being committed that implement the
@@ -29,8 +27,7 @@ namespace Highway.Data.Interceptors
             _userNameService = userNameService;
         }
 
-        #region IEventInterceptor<PreSaveEventArgs> Members
-
+        
         /// <summary>
         ///     The priority order that this eventInterceptor has for ordered execution by the event manager
         /// </summary>
@@ -87,6 +84,5 @@ namespace Highway.Data.Interceptors
             return true;
         }
 
-        #endregion
-    }
+            }
 }

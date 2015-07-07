@@ -1,12 +1,10 @@
-﻿#region
-
+﻿
 using System.Linq;
 using FluentAssertions;
 using Highway.Data;
 using Highway.Data.Contexts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-#endregion
 
 namespace Highway.DriversEducation.GettingStarted.Exam
 {

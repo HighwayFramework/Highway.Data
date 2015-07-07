@@ -5,8 +5,7 @@ namespace Highway.Data.Services
     /// </summary>
     public class DefaultUserNameService : IUserNameService
     {
-        #region IUserNameService Members
-
+        
         /// <summary>
         ///     Basic Method for returning the current user name
         /// </summary>
@@ -16,6 +15,5 @@ namespace Highway.Data.Services
             return "Default User";
         }
 
-        #endregion
-    }
+            }
 }

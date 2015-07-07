@@ -1,5 +1,4 @@
-﻿#region
-
+﻿
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,7 +7,6 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Highway.Data.Interceptors.Events;
 
-#endregion
 
 namespace Highway.Data
 {
@@ -36,15 +34,14 @@ namespace Highway.Data
         /// </summary>
         protected IDataContext Context { get; set; }
 
-        #region IExtendableQuery Members
-
+        
         /// <summary>
         ///     Adds a method to the expression in the query object
         /// </summary>
         /// <param name="methodName">The name of the method to be added i.e. GroupBy</param>
         /// <param name="generics">Any type parameters needed by the method to be added</param>
         /// <param name="parameters">Any object parameters needed by the method to be added</param>
-        public void AddMethodExpression(string methodName, Type[] generics, Expression[] parameters)
+        public virtual void AddMethodExpression(string methodName, Type[] generics, Expression[] parameters)
         {
             MethodInfo orderMethodInfo =
                 QueryableMethods.First(m => m.Name == methodName && m.GetParameters().Length == parameters.Length + 1);
@@ -53,10 +50,8 @@ namespace Highway.Data
             ExpressionList.Add(new Tuple<MethodInfo, Expression[]>(orderMethodInfo, parameters));
         }
 
-        #endregion
-
-        #region IObservableQuery Members
-
+        
+        
         /// <summary>
         ///     The event fired just before the query goes to the database
         /// </summary>
@@ -67,13 +62,12 @@ namespace Highway.Data
         /// </summary>
         public event EventHandler<AfterQuery> AfterQuery;
 
-        #endregion
-
+        
         /// <summary>
         ///     Checks the context and the Query for null
         /// </summary>
         /// <param name="query">The query to be executed</param>
-        protected void CheckContextAndQuery(object query)
+        protected virtual void CheckContextAndQuery(object query)
         {
             if (Context == null) throw new InvalidOperationException("DataContext cannot be null.");
             if (query == null) throw new InvalidOperationException("Null Query cannot be executed.");

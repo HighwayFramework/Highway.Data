@@ -1,5 +1,4 @@
-﻿#region
-
+﻿
 using System.Data.Common;
 using System.Data.Entity;
 using System.Data.SqlClient;
@@ -9,7 +8,6 @@ using Highway.Data;
 using Highway.DriversEducation.GettingStarted.Exam.Properties;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-#endregion
 
 namespace Highway.DriversEducation.GettingStarted.Exam
 {

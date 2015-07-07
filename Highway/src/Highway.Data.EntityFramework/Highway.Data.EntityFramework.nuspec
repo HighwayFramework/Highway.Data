@@ -14,7 +14,7 @@
     <copyright>Devlin Liles Copyright 2012</copyright>
     <tags>Architecture  ORM  Repository  Specification  Productivity</tags>
     <dependencies>
-      <dependency id="Highway.Data" version="5.2.0.0" />
+      <dependency id="Highway.Data" version="6.0.0.0" />
 	  <dependency id="EntityFramework" version="6.0.2" />
     </dependencies>
   </metadata>

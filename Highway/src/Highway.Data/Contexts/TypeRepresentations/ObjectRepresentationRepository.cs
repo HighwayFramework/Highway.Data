@@ -94,10 +94,7 @@ namespace Highway.Data.Contexts.TypeRepresentations
                         collection = Activator.CreateInstance(collectionType);
                         referencingProperty.SetValue(data.Entity, collection, null);
                     }
-                    //if (collection != null)
-                    {
-                        addMethod.Invoke(collection, new[] { rep.Entity });
-                    }
+                    addMethod.Invoke(collection, new[] { rep.Entity });
                 }
                 else
                 {

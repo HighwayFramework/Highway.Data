@@ -26,5 +26,13 @@ namespace Highway.Data.Tests.InMemory.Domain
         public Author Author { get; set; }
 
         public ICollection<Post> Posts { get; set; }
+
+        public ICollection<Post> InvalidPosts { get; set; }
+
+        public void AddPost(Post post)
+        {
+            Posts.Add(post);
+            post.Blog = this;
+        }
     }
 }

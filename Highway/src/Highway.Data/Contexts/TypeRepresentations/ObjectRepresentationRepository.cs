@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -54,7 +55,10 @@ namespace Highway.Data.Contexts.TypeRepresentations
                     if (info.PropertyType.IsEnumerable())
                     {
                         IEnumerable values = (IEnumerable) info.GetValue(rep.Entity, null);
-                        referencedProperties.AddRange(values.Cast<object>());
+                        if (values != null)
+                        {
+                            referencedProperties.AddRange(values.Cast<object>());
+                        }
                     }
                     else
                     {
@@ -84,7 +88,16 @@ namespace Highway.Data.Contexts.TypeRepresentations
                 if (referencingProperty.PropertyType.IsAssignableFrom(collectionType))
                 {
                     var collection = referencingProperty.GetValue(data.Entity, null);
-                    addMethod.Invoke(collection, new[] { rep.Entity });
+                    if (collection == null)
+                    {
+                        collectionType = typeof(Collection<>).MakeGenericType(type);
+                        collection = Activator.CreateInstance(collectionType);
+                        referencingProperty.SetValue(data.Entity, collection, null);
+                    }
+                    //if (collection != null)
+                    {
+                        addMethod.Invoke(collection, new[] { rep.Entity });
+                    }
                 }
                 else
                 {

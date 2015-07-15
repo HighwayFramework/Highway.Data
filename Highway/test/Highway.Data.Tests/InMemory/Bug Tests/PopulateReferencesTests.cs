@@ -16,7 +16,8 @@ namespace Highway.Data.Tests.InMemory.BugTests
             // Arrange
             var context = new InMemoryDataContext();
             var blog = new Blog();
-            var post = new Post { Blog = blog };
+            blog.AddPost(new Post());
+            var post = blog.Posts.First();
             context.Add(post);
             context.Commit();
 

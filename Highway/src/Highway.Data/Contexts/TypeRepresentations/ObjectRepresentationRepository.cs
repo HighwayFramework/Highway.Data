@@ -77,7 +77,7 @@ namespace Highway.Data.Contexts.TypeRepresentations
                 var propertiesThatReferToRepresentation =
                     data.Entity.GetType()
                         .GetProperties()
-                        .Where(x => x.PropertyType == type || x.PropertyType.IsAssignableFrom(collectionType));
+                        .Where(x => x.CanWrite && (x.PropertyType == type || x.PropertyType.IsAssignableFrom(collectionType)));
                 var addMethod = collectionType.GetMethod("Add");
                 var propertyInfos = propertiesThatReferToRepresentation.ToList();
                 if (!propertyInfos.Any() || propertyInfos.Count() > 1)

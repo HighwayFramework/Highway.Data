@@ -136,6 +136,7 @@
     <Compile Include="InMemory\Bug Tests\TestThrowsExceptionWithDuplicateElement.cs" />
     <Compile Include="InMemory\Bug Tests\TestThrowsExceptionWithListEntityType.cs" />
     <Compile Include="InMemory\GuidIdentityStrategyTests.cs" />
+    <Compile Include="InMemory\InMemoryBackReferencePopulation.cs" />
     <Compile Include="InMemory\InMemoryDataContextPerfTests.cs" />
     <Compile Include="InMemory\InMemoryDataContextAutoRegisterIdentityStrategiesTests.cs" />
     <Compile Include="InMemory\InMemoryDataContextReferenceByIdTests.cs" />

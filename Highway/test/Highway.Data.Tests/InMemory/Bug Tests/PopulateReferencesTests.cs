@@ -26,6 +26,7 @@ namespace Highway.Data.Tests.InMemory.BugTests
 
             // Assert
             fetchedBlog.Posts.Count().Should().Be(1);
+            fetchedBlog.InvalidPosts.Should().BeNullOrEmpty();
         }
 
         [TestMethod]
@@ -48,6 +49,7 @@ namespace Highway.Data.Tests.InMemory.BugTests
 
             // Assert
             fetchedPost.Blog.Should().NotBeNull();
+            fetchedPost.Blog.InvalidPosts.Should().BeNullOrEmpty();
         }
     }
 }

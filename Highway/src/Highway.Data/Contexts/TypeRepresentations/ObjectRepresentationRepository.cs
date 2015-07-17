@@ -84,6 +84,12 @@ namespace Highway.Data.Contexts.TypeRepresentations
                 if (referencingProperty.PropertyType.IsAssignableFrom(collectionType))
                 {
                     var collection = referencingProperty.GetValue(data.Entity, null);
+                    if (collection == null)
+                    {
+                        var listType = typeof (List<>).MakeGenericType(type);
+                        referencingProperty.SetValue(data.Entity, Activator.CreateInstance(listType), null);
+                        collection = referencingProperty.GetValue(data.Entity, null);
+                    }
                     addMethod.Invoke(collection, new[] { rep.Entity });
                 }
                 else

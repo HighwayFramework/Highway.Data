@@ -81,6 +81,7 @@
     <Compile Include="..\..\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="AsyncQuery.cs" />
     <Compile Include="Collections\BiDictionary.cs" />
     <Compile Include="Contexts\IdentityStrategy\GuidIdentityStrategy.cs" />
     <Compile Include="Contexts\IdentityStrategy\IdentityStrategy.cs" />

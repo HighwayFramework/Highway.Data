@@ -35,7 +35,7 @@ namespace Highway.Data
         /// <param name="command">The prebuilt command object</param>
         public virtual void Execute(ICommand command)
         {
-            ExecuteAsync(command).Wait();
+            command.Execute(_context);
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Highway.Data
         /// <returns>The instance of <typeparamref name="T" /> returned from the query</returns>
         public virtual T Find<T>(IScalar<T> query)
         {
-            return FindAsync(query).Result;
+            return query.Execute(_context);
         }
 
         /// <summary>
@@ -57,7 +57,12 @@ namespace Highway.Data
         /// <returns>The <see cref="IEnumerable{T}" /> returned from the query</returns>
         public virtual IEnumerable<T> Find<T>(IQuery<T> query)
         {
-            return FindAsync(query).Result;
+            return query.Execute(_context);
+        }
+
+        public virtual Task<IEnumerable<T>> Find<T>(IAsyncQuery<T> query)
+        {
+            return query.Execute(_context);
         }
 
         /// <summary>
@@ -69,44 +74,7 @@ namespace Highway.Data
         public virtual IEnumerable<IProjection> Find<TSelection, IProjection>(IQuery<TSelection, IProjection> query)
             where TSelection : class
         {
-            return FindAsync(query).Result;
-        }
-
-        /// <summary>
-        ///     Executes a prebuilt <see cref="ICommand" /> asynchronously
-        /// </summary>
-        /// <param name="command">The prebuilt command object</param>
-        public virtual Task ExecuteAsync(ICommand command)
-        {
-            var task = new Task(() => command.Execute(_context));
-            task.Start();
-            return task;
-        }
-
-        /// <summary>
-        ///     Executes a prebuilt <see cref="IScalar{T}" /> and returns a single instance of <typeparamref name="T" />
-        /// </summary>
-        /// <typeparam name="T">The Entity being queried</typeparam>
-        /// <param name="query">The prebuilt Query Object</param>
-        /// <returns>The task that will return an instance of <typeparamref name="T" /> from the query</returns>
-        public virtual Task<T> FindAsync<T>(IScalar<T> query)
-        {
-            var task = new Task<T>(() => query.Execute(_context));
-            task.Start();
-            return task;
-        }
-
-        /// <summary>
-        ///     Executes a prebuilt <see cref="IQuery{T}" /> and returns an <see cref="IEnumerable{T}" />
-        /// </summary>
-        /// <typeparam name="T">The Entity being queried</typeparam>
-        /// <param name="query">The prebuilt Query Object</param>
-        /// <returns>The task that will return <see cref="IEnumerable{T}" /> from the query</returns>
-        public virtual Task<IEnumerable<T>> FindAsync<T>(IQuery<T> query)
-        {
-            var task = new Task<IEnumerable<T>>(() => query.Execute(_context));
-            task.Start();
-            return task;
+            return query.Execute(_context);
         }
 
         /// <summary>

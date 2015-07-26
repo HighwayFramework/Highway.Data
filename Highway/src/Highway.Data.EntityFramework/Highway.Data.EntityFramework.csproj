@@ -85,6 +85,7 @@
     <Compile Include="..\..\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="AsyncQuery.cs" />
     <Compile Include="Contexts\DataContext.cs" />
     <Compile Include="Contexts\DomainContext.cs" />
     <Compile Include="Database\DropCreateInitializer.cs" />

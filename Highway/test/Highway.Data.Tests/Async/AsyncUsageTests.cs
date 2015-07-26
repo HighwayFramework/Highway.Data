@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using FluentAssertions;
 using Highway.Data.Contexts;
+using Highway.Data.EntityFramework;
 using Highway.Data.Tests.TestDomain;
 using NUnit.Framework;
 
@@ -35,7 +31,7 @@ namespace Highway.Data.Tests.Async
     {
         public TestAsyncQuery()
         {
-            ContextQuery = c => c.AsQueryable<Foo>().ToListAsync();
+            ContextQuery = c => c.AsQueryable<Foo>();
         }
     }
 }

@@ -22,6 +22,7 @@ namespace Highway.Data.Tests.Async
             {
                 Id = 1
             });
+            inMemoryDataContext.Commit();
             var repository = new Repository(inMemoryDataContext);
 
             var task = repository.Find(new TestAsyncQuery());

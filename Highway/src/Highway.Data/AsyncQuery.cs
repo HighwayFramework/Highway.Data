@@ -10,11 +10,11 @@ namespace Highway.Data
 {
     public class AsyncQuery<T> : IAsyncQuery<T>
     {
-        protected Expression<Func<IDataContext, Task>> ContextQuery;
+        protected Func<IDataContext, Task<object>> ContextQuery;
 
         public Task<IEnumerable<T>> Execute(IDataContext context)
         {
-            throw new NotImplementedException();
+            return ContextQuery(context).ContinueWith<IEnumerable<T>>(t => t.Result as IEnumerable<T>);
         }
     }
 

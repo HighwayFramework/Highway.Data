@@ -24,7 +24,7 @@ namespace Highway.Data.Contexts.TypeRepresentations
 
         internal IQueryable<T> Data<T>()
         {
-            return _data.Where(x => x.IsType<T>()).Select(x => x.Entity).Cast<T>().AsQueryable();
+            return _data.Select(x => x.Entity).OfType<T>().AsQueryable();
         }
 
         internal void Add<T>(T item) where T : class

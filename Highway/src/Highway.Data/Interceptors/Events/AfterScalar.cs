@@ -7,6 +7,11 @@ namespace Highway.Data.Interceptors.Events
     /// </summary>
     public class AfterScalar : EventArgs
     {
-         
+        public object Query { get; set; }
+
+        public AfterScalar(object query)
+        {
+            Query = query;
+        }
     }
 }

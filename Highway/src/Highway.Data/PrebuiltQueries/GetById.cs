@@ -18,7 +18,7 @@ namespace Highway.Data
         /// <param name="id">The Id of the <see cref="T"/> to return</param>
         public GetById(TId id)
         {
-            ContextQuery = context => context.AsQueryable<T>().FirstOrDefault(x => x.Id.Equals(id));
+            ContextQuery = context => context.AsQueryable<T>().SingleOrDefault(x => x.Id.Equals(id));
         }
     }
 }

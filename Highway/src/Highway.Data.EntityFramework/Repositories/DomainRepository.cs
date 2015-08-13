@@ -48,17 +48,17 @@ namespace Highway.Data.Repositories
 
         public override T1 Find<T1>(IScalar<T1> query)
         {
-            OnBeforeScalar(new BeforeScalar());
+            OnBeforeScalar(new BeforeScalar(query));
             var result = base.Find(query);
-            OnAfterScalar(new AfterScalar());
+            OnAfterScalar(new AfterScalar(query));
             return result;
         }
 
         public override void Execute(ICommand command)
         {
-            OnBeforeCommand(new BeforeCommand());
+            OnBeforeCommand(new BeforeCommand(command));
             base.Execute(command);
-            OnAfterCommand(new AfterCommand());
+            OnAfterCommand(new AfterCommand(command));
         }
 
         public event EventHandler<BeforeQuery> BeforeQuery;

@@ -7,6 +7,11 @@ namespace Highway.Data.Interceptors.Events
     /// </summary>
     public class BeforeScalar : EventArgs
     {
-         
+        public object Query { get; set; }
+
+        public BeforeScalar(object query)
+        {
+            Query = query;
+        }
     }
 }

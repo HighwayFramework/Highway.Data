@@ -21,7 +21,7 @@ namespace Highway.Data.Contexts.TypeRepresentations
 
         public bool IsType<T1>()
         {
-            return Entity.GetType() is T1;
+            return Entity is T1;
         }
 
         internal IEnumerable<ObjectRepresentation> AllRelated()

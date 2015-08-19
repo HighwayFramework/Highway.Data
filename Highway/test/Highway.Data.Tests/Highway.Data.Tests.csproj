@@ -121,6 +121,7 @@
     <Compile Include="..\..\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="Async\AsyncUsageTests.cs" />
     <Compile Include="AutoMockingLazyComponentLoader.cs" />
     <Compile Include="AutoMockingTest.cs" />
     <Compile Include="BaseTest.cs" />

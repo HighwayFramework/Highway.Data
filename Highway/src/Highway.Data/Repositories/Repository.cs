@@ -35,7 +35,7 @@ namespace Highway.Data
         /// <param name="command">The prebuilt command object</param>
         public virtual void Execute(ICommand command)
         {
-            ExecuteAsync(command).Wait();
+            command.Execute(_context);
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Highway.Data
         /// <returns>The instance of <typeparamref name="T" /> returned from the query</returns>
         public virtual T Find<T>(IScalar<T> query)
         {
-            return FindAsync(query).Result;
+            return query.Execute(_context);
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Highway.Data
         /// <returns>The <see cref="IEnumerable{T}" /> returned from the query</returns>
         public virtual IEnumerable<T> Find<T>(IQuery<T> query)
         {
-            return FindAsync(query).Result;
+            return query.Execute(_context);
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Highway.Data
         public virtual IEnumerable<IProjection> Find<TSelection, IProjection>(IQuery<TSelection, IProjection> query)
             where TSelection : class
         {
-            return FindAsync(query).Result;
+            return query.Execute(_context);
         }
 
         /// <summary>

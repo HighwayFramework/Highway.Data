@@ -12,7 +12,8 @@
     "Highway.Data": "",
     "Highway.Data.InMemory": "",
     "Highway.Data.EFCore": "",
-    "NUnitLite": "3.0.0"
+    "NUnitLite": "3.0.0",
+    "FluentAssertions": "4.2.2"
   },
   "commands": {
     "test": "Highway.Data.CoreCLR.Tests"

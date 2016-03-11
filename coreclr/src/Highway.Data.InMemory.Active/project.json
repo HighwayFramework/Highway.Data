@@ -1,22 +1,15 @@
 {
   "version": "7.0.0-*",
-  "description": "Highway.Data Test Console Application",
+  "description": "Highway.Data.EntityFramework Class Library",
   "authors": [ "Tim Rayburn", "Devlin Liles" ],
   "tags": [ "Highway", "HwyFwk", "HwyFwk.com", "Highway.Data" ],
   "projectUrl": "http://hwyfwk.com/",
   "licenseUrl": "https://github.com/HighwayFramework/Highway.Data/blob/master/LICENSE",
   "tooling": {
-    "defaultNamespace": "Highway.Data.DotNet.Tests"
+    "defaultNamespace": "Highway.Data.InMemory"
   },
   "dependencies": {
-    "Highway.Data": "",
-    "Highway.Data.EntityFramework": "",
-    "Highway.Data.InMemory.Active": "",
-    "FluentAssertions": "4.2.2",
-    "NUnitLite": "3.0.0"
-  },
-  "commands": {
-    "test": "Highway.Data.DotNet.Tests"
+      "Highway.Data.InMemory": ""
   },
   "frameworks": {
     "dnx451": {

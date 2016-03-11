@@ -14,12 +14,12 @@
   "frameworks": {
     "dnx451": {
       "dependencies": {
-        "Microsoft.CSharp": "",
-        "System.Collections": "",
-        "System.Linq": "",
-        "System.Linq.Queryable": "",
-        "System.Runtime": "",
-        "System.Threading": ""
+        "Microsoft.CSharp": "4.0.0",
+        "System.Collections": "4.0.0",
+        "System.Linq": "4.0.0",
+        "System.Linq.Queryable": "4.0.0",
+        "System.Runtime": "4.0.0",
+        "System.Threading": "4.0.0"
       }
     }
   }

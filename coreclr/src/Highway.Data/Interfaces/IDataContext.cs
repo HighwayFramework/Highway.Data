@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 
-
 namespace Highway.Data
 {
     /// <summary>

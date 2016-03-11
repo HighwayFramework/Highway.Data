@@ -2,7 +2,7 @@ using NUnitLite;
 using System;
 using System.Reflection;
 
-namespace Highway.Data.EntityFramework.Tests
+namespace Highway.Data.CoreCLR.Tests
 {
     public class Program
     {

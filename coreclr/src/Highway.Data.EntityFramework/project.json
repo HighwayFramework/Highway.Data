@@ -8,16 +8,18 @@
   "tooling": {
     "defaultNamespace": "Highway.Data.EntityFramework"
   },
+  "dependencies": {
+      "EntityFramework": "6.1.3"
+  },
   "frameworks": {
     "dnx451": {
       "dependencies": {
-        "Microsoft.CSharp": "4.0.1-beta-23516",
-        "System.Collections": "4.0.11-beta-23516",
-        "System.Linq": "4.0.1-beta-23516",
-        "System.Linq.Queryable": "4.0.1-beta-23516",
-        "System.Runtime": "4.0.21-beta-23516",
-        "System.Threading": "4.0.11-beta-23516",
-        "EntityFramework": "6.1.3"
+        "Microsoft.CSharp": "",
+        "System.Collections": "",
+        "System.Linq": "",
+        "System.Linq.Queryable": "",
+        "System.Runtime": "",
+        "System.Threading": ""
       }
     }
   }

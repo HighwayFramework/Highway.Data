@@ -1,0 +1,33 @@
+{
+  "version": "7.0.0-*",
+  "description": "Highway.Data Test Console Application",
+  "authors": [ "Tim Rayburn", "Devlin Liles" ],
+  "tags": [ "Highway", "HwyFwk", "HwyFwk.com", "Highway.Data" ],
+  "projectUrl": "http://hwyfwk.com/",
+  "licenseUrl": "https://github.com/HighwayFramework/Highway.Data/blob/master/LICENSE",
+  "tooling": {
+    "defaultNamespace": "Highway.Data.DotNet.Tests"
+  },
+  "dependencies": {
+    "Highway.Data": "",
+    "Highway.Data.EntityFramework": "",
+    "Highway.Data.InMemory.Active": "",
+    "FluentAssertions": "4.2.2",
+    "NUnitLite": "3.0.0"
+  },
+  "commands": {
+    "test": "Highway.Data.DotNet.Tests"
+  },
+  "frameworks": {
+    "dnx451": {
+      "dependencies": {
+        "Microsoft.CSharp": "4.0.0",
+        "System.Collections": "4.0.0",
+        "System.Linq": "4.0.0",
+        "System.Linq.Queryable": "4.0.0",
+        "System.Runtime": "4.0.0",
+        "System.Threading": "4.0.0"
+      }
+    }
+  }
+}

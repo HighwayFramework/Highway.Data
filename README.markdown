@@ -1,5 +1,17 @@
+# Attention
+
+The Highway.Data repository recently underwent a force push to purge from our
+GIT history certain IP that we requested to be removed by the owner.  We have
+completed the removal but not the cleanup after that removal.  At the current
+time it is entirely likely that any v6.0+ tag or current `HEAD` in `master`
+will not successfully compile.  This will be resolved shortly, the core team
+is hard at work on it, but in the meantime please pardon our dust as we clean
+up from this unfortunate but necessary task.
+
+*Thank You, The Core Team*
+
 # Highway.Data
-## The fastest and smoothest way to great architecture 
+## The fastest and smoothest way to great architecture
 
 # Documentation
 
@@ -18,10 +30,10 @@ public class DriversEducationServiceTests
 		//arrange
 		var context = new InMemoryDataContext();
 		var service = new DriversEducationService(new Repository(context));
-		 
+
 		//act
 		service.AddDriver("Devlin");
-    
+
 		//assert
 		context.AsQueryable<Driver>().Count(x => x.Name == "Devlin").Should().Be(1);
 	}
@@ -30,7 +42,7 @@ public class DriversEducationServiceTests
 
 Now that we have a test, lets work on an implementation. In this implementation we are going to focus on the patterns in Highway.Data. We will dive into Entity Framework, nHibernate, and RavenDb later. In order to facilitate this, we are going to use the InMemoryDataContext that ships with Highway.Data as our test stub.
 
-We just need to add a driver to the database. 
+We just need to add a driver to the database.
 
 ``` csharp
     public class DriversEducationService
@@ -59,18 +71,18 @@ We just need to add a driver to the database.
         }
     }
 ```
-    
-Once we have the repository, we can use the Context on Repository as a unit of work. Check [here](http://www.martinfowler.com/eaaCatalog/repository.html "Repository Pattern") and [here](http://www.martinfowler.com/eaaCatalog/unitOfWork.html "Unit of Work Pattern") read up on Repository or Unit of Work. 
+
+Once we have the repository, we can use the Context on Repository as a unit of work. Check [here](http://www.martinfowler.com/eaaCatalog/repository.html "Repository Pattern") and [here](http://www.martinfowler.com/eaaCatalog/unitOfWork.html "Unit of Work Pattern") read up on Repository or Unit of Work.
 
 This gives us the ability to separate the persistence from the business logic of our services.
 
-Once we have added an object we will obviously need to query the object back out. For this we will need to use a mixture of [Specification Pattern](http://en.wikipedia.org/wiki/Specification_pattern "Specification Pattern") and [Query Object Pattern](http://martinfowler.com/eaaCatalog/queryObject.html "Query Object Pattern"). Below is the test for querying back an object. 
+Once we have added an object we will obviously need to query the object back out. For this we will need to use a mixture of [Specification Pattern](http://en.wikipedia.org/wiki/Specification_pattern "Specification Pattern") and [Query Object Pattern](http://martinfowler.com/eaaCatalog/queryObject.html "Query Object Pattern"). Below is the test for querying back an object.
 
 ``` csharp
     [TestMethod]
     public void ShouldQueryDriversByName()
     {
-        //arrange 
+        //arrange
         var context = new InMemoryDataContext();
         context.Add(new Driver("Devlin"));
         context.Add(new Driver("Tim"));
@@ -142,4 +154,3 @@ Built into the framework is the ability to fire off commands that affect the dat
         }
     }
 ```
-

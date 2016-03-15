@@ -1,0 +1,3 @@
+./src/Highway.Data.EntityFramework/project.json
+./src/Highway.Data.InMemory.Active/project.json
+./test/Highway.Data.DotNet.Tests/project.json

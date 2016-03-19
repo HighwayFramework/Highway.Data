@@ -4,7 +4,6 @@ using System.Web;
 using FluentAssertions;
 using Highway.Data.Contexts;
 using Highway.Data.OData;
-using Highway.Data.Tests.Security;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highway.Data.Tests.OData
@@ -81,5 +80,17 @@ namespace Highway.Data.Tests.OData
             inMemoryDataContext.Commit();
             return inMemoryDataContext;
         }
+    }
+
+    public class ExampleRoot
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+
+    public class ExampleLeaf
+    {
+        public int Id { get; set; }
+        public ExampleRoot SecuredRoot { get; set; }
     }
 }

@@ -201,22 +201,6 @@
     <Compile Include="OData\PredicateMapperTests.cs" />
     <Compile Include="OData\RuntimeTypeProviderTests.cs" />
     <Compile Include="OData\SelectExpressionFactoryTests.cs" />
-    <Compile Include="Security\ComplexDomain\AudioBlog.cs" />
-    <Compile Include="Security\ComplexDomain\Author.cs" />
-    <Compile Include="Security\ComplexDomain\Blog.cs" />
-    <Compile Include="Security\ComplexDomain\LiveStreamBlog.cs" />
-    <Compile Include="Security\ComplexDomain\Mapping\BlogSecurityMap.cs" />
-    <Compile Include="Security\ComplexDomain\Post.cs" />
-    <Compile Include="Security\ComplexDomain\VideoBlog.cs" />
-    <Compile Include="Security\ExampleDomain.cs" />
-    <Compile Include="Security\ExampleLeaf.cs" />
-    <Compile Include="Security\ExampleRoot.cs" />
-    <Compile Include="Security\NullPermissiveExampleSecuredRelationshipBuilder.cs" />
-    <Compile Include="Security\NullRestrictiveExampleSecuredRelationshipBuilder.cs" />
-    <Compile Include="Security\ParameterToMemberRebinderTests.cs" />
-    <Compile Include="Security\SecuredInMemoryTests.cs" />
-    <Compile Include="Security\SecuredMappingConfigurationTests.cs" />
-    <Compile Include="Security\SecuredMappingsCacheTests.cs" />
     <Compile Include="TestDomain\Bar.cs" />
     <Compile Include="TestDomain\Baz.cs" />
     <Compile Include="TestDomain\Qux.cs" />
@@ -244,10 +228,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Highway.Data.Security\Highway.Data.Security.csproj">
-      <Project>{D6BBD313-BA23-4AD0-9EF0-26B46DCDAC54}</Project>
-      <Name>Highway.Data.Security</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\Highway.Data.EntityFramework\Highway.Data.EntityFramework.csproj">
       <Project>{726c5578-4d46-46fb-a58d-352e447e672a}</Project>
       <Name>Highway.Data.EntityFramework</Name>

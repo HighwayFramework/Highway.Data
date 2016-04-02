@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using Highway.Data.InMemory.Utilities;
 using System.Reflection;
 using System.Threading.Tasks;
-using Highway.Data.InMemory.Collections;
+using Highway.Pavement.Collections;
 
 namespace Highway.Data.InMemory
 {

@@ -12,6 +12,7 @@
     "Highway.Data": "",
     "Highway.Data.EntityFramework": "",
     "Highway.Data.InMemory.Active": "",
+    "Highway.Pavement": "0.4.0",
     "FluentAssertions": "4.2.2",
     "NUnitLite": "3.0.0",
     "RhinoMocks": "3.6.1",

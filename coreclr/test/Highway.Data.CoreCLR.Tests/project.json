@@ -11,7 +11,7 @@
   "dependencies": {
     "Highway.Data": "",
     "Highway.Data.InMemory": "",
-    "Highway.Data.EFCore": "",
+    "Highway.Data.EntityFrameworkCore": "",
     "NUnitLite": "3.0.0",
     "FluentAssertions": "4.2.2"
   },

@@ -6,15 +6,18 @@
   "projectUrl": "http://hwyfwk.com/",
   "licenseUrl": "https://github.com/HighwayFramework/Highway.Data/blob/master/LICENSE",
   "tooling": {
-    "defaultNamespace": "Highway.Data.EntityFrameworkCore.MicrosoftSqlServer"
+    "defaultNamespace": "Highway.Data.EntityFrameworkCore"
   },
   "dependencies": {
     "Highway.Data": "",
-    "EntityFramework.Core": "7.0.0-rc1-final",
-    "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final"
+    "EntityFramework.Core": "7.0.0-rc1-final"
   },
   "frameworks": {
-    "dnx451": { },
+    "dnx451": {
+      "frameworkAssemblies": {
+        "System.Data": "4.0.0"
+      }
+    },
     "dnxcore50": {
       "dependencies": {
         "Microsoft.CSharp": "4.0.1-beta-23516",

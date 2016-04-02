@@ -9,16 +9,22 @@
     "defaultNamespace": "Highway.Data.EntityFramework"
   },
   "dependencies": {
-      "EntityFramework": "6.1.3"
+      "EntityFramework": "6.1.3",
+      "Common.Logging": "3.2.0",
+      "Common.Logging.Core": "3.2.0",
+      "CommonServiceLocator": "1.3",
+      "RefactorThis.GraphDiff": "2.0.1",
+      "Highway.Data": ""
   },
   "frameworks": {
     "dnx451": {
-      "dependencies": {
+      "frameworkAssemblies": {
         "Microsoft.CSharp": "4.0.0",
         "System.Collections": "4.0.0",
         "System.Linq": "4.0.0",
         "System.Linq.Queryable": "4.0.0",
         "System.Runtime": "4.0.0",
+        "System.Data": "4.0.0",
         "System.Threading": "4.0.0"
       }
     }

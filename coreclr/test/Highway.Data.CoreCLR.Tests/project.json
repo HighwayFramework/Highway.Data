@@ -8,6 +8,11 @@
   "tooling": {
     "defaultNamespace": "Highway.Data.CoreCLR.Tests"
   },
+  "compilationOptions": {
+    "warningsAsErrors": true,
+    "keyFile": "../../Highway.snk",
+    "xmlDoc": true
+  },
   "dependencies": {
     "Highway.Data": "",
     "Highway.Data.InMemory": "",

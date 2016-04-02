@@ -8,6 +8,11 @@
   "tooling": {
     "defaultNamespace": "Highway.Data.EntityFrameworkCore"
   },
+  "compilationOptions": {
+    "warningsAsErrors": true,
+    "keyFile": "../../Highway.snk",
+    "xmlDoc": true
+  },
   "dependencies": {
     "Highway.Data": "",
     "EntityFramework.Core": "7.0.0-rc1-final"

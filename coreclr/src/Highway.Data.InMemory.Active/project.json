@@ -8,9 +8,14 @@
   "tooling": {
     "defaultNamespace": "Highway.Data.InMemory"
   },
+  "compilationOptions": {
+    "warningsAsErrors": true,
+    "keyFile": "../../Highway.snk",
+    "xmlDoc": true
+  },
   "dependencies": {
       "Highway.Data.InMemory": "",
-      "Highway.Pavement": "0.4.0"
+      "Highway.Pavement": "0.5.0"
   },
   "frameworks": {
     "dnx451": {

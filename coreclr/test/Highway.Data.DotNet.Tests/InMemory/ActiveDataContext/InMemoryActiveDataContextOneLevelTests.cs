@@ -12,7 +12,7 @@ namespace Highway.Data.DotNet.Tests.InMemory.ActiveDataContext
         public string FirstName { get; set; }
     }
 
-    [TestFixture]
+    [TestFixture][Explicit]
     public class InMemoryActiveDataContextOneLevelTests
     {
         [TearDown]
@@ -62,7 +62,7 @@ namespace Highway.Data.DotNet.Tests.InMemory.ActiveDataContext
         }
     }
 
-    [TestFixture]
+    [TestFixture][Explicit]
     public class InMemoryActiveDataContextOneLevelTests_GivenInitialData
     {
         [SetUp]

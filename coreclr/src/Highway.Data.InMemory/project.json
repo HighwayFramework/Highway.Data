@@ -9,7 +9,8 @@
     "defaultNamespace": "Highway.Data.InMemory"
   },
   "dependencies":{
-    "Highway.Data":""
+    "Highway.Data":"",
+    "Highway.Pavement": "0.4.0"
   },
   "frameworks": {
     "dnx451": { },

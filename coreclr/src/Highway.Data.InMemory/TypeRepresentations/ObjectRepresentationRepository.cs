@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Highway.Data.InMemory.Utilities;
-using Highway.Data.InMemory.Collections;
+using Highway.Pavement.Collections;
 
 namespace Highway.Data.InMemory.TypeRepresentations
 {

@@ -13,7 +13,10 @@
     "Highway.Data.EntityFramework": "",
     "Highway.Data.InMemory.Active": "",
     "FluentAssertions": "4.2.2",
-    "NUnitLite": "3.0.0"
+    "NUnitLite": "3.0.0",
+    "RhinoMocks": "3.6.1",
+    "Castle.Core": "3.3.3",
+    "Castle.Windsor": "3.3.0"
   },
   "commands": {
     "test": "Highway.Data.DotNet.Tests"
@@ -27,9 +30,6 @@
         "System.Linq.Queryable": "4.0.0",
         "System.Runtime": "4.0.0",
         "System.Threading": "4.0.0"
-      },
-      "dependencies": {
-        "RhinoMocks": "3.6.1"
       }
     }
   }

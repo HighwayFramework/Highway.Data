@@ -79,16 +79,25 @@ Task("Build")
     .IsDependentOn("Restore")
     .Does(() =>
 {
-    DNUBuild("./src/*", new DNUBuildSettings
+    var settingsCoreClr = new DNUPackSettings
     {
+        Frameworks = new[] { "dnxcore50" },
         Configurations = new[] { configuration },
         Quiet = true
-    });
-    DNUBuild("./test/*", new DNUBuildSettings
+    };
+    var settingsDotNet = new DNUPackSettings
     {
+        Frameworks = new[] { "dnx451" },
         Configurations = new[] { configuration },
         Quiet = true
-    });
+    };
+    DNUPack("./src/Highway.Data", settingsCoreClr);
+    DNUPack("./src/Highway.Data.EntityFrameworkCore", settingsCoreClr);
+    DNUPack("./src/Highway.Data.InMemory", settingsCoreClr);
+    DNUPack("./test/Highway.Data.CoreCLR.Tests", settingsCoreClr);
+    DNUPack("./src/Highway.Data.EntityFramework", settingsDotNet);
+    DNUPack("./src/Highway.Data.InMemory.Active", settingsDotNet);
+    DNUPack("./test/Highway.Data.DotNet.Tests", settingsDotNet);
 });
 
 Task("Test")
@@ -98,6 +107,20 @@ Task("Test")
     StartProcess(dnx, @"--project .\test\Highway.Data.CoreCLR.Tests test");
     StartProcess(dnx, @"--project .\test\Highway.Data.DotNet.Tests test");
 });
+
+Task("Pack")
+    .IsDependentOn("Test")
+    .Does(() =>
+{
+    var settings = new DNUPackSettings
+    {
+        Configurations = new[] { "Release" },
+        OutputDirectory = "./artifacts/",
+        Quiet = true
+    };
+    DNUPack("./src/*", settings);
+});
+
 ///////////////////////////////////////////////////////////////////////////////
 // TARGETS
 ///////////////////////////////////////////////////////////////////////////////

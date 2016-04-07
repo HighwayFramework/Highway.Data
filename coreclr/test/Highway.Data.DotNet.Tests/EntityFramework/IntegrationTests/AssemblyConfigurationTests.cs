@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+using System.Data.SqlClient;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using Castle.MicroKernel.Registration;
@@ -31,7 +32,60 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
 
             base.RegisterComponents(container);
         }
+        public override void BeforeAllTests()
+        {
+            base.BeforeAllTests();
+            var initializeDbString = @"
+            DECLARE @dbname nvarchar(128)
+            SET @dbname = N'Highway.Test'
 
+            IF (EXISTS (SELECT name
+              FROM master.dbo.sysdatabases
+              WHERE ('[' + name + ']' = @dbname
+              OR name = @dbname)))
+            BEGIN
+              ALTER DATABASE [Highway.Test] SET RESTRICTED_USER WITH ROLLBACK IMMEDIATE
+            END
+
+            USE master
+            DROP DATABASE [Highway.Test]
+            CREATE DATABASE [Highway.Test]
+
+            USE [Highway.Test]
+
+            CREATE TABLE Foos (
+              [Id]		INT				NOT NULL IDENTITY(1,1) PRIMARY KEY,
+              [Name]		NVARCHAR(50)	NULL,
+              [Address]	NVARCHAR(50)	NULL,
+              [Bar_Id]	INT				NULL
+            )
+
+            CREATE TABLE Bars (
+              [Id]		INT				NOT NULL IDENTITY(1,1) PRIMARY KEY,
+              [Name]		NVARCHAR(50)	NULL,
+              [Foo_Id]	INT				NULL,
+              [Qux_Id]	INT				NULL
+            )
+
+            CREATE TABLE Quxs (
+              [Id]		INT				NOT NULL IDENTITY(1,1) PRIMARY KEY,
+              [Name]		NVARCHAR(50)	NULL,
+              [Bar_Id]	INT				NULL,
+              [Qux_Id]	INT				NULL
+            )
+
+            CREATE TABLE Bazs (
+              [Id]		INT				NOT NULL IDENTITY(1,1) PRIMARY KEY,
+              [Name]		NVARCHAR(50)	NULL
+            )
+            ";
+            using (var conn = new SqlConnection(Settings.Default.Connection))
+            {
+              System.Data.SqlClient.SqlCommand command = new System.Data.SqlClient.SqlCommand(initializeDbString, conn);
+              conn.Open();
+              command.ExecuteNonQuery();
+            }
+        }
         public override void BeforeEachTest()
         {
             base.BeforeEachTest();

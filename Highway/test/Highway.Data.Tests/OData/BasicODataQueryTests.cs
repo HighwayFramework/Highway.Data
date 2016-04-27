@@ -5,6 +5,7 @@ using FluentAssertions;
 using Highway.Data.Contexts;
 using Highway.Data.OData;
 using Highway.Data.Tests.Security;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highway.Data.Tests.OData

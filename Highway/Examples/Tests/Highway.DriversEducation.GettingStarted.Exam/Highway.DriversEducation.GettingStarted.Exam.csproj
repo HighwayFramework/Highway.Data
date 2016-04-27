@@ -96,7 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\Highway.Data.EntityFramework\Highway.Data.EntityFramework.csproj">
-      <Project>{726c5578-4d46-46fb-a58d-352e447e672a}</Project>
+      <Project>{726C5578-4D46-46FB-A58D-352E447E672A}</Project>
       <Name>Highway.Data.EntityFramework</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\src\Highway.Data\Highway.Data.csproj">

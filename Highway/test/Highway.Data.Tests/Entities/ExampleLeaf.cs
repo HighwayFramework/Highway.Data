@@ -1,4 +1,4 @@
-﻿namespace Highway.Data.Tests.Security
+﻿namespace Highway.Data.Tests.Entities
 {
     public class ExampleLeaf : IIdentifiable<long>
     {

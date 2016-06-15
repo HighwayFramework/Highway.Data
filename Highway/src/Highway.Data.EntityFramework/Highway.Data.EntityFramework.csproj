@@ -89,6 +89,8 @@
     <Compile Include="Contexts\DomainContext.cs" />
     <Compile Include="Database\DropCreateInitializer.cs" />
     <Compile Include="DefaultContextConfiguration.cs" />
+    <Compile Include="Extensions\DbContextExtentions.cs" />
+    <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="Interceptors\DynamicFilters\DynamicFilterCommandInterceptor.cs" />
     <Compile Include="Interceptors\DynamicFilters\DynamicFilterConstants.cs" />
     <Compile Include="Interceptors\DynamicFilters\DynamicFilterConvention.cs" />

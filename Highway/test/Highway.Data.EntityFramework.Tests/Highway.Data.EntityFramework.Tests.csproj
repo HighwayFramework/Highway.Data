@@ -155,7 +155,6 @@
     <Compile Include="AdvancedFeatures\EventManagement\SaveInterceptionTests.cs" />
     <Compile Include="Factories\RepositoryFactoryTests.cs" />
     <Compile Include="Initializer\EntityFrameworkIntializer.cs" />
-    <Compile Include="IntegrationTests\AssemblyConfigurationTests.cs" />
     <Compile Include="IntegrationTests\BasicQueryTests.cs" />
     <Compile Include="Logging\Given_A_Context_With_a_Logger.cs" />
     <Compile Include="Mapping\BarMappingConfiguration.cs" />

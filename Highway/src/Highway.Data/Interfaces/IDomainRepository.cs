@@ -3,7 +3,7 @@ using Highway.Data.Interceptors.Events;
 
 namespace Highway.Data.Repositories
 {
-    public interface IDomainRepository<in T> where T : class
+    public interface IDomainRepository<in T> : IRepository where T : class
     {
         event EventHandler<BeforeQuery> BeforeQuery;
 

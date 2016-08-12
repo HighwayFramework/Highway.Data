@@ -1,19 +1,33 @@
 ﻿using System;
 using System.Linq;
 using System.Web;
+
 using FluentAssertions;
+
 using Highway.Data.Contexts;
 using Highway.Data.OData;
 using Highway.Data.Tests.Security;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Highway.Data.Tests.OData
 {
-    [TestClass]
+    [TestFixture]
     public class BasicODataQueryTests
     {
-        [TestMethod]
+        [Test]
+        public void ShouldCorrectlyInterpretInlineCountNone()
+        {
+            var uri = new Uri("http://localhost/Something/To/Test?$inlinecount=none&$skip=1&$top=1");
+            var context = GetTestContext();
+            var repo = new Repository(context);
+
+            var odataResponse = repo.Find(new GetByOData<ExampleLeaf>(HttpUtility.ParseQueryString(uri.Query)));
+            odataResponse.Count.Should().NotHaveValue();
+            odataResponse.Results.Should().HaveCount(1);
+        }
+
+        [Test]
         public void ShouldApplyPaging()
         {
             var uri = new Uri("http://localhost/Something/To/Test?$inlinecount=allpages&$skip=1&$top=1");
@@ -25,7 +39,7 @@ namespace Highway.Data.Tests.OData
             odataResponse.Results.Should().HaveCount(1);
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldApplyOrderingDesc()
         {
             var uri = new Uri("http://localhost/Something/To/Test?$orderby=Id desc");
@@ -37,7 +51,7 @@ namespace Highway.Data.Tests.OData
             results.Last().Id.Should().Be(1);
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldApplyOrderingDescOnMultipleFields()
         {
             var uri = new Uri("http://localhost/Something/To/Test?$orderby=Name, Id");

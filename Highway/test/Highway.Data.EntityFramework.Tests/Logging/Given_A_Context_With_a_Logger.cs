@@ -1,6 +1,8 @@
 ﻿
 using System.Data.Entity;
 using Common.Logging;
+
+using Highway.Data.EntityFramework.Tests.Initializer;
 using Highway.Data.EntityFramework.Tests.Mapping;
 using Highway.Data.EntityFramework.Tests.Properties;
 using Highway.Data.EntityFramework.Tests.UnitTests;
@@ -18,7 +20,7 @@ namespace Highway.Data.EntityFramework.Tests.Logging
         public void Should_Add_log_messages_for_add()
         {
             //Arrange
-            Database.SetInitializer(new DropCreateInitializer<TestDataContext>());
+            Database.SetInitializer(new EntityFrameworkInitializer());
             var logger = MockRepository.GenerateMock<ILog>();
             logger.Expect(x => x.TraceFormat(Arg<string>.Is.Anything, Arg<object[]>.Is.Anything)).IgnoreArguments().
                 Repeat.Once();

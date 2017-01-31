@@ -29,7 +29,7 @@ namespace Highway.Data.EntityFramework.Tests.Contexts
 
         public override DataContext ResolveTarget()
         {
-            Database.SetInitializer(new EntityFrameworkIntializer());
+            Database.SetInitializer(new EntityFrameworkInitializer());
             return Container.Resolve<DataContext>(new {connectionString = Settings.Default.Connection});
         }
 

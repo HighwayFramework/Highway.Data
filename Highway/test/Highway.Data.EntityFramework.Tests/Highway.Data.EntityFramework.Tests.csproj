@@ -154,7 +154,7 @@
     <Compile Include="Contexts\DomainContextTests.cs" />
     <Compile Include="AdvancedFeatures\EventManagement\SaveInterceptionTests.cs" />
     <Compile Include="Factories\RepositoryFactoryTests.cs" />
-    <Compile Include="Initializer\EntityFrameworkIntializer.cs" />
+    <Compile Include="Initializer\EntityFrameworkInitializer.cs" />
     <Compile Include="IntegrationTests\AssemblyConfigurationTests.cs" />
     <Compile Include="IntegrationTests\BasicQueryTests.cs" />
     <Compile Include="Logging\Given_A_Context_With_a_Logger.cs" />
@@ -278,7 +278,9 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Initializer\Create_TestEntity_Table.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

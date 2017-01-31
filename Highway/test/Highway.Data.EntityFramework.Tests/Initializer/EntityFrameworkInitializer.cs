@@ -19,7 +19,10 @@ namespace Highway.Data.EntityFramework.Tests.Initializer
         private static IEnumerable<string> AdoCommands()
         {
             var assembly = typeof(EntityFrameworkInitializer).Assembly;
-            var initializerScriptResourceNames = assembly.GetManifestResourceNames().Where(x => x.Contains("Highway.Data.EntityFramework.Tests.Initializer"));
+            var initializerScriptResourceNames =
+                assembly.GetManifestResourceNames()
+                    .Where(x => x.Contains("Highway.Data.EntityFramework.Tests.Initializer"))
+                    .OrderBy(x => x);
 
             foreach (var resourceName in initializerScriptResourceNames)
             {

@@ -279,7 +279,31 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Initializer\Create_TestEntity_Table.sql" />
+    <EmbeddedResource Include="Initializer\01_Create_TestEntity_Table.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Initializer\03_Create_uspGetTestEntitiesByWildcard_Procedure.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Initializer\02_Drop_uspGetTestEntitiesByWildcard_Procedure.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Initializer\04_Drop_uspGetTestEntities_Procedure.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Initializer\05_Create_uspGetTestEntities_Procedure.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Initializer\06_Drop_uspTestCommand_Procedure.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Initializer\07_Create_uspTestCommand_Procedure.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Initializer\08_Drop_uspTestOutCommand_Command.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Initializer\09_Create_uspTestOutCommand_Command.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Choose>

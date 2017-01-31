@@ -19,19 +19,17 @@ namespace Highway.Data.EntityFramework.Tests.Logging
         [TestMethod, TestCategory("Database")]
         public void Should_Add_log_messages_for_add()
         {
-            //Arrange
+            // Arrange
             Database.SetInitializer(new EntityFrameworkInitializer());
             var logger = MockRepository.GenerateMock<ILog>();
-            logger.Expect(x => x.TraceFormat(Arg<string>.Is.Anything, Arg<object[]>.Is.Anything)).IgnoreArguments().
-                Repeat.Once();
-            logger.Expect(x => x.DebugFormat(Arg<string>.Is.Anything, Arg<object[]>.Is.Anything)).IgnoreArguments().
-                Repeat.Once();
+            logger.Expect(x => x.TraceFormat(Arg<string>.Is.Anything, Arg<object[]>.Is.Anything)).IgnoreArguments().Repeat.Once();
+            logger.Expect(x => x.DebugFormat(Arg<string>.Is.Anything, Arg<object[]>.Is.Anything)).IgnoreArguments().Repeat.Once();
             var context = new TestDataContext(Settings.Default.Connection, new FooMappingConfiguration(), logger);
 
-            //Act
+            // Act
             context.Add(new Foo());
 
-            //Assert
+            // Assert
             logger.VerifyAllExpectations();
         }
     }

@@ -36,7 +36,7 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
         public override void BeforeEachTest()
         {
             base.BeforeEachTest();
-            Database.SetInitializer(new EntityFrameworkIntializer());
+            Database.SetInitializer(new EntityFrameworkInitializer());
         }
 
         [TestMethod, TestCategory(TestCategories.Database)]

@@ -4,7 +4,7 @@ using System.Web;
 using FluentAssertions;
 using Highway.Data.Contexts;
 using Highway.Data.OData;
-using Highway.Data.Tests.Security;
+using Highway.Data.Tests.Entities;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

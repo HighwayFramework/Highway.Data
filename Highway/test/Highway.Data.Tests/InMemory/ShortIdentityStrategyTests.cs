@@ -1,7 +1,4 @@
-﻿
-using FluentAssertions;
-using Highway.Data.Contexts;
-using Highway.Data.Tests.InMemory.Domain;
+﻿using Highway.Data.Contexts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
@@ -10,13 +7,11 @@ namespace Highway.Data.Tests.InMemory
     [TestClass]
     public class ShortIdentityStrategyTests
     {
-        private readonly short seedNumber = 500;
         private ShortIdentityStrategy<Entity> target;
 
         [TestInitialize]
         public void Setup()
         {
-            ShortIdentityStrategy<Entity>.LastValue = seedNumber;
             target = new ShortIdentityStrategy<Entity>(x => x.Id);
         }
 
@@ -29,7 +24,7 @@ namespace Highway.Data.Tests.InMemory
             var result = target.Next();
 
             // Assert
-            Assert.AreEqual(seedNumber + 1, result);
+            Assert.AreEqual(1, result);
         }
 
         [TestMethod]
@@ -42,7 +37,7 @@ namespace Highway.Data.Tests.InMemory
             target.Assign(entity);
 
             // Assert
-            Assert.AreEqual(seedNumber + 1, entity.Id);
+            Assert.AreEqual(1, entity.Id);
         }
 
         class Entity

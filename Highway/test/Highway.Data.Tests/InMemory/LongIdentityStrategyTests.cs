@@ -1,7 +1,5 @@
-﻿
-using FluentAssertions;
+﻿using FluentAssertions;
 using Highway.Data.Contexts;
-using Highway.Data.Tests.InMemory.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
@@ -10,13 +8,11 @@ namespace Highway.Data.Tests.InMemory
     [TestClass]
     public class LongIdentityStrategyTests
     {
-        private readonly long seedNumber = 500;
         private LongIdentityStrategy<Entity> target;
 
         [TestInitialize]
         public void Setup()
         {
-            LongIdentityStrategy<Entity>.LastValue = seedNumber;
             target = new LongIdentityStrategy<Entity>(x => x.Id);
         }
 
@@ -29,7 +25,7 @@ namespace Highway.Data.Tests.InMemory
             var result = target.Next();
 
             // Assert
-            result.Should().Be(seedNumber + 1);
+            result.Should().Be(1);
         }
 
         [TestMethod]
@@ -42,7 +38,7 @@ namespace Highway.Data.Tests.InMemory
             target.Assign(entity);
 
             // Assert
-            entity.Id.Should().Be(seedNumber + 1);
+            entity.Id.Should().Be(1);
         }
 
         class Entity

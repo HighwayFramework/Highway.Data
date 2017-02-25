@@ -1,5 +1,4 @@
-﻿
-using FluentAssertions;
+﻿using FluentAssertions;
 using Highway.Data.Contexts;
 using Highway.Data.Tests.InMemory.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -10,13 +9,11 @@ namespace Highway.Data.Tests.InMemory
     [TestClass]
     public class IntegerIdentityStrategyTests
     {
-        private readonly int seedNumber = 500;
         private IntegerIdentityStrategy<Post> target;
 
         [TestInitialize]
         public void Setup()
         {
-            IntegerIdentityStrategy<Post>.LastValue = seedNumber;
             target = new IntegerIdentityStrategy<Post>(x => x.Id);
         }
 
@@ -29,7 +26,7 @@ namespace Highway.Data.Tests.InMemory
             int result = target.Next();
 
             // Assert
-            result.Should().Be(seedNumber + 1);
+            result.Should().Be(1);
         }
 
         [TestMethod]
@@ -42,7 +39,7 @@ namespace Highway.Data.Tests.InMemory
             target.Assign(post);
 
             // Assert
-            post.Id.Should().Be(seedNumber + 1);
+            post.Id.Should().Be(1);
         }
     }
 }

@@ -212,7 +212,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Contexts\IdentityStrategy\Configuration\" />
     <Folder Include="Contexts\TypeUtilities\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

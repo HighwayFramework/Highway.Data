@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
@@ -19,6 +18,60 @@ namespace Highway.Data.Tests.InMemory
         public void Setup()
         {
             _context = new InMemoryDataContext();
+        }
+
+        [TestMethod]
+        public void Add_ShouldCreateAFirstIdOfOneEveryTimeForANewInstanceOfIIdentifiableOfInt()
+        {
+            // Arrange
+            var longPerson = new IdentifiablePerson<int>();
+            _context.Add(longPerson);
+            _context.Commit();
+
+            // Act
+            var newLongPerson = new IdentifiablePerson<int>();
+            _context = new InMemoryDataContext();
+            _context.Add(newLongPerson);
+            _context.Commit();
+
+            // Assert
+            newLongPerson.Id.Should().Be(1);
+        }
+
+        [TestMethod]
+        public void Add_ShouldCreateAFirstIdOfOneEveryTimeForANewInstanceOfIIdentifiableOfLong()
+        {
+            // Arrange
+            var longPerson = new IdentifiablePerson<long>();
+            _context.Add(longPerson);
+            _context.Commit();
+
+            // Act
+            var newLongPerson = new IdentifiablePerson<long>();
+            _context = new InMemoryDataContext();
+            _context.Add(newLongPerson);
+            _context.Commit();
+
+            // Assert
+            newLongPerson.Id.Should().Be(1);
+        }
+
+        [TestMethod]
+        public void Add_ShouldCreateAFirstIdOfOneEveryTimeForANewInstanceOfIIdentifiableOfShort()
+        {
+            // Arrange
+            var longPerson = new IdentifiablePerson<short>();
+            _context.Add(longPerson);
+            _context.Commit();
+
+            // Act
+            var newLongPerson = new IdentifiablePerson<short>();
+            _context = new InMemoryDataContext();
+            _context.Add(newLongPerson);
+            _context.Commit();
+
+            // Assert
+            newLongPerson.Id.Should().Be(1);
         }
 
         [TestMethod]

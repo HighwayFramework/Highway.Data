@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
+using Highway.Data.Interceptors.Events;
 
 namespace Highway.Data
 {
@@ -19,12 +20,19 @@ namespace Highway.Data
 
 		public int Commit()
 		{
-			return this.SaveChanges();
+			OnBeforeSave();
+			var changes = this.SaveChanges();
+			OnAfterSave();
+			return changes;
 		}
 
 		public Task<int> CommitAsync()
 		{
-			return this.SaveChangesAsync();
+			OnBeforeSave();
+			return this.SaveChangesAsync().ContinueWith(task => {
+				OnAfterSave();
+				return task.Result;
+			});
 		}
 
 		public T Reload<T>(T item) where T : class
@@ -52,5 +60,19 @@ namespace Highway.Data
 			this.Update<T>(item);
 			return item;
 		}
+
+		private void OnAfterSave()
+		{
+			if (AfterSave != null) AfterSave(this, new AfterSave());
+		}
+
+		private void OnBeforeSave()
+		{
+			if (BeforeSave != null) BeforeSave(this, new BeforeSave());
+		}
+
+
+		public event EventHandler<BeforeSave> BeforeSave;
+		public event EventHandler<AfterSave> AfterSave;
 	}
 }

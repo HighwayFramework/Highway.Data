@@ -22,4 +22,10 @@
     <ProjectReference Include="..\Highway.Data\Highway.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Page1.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

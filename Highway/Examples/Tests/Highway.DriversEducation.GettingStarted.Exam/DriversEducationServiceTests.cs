@@ -1,10 +1,8 @@
-﻿
-using System.Linq;
+﻿using System.Linq;
 using FluentAssertions;
 using Highway.Data;
 using Highway.Data.Contexts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 
 namespace Highway.DriversEducation.GettingStarted.Exam
 {

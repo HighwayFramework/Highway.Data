@@ -1,5 +1,4 @@
-﻿
-using System.Data.Common;
+﻿using System.Data.Common;
 using System.Data.Entity;
 using System.Data.SqlClient;
 using Common.Logging;
@@ -7,7 +6,6 @@ using Common.Logging.Simple;
 using Highway.Data;
 using Highway.DriversEducation.GettingStarted.Exam.Properties;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 
 namespace Highway.DriversEducation.GettingStarted.Exam
 {

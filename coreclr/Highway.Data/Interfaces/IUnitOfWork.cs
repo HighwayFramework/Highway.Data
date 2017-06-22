@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using Highway.Data.Interceptors.Events;
+using System;
+using System.Threading.Tasks;
 
 namespace Highway.Data
 {
@@ -51,5 +53,15 @@ namespace Highway.Data
 		/// </summary>
 		/// <returns>the number of rows affected</returns>
 		Task<int> CommitAsync();
+
+		/// <summary>
+		///     The event fired just before the commit of the persistence
+		/// </summary>
+		event EventHandler<BeforeSave> BeforeSave;
+
+		/// <summary>
+		///     The event fired just after the commit of the persistence
+		/// </summary>
+		event EventHandler<AfterSave> AfterSave;
 	}
 }

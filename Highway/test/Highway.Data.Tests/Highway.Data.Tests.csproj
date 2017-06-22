@@ -244,10 +244,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Highway.Data.Security\Highway.Data.Security.csproj">
-      <Project>{D6BBD313-BA23-4AD0-9EF0-26B46DCDAC54}</Project>
-      <Name>Highway.Data.Security</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\Highway.Data.EntityFramework\Highway.Data.EntityFramework.csproj">
       <Project>{726c5578-4d46-46fb-a58d-352e447e672a}</Project>
       <Name>Highway.Data.EntityFramework</Name>

@@ -32,9 +32,11 @@ namespace Highway.Data.Test
         {
 			var mb = new ModelBuilder(new ConventionSet());
 			mb.Entity<Person>(e => e.HasKey(x => x.Id));
+
 			var builder = new DbContextOptionsBuilder()
-				.UseInMemoryDatabase()
+				.UseInMemoryDatabase("ShouldStoreAndRetrive")
 				.UseModel(mb.Model);
+
 			IDataContext dc = new DataContext(builder.Options);
 			IRepository repo = new Repository(dc);
 

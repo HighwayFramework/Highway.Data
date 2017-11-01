@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Version>7.0.0-beta1</Version>
-    <Product>Highway.Data</Product>
     <Authors>trayburn, devlinliles</Authors>
     <Company>trayburn, devlinliles</Company>
+    <Product>Highway.Data</Product>
     <Description>The fastest and smoothest way to great architecture</Description>
     <Copyright>Copyright 2012-2017 Devlin Liles</Copyright>
     <PackageLicenseUrl>https://github.com/HighwayFramework/Highway.Data/license.txt</PackageLicenseUrl>
@@ -16,17 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Highway.Data\Highway.Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Page1.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
 
 </Project>

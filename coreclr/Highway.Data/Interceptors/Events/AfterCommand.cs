@@ -7,9 +7,9 @@ namespace Highway.Data.Interceptors.Events
 	/// </summary>
 	public class AfterCommand : EventArgs
 	{
-		public object Command { get; set; }
+		public ICommand Command { get; set; }
 
-		public AfterCommand(object command)
+		public AfterCommand(ICommand command)
 		{
 			Command = command;
 		}

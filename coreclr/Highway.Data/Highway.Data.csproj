@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
-    <Version>7.0.0-alpha3</Version>
+    <Version>7.0.0-beta1</Version>
     <Authors>trayburn, devlinliles</Authors>
     <Company>trayburn, devlinliles</Company>
     <Description>The fastest and smoothest way to great architecture</Description>
@@ -11,6 +11,7 @@
     <PackageProjectUrl>http://hwyfwk.com</PackageProjectUrl>
     <RepositoryUrl>https://github.com/HighwayFramework/Highway.Data/</RepositoryUrl>
     <PackageTags>Architecture,ORM,Repository,Specification,Productivity</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

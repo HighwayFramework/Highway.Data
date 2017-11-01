@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Highway.Data.Test", "Highway.Data.Test\Highway.Data.Test.csproj", "{FA68EFFA-2801-4D52-80C5-9E52CE0C4DFC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Highway.Data", "Highway.Data\Highway.Data.csproj", "{65B85711-2A36-4C84-90DE-AD9E3BD1B818}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Highway.Data.EntityFrameworkCore", "Highway.Data.EntityFrameworkCore\Highway.Data.EntityFrameworkCore.csproj", "{2A65A71F-87B2-46C0-92FC-99A40DC7BC25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.Queries", "Highway.Data.Queries\Highway.Data.Queries.csproj", "{97001C02-B7A3-47EE-8F94-1F29D7423729}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,8 +57,23 @@ Global
 		{2A65A71F-87B2-46C0-92FC-99A40DC7BC25}.Release|x64.Build.0 = Release|Any CPU
 		{2A65A71F-87B2-46C0-92FC-99A40DC7BC25}.Release|x86.ActiveCfg = Release|Any CPU
 		{2A65A71F-87B2-46C0-92FC-99A40DC7BC25}.Release|x86.Build.0 = Release|Any CPU
+		{97001C02-B7A3-47EE-8F94-1F29D7423729}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97001C02-B7A3-47EE-8F94-1F29D7423729}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97001C02-B7A3-47EE-8F94-1F29D7423729}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{97001C02-B7A3-47EE-8F94-1F29D7423729}.Debug|x64.Build.0 = Debug|Any CPU
+		{97001C02-B7A3-47EE-8F94-1F29D7423729}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{97001C02-B7A3-47EE-8F94-1F29D7423729}.Debug|x86.Build.0 = Debug|Any CPU
+		{97001C02-B7A3-47EE-8F94-1F29D7423729}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97001C02-B7A3-47EE-8F94-1F29D7423729}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97001C02-B7A3-47EE-8F94-1F29D7423729}.Release|x64.ActiveCfg = Release|Any CPU
+		{97001C02-B7A3-47EE-8F94-1F29D7423729}.Release|x64.Build.0 = Release|Any CPU
+		{97001C02-B7A3-47EE-8F94-1F29D7423729}.Release|x86.ActiveCfg = Release|Any CPU
+		{97001C02-B7A3-47EE-8F94-1F29D7423729}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B5AB74CE-567C-4DA0-8A6D-2957EDBBEAF6}
 	EndGlobalSection
 EndGlobal

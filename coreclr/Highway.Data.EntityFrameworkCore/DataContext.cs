@@ -2,7 +2,6 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using JetBrains.Annotations;
 using Highway.Data.Interceptors.Events;
 
 namespace Highway.Data
@@ -20,17 +19,17 @@ namespace Highway.Data
 
 		public int Commit()
 		{
-			OnBeforeSave();
+			BeforeSave?.Invoke(this, new BeforeSave());
 			var changes = this.SaveChanges();
-			OnAfterSave();
+			AfterSave?.Invoke(this, new AfterSave());
 			return changes;
 		}
 
 		public Task<int> CommitAsync()
 		{
-			OnBeforeSave();
+			BeforeSave?.Invoke(this, new BeforeSave());
 			return this.SaveChangesAsync().ContinueWith(task => {
-				OnAfterSave();
+				AfterSave?.Invoke(this, new AfterSave());
 				return task.Result;
 			});
 		}
@@ -60,17 +59,6 @@ namespace Highway.Data
 			this.Update<T>(item);
 			return item;
 		}
-
-		private void OnAfterSave()
-		{
-			if (AfterSave != null) AfterSave(this, new AfterSave());
-		}
-
-		private void OnBeforeSave()
-		{
-			if (BeforeSave != null) BeforeSave(this, new BeforeSave());
-		}
-
 
 		public event EventHandler<BeforeSave> BeforeSave;
 		public event EventHandler<AfterSave> AfterSave;

@@ -1,9 +1,9 @@
-﻿namespace Highway.Data
+﻿namespace Highway.Data.Queries
 {
 	using System;
 
 	/// <summary>
-	///     Defines a generalized Id property for identifying an individual entity.
+	///     Defines a generalized Id property for uniquely identifying an individual entity.
 	/// </summary>
 	/// <typeparam name="T">The type of the Id</typeparam>
 	public interface IIdentifiable<T> where T : IEquatable<T>

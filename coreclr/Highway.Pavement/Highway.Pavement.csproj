@@ -1,26 +1,21 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
-    <Version>7.0.0-beta1</Version>
+    <Version>1.0.0-beta1</Version>
     <Authors>trayburn, devlinliles</Authors>
     <Company>trayburn, devlinliles</Company>
     <Description>The fastest and smoothest way to great architecture</Description>
     <Copyright>Copyright 2012-2017 Devlin Liles</Copyright>
     <PackageLicenseUrl>https://github.com/HighwayFramework/Highway.Data/license.txt</PackageLicenseUrl>
     <PackageProjectUrl>http://hwyfwk.com</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/HighwayFramework/Highway.Data/</RepositoryUrl>
+    <RepositoryUrl>https://github.com/HighwayFramework/Highway.Pavement/</RepositoryUrl>
     <PackageTags>Architecture,ORM,Repository,Specification,Productivity</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Linq.Queryable" Version="4.3.0" />
     <PackageReference Include="System.Reflection.TypeExtensions" Version="4.4.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Highway.Pavement\Highway.Pavement.csproj" />
   </ItemGroup>
 
 </Project>

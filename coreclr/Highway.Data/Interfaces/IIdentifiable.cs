@@ -1,4 +1,4 @@
-﻿namespace Highway.Data.Queries
+﻿namespace Highway.Data
 {
 	using System;
 

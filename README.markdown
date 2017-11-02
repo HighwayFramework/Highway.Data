@@ -1,17 +1,9 @@
-# Attention
-
-The Highway.Data repository recently underwent a force push to purge from our
-GIT history certain IP that we requested to be removed by the owner.  We have
-completed the removal but not the cleanup after that removal.  At the current
-time it is entirely likely that any v6.0+ tag or current `HEAD` in `master`
-will not successfully compile.  This will be resolved shortly, the core team
-is hard at work on it, but in the meantime please pardon our dust as we clean
-up from this unfortunate but necessary task.
-
-*Thank You, The Core Team*
-
 # Highway.Data
 ## The fastest and smoothest way to great architecture
+
+# Note about .NET Core & .NET Standard
+
+Our core team is hard at work on migrating Highway.Data into the .NET Standard world.  Our v7.0.0-beta1 packages are currently available in pre-release.  There is significant refactoring, and also removal of features which we consider distractions to the primary purpose of Highway.Data.  If you are a regular user, please check out these packages and let us know if you find something lacking in them via Issues here.
 
 # Documentation
 

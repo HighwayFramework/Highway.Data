@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Highway.Data", "Highway.Dat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Highway.Data.EntityFrameworkCore", "Highway.Data.EntityFrameworkCore\Highway.Data.EntityFrameworkCore.csproj", "{2A65A71F-87B2-46C0-92FC-99A40DC7BC25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.Queries", "Highway.Data.Queries\Highway.Data.Queries.csproj", "{97001C02-B7A3-47EE-8F94-1F29D7423729}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Highway.Data.Queries", "Highway.Data.Queries\Highway.Data.Queries.csproj", "{97001C02-B7A3-47EE-8F94-1F29D7423729}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.EntityFramework", "Highway.Data.EntityFramework\Highway.Data.EntityFramework.csproj", "{F27219AA-1E10-4DE2-A8C4-79E7EA1565A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Pavement", "Highway.Pavement\Highway.Pavement.csproj", "{7CD6CB76-BA51-491D-A938-3AAF80E1C278}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +85,18 @@ Global
 		{F27219AA-1E10-4DE2-A8C4-79E7EA1565A2}.Release|x64.Build.0 = Release|Any CPU
 		{F27219AA-1E10-4DE2-A8C4-79E7EA1565A2}.Release|x86.ActiveCfg = Release|Any CPU
 		{F27219AA-1E10-4DE2-A8C4-79E7EA1565A2}.Release|x86.Build.0 = Release|Any CPU
+		{7CD6CB76-BA51-491D-A938-3AAF80E1C278}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CD6CB76-BA51-491D-A938-3AAF80E1C278}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CD6CB76-BA51-491D-A938-3AAF80E1C278}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7CD6CB76-BA51-491D-A938-3AAF80E1C278}.Debug|x64.Build.0 = Debug|Any CPU
+		{7CD6CB76-BA51-491D-A938-3AAF80E1C278}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7CD6CB76-BA51-491D-A938-3AAF80E1C278}.Debug|x86.Build.0 = Debug|Any CPU
+		{7CD6CB76-BA51-491D-A938-3AAF80E1C278}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CD6CB76-BA51-491D-A938-3AAF80E1C278}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CD6CB76-BA51-491D-A938-3AAF80E1C278}.Release|x64.ActiveCfg = Release|Any CPU
+		{7CD6CB76-BA51-491D-A938-3AAF80E1C278}.Release|x64.Build.0 = Release|Any CPU
+		{7CD6CB76-BA51-491D-A938-3AAF80E1C278}.Release|x86.ActiveCfg = Release|Any CPU
+		{7CD6CB76-BA51-491D-A938-3AAF80E1C278}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

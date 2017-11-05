@@ -1,32 +1,40 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Highway.Config
 {
-	public class InMemoryConfigStore : IConfigStore
+	public class InMemoryConfigStore : BaseConfigStore
 	{
 		private readonly Dictionary<string, string> storage = new Dictionary<string, string>();
-
-		public Task Clear(string key)
+		
+		public InMemoryConfigStore(string env, string store) : base(env, store)
 		{
-			storage.Remove(key);
+		}
+
+		public override Task Clear(string key)
+		{
+			storage.Remove(GetStorageKey(key));
 			return Task.FromResult(0);
 		}
 
-		public Task<string> Get(string key)
+		public override Task<string> Get(string key)
 		{
-			return Task.FromResult(storage[key]);
+			return Task.FromResult(storage[GetStorageKey(key)]);
 		}
 
-		public Task<IEnumerable<string>> GetKeys()
+		public override Task<IEnumerable<string>> GetKeys()
 		{
-			return Task.FromResult(storage.Keys as IEnumerable<string>);
+			return Task.FromResult(
+				storage.Keys
+				.Select(e => e.Replace(prefix,""))
+			);
 		}
 
-		public Task Set(string key, string value)
+		public override Task Set(string key, string value)
 		{
-			storage.Add(key, value);
+			storage.Add(GetStorageKey(key), value);
 			return Task.FromResult(0);
 		}
 	}

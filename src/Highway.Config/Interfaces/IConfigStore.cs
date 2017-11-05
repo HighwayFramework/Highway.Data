@@ -10,5 +10,8 @@ namespace Highway.Config
 		Task<string> Get(string key);
 		Task Set(string key, string value);
 		Task<IEnumerable<string>> GetKeys();
+		string GetStorageKey(string key);
+		string Store { get; }
+		string Environment { get; }
 	}
 }

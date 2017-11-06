@@ -20,16 +20,34 @@ namespace Highway.Data
 		public int Commit()
 		{
 			BeforeSave?.Invoke(this, new BeforeSave());
-			var changes = this.SaveChanges();
-			AfterSave?.Invoke(this, new AfterSave());
-			return changes;
+
+			int? changes = null;
+			Exception exception = null;
+
+			try
+			{
+				changes = this.SaveChanges();
+			}
+			catch (Exception ex)
+			{
+				exception = ex;
+				AfterSave?.Invoke(this, new AfterSave(changes, exception));
+				throw; // AfterSave might change the exception and throw, if not, do it ourself
+			}
+			finally
+			{
+				AfterSave?.Invoke(this, new AfterSave(changes, exception));
+			}
+
+			return changes.Value;
 		}
 
 		public Task<int> CommitAsync()
 		{
 			BeforeSave?.Invoke(this, new BeforeSave());
 			return this.SaveChangesAsync().ContinueWith(task => {
-				AfterSave?.Invoke(this, new AfterSave());
+				int? changes = task.Status == TaskStatus.RanToCompletion ? new int?(task.Result) : null;
+				AfterSave?.Invoke(this, new AfterSave(changes, task.Exception));
 				return task.Result;
 			});
 		}

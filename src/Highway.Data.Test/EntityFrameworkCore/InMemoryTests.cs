@@ -25,7 +25,7 @@ namespace Highway.Data.Test
 		}
 	}
 	[TestClass]
-    public class EntityFrameworkCoreInMemory
+    public class InMemoryTests
     {
         [TestMethod]
         public void ShouldStoreAndRetrive()

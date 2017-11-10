@@ -15,7 +15,7 @@ namespace Highway.Data
 	/// <summary>
 	///     A base implementation of the Code First Data DataContext for Entity Framework
 	/// </summary>
-	public class DataContext : DbContext, IEntityUnitOfWork, IUnitOfWork
+	public class UnitOfWork : DbContext, IEntityUnitOfWork, IUnitOfWork
 	{
 		private readonly bool _databaseFirst;
 		private readonly ILog _log;
@@ -26,8 +26,8 @@ namespace Highway.Data
 		/// </summary>
 		/// <param name="connectionString">The standard SQL connection string for the Database</param>
 		/// <param name="mapping">The Mapping Configuration that will determine how the tables and objects interact</param>
-		public DataContext(string connectionString, IMappingConfiguration mapping)
-			: this(connectionString, mapping, new DefaultContextConfiguration(), new NoOpLogger())
+		public UnitOfWork(string connectionString, IMappingConfiguration mapping)
+			: this(connectionString, mapping, new DefaultUnitOfWorkConfiguration(), new NoOpLogger())
 		{
 		}
 
@@ -37,8 +37,8 @@ namespace Highway.Data
 		/// <param name="connectionString">The standard SQL connection string for the Database</param>
 		/// <param name="mapping">The Mapping Configuration that will determine how the tables and objects interact</param>
 		/// <param name="log">The logger being supplied for this context ( Optional )</param>
-		public DataContext(string connectionString, IMappingConfiguration mapping, ILog log)
-			: this(connectionString, mapping, new DefaultContextConfiguration(), log)
+		public UnitOfWork(string connectionString, IMappingConfiguration mapping, ILog log)
+			: this(connectionString, mapping, new DefaultUnitOfWorkConfiguration(), log)
 		{
 		}
 
@@ -51,8 +51,8 @@ namespace Highway.Data
 		///     The context specific configuration that will change context level behavior (
 		///     Optional )
 		/// </param>
-		public DataContext(string connectionString, IMappingConfiguration mapping,
-			IContextConfiguration contextConfiguration)
+		public UnitOfWork(string connectionString, IMappingConfiguration mapping,
+			IUnitOfWorkConfiguration contextConfiguration)
 			: this(connectionString, mapping, contextConfiguration, new NoOpLogger())
 		{
 		}
@@ -65,8 +65,8 @@ namespace Highway.Data
 		/// <param name="mapping">The Mapping Configuration that will determine how the tables and objects interact</param>
 		/// <param name="contextConfiguration">The context specific configuration that will change context level behavior</param>
 		/// <param name="log">The logger being supplied for this context ( Optional )</param>
-		public DataContext(string connectionString, IMappingConfiguration mapping,
-			IContextConfiguration contextConfiguration, ILog log)
+		public UnitOfWork(string connectionString, IMappingConfiguration mapping,
+			IUnitOfWorkConfiguration contextConfiguration, ILog log)
 			: base(connectionString)
 		{
 			_mapping = mapping;
@@ -82,7 +82,7 @@ namespace Highway.Data
 		///     The metadata embedded connection string from database first Entity
 		///     Framework
 		/// </param>
-		public DataContext(string databaseFirstConnectionString) : this(databaseFirstConnectionString, new NoOpLogger())
+		public UnitOfWork(string databaseFirstConnectionString) : this(databaseFirstConnectionString, new NoOpLogger())
 		{
 		}
 
@@ -94,7 +94,7 @@ namespace Highway.Data
 		///     Framework
 		/// </param>
 		/// <param name="log">The logger for the database first context</param>
-		public DataContext(string databaseFirstConnectionString, ILog log) : base(databaseFirstConnectionString)
+		public UnitOfWork(string databaseFirstConnectionString, ILog log) : base(databaseFirstConnectionString)
 		{
 			_databaseFirst = true;
 			_log = log;

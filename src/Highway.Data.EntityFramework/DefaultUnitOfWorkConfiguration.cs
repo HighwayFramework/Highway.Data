@@ -7,7 +7,7 @@ namespace Highway.Data
 	/// <summary>
 	/// Configuration for the context that takes the Highway.Data opinions.
 	/// </summary>
-	public class DefaultContextConfiguration : IContextConfiguration
+	public class DefaultUnitOfWorkConfiguration : IUnitOfWorkConfiguration
 	{
 		/// <summary>
 		/// Configures context without lazy loading or proxy creation

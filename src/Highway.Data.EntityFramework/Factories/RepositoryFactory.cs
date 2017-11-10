@@ -12,21 +12,21 @@ namespace Highway.Data.Factories
 	{
 		private readonly string _connectionString;
 		private readonly IMappingConfiguration _mappings;
-		private readonly IContextConfiguration _contextConfig;
+		private readonly IUnitOfWorkConfiguration _contextConfig;
 		private readonly ILog _logger;
 
 		/// <summary>
 		/// Creates a repository factory for the supplied list of domains
 		/// </summary>
 		public RepositoryFactory(string connectionString, IMappingConfiguration mappings)
-			: this(connectionString, mappings, new DefaultContextConfiguration(), new NoOpLogger())
+			: this(connectionString, mappings, new DefaultUnitOfWorkConfiguration(), new NoOpLogger())
 		{
 
 		}
 		/// <summary>
 		/// Creates a repository factory for the supplied list of domains
 		/// </summary>
-		public RepositoryFactory(string connectionString, IMappingConfiguration mappings, IContextConfiguration contextConfiguration)
+		public RepositoryFactory(string connectionString, IMappingConfiguration mappings, IUnitOfWorkConfiguration contextConfiguration)
 			: this(connectionString, mappings, contextConfiguration, new NoOpLogger())
 		{
 
@@ -35,14 +35,14 @@ namespace Highway.Data.Factories
 		/// Creates a repository factory for the supplied list of domains
 		/// </summary>
 		public RepositoryFactory(string connectionString, IMappingConfiguration mappings, ILog logger)
-			: this(connectionString, mappings, new DefaultContextConfiguration(), logger)
+			: this(connectionString, mappings, new DefaultUnitOfWorkConfiguration(), logger)
 		{
 
 		}
 		/// <summary>
 		/// Creates a repository factory for the supplied list of domains
 		/// </summary>
-		public RepositoryFactory(string connectionString, IMappingConfiguration mappings, IContextConfiguration contextConfig, ILog logger)
+		public RepositoryFactory(string connectionString, IMappingConfiguration mappings, IUnitOfWorkConfiguration contextConfig, ILog logger)
 		{
 			_connectionString = connectionString;
 			_mappings = mappings;
@@ -56,7 +56,7 @@ namespace Highway.Data.Factories
 		/// <returns>Domain specific repository</returns>
 		public IRepository Create()
 		{
-			return new Repository(new DataContext(_connectionString, _mappings, _contextConfig, _logger));
+			return new Repository(new UnitOfWork(_connectionString, _mappings, _contextConfig, _logger));
 		}
 	}
 }

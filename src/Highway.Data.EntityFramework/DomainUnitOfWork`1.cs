@@ -9,7 +9,7 @@ namespace Highway.Data
 	/// A Context that is constrained to a specified Domain
 	/// </summary>
 	/// <typeparam name="T">The Domain this context is specific for</typeparam>
-	public class DomainContext<T> : DataContext, IDomainUnitOfWork<T>
+	public class DomainUnitOfWork<T> : UnitOfWork, IDomainUnitOfWork<T>
 		where T : class, IDomain
 	{
 		private readonly T domain;
@@ -18,7 +18,7 @@ namespace Highway.Data
 		/// Constructs the domain context
 		/// </summary>
 		/// <param name="domain"></param>
-		public DomainContext(T domain)
+		public DomainUnitOfWork(T domain)
 			: base(domain.ConnectionString, domain.Mappings, domain.Context, new NoOpLogger())
 		{
 			this.domain = domain;
@@ -29,7 +29,7 @@ namespace Highway.Data
 		/// </summary>
 		/// <param name="domain">domain for context</param>
 		/// <param name="logger">logger</param>
-		public DomainContext(T domain, ILog logger)
+		public DomainUnitOfWork(T domain, ILog logger)
 			: base(domain.ConnectionString, domain.Mappings, domain.Context, logger)
 		{
 			this.domain = domain;

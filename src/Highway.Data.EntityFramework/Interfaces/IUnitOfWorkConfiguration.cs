@@ -7,7 +7,7 @@ namespace Highway.Data
 	/// <summary>
 	///     Implement this interface to pass the context specific mapping to the constructor
 	/// </summary>
-	public interface IContextConfiguration
+	public interface IUnitOfWorkConfiguration
 	{
 		/// <summary>
 		///     This method allows the configuration of context specific properties to be injected

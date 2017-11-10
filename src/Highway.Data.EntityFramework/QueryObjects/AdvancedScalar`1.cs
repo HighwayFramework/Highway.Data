@@ -13,7 +13,7 @@ namespace Highway.Data
 		/// <summary>
 		///     The query to be executed later
 		/// </summary>
-		protected Func<DataContext, T> ContextQuery { get; set; }
+		protected Func<UnitOfWork, T> ContextQuery { get; set; }
 
 
 		/// <summary>
@@ -25,7 +25,7 @@ namespace Highway.Data
 		{
 			Context = context;
 			CheckContextAndQuery(ContextQuery);
-			return ContextQuery((DataContext)context);
+			return ContextQuery((UnitOfWork)context);
 		}
 
 	}

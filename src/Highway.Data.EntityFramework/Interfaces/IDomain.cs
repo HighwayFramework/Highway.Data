@@ -9,6 +9,6 @@ namespace Highway.Data
 
 		IMappingConfiguration Mappings { get; }
 
-		IContextConfiguration Context { get; }
+		IUnitOfWorkConfiguration Context { get; }
 	}
 }

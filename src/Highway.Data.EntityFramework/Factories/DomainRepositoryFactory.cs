@@ -28,7 +28,7 @@ namespace Highway.Data.Factories
 		public IRepository Create<T>() where T : class, IDomain
 		{
 			var domain = _domains.OfType<T>().SingleOrDefault();
-			var context = new DomainContext<T>(domain);
+			var context = new DomainUnitOfWork<T>(domain);
 			return new DomainRepository<T>(context, domain);
 		}
 
@@ -40,7 +40,7 @@ namespace Highway.Data.Factories
 		public IRepository Create(Type type)
 		{
 			var domain = _domains.FirstOrDefault(x => x.GetType() == type);
-			var d1 = typeof(DomainContext<>);
+			var d1 = typeof(DomainUnitOfWork<>);
 			Type[] typeArgs = { type };
 			var contextCtor = d1.MakeGenericType(typeArgs);
 			object untypedObject = Activator.CreateInstance(contextCtor, domain);

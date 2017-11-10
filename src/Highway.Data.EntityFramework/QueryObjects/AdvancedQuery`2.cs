@@ -14,7 +14,7 @@ namespace Highway.Data
 	public class AdvancedQuery<TSelection, TProjection> : QueryBase, IQuery<TSelection, TProjection>
 		where TSelection : class
 	{
-		protected Func<DataContext, IQueryable<TSelection>> Selector { get; set; }
+		protected Func<UnitOfWork, IQueryable<TSelection>> Selector { get; set; }
 		protected Func<IQueryable<TSelection>, IQueryable<TProjection>> Projector { get; set; }
 
 		/// <summary>
@@ -23,7 +23,7 @@ namespace Highway.Data
 		/// <returns>an <see cref="IQueryable{TSelection}" /></returns>
 		protected virtual IQueryable<TSelection> ExtendQuery()
 		{
-			return Selector((DataContext)Context);
+			return Selector((UnitOfWork)Context);
 		}
 
 		/// <summary>

@@ -14,7 +14,7 @@ namespace Highway.Data
 		/// <summary>
 		///     This holds the expression that will be used to create the <see cref="IQueryable{T}" /> when executed on the context
 		/// </summary>
-		protected Func<DataContext, IQueryable<T>> ContextQuery { get; set; }
+		protected Func<UnitOfWork, IQueryable<T>> ContextQuery { get; set; }
 
 		/// <summary>
 		///     This method allows for the extension of Ordering and Grouping on the prebuild Query
@@ -24,7 +24,7 @@ namespace Highway.Data
 		{
 			try
 			{
-				return ContextQuery((DataContext)Context);
+				return ContextQuery((UnitOfWork)Context);
 			}
 			catch (Exception)
 			{

@@ -6,6 +6,6 @@ namespace Highway.Data
 	public interface IDomainRepository<out T> : IRepository
 		where T : class, IDomain
 	{
-		IDomainContext<T> DomainContext { get; }
+		IDomainUnitOfWork<T> DomainUnitOfWork { get; }
 	}
 }

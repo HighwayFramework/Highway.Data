@@ -15,6 +15,6 @@ namespace Highway.Data
 		/// </summary>
 		/// <param name="context">The data context that the query is evaluated and the details are generated against</param>
 		/// <returns>The details of the Statement from the Query</returns>
-		string OutputQuery(IDataContext context);
+		string OutputQuery(IReadOnlyUnitOfWork context);
 	}
 }

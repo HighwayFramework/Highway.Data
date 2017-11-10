@@ -49,7 +49,7 @@ namespace Highway.Data
 			return source;
 		}
 
-		protected virtual IQueryable<T> PrepareQuery(IDataContext context)
+		protected virtual IQueryable<T> PrepareQuery(IReadOnlyUnitOfWork context)
 		{
 			Context = context;
 			CheckContextAndQuery(ContextQuery);
@@ -65,13 +65,13 @@ namespace Highway.Data
 		/// <returns>
 		///     <see cref="IEnumerable{T}" />
 		/// </returns>
-		public virtual IEnumerable<T> Execute(IDataContext context)
+		public virtual IEnumerable<T> Execute(IReadOnlyUnitOfWork context)
 		{
 			var task = PrepareQuery(context);
 			return task;
 		}
 
-		public string OutputQuery(IDataContext context)
+		public string OutputQuery(IReadOnlyUnitOfWork context)
 		{
 			var query = PrepareQuery(context);
 			return query.ToString();

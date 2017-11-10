@@ -9,6 +9,6 @@
 		///     Executes the expression against the passed in context and ignores the returned value if any
 		/// </summary>
 		/// <param name="context">The data context that the command is executed against</param>
-		void Execute(IDataContext context);
+		void Execute(IUnitOfWork context);
 	}
 }

@@ -7,14 +7,11 @@ using Highway.Data.InMemory;
 
 namespace Highway.Data
 {
-	public class InMemoryDataContext : IDataContext
+	public class InMemoryDataContext : IUnitOfWork
 	{
 		internal readonly ObjectRepresentationRepository repo;
 		private readonly Queue<object> addQueue = new Queue<object>();
 		private readonly Queue<object> removeQueue = new Queue<object>();
-
-		public event EventHandler<BeforeSave> BeforeSave;
-		public event EventHandler<AfterSave> AfterSave;
 
 		public InMemoryDataContext()
 		{
@@ -69,18 +66,16 @@ namespace Highway.Data
 
 		public virtual int Commit()
 		{
-			BeforeSave?.Invoke(this, new Interceptors.Events.BeforeSave());
-			ProcessCommitQueues();
+			int count = ProcessCommitQueues();
 			repo.Commit();
-			AfterSave?.Invoke(this, new Interceptors.Events.AfterSave());
-			return 0;
+			return count;
 		}
 
 		public virtual Task<int> CommitAsync()
 		{
-			var task = new Task<int>(Commit);
-			task.Start();
-			return task;
+			int count = ProcessCommitQueues();
+			repo.Commit();
+			return Task.FromResult(count);
 		}
 
 		/// <summary>
@@ -103,25 +98,34 @@ namespace Highway.Data
 		/// <summary>
 		/// Processes the held but uncommitted adds and removes from the context
 		/// </summary>
-		protected void ProcessCommitQueues()
+		protected int ProcessCommitQueues()
 		{
-			AddAllFromQueueIntoRepository();
-			RemoveAllFromQueueFromRepository();
+			return AddAllFromQueueIntoRepository()
+				+ RemoveAllFromQueueFromRepository();
 		}
 
-		private void AddAllFromQueueIntoRepository()
+		private int AddAllFromQueueIntoRepository()
 		{
+			var queueCount = addQueue.Count;
 			while (addQueue.Count > 0)
 			{
 				repo.Add(addQueue.Dequeue());
 			}
+			return queueCount;
 		}
-		private void RemoveAllFromQueueFromRepository()
+		private int RemoveAllFromQueueFromRepository()
 		{
+			var queueCount = removeQueue.Count;
 			while (removeQueue.Count > 0)
 			{
 				repo.Remove(removeQueue.Dequeue());
 			}
+			return queueCount;
+		}
+
+		public IUnitOfWork GetRootDecoratedObject()
+		{
+			return this;
 		}
 	}
 }

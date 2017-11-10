@@ -24,7 +24,7 @@ namespace Highway.Data.Test.Queries
 		{
 			builder.Entity<BlogPost>(e => e.HasKey(x => x.Id));
 		}
-		public override void ArrangeDataContext(IDataContext context)
+		public override void ArrangeDataContext(IUnitOfWork context)
 		{
 			context.Add(new BlogPost { Id = sampleId, Code = "sample", Name = "Sample Posting" });
 			context.Add(new BlogPost { Id = testId, Code = "test", Name = "Test Posting" });

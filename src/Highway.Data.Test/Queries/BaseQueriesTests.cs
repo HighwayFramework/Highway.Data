@@ -15,7 +15,7 @@ namespace Highway.Data.Test.Queries
 
 		public TestContext TestContext { get; set; }
 
-		public abstract void ArrangeDataContext(IDataContext context);
+		public abstract void ArrangeDataContext(IUnitOfWork context);
 		public abstract void ConfigureModelBuilder(ModelBuilder builder);
 
 		[TestInitialize]
@@ -28,7 +28,7 @@ namespace Highway.Data.Test.Queries
 				.UseInMemoryDatabase(TestContext.FullyQualifiedTestClassName)
 				.UseModel(mb.Model);
 
-			IDataContext dc = new DataContext(builder.Options);
+			IUnitOfWork dc = new UnitOfWork(builder.Options);
 
 			ArrangeDataContext(dc);
 			dc.Commit();

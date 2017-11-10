@@ -7,7 +7,7 @@ namespace Highway.Data
 {
 	/// <summary>
 	/// </summary>
-	public interface IEntityDataContext : IDataContext
+	public interface IEntityUnitOfWork
 	{
 		/// <summary>
 		///     Executes a SQL command and tries to map the returned datasets into an <see cref="IEnumerable{T}" />

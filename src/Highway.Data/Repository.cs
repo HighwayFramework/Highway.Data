@@ -11,23 +11,23 @@ namespace Highway.Data
 	/// </summary>
 	public class Repository : IRepository
 	{
-		private readonly IDataContext _context;
+		private readonly IUnitOfWork uow;
 
 		/// <summary>
 		///     Creates a Repository that uses the context provided
 		/// </summary>
-		/// <param name="context">The data context that this repository uses</param>
-		public Repository(IDataContext context)
+		/// <param name="uow">The data context that this repository uses</param>
+		public Repository(IUnitOfWork uow)
 		{
-			_context = context;
+			this.uow = uow;
 		}
 
 		/// <summary>
 		///     Reference to the DataContext the repository is using
 		/// </summary>
-		public IUnitOfWork Context
+		public IWriteOnlyUnitOfWork UnitOfWork
 		{
-			get { return _context; }
+			get { return uow as IWriteOnlyUnitOfWork; }
 		}
 
 		/// <summary>
@@ -37,7 +37,7 @@ namespace Highway.Data
 		public virtual void Execute(ICommand command)
 		{
 			OnBeforeCommand(new BeforeCommand(command));
-			command.Execute(_context);
+			command.Execute(uow);
 			OnAfterCommand(new AfterCommand(command));
 		}
 
@@ -50,7 +50,7 @@ namespace Highway.Data
 		public virtual T Find<T>(IScalar<T> scalar)
 		{
 			OnBeforeScalar(new BeforeScalar(scalar));
-			var result = scalar.Execute(_context);
+			var result = scalar.Execute(uow);
 			OnAfterScalar(new AfterScalar(result));
 			return result;
 		}
@@ -64,7 +64,7 @@ namespace Highway.Data
 		public virtual IEnumerable<T> Find<T>(IQuery<T> query)
 		{
 			OnBeforeQuery(new BeforeQuery(query));
-			var result = query.Execute(_context);
+			var result = query.Execute(uow);
 			OnAfterQuery(new AfterQuery(result));
 			return result;
 		}
@@ -79,7 +79,7 @@ namespace Highway.Data
 			where TSelection : class
 		{
 			OnBeforeQuery(new BeforeQuery(query));
-			var results = query.Execute(_context);
+			var results = query.Execute(uow);
 			OnAfterQuery(new AfterQuery(results));
 			return results;
 		}
@@ -91,7 +91,7 @@ namespace Highway.Data
 		public virtual Task ExecuteAsync(ICommand command)
 		{
 			OnBeforeCommand(new BeforeCommand(command));
-			var task = new Task(() => command.Execute(_context)).ContinueWith(t =>
+			var task = new Task(() => command.Execute(uow)).ContinueWith(t =>
 			{
 				OnAfterCommand(new AfterCommand(command));
 			});
@@ -108,7 +108,7 @@ namespace Highway.Data
 		public virtual Task<T> FindAsync<T>(IScalar<T> query)
 		{
 			OnBeforeScalar(new BeforeScalar(query));
-			var task = new Task<T>(() => query.Execute(_context)).ContinueWith(t =>
+			var task = new Task<T>(() => query.Execute(uow)).ContinueWith(t =>
 			{
 				OnAfterScalar(new AfterScalar(query));
 				return t.Result;
@@ -126,7 +126,7 @@ namespace Highway.Data
 		public virtual Task<IEnumerable<T>> FindAsync<T>(IQuery<T> query)
 		{
 			OnBeforeQuery(new BeforeQuery(query));
-			var task = new Task<IEnumerable<T>>(() => query.Execute(_context)).ContinueWith(t =>
+			var task = new Task<IEnumerable<T>>(() => query.Execute(uow)).ContinueWith(t =>
 			{
 				OnAfterQuery(new AfterQuery(query));
 				return t.Result;
@@ -145,7 +145,7 @@ namespace Highway.Data
 			where TSelection : class
 		{
 			OnBeforeQuery(new BeforeQuery(query));
-			var task = new Task<IEnumerable<IProjection>>(() => query.Execute(_context)).ContinueWith(t =>
+			var task = new Task<IEnumerable<IProjection>>(() => query.Execute(uow)).ContinueWith(t =>
 			{
 				OnAfterQuery(new AfterQuery(query));
 				return t.Result;

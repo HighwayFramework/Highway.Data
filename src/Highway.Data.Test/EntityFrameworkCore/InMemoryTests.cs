@@ -37,11 +37,11 @@ namespace Highway.Data.Test
 				.UseInMemoryDatabase("ShouldStoreAndRetrive")
 				.UseModel(mb.Model);
 
-			IDataContext dc = new DataContext(builder.Options);
+			IUnitOfWork dc = new UnitOfWork(builder.Options);
 			IRepository repo = new Repository(dc);
 
-			repo.Context.Add(new Person { FirstName = "Tim", LastName = "Rayburn" });
-			repo.Context.Commit();
+			repo.UnitOfWork.Add(new Person { FirstName = "Tim", LastName = "Rayburn" });
+			repo.UnitOfWork.Commit();
 
 			Assert.AreEqual("Tim", repo.Find(new FirstRayburn()).FirstName);
         }

@@ -16,7 +16,7 @@ namespace Highway.Data
 		/// <summary>
 		///     The query to limit the result set
 		/// </summary>
-		protected Func<IDataContext, IQueryable<TSelection>> Selector { get; set; }
+		protected Func<IReadOnlyUnitOfWork, IQueryable<TSelection>> Selector { get; set; }
 
 		/// <summary>
 		/// the projection to take the limited result set and materialize it.
@@ -31,7 +31,7 @@ namespace Highway.Data
 		/// <returns>
 		///     <see cref="IEnumerable{T}" />
 		/// </returns>
-		public virtual TProjection Execute(IDataContext context)
+		public virtual TProjection Execute(IReadOnlyUnitOfWork context)
 		{
 			TProjection task = PrepareQuery(context);
 			return task;
@@ -43,7 +43,7 @@ namespace Highway.Data
 		/// </summary>
 		/// <param name="context">The data context that the query is evaluated and the SQL is generated against</param>
 		/// <returns></returns>
-		public string OutputQuery(IDataContext context)
+		public string OutputQuery(IReadOnlyUnitOfWork context)
 		{
 			return ExtendQuery().ToString();
 		}
@@ -76,7 +76,7 @@ namespace Highway.Data
 			return Projector(source);
 		}
 
-		private TProjection PrepareQuery(IDataContext context)
+		private TProjection PrepareQuery(IReadOnlyUnitOfWork context)
 		{
 			Context = context;
 			CheckContextAndQuery(Selector);

@@ -15,14 +15,11 @@ namespace Highway.Data
 	/// <summary>
 	///     A base implementation of the Code First Data DataContext for Entity Framework
 	/// </summary>
-	public class DataContext : DbContext, IEntityDataContext
+	public class DataContext : DbContext, IEntityUnitOfWork, IUnitOfWork
 	{
 		private readonly bool _databaseFirst;
 		private readonly ILog _log;
 		private readonly IMappingConfiguration _mapping;
-
-		public event EventHandler<BeforeSave> BeforeSave;
-		public event EventHandler<AfterSave> AfterSave;
 
 		/// <summary>
 		///     Constructs a context
@@ -230,13 +227,7 @@ namespace Highway.Data
 		/// <returns>the number of rows affected</returns>
 		public virtual int Commit()
 		{
-			_log.Trace("\tCommit");
-			BeforeSave?.Invoke(this, new Interceptors.Events.BeforeSave());
-			ChangeTracker.DetectChanges();
-			int result = SaveChanges();
-			AfterSave?.Invoke(this, new Interceptors.Events.AfterSave());
-			_log.DebugFormat("\tCommited {0} Changes", result);
-			return result;
+			return this.SaveChanges();
 		}
 
 		/// <summary>
@@ -245,13 +236,7 @@ namespace Highway.Data
 		/// <returns>the number of rows affected</returns>
 		public virtual Task<int> CommitAsync()
 		{
-			_log.Trace("\tCommit");
-			BeforeSave?.Invoke(this, new Interceptors.Events.BeforeSave());
-			ChangeTracker.DetectChanges();
-			Task<int> result = SaveChangesAsync();
-			AfterSave?.Invoke(this, new Interceptors.Events.AfterSave());
-			result.ContinueWith(x => _log.DebugFormat("\tCommited {0} Changes", result));
-			return result;
+			return this.SaveChangesAsync();
 		}
 
 		/// <summary>
@@ -329,6 +314,15 @@ namespace Highway.Data
 				_mapping.ConfigureModelBuilder(modelBuilder);
 			}
 			base.OnModelCreating(modelBuilder);
+		}
+
+		/// <summary>
+		/// Returns the root object of a decoration chain, usually the actual ORM class.
+		/// </summary>
+		/// <returns></returns>
+		public IUnitOfWork GetRootDecoratedObject()
+		{
+			return this;
 		}
 	}
 }

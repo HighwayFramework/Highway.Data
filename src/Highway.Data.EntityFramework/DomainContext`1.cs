@@ -9,7 +9,7 @@ namespace Highway.Data
 	/// A Context that is constrained to a specified Domain
 	/// </summary>
 	/// <typeparam name="T">The Domain this context is specific for</typeparam>
-	public class DomainContext<T> : DataContext, IDomainContext<T>
+	public class DomainContext<T> : DataContext, IDomainUnitOfWork<T>
 		where T : class, IDomain
 	{
 		private readonly T domain;

@@ -16,7 +16,7 @@ namespace Highway.Data
 		/// <summary>
 		///     The query to be executed later
 		/// </summary>
-		protected Func<IDataContext, T> ContextQuery { get; set; }
+		protected Func<IReadOnlyUnitOfWork, T> ContextQuery { get; set; }
 
 
 		/// <summary>
@@ -24,7 +24,7 @@ namespace Highway.Data
 		/// </summary>
 		/// <param name="context">The data context that the scalar query is executed against</param>
 		/// <returns>The instance of <typeparamref name="T" /> that the query materialized if any</returns>
-		public T Execute(IDataContext context)
+		public T Execute(IReadOnlyUnitOfWork context)
 		{
 			Context = context;
 			CheckContextAndQuery(ContextQuery);

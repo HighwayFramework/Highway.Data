@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Highway.Data
 {
-	public interface IDomainContext<out T> : IDataContext
+	public interface IDomainUnitOfWork<out T> : IUnitOfWork
 		where T : class, IDomain
 	{
 		T Domain { get; }

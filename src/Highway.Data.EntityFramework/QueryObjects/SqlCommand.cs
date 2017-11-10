@@ -10,7 +10,7 @@ namespace Highway.Data
 	{
 		protected Action<SqlConnection> ContextQuery;
 
-		public void Execute(IDataContext context)
+		public void Execute(IUnitOfWork context)
 		{
 			var efContext = context as DbContext;
 			using (var conn = new SqlConnection(efContext.Database.Connection.ConnectionString))

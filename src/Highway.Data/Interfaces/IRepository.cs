@@ -8,28 +8,12 @@ namespace Highway.Data
 	/// <summary>
 	///     The interface used to interact with the ORM Specific Implementations
 	/// </summary>
-	public interface IRepository
+	public interface IRepository : IReadOnlyRepository
 	{
 		/// <summary>
-		///     Reference to the Context the repository, allowing for create, update, and delete
+		///     Reference to the Unit of Work the repository, allowing for create, update, and delete
 		/// </summary>
-		IUnitOfWork Context { get; }
-
-		/// <summary>
-		///     Executes a prebuilt <see cref="IQuery{T}" /> and returns an <see cref="IEnumerable{T}" />
-		/// </summary>
-		/// <typeparam name="T">The Entity being queried</typeparam>
-		/// <param name="query">The prebuilt Query Object</param>
-		/// <returns>The <see cref="IEnumerable{T}" /> returned from the query</returns>
-		IEnumerable<T> Find<T>(IQuery<T> query);
-
-		/// <summary>
-		///     Executes a prebuilt <see cref="IScalar{T}" /> and returns a single instance of <typeparamref name="T" />
-		/// </summary>
-		/// <typeparam name="T">The Entity being queried</typeparam>
-		/// <param name="query">The prebuilt Query Object</param>
-		/// <returns>The instance of <typeparamref name="T" /> returned from the query</returns>
-		T Find<T>(IScalar<T> query);
+		IWriteOnlyUnitOfWork UnitOfWork { get; }
 
 		/// <summary>
 		///     Executes a prebuilt <see cref="ICommand" />
@@ -43,29 +27,5 @@ namespace Highway.Data
 		/// <param name="command">The prebuilt command object</param>
 		Task ExecuteAsync(ICommand command);
 
-		/// <summary>
-		///     Executes a prebuilt <see cref="IScalar{T}" /> and returns a single instance of <typeparamref name="T" />
-		/// </summary>
-		/// <typeparam name="T">The Entity being queried</typeparam>
-		/// <param name="query">The prebuilt Query Object</param>
-		/// <returns>The task that will return an instance of <typeparamref name="T" /> from the query</returns>
-		Task<T> FindAsync<T>(IScalar<T> query);
-
-		/// <summary>
-		///     Executes a prebuilt <see cref="IQuery{T}" /> and returns an <see cref="IEnumerable{T}" />
-		/// </summary>
-		/// <typeparam name="T">The Entity being queried</typeparam>
-		/// <param name="query">The prebuilt Query Object</param>
-		/// <returns>The task that will return <see cref="IEnumerable{T}" /> from the query</returns>
-		Task<IEnumerable<T>> FindAsync<T>(IQuery<T> query);
-
-		/// <summary>
-		///     Executes a prebuilt <see cref="IQuery{T}" /> and returns an <see cref="IEnumerable{T}" />
-		/// </summary>
-		/// <typeparam name="T">The Entity being queried</typeparam>
-		/// <param name="query">The prebuilt Query Object</param>
-		/// <returns>The task that will return <see cref="IEnumerable{T}" /> from the query</returns>
-		Task<IEnumerable<IProjection>> FindAsync<TSelection, IProjection>(IQuery<TSelection, IProjection> query)
-			where TSelection : class;
 	}
 }

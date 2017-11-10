@@ -5,10 +5,10 @@ namespace Highway.Data
 {
 	public class DomainRepository<T> : Repository, IDomainRepository<T> where T : class, IDomain
 	{
-		public DomainRepository(IDomainContext<T> context, IDomain domain) : base(context)
+		public DomainRepository(IDomainUnitOfWork<T> context, IDomain domain) : base(context)
 		{
 		}
 
-		public IDomainContext<T> DomainContext => (IDomainContext<T>)base.Context;
+		public IDomainUnitOfWork<T> DomainUnitOfWork => (IDomainUnitOfWork<T>)base.UnitOfWork;
 	}
 }

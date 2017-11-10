@@ -12,14 +12,14 @@ namespace Highway.Data
 		/// <summary>
 		///     The Command that will be executed at some point in the future
 		/// </summary>
-		protected Action<IDataContext> ContextQuery { get; set; }
+		protected Action<IReadOnlyUnitOfWork> ContextQuery { get; set; }
 
 
 		/// <summary>
 		///     Executes the expression against the passed in context and ignores the returned value if any
 		/// </summary>
 		/// <param name="context">The data context that the command is executed against</param>
-		public virtual void Execute(IDataContext context)
+		public virtual void Execute(IUnitOfWork context)
 		{
 			Context = context;
 			CheckContextAndQuery(ContextQuery);

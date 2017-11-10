@@ -53,9 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataContext.cs" />
-    <Compile Include="DefaultContextConfiguration.cs" />
-    <Compile Include="DomainContext`1.cs" />
+    <Compile Include="UnitOfWork.cs" />
+    <Compile Include="DefaultUnitOfWorkConfiguration.cs" />
+    <Compile Include="DomainUnitOfWork`1.cs" />
     <Compile Include="DomainRepository`1.cs" />
     <Compile Include="Factories\RepositoryFactory.cs" />
     <Compile Include="Factories\DomainRepositoryFactory.cs" />
@@ -64,7 +64,7 @@
     <Compile Include="Interfaces\IRepositoryFactory.cs" />
     <Compile Include="Interfaces\IDomainUnitOfWork`1.cs" />
     <Compile Include="Interfaces\IDomain.cs" />
-    <Compile Include="Interfaces\IContextConfiguration.cs" />
+    <Compile Include="Interfaces\IUnitOfWorkConfiguration.cs" />
     <Compile Include="Interfaces\IDomainRepository`1.cs" />
     <Compile Include="Interfaces\IEntityUnitOfWork.cs" />
     <Compile Include="Interfaces\IMappingConfiguration.cs" />

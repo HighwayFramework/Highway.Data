@@ -108,12 +108,13 @@ namespace Highway.Data
 		public virtual Task<T> FindAsync<T>(IScalar<T> query)
 		{
 			OnBeforeScalar(new BeforeScalar(query));
-			var task = new Task<T>(() => query.Execute(uow)).ContinueWith(t =>
+			var task = new Task<T>(() => query.Execute(uow));
+			task.Start();
+			task.ContinueWith(t =>
 			{
 				OnAfterScalar(new AfterScalar(query));
 				return t.Result;
 			});
-			task.Start();
 			return task;
 		}
 
@@ -126,12 +127,13 @@ namespace Highway.Data
 		public virtual Task<IEnumerable<T>> FindAsync<T>(IQuery<T> query)
 		{
 			OnBeforeQuery(new BeforeQuery(query));
-			var task = new Task<IEnumerable<T>>(() => query.Execute(uow)).ContinueWith(t =>
+			var task = new Task<IEnumerable<T>>(() => query.Execute(uow));
+			task.Start();
+			task.ContinueWith(t =>
 			{
 				OnAfterQuery(new AfterQuery(query));
 				return t.Result;
 			});
-			task.Start();
 			return task;
 		}
 
@@ -145,12 +147,13 @@ namespace Highway.Data
 			where TSelection : class
 		{
 			OnBeforeQuery(new BeforeQuery(query));
-			var task = new Task<IEnumerable<IProjection>>(() => query.Execute(uow)).ContinueWith(t =>
+			var task = new Task<IEnumerable<IProjection>>(() => query.Execute(uow));
+			task.Start();
+			task.ContinueWith(t =>
 			{
 				OnAfterQuery(new AfterQuery(query));
 				return t.Result;
 			});
-			task.Start();
 			return task;
 		}
 

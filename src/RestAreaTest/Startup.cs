@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
 using Microsoft.EntityFrameworkCore.Storage;
+using RestAreaTest.Models;
 
 namespace RestAreaTest
 {
@@ -33,6 +34,7 @@ namespace RestAreaTest
 				var builder = new ModelBuilder(csBuilder.CreateConventionSet());
 
 				builder.Entity<Blog>();
+				builder.Entity<Post>();
 
 				opt.UseModel(builder.Model);
 			},
@@ -51,8 +53,13 @@ namespace RestAreaTest
 
 			app.UseHighwayRestArea<UnitOfWork>(ra =>
 			{
-				ra.ConvertTo<Guid>(s => new Guid(s));
-				ra.AddFromContext<Blog, Guid>(e =>
+				ra.ConvertTo(s => new Guid(s));
+				//ra.AddTransform(cfg =>
+				//{
+				//	cfg.CreateMap<Post, PostModel>();
+				//});
+				ra.AddFromContext<Post, Guid, PostModel>(e => e.WithUrlName("posts"));
+				ra.AddFromContext<Blog, Guid, BlogModel>(e =>
 				{
 					e.WithUrlName("blogs");
 				});
@@ -64,7 +71,16 @@ namespace RestAreaTest
 				c.Add(new Blog
 				{
 					Id = new Guid("510B2A5E-0CDD-4590-95E3-05E93DFA247E"),
-					Title = "TimRayburn.net"
+					Title = "TimRayburn.net",
+					Posts = new List<Post>
+					{
+						new Post
+						{
+							Id = Guid.NewGuid(),
+							Title = "Ruling the World",
+							Body = "#Awesome!"
+						}
+					}
 				});
 				c.Commit();
 			}

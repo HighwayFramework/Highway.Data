@@ -1,20 +1,29 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Linq;
 using Highway.Data;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Reflection;
 
 namespace Highway.RestArea
 {
 	public abstract class EntityOptions
 	{
-		public Microsoft.EntityFrameworkCore.Metadata.Internal.EntityType Model { get; }
+		public EntityType Model { get; }
 		public string UrlName { get; }
 		public Type UnitOfWorkType { get; }
 		public Type EntityType { get; }
 		public Type IdentityType { get; }
+		public Type ModelType { get; }
 		public string IdentityRouteValue { get; }
 
-		protected EntityOptions(Microsoft.EntityFrameworkCore.Metadata.Internal.EntityType model, Type unitOfWorkType, Type entityType, Type identityType, string urlEntityName = null)
+		protected EntityOptions(
+			EntityType model, 
+			Type unitOfWorkType, 
+			Type entityType, 
+			Type identityType, 
+			Type modelType,
+			string urlEntityName = null)
 		{
 			Model = model;
 			UrlName = urlEntityName ?? model.ClrType.Name;
@@ -22,6 +31,8 @@ namespace Highway.RestArea
 			UnitOfWorkType = unitOfWorkType;
 			EntityType = entityType;
 			IdentityType = identityType;
+			ModelType = modelType;
 		}
+		public abstract void ConfigureMap(IMapperConfigurationExpression cfg);
 	}
 }

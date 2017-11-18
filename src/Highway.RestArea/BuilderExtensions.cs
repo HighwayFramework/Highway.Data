@@ -27,31 +27,38 @@ namespace Microsoft.AspNetCore.Builder
 
 			foreach (var entity in options.Entities)
 			{
-				routeBuilder.MapRoute(
-					name: $"{entity.UrlName} GetAll Route Name",
-					template: $"apis/{entity.UrlName}",
-					defaults: new {
-						type = entity,
-						method = "GetAll"
-					},
-					constraints: new { httpMethod = new HttpMethodRouteConstraint("GET") }
-				);
-				routeBuilder.MapRoute(
-					name: $"{entity.UrlName} GET Route Name",
-					template: $"apis/{entity.UrlName}/{{{entity.IdentityRouteValue}}}",
-					defaults: new
-					{
-						type = entity,
-						method = "GetOne"
-					},
-					constraints: new { httpMethod = new HttpMethodRouteConstraint("GET") }
-				);
+				var root = options.UrlPrefix;
+				CreateRoutes(routeBuilder, entity, root);
 			}
 
 
 			var routes = routeBuilder.Build();
 			app.UseRouter(routes);
 			return app;
+		}
+
+		private static void CreateRoutes(RouteBuilder routeBuilder, EntityOptions entity, string parentRoot)
+		{
+			var currentRoot = $"{parentRoot}/{entity.UrlName}";
+			var currentRootId = $"{currentRoot}/{{{entity.IdentityRouteValue}}}";
+
+			routeBuilder.MapRoute(
+				name: $"{currentRoot} GetAll",
+				template: currentRoot,
+				defaults: new { type = entity, method = "GetAll" },
+				constraints: new { httpMethod = new HttpMethodRouteConstraint("GET") }
+			);
+			routeBuilder.MapRoute(
+				name: $"{parentRoot}{entity.UrlName} GET Route Name",
+				template: currentRootId,
+				defaults: new { type = entity, method = "GetOne" },
+				constraints: new { httpMethod = new HttpMethodRouteConstraint("GET") }
+			);
+
+			foreach (var entityOptions in entity.Children)
+			{
+				CreateRoutes(routeBuilder, entityOptions, currentRootId);
+			}
 		}
 	}
 }

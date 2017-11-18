@@ -31,14 +31,14 @@ namespace Highway.RestArea
 
 		public async Task GetAll(HttpContext context, RouteData routeData)
 		{
-			var data = (await repo.FindAsync(options.GetAllFactory())).ToList();
+			var data = (await repo.FindAsync(options.GetAllFactory(routeData))).ToList();
 			Json<List<TModel>>(data, context);
 		}
 
 		public async Task GetOne(HttpContext context, RouteData routeData)
 		{
 			TId id = restAreaOptions.ConvertTo<TId>(routeData.Values[options.IdentityRouteValue].ToString());
-			var data = await repo.FindAsync(options.GetByIdFactory(id));
+			var data = await repo.FindAsync(options.GetByIdFactory(routeData));
 			if (data == null) PageNotFound(context);
 			else Json<TModel>(data, context);
 		}

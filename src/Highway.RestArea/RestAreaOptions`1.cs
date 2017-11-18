@@ -12,25 +12,22 @@ using System.Threading.Tasks;
 using Highway.Pavement;
 using Newtonsoft.Json;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Highway.RestArea
 {
-	public class RestAreaOptions<TContext>
+	public class RestAreaOptions<TContext> : RestAreaOptions
 		where TContext : UnitOfWork
 	{
-		public IEnumerable<EntityOptions> Entities { get; }
-		public JsonSerializer Serializer { get; }
-		private readonly Dictionary<Type, Func<string, object>> converters;
-		private readonly Action<IMapperConfigurationExpression> mapperConfig;
 		public RequestDelegate Handler { get; }
 
-		public RestAreaOptions(IEnumerable<EntityOptions> entityOptions, Dictionary<Type, Func<string, object>> converters, Action<IMapperConfigurationExpression> mapperConfig)
+		public RestAreaOptions(
+			IModel model,
+			IEnumerable<EntityOptions> entityOptions, 
+			Dictionary<Type, Func<string, object>> converters, 
+			Action<IMapperConfigurationExpression> mapperConfig
+		) : base(model, entityOptions, converters, mapperConfig)
 		{
-			Action<IMapperConfigurationExpression> defaultMapperConfig = cfg => { };
-			this.mapperConfig = mapperConfig ?? defaultMapperConfig;
-			this.converters = converters;
-			Serializer = new JsonSerializer();
-			Entities = entityOptions;
 			Handler = CreateHandler();
 		}
 
@@ -50,28 +47,6 @@ namespace Highway.RestArea
 				await handlerType.GetMethod(routeData.Values["method"] as string)
 					.InvokeAsync(handler, c, routeData);
 			};
-		}
-
-		private IMapper mapper = null;
-		public IMapper GetMapper()
-		{
-			if (mapper != null) return mapper;
-			var config = new MapperConfiguration(cfg =>
-			{
-				mapperConfig(cfg);
-				foreach (var e in Entities)
-				{
-					e.ConfigureMap(cfg);
-				}
-			});
-			config.AssertConfigurationIsValid();
-			mapper = config.CreateMapper();
-			return mapper;
-		}
-
-		public TId ConvertTo<TId>(string input)
-		{
-			return (TId) converters[typeof(TId)].Invoke(input);
 		}
 	}
 }

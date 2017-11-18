@@ -11,5 +11,6 @@ namespace RestAreaTest.Entities
 		public string Title { get; set; }
 		public string Body { get; set; }
 		public List<Category> Categories { get; set; }
+		public Blog Blog { get; set; }
 	}
 }

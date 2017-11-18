@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
 using Microsoft.EntityFrameworkCore.Storage;
 using RestAreaTest.Models;
+using RestAreaTest.Queries;
 
 namespace RestAreaTest
 {
@@ -54,14 +55,18 @@ namespace RestAreaTest
 			app.UseHighwayRestArea<UnitOfWork>(ra =>
 			{
 				ra.ConvertTo(s => new Guid(s));
-				//ra.AddTransform(cfg =>
-				//{
-				//	cfg.CreateMap<Post, PostModel>();
-				//});
-				ra.AddFromContext<Post, Guid, PostModel>(e => e.WithUrlName("posts"));
-				ra.AddFromContext<Blog, Guid, BlogModel>(e =>
+				ra.AddEntityById<Blog, Guid, BlogModel>(e =>
 				{
 					e.WithUrlName("blogs");
+					e.WithGetOne<GetOneBlog>();
+					e.WithGetAll<GetAllBlogs>();
+
+					e.AddEntityById<Post, Guid, PostModel>(p => p.Posts, x =>
+					{
+						x.WithUrlName("posts");
+						x.WithGetOne<GetOnePost>();
+						x.WithGetAll<GetAllPosts>();
+					});
 				});
 			});
 
@@ -70,15 +75,29 @@ namespace RestAreaTest
 			{
 				c.Add(new Blog
 				{
-					Id = new Guid("510B2A5E-0CDD-4590-95E3-05E93DFA247E"),
+					Id = new Guid("AAFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF"),
 					Title = "TimRayburn.net",
 					Posts = new List<Post>
 					{
 						new Post
 						{
-							Id = Guid.NewGuid(),
+							Id = new Guid("AAAAFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF"),
 							Title = "Ruling the World",
 							Body = "#Awesome!"
+						}
+					}
+				});
+				c.Add(new Blog
+				{
+					Id = new Guid("BBFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF"),
+					Title = "Driven To Develop",
+					Posts = new List<Post>
+					{
+						new Post
+						{
+							Id = new Guid("BBBBFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF"),
+							Title = "Smashing Success",
+							Body = "It's what we do."
 						}
 					}
 				});

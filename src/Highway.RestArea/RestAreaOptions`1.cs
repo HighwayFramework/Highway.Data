@@ -24,9 +24,8 @@ namespace Highway.RestArea
 		public RestAreaOptions(
 			IModel model,
 			IEnumerable<EntityOptions> entityOptions, 
-			Dictionary<Type, Func<string, object>> converters, 
 			Action<IMapperConfigurationExpression> mapperConfig
-		) : base(model, entityOptions, converters, mapperConfig)
+		) : base(model, entityOptions, mapperConfig)
 		{
 			Handler = CreateHandler();
 		}

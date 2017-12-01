@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Highway.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
-using Highway.Data;
-using RestAreaTest.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
 using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Extensions.DependencyInjection;
+using RestAreaTest.Entities;
 using RestAreaTest.Models;
 using RestAreaTest.Queries;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RestAreaTest
 {
@@ -51,19 +48,16 @@ namespace RestAreaTest
 			{
 				app.UseDeveloperExceptionPage();
 			}
-
+			
 			app.UseHighwayRestArea<UnitOfWork>(ra =>
 			{
-				ra.ConvertTo(s => new Guid(s));
 				ra.AddEntityById<Blog, Guid, BlogModel>(e =>
 				{
-					e.WithUrlName("blogs");
 					e.WithGetOne<GetOneBlog>();
 					e.WithGetAll<GetAllBlogs>();
 
 					e.AddEntityById<Post, Guid, PostModel>(p => p.Posts, x =>
 					{
-						x.WithUrlName("posts");
 						x.WithGetOne<GetOnePost>();
 						x.WithGetAll<GetAllPosts>();
 					});

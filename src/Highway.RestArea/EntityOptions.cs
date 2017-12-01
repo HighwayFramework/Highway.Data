@@ -5,6 +5,7 @@ using Highway.Data;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Reflection;
 using System.Collections.Generic;
+using Humanizer;
 
 namespace Highway.RestArea
 {
@@ -41,7 +42,7 @@ namespace Highway.RestArea
 			Model = model;
 			Children = children;
 			UrlName = urlEntityName ?? model.ClrType.Name;
-			IdentityRouteValue = UrlName + "Id";
+			IdentityRouteValue = (UrlName + "Id").Camelize();
 			UnitOfWorkType = unitOfWorkType;
 			EntityType = entityType;
 			IdentityType = identityType;

@@ -12,7 +12,6 @@ namespace Highway.RestArea
 		where TUnitOfWork : UnitOfWork
 	{
 		private readonly List<EntityOptions> entityOptions = new List<EntityOptions>();
-		private readonly Dictionary<Type, Func<string, object>> converters = new Dictionary<Type, Func<string, object>>();
 		private Action<IMapperConfigurationExpression> mapperConfig = null;
 
 		public RestAreaOptionsBuilder(IModel model) : base(model)
@@ -34,7 +33,7 @@ namespace Highway.RestArea
 		}
 		public RestAreaOptions<TUnitOfWork> Build()
 		{
-			var opts = new RestAreaOptions<TUnitOfWork>(model, entityOptions, converters, mapperConfig);
+			var opts = new RestAreaOptions<TUnitOfWork>(model, entityOptions, mapperConfig);
 			SetRestArea(opts.Entities, opts);
 			return opts;
 		}
@@ -45,11 +44,6 @@ namespace Highway.RestArea
 				entity.RestArea = opts;
 				SetRestArea(entity.Children, opts);
 			}
-		}
-
-		public void ConvertTo<TId>(Func<string, TId> converter)
-		{
-			converters.Add(typeof(TId), s => converter(s));
 		}
 	}
 }

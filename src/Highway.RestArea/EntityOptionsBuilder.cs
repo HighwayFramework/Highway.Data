@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Humanizer;
 
 namespace Highway.RestArea
 {
@@ -27,7 +28,11 @@ namespace Highway.RestArea
 			this.entityModel = entityModel;
 			this.unitOfWorkType = unitOfWorkType;
 			children = new List<EntityOptions>();
-			name = null;
+			name = typeof(TModel).Name
+				.Humanize(LetterCasing.Title)
+				.Replace(" Model", "")
+				.Dehumanize()
+				.Pluralize(inputIsKnownToBeSingular: false);
 		}
 
 		public EntityOptionsBuilder<TEntity, TId, TModel> WithUrlName(string entityName)

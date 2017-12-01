@@ -4,10 +4,10 @@
     <Sessions>
       <Item Id="MainSession">
         <DetailsOrientation>Vertical</DetailsOrientation>
-        <Filter Type="DevExpress.CodeRush.TestRunner.Data.Filters.TestFilterAnd" Assembly="DevExpress.CodeRush.TestRunner.Data, Version=17.1.9.0, Culture=neutral, PublicKeyToken=79868b8147b5eae4">
-          <Filter Type="DevExpress.CodeRush.TestRunner.Data.Filters.TestFilterOr" Assembly="DevExpress.CodeRush.TestRunner.Data, Version=17.1.9.0, Culture=neutral, PublicKeyToken=79868b8147b5eae4" />
-          <Filter Type="DevExpress.CodeRush.TestRunner.Data.Filters.TestFilterNot" Assembly="DevExpress.CodeRush.TestRunner.Data, Version=17.1.9.0, Culture=neutral, PublicKeyToken=79868b8147b5eae4">
-            <Filter Type="DevExpress.CodeRush.TestRunner.Data.Filters.TestFilterAnd" Assembly="DevExpress.CodeRush.TestRunner.Data, Version=17.1.9.0, Culture=neutral, PublicKeyToken=79868b8147b5eae4" />
+        <Filter Type="DevExpress.CodeRush.TestRunner.Data.Filters.TestFilterAnd" Assembly="DevExpress.CodeRush.TestRunner.Data, Version=17.2.3.0, Culture=neutral, PublicKeyToken=79868b8147b5eae4">
+          <Filter Type="DevExpress.CodeRush.TestRunner.Data.Filters.TestFilterOr" Assembly="DevExpress.CodeRush.TestRunner.Data, Version=17.2.3.0, Culture=neutral, PublicKeyToken=79868b8147b5eae4" />
+          <Filter Type="DevExpress.CodeRush.TestRunner.Data.Filters.TestFilterNot" Assembly="DevExpress.CodeRush.TestRunner.Data, Version=17.2.3.0, Culture=neutral, PublicKeyToken=79868b8147b5eae4">
+            <Filter Type="DevExpress.CodeRush.TestRunner.Data.Filters.TestFilterAnd" Assembly="DevExpress.CodeRush.TestRunner.Data, Version=17.2.3.0, Culture=neutral, PublicKeyToken=79868b8147b5eae4" />
           </Filter>
         </Filter>
         <SessionName>Main</SessionName>

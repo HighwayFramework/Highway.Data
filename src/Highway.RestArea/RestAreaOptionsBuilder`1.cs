@@ -13,9 +13,16 @@ namespace Highway.RestArea
 	{
 		private readonly List<EntityOptions> entityOptions = new List<EntityOptions>();
 		private Action<IMapperConfigurationExpression> mapperConfig = null;
+		private string urlPrefix;
 
 		public RestAreaOptionsBuilder(IModel model) : base(model)
 		{
+		}
+
+		public RestAreaOptionsBuilder<TUnitOfWork> SetUrlPrefix(string urlPrefix)
+		{
+			this.urlPrefix = urlPrefix;
+			return this;
 		}
 
 		public RestAreaOptionsBuilder<TUnitOfWork> AddEntityById<TEntity, TId, TModel>(Action<EntityOptionsBuilder<TEntity, TId, TModel>> configure)
@@ -33,7 +40,7 @@ namespace Highway.RestArea
 		}
 		public RestAreaOptions<TUnitOfWork> Build()
 		{
-			var opts = new RestAreaOptions<TUnitOfWork>(model, entityOptions, mapperConfig);
+			var opts = new RestAreaOptions<TUnitOfWork>(model, urlPrefix, entityOptions, mapperConfig);
 			SetRestArea(opts.Entities, opts);
 			return opts;
 		}

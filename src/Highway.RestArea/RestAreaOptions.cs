@@ -19,6 +19,7 @@ namespace Highway.RestArea
 
 		public RestAreaOptions(
 			IModel model,
+			string urlPrefix,
 			IEnumerable<EntityOptions> entityOptions,
 			Action<IMapperConfigurationExpression> mapperConfig
 		)
@@ -28,7 +29,7 @@ namespace Highway.RestArea
 			this.mapperConfig = mapperConfig ?? defaultMapperConfig;
 			Entities = entityOptions;
 			Serializer = new JsonSerializer();
-			UrlPrefix = "apis";
+			UrlPrefix = "apis/v1";
 		}
 
 		public TId ConvertTo<TId>(string input)

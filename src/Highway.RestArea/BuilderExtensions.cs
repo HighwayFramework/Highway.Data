@@ -49,10 +49,22 @@ namespace Microsoft.AspNetCore.Builder
 				constraints: new { httpMethod = new HttpMethodRouteConstraint("GET") }
 			);
 			routeBuilder.MapRoute(
-				name: $"{parentRoot}{entity.UrlName} GET Route Name",
+				name: $"{parentRoot}{entity.UrlName} Get",
 				template: currentRootId,
 				defaults: new { type = entity, method = "GetOne" },
 				constraints: new { httpMethod = new HttpMethodRouteConstraint("GET") }
+			);
+			routeBuilder.MapRoute(
+				name: $"{currentRoot} Post",
+				template: currentRoot,
+				defaults: new { type = entity, method = "Post" },
+				constraints: new { httpMethod = new HttpMethodRouteConstraint("POST") }
+			);
+			routeBuilder.MapRoute(
+				name: $"{currentRoot} Put",
+				template: currentRoot,
+				defaults: new { type = entity, method = "Put" },
+				constraints: new { httpMethod = new HttpMethodRouteConstraint("PUT") }
 			);
 
 			foreach (var entityOptions in entity.Children)

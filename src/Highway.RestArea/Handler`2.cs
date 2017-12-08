@@ -15,7 +15,6 @@ namespace Highway.RestArea
 		where TContext : UnitOfWork
 		where TId : IEquatable<TId>
 		where TEntity : class, IIdentifiable<TId>
-
 	{
 		private readonly RestAreaOptions<TContext> restAreaOptions;
 		private readonly EntityOptions<TEntity, TId, TModel> options;
@@ -41,6 +40,23 @@ namespace Highway.RestArea
 			var data = await repo.FindAsync(options.GetByIdFactory(routeData));
 			if (data == null) PageNotFound(context);
 			else Json<TModel>(data, context);
+		}
+
+		public async Task Post(HttpContext context, RouteData routeData)
+		{
+			TModel model = default(TModel);
+			using (var rdr = new JsonTextReader(new StreamReader(context.Request.Body)))
+			{
+				model = restAreaOptions.Serializer.Deserialize<TModel>(rdr);
+			}
+			var entity = restAreaOptions.GetMapper().Map<TEntity>(model);
+			repo.UnitOfWork.Add(entity);
+			await repo.UnitOfWork.CommitAsync();
+		}
+
+		public Task Put(HttpContext context, RouteData routeData)
+		{
+			return Task.FromResult(0);
 		}
 
 		private void PageNotFound(HttpContext context)

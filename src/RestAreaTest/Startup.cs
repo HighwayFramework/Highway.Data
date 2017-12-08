@@ -63,7 +63,10 @@ namespace RestAreaTest
 					});
 				});
 			});
-
+			SetupTestData(app);
+		}
+		private void SetupTestData(IApplicationBuilder app)
+		{
 			using (var scope = app.ApplicationServices.CreateScope())
 			using (var c = scope.ServiceProvider.GetService<UnitOfWork>())
 			{

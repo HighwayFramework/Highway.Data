@@ -23,7 +23,7 @@ namespace Highway.Data
 		/// <returns>an <see cref="IQueryable{TSelection}" /></returns>
 		protected virtual IQueryable<TSelection> ExtendQuery()
 		{
-			return Selector((UnitOfWork)Context);
+			return Selector((UnitOfWork)UnitOfWork);
 		}
 
 		/// <summary>
@@ -50,7 +50,7 @@ namespace Highway.Data
 		/// <returns>The preppared but unexecuted queryable</returns>
 		protected virtual IQueryable<TProjection> PrepareQuery(IReadOnlyUnitOfWork context)
 		{
-			Context = context;
+			UnitOfWork = context;
 			CheckContextAndQuery(Selector);
 			var query = ExtendQuery();
 			return AppendExpressions(query);

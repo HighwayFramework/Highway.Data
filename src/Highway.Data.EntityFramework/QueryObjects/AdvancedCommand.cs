@@ -21,7 +21,7 @@ namespace Highway.Data
 		/// <param name="context">The data context that the command is executed against</param>
 		public virtual void Execute(IUnitOfWork context)
 		{
-			Context = context;
+			UnitOfWork = context;
 			CheckContextAndQuery(ContextQuery);
 			ContextQuery((UnitOfWork)context);
 		}

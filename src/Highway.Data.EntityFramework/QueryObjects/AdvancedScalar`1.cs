@@ -23,7 +23,7 @@ namespace Highway.Data
 		/// <returns>The instance of <typeparamref name="T" /> that the query materialized if any</returns>
 		public T Execute(IReadOnlyUnitOfWork context)
 		{
-			Context = context;
+			UnitOfWork = context;
 			CheckContextAndQuery(ContextQuery);
 			return ContextQuery((UnitOfWork)context);
 		}

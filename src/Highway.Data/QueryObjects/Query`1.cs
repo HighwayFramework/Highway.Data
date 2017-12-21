@@ -55,7 +55,7 @@ namespace Highway.Data
 		{
 			try
 			{
-				return ContextQuery(Context);
+				return ContextQuery(UnitOfWork);
 			}
 			catch (Exception)
 			{
@@ -82,7 +82,7 @@ namespace Highway.Data
 
 		protected virtual IQueryable<T> PrepareQuery(IReadOnlyUnitOfWork context)
 		{
-			Context = context;
+			UnitOfWork = context;
 			CheckContextAndQuery(ContextQuery);
 			IQueryable<T> query = ExtendQuery();
 			return AppendExpressions(query);

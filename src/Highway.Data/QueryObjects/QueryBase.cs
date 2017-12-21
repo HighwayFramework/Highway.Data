@@ -30,7 +30,7 @@ namespace Highway.Data
 		/// <summary>
 		///     The reference to the <see cref="IDataContext" /> that gives data connection
 		/// </summary>
-		protected IReadOnlyUnitOfWork Context { get; set; }
+		protected IReadOnlyUnitOfWork UnitOfWork { get; set; }
 
 
 		/// <summary>
@@ -54,7 +54,7 @@ namespace Highway.Data
 		/// <param name="query">The query to be executed</param>
 		protected virtual void CheckContextAndQuery(object query)
 		{
-			if (Context == null) throw new InvalidOperationException("DataContext cannot be null.");
+			if (UnitOfWork == null) throw new InvalidOperationException("DataContext cannot be null.");
 			if (query == null) throw new InvalidOperationException("Null Query cannot be executed.");
 		}
 	}

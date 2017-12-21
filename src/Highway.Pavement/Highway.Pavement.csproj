@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
-    <Version>1.0.0-beta1</Version>
+    <Version>1.0.0-beta2</Version>
     <Authors>trayburn, devlinliles</Authors>
     <Company>trayburn, devlinliles</Company>
     <Description>The fastest and smoothest way to great architecture</Description>

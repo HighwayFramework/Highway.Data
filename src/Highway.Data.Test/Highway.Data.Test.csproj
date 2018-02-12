@@ -19,6 +19,7 @@
     <ProjectReference Include="..\Highway.Data.EntityFrameworkCore\Highway.Data.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\Highway.Data.Queries\Highway.Data.Queries.csproj" />
     <ProjectReference Include="..\Highway.Data\Highway.Data.csproj" />
+    <ProjectReference Include="..\Highway.DriversEd\Highway.DriversEd.csproj" />
   </ItemGroup>
 
   <ItemGroup>

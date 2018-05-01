@@ -12,7 +12,7 @@ namespace Highway.Data
 		/// <summary>
 		///     The Command that will be executed at some point in the future
 		/// </summary>
-		protected Action<IReadOnlyUnitOfWork> ContextQuery { get; set; }
+		protected Action<IUnitOfWork> ContextQuery { get; set; }
 
 
 		/// <summary>

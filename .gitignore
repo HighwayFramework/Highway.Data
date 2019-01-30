@@ -6,6 +6,7 @@ data
 *.orig
 buildarchive
 *.ncrunchsolution
+.cr/
 
 
 ## ---------------------------------------------------------

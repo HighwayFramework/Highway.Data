@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Highway.Data.EntityFrameworkCore\Highway.Data.EntityFrameworkCore.csproj" />
-    <ProjectReference Include="..\Highway.RestArea\Highway.RestArea.csproj" />
   </ItemGroup>
 
 </Project>

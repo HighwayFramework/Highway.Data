@@ -131,7 +131,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryObjects\AdoCommandBase.cs" />
     <Compile Include="QueryObjects\AdoQueryBase.cs" />
-    <Compile Include="QueryObjects\AdoOutCommand.cs" />
+    <Compile Include="QueryObjects\AdoCommand.cs" />
     <Compile Include="QueryObjects\AdoQuery.cs" />
     <Compile Include="QueryObjects\AdoScalar.cs" />
     <Compile Include="QueryObjects\AdoScalarBase.cs" />
@@ -141,7 +141,7 @@
     <Compile Include="QueryObjects\AdvancedQuery.cs" />
     <Compile Include="QueryObjects\AdvancedScalar.cs" />
     <Compile Include="QueryObjects\SqlScalar.cs" />
-    <Compile Include="QueryObjects\StoredProcedureOutCommand.cs" />
+    <Compile Include="QueryObjects\StoredProcedureCommand.cs" />
     <Compile Include="QueryObjects\StoredProcedureQuery.cs" />
     <Compile Include="QueryObjects\StoredProcedureScalar.cs" />
     <Compile Include="Repositories\DomainRepository.cs" />

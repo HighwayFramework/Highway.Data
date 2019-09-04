@@ -8,8 +8,9 @@ using Highway.Data.Extensions;
 namespace Highway.Data
 {
     // ERIC:  Derive from this?  Seems heavy-handed.
-    public abstract class AdoQueryBase<T> : QueryBase, IQuery<T>
+    public abstract class AdoQueryBase<T> : IQuery<T>
     {
+        // ERIC:  Discuss
         protected Func<DbContext, IQueryable<T>> ContextQuery { get; }
 
         protected abstract IEnumerable<IDataParameter> Parameters { get; }

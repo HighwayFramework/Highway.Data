@@ -9,69 +9,55 @@ namespace Highway.Data.Extensions
     {
         public static void Execute(this IDbCommand cmd)
         {
-            try
+            if (cmd.Connection.State != ConnectionState.Open)
             {
-                // ERIC:  Code defensively, or assumed closed connection?
                 cmd.Connection.Open();
-                cmd.ExecuteNonQuery();
             }
-            finally
-            {
-                cmd.Connection.Close();
-            }
+
+            cmd.ExecuteNonQuery();
         }
 
         public static T ExecuteWithResult<T>(this IDbCommand cmd, Func<IDbCommand, T> mapResults)
         {
-            T result;
-            try
+            if (cmd.Connection.State != ConnectionState.Open)
             {
-                // ERIC:  Code defensively, or assumed closed connection?
                 cmd.Connection.Open();
-                cmd.ExecuteNonQuery();
-                result = mapResults(cmd);
             }
-            finally
-            {
-                cmd.Connection.Close();
-            }
+
+            cmd.ExecuteNonQuery();
+            var result = mapResults(cmd);
 
             return result;
         }
-        
+
         public static T ExecuteWithResult<T>(this IDbCommand cmd, Func<IDataReader, T> mapResult)
         {
             T result;
-            try
+            if (cmd.Connection.State != ConnectionState.Open)
             {
                 cmd.Connection.Open();
-                using (var reader = cmd.ExecuteReader())
-                {
-                    result = mapResult(reader);
-                }
             }
-            finally
+
+            using (var reader = cmd.ExecuteReader())
             {
-                cmd.Connection.Close();
+                result = mapResult(reader);
             }
 
             return result;
         }
 
-        public static IQueryable<T> ExecuteWithResults<T>(this IDbCommand cmd, Func<IDataReader, IEnumerable<T>> mapResults)
+        public static IQueryable<T> ExecuteWithResults<T>(this IDbCommand cmd,
+            Func<IDataReader, IEnumerable<T>> mapResults)
         {
             IQueryable<T> results;
-            try
+            if (cmd.Connection.State != ConnectionState.Open)
             {
                 cmd.Connection.Open();
-                using (var reader = cmd.ExecuteReader())
-                {
-                    results = mapResults(reader).ToList().AsQueryable();
-                }
             }
-            finally
+
+            using (var reader = cmd.ExecuteReader())
             {
-                cmd.Connection.Close();
+                results = mapResults(reader).ToList().AsQueryable();
             }
 
             return results;

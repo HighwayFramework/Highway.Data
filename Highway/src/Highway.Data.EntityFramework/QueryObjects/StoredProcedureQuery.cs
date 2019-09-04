@@ -8,17 +8,9 @@ using Highway.Data.Extensions;
 
 namespace Highway.Data
 {
-    public abstract class StoredProcedureQuery<T> : QueryBase, IQuery<T>
+    public abstract class StoredProcedureQuery<T> : AdoBase, IQuery<T>
     {
-        private Func<DbContext, IQueryable<T>> _contextQuery;
-
-        protected IQueryable<T> Output { get; set; }
-
-        protected IEnumerable<IDataParameter> Parameters { get; set; }
-
         protected abstract string StoredProcedureName { get; }
-
-        protected DbContext TypedContext { get; set; }
 
         public virtual IEnumerable<T> Execute(IDataContext context)
         {
@@ -27,32 +19,23 @@ namespace Highway.Data
 
         public string OutputQuery(IDataContext context)
         {
-            var c = (DbContext)context;
-            var cmd = GetCommand(c);
+            var efContext = GetTypedContext(context);
+            var cmd = GetCommand(efContext);
             return cmd.CommandText;
         }
-
-        protected virtual IQueryable<T> ExtendQuery()
-        {
-            return _contextQuery((DbContext)Context);
-        }
-
-        protected abstract IEnumerable<IDataParameter> GetParameters();
 
         protected abstract IEnumerable<T> MapReaderResults(IDataReader reader);
 
         protected virtual IQueryable<T> PrepareQuery(IDataContext context)
         {
-            TypedContext = (DbContext)context;
-            Parameters = GetParameters();
-            _contextQuery = c =>
+            var efContext = GetTypedContext(context);
+            Func<DbContext, IQueryable<T>> contextQuery = c =>
             {
                 var cmd = GetCommand(c);
-                Output = cmd.ExecuteCommandWithResults(MapReaderResults);
-                return Output;
+                return cmd.ExecuteCommandWithResults(MapReaderResults);
             };
 
-            return _contextQuery(TypedContext);
+            return contextQuery(efContext);
         }
 
         private IDbCommand GetCommand(DbContext c)

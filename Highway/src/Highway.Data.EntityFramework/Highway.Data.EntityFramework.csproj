@@ -89,6 +89,7 @@
     <Compile Include="Contexts\DomainContext.cs" />
     <Compile Include="Database\DropCreateInitializer.cs" />
     <Compile Include="DefaultContextConfiguration.cs" />
+    <Compile Include="Extensions\DbContextExtensions.cs" />
     <Compile Include="Interceptors\DynamicFilters\DynamicFilterCommandInterceptor.cs" />
     <Compile Include="Interceptors\DynamicFilters\DynamicFilterConstants.cs" />
     <Compile Include="Interceptors\DynamicFilters\DynamicFilterConvention.cs" />
@@ -128,12 +129,18 @@
     <Compile Include="Mappings\TypeMappings.cs" />
     <Compile Include="PrebuiltInterceptors\AppendWhere.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryObjects\AdoCommand.cs" />
+    <Compile Include="QueryObjects\AdoQuery.cs" />
+    <Compile Include="QueryObjects\AdoScalar.cs" />
     <Compile Include="QueryObjects\SqlCommand.cs" />
     <Compile Include="QueryObjects\SqlQuery.cs" />
     <Compile Include="QueryObjects\AdvancedCommand.cs" />
     <Compile Include="QueryObjects\AdvancedQuery.cs" />
     <Compile Include="QueryObjects\AdvancedScalar.cs" />
     <Compile Include="QueryObjects\SqlScalar.cs" />
+    <Compile Include="QueryObjects\StoredProcedureCommand.cs" />
+    <Compile Include="QueryObjects\StoredProcedureQuery.cs" />
+    <Compile Include="QueryObjects\StoredProcedureScalar.cs" />
     <Compile Include="Repositories\DomainRepository.cs" />
   </ItemGroup>
   <ItemGroup>

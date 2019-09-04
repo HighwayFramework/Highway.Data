@@ -91,6 +91,8 @@
     <Compile Include="Contexts\TypeRepresentations\ObjectRepresentationRepository.cs" />
     <Compile Include="Contexts\TypeRepresentations\ObjectRepresentation.cs" />
     <Compile Include="EventManagement\Interfaces\BaseInterceptor.cs" />
+    <Compile Include="Extensions\DbCommandExtensions.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\QueryableExtensions.cs" />
     <Compile Include="Factories\IDataContextFactory.cs" />
     <Compile Include="Filtering\AndCriteria.cs" />

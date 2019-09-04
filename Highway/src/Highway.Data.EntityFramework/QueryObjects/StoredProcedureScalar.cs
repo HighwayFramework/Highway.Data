@@ -1,27 +1,17 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using Highway.Data.EntityFramework.Extensions;
-using Highway.Data.Extensions;
 
 namespace Highway.Data
 {
-    public abstract class StoredProcedureScalar<T> : AdoScalarBase, IScalar<T>
+    public abstract class StoredProcedureScalar<T> : AdoScalarBase<T>, IScalar<T>
     {
         public abstract string StoredProcedureName { get; }
 
-        public T Execute(IDataContext context)
+        protected override IDbCommand GetCommand(DbContext c)
         {
-            var efContext = context.GetTypedContext();
-            Func<DbContext, T> contextQuery = c =>
-            {
-                var cmd = c.CreateStoredProcedureCommand(StoredProcedureName, Parameters?.ToArray());
-                return cmd.ExecuteCommandWithResult(MapReaderResults);
-            };
-            return contextQuery(efContext);
+            return c.CreateStoredProcedureCommand(StoredProcedureName, Parameters?.ToArray());
         }
-
-        protected abstract T MapReaderResults(IDataReader reader);
     }
 }

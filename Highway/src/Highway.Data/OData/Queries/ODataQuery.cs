@@ -53,13 +53,13 @@ namespace Highway.Data
         /// <summary>
         ///     This executes the expression in ContextQuery on the context that is passed in, resulting in a an <see cref="ODataResult{T}"/>
         /// </summary>
-        /// <param name="context">the data context that the query should be executed against</param>
+        /// <param name="dataContext">the data context that the query should be executed against</param>
         /// <returns>
         ///     <see cref="ODataResult{T}"/>
         /// </returns>
-        public virtual ODataResult<T> Execute(IDataContext context)
+        public virtual ODataResult<T> Execute(IDataContext dataContext)
         {
-            var task = PrepareQuery(context);
+            var task = PrepareQuery(dataContext);
             return new ODataResult<T>(task);
         }
 

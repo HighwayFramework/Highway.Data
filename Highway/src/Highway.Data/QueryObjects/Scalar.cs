@@ -22,13 +22,13 @@ namespace Highway.Data
         /// <summary>
         ///     Executes the expression against the passed in context
         /// </summary>
-        /// <param name="context">The data context that the scalar query is executed against</param>
+        /// <param name="dataContext">The data context that the scalar query is executed against</param>
         /// <returns>The instance of <typeparamref name="T" /> that the query materialized if any</returns>
-        public T Execute(IDataContext context)
+        public T Execute(IDataContext dataContext)
         {
-            Context = context;
+            Context = dataContext;
             CheckContextAndQuery(ContextQuery);
-            return ContextQuery(context);
+            return ContextQuery(dataContext);
         }
 
             }
@@ -53,13 +53,13 @@ namespace Highway.Data
         ///     This executes the expression in ContextQuery on the context that is passed in, resulting in a
         ///     <see cref="IQueryable{T}" /> that is returned as an <see cref="IEnumerable{T}" />
         /// </summary>
-        /// <param name="context">the data context that the query should be executed against</param>
+        /// <param name="dataContext">the data context that the query should be executed against</param>
         /// <returns>
         ///     <see cref="IEnumerable{T}" />
         /// </returns>
-        public virtual TProjection Execute(IDataContext context)
+        public virtual TProjection Execute(IDataContext dataContext)
         {
-            TProjection task = PrepareQuery(context);
+            TProjection task = PrepareQuery(dataContext);
             return task;
         }
 

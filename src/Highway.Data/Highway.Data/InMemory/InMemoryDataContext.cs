@@ -1,5 +1,4 @@
-﻿
-using System.Linq;
+﻿using System.Linq;
 using Highway.Data.Contexts.TypeRepresentations;
 using System;
 using System.Collections;

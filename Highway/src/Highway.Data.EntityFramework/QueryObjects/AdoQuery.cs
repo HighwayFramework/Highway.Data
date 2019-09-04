@@ -11,7 +11,7 @@ namespace Highway.Data
 
         protected override IDbCommand GetCommand(DbContext c)
         {
-            return c.CreateSqlCommand(Query, Parameters?.ToArray());
+            return c.CreateAdoCommand(Query, Parameters?.ToArray());
         }
     }
 }

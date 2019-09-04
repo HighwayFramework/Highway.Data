@@ -10,12 +10,14 @@ namespace Highway.Data
 {
     public abstract class AdoScalar<T> : AdoBase, IScalar<T>
     {
+        public abstract string Query { get; }
+
         public T Execute(IDataContext context)
         {
             var efContext = GetTypedContext(context);
             Func<DbContext, T> contextQuery = c =>
             {
-                var cmd = c.CreateSqlCommand(SqlStatement, Parameters?.ToArray());
+                var cmd = c.CreateSqlCommand(Query, Parameters?.ToArray());
                 return cmd.ExecuteCommandWithResult(MapReaderResults);
             };
             return contextQuery(efContext);

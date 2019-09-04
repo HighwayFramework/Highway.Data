@@ -10,6 +10,8 @@ namespace Highway.Data
 {
     public abstract class AdoQuery<T> : AdoBase, IQuery<T>
     {
+        public abstract string Query { get; }
+
         public virtual IEnumerable<T> Execute(IDataContext context)
         {
             return PrepareQuery(context);
@@ -38,7 +40,7 @@ namespace Highway.Data
 
         private IDbCommand GetCommand(DbContext c)
         {
-            return c.CreateSqlCommand(SqlStatement, Parameters?.ToArray());
+            return c.CreateSqlCommand(Query, Parameters?.ToArray());
         }
     }
 }

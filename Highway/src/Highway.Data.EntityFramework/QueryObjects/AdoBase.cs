@@ -9,8 +9,6 @@ namespace Highway.Data
     {
         protected abstract IEnumerable<IDataParameter> Parameters { get; }
 
-        protected abstract string SqlStatement { get; }
-
         protected DbContext GetTypedContext(IDataContext context)
         {
             var efContext = context as DbContext;

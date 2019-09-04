@@ -18,32 +18,20 @@ using Highway.Data.Extensions;
 
 namespace Highway.Data
 {
-    public abstract class StoredProcedureScalar<T> : QueryBase, IScalar<T>
+    public abstract class StoredProcedureScalar<T> : AdoBase, IScalar<T>
     {
-        private Func<DbContext, T> _contextQuery;
-
-        protected T Output { get; set; }
-
-        protected IEnumerable<IDataParameter> Parameters { get; set; }
-
-        protected abstract string StoredProcedureName { get; }
-
-        protected DbContext TypedContext { get; set; }
+        public abstract string StoredProcedureName { get; }
 
         public T Execute(IDataContext context)
         {
-            TypedContext = (DbContext)context;
-            Parameters = GetParameters();
-            _contextQuery = c =>
+            var efContext = GetTypedContext(context);
+            Func<DbContext, T> contextQuery = c =>
             {
                 var cmd = c.CreateStoredProcedureCommand(StoredProcedureName, Parameters?.ToArray());
-                Output = cmd.ExecuteCommandWithResult(MapReaderResults);
-                return Output;
+                return cmd.ExecuteCommandWithResult(MapReaderResults);
             };
-            return _contextQuery(TypedContext);
+            return contextQuery(efContext);
         }
-
-        protected abstract IEnumerable<IDataParameter> GetParameters();
 
         protected abstract T MapReaderResults(IDataReader reader);
     }

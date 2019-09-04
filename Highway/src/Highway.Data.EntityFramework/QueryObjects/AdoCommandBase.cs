@@ -10,7 +10,7 @@ namespace Highway.Data
     {
         protected abstract IEnumerable<IDataParameter> Parameters { get; }
 
-        public AdoCommandBase()
+        protected AdoCommandBase()
         {
             ContextQuery = dbContext =>
             {

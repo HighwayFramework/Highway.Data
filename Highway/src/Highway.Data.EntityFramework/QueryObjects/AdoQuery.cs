@@ -8,24 +8,6 @@ using Highway.Data.Extensions;
 
 namespace Highway.Data
 {
-    public abstract class AdoBase : QueryBase
-    {
-        protected abstract IEnumerable<IDataParameter> Parameters { get; }
-
-        protected abstract string SqlStatement { get; }
-
-        protected DbContext GetTypedContext(IDataContext context)
-        {
-            var efContext = context as DbContext;
-            if (efContext == null)
-            {
-                throw new InvalidOperationException("You cannot execute EF Sql Queries against a non-EF context");
-            }
-
-            return efContext;
-        }
-    }
-
     public abstract class AdoQuery<T> : AdoBase, IQuery<T>
     {
         public virtual IEnumerable<T> Execute(IDataContext context)
@@ -45,7 +27,6 @@ namespace Highway.Data
         protected virtual IQueryable<T> PrepareQuery(IDataContext context)
         {
             var efContext = GetTypedContext(context);
-
             Func<DbContext, IQueryable<T>> contextQuery = c =>
             {
                 var cmd = GetCommand(c);
@@ -57,8 +38,7 @@ namespace Highway.Data
 
         private IDbCommand GetCommand(DbContext c)
         {
-            var parameters = Parameters;
-            return c.CreateSqlCommand(SqlStatement, parameters?.ToArray());
+            return c.CreateSqlCommand(SqlStatement, Parameters?.ToArray());
         }
     }
 }

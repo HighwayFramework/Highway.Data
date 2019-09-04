@@ -129,6 +129,7 @@
     <Compile Include="Mappings\TypeMappings.cs" />
     <Compile Include="PrebuiltInterceptors\AppendWhere.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryObjects\AdoBase.cs" />
     <Compile Include="QueryObjects\AdoCommand.cs" />
     <Compile Include="QueryObjects\AdoQuery.cs" />
     <Compile Include="QueryObjects\AdoScalar.cs" />

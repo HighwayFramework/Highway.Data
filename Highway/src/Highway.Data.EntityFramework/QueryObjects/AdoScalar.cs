@@ -8,32 +8,18 @@ using Highway.Data.Extensions;
 
 namespace Highway.Data
 {
-    public abstract class AdoScalar<T> : QueryBase, IScalar<T>
+    public abstract class AdoScalar<T> : AdoBase, IScalar<T>
     {
-        private Func<DbContext, T> _contextQuery;
-
-        protected T Output { get; set; }
-
-        protected IEnumerable<IDataParameter> Parameters { get; set; }
-
-        protected abstract string Query { get; }
-
-        protected DbContext TypedContext { get; set; }
-
         public T Execute(IDataContext context)
         {
-            TypedContext = (DbContext)context;
-            Parameters = GetParameters();
-            _contextQuery = c =>
+            var efContext = GetTypedContext(context);
+            Func<DbContext, T> contextQuery = c =>
             {
-                var cmd = c.CreateSqlCommand(Query, Parameters?.ToArray());
-                Output = cmd.ExecuteCommandWithResult(MapReaderResults);
-                return Output;
+                var cmd = c.CreateSqlCommand(SqlStatement, Parameters?.ToArray());
+                return cmd.ExecuteCommandWithResult(MapReaderResults);
             };
-            return _contextQuery(TypedContext);
+            return contextQuery(efContext);
         }
-
-        protected abstract IEnumerable<IDataParameter> GetParameters();
 
         protected abstract T MapReaderResults(IDataReader reader);
     }

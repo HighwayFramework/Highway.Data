@@ -6,23 +6,23 @@ namespace Highway.Data.EntityFramework.Extensions
 {
     internal static class DbContextExtensions
     {
-        public static IDbCommand CreateAdoCommand(this DbContext context, string query, params IDataParameter[] parameters)
+        public static IDbCommand CreateAdoCommand(this DbContext context, string query, params IDataParameter[] dataParameters)
         {
-            return context.CreateDbCommand(query, CommandType.Text, parameters);
+            return context.CreateDbCommand(query, CommandType.Text, dataParameters);
         }
 
-        public static IDbCommand CreateDbCommand(this DbContext context, string commandText, CommandType commandType, params IDataParameter[] parameters)
+        public static IDbCommand CreateDbCommand(this DbContext context, string commandText, CommandType commandType, params IDataParameter[] dataParameters)
         {
             var command = context.Database.Connection.CreateCommand();
             command.CommandText = commandText;
             command.CommandType = commandType;
-            parameters?.ForEach(parameter => command.Parameters.Add(parameter));
+            dataParameters?.ForEach(dataParameter => command.Parameters.Add(dataParameter));
             return command;
         }
 
-        public static IDbCommand CreateStoredProcedureCommand(this DbContext context, string storedProcedureName, params IDataParameter[] parameters)
+        public static IDbCommand CreateStoredProcedureCommand(this DbContext context, string storedProcedureName, params IDataParameter[] dataParameters)
         {
-            return context.CreateDbCommand(storedProcedureName, CommandType.StoredProcedure, parameters);
+            return context.CreateDbCommand(storedProcedureName, CommandType.StoredProcedure, dataParameters);
         }
     }
 }

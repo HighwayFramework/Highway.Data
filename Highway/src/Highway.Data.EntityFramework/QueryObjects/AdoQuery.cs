@@ -5,9 +5,9 @@ using Highway.Data.EntityFramework.Extensions;
 
 namespace Highway.Data
 {
-    public abstract class AdoQuery<T> : AdoQueryBase<T>, IQuery<T>
+    public abstract class AdoQuery<T> : AdoQueryBase<T>
     {
-        public abstract string Query { get; }
+        protected abstract string Query { get; }
 
         protected override IDbCommand GetDbCommand(DbContext dbContext)
         {

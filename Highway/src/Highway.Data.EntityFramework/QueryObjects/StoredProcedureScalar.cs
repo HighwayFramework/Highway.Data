@@ -5,9 +5,9 @@ using Highway.Data.EntityFramework.Extensions;
 
 namespace Highway.Data
 {
-    public abstract class StoredProcedureScalar<T> : AdoScalarBase<T>, IScalar<T>
+    public abstract class StoredProcedureScalar<T> : AdoScalarBase<T>
     {
-        public abstract string StoredProcedureName { get; }
+        protected abstract string StoredProcedureName { get; }
 
         protected override IDbCommand GetDbCommand(DbContext dbContext)
         {

@@ -8,7 +8,7 @@ using Highway.Data.Extensions;
 namespace Highway.Data
 {
     // ERIC:  Derive from this?  Seems heavy-handed.
-    public abstract class AdoQueryBase<T> : QueryBase
+    public abstract class AdoQueryBase<T> : QueryBase, IQuery<T>
     {
         protected Func<DbContext, IQueryable<T>> ContextQuery { get; }
 
@@ -25,21 +25,16 @@ namespace Highway.Data
 
         public virtual IEnumerable<T> Execute(IDataContext dataContext)
         {
-            return PrepareQuery(dataContext);
+            var entityDbContext = dataContext.GetEntityDbContext();
+            return ContextQuery(entityDbContext);
         }
 
-        // ERIC:  Do we want this?  Implementation?
+        // ERIC:  Implementation?
         public string OutputQuery(IDataContext dataContext)
         {
             var entityDbContext = dataContext.GetEntityDbContext();
             var dbCommand = GetDbCommand(entityDbContext);
             return dbCommand.CommandText;
-        }
-
-        protected virtual IQueryable<T> PrepareQuery(IDataContext context)
-        {
-            var entityDbContext = context.GetEntityDbContext();
-            return ContextQuery(entityDbContext);
         }
 
         protected abstract IDbCommand GetDbCommand(DbContext dbContext);

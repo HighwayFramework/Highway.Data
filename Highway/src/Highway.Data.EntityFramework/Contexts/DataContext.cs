@@ -101,6 +101,72 @@ namespace Highway.Data
         }
 
         /// <summary>
+        ///     Initializes a new instance of the <see cref="DataContext"/> class.
+        /// </summary>
+        /// <param name="dbConnection">The db connection.</param>
+        /// <param name="contextOwnsConnection">The context owns connection.</param>
+        /// <param name="mapping">The Mapping Configuration that will determine how the tables and objects interact</param>
+        public DataContext(DbConnection dbConnection, bool contextOwnsConnection, IMappingConfiguration mapping)
+            : this(dbConnection, contextOwnsConnection, mapping, new DefaultContextConfiguration(), new NoOpLogger())
+        {
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="DataContext"/> class.
+        /// </summary>
+        /// <param name="dbConnection">The db connection.</param>
+        /// <param name="contextOwnsConnection">The context owns connection.</param>
+        /// <param name="mapping">The Mapping Configuration that will determine how the tables and objects interact</param>
+        /// <param name="log">The logger being supplied for this context ( Optional )</param>
+        ///     The log.
+        /// </param>
+        public DataContext(
+            DbConnection dbConnection,
+            bool contextOwnsConnection,
+            IMappingConfiguration mapping,
+            ILog log)
+            : this(dbConnection, contextOwnsConnection, mapping, new DefaultContextConfiguration(), log)
+        {
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="DataContext"/> class.
+        /// </summary>
+        /// <param name="dbConnection">The db connection.</param>
+        /// <param name="contextOwnsConnection">The context owns connection.</param>
+        /// <param name="mapping">The Mapping Configuration that will determine how the tables and objects interact</param>
+        /// <param name="contextConfiguration">The context specific configuration that will change context level behavior</param>
+        public DataContext(
+            DbConnection dbConnection,
+            bool contextOwnsConnection,
+            IMappingConfiguration mapping,
+            IContextConfiguration contextConfiguration)
+            : this(dbConnection, contextOwnsConnection, mapping, contextConfiguration, new NoOpLogger())
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DataContext"/> class.
+        /// </summary>
+        /// <param name="dbConnection">The db connection.</param>
+        /// <param name="contextOwnsConnection">The context owns connection.</param>
+        /// <param name="mapping">The Mapping Configuration that will determine how the tables and objects interact</param>
+        /// <param name="contextConfiguration">The context specific configuration that will change context level behavior</param>
+        /// <param name="log">The logger being supplied for this context ( Optional )</param>
+        public DataContext(
+            DbConnection dbConnection,
+            bool contextOwnsConnection,
+            IMappingConfiguration mapping,
+            IContextConfiguration contextConfiguration,
+            ILog log) : base(dbConnection, contextOwnsConnection)
+        {
+            this._mapping = mapping;
+            this._log = log;
+            this.Database.Log = _log.Debug;
+            if (contextConfiguration != null) contextConfiguration.ConfigureContext(this);
+        }
+
+        /// <summary>
         ///     This gives a mockable wrapper around the normal <see cref="DbSet{T}" /> method that allows for testablity
         ///     This method is now virtual to allow for the injection of cross cutting concerns.
         /// </summary>

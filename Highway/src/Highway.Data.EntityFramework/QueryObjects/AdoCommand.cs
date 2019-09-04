@@ -9,9 +9,9 @@ namespace Highway.Data
     {
         protected abstract string Query { get; }
 
-        protected override IDbCommand GetCommand(DbContext c)
+        protected override IDbCommand GetDbCommand(DbContext dbContext)
         {
-            return c.CreateAdoCommand(Query, Parameters?.ToArray());
+            return dbContext.CreateAdoCommand(Query, Parameters?.ToArray());
         }
     }
 }

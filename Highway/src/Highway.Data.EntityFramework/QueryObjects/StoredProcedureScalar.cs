@@ -9,9 +9,9 @@ namespace Highway.Data
     {
         public abstract string StoredProcedureName { get; }
 
-        protected override IDbCommand GetCommand(DbContext c)
+        protected override IDbCommand GetDbCommand(DbContext dbContext)
         {
-            return c.CreateStoredProcedureCommand(StoredProcedureName, Parameters?.ToArray());
+            return dbContext.CreateStoredProcedureCommand(StoredProcedureName, Parameters?.ToArray());
         }
     }
 }

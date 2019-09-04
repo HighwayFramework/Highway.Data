@@ -5,12 +5,10 @@
  */
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
 using Highway.Data.EntityFramework.Extensions.GraphDiff;
 using Highway.Data.EntityFramework.Extensions.GraphDiff.Internal;
 using Highway.Data.EntityFramework.Extensions.GraphDiff.Internal.Graph;
@@ -19,12 +17,12 @@ namespace Highway.Data
 {
     public static class DbContextExtensions
     {
-        public static DbContext GetTypedContext(this IDataContext context)
+        public static DbContext GetEntityDbContext(this IDataContext context)
         {
             var efContext = context as DbContext;
             if (efContext == null)
             {
-                throw new InvalidOperationException("You cannot execute EF Sql Queries against a non-EF context");
+                throw new InvalidOperationException("You cannot execute EF Sql Queries against a non-EF context.");
             }
 
             return efContext;

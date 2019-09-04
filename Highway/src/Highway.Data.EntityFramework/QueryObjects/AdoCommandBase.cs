@@ -1,30 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using Highway.Data.Extensions;
 
 namespace Highway.Data
 {
+    // ERIC:  Derive from this?  Seems heavy-handed.
     public abstract class AdoCommandBase : AdvancedCommand
     {
         protected abstract IEnumerable<IDataParameter> Parameters { get; }
 
         public AdoCommandBase()
         {
-            ContextQuery = c =>
+            ContextQuery = dbContext =>
             {
-                var cmd = GetCommand(c);
-                cmd.ExecuteCommand();
+                var dbCommand = GetDbCommand(dbContext);
+                dbCommand.Execute();
             };
         }
 
-        public void Execute(IDataContext context)
+        public void Execute(IDataContext dataContext)
         {
-            var efContext = context.GetTypedContext();
-            ContextQuery(efContext);
+            var entityDbContext = dataContext.GetEntityDbContext();
+            ContextQuery(entityDbContext);
         }
 
-        protected abstract IDbCommand GetCommand(DbContext c);
+        protected abstract IDbCommand GetDbCommand(DbContext dbContext);
     }
 }

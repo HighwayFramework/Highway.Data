@@ -6,29 +6,38 @@ using Highway.Data.Extensions;
 
 namespace Highway.Data
 {
+    // ERIC:  Derive from this?  Seems heavy-handed.
     public abstract class AdoScalarBase<T> : QueryBase
     {
-        public Func<DbContext, T> ContextQuery { get; }
+        protected Func<DbContext, T> ContextQuery { get; }
 
         protected abstract IEnumerable<IDataParameter> Parameters { get; }
 
         public AdoScalarBase()
         {
-            ContextQuery = c =>
+            ContextQuery = dbContext =>
             {
-                var cmd = GetCommand(c);
-                return cmd.ExecuteCommandWithResult(MapReaderResults);
+                var dbCommand = GetDbCommand(dbContext);
+                return dbCommand.ExecuteWithResult(MapReaderResults);
             };
         }
 
-        protected abstract T MapReaderResults(IDataReader reader);
-
-        public T Execute(IDataContext context)
+        public T Execute(IDataContext dataContext)
         {
-            var efContext = context.GetTypedContext();
-            return ContextQuery(efContext);
+            var entityDbContext = dataContext.GetEntityDbContext();
+            return ContextQuery(entityDbContext);
         }
 
-        protected abstract IDbCommand GetCommand(DbContext c);
+        // ERIC:  Do we want this?  Implementation?
+        public string OutputQuery(IDataContext dataContext)
+        {
+            var entityDbContext = dataContext.GetEntityDbContext();
+            var dbCommand = GetDbCommand(entityDbContext);
+            return dbCommand.CommandText;
+        }
+
+        protected abstract IDbCommand GetDbCommand(DbContext dbContext);
+
+        protected abstract T MapReaderResults(IDataReader dataReader);
     }
 }

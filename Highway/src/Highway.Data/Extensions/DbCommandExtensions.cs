@@ -7,7 +7,7 @@ namespace Highway.Data.Extensions
 {
     public static class DbCommandExtensions
     {
-        public static void ExecuteCommand(this IDbCommand cmd)
+        public static void Execute(this IDbCommand cmd)
         {
             try
             {
@@ -21,7 +21,7 @@ namespace Highway.Data.Extensions
             }
         }
 
-        public static T ExecuteCommandWithResult<T>(this IDbCommand cmd, Func<IDbCommand, T> mapResults)
+        public static T ExecuteWithResult<T>(this IDbCommand cmd, Func<IDbCommand, T> mapResults)
         {
             T result;
             try
@@ -39,7 +39,7 @@ namespace Highway.Data.Extensions
             return result;
         }
         
-        public static T ExecuteCommandWithResult<T>(this IDbCommand cmd, Func<IDataReader, T> mapResult)
+        public static T ExecuteWithResult<T>(this IDbCommand cmd, Func<IDataReader, T> mapResult)
         {
             T result;
             try
@@ -58,7 +58,7 @@ namespace Highway.Data.Extensions
             return result;
         }
 
-        public static IQueryable<T> ExecuteCommandWithResults<T>(this IDbCommand cmd, Func<IDataReader, IEnumerable<T>> mapResults)
+        public static IQueryable<T> ExecuteWithResults<T>(this IDbCommand cmd, Func<IDataReader, IEnumerable<T>> mapResults)
         {
             IQueryable<T> results;
             try

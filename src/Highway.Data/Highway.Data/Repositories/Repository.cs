@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Highway.Data.Interceptors.Events;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Highway.Data
@@ -34,7 +36,9 @@ namespace Highway.Data
         /// <param name="command">The prebuilt command object</param>
         public virtual void Execute(ICommand command)
         {
+            OnBeforeCommand(new BeforeCommand(command));
             command.Execute(_context);
+            OnAfterCommand(new AfterCommand(command));
         }
 
         /// <summary>
@@ -45,7 +49,10 @@ namespace Highway.Data
         /// <returns>The instance of <typeparamref name="T" /> returned from the query</returns>
         public virtual T Find<T>(IScalar<T> query)
         {
-            return query.Execute(_context);
+            OnBeforeScalar(new BeforeScalar(query));
+            var result = query.Execute(_context);
+            OnAfterScalar(new AfterScalar(query));
+            return result;
         }
 
         /// <summary>
@@ -56,7 +63,10 @@ namespace Highway.Data
         /// <returns>The <see cref="IEnumerable{T}" /> returned from the query</returns>
         public virtual IEnumerable<T> Find<T>(IQuery<T> query)
         {
-            return query.Execute(_context);
+            OnBeforeQuery(new BeforeQuery(query));
+            var result = query.Execute(_context);
+            OnAfterQuery(new AfterQuery(result));
+            return result;
         }
 
         /// <summary>
@@ -68,7 +78,10 @@ namespace Highway.Data
         public virtual IEnumerable<IProjection> Find<TSelection, IProjection>(IQuery<TSelection, IProjection> query)
             where TSelection : class
         {
-            return query.Execute(_context);
+            OnBeforeQuery(new BeforeQuery(query));
+            var results = query.Execute(_context);
+            OnAfterQuery(new AfterQuery(results));
+            return results;
         }
 
         /// <summary>
@@ -120,6 +133,48 @@ namespace Highway.Data
             var task = new Task<IEnumerable<IProjection>>(() => query.Execute(_context));
             task.Start();
             return task;
+        }
+
+        public event EventHandler<BeforeQuery> BeforeQuery;
+
+        protected virtual void OnBeforeQuery(BeforeQuery e)
+        {
+            BeforeQuery?.Invoke(this, e);
+        }
+
+        public event EventHandler<BeforeScalar> BeforeScalar;
+
+        protected virtual void OnBeforeScalar(BeforeScalar e)
+        {
+            BeforeScalar?.Invoke(this, e);
+        }
+
+        public event EventHandler<BeforeCommand> BeforeCommand;
+
+        protected virtual void OnBeforeCommand(BeforeCommand e)
+        {
+            BeforeCommand?.Invoke(this, e);
+        }
+
+        public event EventHandler<AfterQuery> AfterQuery;
+
+        protected virtual void OnAfterQuery(AfterQuery e)
+        {
+            AfterQuery?.Invoke(this, e);
+        }
+
+        public event EventHandler<AfterScalar> AfterScalar;
+
+        protected virtual void OnAfterScalar(AfterScalar e)
+        {
+            AfterScalar?.Invoke(this, e);
+        }
+
+        public event EventHandler<AfterCommand> AfterCommand;
+
+        protected virtual void OnAfterCommand(AfterCommand e)
+        {
+            AfterCommand?.Invoke(this, e);
         }
     }
 }

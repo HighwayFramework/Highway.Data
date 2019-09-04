@@ -18,14 +18,12 @@ namespace Highway.Data.Contexts
 
         protected virtual void OnBeforeSave(BeforeSave e)
         {
-            var handler = BeforeSave;
-            if (handler != null) handler(this, e);
+            BeforeSave?.Invoke(this, e);
         }
 
         protected virtual void OnAfterSave(AfterSave e)
         {
-            var handler = AfterSave;
-            if (handler != null) handler(this, e);
+            AfterSave?.Invoke(this, e);
         }
     }
 }

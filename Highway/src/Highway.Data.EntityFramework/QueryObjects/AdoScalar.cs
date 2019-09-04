@@ -7,13 +7,13 @@ using Highway.Data.Extensions;
 
 namespace Highway.Data
 {
-    public abstract class AdoScalar<T> : AdoBase, IScalar<T>
+    public abstract class AdoScalar<T> : AdoScalarBase, IScalar<T>
     {
         public abstract string Query { get; }
 
         public T Execute(IDataContext context)
         {
-            var efContext = GetTypedContext(context);
+            var efContext = context.GetTypedContext();
             Func<DbContext, T> contextQuery = c =>
             {
                 var cmd = c.CreateSqlCommand(Query, Parameters?.ToArray());

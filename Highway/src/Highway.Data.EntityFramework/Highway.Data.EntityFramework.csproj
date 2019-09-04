@@ -129,10 +129,12 @@
     <Compile Include="Mappings\TypeMappings.cs" />
     <Compile Include="PrebuiltInterceptors\AppendWhere.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryObjects\AdoBase.cs" />
+    <Compile Include="QueryObjects\AdoCommandBase.cs" />
+    <Compile Include="QueryObjects\AdoQueryBase.cs" />
     <Compile Include="QueryObjects\AdoCommand.cs" />
     <Compile Include="QueryObjects\AdoQuery.cs" />
     <Compile Include="QueryObjects\AdoScalar.cs" />
+    <Compile Include="QueryObjects\AdoScalarBase.cs" />
     <Compile Include="QueryObjects\SqlCommand.cs" />
     <Compile Include="QueryObjects\SqlQuery.cs" />
     <Compile Include="QueryObjects\AdvancedCommand.cs" />

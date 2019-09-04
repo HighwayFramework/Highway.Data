@@ -19,6 +19,17 @@ namespace Highway.Data
 {
     public static class DbContextExtensions
     {
+        public static DbContext GetTypedContext(this IDataContext context)
+        {
+            var efContext = context as DbContext;
+            if (efContext == null)
+            {
+                throw new InvalidOperationException("You cannot execute EF Sql Queries against a non-EF context");
+            }
+
+            return efContext;
+        }
+
         /// <summary>
         /// Merges a graph of entities with the data store.
         /// </summary>

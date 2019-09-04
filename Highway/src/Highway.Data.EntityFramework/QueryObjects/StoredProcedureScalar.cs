@@ -7,13 +7,13 @@ using Highway.Data.Extensions;
 
 namespace Highway.Data
 {
-    public abstract class StoredProcedureScalar<T> : AdoBase, IScalar<T>
+    public abstract class StoredProcedureScalar<T> : AdoScalarBase, IScalar<T>
     {
         public abstract string StoredProcedureName { get; }
 
         public T Execute(IDataContext context)
         {
-            var efContext = GetTypedContext(context);
+            var efContext = context.GetTypedContext();
             Func<DbContext, T> contextQuery = c =>
             {
                 var cmd = c.CreateStoredProcedureCommand(StoredProcedureName, Parameters?.ToArray());

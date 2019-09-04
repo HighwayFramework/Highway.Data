@@ -10,15 +10,19 @@ namespace Highway.Data
     {
         protected abstract IEnumerable<IDataParameter> Parameters { get; }
 
-        public void Execute(IDataContext context)
+        public AdoCommandBase()
         {
-            var efContext = context.GetTypedContext();
-            Action<DbContext> contextQuery = c =>
+            ContextQuery = c =>
             {
                 var cmd = GetCommand(c);
                 cmd.ExecuteCommand();
             };
-            contextQuery(efContext);
+        }
+
+        public void Execute(IDataContext context)
+        {
+            var efContext = context.GetTypedContext();
+            ContextQuery(efContext);
         }
 
         protected abstract IDbCommand GetCommand(DbContext c);

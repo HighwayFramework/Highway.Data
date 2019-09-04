@@ -1,5 +1,6 @@
 
 using System;
+using System.Data.Entity;
 
 
 namespace Highway.Data
@@ -12,9 +13,9 @@ namespace Highway.Data
         /// <summary>
         ///     The Command that will be executed at some point in the future
         /// </summary>
-        protected Action<DataContext> ContextQuery { get; set; }
+        protected Action<DbContext> ContextQuery { get; set; }
 
-        
+
         /// <summary>
         ///     Executes the expression against the passed in context and ignores the returned value if any
         /// </summary>
@@ -23,8 +24,7 @@ namespace Highway.Data
         {
             Context = context;
             CheckContextAndQuery(ContextQuery);
-            ContextQuery((DataContext) context);
+            ContextQuery((DbContext) context);
         }
-
-            }
+    }
 }

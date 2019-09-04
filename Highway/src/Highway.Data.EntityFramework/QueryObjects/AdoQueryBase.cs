@@ -9,7 +9,18 @@ namespace Highway.Data
 {
     public abstract class AdoQueryBase<T> : QueryBase
     {
+        public Func<DbContext, IQueryable<T>> ContextQuery { get; }
+
         protected abstract IEnumerable<IDataParameter> Parameters { get; }
+
+        public AdoQueryBase()
+        {
+            ContextQuery = c =>
+            {
+                var cmd = GetCommand(c);
+                return cmd.ExecuteCommandWithResults(MapReaderResults);
+            };
+        }
 
         public virtual IEnumerable<T> Execute(IDataContext context)
         {
@@ -23,16 +34,10 @@ namespace Highway.Data
             return cmd.CommandText;
         }
 
-        protected IQueryable<T> PrepareQuery(IDataContext context)
+        protected virtual IQueryable<T> PrepareQuery(IDataContext context)
         {
             var efContext = context.GetTypedContext();
-            Func<DbContext, IQueryable<T>> contextQuery = c =>
-            {
-                var cmd = GetCommand(c);
-                return cmd.ExecuteCommandWithResults(MapReaderResults);
-            };
-
-            return contextQuery(efContext);
+            return ContextQuery(efContext);
         }
 
         protected abstract IDbCommand GetCommand(DbContext c);

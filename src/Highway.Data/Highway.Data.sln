@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29209.152
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data", "Highway.Data\Highway.Data.csproj", "{E8B7F6E4-C819-4C5F-8EE8-568745589057}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Highway.Data", "Highway.Data\Highway.Data.csproj", "{E8B7F6E4-C819-4C5F-8EE8-568745589057}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

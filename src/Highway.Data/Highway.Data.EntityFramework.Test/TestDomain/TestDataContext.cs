@@ -1,6 +1,8 @@
 ﻿using Common.Logging;
+using Highway.Data.Tests.TestDomain;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Text;
 
 namespace Highway.Data.EntityFramework.Test.TestDomain

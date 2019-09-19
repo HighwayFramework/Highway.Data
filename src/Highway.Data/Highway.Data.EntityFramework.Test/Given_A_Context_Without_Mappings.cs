@@ -21,7 +21,7 @@ namespace Highway.Data.EntityFramework.Test
             Database.SetInitializer(new EntityFrameworkIntializer());
             mapping = new FooMappingConfiguration();
             context = new TestDataContext(
-                connectionString: "Data Source=(localDb);Initial Catalog=Highway.Data.Test.Db;Integrated Security=True",
+                connectionString: "Data Source=(localDb);Initial Catalog=Highway.Data.Test.Db;Integrated Security=True;Connection Timeout=1",
                 mapping: mapping,
                 logger: new NoOpLogger());
         }
@@ -46,19 +46,5 @@ namespace Highway.Data.EntityFramework.Test
             //Assert
             mapping.Called.Should().Be(true);
         }
-
-        //[TestMethod]
-        //public void Should_Apply_Context_Configuration_On_Construction()
-        //{
-        //    //Arrange
-        //    var mockConfig = MockRepository.GenerateStrictMock<IContextConfiguration>();
-        //    mockConfig.Expect(x => x.ConfigureContext(Arg<DbContext>.Is.Anything)).Repeat.Once();
-
-        //    //Act
-        //    var target = new DataContext("Test", new FooMappingConfiguration(), mockConfig);
-
-        //    //Assert
-        //    mockConfig.VerifyAllExpectations();
-        //}
     }
 }

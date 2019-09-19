@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>7.0.0-Preview8</Version>
+    <Authors>Tim Rayburn, Devlin Liles</Authors>
+    <Description>The fastest and smoothest way to good architecture.</Description>
+    <Copyright>2012-2019 Devlin Liles</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>http://hwyfwk.com</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/highwayframework/highway.data</RepositoryUrl>
+    <PackageTags>Architecture ORM Repository Specification Productivity</PackageTags>
+    <PackageReleaseNotes />
+    <PackageIconUrl>http://hwyfwk.com/images/Highway.jpg</PackageIconUrl>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Common.Logging" Version="3.4.1" />
+    <PackageReference Include="EntityFramework" Version="6.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Highway.Data\Highway.Data.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,15 +1,3 @@
-# Attention
-
-The Highway.Data repository recently underwent a force push to purge from our
-GIT history certain IP that we requested to be removed by the owner.  We have
-completed the removal but not the cleanup after that removal.  At the current
-time it is entirely likely that any v6.0+ tag or current `HEAD` in `master`
-will not successfully compile.  This will be resolved shortly, the core team
-is hard at work on it, but in the meantime please pardon our dust as we clean
-up from this unfortunate but necessary task.
-
-*Thank You, The Core Team*
-
 # Highway.Data
 ## The fastest and smoothest way to great architecture
 

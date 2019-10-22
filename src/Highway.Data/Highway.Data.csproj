@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>7.0.0-Preview8</Version>
     <Authors>Tim Rayburn, Devlin Liles</Authors>
@@ -14,19 +14,9 @@
     <PackageReleaseNotes />
     <PackageIconUrl>http://hwyfwk.com/images/Highway.jpg</PackageIconUrl>
   </PropertyGroup>
-  
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Common.Logging" Version="3.4.1" />
-    <PackageReference Include="EntityFramework" Version="6.2.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Highway.Data\Highway.Data.csproj" />
+    <PackageReference Include="Highway.Pavement" Version="1.0.0-beta2" />
   </ItemGroup>
 
 </Project>

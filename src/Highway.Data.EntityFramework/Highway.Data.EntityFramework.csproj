@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>7.0.0-Preview8</Version>
+    <Version>7.0.1</Version>
     <Authors>Tim Rayburn, Devlin Liles</Authors>
     <Description>The fastest and smoothest way to good architecture.</Description>
     <Copyright>2012-2019 Devlin Liles</Copyright>

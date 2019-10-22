@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Highway.Pavement" Version="1.0.0-beta2" />
+    <PackageReference Include="Highway.Pavement" Version="7.0.1" />
   </ItemGroup>
 
 </Project>

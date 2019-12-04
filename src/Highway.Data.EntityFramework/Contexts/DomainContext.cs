@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Common.Logging;
 using Common.Logging.Simple;
 using Highway.Data.Interceptors.Events;
@@ -36,6 +37,14 @@ namespace Highway.Data
         {
             OnBeforeSave();
             var changes = base.Commit();
+            OnAfterSave();
+            return changes;
+        }
+
+        public async override Task<int> CommitAsync()
+        {
+            OnBeforeSave();
+            var changes = await base.CommitAsync();
             OnAfterSave();
             return changes;
         }

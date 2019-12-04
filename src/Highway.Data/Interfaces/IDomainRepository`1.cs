@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Highway.Data
 {
-    public interface IDomainRepository<in T> where T : class
+    public interface IDomainRepository<in T> : IRepository where T : class
     {
         event EventHandler<BeforeQuery> BeforeQuery;
 

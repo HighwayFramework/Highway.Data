@@ -67,11 +67,12 @@ namespace Highway.Data.EntityFramework.Test
             context = new InMemoryDataContext();
             context.Add(new Foo {Id = 1, Name = "Test"});
             context.Add(new Foo {Id = 2, Name = "Test2"});
+            context.Add(new Foo {Id = 3, Name = "NoMatch"});
             context.Commit();
             target = new Repository(context);
 
             //Act
-            var query = new FindFoo().Skip(1).Take(1);
+            var query = new FindFoo().Where(x => x.Name.Contains("Test")).Skip(1).Take(1);
             IEnumerable<Foo> result = target.Find(query);
 
             //Assert

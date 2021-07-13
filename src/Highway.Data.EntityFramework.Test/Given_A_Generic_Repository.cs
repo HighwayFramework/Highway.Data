@@ -61,6 +61,27 @@ namespace Highway.Data.EntityFramework.Test
         }
 
         [TestMethod]
+        public void Should_Extend_Query_Objects()
+        {
+            //Arrange
+            context = new InMemoryDataContext();
+            context.Add(new Foo {Id = 1, Name = "Test"});
+            context.Add(new Foo {Id = 2, Name = "Test2"});
+            context.Commit();
+            target = new Repository(context);
+
+            //Act
+            var query = new FindFoo().Skip(1).Take(1);
+            IEnumerable<Foo> result = target.Find(query);
+
+            //Assert
+            Foo foo = result.First();
+            foo.Should().NotBeNull();
+            foo.Id.Should().Be(2);
+            foo.Name.Should().Be("Test2");
+        }
+
+        [TestMethod]
         public void Should_Execute_Scalar_Objects_That_Return_Values()
         {
             //Arrange

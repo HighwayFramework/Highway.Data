@@ -7,9 +7,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Highway.Data", "Highway.Dat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Highway.Data.Test", "Highway.Data.Test\Highway.Data.Test.csproj", "{28089AEA-36BE-46F3-95C3-9E05157BF34F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.EntityFramework", "Highway.Data.EntityFramework\Highway.Data.EntityFramework.csproj", "{B2110477-BE7A-4860-A086-A4233F257DC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Highway.Data.EntityFramework", "Highway.Data.EntityFramework\Highway.Data.EntityFramework.csproj", "{B2110477-BE7A-4860-A086-A4233F257DC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highway.Data.EntityFramework.Test", "Highway.Data.EntityFramework.Test\Highway.Data.EntityFramework.Test.csproj", "{ACF64CA5-6A29-47CA-AE57-E4A7455B3006}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Highway.Data.EntityFramework.Test", "Highway.Data.EntityFramework.Test\Highway.Data.EntityFramework.Test.csproj", "{ACF64CA5-6A29-47CA-AE57-E4A7455B3006}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{97832809-9763-4541-9383-8D28FF128D45}"
+	ProjectSection(SolutionItems) = preProject
+		todo.md = todo.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

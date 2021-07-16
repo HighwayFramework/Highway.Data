@@ -1,8 +1,8 @@
 Should IRepository.Context move to IReadonlyRepository?
 Should IUnitOfWork get a readonly version?
 Should IDomain get a readonly version?
-Make a ReadOnlyDataContext
-
+Make a ReadOnlyDataContext?
+  Update DomainRepositoryFactory to use it.
 
 Look to see what uses of each interface can be made into the readonly version of that interface.
 

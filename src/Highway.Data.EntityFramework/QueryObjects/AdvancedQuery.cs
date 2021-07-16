@@ -48,7 +48,7 @@ namespace Highway.Data
             return source;
         }
 
-        protected virtual IQueryable<T> PrepareQuery(IDataContext context)
+        protected virtual IQueryable<T> PrepareQuery(IReadonlyDataContext context)
         {
             Context = context;
             CheckContextAndQuery(ContextQuery);
@@ -64,13 +64,13 @@ namespace Highway.Data
         /// <returns>
         ///     <see cref="IEnumerable{T}" />
         /// </returns>
-        public virtual IEnumerable<T> Execute(IDataContext context)
+        public virtual IEnumerable<T> Execute(IReadonlyDataContext context)
         {
             var task = PrepareQuery(context);
             return task;
         }
 
-        public string OutputQuery(IDataContext context)
+        public string OutputQuery(IReadonlyDataContext context)
         {
             var query = PrepareQuery(context);
             return query.ToString();
@@ -119,7 +119,7 @@ namespace Highway.Data
         /// </summary>
         /// <param name="context">the context to prepare against</param>
         /// <returns>The preppared but unexecuted queryable</returns>
-        protected virtual IQueryable<TProjection> PrepareQuery(IDataContext context)
+        protected virtual IQueryable<TProjection> PrepareQuery(IReadonlyDataContext context)
         {
             Context = context;
             CheckContextAndQuery(Selector);
@@ -135,13 +135,13 @@ namespace Highway.Data
         /// <returns>
         ///     <see cref="IEnumerable{T}" />
         /// </returns>
-        public virtual IEnumerable<TProjection> Execute(IDataContext context)
+        public virtual IEnumerable<TProjection> Execute(IReadonlyDataContext context)
         {
             var task = PrepareQuery(context);
             return task;
         }
 
-        public virtual string OutputQuery(IDataContext context)
+        public virtual string OutputQuery(IReadonlyDataContext context)
         {
             var query = PrepareQuery(context);
 

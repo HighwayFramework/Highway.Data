@@ -19,6 +19,8 @@ namespace Highway.Data
         {
         }
 
+        public new IDataContext Context => base.Context as IDataContext;
+
         /// <summary>
         ///     Executes a prebuilt <see cref="ICommand" />
         /// </summary>
@@ -26,7 +28,7 @@ namespace Highway.Data
         public virtual void Execute(ICommand command)
         {
             OnBeforeCommand(new BeforeCommand(command));
-            command.Execute(_context);
+            command.Execute(Context);
             OnAfterCommand(new AfterCommand(command));
         }
 
@@ -36,7 +38,7 @@ namespace Highway.Data
         /// <param name="command">The prebuilt command object</param>
         public virtual Task ExecuteAsync(ICommand command)
         {
-            var task = new Task(() => command.Execute(_context));
+            var task = new Task(() => command.Execute(Context));
             task.Start();
             return task;
         }

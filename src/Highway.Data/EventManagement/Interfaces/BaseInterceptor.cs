@@ -10,8 +10,6 @@ namespace Highway.Data.EventManagement.Interfaces
     /// <typeparam name="T"></typeparam>
     public interface IEventInterceptor<in T>  : IInterceptor
     {
-       
-
         /// <summary>
         /// Executes the interceptors that were applied during the domain creation
         /// </summary>
@@ -19,6 +17,14 @@ namespace Highway.Data.EventManagement.Interfaces
         /// <param name="eventArgs">the EventArgs for the current event being intercepted</param>
         /// <returns></returns>
         InterceptorResult Apply(IDataContext context, T eventArgs);
+
+        /// <summary>
+        /// Executes the interceptors that were applied during the domain creation
+        /// </summary>
+        /// <param name="context">The DataContext that the current interceptor is using</param>
+        /// <param name="eventArgs">the EventArgs for the current event being intercepted</param>
+        /// <returns></returns>
+        InterceptorResult Apply(IReadonlyDataContext context, T eventArgs);
 
         bool AppliesTo(T eventArgs);
     }

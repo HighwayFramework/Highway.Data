@@ -5,11 +5,11 @@ using Highway.Data.Interceptors.Events;
 
 namespace Highway.Data
 {
-    public abstract class ReadonlyRepository : IReadonlyRepository
+    public class ReadonlyRepository : IReadonlyRepository
     {
-        protected IDataContext _context;
+        private readonly IReadonlyDataContext _context;
 
-        protected ReadonlyRepository(IDataContext context)
+        protected ReadonlyRepository(IReadonlyDataContext context)
         {
             _context = context;
         }

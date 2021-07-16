@@ -11,6 +11,6 @@
         /// </summary>
         /// <param name="context">The data context that the scalar query is executed against</param>
         /// <returns>The instance of <typeparamref name="T" /> that the query materialized if any</returns>
-        T Execute(IDataContext context);
+        T Execute(IReadonlyDataContext context);
     }
 }

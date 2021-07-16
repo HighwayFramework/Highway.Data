@@ -28,9 +28,9 @@ namespace Highway.Data
         }
 
         /// <summary>
-        ///     The reference to the <see cref="IDataContext" /> that gives data connection
+        ///     The reference to the <see cref="IReadonlyDataContext" /> that gives data connection
         /// </summary>
-        protected IDataContext Context { get; set; }
+        protected IReadonlyDataContext Context { get; set; }
 
 
         /// <summary>

@@ -14,6 +14,6 @@ namespace Highway.Data
         /// </summary>
         /// <param name="context">the data context that the query should be executed against</param>
         /// <returns>The collection of <typeparamref name="T" /> that the query materialized if any</returns>
-        IEnumerable<T> Execute(IDataContext context);
+        IEnumerable<T> Execute(IReadonlyDataContext context);
     }
 }

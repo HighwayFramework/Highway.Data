@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Highway.Data.EventManagement;
-using Highway.Data.Interceptors.Events;
+﻿using Highway.Data.EventManagement;
 
 namespace Highway.Data.Repositories
 {
     public class DomainRepository<T> : Repository, IDomainRepository<T> where T : class, IDomain
     {
-        private EventManager<T> _eventManager;
+        private readonly EventManager<T> _eventManager;
 
-        public IDomainContext<T> DomainContext
-        {
-            get { return (IDomainContext<T>) base.Context;}
-        } 
+        public IDomainContext<T> DomainContext => (IDomainContext<T>) base.Context;
 
         public DomainRepository(IDomainContext<T> context, IDomain domain) : base(context)
         {
@@ -29,5 +22,7 @@ namespace Highway.Data.Repositories
                 _eventManager.Register(@event);
             }
         }
+
+        IReadonlyDomainContext<T> IReadonlyDomainRepository<T>.DomainContext => (IReadonlyDomainContext<T>) base.Context;
     }
 }

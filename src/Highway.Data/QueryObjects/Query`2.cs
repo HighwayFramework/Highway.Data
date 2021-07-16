@@ -13,7 +13,7 @@ namespace Highway.Data
     public class Query<TSelection, TProjection> : QueryBase, IQuery<TSelection, TProjection> 
         where TSelection : class
     {
-        protected Func<IDataContext, IQueryable<TSelection>> Selector { get; set; }
+        protected Func<IReadonlyDataContext, IQueryable<TSelection>> Selector { get; set; }
         protected Func<IQueryable<TSelection>, IQueryable<TProjection>> Projector { get; set; }
 
         /// <summary>
@@ -24,13 +24,13 @@ namespace Highway.Data
         /// <returns>
         ///     <see cref="IEnumerable{T}" />
         /// </returns>
-        public virtual IEnumerable<TProjection> Execute(IDataContext context)
+        public virtual IEnumerable<TProjection> Execute(IReadonlyDataContext context)
         {
             IQueryable<TProjection> task = PrepareQuery(context);
             return task;
         }
 
-        public virtual string OutputQuery(IDataContext context)
+        public virtual string OutputQuery(IReadonlyDataContext context)
         {
             IQueryable<TProjection> query = PrepareQuery(context);
 
@@ -63,7 +63,7 @@ namespace Highway.Data
             return Projector(source);
         }
 
-        protected IQueryable<TProjection> PrepareQuery(IDataContext context)
+        protected IQueryable<TProjection> PrepareQuery(IReadonlyDataContext context)
         {
             Context = context;
             CheckContextAndQuery(Selector);

@@ -53,14 +53,16 @@ namespace Highway.Data
         /// <returns>The combined query</returns>
         protected IQueryable<TProjection> AppendExpressions(IQueryable<TSelection> query)
         {
-            var source = query;
+            var source = Projector(query);
+
             foreach (var exp in ExpressionList)
             {
                 List<Expression> newParams = exp.Item2.ToList();
                 newParams.Insert(0, source.Expression);
-                source = source.Provider.CreateQuery<TSelection>(Expression.Call(null, exp.Item1, newParams));
+                source = source.Provider.CreateQuery<TProjection>(Expression.Call(null, exp.Item1, newParams));
             }
-            return Projector(source);
+
+            return source;
         }
 
         protected IQueryable<TProjection> PrepareQuery(IReadonlyDataContext context)

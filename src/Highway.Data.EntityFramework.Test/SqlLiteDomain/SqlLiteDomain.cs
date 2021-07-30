@@ -8,10 +8,10 @@ namespace Highway.Data.EntityFramework.Test.SqlLiteDomain
     {
         public string ConnectionString => @"Data Source=:memory:";
 
-        public IMappingConfiguration Mappings => new SqlLiteDomainMappings();
-
         public IContextConfiguration Context => new SqlLiteDomainContextConfiguration();
 
         public List<IInterceptor> Events => new List<IInterceptor>();
+
+        public IMappingConfiguration Mappings => new SqlLiteDomainMappings();
     }
 }

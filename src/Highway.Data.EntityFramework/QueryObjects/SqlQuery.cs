@@ -18,6 +18,7 @@ namespace Highway.Data
             {
                 throw new InvalidOperationException("You cannot execute EF Sql Queries against a non-EF context");
             }
+
             using (var conn = new SqlConnection(efContext.Database.Connection.ConnectionString))
             {
                 return ContextQuery.Invoke(conn);

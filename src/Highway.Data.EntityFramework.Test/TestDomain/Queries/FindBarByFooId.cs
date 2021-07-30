@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+
 using Highway.Data.Tests.TestDomain;
 
 namespace Highway.Data.EntityFramework.Test.TestDomain.Queries

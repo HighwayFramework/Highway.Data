@@ -1,16 +1,21 @@
-using FluentAssertions;
-using Highway.Data.EntityFramework.Test.SqlLiteDomain;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+
+using FluentAssertions;
+
+using Highway.Data.EntityFramework.Test.SqlLiteDomain;
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highway.Data.EntityFramework.Test
 {
     //[TestClass]
     public class GivenADomainContextWithEvents
     {
-        private TestDomainContext<SqlLiteDomain.SqlLiteDomain> _context;
-        private bool _beforeSaveCalled;
         private bool _afterSaveCalled;
+
+        private bool _beforeSaveCalled;
+
+        private TestDomainContext<SqlLiteDomain.SqlLiteDomain> _context;
 
         [TestInitialize]
         public void Setup()

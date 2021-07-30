@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 using Highway.Data.EventManagement.Interfaces;
 
 namespace Highway.Data
@@ -7,10 +8,10 @@ namespace Highway.Data
     {
         string ConnectionString { get; }
 
-        IMappingConfiguration Mappings { get;}
-
         IContextConfiguration Context { get; }
 
         List<IInterceptor> Events { get; }
+
+        IMappingConfiguration Mappings { get; }
     }
 }

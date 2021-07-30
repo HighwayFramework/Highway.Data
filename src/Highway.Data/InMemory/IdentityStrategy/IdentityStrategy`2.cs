@@ -5,7 +5,7 @@ using System.Reflection;
 namespace Highway.Data.Contexts
 {
     /// <summary>
-    /// A base implementation of IIdentityStrategy.
+    ///     A base implementation of IIdentityStrategy.
     /// </summary>
     /// <typeparam name="TType">The type of the entities that will have identity values assigned.</typeparam>
     /// <typeparam name="TIdentity">The type of the identity values to be assigned.</typeparam>
@@ -17,7 +17,8 @@ namespace Highway.Data.Contexts
         private readonly object _lastValueLock = new object();
 
         /// <summary>
-        /// Creates an instance of <see cref="IdentityStrategy{TType,TIdentity}"/> using the provided identity <paramref name="property"/> setter.
+        ///     Creates an instance of <see cref="IdentityStrategy{TType,TIdentity}" /> using the provided identity
+        ///     <paramref name="property" /> setter.
         /// </summary>
         /// <param name="property">The property setter used to set the identity value of an entity.</param>
         protected IdentityStrategy(Expression<Func<TType, TIdentity>> property)
@@ -34,17 +35,17 @@ namespace Highway.Data.Contexts
         }
 
         /// <summary>
-        /// The last value used to set an identity value.
-        /// </summary>
-        public TIdentity LastValue { get; protected set; }
-
-        /// <summary>
-        /// The function used to generate identity values.
+        ///     The function used to generate identity values.
         /// </summary>
         public Func<TIdentity> Generator { get; protected set; } = null;
 
         /// <summary>
-        /// Assigns an identity value to the given <paramref name="entity"/>.
+        ///     The last value used to set an identity value.
+        /// </summary>
+        public TIdentity LastValue { get; protected set; }
+
+        /// <summary>
+        ///     Assigns an identity value to the given <paramref name="entity" />.
         /// </summary>
         /// <param name="entity"></param>
         public void Assign(TType entity)
@@ -53,7 +54,7 @@ namespace Highway.Data.Contexts
         }
 
         /// <summary>
-        /// Invokes the generator to set the next appropriate value for the identity value.
+        ///     Invokes the generator to set the next appropriate value for the identity value.
         /// </summary>
         /// <returns>The next appropriate value for the identity value.</returns>
         /// <exception cref="NotImplementedException"></exception>
@@ -68,7 +69,14 @@ namespace Highway.Data.Contexts
         }
 
         /// <summary>
-        /// A thread-safe method for setting the LastValue property
+        ///     Returns a value indicating whether a given value equals the default, unset identity value.
+        /// </summary>
+        /// <param name="id">The identity value to examine.</param>
+        /// <returns>A value indicating whether a given value equals the default, unset identity value.</returns>
+        protected abstract bool IsDefaultUnsetValue(TIdentity id);
+
+        /// <summary>
+        ///     A thread-safe method for setting the LastValue property
         /// </summary>
         /// <param name="value"></param>
         protected void SetLastValue(TIdentity value)
@@ -78,13 +86,6 @@ namespace Highway.Data.Contexts
                 LastValue = value;
             }
         }
-
-        /// <summary>
-        /// Returns a value indicating whether a given value equals the default, unset identity value.
-        /// </summary>
-        /// <param name="id">The identity value to examine.</param>
-        /// <returns>A value indicating whether a given value equals the default, unset identity value.</returns>
-        protected abstract bool IsDefaultUnsetValue(TIdentity id);
 
         private PropertyInfo GetPropertyFromExpression(Expression<Func<TType, TIdentity>> lambda)
         {

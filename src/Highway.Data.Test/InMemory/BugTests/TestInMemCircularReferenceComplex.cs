@@ -1,18 +1,23 @@
-﻿using FluentAssertions;
-using Highway.Data.Contexts;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Linq;
 
-using System.Linq;
+using FluentAssertions;
+
+using Highway.Data.Contexts;
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highway.Data.Tests.InMemory.BugTests
 {
     [TestClass]
     public class TestInMemCircularReferenceComplex
     {
-        private IDataContext _context;
-        private GrandParent _grandParent;
-        private Parent _parent;
         private Child _child;
+
+        private IDataContext _context;
+
+        private GrandParent _grandParent;
+
+        private Parent _parent;
 
         [TestInitialize]
         public void SetUp()
@@ -37,42 +42,17 @@ namespace Highway.Data.Tests.InMemory.BugTests
         }
 
         [TestMethod]
-        public void ShouldGetSingleChild()
-        {
-            var child = _context.AsQueryable<Child>().Single();
-
-            AssertEntities(child.GrandParent, child.Parent, child);
-        }
-
-        [TestMethod]
-        public void ShouldGetSingleParent()
-        {
-            var parent = _context.AsQueryable<Parent>().Single();
-
-            AssertEntities(parent.DirectParent, parent, parent.Child);
-        }
-
-        [TestMethod]
-        public void ShouldGetSingleGrandParent()
-        {
-            var grandParent = _context.AsQueryable<GrandParent>().Single();
-
-            AssertEntities(grandParent, grandParent.Child, grandParent.GrandChild);
-        }
-
-        private void AssertEntities(GrandParent grandParent, Parent parent, Child child)
-        {
-            _grandParent.Should().Be(grandParent);
-            _parent.Should().Be(parent);
-            _child.Should().Be(child);
-        }
-
-        [TestMethod]
         public void ShouldAllowCircularHierarchies()
         {
-            var grandparent = new CircularReference() { Id = 1, Outer = null };
-            var parent = new CircularReference() { Id = 2, Outer = grandparent };
-            var child = new CircularReference() { Id = 3, Outer = parent };
+            var grandparent = new CircularReference
+                { Id = 1, Outer = null };
+
+            var parent = new CircularReference
+                { Id = 2, Outer = grandparent };
+
+            var child = new CircularReference
+                { Id = 3, Outer = parent };
+
             grandparent.Inner = parent;
             parent.Inner = child;
 
@@ -87,34 +67,66 @@ namespace Highway.Data.Tests.InMemory.BugTests
             circularReferences.Single(x => x.Id == 3).Outer.Should().BeSameAs(parent);
             circularReferences.Single(x => x.Id == 2).Outer.Should().BeSameAs(grandparent);
             circularReferences.Single(x => x.Id == 1).Outer.Should().BeNull();
-
-
         }
 
+        [TestMethod]
+        public void ShouldGetSingleChild()
+        {
+            var child = _context.AsQueryable<Child>().Single();
 
-        class CircularReference
+            AssertEntities(child.GrandParent, child.Parent, child);
+        }
+
+        [TestMethod]
+        public void ShouldGetSingleGrandParent()
+        {
+            var grandParent = _context.AsQueryable<GrandParent>().Single();
+
+            AssertEntities(grandParent, grandParent.Child, grandParent.GrandChild);
+        }
+
+        [TestMethod]
+        public void ShouldGetSingleParent()
+        {
+            var parent = _context.AsQueryable<Parent>().Single();
+
+            AssertEntities(parent.DirectParent, parent, parent.Child);
+        }
+
+        private void AssertEntities(GrandParent grandParent, Parent parent, Child child)
+        {
+            _grandParent.Should().Be(grandParent);
+            _parent.Should().Be(parent);
+            _child.Should().Be(child);
+        }
+
+        private class CircularReference
         {
             public int Id { get; set; }
+
             public CircularReference Inner { get; set; }
+
             public CircularReference Outer { get; set; }
-
         }
 
-        class Child
+        private class Child
         {
-            public Parent Parent { get; set; }
             public GrandParent GrandParent { get; set; }
+
+            public Parent Parent { get; set; }
         }
 
-        class Parent
+        private class Parent
         {
             public Child Child { get; set; }
+
             public GrandParent DirectParent { get; set; }
         }
 
-        class GrandParent
+        private class GrandParent
         {
             public Parent Child { get; set; }
+
             public Child GrandChild { get; set; }
         }
     }

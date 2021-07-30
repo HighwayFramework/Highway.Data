@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+
 using FluentAssertions;
+
 using Highway.Data.Contexts;
 using Highway.Data.Tests.InMemory.Domain;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highway.Data.Tests.InMemory.BugTests
@@ -32,13 +35,14 @@ namespace Highway.Data.Tests.InMemory.BugTests
         {
             // Arrange
             var context = new InMemoryDataContext();
-            var blog = new Blog()
+            var blog = new Blog
             {
-                Posts = new List<Post>()
+                Posts = new List<Post>
                 {
                     new Post()
                 }
             };
+
             context.Add(blog);
             context.Commit();
 

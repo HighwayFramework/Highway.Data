@@ -4,6 +4,7 @@ using FluentAssertions;
 
 using Highway.Data.Contexts;
 using Highway.Data.Tests.TestDomain;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highway.Data.Tests.InMemory.BugTests

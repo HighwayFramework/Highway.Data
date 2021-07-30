@@ -9,9 +9,11 @@ namespace Highway.Data.Tests.InMemory.BugTests
     [TestClass]
     public class TestCircularReference
     {
-        private IDataContext _context;
-        private Parent _parent;
         private Child _child;
+
+        private IDataContext _context;
+
+        private Parent _parent;
 
         [TestInitialize]
         public void SetUp()
@@ -45,12 +47,12 @@ namespace Highway.Data.Tests.InMemory.BugTests
             Assert.AreEqual(_child, parent.Child);
         }
 
-        class Child
+        private class Child
         {
             public Parent Parent { get; set; }
         }
 
-        class Parent
+        private class Parent
         {
             public Child Child { get; set; }
         }

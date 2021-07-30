@@ -1,6 +1,6 @@
-﻿using Highway.Data.Tests.TestDomain;
+﻿using System.Data.Entity.ModelConfiguration;
 
-using System.Data.Entity.ModelConfiguration;
+using Highway.Data.Tests.TestDomain;
 
 namespace Highway.Data.EntityFramework.Test.TestDomain
 {

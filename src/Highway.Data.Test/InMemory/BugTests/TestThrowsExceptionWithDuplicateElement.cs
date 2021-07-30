@@ -23,7 +23,9 @@ namespace Highway.Data.Tests.InMemory.BugTests
             _context.Commit();
 
             var businessEntity = new BusinessEntity(
-                new List<EntityType>() { entityType });
+                new List<EntityType>
+                    { entityType });
+
             _context.Add(businessEntity);
             _context.Commit();
         }
@@ -37,32 +39,32 @@ namespace Highway.Data.Tests.InMemory.BugTests
             _context.Commit();
 
             var businessEntity = new BusinessEntity(
-                new List<EntityType>() { entityType });
+                new List<EntityType>
+                    { entityType });
+
             _context.Add(businessEntity);
             _context.Commit();
 
             entityType.Should().Be(_context.AsQueryable<BusinessEntity>().Single().EntityTypes.First());
         }
 
-        class BusinessEntity : IIdentifiable<long>
+        private class BusinessEntity : IIdentifiable<long>
         {
-
             public BusinessEntity(List<EntityType> entityTypes)
             {
                 EntityTypes = entityTypes;
             }
 
-            public long Id { get; set; }
-
             public List<EntityType> EntityTypes { get; }
 
+            public long Id { get; set; }
         }
 
-        class EntityType
+        private class EntityType
         {
-            public int Id { get; set; }
-
             public string EntityTypeName { get; set; }
+
+            public int Id { get; set; }
         }
     }
 }

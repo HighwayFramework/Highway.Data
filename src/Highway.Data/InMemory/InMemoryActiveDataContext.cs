@@ -110,7 +110,7 @@ namespace Highway.Data.Contexts
         {
             if (_commitVersion == CommitCounter) return;
 
-            foreach (var item in Repo._data.Select(o => o.Entity))
+            foreach (var item in Repo.ObjectRepresentations.Select(o => o.Entity))
             {
                 Utilities.CloneExtension.Clone(item, _entityToRepoEntityMap.Reverse);
             }

@@ -8,7 +8,7 @@ using System.Linq;
 namespace Highway.Data.EntityFramework.Test
 {
     //[TestClass]
-    public class Given_A_DomainContext_With_Events
+    public class GivenADomainContextWithEvents
     {
         private TestDomainContext<SqlLiteDomain.SqlLiteDomain> _context;
         private bool _beforeSaveCalled;

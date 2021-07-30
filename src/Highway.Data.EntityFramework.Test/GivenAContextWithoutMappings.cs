@@ -11,7 +11,7 @@ using System.Linq;
 namespace Highway.Data.EntityFramework.Test
 {
     [TestClass]
-    public class Given_A_Context_Without_Mappings
+    public class GivenAContextWithoutMappings
     {
         private DataContext _context;
         private FooMappingConfiguration _mapping;

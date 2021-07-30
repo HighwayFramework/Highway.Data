@@ -14,7 +14,7 @@ namespace Highway.Data.EntityFramework.Test
 {
 
     [TestClass]
-    public class Given_A_Generic_Repository
+    public class GivenAGenericRepository
     {
         private IDataContext _context;
         private IRepository _target;

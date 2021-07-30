@@ -12,7 +12,7 @@ namespace Highway.Data.Repositories
 
         public IDomainContext<T> DomainContext
         {
-            get { return (IDomainContext<T>) base.Context;}
+            get { return (IDomainContext<T>) Context;}
         } 
 
         public DomainRepository(IDomainContext<T> context, IDomain domain) : base(context)

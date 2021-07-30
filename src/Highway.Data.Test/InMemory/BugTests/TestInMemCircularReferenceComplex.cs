@@ -18,29 +18,29 @@ namespace Highway.Data.Tests.InMemory.BugTests
         [TestInitialize]
         public void SetUp()
         {
-            this._context = new InMemoryDataContext();
+            _context = new InMemoryDataContext();
 
-            this._grandParent = new GrandParent();
-            this._parent = new Parent();
-            this._child = new Child();
+            _grandParent = new GrandParent();
+            _parent = new Parent();
+            _child = new Child();
 
-            this._grandParent.Child = this._parent;
-            this._grandParent.GrandChild = this._child;
+            _grandParent.Child = _parent;
+            _grandParent.GrandChild = _child;
 
-            this._parent.Child = this._child;
-            this._parent.DirectParent = this._grandParent;
+            _parent.Child = _child;
+            _parent.DirectParent = _grandParent;
 
-            this._child.Parent = this._parent;
-            this._child.GrandParent = this._grandParent;
+            _child.Parent = _parent;
+            _child.GrandParent = _grandParent;
 
-            this._context.Add(_parent);
-            this._context.Commit();
+            _context.Add(_parent);
+            _context.Commit();
         }
 
         [TestMethod]
         public void ShouldGetSingleChild()
         {
-            var child = this._context.AsQueryable<Child>().Single();
+            var child = _context.AsQueryable<Child>().Single();
 
             AssertEntities(child.GrandParent, child.Parent, child);
         }
@@ -48,7 +48,7 @@ namespace Highway.Data.Tests.InMemory.BugTests
         [TestMethod]
         public void ShouldGetSingleParent()
         {
-            var parent = this._context.AsQueryable<Parent>().Single();
+            var parent = _context.AsQueryable<Parent>().Single();
 
             AssertEntities(parent.DirectParent, parent, parent.Child);
         }
@@ -56,16 +56,16 @@ namespace Highway.Data.Tests.InMemory.BugTests
         [TestMethod]
         public void ShouldGetSingleGrandParent()
         {
-            var grandParent = this._context.AsQueryable<GrandParent>().Single();
+            var grandParent = _context.AsQueryable<GrandParent>().Single();
 
             AssertEntities(grandParent, grandParent.Child, grandParent.GrandChild);
         }
 
         private void AssertEntities(GrandParent grandParent, Parent parent, Child child)
         {
-            Assert.AreEqual(this._grandParent, grandParent);
-            Assert.AreEqual(this._parent, parent);
-            Assert.AreEqual(this._child, child);
+            Assert.AreEqual(_grandParent, grandParent);
+            Assert.AreEqual(_parent, parent);
+            Assert.AreEqual(_child, child);
         }
 
         [TestMethod]
@@ -77,10 +77,10 @@ namespace Highway.Data.Tests.InMemory.BugTests
             grandparent.Inner = parent;
             parent.Inner = child;
 
-            this._context.Add(grandparent);
-            this._context.Commit();
+            _context.Add(grandparent);
+            _context.Commit();
 
-            var circularReferences = this._context.AsQueryable<CircularReference>();
+            var circularReferences = _context.AsQueryable<CircularReference>();
             circularReferences.Count().Should().Be(3);
             circularReferences.Single(x => x.Id == 1).Inner.Should().BeSameAs(parent);
             circularReferences.Single(x => x.Id == 2).Inner.Should().BeSameAs(child);

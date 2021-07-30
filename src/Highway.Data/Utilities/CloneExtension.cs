@@ -100,7 +100,7 @@ namespace Highway.Data.Utilities
             Type t = classObject.GetType();
 
             ConstructorInfo ci = t.GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public,
-                System.Type.DefaultBinder, System.Type.EmptyTypes, null);
+                Type.DefaultBinder, Type.EmptyTypes, null);
 
             T cloneObject;
 

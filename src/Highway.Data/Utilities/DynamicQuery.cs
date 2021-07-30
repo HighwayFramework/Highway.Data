@@ -410,8 +410,8 @@ namespace System.Linq.Dynamic
                 throw new ArgumentNullException("type");
             }
 
-            this._name = name;
-            this._type = type;
+            _name = name;
+            _type = type;
         }
 
         public string Name
@@ -698,7 +698,7 @@ namespace System.Linq.Dynamic
         public ParseException(string message, int position)
             : base(message)
         {
-            this._position = position;
+            _position = position;
         }
 
         public int Position

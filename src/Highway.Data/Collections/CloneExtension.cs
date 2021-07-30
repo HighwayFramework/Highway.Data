@@ -34,10 +34,12 @@ namespace Highway.Data.Collections
 
             var cloneObject = InstantiateClone(originalObject);
 
-            if (!typeof(IEnumerable).IsInstanceOfType(originalObject))
+            if (originalObject is IEnumerable)
             {
-                CloneFields(originalObject, cloneObject);
+                return cloneObject;
             }
+
+            CloneFields(originalObject, cloneObject);
 
             return cloneObject;
         }
@@ -87,7 +89,7 @@ namespace Highway.Data.Collections
         [Obsolete("This will be used in a future version.  Use Highway.Data.Utilities.CloneExtension instead.")]
         private static T InstantiateClone<T>(T originalObject)
         {
-            if (typeof(IEnumerable).IsAssignableFrom(originalObject.GetType()))
+            if (originalObject is IEnumerable)
             {
                 return InstantiateCollectionClone(originalObject);
             }
@@ -103,7 +105,7 @@ namespace Highway.Data.Collections
             Type t = classObject.GetType();
 
             ConstructorInfo ci = t.GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public,
-                System.Type.DefaultBinder, System.Type.EmptyTypes, null);
+                Type.DefaultBinder, Type.EmptyTypes, null);
 
             T cloneObject;
 

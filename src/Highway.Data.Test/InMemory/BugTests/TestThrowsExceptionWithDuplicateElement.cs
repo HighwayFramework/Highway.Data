@@ -17,31 +17,31 @@ namespace Highway.Data.Tests.InMemory.BugTests
         [TestMethod]
         public void ShouldNotThrowErrorOnCommit()
         {
-            this._context = new InMemoryDataContext();
+            _context = new InMemoryDataContext();
             var entityType = new EntityType { Id = 1, EntityTypeName = "Customer" };
-            this._context.Add(entityType);
-            this._context.Commit();
+            _context.Add(entityType);
+            _context.Commit();
 
             var businessEntity = new BusinessEntity(
                 new List<EntityType>() { entityType });
-            this._context.Add(businessEntity);
-            this._context.Commit();
+            _context.Add(businessEntity);
+            _context.Commit();
         }
 
         [TestMethod]
         public void ShouldRetrieveWithChildProperty()
         {
-            this._context = new InMemoryDataContext();
+            _context = new InMemoryDataContext();
             var entityType = new EntityType { Id = 1, EntityTypeName = "Customer" };
-            this._context.Add(entityType);
-            this._context.Commit();
+            _context.Add(entityType);
+            _context.Commit();
 
             var businessEntity = new BusinessEntity(
                 new List<EntityType>() { entityType });
-            this._context.Add(businessEntity);
-            this._context.Commit();
+            _context.Add(businessEntity);
+            _context.Commit();
 
-            Assert.AreEqual(entityType, this._context.AsQueryable<BusinessEntity>().Single().EntityTypes.First());
+            Assert.AreEqual(entityType, _context.AsQueryable<BusinessEntity>().Single().EntityTypes.First());
         }
 
         class BusinessEntity : IIdentifiable<long>

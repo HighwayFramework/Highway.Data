@@ -59,12 +59,12 @@ namespace Highway.Data.Contexts
         /// <exception cref="NotImplementedException"></exception>
         public TIdentity Next()
         {
-            if (this.Generator == null)
+            if (Generator == null)
             {
                 throw new NotImplementedException();
             }
 
-            return this.Generator.Invoke();
+            return Generator.Invoke();
         }
 
         /// <summary>

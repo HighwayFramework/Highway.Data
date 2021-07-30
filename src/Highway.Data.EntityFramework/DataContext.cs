@@ -75,7 +75,7 @@ namespace Highway.Data
         {
             _mapping = mapping;
             _log = log;
-            this.Database.Log = _log.Debug;
+            Database.Log = _log.Debug;
             if (contextConfiguration != null)
             {
                 contextConfiguration.ConfigureContext(this);
@@ -167,9 +167,9 @@ namespace Highway.Data
             IContextConfiguration contextConfiguration,
             ILog log) : base(dbConnection, contextOwnsConnection)
         {
-            this._mapping = mapping;
-            this._log = log;
-            this.Database.Log = _log.Debug;
+            _mapping = mapping;
+            _log = log;
+            Database.Log = _log.Debug;
             if (contextConfiguration != null)
             {
                 contextConfiguration.ConfigureContext(this);

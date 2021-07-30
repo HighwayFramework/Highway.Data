@@ -17,11 +17,11 @@ namespace Highway.Data.EntityFramework.Test
         [TestInitialize]
         public void Setup()
         {
-            this._beforeSaveCalled = false;
-            this._afterSaveCalled = false;
+            _beforeSaveCalled = false;
+            _afterSaveCalled = false;
             _context = new TestDomainContext<SqlLiteDomain.SqlLiteDomain>(new SqlLiteDomain.SqlLiteDomain());
-            _context.BeforeSave += (sender, args) => this._beforeSaveCalled = true;
-            _context.AfterSave += (sender, args) => this._afterSaveCalled = true;
+            _context.BeforeSave += (sender, args) => _beforeSaveCalled = true;
+            _context.AfterSave += (sender, args) => _afterSaveCalled = true;
         }
 
         [TestMethod]

@@ -743,7 +743,7 @@ namespace System.Linq.Dynamic
             void Average(decimal? selector);
         }
 
-        private static readonly Type[] predefinedTypes =
+        private static readonly Type[] PredefinedTypes =
         {
             typeof (Object),
             typeof (Boolean),
@@ -767,15 +767,15 @@ namespace System.Linq.Dynamic
             typeof (Convert)
         };
 
-        private static readonly Expression trueLiteral = Expression.Constant(true);
-        private static readonly Expression falseLiteral = Expression.Constant(false);
-        private static readonly Expression nullLiteral = Expression.Constant(null);
+        private static readonly Expression TrueLiteral = Expression.Constant(true);
+        private static readonly Expression FalseLiteral = Expression.Constant(false);
+        private static readonly Expression NullLiteral = Expression.Constant(null);
 
-        private static readonly string keywordIt = "it";
-        private static readonly string keywordIif = "iif";
-        private static readonly string keywordNew = "new";
+        private static readonly string KeywordIt = "it";
+        private static readonly string KeywordIif = "iif";
+        private static readonly string KeywordNew = "new";
 
-        private static Dictionary<string, object> _keywords;
+        private static Dictionary<string, object> Keywords;
 
         private readonly Dictionary<string, object> _symbols;
         private IDictionary<string, object> _externals;
@@ -790,7 +790,7 @@ namespace System.Linq.Dynamic
         public ExpressionParser(ParameterExpression[] parameters, string expression, object[] values)
         {
             if (expression == null) throw new ArgumentNullException("expression");
-            if (_keywords == null) _keywords = CreateKeywords();
+            if (Keywords == null) Keywords = CreateKeywords();
             _symbols = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             _literals = new Dictionary<Expression, string>();
             if (parameters != null) ProcessParameters(parameters);
@@ -1223,12 +1223,12 @@ namespace System.Linq.Dynamic
         {
             ValidateToken(TokenId.Identifier);
             object value;
-            if (_keywords.TryGetValue(_token.text, out value))
+            if (Keywords.TryGetValue(_token.text, out value))
             {
                 if (value is Type) return ParseTypeAccess((Type) value);
-                if (value == keywordIt) return ParseIt();
-                if (value == keywordIif) return ParseIif();
-                if (value == keywordNew) return ParseNew();
+                if (value == KeywordIt) return ParseIt();
+                if (value == KeywordIif) return ParseIif();
+                if (value == KeywordNew) return ParseNew();
                 NextToken();
                 return (Expression) value;
             }
@@ -1276,21 +1276,21 @@ namespace System.Linq.Dynamic
                 throw ParseError(errorPos, Res.FirstExprMustBeBool);
             if (expr1.Type != expr2.Type)
             {
-                Expression expr1as2 = expr2 != nullLiteral ? PromoteExpression(expr1, expr2.Type, true) : null;
-                Expression expr2as1 = expr1 != nullLiteral ? PromoteExpression(expr2, expr1.Type, true) : null;
-                if (expr1as2 != null && expr2as1 == null)
+                Expression expr1As2 = expr2 != NullLiteral ? PromoteExpression(expr1, expr2.Type, true) : null;
+                Expression expr2As1 = expr1 != NullLiteral ? PromoteExpression(expr2, expr1.Type, true) : null;
+                if (expr1As2 != null && expr2As1 == null)
                 {
-                    expr1 = expr1as2;
+                    expr1 = expr1As2;
                 }
-                else if (expr2as1 != null && expr1as2 == null)
+                else if (expr2As1 != null && expr1As2 == null)
                 {
-                    expr2 = expr2as1;
+                    expr2 = expr2As1;
                 }
                 else
                 {
-                    string type1 = expr1 != nullLiteral ? expr1.Type.Name : "null";
-                    string type2 = expr2 != nullLiteral ? expr2.Type.Name : "null";
-                    if (expr1as2 != null && expr2as1 != null)
+                    string type1 = expr1 != NullLiteral ? expr1.Type.Name : "null";
+                    string type2 = expr2 != NullLiteral ? expr2.Type.Name : "null";
+                    if (expr1As2 != null && expr2As1 != null)
                         throw ParseError(errorPos, Res.BothTypesConvertToOther, type1, type2);
                     throw ParseError(errorPos, Res.NeitherTypeConvertsToOther, type1, type2);
                 }
@@ -1554,7 +1554,7 @@ namespace System.Linq.Dynamic
 
         private static bool IsPredefinedType(Type type)
         {
-            foreach (Type t in predefinedTypes) if (t == type) return true;
+            foreach (Type t in PredefinedTypes) if (t == type) return true;
             return false;
         }
 
@@ -1779,7 +1779,7 @@ namespace System.Linq.Dynamic
             if (expr is ConstantExpression)
             {
                 var ce = (ConstantExpression) expr;
-                if (ce == nullLiteral)
+                if (ce == NullLiteral)
                 {
                     if (!type.IsValueType || IsNullableType(type))
                         return Expression.Constant(null, type);
@@ -2384,13 +2384,13 @@ namespace System.Linq.Dynamic
         private static Dictionary<string, object> CreateKeywords()
         {
             var d = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
-            d.Add("true", trueLiteral);
-            d.Add("false", falseLiteral);
-            d.Add("null", nullLiteral);
-            d.Add(keywordIt, keywordIt);
-            d.Add(keywordIif, keywordIif);
-            d.Add(keywordNew, keywordNew);
-            foreach (Type type in predefinedTypes) d.Add(type.Name, type);
+            d.Add("true", TrueLiteral);
+            d.Add("false", FalseLiteral);
+            d.Add("null", NullLiteral);
+            d.Add(KeywordIt, KeywordIt);
+            d.Add(KeywordIif, KeywordIif);
+            d.Add(KeywordNew, KeywordNew);
+            foreach (Type type in PredefinedTypes) d.Add(type.Name, type);
             return d;
         }
     }

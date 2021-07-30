@@ -10,31 +10,31 @@ namespace Highway.Data.EntityFramework.Test
     //[TestClass]
     public class Given_A_DomainContext_With_Events
     {
-        private TestDomainContext<SqlLiteDomain.SqlLiteDomain> context;
-        private bool BeforeSaveCalled;
-        private bool AfterSaveCalled;
+        private TestDomainContext<SqlLiteDomain.SqlLiteDomain> _context;
+        private bool _beforeSaveCalled;
+        private bool _afterSaveCalled;
 
         [TestInitialize]
         public void Setup()
         {
-            this.BeforeSaveCalled = false;
-            this.AfterSaveCalled = false;
-            context = new TestDomainContext<SqlLiteDomain.SqlLiteDomain>(new SqlLiteDomain.SqlLiteDomain());
-            context.BeforeSave += (sender, args) => this.BeforeSaveCalled = true;
-            context.AfterSave += (sender, args) => this.AfterSaveCalled = true;
+            this._beforeSaveCalled = false;
+            this._afterSaveCalled = false;
+            _context = new TestDomainContext<SqlLiteDomain.SqlLiteDomain>(new SqlLiteDomain.SqlLiteDomain());
+            _context.BeforeSave += (sender, args) => this._beforeSaveCalled = true;
+            _context.AfterSave += (sender, args) => this._afterSaveCalled = true;
         }
 
         [TestMethod]
         public void Should_Call_BeforeSave()
         {
             // Arrange
-            context.Add(new Person { Id = Guid.NewGuid(), FirstName = "Tim", LastName = "Rayburn" });
+            _context.Add(new Person { Id = Guid.NewGuid(), FirstName = "Tim", LastName = "Rayburn" });
 
             // Act
-            context.Commit();
+            _context.Commit();
 
             // Assert
-            BeforeSaveCalled.Should().BeTrue();
+            _beforeSaveCalled.Should().BeTrue();
         }
     }
 }

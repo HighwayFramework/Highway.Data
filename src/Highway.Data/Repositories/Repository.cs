@@ -25,10 +25,7 @@ namespace Highway.Data
         /// <summary>
         ///     Reference to the DataContext the repository is using
         /// </summary>
-        public IUnitOfWork Context
-        {
-            get { return _context; }
-        }
+        public IUnitOfWork Context => _context;
 
         /// <summary>
         ///     Executes a prebuilt <see cref="ICommand" />

@@ -19,39 +19,21 @@ namespace Highway.Data.Collections
             _reverseDictionary = new ReverseDictionary(this);
         }
 
-        public IDictionary<TSecond, TFirst> Reverse
-        {
-            get { return _reverseDictionary; }
-        }
+        public IDictionary<TSecond, TFirst> Reverse => _reverseDictionary;
 
-        public int Count
-        {
-            get { return _firstToSecond.Count; }
-        }
+        public int Count => _firstToSecond.Count;
 
-        object ICollection.SyncRoot
-        {
-            get { return ((ICollection)_firstToSecond).SyncRoot; }
-        }
+        object ICollection.SyncRoot => ((ICollection)_firstToSecond).SyncRoot;
 
-        bool ICollection.IsSynchronized
-        {
-            get { return ((ICollection)_firstToSecond).IsSynchronized; }
-        }
+        bool ICollection.IsSynchronized => ((ICollection)_firstToSecond).IsSynchronized;
 
-        bool IDictionary.IsFixedSize
-        {
-            get { return ((IDictionary)_firstToSecond).IsFixedSize; }
-        }
+        bool IDictionary.IsFixedSize => ((IDictionary)_firstToSecond).IsFixedSize;
 
-        public bool IsReadOnly
-        {
-            get { return _firstToSecond.IsReadOnly || _secondToFirst.IsReadOnly; }
-        }
+        public bool IsReadOnly => _firstToSecond.IsReadOnly || _secondToFirst.IsReadOnly;
 
         public TSecond this[TFirst key]
         {
-            get { return _firstToSecond[key]; }
+            get => _firstToSecond[key];
             set
             {
                 _firstToSecond[key] = value;
@@ -61,7 +43,7 @@ namespace Highway.Data.Collections
 
         object IDictionary.this[object key]
         {
-            get { return ((IDictionary)_firstToSecond)[key]; }
+            get => ((IDictionary)_firstToSecond)[key];
             set
             {
                 ((IDictionary)_firstToSecond)[key] = value;
@@ -69,25 +51,13 @@ namespace Highway.Data.Collections
             }
         }
 
-        public ICollection<TFirst> Keys
-        {
-            get { return _firstToSecond.Keys; }
-        }
+        public ICollection<TFirst> Keys => _firstToSecond.Keys;
 
-        ICollection IDictionary.Keys
-        {
-            get { return ((IDictionary)_firstToSecond).Keys; }
-        }
+        ICollection IDictionary.Keys => ((IDictionary)_firstToSecond).Keys;
 
-        public ICollection<TSecond> Values
-        {
-            get { return _firstToSecond.Values; }
-        }
+        public ICollection<TSecond> Values => _firstToSecond.Values;
 
-        ICollection IDictionary.Values
-        {
-            get { return ((IDictionary)_firstToSecond).Values; }
-        }
+        ICollection IDictionary.Values => ((IDictionary)_firstToSecond).Values;
 
         public IEnumerator<KeyValuePair<TFirst, TSecond>> GetEnumerator()
         {
@@ -210,34 +180,19 @@ namespace Highway.Data.Collections
                 _owner = owner;
             }
 
-            public int Count
-            {
-                get { return _owner._secondToFirst.Count; }
-            }
+            public int Count => _owner._secondToFirst.Count;
 
-            object ICollection.SyncRoot
-            {
-                get { return ((ICollection)_owner._secondToFirst).SyncRoot; }
-            }
+            object ICollection.SyncRoot => ((ICollection)_owner._secondToFirst).SyncRoot;
 
-            bool ICollection.IsSynchronized
-            {
-                get { return ((ICollection)_owner._secondToFirst).IsSynchronized; }
-            }
+            bool ICollection.IsSynchronized => ((ICollection)_owner._secondToFirst).IsSynchronized;
 
-            bool IDictionary.IsFixedSize
-            {
-                get { return ((IDictionary)_owner._secondToFirst).IsFixedSize; }
-            }
+            bool IDictionary.IsFixedSize => ((IDictionary)_owner._secondToFirst).IsFixedSize;
 
-            public bool IsReadOnly
-            {
-                get { return _owner._secondToFirst.IsReadOnly || _owner._firstToSecond.IsReadOnly; }
-            }
+            public bool IsReadOnly => _owner._secondToFirst.IsReadOnly || _owner._firstToSecond.IsReadOnly;
 
             public TFirst this[TSecond key]
             {
-                get { return _owner._secondToFirst[key]; }
+                get => _owner._secondToFirst[key];
                 set
                 {
                     _owner._secondToFirst[key] = value;
@@ -247,7 +202,7 @@ namespace Highway.Data.Collections
 
             object IDictionary.this[object key]
             {
-                get { return ((IDictionary)_owner._secondToFirst)[key]; }
+                get => ((IDictionary)_owner._secondToFirst)[key];
                 set
                 {
                     ((IDictionary)_owner._secondToFirst)[key] = value;
@@ -255,25 +210,13 @@ namespace Highway.Data.Collections
                 }
             }
 
-            public ICollection<TSecond> Keys
-            {
-                get { return _owner._secondToFirst.Keys; }
-            }
+            public ICollection<TSecond> Keys => _owner._secondToFirst.Keys;
 
-            ICollection IDictionary.Keys
-            {
-                get { return ((IDictionary)_owner._secondToFirst).Keys; }
-            }
+            ICollection IDictionary.Keys => ((IDictionary)_owner._secondToFirst).Keys;
 
-            public ICollection<TFirst> Values
-            {
-                get { return _owner._secondToFirst.Values; }
-            }
+            public ICollection<TFirst> Values => _owner._secondToFirst.Values;
 
-            ICollection IDictionary.Values
-            {
-                get { return ((IDictionary)_owner._secondToFirst).Values; }
-            }
+            ICollection IDictionary.Values => ((IDictionary)_owner._secondToFirst).Values;
 
             public IEnumerator<KeyValuePair<TSecond, TFirst>> GetEnumerator()
             {

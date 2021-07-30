@@ -10,10 +10,7 @@ namespace Highway.Data.Repositories
     {
         private EventManager<T> _eventManager;
 
-        public IDomainContext<T> DomainContext
-        {
-            get { return (IDomainContext<T>) Context;}
-        } 
+        public IDomainContext<T> DomainContext => (IDomainContext<T>) Context;
 
         public DomainRepository(IDomainContext<T> context, IDomain domain) : base(context)
         {

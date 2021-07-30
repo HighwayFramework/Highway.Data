@@ -414,15 +414,9 @@ namespace System.Linq.Dynamic
             _type = type;
         }
 
-        public string Name
-        {
-            get { return _name; }
-        }
+        public string Name => _name;
 
-        public Type Type
-        {
-            get { return _type; }
-        }
+        public Type Type => _type;
     }
 
     [Obsolete("This feature will be removed in a future version")]
@@ -701,10 +695,7 @@ namespace System.Linq.Dynamic
             _position = position;
         }
 
-        public int Position
-        {
-            get { return _position; }
-        }
+        public int Position => _position;
 
         public override string ToString()
         {

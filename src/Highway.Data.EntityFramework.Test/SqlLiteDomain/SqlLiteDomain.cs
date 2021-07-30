@@ -10,13 +10,7 @@ namespace Highway.Data.EntityFramework.Test.SqlLiteDomain
 {
     public class SqlLiteDomain : IDomain
     {
-        public string ConnectionString
-        {
-            get
-            {
-                return @"Data Source=:memory:";
-            }
-        }
+        public string ConnectionString => @"Data Source=:memory:";
 
         public IMappingConfiguration Mappings => new SqlLiteDomainMappings();
 

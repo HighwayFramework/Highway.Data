@@ -21,13 +21,7 @@ namespace Highway.Data.Tests.InMemory.BugTests
         {
             public Child Child { get; set; }
 
-            public string ChildName
-            {
-                get
-                {
-                    return Child.Name;
-                }
-            }
+            public string ChildName => Child.Name;
         }
 
         public class GetParents : Query<Parent>

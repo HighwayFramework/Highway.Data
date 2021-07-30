@@ -2,9 +2,9 @@
 
 namespace Highway.Data.EntityFramework.Test.TestDomain
 {
-    public class EntityFrameworkIntializer : DropCreateInitializer<TestDataContext>
+    public class EntityFrameworkInitializer : DropCreateInitializer<TestDataContext>
     {
-        public EntityFrameworkIntializer() : base(SeedDatabase)
+        public EntityFrameworkInitializer() : base(SeedDatabase)
         {
         }
 

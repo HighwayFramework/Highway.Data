@@ -125,8 +125,6 @@ namespace Highway.Data
         /// <param name="contextOwnsConnection">The context owns connection.</param>
         /// <param name="mapping">The Mapping Configuration that will determine how the tables and objects interact</param>
         /// <param name="log">The logger being supplied for this context ( Optional )</param>
-        ///     The log.
-        /// </param>
         public DataContext(
             DbConnection dbConnection,
             bool contextOwnsConnection,
@@ -355,8 +353,7 @@ namespace Highway.Data
 
         protected virtual DbEntityEntry<T> GetChangeTrackingEntry<T>(T item) where T : class
         {
-            DbEntityEntry<T> entry = Entry(item);
-            return entry;
+            return Entry(item);
         }
 
         /// <summary>

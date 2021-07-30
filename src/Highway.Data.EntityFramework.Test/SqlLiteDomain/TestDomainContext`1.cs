@@ -1,6 +1,4 @@
-﻿using Common.Logging;
-
-using System.Data.Entity;
+﻿using System.Data.Entity;
 
 namespace Highway.Data.EntityFramework.Test.SqlLiteDomain
 {
@@ -13,16 +11,6 @@ namespace Highway.Data.EntityFramework.Test.SqlLiteDomain
         /// </summary>
         /// <param name="domain"></param>
         public TestDomainContext(T domain) : base(domain)
-        {
-
-        }
-
-        /// <summary>
-        /// Constructs the domain context
-        /// </summary>
-        /// <param name="domain">domain for context</param>
-        /// <param name="logger">logger</param>
-        public TestDomainContext(T domain, ILog logger) : base(domain, logger)
         {
 
         }

@@ -19,7 +19,7 @@ namespace Highway.Data.EntityFramework.Test
         [TestInitialize]
         public void Setup()
         {
-            Database.SetInitializer(new EntityFrameworkIntializer());
+            Database.SetInitializer(new EntityFrameworkInitializer());
             _mapping = new FooMappingConfiguration();
             _context = new TestDataContext(
                 connectionString: "Data Source=(localDb);Initial Catalog=Highway.Data.Test.Db;Integrated Security=True;Connection Timeout=1",

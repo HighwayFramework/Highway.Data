@@ -66,8 +66,7 @@ namespace Highway.Data
         /// </returns>
         public virtual IEnumerable<T> Execute(IDataContext context)
         {
-            var task = PrepareQuery(context);
-            return task;
+            return PrepareQuery(context);
         }
 
         public string OutputQuery(IDataContext context)
@@ -137,8 +136,7 @@ namespace Highway.Data
         /// </returns>
         public virtual IEnumerable<TProjection> Execute(IDataContext context)
         {
-            var task = PrepareQuery(context);
-            return task;
+            return PrepareQuery(context);
         }
 
         public virtual string OutputQuery(IDataContext context)

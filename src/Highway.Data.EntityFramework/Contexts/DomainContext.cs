@@ -41,7 +41,7 @@ namespace Highway.Data
             return changes;
         }
 
-        public async override Task<int> CommitAsync()
+        public override async Task<int> CommitAsync()
         {
             OnBeforeSave();
             var changes = await base.CommitAsync();
@@ -61,18 +61,12 @@ namespace Highway.Data
 
         private void OnAfterSave()
         {
-            if (AfterSave != null)
-            {
-                AfterSave(this, new AfterSave());
-            }
+            AfterSave?.Invoke(this, new AfterSave());
         }
 
         private void OnBeforeSave()
         {
-            if (BeforeSave != null)
-            {
-                BeforeSave(this, new BeforeSave());
-            }
+            BeforeSave?.Invoke(this, new BeforeSave());
         }
     }
 }

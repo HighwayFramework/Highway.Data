@@ -2,8 +2,5 @@
 {
     public class SqlLiteDomainContextConfiguration : DefaultContextConfiguration
     {
-        public SqlLiteDomainContextConfiguration()
-        {
-        }
     }
 }

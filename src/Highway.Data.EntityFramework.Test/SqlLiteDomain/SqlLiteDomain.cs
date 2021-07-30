@@ -12,8 +12,6 @@ namespace Highway.Data.EntityFramework.Test.SqlLiteDomain
 
         public IContextConfiguration Context => new SqlLiteDomainContextConfiguration();
 
-        public List<IInterceptor> Events => new List<IInterceptor>
-        {
-        };
+        public List<IInterceptor> Events => new List<IInterceptor>();
     }
 }

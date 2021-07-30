@@ -29,7 +29,7 @@ namespace Highway.Data.EntityFramework.Test
 
 
         [TestMethod]
-        public void When_Given_A_Contructor_It_Should_Support_Dependency_Injection()
+        public void When_Given_A_Constructor_It_Should_Support_Dependency_Injection()
         {
             //Arrange
 

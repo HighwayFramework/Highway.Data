@@ -68,7 +68,7 @@ namespace Highway.Data.Tests.InMemory.BugTests
         }
 
         [TestMethod]
-        public void ShouldAllowCircularHeirarchies()
+        public void ShouldAllowCircularHierarchies()
         {
             var grandparent = new CircularReference() { Id = 1, Outer = null };
             var parent = new CircularReference() { Id = 2, Outer = grandparent };

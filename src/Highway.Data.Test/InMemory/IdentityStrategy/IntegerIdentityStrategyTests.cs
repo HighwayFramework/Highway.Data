@@ -10,12 +10,12 @@ namespace Highway.Data.Tests.InMemory
     [TestClass]
     public class IntegerIdentityStrategyTests
     {
-        private IntegerIdentityStrategy<Post> target;
+        private IntegerIdentityStrategy<Post> _target;
 
         [TestInitialize]
         public void Setup()
         {
-            target = new IntegerIdentityStrategy<Post>(x => x.Id);
+            _target = new IntegerIdentityStrategy<Post>(x => x.Id);
         }
 
         [TestMethod]
@@ -24,7 +24,7 @@ namespace Highway.Data.Tests.InMemory
             // Arrange
 
             // Act
-            int result = target.Next();
+            int result = _target.Next();
 
             // Assert
             result.Should().Be(1);
@@ -37,7 +37,7 @@ namespace Highway.Data.Tests.InMemory
             var post = new Post { Id = 0 };
 
             // Act
-            target.Assign(post);
+            _target.Assign(post);
 
             // Assert
             post.Id.Should().Be(1);

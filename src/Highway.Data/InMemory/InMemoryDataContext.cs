@@ -10,8 +10,8 @@ namespace Highway.Data.Contexts
     public class InMemoryDataContext : IDataContext
     {
         internal readonly ObjectRepresentationRepository repo;
-        private readonly Queue addQueue = new Queue();
-        private readonly Queue removeQueue = new Queue();
+        private readonly Queue _addQueue = new Queue();
+        private readonly Queue _removeQueue = new Queue();
 
         public event EventHandler<BeforeSave> BeforeSave;
         public event EventHandler<AfterSave> AfterSave;
@@ -47,13 +47,13 @@ namespace Highway.Data.Contexts
 
         public virtual T Add<T>(T item) where T : class
         {
-            addQueue.Enqueue(item);
+            _addQueue.Enqueue(item);
             return item;
         }
 
         public virtual T Remove<T>(T item) where T : class
         {
-            removeQueue.Enqueue(item);
+            _removeQueue.Enqueue(item);
             return item;
         }
 
@@ -112,16 +112,16 @@ namespace Highway.Data.Contexts
 
         private void AddAllFromQueueIntoRepository()
         {
-            while (addQueue.Count > 0)
+            while (_addQueue.Count > 0)
             {
-                repo.Add(addQueue.Dequeue());
+                repo.Add(_addQueue.Dequeue());
             }
         }
         private void RemoveAllFromQueueFromRepository()
         {
-            while (removeQueue.Count > 0)
+            while (_removeQueue.Count > 0)
             {
-                repo.Remove(removeQueue.Dequeue());
+                repo.Remove(_removeQueue.Dequeue());
             }
         }
 

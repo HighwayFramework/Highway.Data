@@ -7,11 +7,11 @@ namespace Highway.Data.Collections
 {
     public static class CloneExtension
     {
-        private static IDictionary<object, object> originalToCloneMap;
+        private static IDictionary<object, object> _originalToCloneMap;
 
         public static T Clone<T>(this T originalObject, IDictionary<object, object> existingOriginalToCloneMap) where T : class
         {
-            originalToCloneMap = existingOriginalToCloneMap ?? new Dictionary<object, object>();
+            _originalToCloneMap = existingOriginalToCloneMap ?? new Dictionary<object, object>();
 
             var cloneObject = ExecuteClone(originalObject);
 
@@ -25,8 +25,8 @@ namespace Highway.Data.Collections
 
         public static T ExecuteClone<T>(this T originalObject) where T : class
         {
-            if (originalToCloneMap.ContainsKey(originalObject))
-                return (T)originalToCloneMap[originalObject];
+            if (_originalToCloneMap.ContainsKey(originalObject))
+                return (T)_originalToCloneMap[originalObject];
 
             var cloneObject = (T)InstantiateClone(originalObject);
 
@@ -96,7 +96,7 @@ namespace Highway.Data.Collections
                 throw new MissingMethodException(string.Format("Possible missing default constructor for {0}. Can be private. Required for EF as well.", t), e);
             }
 
-            originalToCloneMap.Add(classObject, cloneObject);
+            _originalToCloneMap.Add(classObject, cloneObject);
             return cloneObject;
         }
 
@@ -110,7 +110,7 @@ namespace Highway.Data.Collections
             if (!typeof(IList).IsAssignableFrom(collectionType))
                 throw new NotSupportedException("Uncertain of what other collection types to handle.");
 
-            originalToCloneMap.Add(originalCollection, cloneCollection);
+            _originalToCloneMap.Add(originalCollection, cloneCollection);
 
             foreach (var item in (IEnumerable)originalCollection)
             {

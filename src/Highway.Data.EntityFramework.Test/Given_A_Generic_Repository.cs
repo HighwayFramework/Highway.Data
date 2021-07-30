@@ -16,13 +16,13 @@ namespace Highway.Data.EntityFramework.Test
     [TestClass]
     public class Given_A_Generic_Repository
     {
-        private IDataContext context;
-        private IRepository target;
+        private IDataContext _context;
+        private IRepository _target;
 
         [TestInitialize]
         public void Setup()
         {
-            context = new TestDataContext(
+            _context = new TestDataContext(
                 connectionString: "Data Source=(localDb);Initial Catalog=Highway.Data.Test.Db;Integrated Security=True",
                 mapping: new FooMappingConfiguration(),
                 logger: new NoOpLogger());
@@ -35,23 +35,23 @@ namespace Highway.Data.EntityFramework.Test
             //Arrange
 
             //Act
-            var repository = new Repository(context);
+            var repository = new Repository(_context);
 
             //Assert
-            repository.Context.Should().BeSameAs(context);
+            repository.Context.Should().BeSameAs(_context);
         }
 
         [TestMethod]
         public void Should_Execute_Query_Objects()
         {
             //Arrange
-            context = new InMemoryDataContext();
-            context.Add(new Foo { Id = 1, Name = "Test" });
-            context.Commit();
-            target = new Repository(context);
+            _context = new InMemoryDataContext();
+            _context.Add(new Foo { Id = 1, Name = "Test" });
+            _context.Commit();
+            _target = new Repository(_context);
 
             //Act
-            IEnumerable<Foo> result = target.Find(new FindFoo());
+            IEnumerable<Foo> result = _target.Find(new FindFoo());
 
             //Assert
             Foo foo = result.First();
@@ -64,16 +64,16 @@ namespace Highway.Data.EntityFramework.Test
         public void Should_Extend_Query_Objects()
         {
             //Arrange
-            context = new InMemoryDataContext();
-            context.Add(new Foo {Id = 1, Name = "Test"});
-            context.Add(new Foo {Id = 2, Name = "Test2"});
-            context.Add(new Foo {Id = 3, Name = "NoMatch"});
-            context.Commit();
-            target = new Repository(context);
+            _context = new InMemoryDataContext();
+            _context.Add(new Foo {Id = 1, Name = "Test"});
+            _context.Add(new Foo {Id = 2, Name = "Test2"});
+            _context.Add(new Foo {Id = 3, Name = "NoMatch"});
+            _context.Commit();
+            _target = new Repository(_context);
 
             //Act
             var query = new FindFoo().Where(x => x.Name.Contains("Test")).Skip(1).Take(1);
-            IEnumerable<Foo> result = target.Find(query);
+            IEnumerable<Foo> result = _target.Find(query);
 
             //Assert
             Foo foo = result.Single();
@@ -86,7 +86,7 @@ namespace Highway.Data.EntityFramework.Test
         public void Should_Extend_Selector_Projector_Query_Objects()
         {
             //Arrange
-            context = new InMemoryDataContext();
+            _context = new InMemoryDataContext();
 
             // Create the first Foo, with two Bar children.  This is the non-matching Foo.
             var nonMatchingFoo = new Foo
@@ -110,14 +110,14 @@ namespace Highway.Data.EntityFramework.Test
                 }
             };
 
-            context.Add(nonMatchingFoo);
-            context.Add(matchingFoo);
-            context.Commit();
-            target = new Repository(context);
+            _context.Add(nonMatchingFoo);
+            _context.Add(matchingFoo);
+            _context.Commit();
+            _target = new Repository(_context);
 
             //Act
             var query = new FindBarByFooId(2).Where(x => x.Name.Contains("Matching")).Skip(1).Take(1);
-            IEnumerable<Bar> result = target.Find(query);
+            IEnumerable<Bar> result = _target.Find(query);
 
             //Assert
             Bar bar = result.Single();
@@ -130,13 +130,13 @@ namespace Highway.Data.EntityFramework.Test
         public void Should_Execute_Scalar_Objects_That_Return_Values()
         {
             //Arrange
-            context = new InMemoryDataContext();
-            context.Add(new Foo { Id = 1, Name = "Test" });
-            context.Commit();
-            target = new Repository(context);
+            _context = new InMemoryDataContext();
+            _context.Add(new Foo { Id = 1, Name = "Test" });
+            _context.Commit();
+            _target = new Repository(_context);
 
             //Act
-            int result = target.Find(new ScalarIntTestQuery());
+            int result = _target.Find(new ScalarIntTestQuery());
 
             //Assert
             result.Should().Be(1);
@@ -146,13 +146,13 @@ namespace Highway.Data.EntityFramework.Test
         public void Should_Execute_Scalar_Objects_That_Return_Objects()
         {
             //Arrange
-            context = new InMemoryDataContext();
-            context.Add(new Foo { Id = 1, Name = "Test" });
-            context.Commit();
-            target = new Repository(context);
+            _context = new InMemoryDataContext();
+            _context.Add(new Foo { Id = 1, Name = "Test" });
+            _context.Commit();
+            _target = new Repository(_context);
 
             //Act
-            int result = target.Find(new ScalarIntTestQuery());
+            int result = _target.Find(new ScalarIntTestQuery());
 
             //Assert
             result.Should().Be(1);
@@ -162,14 +162,14 @@ namespace Highway.Data.EntityFramework.Test
         public void Should_Execute_A_Query_Object_And_Pull_The_First_Object()
         {
             //Arrange
-            context = new InMemoryDataContext();
+            _context = new InMemoryDataContext();
             Foo foo = new Foo { Id = 1, Name = "Test" };
-            context.Add(foo);
-            context.Commit();
-            target = new Repository(context);
+            _context.Add(foo);
+            _context.Commit();
+            _target = new Repository(_context);
 
             //Act
-            Foo result = target.Find(new FindFoo()).FirstOrDefault();
+            Foo result = _target.Find(new FindFoo()).FirstOrDefault();
 
             //Assert
             result.Should().Be(foo);
@@ -179,14 +179,14 @@ namespace Highway.Data.EntityFramework.Test
         public void Should_Execute_Commands_Against_Context()
         {
             //Arrange
-            context = new InMemoryDataContext();
+            _context = new InMemoryDataContext();
             Foo foo = new Foo { Id = 1, Name = "Test" };
-            context.Add(foo);
-            target = new Repository(context);
+            _context.Add(foo);
+            _target = new Repository(_context);
 
             //Act
             var testCommand = new TestCommand();
-            target.Execute(testCommand);
+            _target.Execute(testCommand);
 
             //Assert
             testCommand.Called.Should().BeTrue();

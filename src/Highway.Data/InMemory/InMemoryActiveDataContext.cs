@@ -11,10 +11,10 @@ namespace Highway.Data.Contexts
 {
     public class InMemoryActiveDataContext : InMemoryDataContext, IDataContext
     {
-        private int commitVersion = 0;
+        private int _commitVersion = 0;
         private static int CommitCounter = 0;
         internal static ObjectRepresentationRepository Repo = new ObjectRepresentationRepository();
-        private BiDictionary<object, object> entityToRepoEntityMap = new BiDictionary<object, object>();
+        private BiDictionary<object, object> _entityToRepoEntityMap = new BiDictionary<object, object>();
 
         public InMemoryActiveDataContext()
             : base(Repo)
@@ -30,14 +30,14 @@ namespace Highway.Data.Contexts
 
         public override T Add<T>(T item)
         {
-            var repoItem = item.Clone(entityToRepoEntityMap);
+            var repoItem = item.Clone(_entityToRepoEntityMap);
             base.Add(repoItem);
             return item;
         }
 
         public override T Remove<T>(T item)
         {
-            var repoItem = entityToRepoEntityMap[item];
+            var repoItem = _entityToRepoEntityMap[item];
             base.Remove(repoItem);
             return item;
         }
@@ -47,7 +47,7 @@ namespace Highway.Data.Contexts
         {
             UpdateMapFromRepo();
 
-            return base.AsQueryable<T>().Select(t => (T)entityToRepoEntityMap.Reverse[t]);
+            return base.AsQueryable<T>().Select(t => (T)_entityToRepoEntityMap.Reverse[t]);
         }
 
         public override T Update<T>(T item)
@@ -62,10 +62,10 @@ namespace Highway.Data.Contexts
 
         public override int Commit()
         {
-            if (commitVersion != CommitCounter)
+            if (_commitVersion != CommitCounter)
                 throw new InvalidOperationException("Cannot commit on stale data. Possibly need to requery. Unexpected scenario.");
 
-            foreach (var pair in entityToRepoEntityMap)
+            foreach (var pair in _entityToRepoEntityMap)
             {
                 if (!typeof(IEnumerable).IsAssignableFrom(pair.Key.GetType()))
                     CopyPrimitives(pair.Key, pair.Value);
@@ -77,13 +77,13 @@ namespace Highway.Data.Contexts
 
             repo.Commit();
 
-            foreach (var pair in entityToRepoEntityMap.Reverse)
+            foreach (var pair in _entityToRepoEntityMap.Reverse)
             {
                 if (!typeof(IEnumerable).IsAssignableFrom(pair.Key.GetType()))
                     CopyPrimitives(pair.Key, pair.Value);
             }
 
-            commitVersion = ++CommitCounter;
+            _commitVersion = ++CommitCounter;
 
             return 0;
         }
@@ -97,7 +97,7 @@ namespace Highway.Data.Contexts
 
         private void UpdateForwardEntityToRepoEntityMap()
         {
-            var entities = new List<object>(entityToRepoEntityMap.Keys);
+            var entities = new List<object>(_entityToRepoEntityMap.Keys);
             foreach (var entity in entities)
             {
                 CloneCollectionsUpdate(entity);
@@ -106,14 +106,14 @@ namespace Highway.Data.Contexts
 
         private void UpdateMapFromRepo()
         {
-            if (commitVersion == CommitCounter) return;
+            if (_commitVersion == CommitCounter) return;
 
             foreach (var item in Repo._data.Select(o => o.Entity))
             {
-                item.Clone(entityToRepoEntityMap.Reverse);
+                item.Clone(_entityToRepoEntityMap.Reverse);
             }
 
-            commitVersion = CommitCounter;
+            _commitVersion = CommitCounter;
         }
 
         private void CopyPrimitives(object source, object destination)
@@ -148,14 +148,14 @@ namespace Highway.Data.Contexts
             if (!typeof(IList).IsAssignableFrom(collectionType))
                 throw new NotSupportedException("Uncertain of what other collection types to handle.");
 
-            var repoEntityCollection = (IList)entityToRepoEntityMap[entityCollection];
+            var repoEntityCollection = (IList)_entityToRepoEntityMap[entityCollection];
 
             var unremovedRepoEntities = new List<object>();
             foreach (var item in (IEnumerable)entityCollection)
             {
-                if (!entityToRepoEntityMap.ContainsKey(item))
-                    repoEntityCollection.Add(item.Clone(entityToRepoEntityMap));
-                unremovedRepoEntities.Add(entityToRepoEntityMap[item]);
+                if (!_entityToRepoEntityMap.ContainsKey(item))
+                    repoEntityCollection.Add(item.Clone(_entityToRepoEntityMap));
+                unremovedRepoEntities.Add(_entityToRepoEntityMap[item]);
             }
 
             var removeRepoEntities = new List<object>(((IEnumerable<object>)repoEntityCollection).Except(unremovedRepoEntities));

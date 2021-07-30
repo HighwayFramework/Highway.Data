@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-
-namespace Highway.Data.Tests.InMemory.Domain
+﻿namespace Highway.Data.Tests.InMemory.Domain
 {
     public class Post
     {

@@ -5,9 +5,8 @@ using Highway.Data.EntityFramework.Test.TestDomain;
 using Highway.Data.EntityFramework.Test.TestDomain.Queries;
 using Highway.Data.Tests.TestDomain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 
 namespace Highway.Data.EntityFramework.Test

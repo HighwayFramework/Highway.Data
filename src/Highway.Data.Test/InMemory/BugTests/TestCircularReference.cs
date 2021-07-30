@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using FluentAssertions;
-using Highway.Data;
+﻿using System.Linq;
+
 using Highway.Data.Contexts;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;

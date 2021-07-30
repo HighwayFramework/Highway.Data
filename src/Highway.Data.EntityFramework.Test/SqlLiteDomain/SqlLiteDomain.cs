@@ -1,10 +1,6 @@
-﻿using Common.Logging;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Text;
+﻿using System.Collections.Generic;
+
 using Highway.Data.EventManagement.Interfaces;
-using Highway.Data.Interceptors.Events;
 
 namespace Highway.Data.EntityFramework.Test.SqlLiteDomain
 {

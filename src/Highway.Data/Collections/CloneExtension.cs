@@ -89,14 +89,9 @@ namespace Highway.Data.Collections
         [Obsolete("This will be used in a future version.  Use Highway.Data.Utilities.CloneExtension instead.")]
         private static T InstantiateClone<T>(T originalObject)
         {
-            if (originalObject is IEnumerable)
-            {
-                return InstantiateCollectionClone(originalObject);
-            }
-            else
-            {
-                return InstantiateClassClone(originalObject);
-            }
+            return originalObject is IEnumerable
+                ? InstantiateCollectionClone(originalObject)
+                : InstantiateClassClone(originalObject);
         }
 
         [Obsolete("This will be used in a future version.  Use Highway.Data.Utilities.CloneExtension instead.")]

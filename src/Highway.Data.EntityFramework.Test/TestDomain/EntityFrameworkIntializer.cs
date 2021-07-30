@@ -1,5 +1,4 @@
 ﻿using Highway.Data.Tests.TestDomain;
-using System;
 
 namespace Highway.Data.EntityFramework.Test.TestDomain
 {

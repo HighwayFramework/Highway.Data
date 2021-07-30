@@ -7,8 +7,6 @@ using Highway.Data.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 
-using Highway.Data.Utilities;
-
 namespace Highway.Data.Contexts
 {
     public class InMemoryActiveDataContext : InMemoryDataContext, IDataContext

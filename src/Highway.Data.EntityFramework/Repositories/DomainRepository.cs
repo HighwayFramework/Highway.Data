@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Highway.Data.EventManagement;
-using Highway.Data.Interceptors.Events;
+﻿using Highway.Data.EventManagement;
 
 namespace Highway.Data.Repositories
 {

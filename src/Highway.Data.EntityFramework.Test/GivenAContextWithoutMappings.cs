@@ -1,6 +1,6 @@
 using Common.Logging.Simple;
 using FluentAssertions;
-using Highway.Data.EntityFramework.Test.SqlLiteDomain;
+
 using Highway.Data.EntityFramework.Test.TestDomain;
 using Highway.Data.Tests.TestDomain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

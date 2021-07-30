@@ -2,8 +2,6 @@ using FluentAssertions;
 using Highway.Data.EntityFramework.Test.SqlLiteDomain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Data.Entity;
-using System.Linq;
 
 namespace Highway.Data.EntityFramework.Test
 {

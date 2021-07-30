@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Highway.Data.Utilities
 {
-    public static class CloneExtension
+   public static class CloneExtension
     {
         private static IDictionary<object, object> OriginalToCloneMap;
 
@@ -16,9 +13,7 @@ namespace Highway.Data.Utilities
         {
             OriginalToCloneMap = existingOriginalToCloneMap ?? new Dictionary<object, object>();
 
-            var cloneObject = ExecuteClone(originalObject);
-
-            return cloneObject;
+            return ExecuteClone(originalObject);
         }
 
         public static T Clone<T>(this T originalObject) where T : class
@@ -35,10 +30,12 @@ namespace Highway.Data.Utilities
 
             var cloneObject = InstantiateClone(originalObject);
 
-            if (!typeof(IEnumerable).IsAssignableFrom(originalObject.GetType()))
+            if (originalObject is IEnumerable)
             {
-                CloneFields(originalObject, cloneObject);
+                return cloneObject;
             }
+
+            CloneFields(originalObject, cloneObject);
 
             return cloneObject;
         }
@@ -85,14 +82,9 @@ namespace Highway.Data.Utilities
 
         private static T InstantiateClone<T>(T originalObject)
         {
-            if (typeof(IEnumerable).IsAssignableFrom(originalObject.GetType()))
-            {
-                return InstantiateCollectionClone(originalObject);
-            }
-            else
-            {
-                return InstantiateClassClone(originalObject);
-            }
+            return originalObject is IEnumerable
+                ? InstantiateCollectionClone(originalObject)
+                : InstantiateClassClone(originalObject);
         }
 
         private static T InstantiateClassClone<T>(T classObject)

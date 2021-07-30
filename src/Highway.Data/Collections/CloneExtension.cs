@@ -5,10 +5,12 @@ using System.Reflection;
 
 namespace Highway.Data.Collections
 {
+    [Obsolete("This will be used in a future version.  Use Highway.Data.Utilities.CloneExtension instead.")]
     public static class CloneExtension
     {
         private static IDictionary<object, object> OriginalToCloneMap;
 
+        [Obsolete("This will be used in a future version.  Use Highway.Data.Utilities.CloneExtension instead.")]
         public static T Clone<T>(this T originalObject, IDictionary<object, object> existingOriginalToCloneMap) where T : class
         {
             OriginalToCloneMap = existingOriginalToCloneMap ?? new Dictionary<object, object>();
@@ -18,11 +20,13 @@ namespace Highway.Data.Collections
             return cloneObject;
         }
 
+        [Obsolete("This will be used in a future version.  Use Highway.Data.Utilities.CloneExtension instead.")]
         public static T Clone<T>(this T originalObject) where T : class
         {
             return Clone<T>(originalObject, null);
         }
 
+        [Obsolete("This will be used in a future version.  Use Highway.Data.Utilities.CloneExtension instead.")]
         public static T ExecuteClone<T>(this T originalObject) where T : class
         {
             if (OriginalToCloneMap.ContainsKey(originalObject))
@@ -36,6 +40,7 @@ namespace Highway.Data.Collections
             return cloneObject;
         }
 
+        [Obsolete("This will be used in a future version.  Use Highway.Data.Utilities.CloneExtension instead.")]
         private static void CloneFields<T>(T originalObject, T cloneObject)
         {
             Type type = originalObject.GetType();
@@ -48,6 +53,7 @@ namespace Highway.Data.Collections
             } while (type != null);
         }
 
+        [Obsolete("This will be used in a future version.  Use Highway.Data.Utilities.CloneExtension instead.")]
         private static void CloneFieldsForType<T>(T originalObject, T cloneObject, Type type)
         {
             var fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
@@ -70,6 +76,7 @@ namespace Highway.Data.Collections
             }
         }
 
+        [Obsolete("This will be used in a future version.  Use Highway.Data.Utilities.CloneExtension instead.")]
         private static T InstantiateClone<T>(T originalObject)
         {
             if (typeof(IEnumerable).IsAssignableFrom(originalObject.GetType()))
@@ -78,6 +85,7 @@ namespace Highway.Data.Collections
                 return InstantiateClassClone(originalObject);
         }
 
+        [Obsolete("This will be used in a future version.  Use Highway.Data.Utilities.CloneExtension instead.")]
         private static T InstantiateClassClone<T>(T classObject)
         {
             Type t = classObject.GetType();
@@ -100,6 +108,7 @@ namespace Highway.Data.Collections
             return cloneObject;
         }
 
+        [Obsolete("This will be used in a future version.  Use Highway.Data.Utilities.CloneExtension instead.")]
         private static T InstantiateCollectionClone<T>(T originalCollection)
         {
             var collectionType = originalCollection.GetType().GetGenericTypeDefinition();

@@ -78,7 +78,7 @@ namespace Highway.Data.Utilities
                     var methodInfo = typeof(CloneExtension).GetMethod("ExecuteClone");
                     var genericMethod = methodInfo.MakeGenericMethod(value.GetType());
 
-                    fieldInfo.SetValue(cloneObject, genericMethod.Invoke(value, new object[] { value }));
+                    fieldInfo.SetValue(cloneObject, genericMethod.Invoke(value, new[] { value }));
                 }
             }
         }

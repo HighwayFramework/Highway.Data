@@ -9,12 +9,12 @@ using System.Reflection;
 
 namespace Highway.Data.Contexts
 {
-    public class InMemoryActiveDataContext : InMemoryDataContext, IDataContext
+    public class InMemoryActiveDataContext : InMemoryDataContext
     {
         private int _commitVersion = 0;
         private static int CommitCounter = 0;
         internal static ObjectRepresentationRepository Repo = new ObjectRepresentationRepository();
-        private BiDictionary<object, object> _entityToRepoEntityMap = new BiDictionary<object, object>();
+        private readonly BiDictionary<object, object> _entityToRepoEntityMap = new BiDictionary<object, object>();
 
         public InMemoryActiveDataContext()
             : base(Repo)

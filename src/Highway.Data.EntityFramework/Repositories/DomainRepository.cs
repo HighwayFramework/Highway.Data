@@ -4,7 +4,7 @@ namespace Highway.Data.Repositories
 {
     public class DomainRepository<T> : Repository, IDomainRepository<T> where T : class, IDomain
     {
-        private EventManager<T> _eventManager;
+        private readonly EventManager<T> _eventManager;
 
         public IDomainContext<T> DomainContext => (IDomainContext<T>) Context;
 

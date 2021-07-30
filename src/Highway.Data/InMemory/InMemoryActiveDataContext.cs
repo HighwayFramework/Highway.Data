@@ -7,6 +7,8 @@ using Highway.Data.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 
+using Highway.Data.Utilities;
+
 namespace Highway.Data.Contexts
 {
     public class InMemoryActiveDataContext : InMemoryDataContext, IDataContext
@@ -30,7 +32,7 @@ namespace Highway.Data.Contexts
 
         public override T Add<T>(T item)
         {
-            var repoItem = item.Clone(_entityToRepoEntityMap);
+            var repoItem = Utilities.CloneExtension.Clone(item, _entityToRepoEntityMap);
             base.Add(repoItem);
             return item;
         }
@@ -110,7 +112,7 @@ namespace Highway.Data.Contexts
 
             foreach (var item in Repo._data.Select(o => o.Entity))
             {
-                item.Clone(_entityToRepoEntityMap.Reverse);
+                Utilities.CloneExtension.Clone(item, _entityToRepoEntityMap.Reverse);
             }
 
             _commitVersion = CommitCounter;
@@ -154,7 +156,7 @@ namespace Highway.Data.Contexts
             foreach (var item in (IEnumerable)entityCollection)
             {
                 if (!_entityToRepoEntityMap.ContainsKey(item))
-                    repoEntityCollection.Add(item.Clone(_entityToRepoEntityMap));
+                    repoEntityCollection.Add(Utilities.CloneExtension.Clone(item, _entityToRepoEntityMap));
                 unremovedRepoEntities.Add(_entityToRepoEntityMap[item]);
             }
 

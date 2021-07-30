@@ -42,7 +42,10 @@ namespace Highway.Data.EventManagement
             foreach (var eventInterceptor in events)
             {
                 var result = eventInterceptor.Apply(_repository.DomainContext, e);
-                if (!result.ContinueExecution) break;
+                if (!result.ContinueExecution)
+                {
+                    break;
+                }
             }
         }
 
@@ -52,7 +55,10 @@ namespace Highway.Data.EventManagement
             foreach (var eventInterceptor in events)
             {
                 var result = eventInterceptor.Apply(_repository.DomainContext, e);
-                if (!result.ContinueExecution) break;
+                if (!result.ContinueExecution)
+                {
+                    break;
+                }
             }
         }
 
@@ -62,7 +68,10 @@ namespace Highway.Data.EventManagement
             foreach (var eventInterceptor in events)
             {
                 var result = eventInterceptor.Apply(_repository.DomainContext, e);
-                if (!result.ContinueExecution) break;
+                if (!result.ContinueExecution)
+                {
+                    break;
+                }
             }
         }
 
@@ -72,7 +81,10 @@ namespace Highway.Data.EventManagement
             foreach (var eventInterceptor in events)
             {
                 var result = eventInterceptor.Apply(_repository.DomainContext, e);
-                if (!result.ContinueExecution) break;
+                if (!result.ContinueExecution)
+                {
+                    break;
+                }
             }
         }
 
@@ -82,7 +94,10 @@ namespace Highway.Data.EventManagement
             foreach (var eventInterceptor in events)
             {
                 var result = eventInterceptor.Apply(_repository.DomainContext, e);
-                if (!result.ContinueExecution) break;
+                if (!result.ContinueExecution)
+                {
+                    break;
+                }
             }
         }
 
@@ -92,7 +107,10 @@ namespace Highway.Data.EventManagement
             foreach (var eventInterceptor in events)
             {
                 var result = eventInterceptor.Apply(_repository.DomainContext, e);
-                if (!result.ContinueExecution) break;
+                if (!result.ContinueExecution)
+                {
+                    break;
+                }
             }
         }
 
@@ -102,7 +120,10 @@ namespace Highway.Data.EventManagement
             foreach (var eventInterceptor in events)
             {
                 var result = eventInterceptor.Apply(_repository.DomainContext, e);
-                if (!result.ContinueExecution) break;
+                if (!result.ContinueExecution)
+                {
+                    break;
+                }
             }
         }
 
@@ -112,7 +133,10 @@ namespace Highway.Data.EventManagement
             foreach (var eventInterceptor in events)
             {
                 var result = eventInterceptor.Apply(_repository.DomainContext, e);
-                if (!result.ContinueExecution) break;
+                if (!result.ContinueExecution)
+                {
+                    break;
+                }
             }
         }
         
@@ -122,7 +146,11 @@ namespace Highway.Data.EventManagement
         /// <param name="eventInterceptor">The eventInterceptor to be registered to an event</param>
         public void Register(IInterceptor eventInterceptor)
         {
-            if (_interceptors.Contains(eventInterceptor)) return;
+            if (_interceptors.Contains(eventInterceptor))
+            {
+                return;
+            }
+
             _interceptors.Add(eventInterceptor);
         }
     }

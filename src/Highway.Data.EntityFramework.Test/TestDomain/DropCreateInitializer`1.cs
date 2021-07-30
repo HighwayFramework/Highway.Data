@@ -32,7 +32,11 @@ namespace Highway.Data.EntityFramework.Test.TestDomain
             {
                 foreach (var sp in _storedProcs())
                 {
-                    if (string.IsNullOrWhiteSpace(sp)) continue;
+                    if (string.IsNullOrWhiteSpace(sp))
+                    {
+                        continue;
+                    }
+
                     context.Database.ExecuteSqlCommand(sp);
                 }
             }

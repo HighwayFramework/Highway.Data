@@ -29,12 +29,16 @@ namespace Highway.Data.Utilities
         public static T ExecuteClone<T>(this T originalObject) where T : class
         {
             if (OriginalToCloneMap.ContainsKey(originalObject))
+            {
                 return (T)OriginalToCloneMap[originalObject];
+            }
 
             var cloneObject = (T)InstantiateClone(originalObject);
 
             if (!typeof(IEnumerable).IsAssignableFrom(originalObject.GetType()))
+            {
                 CloneFields(originalObject, cloneObject);
+            }
 
             return cloneObject;
         }
@@ -60,9 +64,15 @@ namespace Highway.Data.Utilities
                 var fieldInfo = type.GetField(field.Name, BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
                 var value = fieldInfo.GetValue(originalObject);
 
-                if (value == null) continue;
+                if (value == null)
+                {
+                    continue;
+                }
 
-                if (fieldInfo.FieldType.IsPrimitive || fieldInfo.FieldType == typeof(string) || fieldInfo.FieldType == typeof(Guid)) fieldInfo.SetValue(cloneObject, value);
+                if (fieldInfo.FieldType.IsPrimitive || fieldInfo.FieldType == typeof(string) || fieldInfo.FieldType == typeof(Guid))
+                {
+                    fieldInfo.SetValue(cloneObject, value);
+                }
                 else
                 {
                     var methodInfo = typeof(CloneExtension).GetMethod("ExecuteClone");
@@ -76,9 +86,13 @@ namespace Highway.Data.Utilities
         private static T InstantiateClone<T>(T originalObject)
         {
             if (typeof(IEnumerable).IsAssignableFrom(originalObject.GetType()))
+            {
                 return InstantiateCollectionClone(originalObject);
+            }
             else
+            {
                 return InstantiateClassClone(originalObject);
+            }
         }
 
         private static T InstantiateClassClone<T>(T classObject)
@@ -111,7 +125,9 @@ namespace Highway.Data.Utilities
             var cloneCollection = (T)Activator.CreateInstance(genericType);
 
             if (!typeof(IList).IsAssignableFrom(collectionType))
+            {
                 throw new NotSupportedException("Uncertain of what other collection types to handle.");
+            }
 
             OriginalToCloneMap.Add(originalCollection, cloneCollection);
 

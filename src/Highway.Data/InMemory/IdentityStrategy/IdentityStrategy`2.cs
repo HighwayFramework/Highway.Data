@@ -26,7 +26,10 @@ namespace Highway.Data.Contexts
             {
                 var propertyInfo = GetPropertyFromExpression(property);
                 var id = (TIdentity)propertyInfo.GetValue(obj, null);
-                if (IsDefaultUnsetValue(id)) propertyInfo.SetValue(obj, Next(), null);
+                if (IsDefaultUnsetValue(id))
+                {
+                    propertyInfo.SetValue(obj, Next(), null);
+                }
             };
         }
 
@@ -56,7 +59,11 @@ namespace Highway.Data.Contexts
         /// <exception cref="NotImplementedException"></exception>
         public TIdentity Next()
         {
-            if (this.Generator == null) throw new NotImplementedException();
+            if (this.Generator == null)
+            {
+                throw new NotImplementedException();
+            }
+
             return this.Generator.Invoke();
         }
 

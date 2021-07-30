@@ -14,7 +14,11 @@ namespace Highway.Data
             ContextQuery = context =>
             {
                 var item = context.AsQueryable<T>().FirstOrDefault(x => x.Id.Equals(id));
-                if (item == null) return;
+                if (item == null)
+                {
+                    return;
+                }
+
                 context.Remove(item);
                 context.Commit();
             };

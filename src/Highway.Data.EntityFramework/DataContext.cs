@@ -76,7 +76,10 @@ namespace Highway.Data
             _mapping = mapping;
             _log = log;
             this.Database.Log = _log.Debug;
-            if (contextConfiguration != null) contextConfiguration.ConfigureContext(this);
+            if (contextConfiguration != null)
+            {
+                contextConfiguration.ConfigureContext(this);
+            }
         }
 
         /// <summary>
@@ -167,7 +170,10 @@ namespace Highway.Data
             this._mapping = mapping;
             this._log = log;
             this.Database.Log = _log.Debug;
-            if (contextConfiguration != null) contextConfiguration.ConfigureContext(this);
+            if (contextConfiguration != null)
+            {
+                contextConfiguration.ConfigureContext(this);
+            }
         }
 
         /// <summary>
@@ -384,7 +390,11 @@ namespace Highway.Data
         /// <param name="modelBuilder">The builder that defines the model for the context being created</param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            if (_databaseFirst) throw new UnintentionalCodeFirstException();
+            if (_databaseFirst)
+            {
+                throw new UnintentionalCodeFirstException();
+            }
+
             _log.Debug("\tOnModelCreating");
             if (_mapping != null)
             {

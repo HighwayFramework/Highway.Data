@@ -10,7 +10,9 @@ namespace System.Linq
             ObservableCollection<T> dataToReturn = new ObservableCollection<T>();
 
             foreach (T t in data)
+            {
                 dataToReturn.Add(t);
+            }
 
             return dataToReturn;
         }

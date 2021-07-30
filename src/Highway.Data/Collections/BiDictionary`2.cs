@@ -147,14 +147,19 @@ namespace Highway.Data.Collections
                 return true;
             }
             else
+            {
                 return false;
+            }
         }
 
         void IDictionary.Remove(object key)
         {
             var firstToSecond = (IDictionary)_firstToSecond;
             if (!firstToSecond.Contains(key))
+            {
                 return;
+            }
+
             var value = firstToSecond[key];
             firstToSecond.Remove(key);
             ((IDictionary)_secondToFirst).Remove(value);
@@ -191,7 +196,9 @@ namespace Highway.Data.Collections
         {
             _secondToFirst.Clear();
             foreach (var item in _firstToSecond)
+            {
                 _secondToFirst.Add(item.Value, item.Key);
+            }
         }
 
         private class ReverseDictionary : IDictionary<TSecond, TFirst>, IDictionary
@@ -326,14 +333,19 @@ namespace Highway.Data.Collections
                     return true;
                 }
                 else
+                {
                     return false;
+                }
             }
 
             void IDictionary.Remove(object key)
             {
                 var firstToSecond = (IDictionary)_owner._secondToFirst;
                 if (!firstToSecond.Contains(key))
+                {
                     return;
+                }
+
                 var value = firstToSecond[key];
                 firstToSecond.Remove(key);
                 ((IDictionary)_owner._firstToSecond).Remove(value);

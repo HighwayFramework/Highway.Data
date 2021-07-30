@@ -27,7 +27,10 @@ namespace Highway.Data.Contexts.TypeRepresentations
 
         internal void Add<T>(T item) where T : class
         {
-            if (EntityExistsInRepository(item)) return;
+            if (EntityExistsInRepository(item))
+            {
+                return;
+            }
 
             var rep = new ObjectRepresentation
             {
@@ -104,7 +107,11 @@ namespace Highway.Data.Contexts.TypeRepresentations
             foreach (var rep in representation)
             {
                 success = ObjectRepresentations.Remove(rep);
-                if (!success) throw new InvalidDataException("Object was not removed");
+                if (!success)
+                {
+                    throw new InvalidDataException("Object was not removed");
+                }
+
                 foreach (var parent in rep.Parents)
                 {
                     parent.Value.RemoveAction();
@@ -119,7 +126,10 @@ namespace Highway.Data.Contexts.TypeRepresentations
                     {
                         objectRepresentation.Parents[item].RemoveAction();
                     }
-                    if (!success) throw new InvalidDataException("Dependent Object was not removed");
+                    if (!success)
+                    {
+                        throw new InvalidDataException("Dependent Object was not removed");
+                    }
                 }
             }
             return success;
@@ -213,7 +223,11 @@ namespace Highway.Data.Contexts.TypeRepresentations
             return (parent, child) =>
             {
                 var value = propertyInfo.GetValue(parent, null);
-                if (value == null) return null;
+                if (value == null)
+                {
+                    return null;
+                }
+
                 var collection = (IEnumerable)value;
                 return collection.Cast<object>().FirstOrDefault(item => item == child);
             };
@@ -224,7 +238,11 @@ namespace Highway.Data.Contexts.TypeRepresentations
             return () =>
             {
                 var items = propertyInfo.GetValue(item, null);
-                if (items == null) return;
+                if (items == null)
+                {
+                    return;
+                }
+
                 var list = CreateGenericList(childItem.GetType());
                 MethodInfo mListAdd = list.GetType().GetMethod("Add");
                 var childItems = (IEnumerable)items;

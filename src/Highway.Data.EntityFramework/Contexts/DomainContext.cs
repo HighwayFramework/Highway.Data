@@ -61,12 +61,18 @@ namespace Highway.Data
 
         private void OnAfterSave()
         {
-            if (AfterSave != null) AfterSave(this, new AfterSave());
+            if (AfterSave != null)
+            {
+                AfterSave(this, new AfterSave());
+            }
         }
 
         private void OnBeforeSave()
         {
-            if (BeforeSave != null) BeforeSave(this, new BeforeSave());
+            if (BeforeSave != null)
+            {
+                BeforeSave(this, new BeforeSave());
+            }
         }
     }
 }

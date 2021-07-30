@@ -50,7 +50,11 @@ namespace Highway.Data.Contexts.TypeRepresentations
 
         public bool Orphaned()
         {
-            if (!Parents.Any()) return true;
+            if (!Parents.Any())
+            {
+                return true;
+            }
+
             return
                 Parents.All(
                     accessor =>

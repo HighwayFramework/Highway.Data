@@ -65,12 +65,16 @@ namespace Highway.Data.Contexts
         public override int Commit()
         {
             if (_commitVersion != CommitCounter)
+            {
                 throw new InvalidOperationException("Cannot commit on stale data. Possibly need to requery. Unexpected scenario.");
+            }
 
             foreach (var pair in _entityToRepoEntityMap)
             {
                 if (!typeof(IEnumerable).IsAssignableFrom(pair.Key.GetType()))
+                {
                     CopyPrimitives(pair.Key, pair.Value);
+                }
             }
 
             ProcessCommitQueues();
@@ -82,7 +86,9 @@ namespace Highway.Data.Contexts
             foreach (var pair in _entityToRepoEntityMap.Reverse)
             {
                 if (!typeof(IEnumerable).IsAssignableFrom(pair.Key.GetType()))
+                {
                     CopyPrimitives(pair.Key, pair.Value);
+                }
             }
 
             _commitVersion = ++CommitCounter;
@@ -108,7 +114,10 @@ namespace Highway.Data.Contexts
 
         private void UpdateMapFromRepo()
         {
-            if (_commitVersion == CommitCounter) return;
+            if (_commitVersion == CommitCounter)
+            {
+                return;
+            }
 
             foreach (var item in Repo.ObjectRepresentations.Select(o => o.Entity))
             {
@@ -130,25 +139,35 @@ namespace Highway.Data.Contexts
                     | BindingFlags.NonPublic);
                 var value = fieldInfo.GetValue(source);
 
-                if (value == null) continue;
+                if (value == null)
+                {
+                    continue;
+                }
 
                 if (fieldInfo.FieldType.IsPrimitive
                     || fieldInfo.FieldType == typeof(string)
                     || fieldInfo.FieldType == typeof(Guid))
+                {
                     fieldInfo.SetValue(destination, value);
+                }
             }
         }
 
         private void CloneCollectionsUpdate<T>(T entityCollection) where T : class
         {
             var type = entityCollection.GetType();
-            if (!typeof(IEnumerable).IsAssignableFrom(type)) return;
+            if (!typeof(IEnumerable).IsAssignableFrom(type))
+            {
+                return;
+            }
 
             var collectionType = type.GetGenericTypeDefinition();
             Type genericType = collectionType.MakeGenericType(type.GetGenericArguments());
 
             if (!typeof(IList).IsAssignableFrom(collectionType))
+            {
                 throw new NotSupportedException("Uncertain of what other collection types to handle.");
+            }
 
             var repoEntityCollection = (IList)_entityToRepoEntityMap[entityCollection];
 
@@ -156,7 +175,10 @@ namespace Highway.Data.Contexts
             foreach (var item in (IEnumerable)entityCollection)
             {
                 if (!_entityToRepoEntityMap.ContainsKey(item))
+                {
                     repoEntityCollection.Add(Utilities.CloneExtension.Clone(item, _entityToRepoEntityMap));
+                }
+
                 unremovedRepoEntities.Add(_entityToRepoEntityMap[item]);
             }
 

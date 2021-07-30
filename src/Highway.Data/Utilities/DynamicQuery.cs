@@ -547,8 +547,7 @@ namespace System.Linq.Dynamic
             try
             {
                 var signature = new Signature(properties);
-                Type type;
-                if (!_classes.TryGetValue(signature, out type))
+                if (!_classes.TryGetValue(signature, out var type))
                 {
                     type = CreateDynamicClass(signature.properties);
                     _classes.Add(signature, type);
@@ -1319,8 +1318,7 @@ namespace System.Linq.Dynamic
             string text = _token.text;
             if (text[0] != '-')
             {
-                ulong value;
-                if (!UInt64.TryParse(text, out value))
+                if (!UInt64.TryParse(text, out var value))
                 {
                     throw ParseError(Res.InvalidIntegerLiteral, text);
                 }
@@ -1345,8 +1343,7 @@ namespace System.Linq.Dynamic
             }
             else
             {
-                long value;
-                if (!Int64.TryParse(text, out value))
+                if (!Int64.TryParse(text, out var value))
                 {
                     throw ParseError(Res.InvalidIntegerLiteral, text);
                 }
@@ -1369,16 +1366,14 @@ namespace System.Linq.Dynamic
             char last = text[text.Length - 1];
             if (last == 'F' || last == 'f')
             {
-                float f;
-                if (Single.TryParse(text.Substring(0, text.Length - 1), out f))
+                if (Single.TryParse(text.Substring(0, text.Length - 1), out var f))
                 {
                     value = f;
                 }
             }
             else
             {
-                double d;
-                if (Double.TryParse(text, out d))
+                if (Double.TryParse(text, out var d))
                 {
                     value = d;
                 }
@@ -1412,8 +1407,7 @@ namespace System.Linq.Dynamic
         private Expression ParseIdentifier()
         {
             ValidateToken(TokenId.Identifier);
-            object value;
-            if (Keywords.TryGetValue(_token.text, out value))
+            if (Keywords.TryGetValue(_token.text, out var value))
             {
                 if (value is Type)
                 {
@@ -1577,8 +1571,7 @@ namespace System.Linq.Dynamic
             int errorPos = _token.pos;
             NextToken();
             Expression[] args = ParseArgumentList();
-            MethodBase method;
-            if (FindMethod(lambda.Type, "Invoke", false, args, out method) != 1)
+            if (FindMethod(lambda.Type, "Invoke", false, args, out var method) != 1)
             {
                 throw ParseError(errorPos, Res.ArgsIncompatibleWithLambda);
             }
@@ -1603,8 +1596,7 @@ namespace System.Linq.Dynamic
             if (_token.id == TokenId.OpenParen)
             {
                 Expression[] args = ParseArgumentList();
-                MethodBase method;
-                switch (FindBestMethod(type.GetConstructors(), args, out method))
+                switch (FindBestMethod(type.GetConstructors(), args, out var method))
                 {
                     case 0:
                         if (args.Length == 1)
@@ -1678,8 +1670,7 @@ namespace System.Linq.Dynamic
                     }
                 }
                 Expression[] args = ParseArgumentList();
-                MethodBase mb;
-                switch (FindMethod(type, id, instance == null, args, out mb))
+                switch (FindMethod(type, id, instance == null, args, out var mb))
                 {
                     case 0:
                         throw ParseError(errorPos, Res.NoApplicableMethod,
@@ -1750,8 +1741,7 @@ namespace System.Linq.Dynamic
             _it = innerIt;
             Expression[] args = ParseArgumentList();
             _it = outerIt;
-            MethodBase signature;
-            if (FindMethod(typeof (IEnumerableSignatures), methodName, false, args, out signature) != 1)
+            if (FindMethod(typeof (IEnumerableSignatures), methodName, false, args, out var signature) != 1)
             {
                 throw ParseError(errorPos, Res.NoApplicableAggregate, methodName);
             }
@@ -1827,8 +1817,7 @@ namespace System.Linq.Dynamic
             }
             else
             {
-                MethodBase mb;
-                switch (FindIndexer(expr.Type, args, out mb))
+                switch (FindIndexer(expr.Type, args, out var mb))
                 {
                     case 0:
                         throw ParseError(errorPos, Res.NoApplicableIndexer,
@@ -1930,8 +1919,7 @@ namespace System.Linq.Dynamic
         private void CheckAndPromoteOperand(Type signatures, string opName, ref Expression expr, int errorPos)
         {
             var args = new[] {expr};
-            MethodBase method;
-            if (FindMethod(signatures, "F", false, args, out method) != 1)
+            if (FindMethod(signatures, "F", false, args, out var method) != 1)
             {
                 throw ParseError(errorPos, Res.IncompatibleOperand,
                                  opName, GetTypeName(args[0].Type));
@@ -1944,8 +1932,7 @@ namespace System.Linq.Dynamic
             int errorPos)
         {
             var args = new[] {left, right};
-            MethodBase method;
-            if (FindMethod(signatures, "F", false, args, out method) != 1)
+            if (FindMethod(signatures, "F", false, args, out var method) != 1)
             {
                 throw IncompatibleOperandsError(opName, left, right, errorPos);
             }
@@ -2131,8 +2118,7 @@ namespace System.Linq.Dynamic
                 }
                 else
                 {
-                    string text;
-                    if (_literals.TryGetValue(ce, out text))
+                    if (_literals.TryGetValue(ce, out var text))
                     {
                         Type target = GetNonNullableType(type);
                         Object value = null;
@@ -2179,88 +2165,77 @@ namespace System.Linq.Dynamic
             switch (Type.GetTypeCode(GetNonNullableType(type)))
             {
                 case TypeCode.SByte:
-                    sbyte sb;
-                    if (sbyte.TryParse(text, out sb))
+                    if (sbyte.TryParse(text, out var sb))
                     {
                         return sb;
                     }
 
                     break;
                 case TypeCode.Byte:
-                    byte b;
-                    if (byte.TryParse(text, out b))
+                    if (byte.TryParse(text, out var b))
                     {
                         return b;
                     }
 
                     break;
                 case TypeCode.Int16:
-                    short s;
-                    if (short.TryParse(text, out s))
+                    if (short.TryParse(text, out var s))
                     {
                         return s;
                     }
 
                     break;
                 case TypeCode.UInt16:
-                    ushort us;
-                    if (ushort.TryParse(text, out us))
+                    if (ushort.TryParse(text, out var us))
                     {
                         return us;
                     }
 
                     break;
                 case TypeCode.Int32:
-                    int i;
-                    if (int.TryParse(text, out i))
+                    if (int.TryParse(text, out var i))
                     {
                         return i;
                     }
 
                     break;
                 case TypeCode.UInt32:
-                    uint ui;
-                    if (uint.TryParse(text, out ui))
+                    if (uint.TryParse(text, out var ui))
                     {
                         return ui;
                     }
 
                     break;
                 case TypeCode.Int64:
-                    long l;
-                    if (long.TryParse(text, out l))
+                    if (long.TryParse(text, out var l))
                     {
                         return l;
                     }
 
                     break;
                 case TypeCode.UInt64:
-                    ulong ul;
-                    if (ulong.TryParse(text, out ul))
+                    if (ulong.TryParse(text, out var ul))
                     {
                         return ul;
                     }
 
                     break;
                 case TypeCode.Single:
-                    float f;
-                    if (float.TryParse(text, out f))
+                    if (float.TryParse(text, out var f))
                     {
                         return f;
                     }
 
                     break;
                 case TypeCode.Double:
-                    double d;
-                    if (double.TryParse(text, out d))
+                    if (double.TryParse(text, out var d))
                     {
                         return d;
                     }
 
                     break;
                 case TypeCode.Decimal:
-                    decimal e;
-                    if (decimal.TryParse(text, out e))
+                    if (decimal.TryParse(text, out var e))
                     {
                         return e;
                     }

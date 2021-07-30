@@ -109,8 +109,7 @@ namespace Highway.Data.Collections
 
         public bool Remove(TFirst key)
         {
-            TSecond value;
-            if (_firstToSecond.TryGetValue(key, out value))
+            if (_firstToSecond.TryGetValue(key, out var value))
             {
                 _firstToSecond.Remove(key);
                 _secondToFirst.Remove(value);
@@ -268,8 +267,7 @@ namespace Highway.Data.Collections
 
             public bool Remove(TSecond key)
             {
-                TFirst value;
-                if (_owner._secondToFirst.TryGetValue(key, out value))
+                if (_owner._secondToFirst.TryGetValue(key, out var value))
                 {
                     _owner._secondToFirst.Remove(key);
                     _owner._firstToSecond.Remove(value);

@@ -23,7 +23,7 @@ namespace Highway.Data.Utilities
 
         public static T Clone<T>(this T originalObject) where T : class
         {
-            return Clone<T>(originalObject, null);
+            return Clone(originalObject, null);
         }
 
         public static T ExecuteClone<T>(this T originalObject) where T : class
@@ -49,7 +49,7 @@ namespace Highway.Data.Utilities
 
             do
             {
-                CloneFieldsForType<T>(originalObject, cloneObject, type);
+                CloneFieldsForType(originalObject, cloneObject, type);
 
                 type = type.BaseType;
             } while (type != null);

@@ -21,7 +21,7 @@ namespace Highway.Data.Collections
         [Obsolete("This will be used in a future version.  Use Highway.Data.Utilities.CloneExtension instead.")]
         public static T Clone<T>(this T originalObject) where T : class
         {
-            return Clone<T>(originalObject, null);
+            return Clone(originalObject, null);
         }
 
         [Obsolete("This will be used in a future version.  Use Highway.Data.Utilities.CloneExtension instead.")]
@@ -49,7 +49,7 @@ namespace Highway.Data.Collections
 
             do
             {
-                CloneFieldsForType<T>(originalObject, cloneObject, type);
+                CloneFieldsForType(originalObject, cloneObject, type);
 
                 type = type.BaseType;
             } while (type != null);

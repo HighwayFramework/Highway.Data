@@ -187,10 +187,11 @@ namespace Highway.Data.Contexts.TypeRepresentations
                         && x.GetValue(item, null) != null);
             foreach (var propertyInfo in properties)
             {
+                object Getter(object parent, object kid) => propertyInfo.GetValue(parent, null);
+                void Remover() => propertyInfo.SetValue(item, null, null);
+
                 var child = propertyInfo.GetValue(item, null);
-                Func<object, object, object> getterFunc = (parent, kid) => propertyInfo.GetValue(parent, null);
-                Action removeAction = () => propertyInfo.SetValue(item, null, null);
-                ObjectRepresentation childTypeRepresentation = CreateChildObjectRepresentation(child, item, removeAction, getterFunc);
+                ObjectRepresentation childTypeRepresentation = CreateChildObjectRepresentation(child, item, Remover, Getter);
                 reps.Add(childTypeRepresentation);
             }
             return reps;
@@ -263,8 +264,8 @@ namespace Highway.Data.Contexts.TypeRepresentations
             Type listType = typeof(List<>);
             Type[] typeArgs = { type };
             Type genericType = listType.MakeGenericType(typeArgs);
-            object o = Activator.CreateInstance(genericType);
-            return o;
+
+            return Activator.CreateInstance(genericType);
         }
 
         private void CleanGraph()
@@ -296,8 +297,11 @@ namespace Highway.Data.Contexts.TypeRepresentations
         private void ApplyIdentityStrategy<T>(T item) where T : class
         {
             var type = item.GetType();
-            var types = new List<Type>(type.GetInterfaces());
-            types.Add(type);
+            var types = new List<Type>(type.GetInterfaces())
+            {
+                type
+            };
+
             var intersectingType = IdentityStrategies.Keys.Intersect(types).FirstOrDefault();
             if (intersectingType != null)
             {

@@ -1435,15 +1435,13 @@ namespace System.Linq.Dynamic
             if (_symbols.TryGetValue(_token.text, out value) ||
                 _externals != null && _externals.TryGetValue(_token.text, out value))
             {
-                var expr = value as Expression;
-                if (expr == null)
+                if (!(value is Expression expr))
                 {
                     expr = Expression.Constant(value);
                 }
                 else
                 {
-                    var lambda = expr as LambdaExpression;
-                    if (lambda != null)
+                    if (expr is LambdaExpression lambda)
                     {
                         return ParseLambdaInvocation(lambda);
                     }
@@ -1537,8 +1535,7 @@ namespace System.Linq.Dynamic
                 }
                 else
                 {
-                    var me = expr as MemberExpression;
-                    if (me == null)
+                    if (!(expr is MemberExpression me))
                     {
                         throw ParseError(exprPos, Res.MissingAsClause);
                     }

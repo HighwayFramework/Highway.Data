@@ -14,8 +14,7 @@ namespace Highway.Data
 
         public IEnumerable<T> Execute(IDataContext context)
         {
-            var efContext = context as DbContext;
-            if (efContext == null)
+            if (!(context is DbContext efContext))
             {
                 throw new InvalidOperationException("You cannot execute EF Sql Queries against a non-EF context");
             }

@@ -20,7 +20,7 @@ namespace Highway.Data.Tests.InMemory
             }
             public int Id { get; set; }
             public AnotherProperty MyProperty { get; set; }
-            public IList<AnotherProperty> MyProperties { get; set; }
+            public IList<AnotherProperty> MyProperties { get; }
         }
 
         class AnotherProperty : IIdentifiable<short>
@@ -82,8 +82,10 @@ namespace Highway.Data.Tests.InMemory
         public void Add_ShouldUseIdentityForRelatedTypes()
         {
             //Arrange
-            var entity = new Entity();
-            entity.MyProperty = new AnotherProperty();
+            var entity = new Entity
+            {
+                MyProperty = new AnotherProperty()
+            };
 
             //Act
             _context.Add(entity);

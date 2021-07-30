@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace Highway.Data.Tests.InMemory.Domain
 {
@@ -8,7 +7,7 @@ namespace Highway.Data.Tests.InMemory.Domain
     {
         public Blog()
         {
-            Posts = new Collection<Post>();
+            Posts = new List<Post>();
             Id = Guid.NewGuid();
         }
 

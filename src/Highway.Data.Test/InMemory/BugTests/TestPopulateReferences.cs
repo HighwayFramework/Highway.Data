@@ -24,7 +24,7 @@ namespace Highway.Data.Tests.InMemory.BugTests
             var fetchedBlog = context.AsQueryable<Blog>().First();
 
             // Assert
-            fetchedBlog.Posts.Count().Should().Be(1);
+            fetchedBlog.Posts.Should().HaveCount(1);
         }
 
         [TestMethod]

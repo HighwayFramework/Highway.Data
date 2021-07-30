@@ -47,8 +47,9 @@ namespace Highway.Data.Tests.InMemory
                 Posts = new List<Post>();
             }
             public long Id { get; set; }
-            public List<Post> Posts { get; set; }
+            public List<Post> Posts { get; }
         }
+
         class Post : IIdentifiable<long>
         {
             public long Id { get; set; }

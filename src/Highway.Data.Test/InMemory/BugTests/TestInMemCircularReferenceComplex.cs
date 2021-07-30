@@ -62,9 +62,9 @@ namespace Highway.Data.Tests.InMemory.BugTests
 
         private void AssertEntities(GrandParent grandParent, Parent parent, Child child)
         {
-            Assert.AreEqual(_grandParent, grandParent);
-            Assert.AreEqual(_parent, parent);
-            Assert.AreEqual(_child, child);
+            _grandParent.Should().Be(grandParent);
+            _parent.Should().Be(parent);
+            _child.Should().Be(child);
         }
 
         [TestMethod]
@@ -80,7 +80,7 @@ namespace Highway.Data.Tests.InMemory.BugTests
             _context.Commit();
 
             var circularReferences = _context.AsQueryable<CircularReference>();
-            circularReferences.Count().Should().Be(3);
+            circularReferences.Should().HaveCount(3);
             circularReferences.Single(x => x.Id == 1).Inner.Should().BeSameAs(parent);
             circularReferences.Single(x => x.Id == 2).Inner.Should().BeSameAs(child);
             circularReferences.Single(x => x.Id == 3).Inner.Should().BeNull();

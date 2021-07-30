@@ -125,7 +125,7 @@ namespace Highway.Data.Tests.InMemory
             _context.Commit();
 
             //assert
-            _context.AsQueryable<Author>().Count().Should().Be(1);
+            _context.AsQueryable<Author>().Should().HaveCount(1);
             _context.AsQueryable<Author>().First().Should().BeSameAs(blog.Author);
         }
 
@@ -147,7 +147,7 @@ namespace Highway.Data.Tests.InMemory
             _context.Commit();
 
             //assert
-            _context.AsQueryable<Author>().Count().Should().Be(1);
+            _context.AsQueryable<Author>().Should().HaveCount(1);
             _context.AsQueryable<Author>().First().Should().BeSameAs(site.Blog.Author);
         }
 
@@ -165,7 +165,7 @@ namespace Highway.Data.Tests.InMemory
             _context.Commit();
 
             //assert
-            _context.AsQueryable<Post>().Count().Should().Be(2);
+            _context.AsQueryable<Post>().Should().HaveCount(2);
         }
 
         [TestMethod]
@@ -189,7 +189,7 @@ namespace Highway.Data.Tests.InMemory
             _context.Commit();
 
             //assert
-            _context.AsQueryable<Post>().Count().Should().Be(2);
+            _context.AsQueryable<Post>().Should().HaveCount(2);
         }
 
         [TestMethod]
@@ -205,15 +205,17 @@ namespace Highway.Data.Tests.InMemory
             _context.Add(blog);
 
             //assert
-            _context.AsQueryable<Post>().Count().Should().Be(0);
+            _context.AsQueryable<Post>().Should().HaveCount(0);
         }
 
         [TestMethod]
         public void Add_ShouldIgnoreNonReferenceTypeProperties()
         {
             //arrange 
-            var site = new Site();
-            site.Id = 2;
+            var site = new Site
+            {
+                Id = 2
+            };
 
             //act
             _context.Add(site);
@@ -237,7 +239,7 @@ namespace Highway.Data.Tests.InMemory
 
 
             //assert
-            _context.AsQueryable<Blog>().Count().Should().Be(0);
+            _context.AsQueryable<Blog>().Should().HaveCount(0);
             _context.AsQueryable<Site>().First().Blog.Should().BeNull();
         }
 
@@ -255,9 +257,9 @@ namespace Highway.Data.Tests.InMemory
             _context.Commit();
 
             //assert
-            _context.AsQueryable<Blog>().Count().Should().Be(1);
-            _context.AsQueryable<Blog>().First().Posts.Count().Should().Be(0);
-            _context.AsQueryable<Post>().Count().Should().Be(0);
+            _context.AsQueryable<Blog>().Should().HaveCount(1);
+            _context.AsQueryable<Blog>().First().Posts.Should().HaveCount(0);
+            _context.AsQueryable<Post>().Should().HaveCount(0);
         }
 
         [TestMethod]
@@ -282,7 +284,7 @@ namespace Highway.Data.Tests.InMemory
 
             //assert
             IQueryable<Post> posts = _context.AsQueryable<Post>();
-            posts.Count().Should().Be(0);
+            posts.Should().HaveCount(0);
         }
 
         [TestMethod]
@@ -301,9 +303,9 @@ namespace Highway.Data.Tests.InMemory
             _context.Commit();
 
             // Assert
-            _context.AsQueryable<Site>().Count().Should().Be(1);
+            _context.AsQueryable<Site>().Should().HaveCount(1);
             _context.AsQueryable<Site>().First().Should().BeSameAs(site2);
-            _context.AsQueryable<Blog>().Count().Should().Be(1);
+            _context.AsQueryable<Blog>().Should().HaveCount(1);
             _context.AsQueryable<Blog>().First().Should().BeSameAs(blog);
         }
 
@@ -330,9 +332,9 @@ namespace Highway.Data.Tests.InMemory
             _context.Commit();
 
             // Assert
-            _context.AsQueryable<Post>().Count().Should().Be(1);
+            _context.AsQueryable<Post>().Should().HaveCount(1);
             _context.AsQueryable<Post>().First().Should().BeSameAs(post1);
-            _context.AsQueryable<Blog>().Where(b => b.Posts.Count > 1).Count().Should().Be(0);
+            _context.AsQueryable<Blog>().Count(b => b.Posts.Count > 1).Should().Be(0);
         }
 
         [TestMethod]
@@ -363,9 +365,9 @@ namespace Highway.Data.Tests.InMemory
             _context.Commit();
 
             // Assert
-            _context.AsQueryable<Post>().Count().Should().Be(2);
+            _context.AsQueryable<Post>().Should().HaveCount(2);
             _context.AsQueryable<Post>().First().Should().BeSameAs(post1);
-            _context.AsQueryable<Blog>().Single().Posts.Count().Should().Be(2);
+            _context.AsQueryable<Blog>().Single().Posts.Should().HaveCount(2);
             site.Blog.Should().BeNull();
         }
 
@@ -412,7 +414,7 @@ namespace Highway.Data.Tests.InMemory
             // Assert
             _context.AsQueryable<Post>().Should().NotContain(post1);
             _context.AsQueryable<Post>().Should().NotContain(post2);
-            _context.AsQueryable<Post>().Count().Should().Be(0);
+            _context.AsQueryable<Post>().Should().HaveCount(0);
         }
 
         [TestMethod]
@@ -430,7 +432,7 @@ namespace Highway.Data.Tests.InMemory
 
             // Assert
             _context.AsQueryable<Blog>().Should().NotContain(blog);
-            _context.AsQueryable<Blog>().Count().Should().Be(0);
+            _context.AsQueryable<Blog>().Should().HaveCount(0);
         }
 
         [TestMethod]
@@ -446,7 +448,7 @@ namespace Highway.Data.Tests.InMemory
             _context.Commit();
 
             //Assert
-            _context.AsQueryable<Post>().Count().Should().Be(1);
+            _context.AsQueryable<Post>().Should().HaveCount(1);
         }
 
         [TestMethod]
@@ -485,8 +487,13 @@ namespace Highway.Data.Tests.InMemory
         {
             //Arrange
             _context.RegisterIdentityStrategy(new GuidIdentityStrategy<Author>(x => x.Id));
-            var blog = new Blog();
-            blog.Author = new Author { Id = Guid.Empty };
+            var blog = new Blog
+            {
+                Author = new Author
+                {
+                    Id = Guid.Empty
+                }
+            };
 
             //Act
             _context.Add(blog);

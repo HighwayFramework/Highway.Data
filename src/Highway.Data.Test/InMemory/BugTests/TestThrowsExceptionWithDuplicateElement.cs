@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
+using FluentAssertions;
+
 using Highway.Data.Contexts;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -39,7 +41,7 @@ namespace Highway.Data.Tests.InMemory.BugTests
             _context.Add(businessEntity);
             _context.Commit();
 
-            Assert.AreEqual(entityType, _context.AsQueryable<BusinessEntity>().Single().EntityTypes.First());
+            entityType.Should().Be(_context.AsQueryable<BusinessEntity>().Single().EntityTypes.First());
         }
 
         class BusinessEntity : IIdentifiable<long>
@@ -52,7 +54,7 @@ namespace Highway.Data.Tests.InMemory.BugTests
 
             public long Id { get; set; }
 
-            public List<EntityType> EntityTypes { get; protected set; }
+            public List<EntityType> EntityTypes { get; }
 
         }
 

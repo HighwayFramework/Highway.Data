@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using System.Linq;
 
+using FluentAssertions;
 
 namespace Highway.Data.Tests.InMemory
 {
@@ -22,7 +23,7 @@ namespace Highway.Data.Tests.InMemory
             context.Add(blog);
             context.Commit();
 
-            Assert.IsNotNull(child.Blog);
+            child.Blog.Should().NotBeNull();
         }
 
         [TestMethod]
@@ -37,7 +38,7 @@ namespace Highway.Data.Tests.InMemory
             context.Add(child);
             context.Commit();
 
-            Assert.AreEqual(1, blog.Posts.Count(x => x == child));
+            blog.Posts.Count(x => x == child).Should().Be(1);
         }
 
         [TestMethod]
@@ -53,7 +54,7 @@ namespace Highway.Data.Tests.InMemory
             context.Add(child);
             context.Commit();
 
-            Assert.AreEqual(1, blog.Posts.Count(x => x == child));
+            blog.Posts.Count(x => x == child).Should().Be(1);
         }
     }
 }

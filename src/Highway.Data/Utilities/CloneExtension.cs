@@ -33,7 +33,7 @@ namespace Highway.Data.Utilities
                 return (T)OriginalToCloneMap[originalObject];
             }
 
-            var cloneObject = (T)InstantiateClone(originalObject);
+            var cloneObject = InstantiateClone(originalObject);
 
             if (!typeof(IEnumerable).IsAssignableFrom(originalObject.GetType()))
             {

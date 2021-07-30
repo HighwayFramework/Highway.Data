@@ -43,7 +43,6 @@ namespace Highway.Data
         /// </summary>
         /// <param name="extend"></param>
         /// <param name="count"></param>
-        /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         public static IQuery<TSelection, TProjection> Take<TSelection, TProjection>(
             this IQuery<TSelection, TProjection> extend, int count)
@@ -59,7 +58,8 @@ namespace Highway.Data
         /// </summary>
         /// <param name="extend"></param>
         /// <param name="count"></param>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TSelection">The type to query.</typeparam>
+        /// <typeparam name="TProjection">The type to return.</typeparam>
         /// <returns></returns>
         public static IQuery<TSelection, TProjection> Skip<TSelection, TProjection>(
             this IQuery<TSelection, TProjection> extend, int count)

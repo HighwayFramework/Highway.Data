@@ -42,6 +42,7 @@ namespace Highway.Data
         /// </summary>
         /// <typeparam name="TKey">The Type of the item being sorted by</typeparam>
         /// <param name="orderBy">The ordering criterion</param>
+        /// <param name="comparer">The comparer to use for ordering.</param>
         /// <example>
         /// new FindWhere(person => person.Name == "Philip")
         ///              .OrderedBy(person => person.DateOfBirth);

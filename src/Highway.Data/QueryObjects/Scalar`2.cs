@@ -8,7 +8,8 @@ namespace Highway.Data
     /// <summary>
     ///     Base implementation of a query that returns a single value or object
     /// </summary>
-    /// <typeparam name="T">The type of object or value being returned</typeparam>
+    /// <typeparam name="TSelection">The type to query.</typeparam>
+    /// <typeparam name="TProjection">The type to return.</typeparam>
     public class Scalar<TSelection, TProjection> : QueryBase, IScalar<TProjection> where TSelection : class
     {
         /// <summary>
@@ -31,13 +32,12 @@ namespace Highway.Data
         /// </returns>
         public virtual TProjection Execute(IDataContext context)
         {
-            TProjection task = PrepareQuery(context);
-            return task;
+            return PrepareQuery(context);
         }
 
         /// <summary>
         ///     This executes the expression against the passed in context to generate the SQL statement, but doesn't execute the
-        ///     IQueryable<typeparamref name="T" /> against the data context
+        ///     query against the data context.
         /// </summary>
         /// <param name="context">The data context that the query is evaluated and the SQL is generated against</param>
         /// <returns></returns>

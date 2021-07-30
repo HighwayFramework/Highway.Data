@@ -69,7 +69,7 @@ namespace Highway.Data.Contexts
 
             foreach (var pair in _entityToRepoEntityMap)
             {
-                if (!typeof(IEnumerable).IsAssignableFrom(pair.Key.GetType()))
+                if (!(pair.Key is IEnumerable))
                 {
                     CopyPrimitives(pair.Key, pair.Value);
                 }
@@ -83,7 +83,7 @@ namespace Highway.Data.Contexts
 
             foreach (var pair in _entityToRepoEntityMap.Reverse)
             {
-                if (!typeof(IEnumerable).IsAssignableFrom(pair.Key.GetType()))
+                if (!(pair.Key is IEnumerable))
                 {
                     CopyPrimitives(pair.Key, pair.Value);
                 }

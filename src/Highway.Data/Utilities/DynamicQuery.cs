@@ -30,12 +30,12 @@ namespace System.Linq.Dynamic
         {
             if (source == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(source));
             }
 
             if (predicate == null)
             {
-                throw new ArgumentNullException("predicate");
+                throw new ArgumentNullException(nameof(predicate));
             }
 
             LambdaExpression lambda = DynamicExpression.ParseLambda(source.ElementType, typeof (bool), predicate, values);
@@ -50,12 +50,12 @@ namespace System.Linq.Dynamic
         {
             if (source == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(source));
             }
 
             if (selector == null)
             {
-                throw new ArgumentNullException("selector");
+                throw new ArgumentNullException(nameof(selector));
             }
 
             LambdaExpression lambda = DynamicExpression.ParseLambda(source.ElementType, null, selector, values);
@@ -75,12 +75,12 @@ namespace System.Linq.Dynamic
         {
             if (source == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(source));
             }
 
             if (ordering == null)
             {
-                throw new ArgumentNullException("ordering");
+                throw new ArgumentNullException(nameof(ordering));
             }
 
             var parameters = new[]
@@ -108,7 +108,7 @@ namespace System.Linq.Dynamic
         {
             if (source == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(source));
             }
 
             return source.Provider.CreateQuery(
@@ -122,7 +122,7 @@ namespace System.Linq.Dynamic
         {
             if (source == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(source));
             }
 
             return source.Provider.CreateQuery(
@@ -137,17 +137,17 @@ namespace System.Linq.Dynamic
         {
             if (source == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(source));
             }
 
             if (keySelector == null)
             {
-                throw new ArgumentNullException("keySelector");
+                throw new ArgumentNullException(nameof(keySelector));
             }
 
             if (elementSelector == null)
             {
-                throw new ArgumentNullException("elementSelector");
+                throw new ArgumentNullException(nameof(elementSelector));
             }
 
             LambdaExpression keyLambda = DynamicExpression.ParseLambda(source.ElementType, null, keySelector, values);
@@ -164,7 +164,7 @@ namespace System.Linq.Dynamic
         {
             if (source == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(source));
             }
 
             return (bool) source.Provider.Execute(
@@ -177,7 +177,7 @@ namespace System.Linq.Dynamic
         {
             if (source == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(source));
             }
 
             return (int) source.Provider.Execute(
@@ -203,12 +203,12 @@ namespace System.Linq.Dynamic
         {
             if (querySource == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(querySource));
             }
 
             if (predicate == null)
             {
-                throw new ArgumentNullException("predicate");
+                throw new ArgumentNullException(nameof(predicate));
             }
 
             IQueryable source = querySource.AsQueryable();
@@ -224,12 +224,12 @@ namespace System.Linq.Dynamic
         {
             if (querySource == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(querySource));
             }
 
             if (selector == null)
             {
-                throw new ArgumentNullException("selector");
+                throw new ArgumentNullException(nameof(selector));
             }
 
             IQueryable source = querySource.AsQueryable();
@@ -250,12 +250,12 @@ namespace System.Linq.Dynamic
         {
             if (querySource == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(querySource));
             }
 
             if (ordering == null)
             {
-                throw new ArgumentNullException("ordering");
+                throw new ArgumentNullException(nameof(ordering));
             }
 
             IQueryable source = querySource.AsQueryable();
@@ -284,7 +284,7 @@ namespace System.Linq.Dynamic
         {
             if (querySource == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(querySource));
             }
 
             IQueryable source = querySource.AsQueryable();
@@ -299,7 +299,7 @@ namespace System.Linq.Dynamic
         {
             if (querySource == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(querySource));
             }
 
             IQueryable source = querySource.AsQueryable();
@@ -315,17 +315,17 @@ namespace System.Linq.Dynamic
         {
             if (querySource == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(querySource));
             }
 
             if (keySelector == null)
             {
-                throw new ArgumentNullException("keySelector");
+                throw new ArgumentNullException(nameof(keySelector));
             }
 
             if (elementSelector == null)
             {
-                throw new ArgumentNullException("elementSelector");
+                throw new ArgumentNullException(nameof(elementSelector));
             }
 
             IQueryable source = querySource.AsQueryable();
@@ -343,7 +343,7 @@ namespace System.Linq.Dynamic
         {
             if (querySource == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(querySource));
             }
 
             IQueryable source = querySource.AsQueryable();
@@ -357,7 +357,7 @@ namespace System.Linq.Dynamic
         {
             if (querySource == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(querySource));
             }
 
             IQueryable source = querySource.AsQueryable();
@@ -402,12 +402,12 @@ namespace System.Linq.Dynamic
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
 
             if (type == null)
             {
-                throw new ArgumentNullException("type");
+                throw new ArgumentNullException(nameof(type));
             }
 
             _name = name;
@@ -904,7 +904,7 @@ namespace System.Linq.Dynamic
         {
             if (expression == null)
             {
-                throw new ArgumentNullException("expression");
+                throw new ArgumentNullException(nameof(expression));
             }
 
             if (Keywords == null)

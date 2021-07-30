@@ -2030,10 +2030,10 @@ namespace System.Linq.Dynamic
             if (t1 == t2) return 0;
             if (s == t1) return 1;
             if (s == t2) return -1;
-            bool t1t2 = IsCompatibleWith(t1, t2);
-            bool t2t1 = IsCompatibleWith(t2, t1);
-            if (t1t2 && !t2t1) return 1;
-            if (t2t1 && !t1t2) return -1;
+            bool t1T2 = IsCompatibleWith(t1, t2);
+            bool t2T1 = IsCompatibleWith(t2, t1);
+            if (t1T2 && !t2T1) return 1;
+            if (t2T1 && !t1T2) return -1;
             if (IsSignedIntegralType(t1) && IsUnsignedIntegralType(t2)) return 1;
             if (IsSignedIntegralType(t2) && IsUnsignedIntegralType(t1)) return -1;
             return 0;

@@ -115,7 +115,7 @@ namespace Highway.Data.Collections
             }
             catch (NullReferenceException e)
             {
-                throw new MissingMethodException(string.Format("Possible missing default constructor for {0}. Can be private. Required for EF as well.", t), e);
+                throw new MissingMethodException($"Possible missing default constructor for {t}. Can be private. Required for EF as well.", e);
             }
 
             OriginalToCloneMap.Add(classObject, cloneObject);

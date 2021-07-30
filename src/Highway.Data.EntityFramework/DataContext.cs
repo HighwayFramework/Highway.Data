@@ -334,7 +334,7 @@ namespace Highway.Data
         public virtual IEnumerable<T> ExecuteSqlQuery<T>(string sql, params DbParameter[] dbParams)
         {
             string[] parameters =
-                dbParams.Select(x => string.Format("{0} : {1} : {2}\t", x.ParameterName, x.Value, x.DbType)).ToArray();
+                dbParams.Select(x => $"{x.ParameterName} : {x.Value} : {x.DbType}\t").ToArray();
             _log.TraceFormat("Executing SQL {0}, with parameters {1}", sql, string.Join(",", parameters));
             return Database.SqlQuery<T>(sql, dbParams);
         }
@@ -348,7 +348,7 @@ namespace Highway.Data
         public virtual int ExecuteSqlCommand(string sql, params DbParameter[] dbParams)
         {
             string[] parameters =
-                dbParams.Select(x => string.Format("{0} : {1} : {2}\t", x.ParameterName, x.Value, x.DbType)).ToArray();
+                dbParams.Select(x => $"{x.ParameterName} : {x.Value} : {x.DbType}\t").ToArray();
             _log.TraceFormat("Executing SQL {0}, with parameters {1}", sql, string.Join(",", parameters));
             return Database.ExecuteSqlCommand(sql, dbParams);
         }
@@ -367,7 +367,7 @@ namespace Highway.Data
         public virtual int ExecuteFunction(string procedureName, params ObjectParameter[] dbParams)
         {
             string[] parameters =
-                dbParams.Select(x => string.Format("{0} : {1} : {2}\t", x.Name, x.Value, x.ParameterType)).ToArray();
+                dbParams.Select(x => $"{x.Name} : {x.Value} : {x.ParameterType}\t").ToArray();
             _log.TraceFormat("Executing Procedure {0}, with parameters {1}", procedureName, string.Join(",", parameters));
             return Database.SqlQuery<int>(procedureName, dbParams).FirstOrDefault();
         }

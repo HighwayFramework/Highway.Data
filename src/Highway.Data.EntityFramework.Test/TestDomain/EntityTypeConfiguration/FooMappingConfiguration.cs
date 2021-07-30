@@ -11,6 +11,6 @@ namespace Highway.Data.EntityFramework.Test.TestDomain
             base.ConfigureModelBuilder(modelBuilder);
         }
 
-        public bool Called { get; set; } = false;
+        public bool Called { get; set; }
     }
 }

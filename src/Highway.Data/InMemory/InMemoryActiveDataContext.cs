@@ -11,8 +11,8 @@ namespace Highway.Data.Contexts
 {
     public class InMemoryActiveDataContext : InMemoryDataContext
     {
-        private int _commitVersion = 0;
-        private static int CommitCounter = 0;
+        private int _commitVersion;
+        private static int CommitCounter;
         internal static ObjectRepresentationRepository Repo = new ObjectRepresentationRepository();
         private readonly BiDictionary<object, object> _entityToRepoEntityMap = new BiDictionary<object, object>();
 

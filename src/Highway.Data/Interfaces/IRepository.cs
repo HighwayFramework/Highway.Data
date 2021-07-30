@@ -61,7 +61,7 @@ namespace Highway.Data
         /// <summary>
         ///     Executes a prebuilt <see cref="IQuery{T}" /> and returns an <see cref="IEnumerable{T}" />
         /// </summary>
-        /// <typeparam name="TSelection">The Entity being selected from the underlying data store.</typeparam>
+        /// <typeparam name="TSelection">The Entity being queried from the data store.</typeparam>
         /// <typeparam name="TProjection">The type being returned to the caller.</typeparam>
         /// <param name="query">The prebuilt Query Object</param>
         /// <returns>The task that will return <see cref="IEnumerable{T}" /> from the query</returns>

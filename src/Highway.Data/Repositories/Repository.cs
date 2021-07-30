@@ -72,10 +72,11 @@ namespace Highway.Data
         /// <summary>
         ///     Executes a prebuilt <see cref="IQuery{T}" /> and returns an <see cref="IEnumerable{T}" />
         /// </summary>
-        /// <typeparam name="T">The Entity being queried</typeparam>
+        /// <typeparam name="TSelection">The Entity being queried from the data store.</typeparam>
+        /// <typeparam name="TProjection">The type being returned to the caller.</typeparam>
         /// <param name="query">The prebuilt Query Object</param>
         /// <returns>The <see cref="IEnumerable{T}" /> returned from the query</returns>
-        public virtual IEnumerable<IProjection> Find<TSelection, IProjection>(IQuery<TSelection, IProjection> query)
+        public virtual IEnumerable<TProjection> Find<TSelection, TProjection>(IQuery<TSelection, TProjection> query)
             where TSelection : class
         {
             OnBeforeQuery(new BeforeQuery(query));
@@ -124,13 +125,14 @@ namespace Highway.Data
         /// <summary>
         ///     Executes a prebuilt <see cref="IQuery{T}" /> and returns an <see cref="IEnumerable{T}" />
         /// </summary>
-        /// <typeparam name="T">The Entity being queried</typeparam>
+        /// <typeparam name="TSelection">The Entity being queried from the data store.</typeparam>
+        /// <typeparam name="TProjection">The type being returned to the caller.</typeparam>
         /// <param name="query">The prebuilt Query Object</param>
         /// <returns>The task that will return <see cref="IEnumerable{T}" /> from the query</returns>
-        public virtual Task<IEnumerable<IProjection>> FindAsync<TSelection, IProjection>(IQuery<TSelection, IProjection> query)
+        public virtual Task<IEnumerable<TProjection>> FindAsync<TSelection, TProjection>(IQuery<TSelection, TProjection> query)
             where TSelection : class
         {
-            var task = new Task<IEnumerable<IProjection>>(() => query.Execute(_context));
+            var task = new Task<IEnumerable<TProjection>>(() => query.Execute(_context));
             task.Start();
             return task;
         }

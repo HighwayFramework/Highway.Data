@@ -103,9 +103,9 @@ namespace Highway.Data.Contexts
                     throw new ArgumentException();
                 }
             }
-            else if (lambda.Body is MemberExpression)
+            else if (lambda.Body is MemberExpression body)
             {
-                memberExpression = (MemberExpression)lambda.Body;
+                memberExpression = body;
             }
             else
             {

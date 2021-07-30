@@ -503,7 +503,7 @@ namespace System.Linq.Dynamic
 
         public override bool Equals(object obj)
         {
-            return obj is Signature ? Equals((Signature) obj) : false;
+            return obj is Signature signature ? Equals(signature) : false;
         }
     }
 
@@ -951,9 +951,9 @@ namespace System.Linq.Dynamic
             for (int i = 0; i < values.Length; i++)
             {
                 object value = values[i];
-                if (i == values.Length - 1 && value is IDictionary<string, object>)
+                if (i == values.Length - 1 && value is IDictionary<string, object> objects)
                 {
-                    _externals = (IDictionary<string, object>) value;
+                    _externals = objects;
                 }
                 else
                 {
@@ -1409,9 +1409,9 @@ namespace System.Linq.Dynamic
             ValidateToken(TokenId.Identifier);
             if (Keywords.TryGetValue(_token.text, out var value))
             {
-                if (value is Type)
+                if (value is Type type)
                 {
-                    return ParseTypeAccess((Type) value);
+                    return ParseTypeAccess(type);
                 }
 
                 if (value == KeywordIt)
@@ -1700,8 +1700,8 @@ namespace System.Linq.Dynamic
                                      id, GetTypeName(type));
                 }
 
-                return member is PropertyInfo
-                    ? Expression.Property(instance, (PropertyInfo) member)
+                return member is PropertyInfo info
+                    ? Expression.Property(instance, info)
                     : Expression.Field(instance, (FieldInfo) member);
             }
         }
@@ -2103,9 +2103,8 @@ namespace System.Linq.Dynamic
                 return expr;
             }
 
-            if (expr is ConstantExpression)
+            if (expr is ConstantExpression ce)
             {
-                var ce = (ConstantExpression) expr;
                 if (ce == NullLiteral)
                 {
                     if (!type.IsValueType || IsNullableType(type))

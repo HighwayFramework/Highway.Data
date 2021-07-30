@@ -608,7 +608,7 @@ namespace System.Linq.Dynamic
             RealLiteral,
             Exclamation,
             Percent,
-            Amphersand,
+            Ampersand,
             OpenParen,
             CloseParen,
             Asterisk,
@@ -626,7 +626,7 @@ namespace System.Linq.Dynamic
             CloseBracket,
             Bar,
             ExclamationEqual,
-            DoubleAmphersand,
+            DoubleAmpersand,
             LessThanEqual,
             LessGreater,
             DoubleEqual,
@@ -906,7 +906,7 @@ namespace System.Linq.Dynamic
         private Expression ParseLogicalAnd()
         {
             Expression left = ParseComparison();
-            while (_token.id == TokenId.DoubleAmphersand || TokenIdentifierIs("and"))
+            while (_token.id == TokenId.DoubleAmpersand || TokenIdentifierIs("and"))
             {
                 Token op = _token;
                 NextToken();
@@ -1005,7 +1005,7 @@ namespace System.Linq.Dynamic
         {
             Expression left = ParseMultiplicative();
             while (_token.id == TokenId.Plus || _token.id == TokenId.Minus ||
-                   _token.id == TokenId.Amphersand)
+                   _token.id == TokenId.Ampersand)
             {
                 Token op = _token;
                 NextToken();
@@ -1014,7 +1014,7 @@ namespace System.Linq.Dynamic
                 {
                     case TokenId.Plus:
                         if (left.Type == typeof (string) || right.Type == typeof (string))
-                            goto case TokenId.Amphersand;
+                            goto case TokenId.Ampersand;
                         CheckAndPromoteOperands(typeof (IAddSignatures), op.text, ref left, ref right, op.pos);
                         left = GenerateAdd(left, right);
                         break;
@@ -1022,7 +1022,7 @@ namespace System.Linq.Dynamic
                         CheckAndPromoteOperands(typeof (ISubtractSignatures), op.text, ref left, ref right, op.pos);
                         left = GenerateSubtract(left, right);
                         break;
-                    case TokenId.Amphersand:
+                    case TokenId.Ampersand:
                         left = GenerateStringConcat(left, right);
                         break;
                 }
@@ -2169,11 +2169,11 @@ namespace System.Linq.Dynamic
                     if (_ch == '&')
                     {
                         NextChar();
-                        t = TokenId.DoubleAmphersand;
+                        t = TokenId.DoubleAmpersand;
                     }
                     else
                     {
-                        t = TokenId.Amphersand;
+                        t = TokenId.Ampersand;
                     }
                     break;
                 case '(':

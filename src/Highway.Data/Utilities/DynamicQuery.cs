@@ -400,18 +400,8 @@ namespace System.Linq.Dynamic
 
         public DynamicProperty(string name, Type type)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-
-            if (type == null)
-            {
-                throw new ArgumentNullException(nameof(type));
-            }
-
-            _name = name;
-            _type = type;
+            _name = name ?? throw new ArgumentNullException(nameof(name));
+            _type = type ?? throw new ArgumentNullException(nameof(type));
         }
 
         public string Name => _name;
@@ -503,7 +493,8 @@ namespace System.Linq.Dynamic
 
         public override bool Equals(object obj)
         {
-            return obj is Signature signature ? Equals(signature) : false;
+            return obj is Signature signature && Equals(signature);
+
         }
     }
 

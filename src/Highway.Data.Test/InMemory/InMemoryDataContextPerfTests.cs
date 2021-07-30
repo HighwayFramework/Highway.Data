@@ -23,7 +23,7 @@ namespace Highway.Data.Tests.InMemory
         }
 
         [TestMethod]
-        public void ShouldPerformBetterThan10msInserts()
+        public void ShouldPerformBetterThan10MsInserts()
         {
             Stopwatch sw = Stopwatch.StartNew();
             for (int i = 0; i < 100; i++)
@@ -45,7 +45,7 @@ namespace Highway.Data.Tests.InMemory
         }
 
         [TestMethod]
-        public void ShouldPerformCommitsBetterThan10ms()
+        public void ShouldPerformCommitsBetterThan10Ms()
         {
             //Arrange
             Stopwatch sw = Stopwatch.StartNew();

@@ -40,7 +40,7 @@ namespace Highway.Data.EntityFramework.Test
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                //Suppress the error from the context. This allows us to test the mappings peice without having to actually map.
+                //Suppress the error from the context. This allows us to test the mappings piece without having to actually map.
             }
 
 

@@ -4892,4 +4892,8 @@ action.ShouldThrow&lt;$ExpectedException$&gt;($Message$);</s:String>
 &#xD;
             </s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=FCED7299FC4BC9489220D9D7D99B9984/Severity/@EntryValue">SUGGESTION</s:String>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=Auditable/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=Commited/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=dataset/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=mockable/@EntryIndexedValue">True</s:Boolean>
 </wpf:ResourceDictionary>

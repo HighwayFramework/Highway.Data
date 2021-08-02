@@ -1,6 +1,10 @@
 ﻿using System.Linq;
+
+using FluentAssertions;
+
 using Highway.Data.Contexts;
 using Highway.Data.Tests.TestDomain;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highway.Data.Tests.InMemory.BugTests
@@ -18,7 +22,7 @@ namespace Highway.Data.Tests.InMemory.BugTests
 
             var foo = repository.Find(new FindFooById(1));
 
-            Assert.IsNotNull(foo);
+            foo.Should().NotBeNull();
         }
     }
 

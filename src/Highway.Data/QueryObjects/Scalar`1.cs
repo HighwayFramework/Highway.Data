@@ -13,7 +13,6 @@ namespace Highway.Data
         /// </summary>
         protected Func<IReadonlyDataContext, T> ContextQuery { get; set; }
 
-
         /// <summary>
         ///     Executes the expression against the passed in context
         /// </summary>
@@ -23,8 +22,8 @@ namespace Highway.Data
         {
             Context = context;
             CheckContextAndQuery(ContextQuery);
+
             return ContextQuery(context);
         }
-
     }
 }

@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-
-namespace Highway.Data.Tests.InMemory.Domain
+﻿namespace Highway.Data.Tests.InMemory.Domain
 {
     public class Post
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
+        public Blog Blog { get; set; }
+
         public string Body { get; set; }
 
-        public Blog Blog { get; set; }
+        public int Id { get; set; }
+
+        public string Title { get; set; }
     }
 }

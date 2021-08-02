@@ -7,11 +7,11 @@ namespace Highway.Data.Interceptors.Events
     /// </summary>
     public class AfterQuery : EventArgs
     {
-        public object Result { get; set; }
-
         public AfterQuery(object result)
         {
             Result = result;
         }
+
+        public object Result { get; set; }
     }
 }

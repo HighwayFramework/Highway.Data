@@ -1,5 +1,6 @@
-﻿using Highway.Data.Interceptors.Events;
-using System;
+﻿using System;
+
+using Highway.Data.Interceptors.Events;
 
 namespace Highway.Data
 {
@@ -18,10 +19,13 @@ namespace Highway.Data
         /// </summary>
         event EventHandler<AfterQuery> AfterQuery;
     }
+
     /// <summary>
     ///     An Interface for Queries that return collections
     /// </summary>
     /// <typeparam name="TSelection">The type being queried</typeparam>
     /// <typeparam name="TProjection">The type to be returned</typeparam>
-    public interface IQuery<out TSelection, out TProjection> : IQuery<TProjection> { }
+    public interface IQuery<out TSelection, out TProjection> : IQuery<TProjection>
+    {
+    }
 }

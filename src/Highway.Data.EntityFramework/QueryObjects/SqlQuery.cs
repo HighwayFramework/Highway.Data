@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Entity;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Linq.Expressions;
 
 namespace Highway.Data
 {
@@ -16,11 +14,11 @@ namespace Highway.Data
 
         public IEnumerable<T> Execute(IReadonlyDataContext context)
         {
-            var efContext = context as DbContext;
-            if (efContext == null)
+            if (!(context is DbContext efContext))
             {
                 throw new InvalidOperationException("You cannot execute EF Sql Queries against a non-EF context");
             }
+
             using (var conn = new SqlConnection(efContext.Database.Connection.ConnectionString))
             {
                 return ContextQuery.Invoke(conn);

@@ -9,49 +9,41 @@ namespace Highway.Data.Collections
     public class BiDictionary<TFirst, TSecond> : IDictionary<TFirst, TSecond>, IDictionary
     {
         private readonly IDictionary<TFirst, TSecond> _firstToSecond = new Dictionary<TFirst, TSecond>();
-        [NonSerialized]
-        private readonly IDictionary<TSecond, TFirst> _secondToFirst = new Dictionary<TSecond, TFirst>();
+
         [NonSerialized]
         private readonly ReverseDictionary _reverseDictionary;
+
+        [NonSerialized]
+        private readonly IDictionary<TSecond, TFirst> _secondToFirst = new Dictionary<TSecond, TFirst>();
 
         public BiDictionary()
         {
             _reverseDictionary = new ReverseDictionary(this);
         }
 
-        public IDictionary<TSecond, TFirst> Reverse
-        {
-            get { return _reverseDictionary; }
-        }
+        public int Count => _firstToSecond.Count;
 
-        public int Count
-        {
-            get { return _firstToSecond.Count; }
-        }
+        public bool IsReadOnly => _firstToSecond.IsReadOnly || _secondToFirst.IsReadOnly;
 
-        object ICollection.SyncRoot
-        {
-            get { return ((ICollection)_firstToSecond).SyncRoot; }
-        }
+        public ICollection<TFirst> Keys => _firstToSecond.Keys;
 
-        bool ICollection.IsSynchronized
-        {
-            get { return ((ICollection)_firstToSecond).IsSynchronized; }
-        }
+        public IDictionary<TSecond, TFirst> Reverse => _reverseDictionary;
 
-        bool IDictionary.IsFixedSize
-        {
-            get { return ((IDictionary)_firstToSecond).IsFixedSize; }
-        }
+        public ICollection<TSecond> Values => _firstToSecond.Values;
 
-        public bool IsReadOnly
-        {
-            get { return _firstToSecond.IsReadOnly || _secondToFirst.IsReadOnly; }
-        }
+        bool IDictionary.IsFixedSize => ((IDictionary)_firstToSecond).IsFixedSize;
+
+        bool ICollection.IsSynchronized => ((ICollection)_firstToSecond).IsSynchronized;
+
+        ICollection IDictionary.Keys => ((IDictionary)_firstToSecond).Keys;
+
+        object ICollection.SyncRoot => ((ICollection)_firstToSecond).SyncRoot;
+
+        ICollection IDictionary.Values => ((IDictionary)_firstToSecond).Values;
 
         public TSecond this[TFirst key]
         {
-            get { return _firstToSecond[key]; }
+            get => _firstToSecond[key];
             set
             {
                 _firstToSecond[key] = value;
@@ -61,7 +53,7 @@ namespace Highway.Data.Collections
 
         object IDictionary.this[object key]
         {
-            get { return ((IDictionary)_firstToSecond)[key]; }
+            get => ((IDictionary)_firstToSecond)[key];
             set
             {
                 ((IDictionary)_firstToSecond)[key] = value;
@@ -69,24 +61,21 @@ namespace Highway.Data.Collections
             }
         }
 
-        public ICollection<TFirst> Keys
+        public void Add(TFirst key, TSecond value)
         {
-            get { return _firstToSecond.Keys; }
+            _firstToSecond.Add(key, value);
+            _secondToFirst.Add(value, key);
         }
 
-        ICollection IDictionary.Keys
+        public void Clear()
         {
-            get { return ((IDictionary)_firstToSecond).Keys; }
+            _firstToSecond.Clear();
+            _secondToFirst.Clear();
         }
 
-        public ICollection<TSecond> Values
+        public bool ContainsKey(TFirst key)
         {
-            get { return _firstToSecond.Values; }
-        }
-
-        ICollection IDictionary.Values
-        {
-            get { return ((IDictionary)_firstToSecond).Values; }
+            return _firstToSecond.ContainsKey(key);
         }
 
         public IEnumerator<KeyValuePair<TFirst, TSecond>> GetEnumerator()
@@ -94,20 +83,32 @@ namespace Highway.Data.Collections
             return _firstToSecond.GetEnumerator();
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public bool Remove(TFirst key)
         {
-            return GetEnumerator();
+            if (_firstToSecond.TryGetValue(key, out var value))
+            {
+                _firstToSecond.Remove(key);
+                _secondToFirst.Remove(value);
+
+                return true;
+            }
+
+            return false;
         }
 
-        IDictionaryEnumerator IDictionary.GetEnumerator()
+        public bool TryGetValue(TFirst key, out TSecond value)
         {
-            return ((IDictionary)_firstToSecond).GetEnumerator();
+            return _firstToSecond.TryGetValue(key, out value);
         }
 
-        public void Add(TFirst key, TSecond value)
+        [OnDeserialized]
+        internal void OnDeserialized(StreamingContext context)
         {
-            _firstToSecond.Add(key, value);
-            _secondToFirst.Add(value, key);
+            _secondToFirst.Clear();
+            foreach (var item in _firstToSecond)
+            {
+                _secondToFirst.Add(item.Value, item.Key);
+            }
         }
 
         void IDictionary.Add(object key, object value)
@@ -122,58 +123,14 @@ namespace Highway.Data.Collections
             _secondToFirst.Add(item.Reverse());
         }
 
-        public bool ContainsKey(TFirst key)
-        {
-            return _firstToSecond.ContainsKey(key);
-        }
-
         bool ICollection<KeyValuePair<TFirst, TSecond>>.Contains(KeyValuePair<TFirst, TSecond> item)
         {
             return _firstToSecond.Contains(item);
         }
 
-        public bool TryGetValue(TFirst key, out TSecond value)
-        {
-            return _firstToSecond.TryGetValue(key, out value);
-        }
-
-        public bool Remove(TFirst key)
-        {
-            TSecond value;
-            if (_firstToSecond.TryGetValue(key, out value))
-            {
-                _firstToSecond.Remove(key);
-                _secondToFirst.Remove(value);
-                return true;
-            }
-            else
-                return false;
-        }
-
-        void IDictionary.Remove(object key)
-        {
-            var firstToSecond = (IDictionary)_firstToSecond;
-            if (!firstToSecond.Contains(key))
-                return;
-            var value = firstToSecond[key];
-            firstToSecond.Remove(key);
-            ((IDictionary)_secondToFirst).Remove(value);
-        }
-
-        bool ICollection<KeyValuePair<TFirst, TSecond>>.Remove(KeyValuePair<TFirst, TSecond> item)
-        {
-            return _firstToSecond.Remove(item);
-        }
-
         bool IDictionary.Contains(object key)
         {
             return ((IDictionary)_firstToSecond).Contains(key);
-        }
-
-        public void Clear()
-        {
-            _firstToSecond.Clear();
-            _secondToFirst.Clear();
         }
 
         void ICollection<KeyValuePair<TFirst, TSecond>>.CopyTo(KeyValuePair<TFirst, TSecond>[] array, int arrayIndex)
@@ -186,12 +143,32 @@ namespace Highway.Data.Collections
             ((IDictionary)_firstToSecond).CopyTo(array, index);
         }
 
-        [OnDeserialized]
-        internal void OnDeserialized(StreamingContext context)
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            _secondToFirst.Clear();
-            foreach (var item in _firstToSecond)
-                _secondToFirst.Add(item.Value, item.Key);
+            return GetEnumerator();
+        }
+
+        IDictionaryEnumerator IDictionary.GetEnumerator()
+        {
+            return ((IDictionary)_firstToSecond).GetEnumerator();
+        }
+
+        void IDictionary.Remove(object key)
+        {
+            var firstToSecond = (IDictionary)_firstToSecond;
+            if (!firstToSecond.Contains(key))
+            {
+                return;
+            }
+
+            var value = firstToSecond[key];
+            firstToSecond.Remove(key);
+            ((IDictionary)_secondToFirst).Remove(value);
+        }
+
+        bool ICollection<KeyValuePair<TFirst, TSecond>>.Remove(KeyValuePair<TFirst, TSecond> item)
+        {
+            return _firstToSecond.Remove(item);
         }
 
         private class ReverseDictionary : IDictionary<TSecond, TFirst>, IDictionary
@@ -203,34 +180,27 @@ namespace Highway.Data.Collections
                 _owner = owner;
             }
 
-            public int Count
-            {
-                get { return _owner._secondToFirst.Count; }
-            }
+            public int Count => _owner._secondToFirst.Count;
 
-            object ICollection.SyncRoot
-            {
-                get { return ((ICollection)_owner._secondToFirst).SyncRoot; }
-            }
+            public bool IsReadOnly => _owner._secondToFirst.IsReadOnly || _owner._firstToSecond.IsReadOnly;
 
-            bool ICollection.IsSynchronized
-            {
-                get { return ((ICollection)_owner._secondToFirst).IsSynchronized; }
-            }
+            public ICollection<TSecond> Keys => _owner._secondToFirst.Keys;
 
-            bool IDictionary.IsFixedSize
-            {
-                get { return ((IDictionary)_owner._secondToFirst).IsFixedSize; }
-            }
+            public ICollection<TFirst> Values => _owner._secondToFirst.Values;
 
-            public bool IsReadOnly
-            {
-                get { return _owner._secondToFirst.IsReadOnly || _owner._firstToSecond.IsReadOnly; }
-            }
+            bool IDictionary.IsFixedSize => ((IDictionary)_owner._secondToFirst).IsFixedSize;
+
+            bool ICollection.IsSynchronized => ((ICollection)_owner._secondToFirst).IsSynchronized;
+
+            ICollection IDictionary.Keys => ((IDictionary)_owner._secondToFirst).Keys;
+
+            object ICollection.SyncRoot => ((ICollection)_owner._secondToFirst).SyncRoot;
+
+            ICollection IDictionary.Values => ((IDictionary)_owner._secondToFirst).Values;
 
             public TFirst this[TSecond key]
             {
-                get { return _owner._secondToFirst[key]; }
+                get => _owner._secondToFirst[key];
                 set
                 {
                     _owner._secondToFirst[key] = value;
@@ -240,7 +210,7 @@ namespace Highway.Data.Collections
 
             object IDictionary.this[object key]
             {
-                get { return ((IDictionary)_owner._secondToFirst)[key]; }
+                get => ((IDictionary)_owner._secondToFirst)[key];
                 set
                 {
                     ((IDictionary)_owner._secondToFirst)[key] = value;
@@ -248,24 +218,21 @@ namespace Highway.Data.Collections
                 }
             }
 
-            public ICollection<TSecond> Keys
+            public void Add(TSecond key, TFirst value)
             {
-                get { return _owner._secondToFirst.Keys; }
+                _owner._secondToFirst.Add(key, value);
+                _owner._firstToSecond.Add(value, key);
             }
 
-            ICollection IDictionary.Keys
+            public void Clear()
             {
-                get { return ((IDictionary)_owner._secondToFirst).Keys; }
+                _owner._secondToFirst.Clear();
+                _owner._firstToSecond.Clear();
             }
 
-            public ICollection<TFirst> Values
+            public bool ContainsKey(TSecond key)
             {
-                get { return _owner._secondToFirst.Values; }
-            }
-
-            ICollection IDictionary.Values
-            {
-                get { return ((IDictionary)_owner._secondToFirst).Values; }
+                return _owner._secondToFirst.ContainsKey(key);
             }
 
             public IEnumerator<KeyValuePair<TSecond, TFirst>> GetEnumerator()
@@ -273,20 +240,22 @@ namespace Highway.Data.Collections
                 return _owner._secondToFirst.GetEnumerator();
             }
 
-            IEnumerator IEnumerable.GetEnumerator()
+            public bool Remove(TSecond key)
             {
-                return GetEnumerator();
+                if (_owner._secondToFirst.TryGetValue(key, out var value))
+                {
+                    _owner._secondToFirst.Remove(key);
+                    _owner._firstToSecond.Remove(value);
+
+                    return true;
+                }
+
+                return false;
             }
 
-            IDictionaryEnumerator IDictionary.GetEnumerator()
+            public bool TryGetValue(TSecond key, out TFirst value)
             {
-                return ((IDictionary)_owner._secondToFirst).GetEnumerator();
-            }
-
-            public void Add(TSecond key, TFirst value)
-            {
-                _owner._secondToFirst.Add(key, value);
-                _owner._firstToSecond.Add(value, key);
+                return _owner._secondToFirst.TryGetValue(key, out value);
             }
 
             void IDictionary.Add(object key, object value)
@@ -301,58 +270,14 @@ namespace Highway.Data.Collections
                 _owner._firstToSecond.Add(item.Reverse());
             }
 
-            public bool ContainsKey(TSecond key)
-            {
-                return _owner._secondToFirst.ContainsKey(key);
-            }
-
             bool ICollection<KeyValuePair<TSecond, TFirst>>.Contains(KeyValuePair<TSecond, TFirst> item)
             {
                 return _owner._secondToFirst.Contains(item);
             }
 
-            public bool TryGetValue(TSecond key, out TFirst value)
-            {
-                return _owner._secondToFirst.TryGetValue(key, out value);
-            }
-
-            public bool Remove(TSecond key)
-            {
-                TFirst value;
-                if (_owner._secondToFirst.TryGetValue(key, out value))
-                {
-                    _owner._secondToFirst.Remove(key);
-                    _owner._firstToSecond.Remove(value);
-                    return true;
-                }
-                else
-                    return false;
-            }
-
-            void IDictionary.Remove(object key)
-            {
-                var firstToSecond = (IDictionary)_owner._secondToFirst;
-                if (!firstToSecond.Contains(key))
-                    return;
-                var value = firstToSecond[key];
-                firstToSecond.Remove(key);
-                ((IDictionary)_owner._firstToSecond).Remove(value);
-            }
-
-            bool ICollection<KeyValuePair<TSecond, TFirst>>.Remove(KeyValuePair<TSecond, TFirst> item)
-            {
-                return _owner._secondToFirst.Remove(item);
-            }
-
             bool IDictionary.Contains(object key)
             {
                 return ((IDictionary)_owner._secondToFirst).Contains(key);
-            }
-
-            public void Clear()
-            {
-                _owner._secondToFirst.Clear();
-                _owner._firstToSecond.Clear();
             }
 
             void ICollection<KeyValuePair<TSecond, TFirst>>.CopyTo(KeyValuePair<TSecond, TFirst>[] array, int arrayIndex)
@@ -363,6 +288,34 @@ namespace Highway.Data.Collections
             void ICollection.CopyTo(Array array, int index)
             {
                 ((IDictionary)_owner._secondToFirst).CopyTo(array, index);
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
+
+            IDictionaryEnumerator IDictionary.GetEnumerator()
+            {
+                return ((IDictionary)_owner._secondToFirst).GetEnumerator();
+            }
+
+            void IDictionary.Remove(object key)
+            {
+                var firstToSecond = (IDictionary)_owner._secondToFirst;
+                if (!firstToSecond.Contains(key))
+                {
+                    return;
+                }
+
+                var value = firstToSecond[key];
+                firstToSecond.Remove(key);
+                ((IDictionary)_owner._firstToSecond).Remove(value);
+            }
+
+            bool ICollection<KeyValuePair<TSecond, TFirst>>.Remove(KeyValuePair<TSecond, TFirst> item)
+            {
+                return _owner._secondToFirst.Remove(item);
             }
         }
     }

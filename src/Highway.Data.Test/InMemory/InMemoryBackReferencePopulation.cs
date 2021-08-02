@@ -1,30 +1,17 @@
-﻿using Highway.Data.Contexts;
-using Highway.Data.Tests.InMemory.Domain;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Linq;
+﻿using System.Linq;
 
+using FluentAssertions;
+
+using Highway.Data.Contexts;
+using Highway.Data.Tests.InMemory.Domain;
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highway.Data.Tests.InMemory
 {
     [TestClass]
     public class InMemoryBackReferencePopulation
     {
-        [TestMethod]
-        public void ShouldPopulateSingleReference()
-        {
-            var context = new InMemoryDataContext();
-
-            var child = new Post();
-            var blog = new Blog("Test");
-            blog.Posts.Add(child);
-
-            context.Add(blog);
-            context.Commit();
-
-            Assert.IsNotNull(child.Blog);
-        }
-
         [TestMethod]
         public void ShouldPopulateCollectionBasedReference()
         {
@@ -37,7 +24,7 @@ namespace Highway.Data.Tests.InMemory
             context.Add(child);
             context.Commit();
 
-            Assert.AreEqual(1, blog.Posts.Count(x => x == child));
+            blog.Posts.Count(x => x == child).Should().Be(1);
         }
 
         [TestMethod]
@@ -53,7 +40,22 @@ namespace Highway.Data.Tests.InMemory
             context.Add(child);
             context.Commit();
 
-            Assert.AreEqual(1, blog.Posts.Count(x => x == child));
+            blog.Posts.Count(x => x == child).Should().Be(1);
+        }
+
+        [TestMethod]
+        public void ShouldPopulateSingleReference()
+        {
+            var context = new InMemoryDataContext();
+
+            var child = new Post();
+            var blog = new Blog("Test");
+            blog.Posts.Add(child);
+
+            context.Add(blog);
+            context.Commit();
+
+            child.Blog.Should().NotBeNull();
         }
     }
 }

@@ -4,7 +4,8 @@
     ///     Finds all items of a certain type in the database
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class FindAll<T> : Query<T> where T : class
+    public class FindAll<T> : Query<T>
+        where T : class
     {
         /// <summary>
         ///     Constructs a find all query for the specified type

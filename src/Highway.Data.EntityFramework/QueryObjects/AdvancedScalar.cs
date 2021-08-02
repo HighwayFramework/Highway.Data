@@ -1,6 +1,4 @@
-﻿
-using System;
-
+﻿using System;
 
 namespace Highway.Data
 {
@@ -15,7 +13,6 @@ namespace Highway.Data
         /// </summary>
         protected Func<DataContext, T> ContextQuery { get; set; }
 
-        
         /// <summary>
         ///     Executes the expression against the passed in context
         /// </summary>
@@ -25,8 +22,8 @@ namespace Highway.Data
         {
             Context = context;
             CheckContextAndQuery(ContextQuery);
-            return ContextQuery((DataContext) context);
-        }
 
-            }
+            return ContextQuery((DataContext)context);
+        }
+    }
 }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-
 
 namespace Highway.Data
 {
@@ -8,7 +6,8 @@ namespace Highway.Data
     ///     Defines a generalized Id property for identifying an individual entity.
     /// </summary>
     /// <typeparam name="T">The type of the Id</typeparam>
-    public interface IIdentifiable<T> where T : IEquatable<T>
+    public interface IIdentifiable<T>
+        where T : IEquatable<T>
     {
         /// <summary>
         ///     A value identifying the individual entity.

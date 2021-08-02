@@ -7,11 +7,11 @@ namespace Highway.Data.Interceptors.Events
     /// </summary>
     public class BeforeQuery : EventArgs
     {
-        public object Query { get; set; }
-
         public BeforeQuery(object query)
         {
             Query = query;
         }
+
+        public object Query { get; set; }
     }
 }

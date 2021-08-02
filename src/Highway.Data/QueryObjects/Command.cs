@@ -3,7 +3,7 @@
 namespace Highway.Data
 {
     /// <summary>
-    ///     An implementation that executes functions against the database independant of the data access layer
+    ///     An implementation that executes functions against the database independent of the data access layer
     /// </summary>
     public class Command : QueryBase, ICommand
     {
@@ -11,7 +11,6 @@ namespace Highway.Data
         ///     The Command that will be executed at some point in the future
         /// </summary>
         protected Action<IDataContext> ContextQuery { get; set; }
-
 
         /// <summary>
         ///     Executes the expression against the passed in context and ignores the returned value if any
@@ -23,6 +22,5 @@ namespace Highway.Data
             CheckContextAndQuery(ContextQuery);
             ContextQuery(context);
         }
-
     }
 }

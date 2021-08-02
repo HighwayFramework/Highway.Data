@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-
 
 namespace Highway.Data
 {
@@ -10,23 +8,23 @@ namespace Highway.Data
     public interface IAuditableEntity
     {
         /// <summary>
-        ///     The date this entity was created
-        /// </summary>
-        DateTime CreatedDate { get; set; }
-
-        /// <summary>
         ///     Who created this entity
         /// </summary>
         string CreatedBy { get; set; }
 
         /// <summary>
-        ///     The date this entity was last modified
+        ///     The date this entity was created
         /// </summary>
-        DateTime ModifiedDate { get; set; }
+        DateTime CreatedDate { get; set; }
 
         /// <summary>
         ///     Who last modified this entity
         /// </summary>
         string ModifiedBy { get; set; }
+
+        /// <summary>
+        ///     The date this entity was last modified
+        /// </summary>
+        DateTime ModifiedDate { get; set; }
     }
 }

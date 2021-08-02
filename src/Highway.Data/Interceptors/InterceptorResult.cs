@@ -21,18 +21,6 @@
         public string Message { get; set; }
 
         /// <summary>
-        ///     Creates a successful result that continues execution
-        /// </summary>
-        /// <returns>An Interceptor Result</returns>
-        public static InterceptorResult Succeeded()
-        {
-            return new InterceptorResult
-            {
-                ContinueExecution = true
-            };
-        }
-
-        /// <summary>
         ///     Creates a failure result that gives the event manager a message to log, and specifies to proceed to the next
         ///     priority in line or not. The Default is False
         /// </summary>
@@ -45,6 +33,18 @@
             {
                 ContinueExecution = continueToExecute,
                 Message = message
+            };
+        }
+
+        /// <summary>
+        ///     Creates a successful result that continues execution
+        /// </summary>
+        /// <returns>An Interceptor Result</returns>
+        public static InterceptorResult Succeeded()
+        {
+            return new InterceptorResult
+            {
+                ContinueExecution = true
             };
         }
     }

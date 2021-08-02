@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace Highway.Data.Contexts.TypeRepresentations
 {
     internal class Accessor
@@ -11,7 +10,8 @@ namespace Highway.Data.Contexts.TypeRepresentations
             GetterFunc = getterFunc;
         }
 
-        internal Action RemoveAction { get; set; }
         internal Func<object, object, object> GetterFunc { get; set; }
+
+        internal Action RemoveAction { get; set; }
     }
 }

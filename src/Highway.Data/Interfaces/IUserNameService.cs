@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-
-
-namespace Highway.Data
+﻿namespace Highway.Data
 {
     /// <summary>
     ///     This gives a standard interface for the user name service,

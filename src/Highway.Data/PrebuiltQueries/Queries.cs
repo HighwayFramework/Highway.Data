@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 
 namespace Highway.Data
 {
@@ -8,17 +7,20 @@ namespace Highway.Data
     /// </summary>
     public static class Queries
     {
-        public static GetById<int, T> GetById<T>(int id) where T : class, IIdentifiable<int>
+        public static GetById<int, T> GetById<T>(int id)
+            where T : class, IIdentifiable<int>
         {
             return new GetById<int, T>(id);
         }
 
-        public static GetById<Guid, T> GetById<T>(Guid id) where T : class, IIdentifiable<Guid>
+        public static GetById<Guid, T> GetById<T>(Guid id)
+            where T : class, IIdentifiable<Guid>
         {
             return new GetById<Guid, T>(id);
         }
 
-        public static GetById<long, T> GetById<T>(long id) where T : class, IIdentifiable<long>
+        public static GetById<long, T> GetById<T>(long id)
+            where T : class, IIdentifiable<long>
         {
             return new GetById<long, T>(id);
         }

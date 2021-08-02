@@ -1,13 +1,13 @@
-﻿using Highway.Data.Contexts;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using Highway.Data.Contexts;
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highway.Data.Tests.InMemory
 {
-
     [TestClass]
     public class InMemoryDataContextReferenceByIdTests
     {
@@ -40,19 +40,23 @@ namespace Highway.Data.Tests.InMemory
             }
         }
 
-        class Blog : IIdentifiable<long>
+        private class Blog : IIdentifiable<long>
         {
             public Blog()
             {
                 Posts = new List<Post>();
             }
+
             public long Id { get; set; }
-            public List<Post> Posts { get; set; }
+
+            public List<Post> Posts { get; }
         }
-        class Post : IIdentifiable<long>
+
+        private class Post : IIdentifiable<long>
         {
-            public long Id { get; set; }
             public long BlogId { get; set; }
+
+            public long Id { get; set; }
         }
     }
 }

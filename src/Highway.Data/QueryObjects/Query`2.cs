@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 namespace Highway.Data
 {
     /// <summary>
-    ///     The base implemetation of a query that has a projection
+    ///     The base implementation of a query that has a projection
     /// </summary>
     /// <typeparam name="TSelection">The Type that will be selected</typeparam>
     /// <typeparam name="TProjection">The type that will be projected</typeparam>
@@ -38,7 +38,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        ///     This method allows for the extension of Ordering and Grouping on the prebuild Query
+        ///     This method allows for the extension of Ordering and Grouping on the prebuilt Query
         /// </summary>
         /// <returns>an <see cref="IQueryable{TSelection}" /></returns>
         protected virtual IQueryable<TSelection> ExtendQuery()
@@ -47,7 +47,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        ///     Gives the ability to apend an <see cref="IQueryable" /> onto the current query
+        ///     Gives the ability to append an <see cref="IQueryable" /> onto the current query
         /// </summary>
         /// <param name="query">The query containing the expressions to append</param>
         /// <returns>The combined query</returns>

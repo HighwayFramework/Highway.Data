@@ -3,7 +3,7 @@
 namespace Highway.Data
 {
     /// <summary>
-    ///     An implementation that executes functions against the database independant of the data access layer
+    ///     An implementation that executes functions against the database independent of the data access layer
     /// </summary>
     public class Command : QueryBase, ICommand
     {

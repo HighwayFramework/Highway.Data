@@ -9,22 +9,22 @@ namespace Highway.Data.Contexts
 {
     public class InMemoryDataContext : IDataContext
     {
-        internal readonly ObjectRepresentationRepository repo;
-        private readonly Queue addQueue = new Queue();
-        private readonly Queue removeQueue = new Queue();
+        internal readonly ObjectRepresentationRepository Repo;
+        private readonly Queue _addQueue = new Queue();
+        private readonly Queue _removeQueue = new Queue();
 
         public event EventHandler<BeforeSave> BeforeSave;
         public event EventHandler<AfterSave> AfterSave;
 
         public InMemoryDataContext()
         {
-            repo = new ObjectRepresentationRepository();
+            Repo = new ObjectRepresentationRepository();
             RegisterIIdentifiables();
         }
 
         internal InMemoryDataContext(ObjectRepresentationRepository repo)
         {
-            this.repo = repo;
+            this.Repo = repo;
             RegisterIIdentifiables();
         }
 
@@ -42,18 +42,18 @@ namespace Highway.Data.Contexts
 
         public virtual IQueryable<T> AsQueryable<T>() where T : class
         {
-            return repo.Data<T>();
+            return Repo.Data<T>();
         }
 
         public virtual T Add<T>(T item) where T : class
         {
-            addQueue.Enqueue(item);
+            _addQueue.Enqueue(item);
             return item;
         }
 
         public virtual T Remove<T>(T item) where T : class
         {
-            removeQueue.Enqueue(item);
+            _removeQueue.Enqueue(item);
             return item;
         }
 
@@ -71,7 +71,7 @@ namespace Highway.Data.Contexts
         {
             OnBeforeSave(new BeforeSave());
             ProcessCommitQueues();
-            repo.Commit();
+            Repo.Commit();
             OnAfterSave(new AfterSave());
 
             return 0;
@@ -91,13 +91,13 @@ namespace Highway.Data.Contexts
         /// <typeparam name="T">The type to use it from</typeparam>
         public void RegisterIdentityStrategy<T>(IIdentityStrategy<T> identityStrategy) where T : class
         {
-            if (repo.IdentityStrategies.ContainsKey(typeof(T)))
+            if (Repo.IdentityStrategies.ContainsKey(typeof(T)))
             {
-                repo.IdentityStrategies[typeof(T)] = obj => identityStrategy.Assign((T)obj);
+                Repo.IdentityStrategies[typeof(T)] = obj => identityStrategy.Assign((T)obj);
             }
             else
             {
-                repo.IdentityStrategies.Add(typeof(T), obj => identityStrategy.Assign((T)obj));
+                Repo.IdentityStrategies.Add(typeof(T), obj => identityStrategy.Assign((T)obj));
             }
         }
 
@@ -112,16 +112,16 @@ namespace Highway.Data.Contexts
 
         private void AddAllFromQueueIntoRepository()
         {
-            while (addQueue.Count > 0)
+            while (_addQueue.Count > 0)
             {
-                repo.Add(addQueue.Dequeue());
+                Repo.Add(_addQueue.Dequeue());
             }
         }
         private void RemoveAllFromQueueFromRepository()
         {
-            while (removeQueue.Count > 0)
+            while (_removeQueue.Count > 0)
             {
-                repo.Remove(removeQueue.Dequeue());
+                Repo.Remove(_removeQueue.Dequeue());
             }
         }
 

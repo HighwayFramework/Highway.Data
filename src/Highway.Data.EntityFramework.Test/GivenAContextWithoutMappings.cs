@@ -11,19 +11,19 @@ using System.Linq;
 namespace Highway.Data.EntityFramework.Test
 {
     [TestClass]
-    public class Given_A_Context_Without_Mappings
+    public class GivenAContextWithoutMappings
     {
-        private DataContext context;
-        private FooMappingConfiguration mapping;
+        private DataContext _context;
+        private FooMappingConfiguration _mapping;
 
         [TestInitialize]
         public void Setup()
         {
             Database.SetInitializer(new EntityFrameworkIntializer());
-            mapping = new FooMappingConfiguration();
-            context = new TestDataContext(
+            _mapping = new FooMappingConfiguration();
+            _context = new TestDataContext(
                 connectionString: "Data Source=(localDb);Initial Catalog=Highway.Data.Test.Db;Integrated Security=True;Connection Timeout=1",
-                mapping: mapping,
+                mapping: _mapping,
                 logger: new NoOpLogger());
         }
 
@@ -35,17 +35,17 @@ namespace Highway.Data.EntityFramework.Test
             //Act
             try
             {
-                context.Set<Foo>().ToList();
+                _context.Set<Foo>().ToList();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                //Suppress the error from the context. This allows us to test the mappings peice without having to actually map.
+                //Suppress the error from the context. This allows us to test the mappings piece without having to actually map.
             }
 
 
             //Assert
-            mapping.Called.Should().Be(true);
+            _mapping.Called.Should().Be(true);
         }
     }
 }

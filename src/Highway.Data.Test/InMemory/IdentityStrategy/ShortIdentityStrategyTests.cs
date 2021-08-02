@@ -8,12 +8,12 @@ namespace Highway.Data.Tests.InMemory
     [TestClass]
     public class ShortIdentityStrategyTests
     {
-        private ShortIdentityStrategy<Entity> target;
+        private ShortIdentityStrategy<Entity> _target;
 
         [TestInitialize]
         public void Setup()
         {
-            target = new ShortIdentityStrategy<Entity>(x => x.Id);
+            _target = new ShortIdentityStrategy<Entity>(x => x.Id);
         }
 
         [TestMethod]
@@ -22,7 +22,7 @@ namespace Highway.Data.Tests.InMemory
             // Arrange
 
             // Act
-            var result = target.Next();
+            var result = _target.Next();
 
             // Assert
             Assert.AreEqual(1, result);
@@ -35,7 +35,7 @@ namespace Highway.Data.Tests.InMemory
             var entity = new Entity { Id = 0 };
 
             // Act
-            target.Assign(entity);
+            _target.Assign(entity);
 
             // Assert
             Assert.AreEqual(1, entity.Id);

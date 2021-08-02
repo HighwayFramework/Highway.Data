@@ -84,7 +84,7 @@ namespace Highway.Data.Contexts
             MemberExpression memberExpression;
 
             // this line is necessary, because sometimes the expression 
-            // comes as Convert(originalexpression)
+            // comes as Convert(originalExpression)
             var bodyExpression = lambda.Body as UnaryExpression;
             if (bodyExpression != null)
             {

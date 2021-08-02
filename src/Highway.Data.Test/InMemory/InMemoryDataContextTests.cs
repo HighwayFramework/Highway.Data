@@ -220,7 +220,7 @@ namespace Highway.Data.Tests.InMemory
             _context.Commit();
 
             //assert
-            _context.repo._data.Count(x => x.IsType<int>()).Should().Be(0);
+            _context.Repo.ObjectRepresentations.Count(x => x.IsType<int>()).Should().Be(0);
         }
 
         [TestMethod]

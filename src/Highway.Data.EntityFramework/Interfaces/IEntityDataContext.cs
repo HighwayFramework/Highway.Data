@@ -8,7 +8,7 @@ namespace Highway.Data.EntityFramework
     public interface IEntityDataContext : IDataContext
     {
         /// <summary>
-        ///     Executes a SQL command and tries to map the returned datasets into an <see cref="IEnumerable{T}" />
+        ///     Executes a SQL command and tries to map the returned dataset into an <see cref="IEnumerable{T}" />
         ///     The results should have the same column names as the Entity Type has properties
         /// </summary>
         /// <typeparam name="T">The Entity Type that the return should be mapped to</typeparam>

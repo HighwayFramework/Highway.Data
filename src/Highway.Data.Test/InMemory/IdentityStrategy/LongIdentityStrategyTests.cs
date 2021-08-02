@@ -9,12 +9,12 @@ namespace Highway.Data.Tests.InMemory
     [TestClass]
     public class LongIdentityStrategyTests
     {
-        private LongIdentityStrategy<Entity> target;
+        private LongIdentityStrategy<Entity> _target;
 
         [TestInitialize]
         public void Setup()
         {
-            target = new LongIdentityStrategy<Entity>(x => x.Id);
+            _target = new LongIdentityStrategy<Entity>(x => x.Id);
         }
 
         [TestMethod]
@@ -23,7 +23,7 @@ namespace Highway.Data.Tests.InMemory
             // Arrange
 
             // Act
-            var result = target.Next();
+            var result = _target.Next();
 
             // Assert
             result.Should().Be(1);
@@ -36,7 +36,7 @@ namespace Highway.Data.Tests.InMemory
             var entity = new Entity { Id = 0 };
 
             // Act
-            target.Assign(entity);
+            _target.Assign(entity);
 
             // Assert
             entity.Id.Should().Be(1);

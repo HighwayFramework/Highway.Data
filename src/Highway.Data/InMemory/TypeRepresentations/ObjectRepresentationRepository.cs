@@ -11,7 +11,7 @@ namespace Highway.Data.Contexts.TypeRepresentations
 {
     internal sealed class ObjectRepresentationRepository
     {
-        internal ConcurrentList<ObjectRepresentation> _data = new ConcurrentList<ObjectRepresentation>();
+        internal ConcurrentList<ObjectRepresentation> ObjectRepresentations = new ConcurrentList<ObjectRepresentation>();
 
         public ObjectRepresentationRepository()
         {
@@ -22,7 +22,7 @@ namespace Highway.Data.Contexts.TypeRepresentations
 
         internal IQueryable<T> Data<T>()
         {
-            return _data.Where(x => x.Entity is T).Select(x => x.Entity).Cast<T>().AsQueryable();
+            return ObjectRepresentations.Where(x => x.Entity is T).Select(x => x.Entity).Cast<T>().AsQueryable();
         }
 
         internal void Add<T>(T item) where T : class
@@ -34,7 +34,7 @@ namespace Highway.Data.Contexts.TypeRepresentations
                 Entity = item
             };
 
-            _data.Add(rep);
+            ObjectRepresentations.Add(rep);
             rep.RelatedEntities = AddRelatedObjects(item);
             UpdateExistingRepresentations(rep);
         }
@@ -100,10 +100,10 @@ namespace Highway.Data.Contexts.TypeRepresentations
         internal bool Remove<T>(T item) where T : class
         {
             var success = false;
-            var representation = _data.Where(x => x.Entity == item).ToList();
+            var representation = ObjectRepresentations.Where(x => x.Entity == item).ToList();
             foreach (var rep in representation)
             {
-                success = _data.Remove(rep);
+                success = ObjectRepresentations.Remove(rep);
                 if (!success) throw new InvalidDataException("Object was not removed");
                 foreach (var parent in rep.Parents)
                 {
@@ -113,7 +113,7 @@ namespace Highway.Data.Contexts.TypeRepresentations
                 {
                     if (objectRepresentation.Parents.Count == 1)
                     {
-                        success = _data.Remove(objectRepresentation);
+                        success = ObjectRepresentations.Remove(objectRepresentation);
                     }
                     else
                     {
@@ -130,7 +130,7 @@ namespace Highway.Data.Contexts.TypeRepresentations
         {
             if (EntityExistsInRepository(item))
             {
-                var objectRepresentation = _data.SingleOrDefault(x => x.Entity == item);
+                var objectRepresentation = ObjectRepresentations.SingleOrDefault(x => x.Entity == item);
                 if (!objectRepresentation.Parents.ContainsKey(parent))
                 {
                     objectRepresentation.Parents.Add(parent, new Accessor(removeAction, getterFunc));
@@ -145,7 +145,7 @@ namespace Highway.Data.Contexts.TypeRepresentations
                     Parents = new Dictionary<object, Accessor> { { parent, new Accessor(removeAction, getterFunc) } }
                 };
 
-                _data.Add(objectRepresentation);
+                ObjectRepresentations.Add(objectRepresentation);
                 objectRepresentation.RelatedEntities = AddRelatedObjects(item);
 
                 return objectRepresentation;
@@ -251,26 +251,26 @@ namespace Highway.Data.Contexts.TypeRepresentations
 
         private void CleanGraph()
         {
-            var objectRepresentations = _data.Where(x => x.Parents.Count == 0).ToList();
+            var objectRepresentations = ObjectRepresentations.Where(x => x.Parents.Count == 0).ToList();
             foreach (var root in objectRepresentations)
             {
                 var orphans = root.GetObjectRepresentationsToPrune();
                 foreach (var objectRepresentation in orphans)
                 {
-                    _data.Remove(objectRepresentation);
+                    ObjectRepresentations.Remove(objectRepresentation);
                 }
             }
         }
 
         private void FindChanges()
         {
-            var objectRepresentations = _data.Where(x => x.Parents.Count == 0).ToList();
+            var objectRepresentations = ObjectRepresentations.Where(x => x.Parents.Count == 0).ToList();
             foreach (var root in objectRepresentations)
             {
                 root.RelatedEntities = AddRelatedObjects(root.Entity);
-                foreach (var objRep in root.AllRelated().Where(x => x.Parents.Count == 1 && !_data.Contains(x)))
+                foreach (var objRep in root.AllRelated().Where(x => x.Parents.Count == 1 && !ObjectRepresentations.Contains(x)))
                 {
-                    _data.Add(objRep);
+                    ObjectRepresentations.Add(objRep);
                 }
             }
         }
@@ -289,7 +289,7 @@ namespace Highway.Data.Contexts.TypeRepresentations
 
         private void ApplyIdentityStrategies()
         {
-            foreach (var entity in _data.Select(x => x.Entity))
+            foreach (var entity in ObjectRepresentations.Select(x => x.Entity))
             {
                 ApplyIdentityStrategy(entity);
             }
@@ -297,7 +297,7 @@ namespace Highway.Data.Contexts.TypeRepresentations
 
         internal bool EntityExistsInRepository(object item)
         {
-            return _data.Any(x => x.Entity == item);
+            return ObjectRepresentations.Any(x => x.Entity == item);
         }
 
         internal void Commit()

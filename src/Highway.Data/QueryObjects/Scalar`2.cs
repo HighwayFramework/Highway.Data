@@ -1,4 +1,12 @@
-﻿using System;
+﻿// <copyright file="Scalar`2.cs" company="Enterprise Products Partners L.P. (Enterprise)">
+// © Copyright 2012 - 2019, Enterprise Products Partners L.P. (Enterprise), All Rights Reserved.
+// Permission to use, copy, modify, or distribute this software source code, binaries or
+// related documentation, is strictly prohibited, without written consent from Enterprise.
+// For inquiries about the software, contact Enterprise: Enterprise Products Company Law
+// Department, 1100 Louisiana, 10th Floor, Houston, Texas 77002, phone 713-381-6500.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -10,17 +18,18 @@ namespace Highway.Data
     /// </summary>
     /// <typeparam name="TSelection">The type to query.</typeparam>
     /// <typeparam name="TProjection">The type to return.</typeparam>
-    public class Scalar<TSelection, TProjection> : QueryBase, IScalar<TProjection> where TSelection : class
+    public class Scalar<TSelection, TProjection> : QueryBase, IScalar<TProjection>
+        where TSelection : class
     {
+        /// <summary>
+        ///     the projection to take the limited result set and materialize it.
+        /// </summary>
+        protected Func<IQueryable<TSelection>, TProjection> Projector { get; set; }
+
         /// <summary>
         ///     The query to limit the result set
         /// </summary>
         protected Func<IDataContext, IQueryable<TSelection>> Selector { get; set; }
-
-        /// <summary>
-        /// the projection to take the limited result set and materialize it.
-        /// </summary>
-        protected Func<IQueryable<TSelection>, TProjection> Projector { get; set; }
 
         /// <summary>
         ///     This executes the expression in ContextQuery on the context that is passed in, resulting in a
@@ -47,17 +56,6 @@ namespace Highway.Data
         }
 
         /// <summary>
-        ///     This method allows for the extension of Ordering and Grouping on the prebuilt Query
-        /// </summary>
-        /// <returns>an <see cref="IQueryable{TSelection}" /></returns>
-        protected virtual IQueryable<TSelection> ExtendQuery()
-        {
-            return Selector(Context);
-        }
-
-
-
-        /// <summary>
         ///     Gives the ability to append an <see cref="IQueryable" /> onto the current query
         /// </summary>
         /// <param name="query">The query containing the expressions to append</param>
@@ -67,11 +65,21 @@ namespace Highway.Data
             var source = query;
             foreach (var exp in ExpressionList)
             {
-                List<Expression> newParams = exp.Item2.ToList();
+                var newParams = exp.Item2.ToList();
                 newParams.Insert(0, source.Expression);
                 source = source.Provider.CreateQuery<TSelection>(Expression.Call(null, exp.Item1, newParams));
             }
+
             return Projector(source);
+        }
+
+        /// <summary>
+        ///     This method allows for the extension of Ordering and Grouping on the prebuilt Query
+        /// </summary>
+        /// <returns>an <see cref="IQueryable{TSelection}" /></returns>
+        protected virtual IQueryable<TSelection> ExtendQuery()
+        {
+            return Selector(Context);
         }
 
         private TProjection PrepareQuery(IDataContext context)
@@ -79,8 +87,8 @@ namespace Highway.Data
             Context = context;
             CheckContextAndQuery(Selector);
             var query = ExtendQuery();
+
             return AppendExpressions(query);
         }
-
     }
 }

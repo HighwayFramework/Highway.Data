@@ -1,77 +1,64 @@
-﻿using System.Linq;
-using Highway.Data.Contexts.TypeRepresentations;
+﻿// <copyright file="InMemoryDataContext.cs" company="Enterprise Products Partners L.P. (Enterprise)">
+// © Copyright 2012 - 2019, Enterprise Products Partners L.P. (Enterprise), All Rights Reserved.
+// Permission to use, copy, modify, or distribute this software source code, binaries or
+// related documentation, is strictly prohibited, without written consent from Enterprise.
+// For inquiries about the software, contact Enterprise: Enterprise Products Company Law
+// Department, 1100 Louisiana, 10th Floor, Houston, Texas 77002, phone 713-381-6500.
+// </copyright>
+
 using System;
 using System.Collections;
+using System.Linq;
 using System.Threading.Tasks;
+
+using Highway.Data.Contexts.TypeRepresentations;
 using Highway.Data.Interceptors.Events;
 
 namespace Highway.Data.Contexts
 {
     public class InMemoryDataContext : IDataContext
     {
-        internal readonly ObjectRepresentationRepository repo;
-        private readonly Queue _addQueue = new Queue();
-        private readonly Queue _removeQueue = new Queue();
+        internal readonly ObjectRepresentationRepository Repo;
 
-        public event EventHandler<BeforeSave> BeforeSave;
-        public event EventHandler<AfterSave> AfterSave;
+        private readonly Queue _addQueue = new Queue();
+
+        private readonly Queue _removeQueue = new Queue();
 
         public InMemoryDataContext()
         {
-            repo = new ObjectRepresentationRepository();
+            Repo = new ObjectRepresentationRepository();
             RegisterIIdentifiables();
         }
 
         internal InMemoryDataContext(ObjectRepresentationRepository repo)
         {
-            this.repo = repo;
+            Repo = repo;
             RegisterIIdentifiables();
         }
 
-        private void RegisterIIdentifiables()
-        {
-            RegisterIdentityStrategy(new IntegerIdentityStrategy<IIdentifiable<int>>(x => x.Id));
-            RegisterIdentityStrategy(new ShortIdentityStrategy<IIdentifiable<short>>(x => x.Id));
-            RegisterIdentityStrategy(new LongIdentityStrategy<IIdentifiable<long>>(x => x.Id));
-            RegisterIdentityStrategy(new GuidIdentityStrategy<IIdentifiable<Guid>>(x => x.Id));
-        }
+        public event EventHandler<BeforeSave> BeforeSave;
 
-        public void Dispose()
-        {
-        }
+        public event EventHandler<AfterSave> AfterSave;
 
-        public virtual IQueryable<T> AsQueryable<T>() where T : class
-        {
-            return repo.Data<T>();
-        }
-
-        public virtual T Add<T>(T item) where T : class
+        public virtual T Add<T>(T item)
+            where T : class
         {
             _addQueue.Enqueue(item);
+
             return item;
         }
 
-        public virtual T Remove<T>(T item) where T : class
+        public virtual IQueryable<T> AsQueryable<T>()
+            where T : class
         {
-            _removeQueue.Enqueue(item);
-            return item;
-        }
-
-        public virtual T Update<T>(T item) where T : class
-        {
-            return item;
-        }
-
-        public virtual T Reload<T>(T item) where T : class
-        {
-            return item;
+            return Repo.Data<T>();
         }
 
         public virtual int Commit()
         {
             OnBeforeSave(new BeforeSave());
             ProcessCommitQueues();
-            repo.Commit();
+            Repo.Commit();
             OnAfterSave(new AfterSave());
 
             return 0;
@@ -81,47 +68,59 @@ namespace Highway.Data.Contexts
         {
             var task = new Task<int>(Commit);
             task.Start();
+
             return task;
         }
 
+        public void Dispose()
+        {
+        }
+
         /// <summary>
-        /// This method allows you to register database "identity" like strategies for auto incrementing keys, or new guid keys, etc...
+        ///     This method allows you to register database "identity" like strategies for auto incrementing keys, or new guid
+        ///     keys, etc...
         /// </summary>
         /// <param name="identityStrategy">The strategy to use for an object</param>
         /// <typeparam name="T">The type to use it from</typeparam>
-        public void RegisterIdentityStrategy<T>(IIdentityStrategy<T> identityStrategy) where T : class
+        public void RegisterIdentityStrategy<T>(IIdentityStrategy<T> identityStrategy)
+            where T : class
         {
-            if (repo.IdentityStrategies.ContainsKey(typeof(T)))
+            if (Repo.IdentityStrategies.ContainsKey(typeof(T)))
             {
-                repo.IdentityStrategies[typeof(T)] = obj => identityStrategy.Assign((T)obj);
+                Repo.IdentityStrategies[typeof(T)] = obj => identityStrategy.Assign((T)obj);
             }
             else
             {
-                repo.IdentityStrategies.Add(typeof(T), obj => identityStrategy.Assign((T)obj));
+                Repo.IdentityStrategies.Add(typeof(T), obj => identityStrategy.Assign((T)obj));
             }
         }
 
-        /// <summary>
-        /// Processes the held but uncommitted adds and removes from the context
-        /// </summary>
-        protected void ProcessCommitQueues()
+        public virtual T Reload<T>(T item)
+            where T : class
         {
-            AddAllFromQueueIntoRepository();
-            RemoveAllFromQueueFromRepository();
+            return item;
         }
 
-        private void AddAllFromQueueIntoRepository()
+        public virtual T Remove<T>(T item)
+            where T : class
         {
-            while (_addQueue.Count > 0)
-            {
-                repo.Add(_addQueue.Dequeue());
-            }
+            _removeQueue.Enqueue(item);
+
+            return item;
         }
-        private void RemoveAllFromQueueFromRepository()
+
+        public virtual T Update<T>(T item)
+            where T : class
         {
-            while (_removeQueue.Count > 0)
+            return item;
+        }
+
+        protected virtual void OnAfterSave(AfterSave e)
+        {
+            var handler = AfterSave;
+            if (handler != null)
             {
-                repo.Remove(_removeQueue.Dequeue());
+                handler(this, e);
             }
         }
 
@@ -134,12 +133,36 @@ namespace Highway.Data.Contexts
             }
         }
 
-        protected virtual void OnAfterSave(AfterSave e)
+        /// <summary>
+        ///     Processes the held but uncommitted adds and removes from the context
+        /// </summary>
+        protected void ProcessCommitQueues()
         {
-            var handler = AfterSave;
-            if (handler != null)
+            AddAllFromQueueIntoRepository();
+            RemoveAllFromQueueFromRepository();
+        }
+
+        private void AddAllFromQueueIntoRepository()
+        {
+            while (_addQueue.Count > 0)
             {
-                handler(this, e);
+                Repo.Add(_addQueue.Dequeue());
+            }
+        }
+
+        private void RegisterIIdentifiables()
+        {
+            RegisterIdentityStrategy(new IntegerIdentityStrategy<IIdentifiable<int>>(x => x.Id));
+            RegisterIdentityStrategy(new ShortIdentityStrategy<IIdentifiable<short>>(x => x.Id));
+            RegisterIdentityStrategy(new LongIdentityStrategy<IIdentifiable<long>>(x => x.Id));
+            RegisterIdentityStrategy(new GuidIdentityStrategy<IIdentifiable<Guid>>(x => x.Id));
+        }
+
+        private void RemoveAllFromQueueFromRepository()
+        {
+            while (_removeQueue.Count > 0)
+            {
+                Repo.Remove(_removeQueue.Dequeue());
             }
         }
     }

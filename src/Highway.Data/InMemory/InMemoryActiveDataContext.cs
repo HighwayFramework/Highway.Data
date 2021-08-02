@@ -1,12 +1,4 @@
-﻿// <copyright file="InMemoryActiveDataContext.cs" company="Enterprise Products Partners L.P. (Enterprise)">
-// © Copyright 2012 - 2019, Enterprise Products Partners L.P. (Enterprise), All Rights Reserved.
-// Permission to use, copy, modify, or distribute this software source code, binaries or
-// related documentation, is strictly prohibited, without written consent from Enterprise.
-// For inquiries about the software, contact Enterprise: Enterprise Products Company Law
-// Department, 1100 Louisiana, 10th Floor, Houston, Texas 77002, phone 713-381-6500.
-// </copyright>
-
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +16,7 @@ namespace Highway.Data.Contexts
     {
         internal static ObjectRepresentationRepository Repo = new ObjectRepresentationRepository();
 
-        private static int CommitCounter;
+        private static int _commitCounter;
 
         private readonly BiDictionary<object, object> _entityToRepoEntityMap = new BiDictionary<object, object>();
 
@@ -38,7 +30,7 @@ namespace Highway.Data.Contexts
         public static void DropRepository()
         {
             Repo = new ObjectRepresentationRepository();
-            CommitCounter = 0;
+            _commitCounter = 0;
         }
 
         public override T Add<T>(T item)
@@ -58,7 +50,7 @@ namespace Highway.Data.Contexts
 
         public override int Commit()
         {
-            if (_commitVersion != CommitCounter)
+            if (_commitVersion != _commitCounter)
             {
                 throw new InvalidOperationException("Cannot commit on stale data. Possibly need to requery. Unexpected scenario.");
             }
@@ -85,7 +77,7 @@ namespace Highway.Data.Contexts
                 }
             }
 
-            _commitVersion = ++CommitCounter;
+            _commitVersion = ++_commitCounter;
 
             return 0;
         }
@@ -194,7 +186,7 @@ namespace Highway.Data.Contexts
 
         private void UpdateMapFromRepo()
         {
-            if (_commitVersion == CommitCounter)
+            if (_commitVersion == _commitCounter)
             {
                 return;
             }
@@ -204,7 +196,7 @@ namespace Highway.Data.Contexts
                 CloneExtension.Clone(item, _entityToRepoEntityMap.Reverse);
             }
 
-            _commitVersion = CommitCounter;
+            _commitVersion = _commitCounter;
         }
     }
 }

@@ -24,5 +24,7 @@ namespace Highway.Data.Repositories
         }
 
         public IDomainContext<T> DomainContext => (IDomainContext<T>)Context;
+
+        IReadonlyDomainContext<T> IReadonlyDomainRepository<T>.DomainContext => (IReadonlyDomainContext<T>)Context;
     }
 }

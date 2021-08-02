@@ -1,12 +1,4 @@
-﻿// <copyright file="Query`1.cs" company="Enterprise Products Partners L.P. (Enterprise)">
-// © Copyright 2012 - 2019, Enterprise Products Partners L.P. (Enterprise), All Rights Reserved.
-// Permission to use, copy, modify, or distribute this software source code, binaries or
-// related documentation, is strictly prohibited, without written consent from Enterprise.
-// For inquiries about the software, contact Enterprise: Enterprise Products Company Law
-// Department, 1100 Louisiana, 10th Floor, Houston, Texas 77002, phone 713-381-6500.
-// </copyright>
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -22,7 +14,7 @@ namespace Highway.Data
         /// <summary>
         ///     This holds the expression that will be used to create the <see cref="IQueryable{T}" /> when executed on the context
         /// </summary>
-        protected Func<IDataContext, IQueryable<T>> ContextQuery { get; set; }
+        protected Func<IReadonlyDataContext, IQueryable<T>> ContextQuery { get; set; }
 
         /// <summary>
         ///     This executes the expression in ContextQuery on the context that is passed in, resulting in a
@@ -32,14 +24,14 @@ namespace Highway.Data
         /// <returns>
         ///     <see cref="IEnumerable{T}" />
         /// </returns>
-        public virtual IEnumerable<T> Execute(IDataContext context)
+        public virtual IEnumerable<T> Execute(IReadonlyDataContext context)
         {
             var task = PrepareQuery(context);
 
             return task;
         }
 
-        public virtual string OutputQuery(IDataContext context)
+        public virtual string OutputQuery(IReadonlyDataContext context)
         {
             var query = PrepareQuery(context);
 
@@ -52,13 +44,13 @@ namespace Highway.Data
         /// </summary>
         /// <param name="context">The data context that the query is evaluated and the SQL is generated against</param>
         /// <returns></returns>
-        public virtual string OutputSQLStatement(IDataContext context)
+        public virtual string OutputSQLStatement(IReadonlyDataContext context)
         {
             return OutputQuery(context);
         }
 
         /// <summary>
-        ///     Gives the ability to append an <see cref="IQueryable" /> onto the current query
+        ///     Gives the ability to apend an <see cref="IQueryable" /> onto the current query
         /// </summary>
         /// <param name="query">The query containing the expressions to append</param>
         /// <returns>The combined query</returns>
@@ -76,7 +68,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        ///     This method allows for the extension of Ordering and Grouping on the prebuilt Query
+        ///     This method allows for the extension of Ordering and Grouping on the prebuild Query
         /// </summary>
         /// <returns>an <see cref="IQueryable{T}" /></returns>
         protected virtual IQueryable<T> ExtendQuery()
@@ -84,7 +76,7 @@ namespace Highway.Data
             return ContextQuery(Context);
         }
 
-        protected virtual IQueryable<T> PrepareQuery(IDataContext context)
+        protected virtual IQueryable<T> PrepareQuery(IReadonlyDataContext context)
         {
             Context = context;
             CheckContextAndQuery(ContextQuery);

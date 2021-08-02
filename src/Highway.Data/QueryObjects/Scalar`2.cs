@@ -1,12 +1,4 @@
-﻿// <copyright file="Scalar`2.cs" company="Enterprise Products Partners L.P. (Enterprise)">
-// © Copyright 2012 - 2019, Enterprise Products Partners L.P. (Enterprise), All Rights Reserved.
-// Permission to use, copy, modify, or distribute this software source code, binaries or
-// related documentation, is strictly prohibited, without written consent from Enterprise.
-// For inquiries about the software, contact Enterprise: Enterprise Products Company Law
-// Department, 1100 Louisiana, 10th Floor, Houston, Texas 77002, phone 713-381-6500.
-// </copyright>
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -16,8 +8,7 @@ namespace Highway.Data
     /// <summary>
     ///     Base implementation of a query that returns a single value or object
     /// </summary>
-    /// <typeparam name="TSelection">The type to query.</typeparam>
-    /// <typeparam name="TProjection">The type to return.</typeparam>
+    /// <typeparam name="T">The type of object or value being returned</typeparam>
     public class Scalar<TSelection, TProjection> : QueryBase, IScalar<TProjection>
         where TSelection : class
     {
@@ -29,7 +20,7 @@ namespace Highway.Data
         /// <summary>
         ///     The query to limit the result set
         /// </summary>
-        protected Func<IDataContext, IQueryable<TSelection>> Selector { get; set; }
+        protected Func<IReadonlyDataContext, IQueryable<TSelection>> Selector { get; set; }
 
         /// <summary>
         ///     This executes the expression in ContextQuery on the context that is passed in, resulting in a
@@ -39,14 +30,16 @@ namespace Highway.Data
         /// <returns>
         ///     <see cref="IEnumerable{T}" />
         /// </returns>
-        public virtual TProjection Execute(IDataContext context)
+        public virtual TProjection Execute(IReadonlyDataContext context)
         {
-            return PrepareQuery(context);
+            var task = PrepareQuery(context);
+
+            return task;
         }
 
         /// <summary>
         ///     This executes the expression against the passed in context to generate the SQL statement, but doesn't execute the
-        ///     query against the data context.
+        ///     IQueryable<typeparamref name="T" /> against the data context
         /// </summary>
         /// <param name="context">The data context that the query is evaluated and the SQL is generated against</param>
         /// <returns></returns>
@@ -74,7 +67,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        ///     This method allows for the extension of Ordering and Grouping on the prebuilt Query
+        ///     This method allows for the extension of Ordering and Grouping on the prebuild Query
         /// </summary>
         /// <returns>an <see cref="IQueryable{TSelection}" /></returns>
         protected virtual IQueryable<TSelection> ExtendQuery()
@@ -82,7 +75,7 @@ namespace Highway.Data
             return Selector(Context);
         }
 
-        private TProjection PrepareQuery(IDataContext context)
+        private TProjection PrepareQuery(IReadonlyDataContext context)
         {
             Context = context;
             CheckContextAndQuery(Selector);

@@ -11,7 +11,7 @@ namespace Highway.Data.Factories
     /// <summary>
     ///     Simple factory for constructing repositories
     /// </summary>
-    public class DomainRepositoryFactory : IDomainRepositoryFactory
+    public class DomainRepositoryFactory : IDomainRepositoryFactory, IReadonlyDomainRepositoryFactory
     {
         private readonly IDomain[] _domains;
 
@@ -56,6 +56,30 @@ namespace Highway.Data.Factories
             var repo = Activator.CreateInstance(repositoryCtor, untypedObject, domain);
 
             return (IRepository)repo;
+        }
+
+        public IReadonlyRepository CreateReadonly<T>()
+            where T : class, IDomain
+        {
+            var domain = _domains.OfType<T>().SingleOrDefault();
+            var context = new DomainContext<T>(domain);
+
+            return new ReadonlyDomainRepository<T>(context, domain);
+        }
+
+        public IReadonlyRepository CreateReadonly(Type type)
+        {
+            var domain = _domains.FirstOrDefault(x => x.GetType() == type);
+            var d1 = typeof(DomainContext<>);
+            Type[] typeArgs = { type };
+            var contextCtor = d1.MakeGenericType(typeArgs);
+            var untypedObject = Activator.CreateInstance(contextCtor, domain);
+
+            var r1 = typeof(ReadonlyDomainRepository<>);
+            var repositoryCtor = r1.MakeGenericType(typeArgs);
+            var repo = Activator.CreateInstance(repositoryCtor, untypedObject, domain);
+
+            return (IReadonlyRepository)repo;
         }
     }
 

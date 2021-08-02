@@ -8,12 +8,12 @@ namespace Highway.Data.Collections
     [Obsolete("This will be used in a future version.  Use Highway.Data.Utilities.CloneExtension instead.")]
     public static class CloneExtension
     {
-        private static IDictionary<object, object> OriginalToCloneMap;
+        private static IDictionary<object, object> _originalToCloneMap;
 
         [Obsolete("This will be used in a future version.  Use Highway.Data.Utilities.CloneExtension instead.")]
         public static T Clone<T>(this T originalObject, IDictionary<object, object> existingOriginalToCloneMap) where T : class
         {
-            OriginalToCloneMap = existingOriginalToCloneMap ?? new Dictionary<object, object>();
+            _originalToCloneMap = existingOriginalToCloneMap ?? new Dictionary<object, object>();
 
             var cloneObject = ExecuteClone(originalObject);
 
@@ -29,8 +29,8 @@ namespace Highway.Data.Collections
         [Obsolete("This will be used in a future version.  Use Highway.Data.Utilities.CloneExtension instead.")]
         public static T ExecuteClone<T>(this T originalObject) where T : class
         {
-            if (OriginalToCloneMap.ContainsKey(originalObject))
-                return (T)OriginalToCloneMap[originalObject];
+            if (_originalToCloneMap.ContainsKey(originalObject))
+                return (T)_originalToCloneMap[originalObject];
 
             var cloneObject = (T)InstantiateClone(originalObject);
 
@@ -104,7 +104,7 @@ namespace Highway.Data.Collections
                 throw new MissingMethodException(string.Format("Possible missing default constructor for {0}. Can be private. Required for EF as well.", t), e);
             }
 
-            OriginalToCloneMap.Add(classObject, cloneObject);
+            _originalToCloneMap.Add(classObject, cloneObject);
             return cloneObject;
         }
 
@@ -119,7 +119,7 @@ namespace Highway.Data.Collections
             if (!typeof(IList).IsAssignableFrom(collectionType))
                 throw new NotSupportedException("Uncertain of what other collection types to handle.");
 
-            OriginalToCloneMap.Add(originalCollection, cloneCollection);
+            _originalToCloneMap.Add(originalCollection, cloneCollection);
 
             foreach (var item in (IEnumerable)originalCollection)
             {

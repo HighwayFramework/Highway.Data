@@ -1,4 +1,12 @@
-﻿using System;
+﻿// <copyright file="Query`1.cs" company="Enterprise Products Partners L.P. (Enterprise)">
+// © Copyright 2012 - 2019, Enterprise Products Partners L.P. (Enterprise), All Rights Reserved.
+// Permission to use, copy, modify, or distribute this software source code, binaries or
+// related documentation, is strictly prohibited, without written consent from Enterprise.
+// For inquiries about the software, contact Enterprise: Enterprise Products Company Law
+// Department, 1100 Louisiana, 10th Floor, Houston, Texas 77002, phone 713-381-6500.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -26,8 +34,16 @@ namespace Highway.Data
         /// </returns>
         public virtual IEnumerable<T> Execute(IDataContext context)
         {
-            IQueryable<T> task = PrepareQuery(context);
+            var task = PrepareQuery(context);
+
             return task;
+        }
+
+        public virtual string OutputQuery(IDataContext context)
+        {
+            var query = PrepareQuery(context);
+
+            return query.ToString();
         }
 
         /// <summary>
@@ -41,10 +57,22 @@ namespace Highway.Data
             return OutputQuery(context);
         }
 
-        public virtual string OutputQuery(IDataContext context)
+        /// <summary>
+        ///     Gives the ability to append an <see cref="IQueryable" /> onto the current query
+        /// </summary>
+        /// <param name="query">The query containing the expressions to append</param>
+        /// <returns>The combined query</returns>
+        protected virtual IQueryable<T> AppendExpressions(IQueryable<T> query)
         {
-            IQueryable<T> query = PrepareQuery(context);
-            return query.ToString();
+            var source = query;
+            foreach (var exp in ExpressionList)
+            {
+                var newParams = exp.Item2.ToList();
+                newParams.Insert(0, source.Expression);
+                source = source.Provider.CreateQuery<T>(Expression.Call(null, exp.Item1, newParams));
+            }
+
+            return source;
         }
 
         /// <summary>
@@ -53,38 +81,15 @@ namespace Highway.Data
         /// <returns>an <see cref="IQueryable{T}" /></returns>
         protected virtual IQueryable<T> ExtendQuery()
         {
-            try
-            {
-                return ContextQuery(Context);
-            }
-            catch (Exception)
-            {
-                throw; //just here to catch while debugging
-            }
-        }
-
-        /// <summary>
-        ///     Gives the ability to append an <see cref="IQueryable" /> onto the current query
-        /// </summary>
-        /// <param name="query">The query containing the expressions to append</param>
-        /// <returns>The combined query</returns>
-        protected virtual IQueryable<T> AppendExpressions(IQueryable<T> query)
-        {
-            IQueryable<T> source = query;
-            foreach (var exp in ExpressionList)
-            {
-                List<Expression> newParams = exp.Item2.ToList();
-                newParams.Insert(0, source.Expression);
-                source = source.Provider.CreateQuery<T>(Expression.Call(null, exp.Item1, newParams));
-            }
-            return source;
+            return ContextQuery(Context);
         }
 
         protected virtual IQueryable<T> PrepareQuery(IDataContext context)
         {
             Context = context;
             CheckContextAndQuery(ContextQuery);
-            IQueryable<T> query = ExtendQuery();
+            var query = ExtendQuery();
+
             return AppendExpressions(query);
         }
     }

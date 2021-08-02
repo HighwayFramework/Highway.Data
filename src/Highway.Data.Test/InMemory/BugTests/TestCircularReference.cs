@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using FluentAssertions;
-using Highway.Data;
+﻿using System.Linq;
+
 using Highway.Data.Contexts;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -12,48 +9,50 @@ namespace Highway.Data.Tests.InMemory.BugTests
     [TestClass]
     public class TestCircularReference
     {
-        private IDataContext _context;
-        private Parent _parent;
         private Child _child;
+
+        private IDataContext _context;
+
+        private Parent _parent;
 
         [TestInitialize]
         public void SetUp()
         {
-            this._context = new InMemoryDataContext();
+            _context = new InMemoryDataContext();
 
-            this._parent = new Parent();
-            this._child = new Child();
-            this._parent.Child = this._child;
-            this._child.Parent = this._parent;
+            _parent = new Parent();
+            _child = new Child();
+            _parent.Child = _child;
+            _child.Parent = _parent;
 
-            this._context.Add(_parent);
-            this._context.Commit();
+            _context.Add(_parent);
+            _context.Commit();
         }
 
         [TestMethod]
         public void ShouldGetSingleChildWithParent()
         {
-            var child = this._context.AsQueryable<Child>().Single();
+            var child = _context.AsQueryable<Child>().Single();
 
-            Assert.AreEqual(this._child, child);
-            Assert.AreEqual(this._parent, child.Parent);
+            Assert.AreEqual(_child, child);
+            Assert.AreEqual(_parent, child.Parent);
         }
 
         [TestMethod]
         public void ShouldGetSingleParentWithChild()
         {
-            var parent = this._context.AsQueryable<Parent>().Single();
+            var parent = _context.AsQueryable<Parent>().Single();
 
-            Assert.AreEqual(this._parent, parent);
-            Assert.AreEqual(this._child, parent.Child);
+            Assert.AreEqual(_parent, parent);
+            Assert.AreEqual(_child, parent.Child);
         }
 
-        class Child
+        private class Child
         {
             public Parent Parent { get; set; }
         }
 
-        class Parent
+        private class Parent
         {
             public Child Child { get; set; }
         }

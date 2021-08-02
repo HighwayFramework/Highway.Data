@@ -1,27 +1,30 @@
-using FluentAssertions;
-using Highway.Data.EntityFramework.Test.SqlLiteDomain;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Data.Entity;
-using System.Linq;
+
+using FluentAssertions;
+
+using Highway.Data.EntityFramework.Test.SqlLiteDomain;
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highway.Data.EntityFramework.Test
 {
     //[TestClass]
     public class GivenADomainContextWithEvents
     {
-        private TestDomainContext<SqlLiteDomain.SqlLiteDomain> _context;
-        private bool _beforeSaveCalled;
         private bool _afterSaveCalled;
+
+        private bool _beforeSaveCalled;
+
+        private TestDomainContext<SqlLiteDomain.SqlLiteDomain> _context;
 
         [TestInitialize]
         public void Setup()
         {
-            this._beforeSaveCalled = false;
-            this._afterSaveCalled = false;
+            _beforeSaveCalled = false;
+            _afterSaveCalled = false;
             _context = new TestDomainContext<SqlLiteDomain.SqlLiteDomain>(new SqlLiteDomain.SqlLiteDomain());
-            _context.BeforeSave += (sender, args) => this._beforeSaveCalled = true;
-            _context.AfterSave += (sender, args) => this._afterSaveCalled = true;
+            _context.BeforeSave += (sender, args) => _beforeSaveCalled = true;
+            _context.AfterSave += (sender, args) => _afterSaveCalled = true;
         }
 
         [TestMethod]

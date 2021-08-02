@@ -6,8 +6,10 @@ using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Threading.Tasks;
+
 using Common.Logging;
 using Common.Logging.Simple;
+
 using Highway.Data.EntityFramework;
 using Highway.Data.Interceptors.Events;
 
@@ -19,11 +21,10 @@ namespace Highway.Data
     public class DataContext : DbContext, IEntityDataContext
     {
         private readonly bool _databaseFirst;
-        private readonly ILog _log;
-        private readonly IMappingConfiguration _mapping;
 
-        public event EventHandler<BeforeSave> BeforeSave;
-        public event EventHandler<AfterSave> AfterSave;
+        private readonly ILog _log;
+
+        private readonly IMappingConfiguration _mapping;
 
         /// <summary>
         ///     Constructs a context
@@ -55,12 +56,13 @@ namespace Highway.Data
         ///     The context specific configuration that will change context level behavior (
         ///     Optional )
         /// </param>
-        public DataContext(string connectionString, IMappingConfiguration mapping,
+        public DataContext(
+            string connectionString,
+            IMappingConfiguration mapping,
             IContextConfiguration contextConfiguration)
             : this(connectionString, mapping, contextConfiguration, new NoOpLogger())
         {
         }
-
 
         /// <summary>
         ///     Constructs a context
@@ -69,14 +71,20 @@ namespace Highway.Data
         /// <param name="mapping">The Mapping Configuration that will determine how the tables and objects interact</param>
         /// <param name="contextConfiguration">The context specific configuration that will change context level behavior</param>
         /// <param name="log">The logger being supplied for this context ( Optional )</param>
-        public DataContext(string connectionString, IMappingConfiguration mapping,
-            IContextConfiguration contextConfiguration, ILog log)
+        public DataContext(
+            string connectionString,
+            IMappingConfiguration mapping,
+            IContextConfiguration contextConfiguration,
+            ILog log)
             : base(connectionString)
         {
             _mapping = mapping;
             _log = log;
-            this.Database.Log = _log.Debug;
-            if (contextConfiguration != null) contextConfiguration.ConfigureContext(this);
+            Database.Log = _log.Debug;
+            if (contextConfiguration != null)
+            {
+                contextConfiguration.ConfigureContext(this);
+            }
         }
 
         /// <summary>
@@ -86,7 +94,8 @@ namespace Highway.Data
         ///     The metadata embedded connection string from database first Entity
         ///     Framework
         /// </param>
-        public DataContext(string databaseFirstConnectionString) : this(databaseFirstConnectionString, new NoOpLogger())
+        public DataContext(string databaseFirstConnectionString)
+            : this(databaseFirstConnectionString, new NoOpLogger())
         {
         }
 
@@ -98,14 +107,15 @@ namespace Highway.Data
         ///     Framework
         /// </param>
         /// <param name="log">The logger for the database first context</param>
-        public DataContext(string databaseFirstConnectionString, ILog log) : base(databaseFirstConnectionString)
+        public DataContext(string databaseFirstConnectionString, ILog log)
+            : base(databaseFirstConnectionString)
         {
             _databaseFirst = true;
             _log = log;
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="DataContext"/> class.
+        ///     Initializes a new instance of the <see cref="DataContext" /> class.
         /// </summary>
         /// <param name="dbConnection">The db connection.</param>
         /// <param name="contextOwnsConnection">The context owns connection.</param>
@@ -116,14 +126,12 @@ namespace Highway.Data
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="DataContext"/> class.
+        ///     Initializes a new instance of the <see cref="DataContext" /> class.
         /// </summary>
         /// <param name="dbConnection">The db connection.</param>
         /// <param name="contextOwnsConnection">The context owns connection.</param>
         /// <param name="mapping">The Mapping Configuration that will determine how the tables and objects interact</param>
         /// <param name="log">The logger being supplied for this context ( Optional )</param>
-        ///     The log.
-        /// </param>
         public DataContext(
             DbConnection dbConnection,
             bool contextOwnsConnection,
@@ -134,7 +142,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="DataContext"/> class.
+        ///     Initializes a new instance of the <see cref="DataContext" /> class.
         /// </summary>
         /// <param name="dbConnection">The db connection.</param>
         /// <param name="contextOwnsConnection">The context owns connection.</param>
@@ -150,7 +158,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DataContext"/> class.
+        ///     Initializes a new instance of the <see cref="DataContext" /> class.
         /// </summary>
         /// <param name="dbConnection">The db connection.</param>
         /// <param name="contextOwnsConnection">The context owns connection.</param>
@@ -162,12 +170,36 @@ namespace Highway.Data
             bool contextOwnsConnection,
             IMappingConfiguration mapping,
             IContextConfiguration contextConfiguration,
-            ILog log) : base(dbConnection, contextOwnsConnection)
+            ILog log)
+            : base(dbConnection, contextOwnsConnection)
         {
-            this._mapping = mapping;
-            this._log = log;
-            this.Database.Log = _log.Debug;
-            if (contextConfiguration != null) contextConfiguration.ConfigureContext(this);
+            _mapping = mapping;
+            _log = log;
+            Database.Log = _log.Debug;
+            if (contextConfiguration != null)
+            {
+                contextConfiguration.ConfigureContext(this);
+            }
+        }
+
+        public event EventHandler<BeforeSave> BeforeSave;
+
+        public event EventHandler<AfterSave> AfterSave;
+
+        /// <summary>
+        ///     Adds the provided instance of <typeparamref name="T" /> to the data context
+        /// </summary>
+        /// <typeparam name="T">The Entity Type being added</typeparam>
+        /// <param name="item">The <typeparamref name="T" /> you want to add</param>
+        /// <returns>The <typeparamref name="T" /> you added</returns>
+        public virtual T Add<T>(T item)
+            where T : class
+        {
+            _log.DebugFormat("Adding Object {0}", item);
+            Set<T>().Add(item);
+            _log.TraceFormat("Added Object {0}", item);
+
+            return item;
         }
 
         /// <summary>
@@ -178,61 +210,14 @@ namespace Highway.Data
         /// <returns>
         ///     <see cref="IQueryable{T}" />
         /// </returns>
-        public virtual IQueryable<T> AsQueryable<T>() where T : class
+        public virtual IQueryable<T> AsQueryable<T>()
+            where T : class
         {
             _log.DebugFormat("Querying Object {0}", typeof(T).Name);
-            DbSet<T> result = Set<T>();
+            var result = Set<T>();
             _log.TraceFormat("Queried Object {0}", typeof(T).Name);
+
             return result;
-        }
-
-        /// <summary>
-        ///     Adds the provided instance of <typeparamref name="T" /> to the data context
-        /// </summary>
-        /// <typeparam name="T">The Entity Type being added</typeparam>
-        /// <param name="item">The <typeparamref name="T" /> you want to add</param>
-        /// <returns>The <typeparamref name="T" /> you added</returns>
-        public virtual T Add<T>(T item) where T : class
-        {
-            _log.DebugFormat("Adding Object {0}", item);
-            Set<T>().Add(item);
-            _log.TraceFormat("Added Object {0}", item);
-            return item;
-        }
-
-        /// <summary>
-        ///     Removes the provided instance of <typeparamref name="T" /> from the data context
-        /// </summary>
-        /// <typeparam name="T">The Entity Type being removed</typeparam>
-        /// <param name="item">The <typeparamref name="T" /> you want to remove</param>
-        /// <returns>The <typeparamref name="T" /> you removed</returns>
-        public virtual T Remove<T>(T item) where T : class
-        {
-            _log.DebugFormat("Removing Object {0}", item);
-            Set<T>().Remove(item);
-            _log.TraceFormat("Removed Object {0}", item);
-            return item;
-        }
-
-        /// <summary>
-        ///     Updates the provided instance of <typeparamref name="T" /> in the data context
-        /// </summary>
-        /// <typeparam name="T">The Entity Type being updated</typeparam>
-        /// <param name="item">The <typeparamref name="T" /> you want to update</param>
-        /// <returns>The <typeparamref name="T" /> you updated</returns>
-        public virtual T Update<T>(T item) where T : class
-        {
-            _log.TraceFormat("Retrieving State Entry For Object {0}", item);
-            DbEntityEntry<T> entry = GetChangeTrackingEntry(item);
-            _log.DebugFormat("Updating Object {0}", item);
-            if (entry == null)
-            {
-                throw new InvalidOperationException(
-                    "Cannot Update an object that is not attacched to the current Entity Framework data context");
-            }
-            entry.State = EntityState.Modified;
-            _log.TraceFormat("Updated Object {0}", item);
-            return item;
         }
 
         /// <summary>
@@ -241,53 +226,13 @@ namespace Highway.Data
         /// <typeparam name="T">The Entity Type being attached</typeparam>
         /// <param name="item">The <typeparamref name="T" /> you want to attach</param>
         /// <returns>The <typeparamref name="T" /> you attached</returns>
-        public virtual T Attach<T>(T item) where T : class
+        public virtual T Attach<T>(T item)
+            where T : class
         {
             _log.DebugFormat("Attaching Object {0}", item);
             Set<T>().Attach(item);
             _log.TraceFormat("Attached Object {0}", item);
-            return item;
-        }
 
-        /// <summary>
-        ///     Detaches the provided instance of <typeparamref name="T" /> from the data context
-        /// </summary>
-        /// <typeparam name="T">The Entity Type being detached</typeparam>
-        /// <param name="item">The <typeparamref name="T" /> you want to detach</param>
-        /// <returns>The <typeparamref name="T" /> you detached</returns>
-        public virtual T Detach<T>(T item) where T : class
-        {
-            _log.TraceFormat("Retrieving State Entry For Object {0}", item);
-            DbEntityEntry<T> entry = GetChangeTrackingEntry(item);
-            _log.DebugFormat("Detaching Object {0}", item);
-            if (entry == null)
-            {
-                throw new InvalidOperationException(
-                    "Cannot detach an object that is not attached to the current context.");
-            }
-            entry.State = EntityState.Detached;
-            _log.TraceFormat("Detached Object {0}", item);
-            return item;
-        }
-
-        /// <summary>
-        ///     Reloads the provided instance of <typeparamref name="T" /> from the database
-        /// </summary>
-        /// <typeparam name="T">The Entity Type being reloaded</typeparam>
-        /// <param name="item">The <typeparamref name="T" /> you want to reload</param>
-        /// <returns>The <typeparamref name="T" /> you reloaded</returns>
-        public virtual T Reload<T>(T item) where T : class
-        {
-            _log.TraceFormat("Retrieving State Entry For Object {0}", item);
-            DbEntityEntry<T> entry = GetChangeTrackingEntry(item);
-            _log.DebugFormat("Reloading Object {0}", item);
-            if (entry == null)
-            {
-                throw new InvalidOperationException(
-                    "You cannot reload an objecct that is not in the current Entity Framework datya context");
-            }
-            entry.Reload();
-            _log.TraceFormat("Reloaded Object {0}", item);
             return item;
         }
 
@@ -299,8 +244,9 @@ namespace Highway.Data
         {
             _log.Trace("\tCommit");
             ChangeTracker.DetectChanges();
-            int result = SaveChanges();
+            var result = SaveChanges();
             _log.DebugFormat("\tCommited {0} Changes", result);
+
             return result;
         }
 
@@ -312,9 +258,64 @@ namespace Highway.Data
         {
             _log.Trace("\tCommit");
             ChangeTracker.DetectChanges();
-            Task<int> result = SaveChangesAsync();
+            var result = SaveChangesAsync();
             result.ContinueWith(x => _log.DebugFormat("\tCommited {0} Changes", result));
+
             return result;
+        }
+
+        /// <summary>
+        ///     Detaches the provided instance of <typeparamref name="T" /> from the data context
+        /// </summary>
+        /// <typeparam name="T">The Entity Type being detached</typeparam>
+        /// <param name="item">The <typeparamref name="T" /> you want to detach</param>
+        /// <returns>The <typeparamref name="T" /> you detached</returns>
+        public virtual T Detach<T>(T item)
+            where T : class
+        {
+            _log.TraceFormat("Retrieving State Entry For Object {0}", item);
+            var entry = GetChangeTrackingEntry(item);
+            _log.DebugFormat("Detaching Object {0}", item);
+            if (entry == null)
+            {
+                throw new InvalidOperationException("Cannot detach an object that is not attached to the current context.");
+            }
+
+            entry.State = EntityState.Detached;
+            _log.TraceFormat("Detached Object {0}", item);
+
+            return item;
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="procedureName"></param>
+        /// <param name="dbParams"></param>
+        /// <returns></returns>
+        public virtual int ExecuteFunction(string procedureName, params ObjectParameter[] dbParams)
+        {
+            var parameters =
+                dbParams.Select(x => $"{x.Name} : {x.Value} : {x.ParameterType}\t").ToArray();
+
+            _log.TraceFormat("Executing Procedure {0}, with parameters {1}", procedureName, string.Join(",", parameters));
+
+            return Database.SqlQuery<int>(procedureName, dbParams).FirstOrDefault();
+        }
+
+        /// <summary>
+        ///     Executes a SQL command and returns the standard int return from the query
+        /// </summary>
+        /// <param name="sql">The Sql Statement</param>
+        /// <param name="dbParams">A List of Database Parameters for the Query</param>
+        /// <returns>The rows affected</returns>
+        public virtual int ExecuteSqlCommand(string sql, params DbParameter[] dbParams)
+        {
+            var parameters =
+                dbParams.Select(x => $"{x.ParameterName} : {x.Value} : {x.DbType}\t").ToArray();
+
+            _log.TraceFormat("Executing SQL {0}, with parameters {1}", sql, string.Join(",", parameters));
+
+            return Database.ExecuteSqlCommand(sql, dbParams);
         }
 
         /// <summary>
@@ -327,43 +328,80 @@ namespace Highway.Data
         /// <returns>An <see cref="IEnumerable{T}" /> from the query return</returns>
         public virtual IEnumerable<T> ExecuteSqlQuery<T>(string sql, params DbParameter[] dbParams)
         {
-            string[] parameters =
-                dbParams.Select(x => string.Format("{0} : {1} : {2}\t", x.ParameterName, x.Value, x.DbType)).ToArray();
+            var parameters =
+                dbParams.Select(x => $"{x.ParameterName} : {x.Value} : {x.DbType}\t").ToArray();
+
             _log.TraceFormat("Executing SQL {0}, with parameters {1}", sql, string.Join(",", parameters));
+
             return Database.SqlQuery<T>(sql, dbParams);
         }
 
         /// <summary>
-        ///     Executes a SQL command and returns the standard int return from the query
+        ///     Reloads the provided instance of <typeparamref name="T" /> from the database
         /// </summary>
-        /// <param name="sql">The Sql Statement</param>
-        /// <param name="dbParams">A List of Database Parameters for the Query</param>
-        /// <returns>The rows affected</returns>
-        public virtual int ExecuteSqlCommand(string sql, params DbParameter[] dbParams)
+        /// <typeparam name="T">The Entity Type being reloaded</typeparam>
+        /// <param name="item">The <typeparamref name="T" /> you want to reload</param>
+        /// <returns>The <typeparamref name="T" /> you reloaded</returns>
+        public virtual T Reload<T>(T item)
+            where T : class
         {
-            string[] parameters =
-                dbParams.Select(x => string.Format("{0} : {1} : {2}\t", x.ParameterName, x.Value, x.DbType)).ToArray();
-            _log.TraceFormat("Executing SQL {0}, with parameters {1}", sql, string.Join(",", parameters));
-            return Database.ExecuteSqlCommand(sql, dbParams);
-        }
+            _log.TraceFormat("Retrieving State Entry For Object {0}", item);
+            var entry = GetChangeTrackingEntry(item);
+            _log.DebugFormat("Reloading Object {0}", item);
+            if (entry == null)
+            {
+                throw new InvalidOperationException("You cannot reload an objecct that is not in the current Entity Framework datya context");
+            }
 
-        protected virtual DbEntityEntry<T> GetChangeTrackingEntry<T>(T item) where T : class
-        {
-            DbEntityEntry<T> entry = Entry(item);
-            return entry;
+            entry.Reload();
+            _log.TraceFormat("Reloaded Object {0}", item);
+
+            return item;
         }
 
         /// <summary>
+        ///     Removes the provided instance of <typeparamref name="T" /> from the data context
         /// </summary>
-        /// <param name="procedureName"></param>
-        /// <param name="dbParams"></param>
-        /// <returns></returns>
-        public virtual int ExecuteFunction(string procedureName, params ObjectParameter[] dbParams)
+        /// <typeparam name="T">The Entity Type being removed</typeparam>
+        /// <param name="item">The <typeparamref name="T" /> you want to remove</param>
+        /// <returns>The <typeparamref name="T" /> you removed</returns>
+        public virtual T Remove<T>(T item)
+            where T : class
         {
-            string[] parameters =
-                dbParams.Select(x => string.Format("{0} : {1} : {2}\t", x.Name, x.Value, x.ParameterType)).ToArray();
-            _log.TraceFormat("Executing Procedure {0}, with parameters {1}", procedureName, string.Join(",", parameters));
-            return Database.SqlQuery<int>(procedureName, dbParams).FirstOrDefault();
+            _log.DebugFormat("Removing Object {0}", item);
+            Set<T>().Remove(item);
+            _log.TraceFormat("Removed Object {0}", item);
+
+            return item;
+        }
+
+        /// <summary>
+        ///     Updates the provided instance of <typeparamref name="T" /> in the data context
+        /// </summary>
+        /// <typeparam name="T">The Entity Type being updated</typeparam>
+        /// <param name="item">The <typeparamref name="T" /> you want to update</param>
+        /// <returns>The <typeparamref name="T" /> you updated</returns>
+        public virtual T Update<T>(T item)
+            where T : class
+        {
+            _log.TraceFormat("Retrieving State Entry For Object {0}", item);
+            var entry = GetChangeTrackingEntry(item);
+            _log.DebugFormat("Updating Object {0}", item);
+            if (entry == null)
+            {
+                throw new InvalidOperationException("Cannot Update an object that is not attacched to the current Entity Framework data context");
+            }
+
+            entry.State = EntityState.Modified;
+            _log.TraceFormat("Updated Object {0}", item);
+
+            return item;
+        }
+
+        protected virtual DbEntityEntry<T> GetChangeTrackingEntry<T>(T item)
+            where T : class
+        {
+            return Entry(item);
         }
 
         /// <summary>
@@ -384,13 +422,18 @@ namespace Highway.Data
         /// <param name="modelBuilder">The builder that defines the model for the context being created</param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            if (_databaseFirst) throw new UnintentionalCodeFirstException();
+            if (_databaseFirst)
+            {
+                throw new UnintentionalCodeFirstException();
+            }
+
             _log.Debug("\tOnModelCreating");
             if (_mapping != null)
             {
                 _log.TraceFormat("\t\tMapping : {0}", _mapping.GetType().Name);
                 _mapping.ConfigureModelBuilder(modelBuilder);
             }
+
             base.OnModelCreating(modelBuilder);
         }
     }

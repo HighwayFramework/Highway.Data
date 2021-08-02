@@ -19,58 +19,30 @@ namespace Highway.Data.EventManagement
         public EventManager(IDomainRepository<T> repository)
             : base(repository)
         {
-            Repository.DomainContext.AfterSave += HandleEvent;
-            Repository.DomainContext.BeforeSave += HandleEvent;
-            Repository.BeforeCommand += HandleEvent;
-            Repository.BeforeScalar += HandleEvent;
             Repository.AfterCommand += HandleEvent;
-            Repository.AfterScalar += HandleEvent;
+            Repository.DomainContext.AfterSave += HandleEvent;
+            Repository.BeforeCommand += HandleEvent;
+            Repository.DomainContext.BeforeSave += HandleEvent;
         }
 
         public new IDomainRepository<T> Repository => base.Repository as IDomainRepository<T>;
 
+        private void HandleEvent(object sender, AfterCommand e)
+        {
+            var events = Interceptors.OfType<IEventInterceptor<AfterCommand>>().OrderBy(x => x.Priority);
+            foreach (var eventInterceptor in events)
+            {
+                var result = eventInterceptor.Apply(Repository.DomainContext, e);
+                if (!result.ContinueExecution)
+                {
+                    break;
+                }
+            }
+        }
+
         private void HandleEvent(object sender, AfterSave e)
         {
             var events = Interceptors.OfType<IEventInterceptor<AfterSave>>().OrderBy(x => x.Priority);
-            foreach (var eventInterceptor in events)
-            {
-                var result = eventInterceptor.Apply(Repository.DomainContext, e);
-                if (!result.ContinueExecution)
-                {
-                    break;
-                }
-            }
-        }
-
-        private void HandleEvent(object sender, BeforeSave e)
-        {
-            var events = Interceptors.OfType<IEventInterceptor<BeforeSave>>().OrderBy(x => x.Priority);
-            foreach (var eventInterceptor in events)
-            {
-                var result = eventInterceptor.Apply(Repository.DomainContext, e);
-                if (!result.ContinueExecution)
-                {
-                    break;
-                }
-            }
-        }
-
-        private void HandleEvent(object sender, BeforeScalar e)
-        {
-            var events = Interceptors.OfType<IEventInterceptor<BeforeScalar>>().OrderBy(x => x.Priority);
-            foreach (var eventInterceptor in events)
-            {
-                var result = eventInterceptor.Apply(Repository.DomainContext, e);
-                if (!result.ContinueExecution)
-                {
-                    break;
-                }
-            }
-        }
-
-        private void HandleEvent(object sender, AfterScalar e)
-        {
-            var events = Interceptors.OfType<IEventInterceptor<AfterScalar>>().OrderBy(x => x.Priority);
             foreach (var eventInterceptor in events)
             {
                 var result = eventInterceptor.Apply(Repository.DomainContext, e);
@@ -94,9 +66,9 @@ namespace Highway.Data.EventManagement
             }
         }
 
-        private void HandleEvent(object sender, AfterCommand e)
+        private void HandleEvent(object sender, BeforeSave e)
         {
-            var events = Interceptors.OfType<IEventInterceptor<AfterCommand>>().OrderBy(x => x.Priority);
+            var events = Interceptors.OfType<IEventInterceptor<BeforeSave>>().OrderBy(x => x.Priority);
             foreach (var eventInterceptor in events)
             {
                 var result = eventInterceptor.Apply(Repository.DomainContext, e);

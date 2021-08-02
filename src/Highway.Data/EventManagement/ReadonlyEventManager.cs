@@ -13,7 +13,9 @@ namespace Highway.Data.EventManagement
         {
             Repository = repository;
             Repository.AfterQuery += HandleEvent;
+            Repository.AfterScalar += HandleEvent;
             Repository.BeforeQuery += HandleEvent;
+            Repository.BeforeScalar += HandleEvent;
         }
 
         protected List<IInterceptor> Interceptors { get; } = new List<IInterceptor>();
@@ -35,6 +37,32 @@ namespace Highway.Data.EventManagement
             Interceptors.Add(eventInterceptor);
         }
 
+        private void HandleEvent(object sender, AfterQuery e)
+        {
+            var events = Interceptors.OfType<IEventInterceptor<AfterQuery>>().OrderBy(x => x.Priority);
+            foreach (var eventInterceptor in events)
+            {
+                var result = eventInterceptor.Apply(Repository.DomainContext, e);
+                if (!result.ContinueExecution)
+                {
+                    break;
+                }
+            }
+        }
+
+        private void HandleEvent(object sender, AfterScalar e)
+        {
+            var events = Interceptors.OfType<IEventInterceptor<AfterScalar>>().OrderBy(x => x.Priority);
+            foreach (var eventInterceptor in events)
+            {
+                var result = eventInterceptor.Apply(Repository.DomainContext, e);
+                if (!result.ContinueExecution)
+                {
+                    break;
+                }
+            }
+        }
+
         private void HandleEvent(object sender, BeforeQuery e)
         {
             var events = Interceptors.OfType<IEventInterceptor<BeforeQuery>>().OrderBy(x => x.Priority);
@@ -48,9 +76,9 @@ namespace Highway.Data.EventManagement
             }
         }
 
-        private void HandleEvent(object sender, AfterQuery e)
+        private void HandleEvent(object sender, BeforeScalar e)
         {
-            var events = Interceptors.OfType<IEventInterceptor<AfterQuery>>().OrderBy(x => x.Priority);
+            var events = Interceptors.OfType<IEventInterceptor<BeforeScalar>>().OrderBy(x => x.Priority);
             foreach (var eventInterceptor in events)
             {
                 var result = eventInterceptor.Apply(Repository.DomainContext, e);

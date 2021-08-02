@@ -635,14 +635,7 @@
 	<s:Boolean x:Key="/Default/CodeStyle/CSharpUsing/AddImportsToDeepestScope/@EntryValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeStyle/CSharpUsing/CanUseGlobalAlias/@EntryValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeStyle/CSharpUsing/QualifiedUsingAtNestedScope/@EntryValue">False</s:Boolean>
-	<s:String x:Key="/Default/CodeStyle/FileHeader/FileHeaderText/@EntryValue">&lt;copyright file="$FILENAME$" company="Enterprise Products Partners L.P. (Enterprise)"&gt;&#xD;
-© Copyright 2012 - 2019, Enterprise Products Partners L.P. (Enterprise), All Rights Reserved.&#xD;
-Permission to use, copy, modify, or distribute this software source code, binaries or&#xD;
-related documentation, is strictly prohibited, without written consent from Enterprise.&#xD;
-For inquiries about the software, contact Enterprise: Enterprise Products Company Law&#xD;
-Department, 1100 Louisiana, 10th Floor, Houston, Texas 77002, phone 713-381-6500.&#xD;
-&lt;/copyright&gt;&#xD;
-</s:String>
+	<s:String x:Key="/Default/CodeStyle/FileHeader/FileHeaderText/@EntryValue"></s:String>
 	<s:Boolean x:Key="/Default/CodeStyle/Generate/=Constructor/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/CodeStyle/Generate/=Constructor/Options/=XmlDocumentation/@EntryIndexedValue">False</s:String>
 	<s:Boolean x:Key="/Default/CodeStyle/Generate/=EqualityMembers/@KeyIndexDefined">True</s:Boolean>
@@ -744,34 +737,6 @@ Department, 1100 Louisiana, 10th Floor, Houston, Texas 77002, phone 713-381-6500
 	<s:Boolean x:Key="/Default/Environment/UnitTesting/MsTestProvider/UseTestRunConfigFromMetadataFile/@EntryValue">True</s:Boolean>
 	<s:Int64 x:Key="/Default/Environment/UnitTesting/ParallelProcessesCount/@EntryValue">1</s:Int64>
 	<s:Boolean x:Key="/Default/Environment/UnitTesting/SeparateAppDomainPerAssembly/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=CD635FFF4BA7B948A020E484077AACB7/Text/@EntryValue">/************************************************************************************************&#xD;
-*&#xD;
-*  © Copyright 2012, Enterprise Products Partners L.P. (Enterprise), All Rights Reserved.&#xD;
-*  Permission to use, copy, modify, or distribute this software source code, binaries or &#xD;
-*  related documentation, is strictly prohibited, without written consent from Enterprise. &#xD;
-*  For inquiries about the software, contact Enterprise: Enterprise Products Company Law&#xD;
-*  Department, 1100 Louisiana, 10th Floor, Houston, Texas 77002, phone 713-381-6500.&#xD;
-*&#xD;
-************************************************************************************************/&#xD;
-&#xD;
-using Foundation.Testing;&#xD;
-using OpenQA.Selenium;&#xD;
-&#xD;
-namespace $namespace$&#xD;
-{&#xD;
-    public class $className$ : IPageObject&#xD;
-    {       &#xD;
-        public $className$(IWebDriver webDriver)&#xD;
-        {&#xD;
-            _webDriver = webDriver;&#xD;
-        }&#xD;
-&#xD;
-        private readonly IWebDriver _webDriver;&#xD;
-&#xD;
-		$END$&#xD;
-    }&#xD;
-}&#xD;
-</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=0043522CA360A14D9FA1237ECC49CB6D/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=0043522CA360A14D9FA1237ECC49CB6D/Comment/@EntryValue">Fluent Assertions: Wordy assertion that string/array should be empty</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=0043522CA360A14D9FA1237ECC49CB6D/CustomPatternPlaceholder/=string/@KeyIndexDefined">True</s:Boolean>

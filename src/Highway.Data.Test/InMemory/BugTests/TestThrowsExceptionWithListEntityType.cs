@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using Highway.Data.Contexts;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -25,9 +26,9 @@ namespace Highway.Data.Tests.InMemory.BugTests
                 new List<EntityType> { new EntityType() },
                 new DateTime(2014, 1, 1),
                 null);
+
             repo.Context.Add(businessEntity);
         }
-
 
         [TestMethod]
         public void ShouldNotThrowErrorsOnAddWithSimilarThings()
@@ -41,6 +42,7 @@ namespace Highway.Data.Tests.InMemory.BugTests
                 Code = specification.DeviceModel,
                 Name = specification.DeviceModel
             };
+
             repo.Context.Add(deviceModel);
             repo.Context.Commit();
         }
@@ -48,9 +50,9 @@ namespace Highway.Data.Tests.InMemory.BugTests
 
     public class DeviceModel : IIdentifiable<long>
     {
-        public long Id { get; set; }
-
         public string Code { get; set; }
+
+        public long Id { get; set; }
 
         public string Name { get; set; }
     }
@@ -60,10 +62,8 @@ namespace Highway.Data.Tests.InMemory.BugTests
         public string DeviceModel { get; set; }
     }
 
-
     public class BusinessEntity : IIdentifiable<long>
     {
-
         public BusinessEntity(long id, string name, string abbreviation, string epaNumber, StatusType status, List<EntityType> entityTypes, DateTime startDate, DateTime? endDate)
         {
             ValidateInitialValues(abbreviation);
@@ -76,42 +76,33 @@ namespace Highway.Data.Tests.InMemory.BugTests
             EntityStatusType = status;
             StartDate = startDate;
             EndDate = endDate;
-
         }
-
-        private static void ValidateInitialValues(string abbreviation)
-        {
-            if (abbreviation.Length != 4)
-            {
-                throw new ArgumentOutOfRangeException(abbreviation, "Abbreviation must be four characters long.");
-            }
-        }
-
-        public long Id { get; set; }
-
-        public string Name { get; protected set; }
 
         public string Abbreviation { get; protected set; }
-
-        public string EpaNumber { get; protected set; }
-
-        public List<EntityType> EntityTypes { get; protected set; }
-
-        public StatusType EntityStatusType { get; protected set; }
-
-        public DateTime StartDate { get; protected set; }
-
-        public DateTime? EndDate { get; protected set; }
 
         public DateTime CreateDate { get; protected set; }
 
         public string CreatedBy { get; protected set; }
 
-        public DateTime LastModifiedDate { get; protected set; }
+        public Customer Customer { get; protected set; }
+
+        public DateTime? EndDate { get; protected set; }
+
+        public StatusType EntityStatusType { get; protected set; }
+
+        public List<EntityType> EntityTypes { get; protected set; }
+
+        public string EpaNumber { get; protected set; }
+
+        public long Id { get; set; }
 
         public string LastModifiedBy { get; protected set; }
 
-        public Customer Customer { get; protected set; }
+        public DateTime LastModifiedDate { get; protected set; }
+
+        public string Name { get; protected set; }
+
+        public DateTime StartDate { get; protected set; }
 
         public void SetCustomer(Customer customer)
         {
@@ -121,6 +112,13 @@ namespace Highway.Data.Tests.InMemory.BugTests
             Customer = customer;
         }
 
+        private static void ValidateInitialValues(string abbreviation)
+        {
+            if (abbreviation.Length != 4)
+            {
+                throw new ArgumentOutOfRangeException(abbreviation, "Abbreviation must be four characters long.");
+            }
+        }
     }
 
     public class Customer
@@ -138,9 +136,9 @@ namespace Highway.Data.Tests.InMemory.BugTests
 
     public class EntityType
     {
-        public int Id { get; set; }
-
         public string EntityTypeName { get; set; }
+
+        public int Id { get; set; }
     }
 
     public class StatusType

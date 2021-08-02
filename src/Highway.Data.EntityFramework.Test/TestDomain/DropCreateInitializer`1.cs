@@ -9,9 +9,11 @@ namespace Highway.Data.EntityFramework.Test.TestDomain
     ///     ****    DO NOT PUT THIS IN PRODUCTION CODE      ****
     ///     This class will clear the existing connections to the database and drop the database
     /// </summary>
-    public class DropCreateInitializer<T> : IDatabaseInitializer<T> where T : DbContext
+    public class DropCreateInitializer<T> : IDatabaseInitializer<T>
+        where T : DbContext
     {
         private readonly Action<T> _seedAction;
+
         private readonly Func<IEnumerable<string>> _storedProcs;
 
         /// <summary>
@@ -24,7 +26,6 @@ namespace Highway.Data.EntityFramework.Test.TestDomain
             _storedProcs = storedProcs;
         }
 
-
         public void InitializeDatabase(T context)
         {
             context.Database.CreateIfNotExists();
@@ -32,16 +33,20 @@ namespace Highway.Data.EntityFramework.Test.TestDomain
             {
                 foreach (var sp in _storedProcs())
                 {
-                    if (string.IsNullOrWhiteSpace(sp)) continue;
+                    if (string.IsNullOrWhiteSpace(sp))
+                    {
+                        continue;
+                    }
+
                     context.Database.ExecuteSqlCommand(sp);
                 }
             }
+
             if (_seedAction != null)
             {
                 _seedAction(context);
                 context.SaveChanges();
             }
         }
-
     }
 }

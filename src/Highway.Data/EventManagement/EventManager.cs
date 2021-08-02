@@ -1,11 +1,16 @@
-﻿
-using System;
+﻿// <copyright file="EventManager.cs" company="Enterprise Products Partners L.P. (Enterprise)">
+// © Copyright 2012 - 2019, Enterprise Products Partners L.P. (Enterprise), All Rights Reserved.
+// Permission to use, copy, modify, or distribute this software source code, binaries or
+// related documentation, is strictly prohibited, without written consent from Enterprise.
+// For inquiries about the software, contact Enterprise: Enterprise Products Company Law
+// Department, 1100 Louisiana, 10th Floor, Houston, Texas 77002, phone 713-381-6500.
+// </copyright>
+
 using System.Collections.Generic;
 using System.Linq;
-using Highway.Data.EventManagement.Interfaces;
-using Highway.Data.Interceptors;
-using Highway.Data.Interceptors.Events;
 
+using Highway.Data.EventManagement.Interfaces;
+using Highway.Data.Interceptors.Events;
 
 namespace Highway.Data.EventManagement
 {
@@ -13,10 +18,12 @@ namespace Highway.Data.EventManagement
     ///     The base implementation of the Event manager for registration of Interceptors, and execution of them in an ordered
     ///     fashion
     /// </summary>
-    public class EventManager<T> where T : class
+    public class EventManager<T>
+        where T : class
     {
-        private readonly IDomainRepository<T> _repository;
         private readonly List<IInterceptor> _interceptors = new List<IInterceptor>();
+
+        private readonly IDomainRepository<T> _repository;
 
         /// <summary>
         ///     Creates the event management system used internally in Highway.Data DataContexts
@@ -33,7 +40,21 @@ namespace Highway.Data.EventManagement
             _repository.BeforeScalar += HandleEvent;
             _repository.AfterCommand += HandleEvent;
             _repository.AfterScalar += HandleEvent;
+        }
 
+        /// <summary>
+        ///     Allows for the Registration of <see cref="IEventInterceptor{T}" /> objects that will hook to events in priority
+        ///     order
+        /// </summary>
+        /// <param name="eventInterceptor">The eventInterceptor to be registered to an event</param>
+        public void Register(IInterceptor eventInterceptor)
+        {
+            if (_interceptors.Contains(eventInterceptor))
+            {
+                return;
+            }
+
+            _interceptors.Add(eventInterceptor);
         }
 
         private void HandleEvent(object sender, AfterSave e)
@@ -42,7 +63,10 @@ namespace Highway.Data.EventManagement
             foreach (var eventInterceptor in events)
             {
                 var result = eventInterceptor.Apply(_repository.DomainContext, e);
-                if (!result.ContinueExecution) break;
+                if (!result.ContinueExecution)
+                {
+                    break;
+                }
             }
         }
 
@@ -52,7 +76,10 @@ namespace Highway.Data.EventManagement
             foreach (var eventInterceptor in events)
             {
                 var result = eventInterceptor.Apply(_repository.DomainContext, e);
-                if (!result.ContinueExecution) break;
+                if (!result.ContinueExecution)
+                {
+                    break;
+                }
             }
         }
 
@@ -62,7 +89,10 @@ namespace Highway.Data.EventManagement
             foreach (var eventInterceptor in events)
             {
                 var result = eventInterceptor.Apply(_repository.DomainContext, e);
-                if (!result.ContinueExecution) break;
+                if (!result.ContinueExecution)
+                {
+                    break;
+                }
             }
         }
 
@@ -72,7 +102,10 @@ namespace Highway.Data.EventManagement
             foreach (var eventInterceptor in events)
             {
                 var result = eventInterceptor.Apply(_repository.DomainContext, e);
-                if (!result.ContinueExecution) break;
+                if (!result.ContinueExecution)
+                {
+                    break;
+                }
             }
         }
 
@@ -82,7 +115,10 @@ namespace Highway.Data.EventManagement
             foreach (var eventInterceptor in events)
             {
                 var result = eventInterceptor.Apply(_repository.DomainContext, e);
-                if (!result.ContinueExecution) break;
+                if (!result.ContinueExecution)
+                {
+                    break;
+                }
             }
         }
 
@@ -92,7 +128,10 @@ namespace Highway.Data.EventManagement
             foreach (var eventInterceptor in events)
             {
                 var result = eventInterceptor.Apply(_repository.DomainContext, e);
-                if (!result.ContinueExecution) break;
+                if (!result.ContinueExecution)
+                {
+                    break;
+                }
             }
         }
 
@@ -102,7 +141,10 @@ namespace Highway.Data.EventManagement
             foreach (var eventInterceptor in events)
             {
                 var result = eventInterceptor.Apply(_repository.DomainContext, e);
-                if (!result.ContinueExecution) break;
+                if (!result.ContinueExecution)
+                {
+                    break;
+                }
             }
         }
 
@@ -112,18 +154,11 @@ namespace Highway.Data.EventManagement
             foreach (var eventInterceptor in events)
             {
                 var result = eventInterceptor.Apply(_repository.DomainContext, e);
-                if (!result.ContinueExecution) break;
+                if (!result.ContinueExecution)
+                {
+                    break;
+                }
             }
-        }
-        
-        /// <summary>
-        ///     Allows for the Registration of <see cref="IEventInterceptor{T}" /> objects that will hook to events in priority order
-        /// </summary>
-        /// <param name="eventInterceptor">The eventInterceptor to be registered to an event</param>
-        public void Register(IInterceptor eventInterceptor)
-        {
-            if (_interceptors.Contains(eventInterceptor)) return;
-            _interceptors.Add(eventInterceptor);
         }
     }
 }

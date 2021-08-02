@@ -5,8 +5,6 @@ namespace Highway.Data.Tests.TestDomain
 {
     public class Foo : IIdentifiable<int>
     {
-        public virtual string Name { get; set; }
-
         public virtual string Address { get; set; }
 
         public Bar Bar { get; set; }
@@ -15,6 +13,7 @@ namespace Highway.Data.Tests.TestDomain
 
         public virtual int Id { get; set; }
 
+        public virtual string Name { get; set; }
 
         public object Test()
         {

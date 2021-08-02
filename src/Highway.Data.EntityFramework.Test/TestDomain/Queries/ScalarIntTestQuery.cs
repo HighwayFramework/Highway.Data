@@ -1,7 +1,6 @@
-﻿
-using Highway.Data.Tests.TestDomain;
-using System.Linq;
+﻿using System.Linq;
 
+using Highway.Data.Tests.TestDomain;
 
 namespace Highway.Data.EntityFramework.Test.TestDomain.Queries
 {

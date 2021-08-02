@@ -7,10 +7,12 @@ namespace System.Linq
     {
         public static ObservableCollection<T> ToObservableList<T>(this IEnumerable<T> data)
         {
-            ObservableCollection<T> dataToReturn = new ObservableCollection<T>();
+            var dataToReturn = new ObservableCollection<T>();
 
-            foreach (T t in data)
+            foreach (var t in data)
+            {
                 dataToReturn.Add(t);
+            }
 
             return dataToReturn;
         }

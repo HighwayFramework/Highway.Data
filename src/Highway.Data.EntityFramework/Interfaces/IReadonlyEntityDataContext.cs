@@ -22,7 +22,11 @@ namespace Highway.Data.EntityFramework
         /// <param name="sql">The Sql Statement</param>
         /// <param name="dbParams">A List of Database Parameters for the Query</param>
         /// <returns>An <see cref="IEnumerable{T}" /> from the query return</returns>
-        /// <warning>This method should not have side-effects in the database.  This is intended as a query operation, not a command operation, though it can be abused as such.  In the future it may be updated to use a readonly connection string.</warning>
+        /// <warning>
+        ///     This method should not have side-effects in the database.  This is intended as a query operation, not a
+        ///     command operation, though it can be abused as such.  In the future it may be updated to use a readonly connection
+        ///     string.
+        /// </warning>
         IEnumerable<T> ExecuteSqlQuery<T>(string sql, params DbParameter[] dbParams);
     }
 }

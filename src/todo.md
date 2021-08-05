@@ -1,3 +1,5 @@
+Standardize names for TSelector, TSelection, TProjector, TProjection
+
 Look at common base classes where direct inheritance doesn't work.
 
 Should IRepository.Context move to IReadonlyRepository?

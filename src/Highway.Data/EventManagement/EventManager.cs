@@ -1,7 +1,7 @@
 ﻿using System.Linq;
+
 using Highway.Data.EventManagement.Interfaces;
 using Highway.Data.Interceptors.Events;
-
 
 namespace Highway.Data.EventManagement
 {
@@ -9,7 +9,8 @@ namespace Highway.Data.EventManagement
     ///     The base implementation of the Event manager for registration of Interceptors, and execution of them in an ordered
     ///     fashion
     /// </summary>
-    public class EventManager<T> : ReadonlyEventManager<T> where T : class
+    public class EventManager<T> : ReadonlyEventManager<T>
+        where T : class
     {
         /// <summary>
         ///     Creates the event management system used internally in Highway.Data DataContexts
@@ -34,7 +35,10 @@ namespace Highway.Data.EventManagement
             foreach (var eventInterceptor in events)
             {
                 var result = eventInterceptor.Apply(Repository.DomainContext, e);
-                if (!result.ContinueExecution) break;
+                if (!result.ContinueExecution)
+                {
+                    break;
+                }
             }
         }
 
@@ -44,7 +48,10 @@ namespace Highway.Data.EventManagement
             foreach (var eventInterceptor in events)
             {
                 var result = eventInterceptor.Apply(Repository.DomainContext, e);
-                if (!result.ContinueExecution) break;
+                if (!result.ContinueExecution)
+                {
+                    break;
+                }
             }
         }
 
@@ -54,7 +61,10 @@ namespace Highway.Data.EventManagement
             foreach (var eventInterceptor in events)
             {
                 var result = eventInterceptor.Apply(Repository.DomainContext, e);
-                if (!result.ContinueExecution) break;
+                if (!result.ContinueExecution)
+                {
+                    break;
+                }
             }
         }
 
@@ -64,7 +74,10 @@ namespace Highway.Data.EventManagement
             foreach (var eventInterceptor in events)
             {
                 var result = eventInterceptor.Apply(Repository.DomainContext, e);
-                if (!result.ContinueExecution) break;
+                if (!result.ContinueExecution)
+                {
+                    break;
+                }
             }
         }
 
@@ -74,7 +87,10 @@ namespace Highway.Data.EventManagement
             foreach (var eventInterceptor in events)
             {
                 var result = eventInterceptor.Apply(Repository.DomainContext, e);
-                if (!result.ContinueExecution) break;
+                if (!result.ContinueExecution)
+                {
+                    break;
+                }
             }
         }
 
@@ -84,7 +100,10 @@ namespace Highway.Data.EventManagement
             foreach (var eventInterceptor in events)
             {
                 var result = eventInterceptor.Apply(Repository.DomainContext, e);
-                if (!result.ContinueExecution) break;
+                if (!result.ContinueExecution)
+                {
+                    break;
+                }
             }
         }
     }

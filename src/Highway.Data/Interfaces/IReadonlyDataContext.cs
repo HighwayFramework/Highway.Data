@@ -6,7 +6,7 @@ namespace Highway.Data
     public interface IReadonlyDataContext : IDisposable
     {
         /// <summary>
-        ///     This gives a mock-able wrapper around normal Set method that allows for test-ablity
+        ///     This gives a mock-able wrapper around normal Set method that allows for testability
         /// </summary>
         /// <typeparam name="T">The Entity being queried</typeparam>
         /// <returns>

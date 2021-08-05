@@ -20,8 +20,8 @@ namespace Highway.Data.EventManagement
             : base(repository)
         {
             Repository.AfterCommand += HandleEvent;
-            Repository.DomainContext.AfterSave += HandleEvent;
             Repository.BeforeCommand += HandleEvent;
+            Repository.DomainContext.AfterSave += HandleEvent;
             Repository.DomainContext.BeforeSave += HandleEvent;
         }
 

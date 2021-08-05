@@ -50,7 +50,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        ///     Gives the ability to apend an <see cref="IQueryable" /> onto the current query
+        ///     Gives the ability to append an <see cref="IQueryable" /> onto the current query
         /// </summary>
         /// <param name="query">The query containing the expressions to append</param>
         /// <returns>The combined query</returns>
@@ -68,7 +68,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        ///     This method allows for the extension of Ordering and Grouping on the prebuild Query
+        ///     This method allows for the extension of Ordering and Grouping on the prebuilt Query
         /// </summary>
         /// <returns>an <see cref="IQueryable{T}" /></returns>
         protected virtual IQueryable<T> ExtendQuery()

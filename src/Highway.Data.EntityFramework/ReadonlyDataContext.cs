@@ -182,7 +182,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        ///     This gives a mockable wrapper around the normal <see cref="DbSet{T}" /> method that allows for testablity
+        ///     This gives a mockable wrapper around the normal <see cref="DbSet{T}" /> method that allows for testability
         ///     This method is now virtual to allow for the injection of cross cutting concerns.
         /// </summary>
         /// <typeparam name="T">The Entity being queried</typeparam>
@@ -223,7 +223,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        ///     Executes a SQL command and tries to map the returned datasets into an <see cref="IEnumerable{T}" />
+        ///     Executes a SQL command and tries to map the returned data sets into an <see cref="IEnumerable{T}" />
         ///     The results should have the same column names as the Entity Type has properties
         /// </summary>
         /// <typeparam name="T">The Entity Type that the return should be mapped to</typeparam>
@@ -307,7 +307,7 @@ namespace Highway.Data
         ///     Typically, this method is called only once when the first instance of a derived context
         ///     is created.  The model for that context is then cached and is for all further instances of
         ///     the context in the app domain.  This caching can be disabled by setting the ModelCaching
-        ///     property on the given ModelBuidler, but note that this can seriously degrade performance.
+        ///     property on the given ModelBuilder, but note that this can seriously degrade performance.
         ///     More control over caching is provided through use of the DbModelBuilder and DbContextFactory
         ///     classes directly.
         /// </remarks>

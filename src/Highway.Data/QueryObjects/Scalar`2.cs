@@ -67,7 +67,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        ///     This method allows for the extension of Ordering and Grouping on the prebuild Query
+        ///     This method allows for the extension of Ordering and Grouping on the prebuilt Query
         /// </summary>
         /// <returns>an <see cref="IQueryable{TSelection}" /></returns>
         protected virtual IQueryable<TSelection> ExtendQuery()

@@ -1,3 +1,5 @@
+Standardize names for TSelector, TSelection, TProjector, TProjection
+
 Should IRepository.Context move to IReadonlyRepository?
 Should IUnitOfWork get a readonly version?
 Should IDomain get a readonly version?

@@ -75,14 +75,14 @@ namespace Highway.Data
     /// <summary>
     ///     The base implementation of a query that has a projection
     /// </summary>
-    /// <typeparam name="TSelection">The Type that will be selected</typeparam>
-    /// <typeparam name="TProjection">The type that will be projected</typeparam>
-    public class AdvancedQuery<TSelection, TProjection> : QueryBase, IQuery<TSelection, TProjection>
-        where TSelection : class
+    /// <typeparam name="TSelector">The Type that will be selected</typeparam>
+    /// <typeparam name="TProjector">The type that will be projected</typeparam>
+    public class AdvancedQuery<TSelector, TProjector> : QueryBase, IQuery<TSelector, TProjector>
+        where TSelector : class
     {
-        protected Func<IQueryable<TSelection>, IQueryable<TProjection>> Projector { get; set; }
+        protected Func<IQueryable<TSelector>, IQueryable<TProjector>> Projector { get; set; }
 
-        protected Func<DataContext, IQueryable<TSelection>> Selector { get; set; }
+        protected Func<DataContext, IQueryable<TSelector>> Selector { get; set; }
 
         /// <summary>
         ///     This executes the expression in ContextQuery on the context that is passed in, resulting in a
@@ -92,7 +92,7 @@ namespace Highway.Data
         /// <returns>
         ///     <see cref="IEnumerable{T}" />
         /// </returns>
-        public virtual IEnumerable<TProjection> Execute(IReadonlyDataContext context)
+        public virtual IEnumerable<TProjector> Execute(IReadonlyDataContext context)
         {
             return PrepareQuery(context);
         }
@@ -109,14 +109,14 @@ namespace Highway.Data
         /// </summary>
         /// <param name="query">The query containing the expressions to append</param>
         /// <returns>The combined query</returns>
-        protected virtual IQueryable<TProjection> AppendExpressions(IQueryable<TSelection> query)
+        protected virtual IQueryable<TProjector> AppendExpressions(IQueryable<TSelector> query)
         {
             var source = query;
             foreach (var exp in ExpressionList)
             {
                 var newParams = exp.Item2.ToList();
                 newParams.Insert(0, source.Expression);
-                source = source.Provider.CreateQuery<TSelection>(Expression.Call(null, exp.Item1, newParams));
+                source = source.Provider.CreateQuery<TSelector>(Expression.Call(null, exp.Item1, newParams));
             }
 
             return Projector(source);
@@ -125,8 +125,8 @@ namespace Highway.Data
         /// <summary>
         ///     This method allows for the extension of Ordering and Grouping on the prebuilt Query
         /// </summary>
-        /// <returns>an <see cref="IQueryable{TSelection}" /></returns>
-        protected virtual IQueryable<TSelection> ExtendQuery()
+        /// <returns>an <see cref="IQueryable{TSelector}" /></returns>
+        protected virtual IQueryable<TSelector> ExtendQuery()
         {
             return Selector((DataContext)Context);
         }
@@ -136,7 +136,7 @@ namespace Highway.Data
         /// </summary>
         /// <param name="context">the context to prepare against</param>
         /// <returns>The prepared but un-executed queryable</returns>
-        protected virtual IQueryable<TProjection> PrepareQuery(IReadonlyDataContext context)
+        protected virtual IQueryable<TProjector> PrepareQuery(IReadonlyDataContext context)
         {
             Context = context;
             CheckContextAndQuery(Selector);

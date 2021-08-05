@@ -20,9 +20,9 @@ namespace Highway.Data
         {
         }
 
-        public event EventHandler<BeforeCommand> BeforeCommand;
-
         public event EventHandler<AfterCommand> AfterCommand;
+
+        public event EventHandler<BeforeCommand> BeforeCommand;
 
         public new IDataContext Context => base.Context as IDataContext;
 

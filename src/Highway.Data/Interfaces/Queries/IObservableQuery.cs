@@ -23,9 +23,9 @@ namespace Highway.Data
     /// <summary>
     ///     An Interface for Queries that return collections
     /// </summary>
-    /// <typeparam name="TSelection">The type being queried</typeparam>
-    /// <typeparam name="TProjection">The type to be returned</typeparam>
-    public interface IQuery<out TSelection, out TProjection> : IQuery<TProjection>
+    /// <typeparam name="TSelector">The type being queried</typeparam>
+    /// <typeparam name="TProjector">The type to be returned</typeparam>
+    public interface IQuery<out TSelector, out TProjector> : IQuery<TProjector>
     {
     }
 }

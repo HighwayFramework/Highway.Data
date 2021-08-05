@@ -8,6 +8,8 @@ namespace Highway.Data
 {
     public class ReadonlyRepository : IReadonlyRepository
     {
+        private readonly IReadonlyDataContext _context;
+
         protected ReadonlyRepository(IReadonlyDataContext context)
         {
             Context = context;
@@ -62,8 +64,8 @@ namespace Highway.Data
         /// <typeparam name="T">The Entity being queried</typeparam>
         /// <param name="query">The prebuilt Query Object</param>
         /// <returns>The <see cref="IEnumerable{T}" /> returned from the query</returns>
-        public virtual IEnumerable<TProjection> Find<TSelection, TProjection>(IQuery<TSelection, TProjection> query)
-            where TSelection : class
+        public virtual IEnumerable<TProjector> Find<TSelector, TProjector>(IQuery<TSelector, TProjector> query)
+            where TSelector : class
         {
             OnBeforeQuery(new BeforeQuery(query));
             var results = query.Execute(Context);
@@ -106,10 +108,10 @@ namespace Highway.Data
         /// <typeparam name="T">The Entity being queried</typeparam>
         /// <param name="query">The prebuilt Query Object</param>
         /// <returns>The task that will return <see cref="IEnumerable{T}" /> from the query</returns>
-        public virtual Task<IEnumerable<TProjection>> FindAsync<TSelection, TProjection>(IQuery<TSelection, TProjection> query)
-            where TSelection : class
+        public virtual Task<IEnumerable<TProjector>> FindAsync<TSelector, TProjector>(IQuery<TSelector, TProjector> query)
+            where TSelector : class
         {
-            var task = new Task<IEnumerable<TProjection>>(() => query.Execute(Context));
+            var task = new Task<IEnumerable<TProjector>>(() => query.Execute(Context));
             task.Start();
 
             return task;

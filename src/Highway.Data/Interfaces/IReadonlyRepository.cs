@@ -48,7 +48,7 @@ namespace Highway.Data
         /// <typeparam name="T">The Entity being queried</typeparam>
         /// <param name="query">The prebuilt Query Object</param>
         /// <returns>The task that will return <see cref="IEnumerable{T}" /> from the query</returns>
-        Task<IEnumerable<TProjection>> FindAsync<TSelection, TProjection>(IQuery<TSelection, TProjection> query)
-            where TSelection : class;
+        Task<IEnumerable<TProjector>> FindAsync<TSelector, TProjector>(IQuery<TSelector, TProjector> query)
+            where TSelector : class;
     }
 }

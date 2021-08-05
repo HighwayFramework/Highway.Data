@@ -26,9 +26,7 @@ namespace Highway.Data
         /// </returns>
         public virtual IEnumerable<T> Execute(IReadonlyDataContext context)
         {
-            var task = PrepareQuery(context);
-
-            return task;
+            return PrepareQuery(context);
         }
 
         public virtual string OutputQuery(IReadonlyDataContext context)

@@ -9,17 +9,18 @@ namespace Highway.Data
     ///     Base implementation of a query that returns a single value or object
     /// </summary>
     /// <typeparam name="T">The type of object or value being returned</typeparam>
-    public class Scalar<TSelection, TProjection> : QueryBase, IScalar<TProjection> where TSelection : class
+    public class Scalar<TSelector, TProjector> : QueryBase, IScalar<TProjector>
+        where TSelector : class
     {
+        /// <summary>
+        ///     the projection to take the limited result set and materialize it.
+        /// </summary>
+        protected Func<IQueryable<TSelector>, TProjector> Projector { get; set; }
+
         /// <summary>
         ///     The query to limit the result set
         /// </summary>
-        protected Func<IReadonlyDataContext, IQueryable<TSelection>> Selector { get; set; }
-
-        /// <summary>
-        /// the projection to take the limited result set and materialize it.
-        /// </summary>
-        protected Func<IQueryable<TSelection>, TProjection> Projector { get; set; }
+        protected Func<IReadonlyDataContext, IQueryable<TSelector>> Selector { get; set; }
 
         /// <summary>
         ///     This executes the expression in ContextQuery on the context that is passed in, resulting in a
@@ -29,10 +30,9 @@ namespace Highway.Data
         /// <returns>
         ///     <see cref="IEnumerable{T}" />
         /// </returns>
-        public virtual TProjection Execute(IReadonlyDataContext context)
+        public virtual TProjector Execute(IReadonlyDataContext context)
         {
-            TProjection task = PrepareQuery(context);
-            return task;
+            return PrepareQuery(context);
         }
 
         /// <summary>
@@ -47,40 +47,39 @@ namespace Highway.Data
         }
 
         /// <summary>
-        ///     This method allows for the extension of Ordering and Grouping on the prebuild Query
-        /// </summary>
-        /// <returns>an <see cref="IQueryable{TSelection}" /></returns>
-        protected virtual IQueryable<TSelection> ExtendQuery()
-        {
-            return Selector(Context);
-        }
-
-
-
-        /// <summary>
         ///     Gives the ability to append an <see cref="IQueryable" /> onto the current query
         /// </summary>
         /// <param name="query">The query containing the expressions to append</param>
         /// <returns>The combined query</returns>
-        protected TProjection AppendExpressions(IQueryable<TSelection> query)
+        protected TProjector AppendExpressions(IQueryable<TSelector> query)
         {
             var source = query;
             foreach (var exp in ExpressionList)
             {
-                List<Expression> newParams = exp.Item2.ToList();
+                var newParams = exp.Item2.ToList();
                 newParams.Insert(0, source.Expression);
-                source = source.Provider.CreateQuery<TSelection>(Expression.Call(null, exp.Item1, newParams));
+                source = source.Provider.CreateQuery<TSelector>(Expression.Call(null, exp.Item1, newParams));
             }
+
             return Projector(source);
         }
 
-        private TProjection PrepareQuery(IReadonlyDataContext context)
+        /// <summary>
+        ///     This method allows for the extension of Ordering and Grouping on the prebuilt Query
+        /// </summary>
+        /// <returns>an <see cref="IQueryable{TSelector}" /></returns>
+        protected virtual IQueryable<TSelector> ExtendQuery()
+        {
+            return Selector(Context);
+        }
+
+        private TProjector PrepareQuery(IReadonlyDataContext context)
         {
             Context = context;
             CheckContextAndQuery(Selector);
             var query = ExtendQuery();
+
             return AppendExpressions(query);
         }
-
     }
 }

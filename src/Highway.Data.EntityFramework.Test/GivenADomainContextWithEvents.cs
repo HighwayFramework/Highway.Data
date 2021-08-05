@@ -8,7 +8,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highway.Data.EntityFramework.Test
 {
-    //[TestClass]
+    [Ignore("These tests spin forever.")]
+    [TestClass]
     public class GivenADomainContextWithEvents
     {
         private bool _afterSaveCalled;
@@ -25,6 +26,19 @@ namespace Highway.Data.EntityFramework.Test
             _context = new TestDomainContext<SqlLiteDomain.SqlLiteDomain>(new SqlLiteDomain.SqlLiteDomain());
             _context.BeforeSave += (sender, args) => _beforeSaveCalled = true;
             _context.AfterSave += (sender, args) => _afterSaveCalled = true;
+        }
+
+        [TestMethod]
+        public void Should_Call_AfterSave()
+        {
+            // Arrange
+            _context.Add(new Person { Id = Guid.NewGuid(), FirstName = "Devlin", LastName = "Liles" });
+
+            // Act
+            _context.Commit();
+
+            // Assert
+            _afterSaveCalled.Should().BeTrue();
         }
 
         [TestMethod]

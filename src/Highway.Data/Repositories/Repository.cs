@@ -1,6 +1,7 @@
-﻿using Highway.Data.Interceptors.Events;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+
+using Highway.Data.Interceptors.Events;
 
 namespace Highway.Data
 {
@@ -18,6 +19,10 @@ namespace Highway.Data
             : base(context)
         {
         }
+
+        public event EventHandler<AfterCommand> AfterCommand;
+
+        public event EventHandler<BeforeCommand> BeforeCommand;
 
         public new IDataContext Context => base.Context as IDataContext;
 
@@ -40,21 +45,18 @@ namespace Highway.Data
         {
             var task = new Task(() => command.Execute(Context));
             task.Start();
+
             return task;
         }
-
-        public event EventHandler<BeforeCommand> BeforeCommand;
-
-        protected virtual void OnBeforeCommand(BeforeCommand e)
-        {
-            BeforeCommand?.Invoke(this, e);
-        }
-
-        public event EventHandler<AfterCommand> AfterCommand;
 
         protected virtual void OnAfterCommand(AfterCommand e)
         {
             AfterCommand?.Invoke(this, e);
+        }
+
+        protected virtual void OnBeforeCommand(BeforeCommand e)
+        {
+            BeforeCommand?.Invoke(this, e);
         }
     }
 }

@@ -6,15 +6,16 @@ using System.Linq.Expressions;
 namespace Highway.Data
 {
     /// <summary>
-    ///     The base implemetation of a query that has a projection
+    ///     The base implementation of a query that has a projection
     /// </summary>
-    /// <typeparam name="TSelection">The Type that will be selected</typeparam>
-    /// <typeparam name="TProjection">The type that will be projected</typeparam>
-    public class Query<TSelection, TProjection> : QueryBase, IQuery<TSelection, TProjection> 
-        where TSelection : class
+    /// <typeparam name="TSelector">The Type that will be selected</typeparam>
+    /// <typeparam name="TProjector">The type that will be projected</typeparam>
+    public class Query<TSelector, TProjector> : QueryBase, IQuery<TSelector, TProjector>
+        where TSelector : class
     {
-        protected Func<IReadonlyDataContext, IQueryable<TSelection>> Selector { get; set; }
-        protected Func<IQueryable<TSelection>, IQueryable<TProjection>> Projector { get; set; }
+        protected Func<IQueryable<TSelector>, IQueryable<TProjector>> Projector { get; set; }
+
+        protected Func<IReadonlyDataContext, IQueryable<TSelector>> Selector { get; set; }
 
         /// <summary>
         ///     This executes the expression in ContextQuery on the context that is passed in, resulting in a
@@ -24,52 +25,52 @@ namespace Highway.Data
         /// <returns>
         ///     <see cref="IEnumerable{T}" />
         /// </returns>
-        public virtual IEnumerable<TProjection> Execute(IReadonlyDataContext context)
+        public virtual IEnumerable<TProjector> Execute(IReadonlyDataContext context)
         {
-            IQueryable<TProjection> task = PrepareQuery(context);
-            return task;
+            return PrepareQuery(context);
         }
 
         public virtual string OutputQuery(IReadonlyDataContext context)
         {
-            IQueryable<TProjection> query = PrepareQuery(context);
+            var query = PrepareQuery(context);
 
             return query.ToString();
         }
 
         /// <summary>
-        ///     This method allows for the extension of Ordering and Grouping on the prebuild Query
-        /// </summary>
-        /// <returns>an <see cref="IQueryable{TSelection}" /></returns>
-        protected virtual IQueryable<TSelection> ExtendQuery()
-        {
-            return Selector(Context);
-        }
-
-        /// <summary>
-        ///     Gives the ability to apend an <see cref="IQueryable" /> onto the current query
+        ///     Gives the ability to append an <see cref="IQueryable" /> onto the current query
         /// </summary>
         /// <param name="query">The query containing the expressions to append</param>
         /// <returns>The combined query</returns>
-        protected IQueryable<TProjection> AppendExpressions(IQueryable<TSelection> query)
+        protected IQueryable<TProjector> AppendExpressions(IQueryable<TSelector> query)
         {
             var source = Projector(query);
 
             foreach (var exp in ExpressionList)
             {
-                List<Expression> newParams = exp.Item2.ToList();
+                var newParams = exp.Item2.ToList();
                 newParams.Insert(0, source.Expression);
-                source = source.Provider.CreateQuery<TProjection>(Expression.Call(null, exp.Item1, newParams));
+                source = source.Provider.CreateQuery<TProjector>(Expression.Call(null, exp.Item1, newParams));
             }
 
             return source;
         }
 
-        protected IQueryable<TProjection> PrepareQuery(IReadonlyDataContext context)
+        /// <summary>
+        ///     This method allows for the extension of Ordering and Grouping on the prebuilt Query
+        /// </summary>
+        /// <returns>an <see cref="IQueryable{TSelector}" /></returns>
+        protected virtual IQueryable<TSelector> ExtendQuery()
+        {
+            return Selector(Context);
+        }
+
+        protected IQueryable<TProjector> PrepareQuery(IReadonlyDataContext context)
         {
             Context = context;
             CheckContextAndQuery(Selector);
             var query = ExtendQuery();
+
             return AppendExpressions(query);
         }
     }

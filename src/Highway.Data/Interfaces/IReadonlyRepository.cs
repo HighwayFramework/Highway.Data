@@ -6,6 +6,11 @@ namespace Highway.Data
     public interface IReadonlyRepository
     {
         /// <summary>
+        ///     Reference to the Context the repository, allowing for create, update, and delete
+        /// </summary>
+        IUnitOfWork Context { get; }
+
+        /// <summary>
         ///     Executes a prebuilt <see cref="IQuery{T}" /> and returns an <see cref="IEnumerable{T}" />
         /// </summary>
         /// <typeparam name="T">The Entity being queried</typeparam>
@@ -40,15 +45,9 @@ namespace Highway.Data
         /// <summary>
         ///     Executes a prebuilt <see cref="IQuery{T}" /> and returns an <see cref="IEnumerable{T}" />
         /// </summary>
-        /// <typeparam name="T">The Entity being queried</typeparam>
         /// <param name="query">The prebuilt Query Object</param>
         /// <returns>The task that will return <see cref="IEnumerable{T}" /> from the query</returns>
-        Task<IEnumerable<IProjection>> FindAsync<TSelection, IProjection>(IQuery<TSelection, IProjection> query)
-            where TSelection : class;
-
-        /// <summary>
-        ///     Reference to the Context the repository, allowing for create, update, and delete
-        /// </summary>
-        IUnitOfWork Context { get; }
+        Task<IEnumerable<TProjector>> FindAsync<TSelector, TProjector>(IQuery<TSelector, TProjector> query)
+            where TSelector : class;
     }
 }

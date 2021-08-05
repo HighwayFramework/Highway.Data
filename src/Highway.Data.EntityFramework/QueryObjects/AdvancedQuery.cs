@@ -23,12 +23,12 @@ namespace Highway.Data
         /// <returns>
         ///     <see cref="IEnumerable{T}" />
         /// </returns>
-        public virtual IEnumerable<T> Execute(IDataContext context)
+        public virtual IEnumerable<T> Execute(IReadonlyDataContext context)
         {
             return PrepareQuery(context);
         }
 
-        public string OutputQuery(IDataContext context)
+        public string OutputQuery(IReadonlyDataContext context)
         {
             var query = PrepareQuery(context);
 

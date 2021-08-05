@@ -2,11 +2,13 @@
 
 namespace Highway.Data.Repositories
 {
-    public class ReadonlyDomainRepository<T> : ReadonlyRepository, IReadonlyDomainRepository<T> where T : class
+    public class ReadonlyDomainRepository<T> : ReadonlyRepository, IReadonlyDomainRepository<T>
+        where T : class
     {
         private readonly ReadonlyEventManager<T> _eventManager;
 
-        public ReadonlyDomainRepository(IReadonlyDomainContext<T> context, IDomain domain) : base(context)
+        public ReadonlyDomainRepository(IReadonlyDomainContext<T> context, IDomain domain)
+            : base(context)
         {
             _eventManager = new ReadonlyEventManager<T>(this);
 
@@ -21,6 +23,6 @@ namespace Highway.Data.Repositories
             }
         }
 
-        public IReadonlyDomainContext<T> DomainContext => (IReadonlyDomainContext<T>)base.Context;
+        public IReadonlyDomainContext<T> DomainContext => (IReadonlyDomainContext<T>)Context;
     }
 }

@@ -1,7 +1,0 @@
-var searchData=
-[
-  ['register_3c_20t_20_3e',['Register&lt; T &gt;',['../class_highway_1_1_data_1_1_event_management_1_1_event_manager.html#afef19b17ec8fa17764a1cd24f5569f34',1,'Highway.Data.EventManagement.EventManager.Register&lt; T &gt;()'],['../interface_highway_1_1_data_1_1_interfaces_1_1_i_event_manager.html#a5573595e903c9d9831145aaca1b24fa7',1,'Highway.Data.Interfaces.IEventManager.Register&lt; T &gt;()']]],
-  ['reload_3c_20t_20_3e',['Reload&lt; T &gt;',['../interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#ac56bd7fbcb297fd6d0deb0edafe057df',1,'Highway.Data.Interfaces.IDataContext.Reload&lt; T &gt;()'],['../class_highway_1_1_data_1_1_data_context.html#a356e8fd459774943527943f1cfeb4f46',1,'Highway.Data.DataContext.Reload&lt; T &gt;()'],['../class_highway_1_1_data_1_1_object_data_context.html#a8012b2235781cd84e3b5a4c8f90f0627',1,'Highway.Data.ObjectDataContext.Reload&lt; T &gt;()']]],
-  ['remove_3c_20t_20_3e',['Remove&lt; T &gt;',['../interface_highway_1_1_data_1_1_interfaces_1_1_i_data_context.html#a07a2c7548509a6db53dd3da67ff5125d',1,'Highway.Data.Interfaces.IDataContext.Remove&lt; T &gt;()'],['../class_highway_1_1_data_1_1_data_context.html#a17ff1673fd0d79f6637e32748f38c9b5',1,'Highway.Data.DataContext.Remove&lt; T &gt;()'],['../class_highway_1_1_data_1_1_object_data_context.html#abd11d26a547a30aa8e9ec792cbe92bf6',1,'Highway.Data.ObjectDataContext.Remove&lt; T &gt;()']]],
-  ['repository',['Repository',['../class_highway_1_1_data_1_1_repository.html#a389f626c975fba670445d97b9ae780c2',1,'Highway::Data::Repository']]]
-];

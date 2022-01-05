@@ -1,5 +1,14 @@
 Standardize names for TSelector, TSelection, TProjector, TProjection
 
+Remove ReadonlyDataContext
+Remove IReadonlyDataContext
+Remove IReadonlyEntityDataContext
+Remove IReadonlyDomainContext
+
+Separate branch and pull request for later readonly application intent on DataContext construction.
+Undo setting readonly application intent on constructrion for the current pull request.
+
+
 Look at common base classes where direct inheritance doesn't work.
 
 Should IRepository.Context move to IReadonlyRepository?
@@ -21,3 +30,6 @@ Extract base classes for all new concretions.
 Run code cleanup, but only on new types.
 
 Remove this file.
+
+
+Merge all new work forward into datacontext-readonly-app-intent

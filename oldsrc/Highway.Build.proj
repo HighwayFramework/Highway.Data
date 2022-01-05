@@ -1,9 +1,0 @@
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-<msbuild project="${SolutionFile}">
-  <property name="Configuration" value="${ProjectConfig}"/>
-  <property name="Platform" value="${Platform}"/>
-  <property name="TargetFrameworkVersion" value="${TargetFrameworkVersion}"/>
-  <property name="MSBuildTargets" value="${MSBuildTargets}"/>
-  <property name="BuildConstants" value="${BuildConstants}"/>
-</msbuild>
-</Project>

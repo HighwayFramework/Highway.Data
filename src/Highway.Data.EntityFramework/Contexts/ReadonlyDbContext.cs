@@ -21,37 +21,37 @@ namespace Highway.Data
         {
         }
 
-        public override int SaveChanges()
+        public sealed override int SaveChanges()
         {
             throw new InvalidOperationException($"Do not call {nameof(SaveChanges)} on a {nameof(ReadonlyDbContext)}.");
         }
 
-        public override Task<int> SaveChangesAsync()
+        public sealed override Task<int> SaveChangesAsync()
         {
             throw new InvalidOperationException($"Do not call {nameof(SaveChangesAsync)} on a {nameof(ReadonlyDbContext)}.");
         }
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+        public sealed override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
             throw new InvalidOperationException($"Do not call {nameof(SaveChangesAsync)} on a {nameof(ReadonlyDbContext)}.");
         }
 
-        public override DbSet<TEntity> Set<TEntity>()
+        public sealed override DbSet<TEntity> Set<TEntity>()
         {
             throw new InvalidOperationException($"Do not call {nameof(Set)} on a {nameof(ReadonlyDbContext)}.");
         }
 
-        public override DbSet Set(Type entityType)
+        public sealed override DbSet Set(Type entityType)
         {
             throw new InvalidOperationException($"Do not call {nameof(Set)} on a {nameof(ReadonlyDbContext)}.");
         }
 
-        protected override bool ShouldValidateEntity(DbEntityEntry entityEntry)
+        protected sealed override bool ShouldValidateEntity(DbEntityEntry entityEntry)
         {
             throw new InvalidOperationException($"Do not call {nameof(ShouldValidateEntity)} on a {nameof(ReadonlyDbContext)}.");
         }
 
-        protected override DbEntityValidationResult ValidateEntity(DbEntityEntry entityEntry, IDictionary<object, object> items)
+        protected sealed override DbEntityValidationResult ValidateEntity(DbEntityEntry entityEntry, IDictionary<object, object> items)
         {
             throw new InvalidOperationException($"Do not call {nameof(ValidateEntity)} on a {nameof(ReadonlyDbContext)}.");
         }

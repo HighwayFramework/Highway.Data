@@ -28,32 +28,32 @@ namespace Highway.Data
 
         public override Task<int> SaveChangesAsync()
         {
-            throw new InvalidOperationException($"{nameof(ReadonlyDataContext)} does not implement {nameof(SaveChangesAsync)}");
+            throw new InvalidOperationException($"Do not call {nameof(SaveChangesAsync)} on a {nameof(ReadonlyDbContext)}.");
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
-            throw new InvalidOperationException($"{nameof(ReadonlyDataContext)} does not implement {nameof(SaveChangesAsync)}");
+            throw new InvalidOperationException($"Do not call {nameof(SaveChangesAsync)} on a {nameof(ReadonlyDbContext)}.");
         }
 
         public override DbSet<TEntity> Set<TEntity>()
         {
-            throw new InvalidOperationException($"{nameof(ReadonlyDataContext)} does not implement {nameof(Set)}");
+            throw new InvalidOperationException($"Do not call {nameof(Set)} on a {nameof(ReadonlyDbContext)}.");
         }
 
         public override DbSet Set(Type entityType)
         {
-            throw new InvalidOperationException($"{nameof(ReadonlyDataContext)} does not implement {nameof(Set)}");
+            throw new InvalidOperationException($"Do not call {nameof(Set)} on a {nameof(ReadonlyDbContext)}.");
         }
 
         protected override bool ShouldValidateEntity(DbEntityEntry entityEntry)
         {
-            throw new InvalidOperationException($"{nameof(ReadonlyDataContext)} does not implement {nameof(ShouldValidateEntity)}");
+            throw new InvalidOperationException($"Do not call {nameof(ShouldValidateEntity)} on a {nameof(ReadonlyDbContext)}.");
         }
 
         protected override DbEntityValidationResult ValidateEntity(DbEntityEntry entityEntry, IDictionary<object, object> items)
         {
-            throw new InvalidOperationException($"{nameof(ReadonlyDataContext)} does not implement {nameof(ValidateEntity)}");
+            throw new InvalidOperationException($"Do not call {nameof(ValidateEntity)} on a {nameof(ReadonlyDbContext)}.");
         }
     }
 }

@@ -1,3 +1,5 @@
+Get rid of DebugFormat / TraceFormat in favor of string interpolation.
+
 Decide how to get IReadonlyDataContext into queries / scalars
 - Use a common base interface for IDataContext / IReadonlyDataContext
 - Make IReadonlyDataContext inherit from IDataContext  and throw in non-implemented members.  Seems awfully tacky.
@@ -6,20 +8,9 @@ Decide how to get IReadonlyDataContext into queries / scalars
 
 Standardize names for TSelector, TSelection, TProjector, TProjection
 
-Should IRepository.Context move to IReadonlyRepository?
-Should IUnitOfWork get a readonly version?
-Should IDomain get a readonly version?
-Make a ReadOnlyDataContext?
-  Update DomainRepositoryFactory to use it.
-
-Look to see what uses of each interface can be made into the readonly version of that interface.
-
 Extract base classes for all new concretions.
-Run code cleanup, but only on new types.
 
-Extract a DataContextBase (if not.  Not important)
-
-Get rid of DebugFormat / TraceFormat in favor of string interpolation.
+Extract a DataContextBase (if time.  Not important)
 
 Remove this file.
 

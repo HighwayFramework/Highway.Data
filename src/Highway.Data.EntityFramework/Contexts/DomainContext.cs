@@ -37,12 +37,12 @@ namespace Highway.Data
         /// <summary>
         ///     The event fired just before the commit of the ORM
         /// </summary>
-        public event EventHandler<BeforeSave> BeforeSave;
+        public new event EventHandler<BeforeSave> BeforeSave;
 
         /// <summary>
         ///     The event fired just after the commit of the ORM
         /// </summary>
-        public event EventHandler<AfterSave> AfterSave;
+        public new event EventHandler<AfterSave> AfterSave;
 
         public override int Commit()
         {

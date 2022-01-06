@@ -8,12 +8,20 @@ namespace Highway.Data
 {
     public class ReadonlyRepository : IReadonlyRepository
     {
-        public IReadonlyDataContext Context { get; }
+        private readonly IReadonlyDataContext _context;
 
         public ReadonlyRepository(IReadonlyDataContext context)
         {
-            Context = context;
+            _context = context;
         }
+
+        public event EventHandler<BeforeQuery> BeforeQuery;
+
+        public event EventHandler<BeforeScalar> BeforeScalar;
+
+        public event EventHandler<AfterQuery> AfterQuery;
+
+        public event EventHandler<AfterScalar> AfterScalar;
 
         /// <summary>
         ///     Executes a prebuilt <see cref="IScalar{T}" /> and returns a single instance of <typeparamref name="T" />
@@ -24,7 +32,7 @@ namespace Highway.Data
         public virtual T Find<T>(IScalar<T> scalar)
         {
             OnBeforeScalar(new BeforeScalar(scalar));
-            var result = scalar.Execute(Context);
+            var result = scalar.Execute(_context);
             OnAfterScalar(new AfterScalar(scalar));
 
             return result;
@@ -39,7 +47,7 @@ namespace Highway.Data
         public virtual IEnumerable<T> Find<T>(IQuery<T> query)
         {
             OnBeforeQuery(new BeforeQuery(query));
-            var result = query.Execute(Context);
+            var result = query.Execute(_context);
             OnAfterQuery(new AfterQuery(result));
 
             return result;
@@ -53,7 +61,7 @@ namespace Highway.Data
         /// <returns>The task that will return an instance of <typeparamref name="T" /> from the scalar</returns>
         public virtual Task<T> FindAsync<T>(IScalar<T> scalar)
         {
-            var task = new Task<T>(() => scalar.Execute(Context));
+            var task = new Task<T>(() => scalar.Execute(_context));
             task.Start();
 
             return task;
@@ -67,12 +75,11 @@ namespace Highway.Data
         /// <returns>The task that will return <see cref="IEnumerable{T}" /> from the scalar</returns>
         public virtual Task<IEnumerable<T>> FindAsync<T>(IQuery<T> query)
         {
-            var task = new Task<IEnumerable<T>>(() => query.Execute(Context));
+            var task = new Task<IEnumerable<T>>(() => query.Execute(_context));
             task.Start();
 
             return task;
         }
-
 
         /// <summary>
         ///     Executes a prebuilt <see cref="IQuery{T}" /> and returns an <see cref="IEnumerable{T}" />
@@ -84,19 +91,11 @@ namespace Highway.Data
         public virtual Task<IEnumerable<TProjection>> FindAsync<TSelection, TProjection>(IQuery<TSelection, TProjection> query)
             where TSelection : class
         {
-            var task = new Task<IEnumerable<TProjection>>(() => query.Execute(Context));
+            var task = new Task<IEnumerable<TProjection>>(() => query.Execute(_context));
             task.Start();
 
             return task;
         }
-
-        public event EventHandler<BeforeQuery> BeforeQuery;
-
-        public event EventHandler<BeforeScalar> BeforeScalar;
-
-        public event EventHandler<AfterQuery> AfterQuery;
-
-        public event EventHandler<AfterScalar> AfterScalar;
 
         protected virtual void OnAfterQuery(AfterQuery e)
         {
@@ -117,6 +116,5 @@ namespace Highway.Data
         {
             BeforeScalar?.Invoke(this, e);
         }
-
     }
 }

@@ -9,11 +9,6 @@ namespace Highway.Data
     public interface IReadonlyRepository
     {
         /// <summary>
-        ///     Reference to the readonly data context, allowing queries.
-        /// </summary>
-        IReadonlyDataContext Context { get; }
-
-        /// <summary>
         ///     Executes a prebuilt <see cref="IScalar{T}" /> and returns a single instance of <typeparamref name="T" />
         /// </summary>
         /// <typeparam name="T">The Entity being queried</typeparam>

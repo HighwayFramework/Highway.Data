@@ -41,9 +41,9 @@ namespace Highway.Data
         public event EventHandler<AfterQuery> AfterQuery;
 
         /// <summary>
-        ///     The reference to the <see cref="IQueryableProvider" /> that gives data connection
+        ///     The reference to the <see cref="IDataContextBase" /> that gives data connection
         /// </summary>
-        protected IQueryableProvider Context { get; set; }
+        protected IDataContextBase Context { get; set; }
 
         /// <summary>
         ///     Adds a method to the expression in the query object

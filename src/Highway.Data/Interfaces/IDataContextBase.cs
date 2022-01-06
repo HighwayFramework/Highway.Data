@@ -5,7 +5,7 @@ namespace Highway.Data
     /// <summary>
     ///     Contract that provides <see cref="IQueryable" /> instances.
     /// </summary>
-    public interface IQueryableProvider
+    public interface IDataContextBase
     {
         /// <summary>
         ///     This gives a mock-able wrapper around normal Set method that allows for testability

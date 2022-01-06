@@ -15,7 +15,7 @@ namespace Highway.Data
     {
         protected Func<IQueryable<TSelection>, IQueryable<TProjection>> Projector { get; set; }
 
-        protected Func<IQueryableProvider, IQueryable<TSelection>> Selector { get; set; }
+        protected Func<IDataContextBase, IQueryable<TSelection>> Selector { get; set; }
 
         /// <summary>
         ///     This executes the expression in ContextQuery on the context that is passed in, resulting in a
@@ -25,12 +25,12 @@ namespace Highway.Data
         /// <returns>
         ///     <see cref="IEnumerable{T}" />
         /// </returns>
-        public virtual IEnumerable<TProjection> Execute(IQueryableProvider context)
+        public virtual IEnumerable<TProjection> Execute(IDataContextBase context)
         {
             return PrepareQuery(context);
         }
 
-        public virtual string OutputQuery(IQueryableProvider context)
+        public virtual string OutputQuery(IDataContextBase context)
         {
             var query = PrepareQuery(context);
 
@@ -65,7 +65,7 @@ namespace Highway.Data
             return Selector(Context);
         }
 
-        protected IQueryable<TProjection> PrepareQuery(IQueryableProvider context)
+        protected IQueryable<TProjection> PrepareQuery(IDataContextBase context)
         {
             Context = context;
             CheckContextAndQuery(Selector);

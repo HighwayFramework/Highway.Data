@@ -8,7 +8,7 @@ namespace Highway.Data
     {
         protected Func<SqlConnection, T> ContextQuery;
 
-        public T Execute(IQueryableProvider context)
+        public T Execute(IDataContextBase context)
         {
             var efContext = context as DbContext;
             using (var conn = new SqlConnection(efContext.Database.Connection.ConnectionString))

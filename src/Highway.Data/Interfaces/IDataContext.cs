@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 
 using Highway.Data.Interceptors.Events;
 

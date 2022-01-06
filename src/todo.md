@@ -1,3 +1,8 @@
+Questions:
+- I don't seem to need any mappings in my ReadonlyDataContext or any derived types.  Is that correct?
+
+Make sure I didn't mess up any namespaces
+
 Look at updating Before/After save events in all data contexts the way I did it in sqe.
 
 Decide how to get IReadonlyDataContext into queries / scalars
@@ -20,3 +25,8 @@ Extract base classes for all new concretions.
 Run code cleanup, but only on new types.
 
 Remove this file.
+
+
+Suggestions moving forward:
+- Pick an approach to namespaces and stick to it.
+- Pick an approach to generic filenames and stick to it.

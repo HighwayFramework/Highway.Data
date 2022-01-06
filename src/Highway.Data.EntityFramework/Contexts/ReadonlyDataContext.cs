@@ -6,6 +6,8 @@ using System.Linq;
 using Common.Logging;
 using Common.Logging.Simple;
 
+using Highway.Data.EntityFramework;
+
 namespace Highway.Data
 {
     public class ReadonlyDataContext : ReadonlyDbContext, IReadonlyEntityDataContext

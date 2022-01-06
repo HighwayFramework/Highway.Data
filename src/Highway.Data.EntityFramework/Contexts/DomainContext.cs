@@ -1,10 +1,5 @@
-using System;
-using System.Threading.Tasks;
-
 using Common.Logging;
 using Common.Logging.Simple;
-
-using Highway.Data.Interceptors.Events;
 
 namespace Highway.Data
 {
@@ -32,44 +27,6 @@ namespace Highway.Data
         public DomainContext(T domain, ILog logger)
             : base(domain.ConnectionString, domain.Mappings, domain.Context, logger)
         {
-        }
-
-        /// <summary>
-        ///     The event fired just before the commit of the ORM
-        /// </summary>
-        public new event EventHandler<BeforeSave> BeforeSave;
-
-        /// <summary>
-        ///     The event fired just after the commit of the ORM
-        /// </summary>
-        public new event EventHandler<AfterSave> AfterSave;
-
-        public override int Commit()
-        {
-            OnBeforeSave();
-            var changes = base.Commit();
-            OnAfterSave();
-
-            return changes;
-        }
-
-        public override async Task<int> CommitAsync()
-        {
-            OnBeforeSave();
-            var changes = await base.CommitAsync();
-            OnAfterSave();
-
-            return changes;
-        }
-
-        private void OnAfterSave()
-        {
-            AfterSave?.Invoke(this, new AfterSave());
-        }
-
-        private void OnBeforeSave()
-        {
-            BeforeSave?.Invoke(this, new BeforeSave());
         }
     }
 }

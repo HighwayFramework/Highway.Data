@@ -1,10 +1,3 @@
-Questions:
-- I don't seem to need any mappings in my ReadonlyDataContext or any derived types.  Is that correct?
-
-Make sure I didn't mess up any namespaces
-
-Look at updating Before/After save events in all data contexts the way I did it in sqe.
-
 Decide how to get IReadonlyDataContext into queries / scalars
 - Use a common base interface for IDataContext / IReadonlyDataContext
 - Make IReadonlyDataContext inherit from IDataContext  and throw in non-implemented members.  Seems awfully tacky.
@@ -24,8 +17,15 @@ Look to see what uses of each interface can be made into the readonly version of
 Extract base classes for all new concretions.
 Run code cleanup, but only on new types.
 
+Extract a DataContextBase (if not.  Not important)
+
+Get rid of DebugFormat / TraceFormat in favor of string interpolation.
+
 Remove this file.
 
+
+Questions:
+- I don't seem to need any mappings in my ReadonlyDataContext or any derived types.  Is that correct?
 
 Suggestions moving forward:
 - Pick an approach to namespaces and stick to it.

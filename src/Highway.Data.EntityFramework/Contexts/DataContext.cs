@@ -242,10 +242,12 @@ namespace Highway.Data
         /// <returns>the number of rows affected</returns>
         public virtual int Commit()
         {
+            OnBeforeSave();
             _log.Trace("\tCommit");
             ChangeTracker.DetectChanges();
             var result = SaveChanges();
-            _log.DebugFormat("\tCommited {0} Changes", result);
+            _log.DebugFormat("\tCommitted {0} Changes", result);
+            OnAfterSave();
 
             return result;
         }
@@ -254,12 +256,14 @@ namespace Highway.Data
         ///     Commits all currently tracked entity changes asynchronously
         /// </summary>
         /// <returns>the number of rows affected</returns>
-        public virtual Task<int> CommitAsync()
+        public virtual async Task<int> CommitAsync()
         {
+            OnBeforeSave();
             _log.Trace("\tCommit");
             ChangeTracker.DetectChanges();
-            var result = SaveChangesAsync();
-            result.ContinueWith(x => _log.DebugFormat("\tCommited {0} Changes", result));
+            var result = await SaveChangesAsync();
+            _log.DebugFormat("\tCommitted {0} Changes", result);
+            OnAfterSave();
 
             return result;
         }
@@ -402,6 +406,16 @@ namespace Highway.Data
             where T : class
         {
             return Entry(item);
+        }
+
+        protected void OnAfterSave()
+        {
+            AfterSave?.Invoke(this, new AfterSave());
+        }
+
+        protected void OnBeforeSave()
+        {
+            BeforeSave?.Invoke(this, new BeforeSave());
         }
 
         /// <summary>

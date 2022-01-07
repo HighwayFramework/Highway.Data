@@ -1,3 +1,5 @@
+Consider removing IReadonlyDataContext from InMemoryDataContext.
+
 Get rid of DebugFormat / TraceFormat in favor of string interpolation.
 
 Decide how to get IReadonlyDataContext into queries / scalars

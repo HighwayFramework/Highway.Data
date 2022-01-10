@@ -7,7 +7,7 @@ namespace Highway.Data
     /// <summary>
     ///     The standard interface used to interact with an ORM specific implementation
     /// </summary>
-    public interface IDataContext : IDataContextBase, IDisposable, IUnitOfWork
+    public interface IDataContext : IDataSource, IDisposable, IUnitOfWork
     {
         /// <summary>
         ///     The event fired just before the commit of the persistence

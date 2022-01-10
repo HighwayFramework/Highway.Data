@@ -17,48 +17,48 @@ namespace Highway.Data
         /// <summary>
         ///     Constructs a context
         /// </summary>
-        /// <param name="nameOrConnectionString">The standard SQL connection string for the Database</param>
-        public ReadonlyDataContext(string nameOrConnectionString)
-            : this(nameOrConnectionString, new DefaultContextConfiguration(), new NoOpLogger())
+        /// <param name="connectionString">The standard SQL connection string for the Database</param>
+        public ReadonlyDataContext(string connectionString)
+            : this(connectionString, new DefaultContextConfiguration(), new NoOpLogger())
         {
         }
 
         /// <summary>
         ///     Constructs a context
         /// </summary>
-        /// <param name="nameOrConnectionString">The standard SQL connection string for the Database</param>
+        /// <param name="connectionString">The standard SQL connection string for the Database</param>
         /// <param name="log">The logger being supplied for this context ( Optional )</param>
-        public ReadonlyDataContext(string nameOrConnectionString, ILog log)
-            : this(nameOrConnectionString, new DefaultContextConfiguration(), log)
+        public ReadonlyDataContext(string connectionString, ILog log)
+            : this(connectionString, new DefaultContextConfiguration(), log)
         {
         }
 
         /// <summary>
         ///     Constructs a context
         /// </summary>
-        /// <param name="nameOrConnectionString">The standard SQL connection string for the Database</param>
+        /// <param name="connectionString">The standard SQL connection string for the Database</param>
         /// <param name="contextConfiguration">
         ///     The context specific configuration that will change context level behavior (
         ///     Optional )
         /// </param>
         public ReadonlyDataContext(
-            string nameOrConnectionString,
+            string connectionString,
             IContextConfiguration contextConfiguration)
-            : this(nameOrConnectionString, contextConfiguration, new NoOpLogger())
+            : this(connectionString, contextConfiguration, new NoOpLogger())
         {
         }
 
         /// <summary>
         ///     Constructs a context
         /// </summary>
-        /// <param name="nameOrConnectionString">The standard SQL connection string for the Database</param>
+        /// <param name="connectionString">The standard SQL connection string for the Database</param>
         /// <param name="contextConfiguration">The context specific configuration that will change context level behavior</param>
         /// <param name="log">The logger being supplied for this context ( Optional )</param>
         public ReadonlyDataContext(
-            string nameOrConnectionString,
+            string connectionString,
             IContextConfiguration contextConfiguration,
             ILog log)
-            : base(nameOrConnectionString)
+            : base(connectionString)
         {
             _log = log;
             Database.Log = _log.Debug;

@@ -11,34 +11,36 @@ namespace Highway.Data.Factories
 
         private readonly ILog _logger;
 
+        private readonly IMappingConfiguration _mappings;
+
         /// <summary>
         ///     Creates a repository factory for the supplied list of domains
         /// </summary>
-        public ReadonlyRepositoryFactory(string connectionString)
-            : this(connectionString, new DefaultContextConfiguration(), new NoOpLogger())
+        public ReadonlyRepositoryFactory(string connectionString, IMappingConfiguration mappings)
+            : this(connectionString, mappings, new DefaultContextConfiguration(), new NoOpLogger())
         {
         }
 
         /// <summary>
         ///     Creates a repository factory for the supplied list of domains
         /// </summary>
-        public ReadonlyRepositoryFactory(string connectionString, IContextConfiguration contextConfiguration)
-            : this(connectionString, contextConfiguration, new NoOpLogger())
+        public ReadonlyRepositoryFactory(string connectionString, IMappingConfiguration mappings, IContextConfiguration contextConfiguration)
+            : this(connectionString, mappings, contextConfiguration, new NoOpLogger())
         {
         }
 
         /// <summary>
         ///     Creates a repository factory for the supplied list of domains
         /// </summary>
-        public ReadonlyRepositoryFactory(string connectionString, ILog logger)
-            : this(connectionString, new DefaultContextConfiguration(), logger)
+        public ReadonlyRepositoryFactory(string connectionString, IMappingConfiguration mappings, ILog logger)
+            : this(connectionString, mappings, new DefaultContextConfiguration(), logger)
         {
         }
 
         /// <summary>
         ///     Creates a repository factory for the supplied list of domains
         /// </summary>
-        public ReadonlyRepositoryFactory(string connectionString, IContextConfiguration contextConfig, ILog logger)
+        public ReadonlyRepositoryFactory(string connectionString, IMappingConfiguration mappings, IContextConfiguration contextConfig, ILog logger)
         {
             _connectionString = connectionString;
             _contextConfig = contextConfig;
@@ -51,7 +53,7 @@ namespace Highway.Data.Factories
         /// <returns>Domain specific repository</returns>
         public IReadonlyRepository CreateReadonly()
         {
-            return new ReadonlyRepository(new ReadonlyDataContext(_connectionString, _contextConfig, _logger));
+            return new ReadonlyRepository(new ReadonlyDataContext(_connectionString, _mappings, _contextConfig, _logger));
         }
     }
 }

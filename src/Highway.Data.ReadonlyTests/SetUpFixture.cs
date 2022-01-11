@@ -1,7 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
 using System.Data.SqlClient;
+
+using FluentAssertions;
+
+using Highway.Data.Repositories;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -47,55 +49,29 @@ namespace Highway.Data.ReadonlyTests
         [TestMethod]
         public void TestOne()
         {
-            var connectionString = TestConfiguration.Instance.TestDatabaseConnectionString;
-            using (var ctx = new SchoolContext(connectionString))
+            var schoolDomain = new SchoolDomain();
+            var domainContext = new DomainContext<SchoolDomain>(schoolDomain);
+            var domainRepository = new DomainRepository<SchoolDomain>(domainContext, schoolDomain);
+
+            var firstGrade = new Grade
             {
-                var stud = new Student
-                    { StudentName = "Bill" };
+                GradeName = "first",
+                Section = "section one"
+            };
 
-                ctx.Students.Add(stud);
-                ctx.SaveChanges();
-            }
+            var bill = new Student
+            {
+                DateOfBirth = DateTime.Now.Subtract(TimeSpan.FromDays(365)),
+                Grade = firstGrade,
+                Height = 60,
+                Weight = 180,
+                StudentName = "Bill"
+            };
+
+            domainRepository.DomainContext.Add(bill);
+            domainRepository.DomainContext.Commit();
+
+            bill.StudentID.Should().NotBe(0);
         }
-    }
-
-    public class Student
-    {
-        public DateTime? DateOfBirth { get; set; }
-
-        public Grade Grade { get; set; }
-
-        public decimal Height { get; set; }
-
-        public byte[] Photo { get; set; }
-
-        public int StudentID { get; set; }
-
-        public string StudentName { get; set; }
-
-        public float Weight { get; set; }
-    }
-
-    public class Grade
-    {
-        public int GradeId { get; set; }
-
-        public string GradeName { get; set; }
-
-        public string Section { get; set; }
-
-        public ICollection<Student> Students { get; set; }
-    }
-
-    public class SchoolContext : DbContext
-    {
-        public SchoolContext(string connectionString)
-            : base(connectionString)
-        {
-        }
-
-        public DbSet<Grade> Grades { get; set; }
-
-        public DbSet<Student> Students { get; set; }
     }
 }

@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace Highway.Data.ReadonlyTests
+namespace Highway.Data.ReadonlyTests.SchoolDomain
 {
     public class Grade
     {
         public int GradeId { get; set; }
 
-        public string GradeName { get; set; }
+        public string Name { get; set; }
 
         public string Section { get; set; }
 

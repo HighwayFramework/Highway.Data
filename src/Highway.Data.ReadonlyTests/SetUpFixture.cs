@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
 
-using FluentAssertions;
-
-using Highway.Data.Repositories;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highway.Data.ReadonlyTests
@@ -44,34 +40,6 @@ namespace Highway.Data.ReadonlyTests
                     command.ExecuteNonQuery();
                 }
             }
-        }
-
-        [TestMethod]
-        public void TestOne()
-        {
-            var schoolDomain = new SchoolDomain();
-            var domainContext = new DomainContext<SchoolDomain>(schoolDomain);
-            var domainRepository = new DomainRepository<SchoolDomain>(domainContext, schoolDomain);
-
-            var firstGrade = new Grade
-            {
-                GradeName = "first",
-                Section = "section one"
-            };
-
-            var bill = new Student
-            {
-                DateOfBirth = DateTime.Now.Subtract(TimeSpan.FromDays(365)),
-                Grade = firstGrade,
-                Height = 60,
-                Weight = 180,
-                StudentName = "Bill"
-            };
-
-            domainRepository.DomainContext.Add(bill);
-            domainRepository.DomainContext.Commit();
-
-            bill.StudentID.Should().NotBe(0);
         }
     }
 }

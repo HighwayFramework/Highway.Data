@@ -36,16 +36,6 @@ namespace Highway.Data
             throw new InvalidOperationException($"Do not call {nameof(SaveChangesAsync)} on a {nameof(ReadonlyDbContext)}.");
         }
 
-        public sealed override DbSet<TEntity> Set<TEntity>()
-        {
-            throw new InvalidOperationException($"Do not call {nameof(Set)} on a {nameof(ReadonlyDbContext)}.");
-        }
-
-        public sealed override DbSet Set(Type entityType)
-        {
-            throw new InvalidOperationException($"Do not call {nameof(Set)} on a {nameof(ReadonlyDbContext)}.");
-        }
-
         protected sealed override bool ShouldValidateEntity(DbEntityEntry entityEntry)
         {
             throw new InvalidOperationException($"Do not call {nameof(ShouldValidateEntity)} on a {nameof(ReadonlyDbContext)}.");

@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 
-namespace Highway.Data.ReadonlyTests
+namespace Highway.Data.ReadonlyTests.SchoolDomain
 {
     public class SchoolMapping : IMappingConfiguration
     {

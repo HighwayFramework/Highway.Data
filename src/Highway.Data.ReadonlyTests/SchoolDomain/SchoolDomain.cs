@@ -2,7 +2,7 @@
 
 using Highway.Data.EventManagement.Interfaces;
 
-namespace Highway.Data.ReadonlyTests
+namespace Highway.Data.ReadonlyTests.SchoolDomain
 {
     public class SchoolDomain : IDomain
     {

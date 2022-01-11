@@ -42,7 +42,7 @@ namespace Highway.Data.ReadonlyTests
 
         public string TestDatabaseConnectionString { get; }
 
-        public string TestDatabaseName { get; }
+        public string TestDatabaseName => $"secured-query-engine-{_testDatabaseGuid}";
 
         private static TestConfiguration Instantiate()
         {

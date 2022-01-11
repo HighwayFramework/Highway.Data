@@ -187,7 +187,7 @@ namespace Highway.Data
             where T : class
         {
             _log.Debug($"Querying Object {typeof(T).Name}");
-            var result = Set<T>();
+            var result = InnerSet<T>();
             _log.Trace($"Queried Object {typeof(T).Name}");
 
             return result;

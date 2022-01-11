@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 
 using Common.Logging;
@@ -11,13 +10,9 @@ using Highway.Data.EntityFramework;
 
 namespace Highway.Data
 {
-    public class ReadonlyDataContext : ReadonlyDbContext, IReadonlyEntityDataContext
+    public class ReadonlyDataContext : IReadonlyEntityDataContext
     {
-        private readonly bool _databaseFirst;
-
-        private readonly ILog _log;
-
-        private readonly IMappingConfiguration _mapping;
+        private readonly ReadonlyDbContext _context;
 
         /// <summary>
         ///     Constructs a readonly context
@@ -69,15 +64,8 @@ namespace Highway.Data
             IMappingConfiguration mapping,
             IContextConfiguration contextConfiguration,
             ILog log)
-            : base(connectionString)
         {
-            _mapping = mapping;
-            _log = log;
-            Database.Log = _log.Debug;
-            if (contextConfiguration != null)
-            {
-                contextConfiguration.ConfigureContext(this);
-            }
+            _context = new ReadonlyDbContext(connectionString, mapping, contextConfiguration, log);
         }
 
         /// <summary>
@@ -101,10 +89,8 @@ namespace Highway.Data
         /// </param>
         /// <param name="log">The logger for the database first context</param>
         public ReadonlyDataContext(string databaseFirstConnectionString, ILog log)
-            : base(databaseFirstConnectionString)
         {
-            _databaseFirst = true;
-            _log = log;
+            _context = new ReadonlyDbContext(databaseFirstConnectionString, log);
         }
 
         /// <summary>
@@ -164,15 +150,8 @@ namespace Highway.Data
             IMappingConfiguration mapping,
             IContextConfiguration contextConfiguration,
             ILog log)
-            : base(dbConnection, contextOwnsConnection)
         {
-            _mapping = mapping;
-            _log = log;
-            Database.Log = _log.Debug;
-            if (contextConfiguration != null)
-            {
-                contextConfiguration.ConfigureContext(this);
-            }
+            _context = new ReadonlyDbContext(dbConnection, contextOwnsConnection, mapping, contextConfiguration, log);
         }
 
         /// <summary>
@@ -186,11 +165,12 @@ namespace Highway.Data
         public IQueryable<T> AsQueryable<T>()
             where T : class
         {
-            _log.Debug($"Querying Object {typeof(T).Name}");
-            var result = InnerSet<T>();
-            _log.Trace($"Queried Object {typeof(T).Name}");
+            return _context.InnerSet<T>();
+        }
 
-            return result;
+        public void Dispose()
+        {
+            _context?.Dispose();
         }
 
         /// <summary>
@@ -203,44 +183,7 @@ namespace Highway.Data
         /// <returns>An <see cref="IEnumerable{T}" /> from the query return</returns>
         public IEnumerable<T> ExecuteSqlQuery<T>(string sql, params DbParameter[] dbParams)
         {
-            var parameters = dbParams.Select(x => $"{x.ParameterName} : {x.Value} : {x.DbType}\t").ToArray();
-
-            _log.Trace($"Executing SQL {sql}, with parameters {string.Join(",", parameters)}");
-
-            return Database.SqlQuery<T>(sql, dbParams);
-        }
-
-        /// <summary>
-        ///     This method is called when the model for a derived context has been initialized, but
-        ///     before the model has been locked down and used to initialize the context.  The default
-        ///     implementation of this method takes the <see cref="IMappingConfiguration" /> array passed in on construction and
-        ///     applies them.
-        ///     If no configuration mappings were passed it it does nothing.
-        /// </summary>
-        /// <remarks>
-        ///     Typically, this method is called only once when the first instance of a derived context
-        ///     is created.  The model for that context is then cached and is for all further instances of
-        ///     the context in the app domain.  This caching can be disabled by setting the ModelCaching
-        ///     property on the given ModelBuilder, but note that this can seriously degrade performance.
-        ///     More control over caching is provided through use of the DbModelBuilder and DbContextFactory
-        ///     classes directly.
-        /// </remarks>
-        /// <param name="modelBuilder">The builder that defines the model for the context being created</param>
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            if (_databaseFirst)
-            {
-                throw new UnintentionalCodeFirstException();
-            }
-
-            _log.Debug("\tOnModelCreating");
-            if (_mapping != null)
-            {
-                _log.TraceFormat("\t\tMapping : {0}", _mapping.GetType().Name);
-                _mapping.ConfigureModelBuilder(modelBuilder);
-            }
-
-            base.OnModelCreating(modelBuilder);
+            return _context.ExecuteSqlQuery<T>(sql, dbParams);
         }
     }
 }

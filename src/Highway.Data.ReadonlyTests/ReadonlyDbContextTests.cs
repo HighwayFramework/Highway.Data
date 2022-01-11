@@ -2,19 +2,21 @@
 using System.Threading;
 using System.Threading.Tasks;
 
+using Common.Logging.Simple;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highway.Data.ReadonlyTests
 {
     [TestClass]
-    public class ReadonlyDataContextTests
+    public class ReadonlyDbContextTests
     {
-        private static ReadonlyDataContext _target;
+        private static ReadonlyDbContext _target;
 
         [ClassInitialize]
         public static void ClassInit(TestContext context)
         {
-            _target = new ReadonlyDataContext(Configuration.Instance.TestDatabaseConnectionString);
+            _target = new ReadonlyDbContext(Configuration.Instance.TestDatabaseConnectionString, new NoOpLogger());
         }
 
         [TestMethod]

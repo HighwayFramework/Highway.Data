@@ -1,17 +1,19 @@
 ﻿using System;
+using System.Linq;
 
 using FluentAssertions;
 
 using Highway.Data.Factories;
-using Highway.Data.Repositories;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highway.Data.ReadonlyTests
 {
     [TestClass]
-    public class FirstTest
+    public class ReadonlyDomainRepositoryTests
     {
+        private static IReadonlyRepository _target;
+
         [ClassInitialize]
         public static void ClassInit(TestContext context)
         {
@@ -37,15 +39,21 @@ namespace Highway.Data.ReadonlyTests
 
             domainRepository.Context.Add(bill);
             domainRepository.Context.Commit();
+
+            _target = domainRepositoryFactory.CreateReadonly(typeof(SchoolDomain)) as IReadonlyDomainRepository<SchoolDomain>;
         }
 
         [TestMethod]
-        public void TestOne()
+        public void CanExecuteQuery()
         {
-            var schoolDomain = new SchoolDomain();
-            var domainRepositoryFactory = new DomainRepositoryFactory(new IDomain[] { schoolDomain });
-            var domainRepository = domainRepositoryFactory.CreateReadonly(typeof(SchoolDomain));
-            var bill = domainRepository.Find(new GetStudentByName("Bill"));
+            var students = _target.Find(new GetStudents()).ToList();
+            students.Count.Should().BeGreaterThan(0);
+        }
+
+        [TestMethod]
+        public void CanExecuteScalar()
+        {
+            var bill = _target.Find(new GetStudentByName("Bill"));
             bill.Grade.Name.Should().Be("first");
         }
     }

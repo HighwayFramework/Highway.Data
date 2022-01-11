@@ -8,3 +8,5 @@ To set your connection string, run:
 dotnet user-secrets set "SqlConnectionString" "Data Source=.;Initial Catalog=[DATABASE_NAME];Integrated Security=false;User ID=sa;Password=[PASSWORD]"
 
 You can use any valid SQL server connection string, so long as you have SA permissions to the server.
+
+The only configuration value used regardless of environment variable or user secret, is "SqlConnectionString."

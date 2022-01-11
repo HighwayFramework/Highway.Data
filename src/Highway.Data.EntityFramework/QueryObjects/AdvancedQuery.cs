@@ -23,12 +23,12 @@ namespace Highway.Data
         /// <returns>
         ///     <see cref="IEnumerable{T}" />
         /// </returns>
-        public virtual IEnumerable<T> Execute(IDataContextBase context)
+        public virtual IEnumerable<T> Execute(IDataSource context)
         {
             return PrepareQuery(context);
         }
 
-        public string OutputQuery(IDataContextBase context)
+        public string OutputQuery(IDataSource context)
         {
             var query = PrepareQuery(context);
 
@@ -62,7 +62,7 @@ namespace Highway.Data
             return ContextQuery((DataContext)Context);
         }
 
-        protected virtual IQueryable<T> PrepareQuery(IDataContextBase context)
+        protected virtual IQueryable<T> PrepareQuery(IDataSource context)
         {
             Context = context;
             CheckContextAndQuery(ContextQuery);
@@ -92,12 +92,12 @@ namespace Highway.Data
         /// <returns>
         ///     <see cref="IEnumerable{T}" />
         /// </returns>
-        public virtual IEnumerable<TProjection> Execute(IDataContextBase context)
+        public virtual IEnumerable<TProjection> Execute(IDataSource context)
         {
             return PrepareQuery(context);
         }
 
-        public virtual string OutputQuery(IDataContextBase context)
+        public virtual string OutputQuery(IDataSource context)
         {
             var query = PrepareQuery(context);
 
@@ -136,7 +136,7 @@ namespace Highway.Data
         /// </summary>
         /// <param name="context">the context to prepare against</param>
         /// <returns>The prepared but un-executed queryable</returns>
-        protected virtual IQueryable<TProjection> PrepareQuery(IDataContextBase context)
+        protected virtual IQueryable<TProjection> PrepareQuery(IDataSource context)
         {
             Context = context;
             CheckContextAndQuery(Selector);

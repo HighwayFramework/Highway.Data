@@ -12,7 +12,7 @@ namespace Highway.Data
 
         public string SqlStatement { get; set; }
 
-        public IEnumerable<T> Execute(IDataContextBase context)
+        public IEnumerable<T> Execute(IDataSource context)
         {
             if (!(context is DbContext efContext))
             {
@@ -25,12 +25,12 @@ namespace Highway.Data
             }
         }
 
-        public string OutputQuery(IDataContextBase context)
+        public string OutputQuery(IDataSource context)
         {
             return SqlStatement;
         }
 
-        public string OutputSQLStatement(IDataContextBase context)
+        public string OutputSQLStatement(IDataSource context)
         {
             return OutputQuery(context);
         }

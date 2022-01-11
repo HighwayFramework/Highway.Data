@@ -14,7 +14,7 @@ namespace Highway.Data
         /// <summary>
         ///     This holds the expression that will be used to create the <see cref="IQueryable{T}" /> when executed on the context
         /// </summary>
-        protected Func<IDataContextBase, IQueryable<T>> ContextQuery { get; set; }
+        protected Func<IDataSource, IQueryable<T>> ContextQuery { get; set; }
 
         /// <summary>
         ///     This executes the expression in ContextQuery on the context that is passed in, resulting in a
@@ -24,12 +24,12 @@ namespace Highway.Data
         /// <returns>
         ///     <see cref="IEnumerable{T}" />
         /// </returns>
-        public virtual IEnumerable<T> Execute(IDataContextBase context)
+        public virtual IEnumerable<T> Execute(IDataSource context)
         {
             return PrepareQuery(context);
         }
 
-        public virtual string OutputQuery(IDataContextBase context)
+        public virtual string OutputQuery(IDataSource context)
         {
             var query = PrepareQuery(context);
 
@@ -42,7 +42,7 @@ namespace Highway.Data
         /// </summary>
         /// <param name="context">The data context that the query is evaluated and the SQL is generated against</param>
         /// <returns></returns>
-        public virtual string OutputSQLStatement(IDataContextBase context)
+        public virtual string OutputSQLStatement(IDataSource context)
         {
             return OutputQuery(context);
         }
@@ -74,7 +74,7 @@ namespace Highway.Data
             return ContextQuery(Context);
         }
 
-        protected virtual IQueryable<T> PrepareQuery(IDataContextBase context)
+        protected virtual IQueryable<T> PrepareQuery(IDataSource context)
         {
             Context = context;
             CheckContextAndQuery(ContextQuery);

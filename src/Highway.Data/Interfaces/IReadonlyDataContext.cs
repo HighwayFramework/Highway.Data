@@ -5,7 +5,7 @@ namespace Highway.Data
     /// <summary>
     ///     Contract for a readonly Data Context
     /// </summary>
-    public interface IReadonlyDataContext : IDataContextBase, IDisposable
+    public interface IReadonlyDataContext : IDataSource, IDisposable
     {
     }
 }

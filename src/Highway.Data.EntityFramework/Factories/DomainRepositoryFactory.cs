@@ -64,7 +64,7 @@ namespace Highway.Data.Factories
         /// </summary>
         /// <param name="type">Domain for repository</param>
         /// <returns>Domain-specific readonly repository</returns>
-        public IReadonlyRepository CreateReadonly<T>(Type type)
+        public IReadonlyRepository CreateReadonly(Type type)
         {
             return (IReadonlyRepository)CreateRepository(type, typeof(ReadonlyDomainContext<>), typeof(ReadonlyDomainRepository<>));
         }
@@ -74,13 +74,11 @@ namespace Highway.Data.Factories
             Type[] typeArgs = { domainType };
 
             var domain = _domains.SingleOrDefault(x => x.GetType() == domainType);
-            var contextCtor = contextType.MakeGenericType(typeArgs);
-            var untypedObject = Activator.CreateInstance(contextCtor, domain);
+            var contextConstructor = contextType.MakeGenericType(typeArgs);
+            var context = Activator.CreateInstance(contextConstructor, domain);
+            var repositoryConstructor = repositoryType.MakeGenericType(typeArgs);
 
-            var repositoryCtor = repositoryType.MakeGenericType(typeArgs);
-            var repo = Activator.CreateInstance(repositoryCtor, untypedObject, domain);
-
-            return (IRepository)repo;
+            return Activator.CreateInstance(repositoryConstructor, context, domain);
         }
     }
 }

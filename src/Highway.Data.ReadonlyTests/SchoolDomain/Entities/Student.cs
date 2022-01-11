@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Highway.Data.ReadonlyTests.SchoolDomain
+namespace Highway.Data.ReadonlyTests
 {
     public class Student
     {

@@ -11,18 +11,15 @@ namespace Highway.Data.ReadonlyTests
         [AssemblyCleanup]
         public static void AssemblyCleanup()
         {
-            using (var masterSqlConnection = new SqlConnection(TestConfiguration.Instance.MasterConnectionString))
-            {
-                masterSqlConnection.Open();
-                using (var command = masterSqlConnection.CreateCommand())
-                {
-                    command.CommandText = $"EXEC msdb.dbo.sp_delete_database_backuphistory @database_name = N'[{TestConfiguration.Instance.TestDatabaseName}]';"
-                        + $"USE [master]; ALTER DATABASE [{TestConfiguration.Instance.TestDatabaseName}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;"
-                        + $"DROP DATABASE [{TestConfiguration.Instance.TestDatabaseName}];";
+            using var masterSqlConnection = new SqlConnection(Configuration.Instance.MasterConnectionString);
+            masterSqlConnection.Open();
 
-                    command.ExecuteNonQuery();
-                }
-            }
+            using var command = masterSqlConnection.CreateCommand();
+            command.CommandText = $"EXEC msdb.dbo.sp_delete_database_backuphistory @database_name = N'[{Configuration.Instance.TestDatabaseName}]';"
+                + $"USE [master]; ALTER DATABASE [{Configuration.Instance.TestDatabaseName}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;"
+                + $"DROP DATABASE [{Configuration.Instance.TestDatabaseName}];";
+
+            command.ExecuteNonQuery();
         }
 
         [AssemblyInitialize]
@@ -30,16 +27,13 @@ namespace Highway.Data.ReadonlyTests
         {
             Console.WriteLine(context.TestName);
 
-            using (var masterSqlConnection = new SqlConnection(TestConfiguration.Instance.MasterConnectionString))
-            {
-                masterSqlConnection.Open();
-                using (var command = masterSqlConnection.CreateCommand())
-                {
-                    command.CommandText = $"CREATE DATABASE [{TestConfiguration.Instance.TestDatabaseName}]";
+            using var masterSqlConnection = new SqlConnection(Configuration.Instance.MasterConnectionString);
+            masterSqlConnection.Open();
 
-                    command.ExecuteNonQuery();
-                }
-            }
+            using var command = masterSqlConnection.CreateCommand();
+            command.CommandText = $"CREATE DATABASE [{Configuration.Instance.TestDatabaseName}]";
+
+            command.ExecuteNonQuery();
         }
     }
 }

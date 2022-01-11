@@ -1,36 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Reflection;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace Highway.Data.ReadonlyTests
 {
-    internal class TestConfiguration : ITestConfiguration
+    internal class Configuration
     {
-        private static readonly Lazy<TestConfiguration> LazyInstance = new(Instantiate);
+        private static readonly Lazy<Configuration> LazyInstance = new(Instantiate);
 
-        public static TestConfiguration Instance = LazyInstance.Value;
+        public static Configuration Instance = LazyInstance.Value;
 
         private readonly IConfigurationRoot _configurationRoot;
 
-        private readonly Assembly _testAssembly;
-
-        private readonly string _testDatabaseGuid;
-
-        private TestConfiguration()
+        private Configuration()
         {
-            _testAssembly = GetType().Assembly;
-            _testDatabaseGuid = Guid.NewGuid().ToString().Replace("-", string.Empty);
+            var testDatabaseGuid = Guid.NewGuid().ToString().Replace("-", string.Empty);
+            TestDatabaseName = $"secured-query-engine-{testDatabaseGuid}";
+
             _configurationRoot = new ConfigurationBuilder()
                                  .AddEnvironmentVariables()
-                                 .AddUserSecrets(_testAssembly)
+                                 .AddUserSecrets(GetType().Assembly)
                                  .Build();
 
-            ILoggerFactory loggerFactory = new LoggerFactory(new List<ILoggerProvider>(), new LoggerFilterOptions());
-
+            var loggerFactory = new LoggerFactory(new List<ILoggerProvider>(), new LoggerFilterOptions());
             Logger = loggerFactory.CreateLogger("integration-tests");
             MasterConnectionString = GetConnectionStringForDatabase("master");
             TestDatabaseConnectionString = GetConnectionStringForDatabase(TestDatabaseName);
@@ -42,11 +37,11 @@ namespace Highway.Data.ReadonlyTests
 
         public string TestDatabaseConnectionString { get; }
 
-        public string TestDatabaseName => $"secured-query-engine-{_testDatabaseGuid}";
+        public string TestDatabaseName { get; }
 
-        private static TestConfiguration Instantiate()
+        private static Configuration Instantiate()
         {
-            return new TestConfiguration();
+            return new Configuration();
         }
 
         private string GetConnectionStringForDatabase(string databaseName)

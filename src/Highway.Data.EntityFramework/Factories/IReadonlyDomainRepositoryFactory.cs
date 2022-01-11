@@ -24,7 +24,6 @@ namespace Highway.Data.Factories
         /// <returns>
         ///     <see cref="IReadonlyRepository" />
         /// </returns>
-        IReadonlyRepository CreateReadonly<T>(Type type);
-
+        IReadonlyRepository CreateReadonly(Type type);
     }
 }

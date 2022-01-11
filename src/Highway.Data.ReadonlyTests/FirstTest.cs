@@ -2,7 +2,7 @@
 
 using FluentAssertions;
 
-using Highway.Data.ReadonlyTests.SchoolDomain;
+using Highway.Data.Factories;
 using Highway.Data.Repositories;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -15,9 +15,9 @@ namespace Highway.Data.ReadonlyTests
         [ClassInitialize]
         public static void ClassInit(TestContext context)
         {
-            var schoolDomain = new SchoolDomain.SchoolDomain();
-            var domainContext = new DomainContext<SchoolDomain.SchoolDomain>(schoolDomain);
-            var domainRepository = new DomainRepository<SchoolDomain.SchoolDomain>(domainContext, schoolDomain);
+            var schoolDomain = new SchoolDomain();
+            var domainRepositoryFactory = new DomainRepositoryFactory(new IDomain[] { schoolDomain });
+            var domainRepository = domainRepositoryFactory.Create(typeof(SchoolDomain));
 
             var firstGrade = new Grade
             {
@@ -28,22 +28,23 @@ namespace Highway.Data.ReadonlyTests
             var bill = new Student
             {
                 DoB = DateTime.Now.Subtract(TimeSpan.FromDays(365)),
-                Grade = firstGrade,
                 Height = 60,
                 Weight = 180,
                 Name = "Bill"
             };
 
-            domainRepository.DomainContext.Add(bill);
-            domainRepository.DomainContext.Commit();
+            firstGrade.AddStudent(bill);
+
+            domainRepository.Context.Add(bill);
+            domainRepository.Context.Commit();
         }
 
         [TestMethod]
         public void TestOne()
         {
-            var schoolDomain = new SchoolDomain.SchoolDomain();
-            var domainContext = new ReadonlyDomainContext<SchoolDomain.SchoolDomain>(schoolDomain);
-            var domainRepository = new ReadonlyDomainRepository<SchoolDomain.SchoolDomain>(domainContext, schoolDomain);
+            var schoolDomain = new SchoolDomain();
+            var domainRepositoryFactory = new DomainRepositoryFactory(new IDomain[] { schoolDomain });
+            var domainRepository = domainRepositoryFactory.CreateReadonly(typeof(SchoolDomain));
             var bill = domainRepository.Find(new GetStudentByName("Bill"));
             bill.Grade.Name.Should().Be("first");
         }

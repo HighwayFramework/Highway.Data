@@ -2,16 +2,16 @@
 
 using Highway.Data.EventManagement.Interfaces;
 
-namespace Highway.Data.ReadonlyTests.SchoolDomain
+namespace Highway.Data.ReadonlyTests
 {
     public class SchoolDomain : IDomain
     {
-        public string ConnectionString => TestConfiguration.Instance.TestDatabaseConnectionString;
+        public string ConnectionString { get; } = Configuration.Instance.TestDatabaseConnectionString;
 
-        public IContextConfiguration Context { get; }
+        public IContextConfiguration Context { get; } = new DefaultContextConfiguration();
 
-        public List<IInterceptor> Events { get; }
+        public List<IInterceptor> Events { get; } = new();
 
-        public IMappingConfiguration Mappings => new SchoolMapping();
+        public IMappingConfiguration Mappings { get; } = new SchoolMapping();
     }
 }

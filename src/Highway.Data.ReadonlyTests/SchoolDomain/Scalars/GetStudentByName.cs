@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Linq;
 
-namespace Highway.Data.ReadonlyTests.SchoolDomain
+namespace Highway.Data.ReadonlyTests
 {
     public class GetStudentByName : Scalar<Student>
     {

@@ -3,8 +3,6 @@ using System.Data.Common;
 
 namespace Highway.Data.EntityFramework
 {
-    /// <summary>
-    /// </summary>
     public interface IEntityDataContext : IDataContext
     {
         /// <summary>

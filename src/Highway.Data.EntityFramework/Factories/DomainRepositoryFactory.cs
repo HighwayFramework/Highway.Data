@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Linq;
 
-using Common.Logging;
-using Common.Logging.Simple;
-
 using Highway.Data.Repositories;
 
 namespace Highway.Data.Factories
@@ -11,7 +8,7 @@ namespace Highway.Data.Factories
     /// <summary>
     ///     Simple factory for constructing repositories
     /// </summary>
-    public class DomainRepositoryFactory : IDomainRepositoryFactory
+    public class DomainRepositoryFactory : IDomainRepositoryFactory, IReadonlyDomainRepositoryFactory
     {
         private readonly IDomain[] _domains;
 
@@ -45,75 +42,43 @@ namespace Highway.Data.Factories
         /// <returns>Domain specific repository</returns>
         public IRepository Create(Type type)
         {
-            var domain = _domains.FirstOrDefault(x => x.GetType() == type);
-            var d1 = typeof(DomainContext<>);
-            Type[] typeArgs = { type };
-            var contextCtor = d1.MakeGenericType(typeArgs);
-            var untypedObject = Activator.CreateInstance(contextCtor, domain);
-
-            var r1 = typeof(DomainRepository<>);
-            var repositoryCtor = r1.MakeGenericType(typeArgs);
-            var repo = Activator.CreateInstance(repositoryCtor, untypedObject, domain);
-
-            return (IRepository)repo;
-        }
-    }
-
-    /// <summary>
-    ///     Simple factory for constructing repositories
-    /// </summary>
-    public class RepositoryFactory : IRepositoryFactory
-    {
-        private readonly string _connectionString;
-
-        private readonly IContextConfiguration _contextConfig;
-
-        private readonly ILog _logger;
-
-        private readonly IMappingConfiguration _mappings;
-
-        /// <summary>
-        ///     Creates a repository factory for the supplied list of domains
-        /// </summary>
-        public RepositoryFactory(string connectionString, IMappingConfiguration mappings)
-            : this(connectionString, mappings, new DefaultContextConfiguration(), new NoOpLogger())
-        {
+            return (IRepository)CreateRepository(type, typeof(DomainContext<>), typeof(DomainRepository<>));
         }
 
         /// <summary>
-        ///     Creates a repository factory for the supplied list of domains
+        ///     Creates a readonly repository for the requested domain
         /// </summary>
-        public RepositoryFactory(string connectionString, IMappingConfiguration mappings, IContextConfiguration contextConfiguration)
-            : this(connectionString, mappings, contextConfiguration, new NoOpLogger())
+        /// <typeparam name="T">Domain for repository</typeparam>
+        /// <returns>Domain-specific readonly repository</returns>
+        public IReadonlyRepository CreateReadonly<T>()
+            where T : class, IDomain
         {
+            var domain = _domains.OfType<T>().SingleOrDefault();
+            var context = new ReadonlyDomainContext<T>(domain);
+
+            return new ReadonlyDomainRepository<T>(context, domain);
         }
 
         /// <summary>
-        ///     Creates a repository factory for the supplied list of domains
+        ///     Creates a readonly repository for the requested domain
         /// </summary>
-        public RepositoryFactory(string connectionString, IMappingConfiguration mappings, ILog logger)
-            : this(connectionString, mappings, new DefaultContextConfiguration(), logger)
+        /// <param name="type">Domain for repository</param>
+        /// <returns>Domain-specific readonly repository</returns>
+        public IReadonlyRepository CreateReadonly(Type type)
         {
+            return (IReadonlyRepository)CreateRepository(type, typeof(ReadonlyDomainContext<>), typeof(ReadonlyDomainRepository<>));
         }
 
-        /// <summary>
-        ///     Creates a repository factory for the supplied list of domains
-        /// </summary>
-        public RepositoryFactory(string connectionString, IMappingConfiguration mappings, IContextConfiguration contextConfig, ILog logger)
+        private object CreateRepository(Type domainType, Type contextType, Type repositoryType)
         {
-            _connectionString = connectionString;
-            _mappings = mappings;
-            _contextConfig = contextConfig;
-            _logger = logger;
-        }
+            Type[] typeArgs = { domainType };
 
-        /// <summary>
-        ///     Creates a repository for the requested domain
-        /// </summary>
-        /// <returns>Domain specific repository</returns>
-        public IRepository Create()
-        {
-            return new Repository(new DataContext(_connectionString, _mappings, _contextConfig, _logger));
+            var domain = _domains.SingleOrDefault(x => x.GetType() == domainType);
+            var contextConstructor = contextType.MakeGenericType(typeArgs);
+            var context = Activator.CreateInstance(contextConstructor, domain);
+            var repositoryConstructor = repositoryType.MakeGenericType(typeArgs);
+
+            return Activator.CreateInstance(repositoryConstructor, context, domain);
         }
     }
 }

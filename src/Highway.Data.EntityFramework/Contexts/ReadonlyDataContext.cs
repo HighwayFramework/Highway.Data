@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Entity;
 using System.Linq;
@@ -184,6 +185,26 @@ namespace Highway.Data
         public IEnumerable<T> ExecuteSqlQuery<T>(string sql, params DbParameter[] dbParams)
         {
             return _context.ExecuteSqlQuery<T>(sql, dbParams);
+        }
+
+        /// <summary>
+        ///     Reloads the provided instance of <typeparamref name="T" /> from the database
+        /// </summary>
+        /// <typeparam name="T">The Entity Type being reloaded</typeparam>
+        /// <param name="item">The <typeparamref name="T" /> you want to reload</param>
+        /// <returns>The <typeparamref name="T" /> you reloaded</returns>
+        public virtual T Reload<T>(T item)
+            where T : class
+        {
+            var entry = _context.Entry(item);
+            if (entry == null)
+            {
+                throw new InvalidOperationException("You cannot reload an object that is not in the current Entity Framework data context");
+            }
+
+            entry.Reload();
+
+            return item;
         }
     }
 }

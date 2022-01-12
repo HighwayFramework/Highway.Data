@@ -70,7 +70,7 @@ namespace Highway.Data
             throw new NotImplementedException($"Do not call {nameof(Set)} on a {nameof(ReadonlyDbContext)}.");
         }
 
-        internal IEnumerable<T> ExecuteSqlQuery<T>(string sql, params DbParameter[] dbParams)
+        public IEnumerable<T> ExecuteSqlQuery<T>(string sql, params DbParameter[] dbParams)
         {
             var parameters = dbParams.Select(x => $"{x.ParameterName} : {x.Value} : {x.DbType}\t").ToArray();
 
@@ -115,7 +115,7 @@ namespace Highway.Data
             _log.Debug("\tOnModelCreating");
             if (_mapping != null)
             {
-                _log.TraceFormat("\t\tMapping : {0}", _mapping.GetType().Name);
+                _log.Trace($"\t\tMapping : {_mapping.GetType().Name}");
                 _mapping.ConfigureModelBuilder(modelBuilder);
             }
 

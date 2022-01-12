@@ -354,7 +354,7 @@ namespace Highway.Data
             _log.DebugFormat("Reloading Object {0}", item);
             if (entry == null)
             {
-                throw new InvalidOperationException("You cannot reload an objecct that is not in the current Entity Framework datya context");
+                throw new InvalidOperationException("You cannot reload an object that is not in the current Entity Framework data context");
             }
 
             entry.Reload();

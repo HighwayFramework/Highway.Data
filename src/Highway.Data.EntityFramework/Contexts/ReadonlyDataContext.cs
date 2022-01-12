@@ -81,7 +81,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        ///     Database first way to construct the data context for Highway.Data.EntityFramework
+        ///     Database first way to construct the readonly data context for Highway.Data.EntityFramework
         /// </summary>
         /// <param name="databaseFirstConnectionString">
         ///     The metadata embedded connection string from database first Entity
@@ -93,7 +93,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        ///     Database first way to construct the data context for Highway.Data.EntityFramework
+        ///     Database first way to construct the readonly data context for Highway.Data.EntityFramework
         /// </summary>
         /// <param name="databaseFirstConnectionString">
         ///     The metadata embedded connection string from database first Entity
@@ -108,7 +108,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="DataContext" /> class.
+        ///     Initializes a new instance of the <see cref="ReadonlyDataContext" /> class.
         /// </summary>
         /// <param name="dbConnection">The db connection.</param>
         /// <param name="contextOwnsConnection">The context owns connection.</param>
@@ -119,7 +119,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="DataContext" /> class.
+        ///     Initializes a new instance of the <see cref="ReadonlyDataContext" /> class.
         /// </summary>
         /// <param name="dbConnection">The db connection.</param>
         /// <param name="contextOwnsConnection">The context owns connection.</param>
@@ -135,7 +135,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="DataContext" /> class.
+        ///     Initializes a new instance of the <see cref="ReadonlyDataContext" /> class.
         /// </summary>
         /// <param name="dbConnection">The db connection.</param>
         /// <param name="contextOwnsConnection">The context owns connection.</param>
@@ -151,7 +151,7 @@ namespace Highway.Data
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="DataContext" /> class.
+        ///     Initializes a new instance of the <see cref="ReadonlyDataContext" /> class.
         /// </summary>
         /// <param name="dbConnection">The db connection.</param>
         /// <param name="contextOwnsConnection">The context owns connection.</param>

@@ -16,7 +16,7 @@ namespace Highway.Data.EventManagement.Interfaces
         /// <param name="context">The DataContext that the current interceptor is using</param>
         /// <param name="eventArgs">the EventArgs for the current event being intercepted</param>
         /// <returns></returns>
-        InterceptorResult Apply(IDataContext context, T eventArgs);
+        InterceptorResult Apply(IDataSource context, T eventArgs);
     }
 
     /// <summary>

@@ -8,7 +8,7 @@ using Highway.Data.Interceptors.Events;
 
 namespace Highway.Data.Contexts
 {
-    public class InMemoryDataContext : IDataContext
+    public class InMemoryDataContext : IDataContext, IReadonlyDataContext
     {
         internal readonly ObjectRepresentationRepository Repo;
 

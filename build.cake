@@ -44,6 +44,7 @@ Task("CleanAll")
     .IsDependentOn("CleanRelease");
 
 Task("CleanDebug")
+    .IsDependentOn("Restore")
     .Does(() =>
     {
         DotNetClean(solutionFile, new DotNetCleanSettings
@@ -53,6 +54,7 @@ Task("CleanDebug")
     });
 
 Task("CleanRelease")
+    .IsDependentOn("Restore")
     .Does(() =>
     {
         DotNetClean(solutionFile, new DotNetCleanSettings

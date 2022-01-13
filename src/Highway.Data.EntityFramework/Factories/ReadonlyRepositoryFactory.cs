@@ -45,6 +45,7 @@ namespace Highway.Data.Factories
             _connectionString = connectionString;
             _contextConfig = contextConfig;
             _logger = logger;
+            _mappings = mappings;
         }
 
         /// <summary>

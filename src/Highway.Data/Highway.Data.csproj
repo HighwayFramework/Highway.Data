@@ -1,26 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <Version>8.0.0-Beta1</Version>
-    <Authors>Tim Rayburn, Devlin Liles</Authors>
-    <Description>The fastest and smoothest way to good architecture.</Description>
-    <Copyright>2012-2022 Devlin Liles</Copyright>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>http://hwyfwk.com</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/highwayframework/highway.data</RepositoryUrl>
-    <PackageTags>Architecture ORM Repository Specification Productivity</PackageTags>
-    <PackageReleaseNotes />
-    <PackageIconUrl>http://hwyfwk.com/images/Highway.jpg</PackageIconUrl>
-  </PropertyGroup>
+	<PropertyGroup>
+		<Version>8.0.0-Beta1</Version>
+		<Authors>Tim Rayburn, Devlin Liles</Authors>
+		<Description>The fastest and smoothest way to good architecture.</Description>
+		<Copyright>2012-2022 Devlin Liles</Copyright>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>http://hwyfwk.com</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/highwayframework/highway.data</RepositoryUrl>
+		<PackageTags>Architecture ORM Repository Specification Productivity</PackageTags>
+		<PackageReleaseNotes />
+		<PackageIcon>icon.png</PackageIcon>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;net45</TargetFrameworks>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
-  
-  <ItemGroup>
-    <PackageReference Include="Highway.Pavement" Version="7.0.2" />
-    <PackageReference Include="System.Reflection.Emit" Version="4.6.0" />
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.1;net45</TargetFrameworks>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\images\icon.png" Pack="true" PackagePath="\"/>
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<PackageReference Include="Highway.Pavement" Version="7.0.2" />
+		<PackageReference Include="System.Reflection.Emit" Version="4.6.0" />
+	</ItemGroup>
 
 </Project>

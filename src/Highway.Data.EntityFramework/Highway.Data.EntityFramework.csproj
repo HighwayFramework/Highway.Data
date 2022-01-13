@@ -10,7 +10,6 @@
 		<RepositoryUrl>https://github.com/highwayframework/highway.data</RepositoryUrl>
 		<PackageTags>Architecture ORM Repository Specification Productivity</PackageTags>
 		<PackageReleaseNotes />
-		<PackageIconUrl>http://hwyfwk.com/images/Highway.jpg</PackageIconUrl>
 		<PackageIcon>icon.png</PackageIcon>
 	</PropertyGroup>
 

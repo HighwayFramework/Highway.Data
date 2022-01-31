@@ -163,7 +163,7 @@ namespace Highway.Data
         /// <returns>
         ///     <see cref="IQueryable{T}" />
         /// </returns>
-        public IQueryable<T> AsQueryable<T>()
+        public virtual IQueryable<T> AsQueryable<T>()
             where T : class
         {
             return _context.InnerSet<T>();

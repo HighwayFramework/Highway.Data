@@ -12,7 +12,7 @@ using Common.Logging;
 
 namespace Highway.Data
 {
-    internal class ReadonlyDbContext : DbContext
+    public class ReadonlyDbContext : DbContext
     {
         private readonly bool _databaseFirst;
 

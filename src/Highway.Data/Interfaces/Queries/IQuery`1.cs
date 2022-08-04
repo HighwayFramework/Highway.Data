@@ -13,8 +13,8 @@ namespace Highway.Data
         ///     This executes the expression in ContextQuery on the context that is passed in, resulting in a
         ///     <see cref="IQueryable{T}" /> that is returned as an <see cref="IEnumerable{T}" />
         /// </summary>
-        /// <param name="context">the data context that the query should be executed against</param>
+        /// <param name="dataSource">the data context that the query should be executed against</param>
         /// <returns>The collection of <typeparamref name="T" /> that the query materialized if any</returns>
-        IEnumerable<T> Execute(IDataSource context);
+        IEnumerable<T> Execute(IDataSource dataSource);
     }
 }

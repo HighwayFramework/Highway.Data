@@ -16,14 +16,14 @@ namespace Highway.Data
         /// <summary>
         ///     Executes the expression against the passed in context
         /// </summary>
-        /// <param name="context">The data context that the scalar query is executed against</param>
+        /// <param name="dataSource">The data context that the scalar query is executed against</param>
         /// <returns>The instance of <typeparamref name="T" /> that the query materialized if any</returns>
-        public T Execute(IDataSource context)
+        public T Execute(IDataSource dataSource)
         {
-            Context = context;
-            CheckContextAndQuery(ContextQuery);
+            DataSource = dataSource;
+            CheckDataSourceAndQuery(ContextQuery);
 
-            return ContextQuery(context);
+            return ContextQuery(dataSource);
         }
     }
 }

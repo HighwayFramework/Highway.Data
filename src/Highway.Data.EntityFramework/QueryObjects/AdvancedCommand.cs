@@ -18,8 +18,8 @@ namespace Highway.Data
         /// <param name="context">The data context that the command is executed against</param>
         public virtual void Execute(IDataContext context)
         {
-            Context = context;
-            CheckContextAndQuery(ContextQuery);
+            DataSource = context;
+            CheckDataSourceAndQuery(ContextQuery);
             ContextQuery((DataContext)context);
         }
     }

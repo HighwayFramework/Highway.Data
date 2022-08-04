@@ -20,18 +20,18 @@ namespace Highway.Data
         ///     This executes the expression in ContextQuery on the context that is passed in, resulting in a
         ///     <see cref="IQueryable{T}" /> that is returned as an <see cref="IEnumerable{T}" />
         /// </summary>
-        /// <param name="context">the data context that the query should be executed against</param>
+        /// <param name="dataSource">the data context that the query should be executed against</param>
         /// <returns>
         ///     <see cref="IEnumerable{T}" />
         /// </returns>
-        public virtual IEnumerable<T> Execute(IDataSource context)
+        public virtual IEnumerable<T> Execute(IDataSource dataSource)
         {
-            return PrepareQuery(context);
+            return PrepareQuery(dataSource);
         }
 
-        public virtual string OutputQuery(IDataSource context)
+        public virtual string OutputQuery(IDataSource dataSource)
         {
-            var query = PrepareQuery(context);
+            var query = PrepareQuery(dataSource);
 
             return query.ToString();
         }
@@ -40,11 +40,11 @@ namespace Highway.Data
         ///     This executes the expression against the passed in context to generate the SQL statement, but doesn't execute the
         ///     IQueryable<typeparamref name="T" /> against the data context
         /// </summary>
-        /// <param name="context">The data context that the query is evaluated and the SQL is generated against</param>
+        /// <param name="dataSource">The data context that the query is evaluated and the SQL is generated against</param>
         /// <returns></returns>
-        public virtual string OutputSQLStatement(IDataSource context)
+        public virtual string OutputSQLStatement(IDataSource dataSource)
         {
-            return OutputQuery(context);
+            return OutputQuery(dataSource);
         }
 
         /// <summary>
@@ -71,13 +71,13 @@ namespace Highway.Data
         /// <returns>an <see cref="IQueryable{T}" /></returns>
         protected virtual IQueryable<T> ExtendQuery()
         {
-            return ContextQuery(Context);
+            return ContextQuery(DataSource);
         }
 
-        protected virtual IQueryable<T> PrepareQuery(IDataSource context)
+        protected virtual IQueryable<T> PrepareQuery(IDataSource dataSource)
         {
-            Context = context;
-            CheckContextAndQuery(ContextQuery);
+            DataSource = dataSource;
+            CheckDataSourceAndQuery(ContextQuery);
             var query = ExtendQuery();
 
             return AppendExpressions(query);

@@ -14,10 +14,14 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.1;net45</TargetFrameworks>
+		<TargetFrameworks>netstandard2.1;net452</TargetFrameworks>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<RootNamespace>Highway.Data</RootNamespace>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="Highway.Data.EntityFramework.csproj.DotSettings" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="..\images\icon.png" Pack="true" PackagePath="\" />

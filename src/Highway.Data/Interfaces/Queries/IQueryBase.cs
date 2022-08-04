@@ -7,9 +7,9 @@
     {
         /// <summary>
         ///     This executes the expression against the passed in context to generate the query details, but doesn't execute the
-        ///     IQueryable against the data context
+        ///     IQueryable against the data source
         /// </summary>
-        /// <param name="dataSource">The data context that the query is evaluated and the details are generated against</param>
+        /// <param name="dataSource">The data source that the query is evaluated and the details are generated against</param>
         /// <returns>The details of the Statement from the Query</returns>
         string OutputQuery(IDataSource dataSource);
     }

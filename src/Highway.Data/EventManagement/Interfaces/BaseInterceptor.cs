@@ -13,7 +13,7 @@ namespace Highway.Data.EventManagement.Interfaces
         /// <summary>
         ///     Executes the interceptors that were applied during the domain creation
         /// </summary>
-        /// <param name="dataSource">The DataContext that the current interceptor is using</param>
+        /// <param name="dataSource">The data source that the current interceptor is using</param>
         /// <param name="eventArgs">the EventArgs for the current event being intercepted</param>
         /// <returns></returns>
         InterceptorResult Apply(IDataSource dataSource, T eventArgs);

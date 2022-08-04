@@ -19,7 +19,7 @@ namespace Highway.Data
         ///     This executes the expression in ContextQuery on the context that is passed in, resulting in a
         ///     <see cref="IQueryable{T}" /> that is returned as an <see cref="IEnumerable{T}" />
         /// </summary>
-        /// <param name="dataSource">the data context that the query should be executed against</param>
+        /// <param name="dataSource">the data source that the query should be executed against</param>
         /// <returns>
         ///     <see cref="IEnumerable{T}" />
         /// </returns>
@@ -88,7 +88,7 @@ namespace Highway.Data
         ///     This executes the expression in ContextQuery on the context that is passed in, resulting in a
         ///     <see cref="IQueryable{T}" /> that is returned as an <see cref="IEnumerable{T}" />
         /// </summary>
-        /// <param name="dataSource">the data context that the query should be executed against</param>
+        /// <param name="dataSource">the data source that the query should be executed against</param>
         /// <returns>
         ///     <see cref="IEnumerable{T}" />
         /// </returns>
@@ -134,7 +134,7 @@ namespace Highway.Data
         /// <summary>
         ///     Appends the projection to the query and prepares it for execution
         /// </summary>
-        /// <param name="dataSource">the context to prepare against</param>
+        /// <param name="dataSource">the source to prepare against</param>
         /// <returns>The prepared but un-executed queryable</returns>
         protected virtual IQueryable<TProjection> PrepareQuery(IDataSource dataSource)
         {

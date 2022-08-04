@@ -20,7 +20,7 @@ namespace Highway.Data
         ///     This executes the expression in ContextQuery on the context that is passed in, resulting in a
         ///     <see cref="IQueryable{T}" /> that is returned as an <see cref="IEnumerable{T}" />
         /// </summary>
-        /// <param name="dataSource">the data context that the query should be executed against</param>
+        /// <param name="dataSource">the data source that the query should be executed against</param>
         /// <returns>
         ///     <see cref="IEnumerable{T}" />
         /// </returns>
@@ -38,9 +38,9 @@ namespace Highway.Data
 
         /// <summary>
         ///     This executes the expression against the passed in context to generate the SQL statement, but doesn't execute the
-        ///     IQueryable<typeparamref name="T" /> against the data context
+        ///     IQueryable<typeparamref name="T" /> against the data source
         /// </summary>
-        /// <param name="dataSource">The data context that the query is evaluated and the SQL is generated against</param>
+        /// <param name="dataSource">The data source that the query is evaluated and the SQL is generated against</param>
         /// <returns></returns>
         public virtual string OutputSQLStatement(IDataSource dataSource)
         {

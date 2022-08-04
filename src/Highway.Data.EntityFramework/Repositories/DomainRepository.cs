@@ -7,7 +7,7 @@ namespace Highway.Data.Repositories
     {
         private readonly EventManager<T> _eventManager;
 
-        public DomainRepository(IDomainContext<T> context, IDomain domain)
+        public DomainRepository(IDomainContext<T> context, T domain)
             : base(context)
         {
             _eventManager = new EventManager<T>(this);

@@ -5,7 +5,7 @@ namespace Highway.Data.Repositories
     public class ReadonlyDomainRepository<T> : ReadonlyRepository, IReadonlyDomainRepository<T>
         where T : class, IDomain
     {
-        public ReadonlyDomainRepository(IReadonlyDomainContext<T> context, IDomain domain)
+        public ReadonlyDomainRepository(IReadonlyDomainContext<T> context, T domain)
             : base(context)
         {
             var eventManager = new ReadonlyEventManager<T>(this);

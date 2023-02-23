@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Devart.Data.SQLite.EF6" Version="5.14.1519" />
     <PackageReference Include="EntityFramework" Version="6.3.0" />
-    <PackageReference Include="FluentAssertions" Version="5.9.0" />
+    <PackageReference Include="FluentAssertions" Version="6.10.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
     <PackageReference Include="Moq" Version="4.13.1" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.0.0" />

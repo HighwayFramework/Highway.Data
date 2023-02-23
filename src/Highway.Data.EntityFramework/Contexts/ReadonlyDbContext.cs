@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 
 using Common.Logging;
 
+using Highway.Data.Utilities;
+
 namespace Highway.Data
 {
     public class ReadonlyDbContext : DbContext
@@ -21,7 +23,7 @@ namespace Highway.Data
         private readonly IMappingConfiguration _mapping;
 
         public ReadonlyDbContext(string connectionString, IMappingConfiguration mapping, IContextConfiguration contextConfiguration, ILog log)
-            : base(connectionString)
+            : base(ReadonlySqlConnectionStringBuilder.GetConnectionString(connectionString))
         {
             _log = log;
             _mapping = mapping;
@@ -30,7 +32,7 @@ namespace Highway.Data
         }
 
         public ReadonlyDbContext(string databaseFirstConnectionString, ILog log)
-            : base(databaseFirstConnectionString)
+            : base(ReadonlySqlConnectionStringBuilder.GetConnectionString(databaseFirstConnectionString))
         {
             _databaseFirst = true;
             _log = log;

@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<Version>8.0.0-Beta2</Version>
+		<Version>8.0.0-Beta3</Version>
 		<Authors>Tim Rayburn, Devlin Liles</Authors>
 		<Description>The fastest and smoothest way to good architecture.</Description>
-		<Copyright>2012-2022 Devlin Liles</Copyright>
+		<Copyright>2012-2023 Devlin Liles</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>http://hwyfwk.com</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/highwayframework/highway.data</RepositoryUrl>

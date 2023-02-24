@@ -14,7 +14,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.1;net45</TargetFrameworks>
+		<TargetFrameworks>netstandard2.1;net462</TargetFrameworks>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<RootNamespace>Highway.Data</RootNamespace>
 	</PropertyGroup>

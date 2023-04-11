@@ -43,7 +43,7 @@ namespace Highway.Data
         /// <summary>
         ///     The reference to the <see cref="IDataSource" /> that gives data connection
         /// </summary>
-        protected IDataSource Context { get; set; }
+        protected IDataSource DataSource { get; set; }
 
         /// <summary>
         ///     Adds a method to the expression in the query object
@@ -64,9 +64,9 @@ namespace Highway.Data
         ///     Checks the context and the Query for null
         /// </summary>
         /// <param name="query">The query to be executed</param>
-        protected virtual void CheckContextAndQuery(object query)
+        protected virtual void CheckDataSourceAndQuery(object query)
         {
-            if (Context == null)
+            if (DataSource == null)
             {
                 throw new InvalidOperationException("DataContext cannot be null.");
             }

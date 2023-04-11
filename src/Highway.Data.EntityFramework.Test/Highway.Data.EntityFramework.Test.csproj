@@ -1,29 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
 
-    <IsPackable>false</IsPackable>
-  </PropertyGroup>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Devart.Data.SQLite.EF6" Version="5.14.1519" />
-    <PackageReference Include="EntityFramework" Version="6.3.0" />
-    <PackageReference Include="FluentAssertions" Version="6.10.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
-    <PackageReference Include="Moq" Version="4.13.1" />
-    <PackageReference Include="MSTest.TestAdapter" Version="3.0.2" />
-    <PackageReference Include="MSTest.TestFramework" Version="3.0.2" />
-    <PackageReference Include="coverlet.collector" Version="1.1.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Devart.Data.SQLite.EF6" Version="6.1.134" />
+        <PackageReference Include="EntityFramework" Version="6.4.4" />
+        <PackageReference Include="FluentAssertions" Version="6.10.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
+        <PackageReference Include="Moq" Version="4.18.4" />
+        <PackageReference Include="MSTest.TestAdapter" Version="3.0.2" />
+        <PackageReference Include="MSTest.TestFramework" Version="3.0.2" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Highway.Data.EntityFramework\Highway.Data.EntityFramework.csproj" />
-    <ProjectReference Include="..\Highway.Data.Test\Highway.Data.Test.csproj" />
-    <ProjectReference Include="..\Highway.Data\Highway.Data.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Highway.Data.EntityFramework\Highway.Data.EntityFramework.csproj" />
+        <ProjectReference Include="..\Highway.Data.Test\Highway.Data.Test.csproj" />
+        <ProjectReference Include="..\Highway.Data\Highway.Data.csproj" />
+    </ItemGroup>
 
 </Project>

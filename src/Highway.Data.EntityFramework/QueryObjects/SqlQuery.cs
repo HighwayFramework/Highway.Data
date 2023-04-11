@@ -12,9 +12,9 @@ namespace Highway.Data
 
         public string SqlStatement { get; set; }
 
-        public IEnumerable<T> Execute(IDataSource context)
+        public IEnumerable<T> Execute(IDataSource dataSource)
         {
-            if (!(context is DbContext efContext))
+            if (!(dataSource is DbContext efContext))
             {
                 throw new InvalidOperationException("You cannot execute EF Sql Queries against a non-EF context");
             }
@@ -25,14 +25,14 @@ namespace Highway.Data
             }
         }
 
-        public string OutputQuery(IDataSource context)
+        public string OutputQuery(IDataSource dataSource)
         {
             return SqlStatement;
         }
 
-        public string OutputSQLStatement(IDataSource context)
+        public string OutputSQLStatement(IDataSource dataSource)
         {
-            return OutputQuery(context);
+            return OutputQuery(dataSource);
         }
     }
 }

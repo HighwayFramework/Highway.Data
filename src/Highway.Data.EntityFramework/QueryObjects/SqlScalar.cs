@@ -8,9 +8,9 @@ namespace Highway.Data
     {
         protected Func<SqlConnection, T> ContextQuery;
 
-        public T Execute(IDataSource context)
+        public T Execute(IDataSource dataSource)
         {
-            var efContext = context as DbContext;
+            var efContext = dataSource as DbContext;
             using (var conn = new SqlConnection(efContext.Database.Connection.ConnectionString))
             {
                 return ContextQuery.Invoke(conn);

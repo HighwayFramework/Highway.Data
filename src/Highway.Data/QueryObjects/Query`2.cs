@@ -21,18 +21,18 @@ namespace Highway.Data
         ///     This executes the expression in ContextQuery on the context that is passed in, resulting in a
         ///     <see cref="IQueryable{T}" /> that is returned as an <see cref="IEnumerable{T}" />
         /// </summary>
-        /// <param name="context">the data context that the query should be executed against</param>
+        /// <param name="dataSource">the data source that the query should be executed against</param>
         /// <returns>
         ///     <see cref="IEnumerable{T}" />
         /// </returns>
-        public virtual IEnumerable<TProjection> Execute(IDataSource context)
+        public virtual IEnumerable<TProjection> Execute(IDataSource dataSource)
         {
-            return PrepareQuery(context);
+            return PrepareQuery(dataSource);
         }
 
-        public virtual string OutputQuery(IDataSource context)
+        public virtual string OutputQuery(IDataSource dataSource)
         {
-            var query = PrepareQuery(context);
+            var query = PrepareQuery(dataSource);
 
             return query.ToString();
         }
@@ -62,13 +62,13 @@ namespace Highway.Data
         /// <returns>an <see cref="IQueryable{TSelection}" /></returns>
         protected virtual IQueryable<TSelection> ExtendQuery()
         {
-            return Selector(Context);
+            return Selector(DataSource);
         }
 
-        protected IQueryable<TProjection> PrepareQuery(IDataSource context)
+        protected IQueryable<TProjection> PrepareQuery(IDataSource dataSource)
         {
-            Context = context;
-            CheckContextAndQuery(Selector);
+            DataSource = dataSource;
+            CheckDataSourceAndQuery(Selector);
             var query = ExtendQuery();
 
             return AppendExpressions(query);

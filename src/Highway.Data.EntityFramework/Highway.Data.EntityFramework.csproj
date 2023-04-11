@@ -1,39 +1,39 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<Version>8.0.0-Beta3</Version>
-		<Authors>Tim Rayburn, Devlin Liles</Authors>
-		<Description>The fastest and smoothest way to good architecture.</Description>
-		<Copyright>2012-2023 Devlin Liles</Copyright>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageProjectUrl>http://hwyfwk.com</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/highwayframework/highway.data</RepositoryUrl>
-		<PackageTags>Architecture ORM Repository Specification Productivity</PackageTags>
-		<PackageReleaseNotes />
-		<PackageIcon>icon.png</PackageIcon>
-	</PropertyGroup>
+    <PropertyGroup>
+        <Version>8.0.0-Beta3</Version>
+        <Authors>Tim Rayburn, Devlin Liles</Authors>
+        <Description>The fastest and smoothest way to good architecture.</Description>
+        <Copyright>2012-2023 Devlin Liles</Copyright>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>http://hwyfwk.com</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/highwayframework/highway.data</RepositoryUrl>
+        <PackageTags>Architecture ORM Repository Specification Productivity</PackageTags>
+        <PackageReleaseNotes />
+        <PackageIcon>icon.png</PackageIcon>
+    </PropertyGroup>
 
-	<PropertyGroup>
-		<TargetFrameworks>netstandard2.1;net462</TargetFrameworks>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<RootNamespace>Highway.Data</RootNamespace>
-	</PropertyGroup>
+    <PropertyGroup>
+        <TargetFrameworks>netstandard2.1;net462</TargetFrameworks>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <RootNamespace>Highway.Data</RootNamespace>
+    </PropertyGroup>
 
-	<ItemGroup>
-	  <None Remove="Highway.Data.EntityFramework.csproj.DotSettings" />
-	</ItemGroup>
+    <ItemGroup>
+        <None Remove="Highway.Data.EntityFramework.csproj.DotSettings" />
+    </ItemGroup>
 
-	<ItemGroup>
-		<None Include="..\images\icon.png" Pack="true" PackagePath="\" />
-	</ItemGroup>
+    <ItemGroup>
+        <None Include="..\images\icon.png" Pack="true" PackagePath="\" />
+    </ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Common.Logging" Version="3.4.1" />
-		<PackageReference Include="EntityFramework" Version="6.3.0" />
-	</ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Common.Logging" Version="3.4.1" />
+        <PackageReference Include="EntityFramework" Version="6.3.0" />
+    </ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\Highway.Data\Highway.Data.csproj" />
-	</ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Highway.Data\Highway.Data.csproj" />
+    </ItemGroup>
 
 </Project>

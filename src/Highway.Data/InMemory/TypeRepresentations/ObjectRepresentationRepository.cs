@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
+using Highway.Data.InMemory.Extensions;
 using Highway.Pavement;
 using Highway.Pavement.Collections;
 
@@ -225,7 +226,7 @@ namespace Highway.Data.Contexts.TypeRepresentations
                     }
                 }
 
-                propertyInfo.SetValue(item, list, null);
+                propertyInfo.TrySetValue(item, list, null);
             };
         }
 
@@ -287,7 +288,7 @@ namespace Highway.Data.Contexts.TypeRepresentations
 
                 void Remover()
                 {
-                    propertyInfo.SetValue(item, null, null);
+                    propertyInfo.TrySetValue(item, null, null);
                 }
 
                 var child = propertyInfo.GetValue(item, null);

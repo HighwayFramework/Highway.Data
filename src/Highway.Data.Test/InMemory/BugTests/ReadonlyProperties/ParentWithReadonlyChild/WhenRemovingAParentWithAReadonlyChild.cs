@@ -1,0 +1,49 @@
+using System;
+
+using FluentAssertions;
+
+using Highway.Data.Contexts;
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace Highway.Data.Test.InMemory.BugTests.ReadonlyProperties.ParentWithReadonlyChild
+{
+    [TestClass]
+    public class WhenRemovingAParentWithAReadonlyChild
+    {
+        private readonly Parent _parent1;
+
+        private readonly Parent _parent2;
+
+        private readonly Repository _repository;
+
+        public WhenRemovingAParentWithAReadonlyChild()
+        {
+            _parent1 = new Parent { Id = 1, Name = $"{nameof(Parent)}1" };
+            _parent2 = new Parent { Id = 2, Name = $"{nameof(Parent)}2" };
+
+            var context = new InMemoryDataContext();
+            _repository = new Repository(context);
+            _repository.Context.Add(_parent1);
+            _repository.Context.Add(_parent2);
+            _repository.Context.Commit();
+        }
+
+        [TestMethod]
+        public void TheContextShouldContainTwoInstanceOfTheParentEntity()
+        {
+            Action removeParent = () =>
+            {
+                _repository.Context.Remove(_parent1);
+                _repository.Context.Remove(_parent2);
+                _repository.Context.Commit();
+            };
+
+            removeParent
+                .Should()
+                .Throw<InvalidOperationException>()
+                .WithMessage($"Entity Type {nameof(Child)} could not be removed through {nameof(Parent)}.{nameof(Child)}"
+                             + $" because {nameof(Parent)}.{nameof(Child)} has no setter.");
+        }
+    }
+}

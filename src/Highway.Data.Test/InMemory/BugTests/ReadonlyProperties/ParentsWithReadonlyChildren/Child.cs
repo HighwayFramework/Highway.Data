@@ -1,4 +1,4 @@
-﻿namespace Highway.Data.Test.InMemory.BugTests.ReadonlyProperties.ParentWithReadonlyChild
+﻿namespace Highway.Data.Test.InMemory.BugTests.ReadonlyProperties.ParentsWithReadonlyChildren
 {
     public class Child : IIdentifiable<long>
     {

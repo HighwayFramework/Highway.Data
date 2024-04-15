@@ -1,17 +1,16 @@
 ﻿using System.Threading;
 
-namespace Highway.Data.Test.InMemory.BugTests.ReadonlyProperties.ParentWithReadonlyChild
+using Highway.Data.Contexts;
+
+namespace Highway.Data.Test.InMemory.BugTests.ReadonlyProperties.ParentsWithIgnoredReadonlyChild
 {
     public class Parent : IIdentifiable<long>
     {
-        private readonly ReaderWriterLockSlim _lock = new();
-        
         private static Child _child;
 
-        public long Id { get; set; }
+        private readonly ReaderWriterLockSlim _lock = new();
 
-        public string Name { get; set; }
-
+        [InMemoryIgnore]
         public Child Child
         {
             get
@@ -29,6 +28,10 @@ namespace Highway.Data.Test.InMemory.BugTests.ReadonlyProperties.ParentWithReado
                 return _child;
             }
         }
+
+        public long Id { get; set; }
+
+        public string Name { get; set; }
 
         private Child BuildChild()
         {

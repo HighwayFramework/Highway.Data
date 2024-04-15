@@ -4,14 +4,14 @@ using Highway.Data.Contexts;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Highway.Data.Test.InMemory.BugTests.ReadonlyProperties.ParentWithReadonlyChild
+namespace Highway.Data.Test.InMemory.BugTests.ReadonlyProperties.ParentsWithReadonlyChild
 {
     [TestClass]
-    public class WhenAddingAParentWithAReadonlyChild
+    public class WhenAddingParentsWithAReadonlyChild
     {
         private readonly Repository _repository;
 
-        public WhenAddingAParentWithAReadonlyChild()
+        public WhenAddingParentsWithAReadonlyChild()
         {
             var parent1 = new Parent { Id = 1, Name = $"{nameof(Parent)}1" };
             var parent2 = new Parent { Id = 2, Name = $"{nameof(Parent)}2" };
@@ -24,17 +24,17 @@ namespace Highway.Data.Test.InMemory.BugTests.ReadonlyProperties.ParentWithReado
         }
 
         [TestMethod]
-        public void TheContextShouldContainTwoInstanceOfTheParentEntity()
+        public void TheContextShouldContainTwoChildren()
         {
-            var query = new GetParents();
-            _repository.Find(query).Should().HaveCount(2);
+            var query = new FindAll<Child>();
+            _repository.Find(query).Should().HaveCount(1);
         }
 
         [TestMethod]
-        public void TheContextShouldContainTwoInstancesOfTheChildEntity()
+        public void TheContextShouldContainTwoParents()
         {
-            var query = new GetChildren();
-            _repository.Find(query).Should().HaveCount(1);
+            var query = new FindAll<Parent>();
+            _repository.Find(query).Should().HaveCount(2);
         }
     }
 }

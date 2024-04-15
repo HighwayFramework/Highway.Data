@@ -28,9 +28,4 @@
 		<PackageReference Include="System.Reflection.Emit" Version="4.6.0" />
 	</ItemGroup>
 
-
-	<ItemGroup>
-	  <Folder Include="InMemory\Extensions\" />
-	</ItemGroup>
-
 </Project>

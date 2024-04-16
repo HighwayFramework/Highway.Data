@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Highway.Data.Test.InMemory.BugTests.ReadonlyProperties.ParentsWithReadonlyChildren
 {
     [TestClass]
-    public class WhenRemovingParentsWithAReadonlyChild
+    public class WhenRemovingParentsWithReadonlyChildren
     {
         private readonly Parent _parent1;
 
@@ -17,7 +17,7 @@ namespace Highway.Data.Test.InMemory.BugTests.ReadonlyProperties.ParentsWithRead
 
         private readonly Repository _repository;
 
-        public WhenRemovingParentsWithAReadonlyChild()
+        public WhenRemovingParentsWithReadonlyChildren()
         {
             _parent1 = new Parent { Id = 1, Name = $"{nameof(Parent)}1" };
             _parent2 = new Parent { Id = 2, Name = $"{nameof(Parent)}2" };
@@ -43,8 +43,8 @@ namespace Highway.Data.Test.InMemory.BugTests.ReadonlyProperties.ParentsWithRead
                 .Should()
                 .Throw<ArgumentException>()
                 .WithMessage(
-                    $"Entity Type {nameof(Child)} could not be removed through {nameof(Parent)}.{nameof(Child)}"
-                    + $" because {nameof(Parent)}.{nameof(Child)} has no setter.");
+                    $"Entity Type {nameof(_parent1.Children)} could not be removed through {nameof(Parent)}.{nameof(_parent1.Children)}"
+                    + $" because {nameof(Parent)}.{nameof(_parent1.Children)} has no setter.");
         }
     }
 }

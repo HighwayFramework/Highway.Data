@@ -28,7 +28,7 @@ namespace Highway.Data.Test.InMemory.BugTests.ReadonlyProperties.ParentsWithRead
             _repository.Context.Add(_parent2);
             _repository.Context.Commit();
         }
-
+        
         [TestMethod]
         public void TheCorrectExceptionShouldBeThrown()
         {
@@ -43,8 +43,8 @@ namespace Highway.Data.Test.InMemory.BugTests.ReadonlyProperties.ParentsWithRead
                 .Should()
                 .Throw<ArgumentException>()
                 .WithMessage(
-                    $"Entity Type {nameof(Child)} could not be removed through {nameof(Parent)}.{nameof(Child)}"
-                    + $" because {nameof(Parent)}.{nameof(Child)} has no setter.");
+                    $"Entity Type {nameof(_parent1.Child)} could not be removed through {nameof(Parent)}.{nameof(_parent1.Child)}"
+                    + $" because {nameof(Parent)}.{nameof(_parent1.Child)} has no setter.");
         }
     }
 }

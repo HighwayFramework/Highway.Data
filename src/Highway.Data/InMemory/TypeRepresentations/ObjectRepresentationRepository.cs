@@ -225,7 +225,19 @@ namespace Highway.Data.Contexts.TypeRepresentations
                     }
                 }
 
-                propertyInfo.SetValue(item, list, null);
+                try
+                {
+                    propertyInfo.SetValue(item, list, null);
+                }
+                catch (ArgumentException ex)
+                {
+                    if (ex.Message == "Property set method not found.")
+                    {
+                        throw new ArgumentException($"Entity Type {propertyInfo.Name} could not be removed through {propertyInfo.ReflectedType.Name}.{propertyInfo.Name}" +
+                            $" because {propertyInfo.DeclaringType.Name}.{propertyInfo.Name} has no setter.", ex);
+                    }
+                    throw ex;
+                }
             };
         }
 
@@ -250,7 +262,8 @@ namespace Highway.Data.Contexts.TypeRepresentations
                     .Where(
                         x => x.PropertyType != typeof(string)
                             && typeof(IEnumerable).IsAssignableFrom(x.PropertyType)
-                            && x.GetValue(item, null) != null);
+                            && x.GetValue(item, null) != null
+                            && x.GetCustomAttribute(typeof(InMemoryIgnoreAttribute)) == null);
 
             foreach (var propertyInfo in properties)
             {
@@ -276,7 +289,8 @@ namespace Highway.Data.Contexts.TypeRepresentations
                     .Where(
                         x => x.PropertyType.IsClass
                             && !typeof(IEnumerable).IsAssignableFrom(x.PropertyType)
-                            && x.GetValue(item, null) != null);
+                            && x.GetValue(item, null) != null
+                            && x.GetCustomAttribute(typeof(InMemoryIgnoreAttribute)) == null);
 
             foreach (var propertyInfo in properties)
             {
@@ -287,7 +301,19 @@ namespace Highway.Data.Contexts.TypeRepresentations
 
                 void Remover()
                 {
-                    propertyInfo.SetValue(item, null, null);
+                    try
+                    {
+                        propertyInfo.SetValue(item, null, null);
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        if (ex.Message == "Property set method not found.")
+                        {
+                            throw new ArgumentException($"Entity Type {propertyInfo.Name} could not be removed through {propertyInfo.ReflectedType.Name}.{propertyInfo.Name}" +
+                            $" because {propertyInfo.DeclaringType.Name}.{propertyInfo.Name} has no setter.", ex);
+                        }
+                        throw ex;
+                    }
                 }
 
                 var child = propertyInfo.GetValue(item, null);

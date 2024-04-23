@@ -42,9 +42,9 @@ namespace Highway.Data.Test.InMemory.BugTests.ReadonlyProperties.ParentsWithRead
             removeParent
                 .Should()
                 .Throw<ArgumentException>()
-                .WithMessage($"An entry could not be removed from the {nameof(InMemoryDataContext)} because its referencing property has no setter.  The entry"
+                .WithMessage($"An entry could not be removed from the {nameof(InMemoryDataContext)} because its referencing property has no setter. The entry"
                              + $" was scheduled for removal because it is referenced from {typeof(ParentBase).FullName} through the property"
-                             + $" {nameof(ParentBase)}.{nameof(_parent1.Child)}.  Either add a setter to this property, or decorate it with the"
+                             + $" {nameof(ParentBase)}.{nameof(_parent1.Child)}. Either add a setter to this property, or decorate it with the"
                              + $" {nameof(InMemoryIgnoreAttribute)}.");
         }
     }

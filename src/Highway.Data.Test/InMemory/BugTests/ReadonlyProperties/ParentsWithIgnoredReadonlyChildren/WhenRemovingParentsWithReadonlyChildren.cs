@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Highway.Data.Test.InMemory.BugTests.ReadonlyProperties.ParentsWithIgnoredReadonlyChildren
 {
     [TestClass]
-    public class WhenRemovingParentsWithAReadonlyChild
+    public class WhenRemovingParentsWithReadonlyChildren
     {
         private readonly Parent _parent1;
 
@@ -17,7 +17,7 @@ namespace Highway.Data.Test.InMemory.BugTests.ReadonlyProperties.ParentsWithIgno
 
         private readonly Repository _repository;
 
-        public WhenRemovingParentsWithAReadonlyChild()
+        public WhenRemovingParentsWithReadonlyChildren()
         {
             _parent1 = new Parent { Id = 1, Name = $"{nameof(Parent)}1" };
             _parent2 = new Parent { Id = 2, Name = $"{nameof(Parent)}2" };

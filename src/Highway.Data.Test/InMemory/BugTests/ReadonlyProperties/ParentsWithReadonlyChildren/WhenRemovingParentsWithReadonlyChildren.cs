@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Highway.Data.Test.InMemory.BugTests.ReadonlyProperties.ParentsWithReadonlyChildren
 {
     [TestClass]
-    public class WhenRemovingParentsWithAReadonlyChild
+    public class WhenRemovingParentsWithReadonlyChildren
     {
         private readonly Parent _parent1;
 
@@ -17,7 +17,7 @@ namespace Highway.Data.Test.InMemory.BugTests.ReadonlyProperties.ParentsWithRead
 
         private readonly Repository _repository;
 
-        public WhenRemovingParentsWithAReadonlyChild()
+        public WhenRemovingParentsWithReadonlyChildren()
         {
             _parent1 = new Parent { Id = 1, Name = $"{nameof(Parent)}1" };
             _parent2 = new Parent { Id = 2, Name = $"{nameof(Parent)}2" };
@@ -43,8 +43,10 @@ namespace Highway.Data.Test.InMemory.BugTests.ReadonlyProperties.ParentsWithRead
                 .Should()
                 .Throw<ArgumentException>()
                 .WithMessage(
-                    $"Entity Type {nameof(Child)} could not be removed through {nameof(Parent)}.{nameof(Child)}"
-                    + $" because {nameof(Parent)}.{nameof(Child)} has no setter.");
+                    $"An entry could not be removed from the {nameof(InMemoryDataContext)} because its referencing property has no setter. " +
+                    $"The data context attempted to remove an entry of the Type {typeof(Child).FullName}. " +
+                    $"The {nameof(_parent1.Children)} was scheduled for removal because it is referenced from {typeof(Parent).FullName} through the property {nameof(Parent)}.{nameof(_parent1.Children)}. " +
+                    $"Either add a setter to this property, or decorate it with the {nameof(InMemoryIgnoreAttribute)}.");
         }
     }
 }

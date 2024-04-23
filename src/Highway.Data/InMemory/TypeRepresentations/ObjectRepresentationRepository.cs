@@ -225,7 +225,21 @@ namespace Highway.Data.Contexts.TypeRepresentations
                     }
                 }
 
-                propertyInfo.SetValue(item, list, null);
+                try
+                {
+                    propertyInfo.SetValue(item, list, null);
+                }
+                catch (ArgumentException ex)
+                {
+                    if (ex.Message == "Property set method not found.")
+                    {
+                        throw new ArgumentException($"An entry could not be removed from the InMemoryDataContext because its referencing property has no setter. " +
+                            $"The data context attempted to remove an entry of the Type {propertyInfo.PropertyType.GenericTypeArguments.FirstOrDefault().FullName}. " +
+                            $"The {propertyInfo.Name} was scheduled for removal because it is referenced from {propertyInfo.DeclaringType.FullName} through the property {propertyInfo.DeclaringType.Name}.{propertyInfo.Name}. " +
+                            $"Either add a setter to this property, or decorate it with the {nameof(InMemoryIgnoreAttribute)}.");
+                    }
+                    throw ex;
+                }
             };
         }
 
@@ -250,7 +264,8 @@ namespace Highway.Data.Contexts.TypeRepresentations
                     .Where(
                         x => x.PropertyType != typeof(string)
                             && typeof(IEnumerable).IsAssignableFrom(x.PropertyType)
-                            && x.GetValue(item, null) != null);
+                            && x.GetValue(item, null) != null
+                            && x.GetCustomAttribute(typeof(InMemoryIgnoreAttribute)) == null);
 
             foreach (var propertyInfo in properties)
             {
@@ -276,7 +291,8 @@ namespace Highway.Data.Contexts.TypeRepresentations
                     .Where(
                         x => x.PropertyType.IsClass
                             && !typeof(IEnumerable).IsAssignableFrom(x.PropertyType)
-                            && x.GetValue(item, null) != null);
+                            && x.GetValue(item, null) != null
+                            && x.GetCustomAttribute(typeof(InMemoryIgnoreAttribute)) == null);
 
             foreach (var propertyInfo in properties)
             {
@@ -287,7 +303,21 @@ namespace Highway.Data.Contexts.TypeRepresentations
 
                 void Remover()
                 {
-                    propertyInfo.SetValue(item, null, null);
+                    try
+                    {
+                        propertyInfo.SetValue(item, null, null);
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        if (ex.Message == "Property set method not found.")
+                        {
+                            throw new ArgumentException($"An entry could not be removed from the InMemoryDataContext because its referencing property has no setter. " +
+                                $"The data context attempted to remove an entry of the Type {propertyInfo.PropertyType.FullName}. " +
+                                $"The {propertyInfo.Name} was scheduled for removal because it is referenced from {propertyInfo.DeclaringType.FullName} through the property {propertyInfo.DeclaringType.Name}.{propertyInfo.Name}. " +
+                                $"Either add a setter to this property, or decorate it with the {nameof(InMemoryIgnoreAttribute)}.");
+                        }
+                        throw ex;
+                    }
                 }
 
                 var child = propertyInfo.GetValue(item, null);

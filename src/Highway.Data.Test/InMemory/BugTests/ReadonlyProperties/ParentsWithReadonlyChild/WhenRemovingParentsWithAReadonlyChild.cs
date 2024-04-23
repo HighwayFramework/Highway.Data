@@ -28,7 +28,7 @@ namespace Highway.Data.Test.InMemory.BugTests.ReadonlyProperties.ParentsWithRead
             _repository.Context.Add(_parent2);
             _repository.Context.Commit();
         }
-
+        
         [TestMethod]
         public void TheCorrectExceptionShouldBeThrown()
         {
@@ -43,8 +43,10 @@ namespace Highway.Data.Test.InMemory.BugTests.ReadonlyProperties.ParentsWithRead
                 .Should()
                 .Throw<ArgumentException>()
                 .WithMessage(
-                    $"Entity Type {nameof(Child)} could not be removed through {nameof(Parent)}.{nameof(Child)}"
-                    + $" because {nameof(Parent)}.{nameof(Child)} has no setter.");
+                    $"An entry could not be removed from the {nameof(InMemoryDataContext)} because its referencing property has no setter. " +
+                    $"The data context attempted to remove an entry of the Type {typeof(Child).FullName}. " +
+                    $"The {nameof(Child)} was scheduled for removal because it is referenced from {typeof(Parent).FullName} through the property {nameof(Parent)}.{nameof(Child)}. " +
+                    $"Either add a setter to this property, or decorate it with the {nameof(InMemoryIgnoreAttribute)}.");
         }
     }
 }

@@ -233,11 +233,14 @@ namespace Highway.Data.Contexts.TypeRepresentations
                 {
                     if (ex.Message == "Property set method not found.")
                     {
-                        throw new ArgumentException($"An entry could not be removed from the InMemoryDataContext because its referencing property has no setter. " +
-                            $"The data context attempted to remove an entry of the Type {propertyInfo.PropertyType.GenericTypeArguments.FirstOrDefault().FullName}. " +
-                            $"The {propertyInfo.Name} was scheduled for removal because it is referenced from {propertyInfo.DeclaringType.FullName} through the property {propertyInfo.DeclaringType.Name}.{propertyInfo.Name}. " +
-                            $"Either add a setter to this property, or decorate it with the {nameof(InMemoryIgnoreAttribute)}.");
+                        throw new ArgumentException(
+                            $"An entry could not be removed from the {nameof(InMemoryDataContext)} because its referencing property"
+                            + " has no setter. The entry was scheduled for removal because it is referenced from"
+                            + $" {propertyInfo.DeclaringType.FullName} through the property"
+                            + $" {propertyInfo.DeclaringType.Name}.{propertyInfo.Name}. Either add a setter to this property, or"
+                            + $" decorate it with the {nameof(InMemoryIgnoreAttribute)}.");
                     }
+
                     throw ex;
                 }
             };
@@ -311,11 +314,14 @@ namespace Highway.Data.Contexts.TypeRepresentations
                     {
                         if (ex.Message == "Property set method not found.")
                         {
-                            throw new ArgumentException($"An entry could not be removed from the InMemoryDataContext because its referencing property has no setter. " +
-                                $"The data context attempted to remove an entry of the Type {propertyInfo.PropertyType.FullName}. " +
-                                $"The {propertyInfo.Name} was scheduled for removal because it is referenced from {propertyInfo.DeclaringType.FullName} through the property {propertyInfo.DeclaringType.Name}.{propertyInfo.Name}. " +
-                                $"Either add a setter to this property, or decorate it with the {nameof(InMemoryIgnoreAttribute)}.");
+                            throw new ArgumentException(
+                                $"An entry could not be removed from the {nameof(InMemoryDataContext)} because its referencing property"
+                                + " has no setter. The entry was scheduled for removal because it is referenced from"
+                                + $" {propertyInfo.DeclaringType.FullName} through the property"
+                                + $" {propertyInfo.DeclaringType.Name}.{propertyInfo.Name}. Either add a setter to this property, or"
+                                + $" decorate it with the {nameof(InMemoryIgnoreAttribute)}.");
                         }
+
                         throw ex;
                     }
                 }

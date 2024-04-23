@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-using FluentAssertions;
+﻿using FluentAssertions;
 
 using Highway.Data.Contexts;
 using Highway.Data.Tests.TestDomain;
@@ -23,14 +21,6 @@ namespace Highway.Data.Tests.InMemory.BugTests
             var foo = repository.Find(new FindFooById(1));
 
             foo.Should().NotBeNull();
-        }
-    }
-
-    public class FindFooById : Scalar<object>
-    {
-        public FindFooById(int i)
-        {
-            ContextQuery = c => c.AsQueryable<Foo>().SingleOrDefault(x => x.Id == i);
         }
     }
 }
